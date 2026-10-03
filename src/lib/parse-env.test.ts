@@ -3,7 +3,7 @@ import { parseEnv } from "./parse-env";
 
 describe("parseEnv", () => {
   it("accepts a valid environment", () => {
-    expect(parseEnv({ APP_URL: "http://localhost:3100" }).APP_URL).toBe("http://localhost:3000");
+    expect(parseEnv({ APP_URL: "http://localhost:3100" }).APP_URL).toBe("http://localhost:3100");
   });
 
   it("names a missing variable", () => {

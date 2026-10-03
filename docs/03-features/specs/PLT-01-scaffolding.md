@@ -62,17 +62,29 @@ Docker (PLT-02), database (PLT-03), auth (PLT-04), UI kit and i18n (PLT-06).
 
 ## 4. Tasks
 
-- [ ] **T1** — Generate the Next.js app (pnpm, TS, App Router, src dir, Tailwind, ESLint, `@/*`),
+- [x] **T1** — Generate the Next.js app (pnpm, TS, App Router, src dir, Tailwind, ESLint, `@/*`),
       remove boilerplate, placeholder home page. (AC-1)
-- [ ] **T2** — tsconfig strict + `noUncheckedIndexedAccess`; Prettier; ESLint flat config incl.
-      module-boundary rule + a test fixture proving a forbidden import fails. (AC-6, AC-8)
-- [ ] **T3** — `src/lib/env.ts` with Zod + `.env.example`; unit test for missing/malformed vars. (AC-4)
-- [ ] **T4** — Folder skeleton and READMEs from AC-5. (AC-5)
-- [ ] **T5** — `/api/health` route + unit test. (AC-3)
-- [ ] **T6** — Vitest setup + Playwright setup with smoke E2E (home page renders). (AC-2)
-- [ ] **T7** — `package.json` scripts; CI workflow. (AC-2, AC-7)
-- [ ] **T8** — Root `README.md` quickstart; update the "Commands" section of `CLAUDE.md` if any
+- [x] **T2** — tsconfig strict + `noUncheckedIndexedAccess`; Prettier; ESLint flat config incl.
+      module-boundary rule (core `no-restricted-imports`, see Deviations) + a test fixture proving a forbidden import fails. (AC-6, AC-8)
+- [x] **T3** — `src/lib/env.ts` with Zod + `.env.example`; unit test for missing/malformed vars. (AC-4)
+- [x] **T4** — Folder skeleton and READMEs from AC-5. (AC-5)
+- [x] **T5** — `/api/health` route + unit test. (AC-3)
+- [x] **T6** — Vitest setup + Playwright setup with smoke E2E (home page renders). (AC-2)
+- [x] **T7** — `package.json` scripts; CI workflow. (AC-2, AC-7)
+- [x] **T8** — Root `README.md` quickstart; update the "Commands" section of `CLAUDE.md` if any
       command differs from what's documented there.
+
+### Deviations (recorded during build)
+
+- **TypeScript 6, ESLint 9:** at build time `typescript-eslint` did not support TypeScript 7 and
+  `eslint-plugin-react` (via `eslint-config-next`) did not support ESLint 10, so `typescript@^6`
+  and `eslint@^9` are pinned. Revisit when those plugins catch up.
+- **Module boundaries** are enforced with ESLint core `no-restricted-imports` (`@/modules/*/*`)
+  instead of `eslint-plugin-boundaries`, whose v7 API was in flux; the spec allows an equivalent.
+  Inside a module, code uses relative imports, so any alias deep path is a violation.
+- `src/lib/parse-env.ts` holds the pure `parseEnv`; `src/lib/env.ts` (`server-only`) exports the
+  validated `env`, loaded at startup from `src/instrumentation.ts`.
+- Playwright's dev server follows the port in `APP_URL`.
 
 ## 5. Test plan
 
@@ -86,6 +98,6 @@ Docker (PLT-02), database (PLT-03), auth (PLT-04), UI kit and i18n (PLT-06).
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, ACs covered
+- [x] All tasks ticked, ACs covered
 - [ ] CI green
 - [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

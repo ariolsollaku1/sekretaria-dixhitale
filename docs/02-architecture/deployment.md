@@ -34,7 +34,7 @@ Secrets are never committed.
 
 | Variable | Used by | Example |
 |---|---|---|
-| `APP_URL` | app | `http://localhost:3000` |
+| `APP_URL` | app | `http://localhost:3100` |
 | `DATABASE_URL` | app | `postgresql://sekretari:…@db:5432/sekretari` |
 | `BETTER_AUTH_SECRET` | app | random 32+ bytes |
 | `KEYCLOAK_ISSUER` | app | `http://localhost:8080/realms/logos` |

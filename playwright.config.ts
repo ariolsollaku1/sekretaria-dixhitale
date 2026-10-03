@@ -1,7 +1,7 @@
 import { defineConfig } from "@playwright/test";
 
-const baseURL = process.env.APP_URL ?? "http://localhost:3000";
-const port = new URL(baseURL).port || "3000";
+const baseURL = process.env.APP_URL ?? "http://localhost:3100";
+const port = new URL(baseURL).port || "3100";
 
 export default defineConfig({
   testDir: "e2e",

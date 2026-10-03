@@ -9,8 +9,8 @@ Requires Node >= 22 (`.nvmrc`) and pnpm (`corepack enable`).
 
 ```bash
 pnpm install
-cp .env.example .env     # then adjust values
-pnpm dev                 # http://localhost:3000 (health: /api/health)
+cp .env.example .env     # APP_URL port must match the dev script (3100)
+pnpm dev                 # http://localhost:3100 (health: /api/health)
 pnpm lint && pnpm typecheck && pnpm test
 pnpm test:e2e            # first time: pnpm exec playwright install chromium
 ```

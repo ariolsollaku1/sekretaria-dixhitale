@@ -65,7 +65,7 @@ Available once PLT-01…03 are built (update this list if they change):
 
 ```bash
 pnpm infra:up | infra:down | infra:reset   # Postgres, Keycloak, Gotenberg, Mailpit (Docker)
-pnpm dev                                    # app on http://localhost:3000
+pnpm dev                                    # app on http://localhost:3100
 pnpm lint && pnpm typecheck && pnpm test    # must pass before a feature is done
 pnpm test:e2e                               # Playwright
 pnpm db:migrate | db:seed | db:reset        # Prisma
@@ -76,3 +76,13 @@ node scripts/features.mjs [--write|--check|--ready]
 
 - Docs, code, identifiers, commit messages: **English**. UI default **Albanian** (Q-17).
 - Branch `feat/<ID>-<slug>`; commit messages `<ID>: <imperative summary>`; one feature per PR.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

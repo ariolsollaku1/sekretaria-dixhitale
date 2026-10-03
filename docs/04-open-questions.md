@@ -1,0 +1,281 @@
+# Open questions
+
+Every unknown that affects what we build. A question is **blocking** when a feature cannot be built
+correctly without the answer. **Non-blocking** questions have a documented working assumption —
+the feature is built configurable around it, and the answer only confirms or adjusts settings.
+
+- Which features each question blocks is defined by the **Questions** column in
+  [03-features/FEATURES.md](03-features/FEATURES.md) (only `Blocking: yes` + `open` questions block);
+  run `node scripts/features.mjs` to see the impact ranking (how many features each answer would
+  unblock).
+- To record an answer: run `/answer Q-xx <answer>` in Claude Code, or edit the table (Status →
+  `answered`), fill **Answer** in the details, and re-run `node scripts/features.mjs --write`.
+
+Status: `open` | `answered`. Blocking: `yes` | `no`.
+
+## Summary
+
+| ID | Topic | Blocking | Status | Ask |
+|---|---|---|---|---|
+| Q-01 | SMIAL integration (NIM) | yes | open | Secretariat / IT |
+| Q-02 | Financa 5 integration & payment data source | yes | open | Finance / F5 vendor |
+| Q-03 | PLEJADES library system | yes | open | Library / PLEJADES vendor |
+| Q-04 | MS Teams integration | yes | open | Management / IT |
+| Q-05 | Access-control (entry/exit) system | yes | open | Administration / IT |
+| Q-06 | LOGOS website platform & form embedding | yes | answered | Marketing / IT |
+| Q-07 | Student certificate templates & numbering | yes | open | Secretariat |
+| Q-08 | Exam document templates (procesverbal, grade sheet, course register) | yes | open | Secretariat |
+| Q-09 | Diploma, supplement and official register formats | yes | open | Secretariat / Rectorate |
+| Q-10 | Student contract & employment contract templates | yes | open | Finance / HR / Legal |
+| Q-11 | Grading & assessment rules | yes | open | Secretariat / Rectorate |
+| Q-12 | Exam eligibility rules | yes | open | Secretariat / Finance |
+| Q-13 | Admission requirements & candidate ranking | yes | open | Student Affairs / Secretariat |
+| Q-14 | Existing data to migrate | yes | open | Secretariat / IT |
+| Q-15 | NJSBC: staff-quality metrics | yes | open | NJSBC |
+| Q-16 | Personal data protection requirements | yes | open | Legal / DPO |
+| Q-17 | UI language(s) | no | answered | Management |
+| Q-18 | Roles: multiple roles, scopes, derived roles, 2FA | no | answered | Management |
+| Q-19 | Account lifecycle (candidates, students, alumni) | no | answered | Secretariat / IT |
+| Q-20 | Notification channels (email provider, SMS) | no | answered | IT |
+| Q-21 | How timetables are produced | no | answered | Secretariat |
+| Q-22 | How lecturer delivered hours are recorded & approved | no | open | HR / Finance |
+| Q-23 | Scholarship types & effect on fees | no | open | Finance |
+| Q-24 | Fee structure & installment rules | no | open | Finance |
+| Q-25 | Evaluation questionnaires content | no | answered | NJSBC / HR |
+| Q-26 | Hosting & data location | no | answered | Client |
+
+---
+
+## Details
+
+### Q-01 — SMIAL integration (NIM)
+- **Context:** SRC-023 — NIM is generated in the Ministry's SMIAL for every person with STUDENT status.
+- **Questions:** Does SMIAL offer an API, a file import/export (Excel/CSV/XML), or only manual entry
+  in its web UI? Which student data must be sent to SMIAL and when? Who receives the NIM back and how?
+- **Working assumption (until answered):** NIM is typed in manually by the Secretariat on the student
+  record (STU-01). Only the automated exchange (INT-01) is blocked.
+- **Answer:** —
+
+### Q-02 — Financa 5 integration & payment data source
+- **Context:** SRC-080, SRC-081 — Finance uses Financa 5; avoid entering students/lecturers twice.
+- **Questions:** Is F5 the source of truth for student payments, or should our system be? Does F5
+  expose an API, direct DB access, or CSV/Excel import/export? Which direction(s): students & staff
+  → F5, payments → us? How is staff payroll data (hours, supplements) handed to F5?
+- **Working assumption:** our system holds payment plans and payment status; payments are entered
+  manually or imported from an F5 CSV export (FIN-02). Automated sync (INT-02) and the payroll export
+  format (FIN-06) are blocked.
+- **Answer:** —
+
+### Q-03 — PLEJADES library system
+- **Context:** SRC-100…104.
+- **Questions:** Does PLEJADES have an API or exports? Is the library card created in PLEJADES? Can
+  we read "user has outstanding loans/fines" to use in graduation clearance? Is the online library a
+  separate site we just link to?
+- **Answer:** —
+
+### Q-04 — MS Teams integration
+- **Context:** SRC-024 says "Possibly … MS Teams??".
+- **Questions:** Is it in scope? Is LOGOS on Microsoft 365 (Entra ID)? Desired behavior: create
+  Teams per course/group? Sync rosters? Single sign-on via Entra ID through Keycloak?
+- **Research findings (2026-10-03, to confirm with the client):** LOGOS **is on Microsoft 365**: the MX record of `kulogos.edu.al` is
+  `kulogos-edu-al.mail.protection.outlook.com` and SPF includes `spf.protection.outlook.com`.
+  So Entra ID SSO through Keycloak (identity brokering, ADR-0004) is technically possible. Still
+  open: is Teams integration in scope at all, and if so which behavior (teams per course, roster sync)?
+- **Answer:** —
+
+### Q-05 — Access-control (entry/exit) system
+- **Context:** SRC-072 — entry/exit report of lecturers linked to the building access system.
+- **Questions:** Vendor/product? Can it export events (CSV/API)? How are people identified (card
+  number ↔ staff)?
+- **Answer:** —
+
+### Q-06 — LOGOS website platform & form embedding
+- **Context:** SRC-030, SRC-037, SRC-114, SRC-133 — forms reachable from the website.
+- **Questions:** Which platform is the website on (WordPress, custom…)? Who maintains it? Is linking
+  to our public form pages enough, or must forms be embedded (iframe) / styled like the site?
+- **Working assumption:** public forms live on our domain at `/f/<form-key>` and the website links
+  to them — works without any website change. Only the deeper integration (INT-06) is blocked.
+- **Answer (2026-10-03):** Link only, no embedding. The website (`http://www.kulogos.edu.al`) is a
+  custom static site (Node/Express serving AngularJS 1.5.6 + Bootstrap 4 pages, no CMS); HTTPS does
+  not respond and the linked subpages currently return 404. Embedding/styling forms inside it is not
+  realistic, so public forms stay on our domain at `/f/<form-key>` and the website only adds links.
+  INT-06 reduces to "publish the list of form URLs". To confirm with Marketing/IT: who adds the links.
+
+### Q-07 — Student certificate templates & numbering
+- **Context:** SRC-012a–d, SRC-047, SRC-048.
+- **Needed:** current templates (Word/PDF samples) for: student status certificate, grades
+  certificate, grades & credits certificate (transcript), attendance certificate. Do they need a
+  protocol number, signature/stamp image, QR verification? Are there fees for certificates?
+- **Answer:** —
+
+### Q-08 — Exam document templates
+- **Context:** SRC-014, SRC-015, SRC-041.
+- **Needed:** samples of the **procesverbal** (exam record), the grade sheet signed by lecturers, the
+  **course register**. Who signs (one lecturer or a commission)? Is the signed paper scanned back?
+- **Research findings (2026-10-03, to confirm with the client):** per the [ASCAL EER 2017](https://ascal.al/media/documents/qaa%20eer/Logos%20University%20College%20EER%20AL.pdf) §4.15, a graded paper needed **four signatures**, and exams were
+  **not marked anonymously** — ASCAL recommended introducing anonymous marking immediately. Ask
+  whether anonymous marking (exam-paper codes) is now in place, since it changes the exam record design.
+- **Answer:** —
+
+### Q-09 — Diploma, supplement and official register formats
+- **Context:** SRC-040, SRC-059, SRC-111.
+- **Needed:** approved diploma and supplement formats (LOGOS + MAS), diploma numbering rules, the
+  format of the **Main Register** and **Diploma Register**. Does the Ministry require these in a
+  specific format or system?
+- **Answer:** —
+
+### Q-10 — Student contract & employment contract templates
+- **Context:** SRC-032, SRC-062, SRC-085.
+- **Needed:** the student contract with its installment **annex**, and the standard employment
+  contract(s) for academic and administrative staff. Which fields are variable?
+- **Answer:** —
+
+### Q-11 — Grading & assessment rules
+- **Context:** SRC-043, SRC-044, SRC-046.
+- **Questions:** Grade scale (4–10?) and pass mark? How is the final grade composed (partial
+  assessments %, exam %)? How many exam attempts, and in which sessions? Retake vs. backlog vs.
+  improvement — which grade counts (latest, highest)? Can a passed grade be improved, and only in
+  autumn? Rounding of averages (decimals)? Are failed attempts shown on transcripts?
+- **Research findings (2026-10-03, to confirm with the client):**
+  - National scale **4–10**, **4 = fail**; assessment in points (0–100 %) converted to the 4–10
+    scale ([Eurydice](https://eurydice.eacea.ec.europa.eu/national-education-systems/albania/bachelor)).
+  - LOGOS computes **credit-weighted averages** with the national formula (SRC-046; [ASCAL EER 2017](https://ascal.al/media/documents/qaa%20eer/Logos%20University%20College%20EER%20AL.pdf) §4.14).
+  - 2015-16 standard scheme: **30 % midterm, 60 % end-of-semester exam, 10 % seminars** (§4.13).
+  - Students may be re-assessed to improve results, "up to three points per year" (§4.13 — wording
+    ambiguous: three exams or three grade points?). Formal grade-appeal process exists (§4.12).
+  - Sessions: winter, summer, autumn (SRC-049); autumn grade improvement (SRC-044).
+  - Still needed: current **Rregullore** / student handbook — the % → grade conversion table, which
+    grade counts after retake/improvement, rounding, attempts per year. The 2017 rules may be outdated.
+- **Answer:** —
+
+### Q-12 — Exam eligibility rules
+- **Context:** SRC-014, SRC-049 — "students who closed all academic and financial obligations".
+- **Questions:** Which **academic** obligations: minimum attendance % (lecture/seminar separately?),
+  passed partial assessments, coursework? Which **financial** obligations: all installments due
+  before the session date? Fee for backlog exams? Can the Secretariat override with a reason?
+- **Research findings (2026-10-03, to confirm with the client):** **75 % attendance** is required to be admitted to an exam ([ASCAL EER 2017](https://ascal.al/media/documents/qaa%20eer/Logos%20University%20College%20EER%20AL.pdf) §4.13–4.14).
+  Financial clearance is checked per session — winter/summer/autumn (SRC-049). Still open: lecture vs.
+  seminar attendance counted separately? Which installments must be paid? Override allowed?
+- **Answer:** —
+
+### Q-13 — Admission requirements & candidate ranking
+- **Context:** SRC-114 — standardized formats for admission, registration, ranking by cycle and category.
+- **Questions:** Required documents per cycle; ranking criteria and formula (high-school average,
+  state matura, bachelor average for master); candidate categories (quotas?); capacity per program;
+  publication of rankings.
+- **Answer:** —
+
+### Q-14 — Existing data to migrate
+- **Questions:** Where are current students, grades, staff, payments kept (Excel, old system, paper)?
+  How many students (active + alumni) and staff? How many past years must be migrated?
+- **Research findings (2026-10-03, to confirm with the client):** in 2017 LOGOS already had an **online system** giving each student their
+  timetable, grades and notices, and was developing an electronic student-records system ([ASCAL EER 2017](https://ascal.al/media/documents/qaa%20eer/Logos%20University%20College%20EER%20AL.pdf)
+  §2.11, §3.8). Older site domain: `shlplogos.edu.al`. 2016-17 size: 336 first-cycle + 39
+  second-cycle students. Ask: which system is it today, who built it, can it export data?
+- **Answer:** —
+
+### Q-15 — NJSBC: staff-quality metrics
+- **Context:** SRC-123 "Staff quality" — no detail in the source.
+- **Questions:** What should be measured and reported (evaluation scores, qualifications,
+  publications, trainings)? At what level (department/faculty/institution)?
+- **Answer:** —
+
+### Q-16 — Personal data protection requirements
+- **Context:** SRC-150, SRC-152.
+- **Questions:** Who is the Data Protection Officer? Retention periods per data type (applications
+  of non-enrolled candidates, alumni data, survey data)? Consent texts for public forms? Any
+  requirement from the Albanian data protection authority (IDP) on processing records?
+- **Research findings (2026-10-03, to confirm with the client):** the legal framework is **Law No. 124/2024 "On personal data protection"**,
+  aligned with the GDPR; in force since **1 Feb 2025** (it repealed Law 9887/2008), with some
+  provisions applying from **17 Jan 2027**. Supervisory authority: **IDP** (Information and Data
+  Protection Commissioner) — [law text](https://idp.al/wp-content/uploads/2025/03/Law-no.124-2024.pdf).
+  Design implication: build to GDPR-level requirements (records of processing, data-subject rights,
+  retention, breach logging). Still open: DPO, retention periods, consent texts.
+- **Answer:** —
+
+### Q-17 — UI language(s)
+- **Working assumption:** UI in English first, built with i18n so Albanian can be added/made
+  default without code changes (ADR-0011). Official documents in Albanian.
+- **Answer (2026-10-03):** **Albanian (`sq`) is the default UI language**, English (`en`) the second
+  locale, user-switchable. All users are Albanian staff/students and the LOGOS website already runs
+  with the `sq-al` locale. Official documents in Albanian (+ English where the template requires it,
+  e.g. the diploma supplement). Follow-up: ADR-0011 and vision.md still say "`en` default".
+
+### Q-18 — Roles: multiple roles, scopes, derived roles, 2FA
+- **Working assumption:** a user can hold several roles; roles can be scoped to faculty /
+  department / program; "head of department", "program coordinator" and "Erasmus officer" exist as
+  roles; 2FA mandatory for `sysadmin`, optional for others ([roles.md](01-product/roles.md)).
+- **Answer (2026-10-03):** Working assumption adopted as the design — it is an internal design
+  decision and the model supports single-role use too, so no client input changes it.
+
+### Q-19 — Account lifecycle
+- **Working assumption:** candidates have **no account** (public forms + email updates); a student
+  account is created at enrollment; accounts are disabled on graduation/deregistration (alumni use
+  public forms, SRC-037); staff accounts created by HR/sysadmin. Usernames = email; do students get
+  an institutional email?
+- **Answer (2026-10-03):** Working assumption adopted — it follows directly from SRC-030 and SRC-037
+  (candidates and alumni use public forms without logging in). Login identifier = email. Remaining
+  detail, not blocking: whether students get a `@kulogos.edu.al` Microsoft 365 mailbox or use a
+  personal email (the email field is the same either way).
+
+### Q-20 — Notification channels
+- **Working assumption:** email (institution's SMTP) + in-app notifications. SMS not included.
+- **Questions:** Which SMTP/provider (Microsoft 365, Google, other)? Is SMS needed (payment
+  reminders)?
+- **Answer (2026-10-03):** Email via the institution's **Microsoft 365 / Exchange Online** (MX of
+  `kulogos.edu.al` points to `mail.protection.outlook.com`) — SMTP AUTH or Microsoft Graph, through
+  a configurable mail adapter, plus in-app notifications. **No SMS in v1**; the payment reminders
+  of SRC-086 go by email + in-app. SMS can be added later behind the same notification interface.
+
+### Q-21 — How timetables are produced
+- **Working assumption:** the Secretariat enters the weekly timetable per group in the system (or
+  imports a CSV); no automatic scheduling.
+- **Answer (2026-10-03):** Working assumption adopted — matches the non-goal in
+  [vision.md](01-product/vision.md) (timetables are entered, not solved).
+
+### Q-22 — Lecturer delivered hours
+- **Context:** SRC-061, SRC-066, SRC-080c.
+- **Working assumption:** a class session marked "held" by the lecturer (when taking attendance)
+  counts its hours as delivered; the head of department approves monthly; approved hours feed the
+  HR/Finance reports.
+- **Answer:** —
+
+### Q-23 — Scholarship types & effect on fees
+- **Working assumption:** scholarship = full (100%) or partial (percentage) reduction of tuition for
+  one academic year; reduces the installments of that year's payment plan.
+- **Research findings (2026-10-03, to confirm with the client):** per the [ASCAL EER 2017](https://ascal.al/media/documents/qaa%20eer/Logos%20University%20College%20EER%20AL.pdf) §5.4, LOGOS has scholarships for **excellent students**,
+  **students in need** and **students with disabilities**. Excellence scholarship by average grade:
+  **50 %** of the fee for 9.1–9.5, **80 %** for 9.6–9.8, **100 %** for 9.8–10. Finance administers
+  them in their finance program. Consistent with the working assumption; bands should be configurable.
+- **Answer:** —
+
+### Q-24 — Fee structure & installment rules
+- **Working assumption:** fees configured per program × academic year × fee type; each student's
+  payment plan copies the schedule from their contract annex; preferential (early) fees configured
+  as date-bound discounts.
+- **Answer:** —
+
+### Q-25 — Evaluation questionnaires content
+- **Working assumption:** questionnaires are configured in the forms engine by NJSBC/HR; scoring =
+  average of 1–5 scale questions.
+- **Answer (2026-10-03):** Working assumption adopted — the forms engine (ADR-0009) is ours; the
+  question content is configuration that NJSBC/HR enter before go-live, so it blocks nothing.
+
+### Q-26 — Hosting & data location
+- **Answer (2026-10-03):** Deployment is not a concern for the documentation phase; the client will
+  comply with the data-location requirements (SRC-150). The stack stays host-agnostic (Docker
+  Compose, no third-party storage of personal data).
+
+---
+
+## Decisions log
+
+Decisions taken in conversation that aren't architecture ADRs.
+
+| Date | Decision |
+|---|---|
+| 2026-10-03 | Documentation language: **English**. |
+| 2026-10-03 | Documentation approach: tool-agnostic spec-driven Markdown (ADR-0001). |
+| 2026-10-03 | No deadline pressure — build in roadmap order, phase by phase. |
+| 2026-10-03 | Stack: Next.js + PostgreSQL, Keycloak for authentication, Docker for deployment. |
+| 2026-10-03 | Answered internally: Q-06, Q-17, Q-18, Q-19, Q-20, Q-21, Q-25. Research findings (DNS, LOGOS website, ASCAL 2017 report, Law 124/2024) added to Q-04, Q-08, Q-11, Q-12, Q-14, Q-16, Q-23 — to confirm with the client. |

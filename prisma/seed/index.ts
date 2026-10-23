@@ -3,6 +3,7 @@
 import { PrismaClient } from "../../src/generated/prisma/client";
 import { createAdapter } from "../../src/lib/db/adapter";
 import { academicYearsSeeder } from "./academic-years";
+import { curCoursesSeeder } from "./cur-courses";
 import { devRolesSeeder } from "./dev-roles";
 import { orgProgramsSeeder } from "./org-programs";
 import { orgUnitsSeeder } from "./org-units";
@@ -16,6 +17,7 @@ const SEEDERS: Seeder[] = [
   devUsersSeeder,
   orgUnitsSeeder,
   orgProgramsSeeder,
+  curCoursesSeeder,
   devRolesSeeder,
   academicYearsSeeder,
 ];

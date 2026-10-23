@@ -90,3 +90,16 @@ it("seeds demo programs and scopes the dev program coordinator to one (ORG-03 AC
   });
   expect(settings.map((s) => s.key)).toEqual(["org.programDurations", "org.programSubtypes"]);
 });
+
+it("seeds demo course categories and courses idempotently (CUR-01)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    (await db.courseCategory.findMany({ orderBy: { code: "asc" } })).map((c) => c.code),
+  ).toEqual(["COMPULSORY", "ELECTIVE"]);
+  expect((await db.course.findMany({ orderBy: { code: "asc" } })).map((c) => c.code)).toEqual([
+    "DEMO101",
+    "DEMO102",
+    "DEMO201",
+  ]);
+});

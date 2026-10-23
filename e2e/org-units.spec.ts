@@ -139,3 +139,34 @@ test("the unit pages have no serious accessibility violations", async ({ page })
     ).toEqual([]);
   }
 });
+
+test("editing a faculty and a department saves (regression: edit forms must not require an id field)", async ({
+  page,
+}) => {
+  await signInAs(page, "sysadmin@dev.logos.test");
+  await page.goto("/org/faculties?q=DEMO-B");
+  await page.getByRole("link", { name: "DEMO-B", exact: true }).click();
+  await page.waitForLoadState("networkidle");
+  const nameEn = page.getByLabel("Emri në anglisht (opsional)");
+  try {
+    await nameEn.fill("Demo Faculty B (edited)");
+    await page.getByRole("button", { name: "Ruaj ndryshimet" }).click();
+    await expect(page.getByText("Ndryshimet u ruajtën.")).toBeVisible();
+    expect((await sql("select name_en from faculties where code = 'DEMO-B'")).rows[0].name_en).toBe(
+      "Demo Faculty B (edited)",
+    );
+
+    await page.goto("/org/departments?q=DEMO-B1");
+    await page.getByRole("link", { name: "DEMO-B1" }).click();
+    await page.waitForLoadState("networkidle");
+    await page.getByLabel("Emri në anglisht (opsional)").fill("Demo Department B1 (edited)");
+    await page.getByRole("button", { name: "Ruaj ndryshimet" }).click();
+    await expect(page.getByText("Ndryshimet u ruajtën.")).toBeVisible();
+    expect(
+      (await sql("select name_en from departments where code = 'DEMO-B1'")).rows[0].name_en,
+    ).toBe("Demo Department B1 (edited)");
+  } finally {
+    await sql("update faculties set name_en = 'Demo Faculty B' where code = 'DEMO-B'");
+    await sql("update departments set name_en = 'Demo Department B1' where code = 'DEMO-B1'");
+  }
+});

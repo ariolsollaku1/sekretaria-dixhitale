@@ -146,15 +146,33 @@ Nav: group Teaching → "Courses", "Course categories".
 - Excel cells that hold numbers or dates where text is expected are read as their displayed text.
 - A row whose department the user may not write is an error (not silently skipped).
 
+**Implementation notes:**
+- First real use of **scoped write permissions**: `cur.course.write` is granted to `sysadmin` and
+  `head_of_department`; the assignment's scope decides where it applies. Actions pass a `target`
+  (`department` / `course` target resolvers, registered by ORG and CUR) and the services re-check
+  (current and destination department on a move). The course page and the "New/Import" buttons use
+  `can(user, …, target)` / `writableDepartments(user)`, which reads `grantScopes`.
+- Import: `.csv` (UTF-8, `,` or `;`) and `.xlsx` (first sheet, via `read-excel-file`). The preview
+  action parses and validates without saving; **confirm sends the file again** and the server
+  re-validates, so nothing from the preview is trusted. All-or-nothing; one audit row per course
+  plus a `cur.course.import` summary.
+- Course dependents (`registerCourseDependent`) mirror the program ones; plans (CUR-02) will use it.
+- Courses table filters category and department by *code* (text) for the same reason as ORG tables.
+- Demo seed: two categories, three courses in the demo departments.
+- **Bug found by the course edit e2e and fixed in ORG-02/ORG-03 forms too:** edit forms validated
+  against "update" schemas that require an id field the form does not have, so a click on *Save*
+  did nothing. Forms now validate the editable fields and add the id on submit; regression e2e
+  tests cover editing a faculty, a department, a program and a course.
+
 ## 4. Tasks
 
 - [x] **T1** — Models + migration (checks); permissions; target resolvers. (AC-1, AC-12)
 - [x] **T2** — Pure course rules and import parsing/validation with unit tests. (AC-1, AC-5, AC-9..AC-11)
 - [x] **T3** — Category and course services with scoped checks, dependents hook; integration tests. (AC-2..AC-7)
 - [x] **T4** — Import service (preview + commit), template; integration tests. (AC-9..AC-11)
-- [ ] **T5** — Course table, list/new/detail pages, status dialog. (AC-8)
-- [ ] **T6** — Import page (upload → preview → confirm), categories page, nav, i18n (`cur.*`). (AC-2, AC-9..AC-11)
-- [ ] **T7** — Demo seed, e2e (head of department scoped), docs. (all)
+- [x] **T5** — Course table, list/new/detail pages, status dialog. (AC-8)
+- [x] **T6** — Import page (upload → preview → confirm), categories page, nav, i18n (`cur.*`). (AC-2, AC-9..AC-11)
+- [x] **T7** — Demo seed, e2e (head of department scoped), docs. (all)
 
 ## 5. Test plan
 
@@ -173,9 +191,9 @@ Nav: group Teaching → "Courses", "Course categories".
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief, access matrix note)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief, access matrix note)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

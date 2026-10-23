@@ -130,3 +130,23 @@ test("the program pages have no serious accessibility violations", async ({ page
     ).toEqual([]);
   }
 });
+
+test("editing a program saves (regression: edit forms must not require an id field)", async ({
+  page,
+}) => {
+  await signInAs(page, "sysadmin@dev.logos.test");
+  await page.goto("/org/programs?q=DEMO-MSC");
+  await page.getByRole("link", { name: "DEMO-MSC" }).click();
+  await page.waitForLoadState("networkidle");
+  try {
+    await page.getByLabel("Kreditet totale").fill("125");
+    await page.getByRole("button", { name: "Ruaj ndryshimet" }).click();
+    await expect(page.getByText("Ndryshimet u ruajtën.")).toBeVisible();
+    expect(
+      (await sql("select total_credits from study_programs where code = 'DEMO-MSC'")).rows[0]
+        .total_credits,
+    ).toBe(125);
+  } finally {
+    await sql("update study_programs set total_credits = 120 where code = 'DEMO-MSC'");
+  }
+});

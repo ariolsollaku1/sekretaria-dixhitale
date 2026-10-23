@@ -70,3 +70,23 @@ registerNav({
   group: "administration",
   order: 22,
 });
+registerNav(
+  {
+    id: "courses",
+    labelKey: "courses",
+    href: "/cur/courses",
+    icon: "book",
+    permission: "cur.course.read",
+    group: "teaching",
+    order: 10,
+  },
+  {
+    id: "course-categories",
+    labelKey: "courseCategories",
+    href: "/cur/categories",
+    icon: "book",
+    permission: "cur.course.read",
+    group: "teaching",
+    order: 11,
+  },
+);

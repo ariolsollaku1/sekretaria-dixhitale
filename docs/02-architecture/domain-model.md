@@ -103,7 +103,8 @@ erDiagram
 ### CUR — curriculum
 | Entity | Key fields |
 |---|---|
-| `Course` | `code`, `name`, `defaultCredits`, `category`, `hoursLecture`, `hoursSeminar`, `hoursLab`, `active` |
+| `CourseCategory` | `code`, `nameSq`, `nameEn`, `active` (administrator-maintained list, Q-28) |
+| `Course` | `code` (unique), `name`, `nameEn?`, `defaultCredits` (0–60), `categoryId?`, `hoursLecture`, `hoursSeminar`, `hoursLab` (0–500), `departmentId`, `active` |
 | `CurriculumPlan` | `programId`, `version`, `validFromAcademicYearId`, `status` (DRAFT/APPROVED/ARCHIVED), `approvedAt`, `approvedById` |
 | `PlanCourse` | `planId`, `courseId`, `yearOfStudy`, `semester`, `credits`, `category`, hours, `isElective` |
 | `Syllabus` | `planCourseId`, `academicYearId`, `fileId` or structured content, `status` |

@@ -9,12 +9,7 @@ import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { toast } from "@/components/ui/toaster";
-import {
-  departmentSchema,
-  facultySchema,
-  updateDepartmentSchema,
-  updateFacultySchema,
-} from "../domain/schemas";
+import { departmentSchema, facultySchema } from "../domain/schemas";
 import {
   createDepartmentAction,
   createFacultyAction,
@@ -35,14 +30,10 @@ export function UnitForm(props: Props & { defaults?: Values }) {
   const t = useTranslations("org");
   const router = useRouter();
   const [pending, setPending] = useState(false);
+  // Edit forms validate the same fields (code, name, English name); the id is added on submit, and
+  // a department's faculty is fixed after creation.
   const schema =
-    props.kind === "faculty"
-      ? props.mode === "create"
-        ? facultySchema
-        : updateFacultySchema
-      : props.mode === "create"
-        ? departmentSchema
-        : updateDepartmentSchema;
+    props.kind === "department" && props.mode === "create" ? departmentSchema : facultySchema;
   const form = useForm<Values>({
     resolver: zodResolver(schema as never) as never,
     defaultValues: props.defaults ?? {

@@ -11,7 +11,7 @@ import { MAX_IMPORT_ROWS, TEMPLATE_CSV } from "../domain/import";
 
 type Actor = { id: string; email: string; name: string; locale: null; personId: null };
 let admin: Actor, head1: Actor;
-let d1: string, d2: string, cat: string;
+let d1: string, cat: string;
 
 const enc = (s: string) => new TextEncoder().encode(s);
 const file = (name: string, text: string) => ({ name, bytes: enc(text) });
@@ -56,8 +56,7 @@ beforeEach(async () => {
   await db.user.deleteMany();
   const f = await db.faculty.create({ data: { code: "FE", name: "F" } });
   d1 = (await db.department.create({ data: { code: "ECO", name: "Ekonomi", facultyId: f.id } })).id;
-  d2 = (await db.department.create({ data: { code: "LAW", name: "Drejtesi", facultyId: f.id } }))
-    .id;
+  await db.department.create({ data: { code: "LAW", name: "Drejtesi", facultyId: f.id } });
   cat = (
     await db.courseCategory.create({
       data: { code: "COMPULSORY", nameSq: "E detyrueshme", nameEn: "Compulsory" },

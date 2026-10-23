@@ -90,7 +90,7 @@ export const commitCourseImportAction = action({
   handler: async (form, ctx) => {
     const file = await fileFrom(form);
     if (!file)
-      throw new (await import("@/lib/actions")).DomainError("VALIDATION", "empty", {
+      throw new DomainError("VALIDATION", "empty", {
         file: ["empty"],
       });
     return commitImport(ctx, file, form.get("updateExisting") === "on");

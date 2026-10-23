@@ -9,7 +9,7 @@ import { FormField } from "@/components/ui/form-field";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { toast } from "@/components/ui/toaster";
-import { programSchema, updateProgramSchema } from "../domain/schemas";
+import { programSchema } from "../domain/schemas";
 import { createProgramAction, updateProgramAction } from "../server/program.actions";
 
 type Values = {
@@ -41,8 +41,11 @@ export function ProgramForm(props: Props) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const form = useForm<Values>({
+    // Edit validates the same fields minus the (fixed) department; the id is added on submit.
     resolver: zodResolver(
-      (props.mode === "create" ? programSchema : updateProgramSchema) as never,
+      (props.mode === "create"
+        ? programSchema
+        : programSchema.omit({ departmentId: true })) as never,
     ) as never,
     defaultValues: props.defaults ?? {
       departmentId: props.mode === "create" ? props.departments[0]?.id : undefined,

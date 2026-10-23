@@ -10,6 +10,8 @@ services:
   db:
     image: postgres:17-alpine
     restart: unless-stopped
+    # TZ (Europe/Tirane) only affects logs; data and sessions run in UTC (conventions.md).
+    command: ["postgres", "-c", "timezone=UTC", "-c", "log_timezone=Europe/Tirane"]
     environment:
       <<: *tz
       POSTGRES_USER: ${POSTGRES_USER:?set in .env}

@@ -55,7 +55,7 @@ function createAuth() {
             });
             const decision = decideAccess(user);
             if (!decision.allow) {
-              recordAuthEvent({ type: "login.denied", reason: decision.reason });
+              await recordAuthEvent({ type: "login.denied", reason: decision.reason });
               throw new APIError("FORBIDDEN", {
                 code: "account_inactive",
                 message: "Account is not active",
@@ -67,7 +67,7 @@ function createAuth() {
               where: { id: session.userId },
               data: { lastLoginAt: new Date() },
             });
-            recordAuthEvent({ type: "login.success", userId: session.userId });
+            await recordAuthEvent({ type: "login.success", userId: session.userId });
           },
         },
       },

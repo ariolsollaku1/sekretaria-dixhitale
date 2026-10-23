@@ -93,12 +93,12 @@ Migration adds a trigger `audit_logs_immutable` raising an exception on `UPDATE`
 ## 4. Tasks
 
 - [x] **T1** — Model + migration + immutability trigger. (AC-1, AC-4)
-- [ ] **T2** — `diffFields` with masking + unit tests. (AC-3)
-- [ ] **T3** — Auditor + request context + integration with `withTransaction`/action wrapper,
+- [x] **T2** — `diffFields` with masking + unit tests. (AC-3)
+- [x] **T3** — Auditor + request context + integration with `withTransaction`/action wrapper,
       `requireReason`. (AC-2, AC-8)
-- [ ] **T4** — Auth events wired from PLT-04. (AC-5)
+- [x] **T4** — Auth events wired from PLT-04. (AC-5)
 - [ ] **T5** — `/admin/audit` page and `<EntityHistory>` component. (AC-6, AC-7)
-- [ ] **T6** — Logging guideline + a lint/grep check in CI for obvious PII in log calls (e.g.
+- [x] **T6** — Logging guideline + a lint/grep check in CI for obvious PII in log calls (e.g.
       `console.log` banned in `src/`; use `logger` with id-only fields). (AC-9)
 
 ## 5. Test plan

@@ -15,7 +15,7 @@ export default async function NoAccessPage({
 }) {
   const { error } = await searchParams;
   // AC-12: a denied sign-in lands here with the library's error code (no personal data in it).
-  recordAuthEvent({
+  await recordAuthEvent({
     type: "login.denied",
     reason: /^[a-z_]{1,64}$/.test(error ?? "") ? error! : "unknown",
   });

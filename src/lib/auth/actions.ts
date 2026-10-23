@@ -38,7 +38,7 @@ export async function signOutAction(): Promise<void> {
     idToken = account?.idToken ?? null;
   }
   await getAuth().api.signOut({ headers: await headers() });
-  if (user) recordAuthEvent({ type: "logout", userId: user.id });
+  if (user) await recordAuthEvent({ type: "logout", userId: user.id });
   redirect(
     endSessionUrl({
       issuer: env.KEYCLOAK_ISSUER,

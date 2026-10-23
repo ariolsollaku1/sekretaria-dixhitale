@@ -4,6 +4,7 @@ import { can as canDefault } from "@/lib/authz/guard";
 import { ForbiddenError } from "@/lib/authz/check";
 import { db } from "@/lib/db";
 import { toCsv, toXlsx, type ExportColumn, type ExportRow } from "./export";
+import type { Locale } from "@/lib/i18n/config";
 import type { TableDef } from "./define";
 import { parseTableParams, visibleColumns } from "./params";
 import { EXPORT_MAX_ROWS, type SearchParams, type TableParams } from "./types";
@@ -59,8 +60,8 @@ export async function runExport<Row>(
   search: SearchParams,
   user: User,
   format: ExportFormat,
-  translate: (key: string) => string,
-  deps: { can?: Can; now?: Date } = {},
+  translate: (key: string, values?: Record<string, string | number>) => string,
+  deps: { can?: Can; now?: Date; locale?: Locale } = {},
 ) {
   if (!(await (deps.can ?? canDefault)(user, def.permission)))
     throw new ForbiddenError(def.permission);
@@ -74,8 +75,9 @@ export async function runExport<Row>(
     label: translate(c.labelKey),
     type: c.type,
   }));
+  const cell = { t: translate, locale: deps.locale ?? ("sq" as Locale) };
   const data: ExportRow[] = rows.map((row) =>
-    Object.fromEntries(columns.map((c) => [c.key, def.values[c.key]!(row)])),
+    Object.fromEntries(columns.map((c) => [c.key, def.values[c.key]!(row, cell)])),
   );
   const bytes =
     format === "xlsx" ? toXlsx(exportColumns, data, def.exportName) : toCsv(exportColumns, data);

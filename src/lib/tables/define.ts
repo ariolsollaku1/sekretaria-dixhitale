@@ -1,9 +1,16 @@
 import type { ReactNode } from "react";
 import { assertValidShape } from "./params";
 import type { ExportValue } from "./export";
+import type { Locale } from "@/lib/i18n/config";
 import type { TableParams, TableShape } from "./types";
 
 export type FetchContext = { user: { id: string } };
+
+/** What value accessors and cell renderers get: the translator and locale of the viewer/exporter. */
+export type CellContext = {
+  t: (key: string, values?: Record<string, string | number>) => string;
+  locale: Locale;
+};
 export type FetchResult<Row> = { rows: Row[]; total: number };
 
 /**
@@ -19,9 +26,9 @@ export type TableDef<Row = unknown> = TableShape & {
   exportName: string;
   rowKey(row: Row): string;
   /** Plain value per column key: what is exported, and shown when no `cells` renderer exists. */
-  values: Record<string, (row: Row) => ExportValue>;
+  values: Record<string, (row: Row, ctx: CellContext) => ExportValue>;
   /** Optional on-screen rendering per column key (links, badges). Not used by exports. */
-  cells?: Record<string, (row: Row) => ReactNode>;
+  cells?: Record<string, (row: Row, ctx: CellContext) => ReactNode>;
   /** `page`/`pageSize` are already validated; the export asks for one big page. */
   fetch(params: TableParams, ctx: FetchContext): Promise<FetchResult<Row>>;
 };

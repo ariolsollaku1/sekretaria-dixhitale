@@ -52,7 +52,9 @@ export function parseTableParams(search: SearchParams, shape: TableShape): Table
   }
 
   const known = new Set(shape.columns.map((c) => c.key));
-  const columns = [...new Set((first(search.cols) ?? "").split(",").filter((k) => known.has(k)))];
+  // A GET form with several checkboxes sends `cols` repeatedly; a saved link sends "a,b".
+  const colsRaw = Array.isArray(search.cols) ? search.cols.join(",") : (search.cols ?? "");
+  const columns = [...new Set(colsRaw.split(",").filter((k) => known.has(k)))];
 
   return { page, pageSize, sort, filters, columns };
 }
@@ -112,4 +114,14 @@ export function assertValidShape(shape: TableShape): void {
   const sortable = shape.columns.find((c) => c.key === shape.defaultSort.key);
   if (!sortable?.sortable)
     throw new Error(`Default sort "${shape.defaultSort.key}" must be a sortable column`);
+}
+
+/** URLSearchParams -> the plain object parseTableParams expects (repeated keys become arrays). */
+export function searchParamsToObject(params: URLSearchParams): SearchParams {
+  const out: SearchParams = {};
+  for (const key of new Set(params.keys())) {
+    const all = params.getAll(key);
+    out[key] = all.length > 1 ? all : all[0];
+  }
+  return out;
 }

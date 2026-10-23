@@ -3,6 +3,7 @@ import {
   assertValidShape,
   nextSort,
   parseTableParams,
+  searchParamsToObject,
   toQueryString,
   visibleColumns,
 } from "./params";
@@ -96,6 +97,21 @@ describe("parseTableParams (AC-2, AC-3)", () => {
   it("takes the first value of repeated parameters and truncates very long text", () => {
     expect(parseTableParams({ q: ["a", "b"] }, shape).filters.q).toBe("a");
     expect(parseTableParams({ q: "x".repeat(500) }, shape).filters.q).toHaveLength(200);
+  });
+});
+
+describe("cols from a GET form (AC-5)", () => {
+  it("accepts repeated checkbox values and the comma form", () => {
+    expect(parseTableParams({ cols: ["city", "joined", "bogus"] }, shape).columns).toEqual([
+      "city",
+      "joined",
+    ]);
+    expect(
+      parseTableParams(
+        searchParamsToObject(new URLSearchParams("cols=city&cols=joined&q=a&q=b")),
+        shape,
+      ),
+    ).toMatchObject({ columns: ["city", "joined"], filters: { q: "a" } });
   });
 });
 

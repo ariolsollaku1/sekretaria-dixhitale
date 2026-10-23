@@ -1,8 +1,10 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getCurrentUser } from "@/lib/auth";
 import { ForbiddenError } from "@/lib/authz/check";
+import type { Locale } from "@/lib/i18n/config";
 import { logger } from "@/lib/logger";
 import { getTable } from "@/lib/tables/define";
+import { searchParamsToObject } from "@/lib/tables/params";
 import { ExportTooLargeError, runExport, type ExportFormat } from "@/lib/tables/run";
 import "@/lib/tables/all";
 
@@ -28,13 +30,14 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   if (format !== "xlsx" && format !== "csv") return fail("BAD_FORMAT", 400);
 
   try {
-    const t = await getTranslations();
+    const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
     const result = await runExport(
       def,
-      Object.fromEntries(url.searchParams),
+      searchParamsToObject(url.searchParams),
       user,
       format as ExportFormat,
-      (key) => t(key as never),
+      (key, values) => t(key as never, values as never),
+      { locale: locale as Locale },
     );
     return new Response(result.bytes as BodyInit, {
       headers: {

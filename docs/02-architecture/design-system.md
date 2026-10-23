@@ -82,6 +82,7 @@ years exist), language select, notifications slot, user menu. Components in `src
 drawer), `DropdownMenu`, `StatusBadge`, `EmptyState`, `ErrorState`, `PageHeader`, `FormField`,
 `ConfirmDialog`, `Skeleton`, `Toaster`. Registries: `registerNav` (`src/lib/nav`),
 `registerWidget` (`src/lib/dashboard`), `registerAcademicYearProvider` (`src/lib/academic-year`).
+Lists use `TablePage` / `DataTable` (`src/components/table`): filter bar, saved filters, column chooser, export and print buttons, scrollable table, pagination, empty/error/403 states.
 The component is named `StatusBadge` in code (the rule above calls it StatusChip).
 
 ## Adding to the system

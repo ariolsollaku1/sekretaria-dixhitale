@@ -122,15 +122,35 @@ scrollable box · pagination. The shell and controls carry `print:hidden`.
 - Very long text cells are not truncated in exports; on screen they wrap.
 - Two saved filters with the same name → refused with a field error.
 
+**Implementation notes:**
+- XLSX is written by a small OOXML writer on `fflate` (inline strings, typed numbers/dates, bold
+  frozen header); `exceljs` is a dev dependency only, used in tests to re-read the files.
+- `values` and `cells` accessors receive `{ t, locale }` so exports and screens are translated the
+  same way (e.g. role names). Dates in exports are Europe/Tirane wall-clock values.
+- Filter parameters are top-level query keys (`q`, `status`, …); `page`, `size`, `sort`, `cols` are
+  reserved and checked by `defineTable`. `cols` accepts repeated checkbox values or `a,b`.
+- Always-visible columns are sent as hidden `cols` values, so unchecking everything else works.
+- Saved filters store the canonical, re-validated query string, so a stale or tampered link cannot
+  inject parameters; `plt.view.save` is granted to every role and the action additionally requires
+  that the user may read the table.
+- `TablePage` loads data in `try/catch` and builds JSX outside it (React compiler rule); errors show
+  an `ErrorState` with retry, forbidden shows the 403 view.
+- Tables register in `src/lib/tables/all.ts` (one import per table) so the export route can resolve
+  them by id. `usersTable` (IAM) and `auditTable` (PLT-07) are the first two; `listUsers` and the
+  hand-written audit list were removed.
+- Print: `print:hidden` on the shell, filters, toolbar and pagination; "Save as PDF" is the browser's.
+  Server-side PDF (Gotenberg) comes with PLT-09.
+- The brief said "printable PDF"; this is delivered as the print view (assumption in the spec header).
+
 ## 4. Tasks
 
 - [x] **T1** — `SavedFilter` model + migration, `plt.view.save` granted to all roles, `fflate` (+ `exceljs` as dev dependency for verifying XLSX). (AC-6)
 - [x] **T2** — Pure `params` module with unit tests. (AC-2, AC-3, AC-4, AC-5)
 - [x] **T3** — Pure `export` module (CSV, XLSX, injection guard) with unit tests that re-read the XLSX. (AC-7, AC-10)
 - [x] **T4** — Table registry, `runTable`, export route with permission, row cap and audit; integration tests. (AC-1, AC-7, AC-8, AC-9)
-- [ ] **T5** — `DataTable` components: filters, sort headers, pagination, column chooser, export menu, print, states, i18n (`table.*`). (AC-3, AC-4, AC-5, AC-11, AC-12)
-- [ ] **T6** — Saved filters: actions, query, UI, integration tests. (AC-6)
-- [ ] **T7** — Convert `/admin/users` and `/admin/audit`; e2e for filter/sort/page/columns/save/export/print; docs. (AC-13 and all)
+- [x] **T5** — `DataTable` components: filters, sort headers, pagination, column chooser, export menu, print, states, i18n (`table.*`). (AC-3, AC-4, AC-5, AC-11, AC-12)
+- [x] **T6** — Saved filters: actions, query, UI, integration tests. (AC-6)
+- [x] **T7** — Convert `/admin/users` and `/admin/audit`; e2e for filter/sort/page/columns/save/export/print; docs. (AC-13 and all)
 
 ## 5. Test plan
 
@@ -151,9 +171,9 @@ scrollable box · pagination. The shell and controls carry `print:hidden`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied (scope in `fetch`, export audited, injection guard)
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (conventions "Tables", design-system list template, module brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied (scope in `fetch`, export audited, injection guard)
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (conventions "Tables", design-system list template, module brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

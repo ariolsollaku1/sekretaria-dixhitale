@@ -13,3 +13,10 @@ services:
     pull_policy: always
     # No .env file on the server: configuration comes from the Portainer stack variables.
     env_file: !reset []
+    environment:
+      # Public issuer; the app reaches Keycloak internally through KEYCLOAK_INTERNAL_URL (base compose).
+      KEYCLOAK_ISSUER: ${KEYCLOAK_ISSUER:?set in the Portainer stack variables}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID:-sekretari-web}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET:?set in the Portainer stack variables}
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ${KEYCLOAK_ADMIN_CLIENT_SECRET:?set in the Portainer stack variables}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?set in the Portainer stack variables}

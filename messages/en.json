@@ -355,7 +355,9 @@
     "status": {
       "PLANNED": "Planned",
       "CURRENT": "Current",
-      "CLOSED": "Closed"
+      "CLOSED": "Closed",
+      "active": "Active",
+      "inactive": "Inactive"
     },
     "form": {
       "year": "Academic year",
@@ -421,7 +423,9 @@
       "intro": "The steps to start the new year. Each module adds its own steps here.",
       "empty": "Steps appear here as the related modules (groups, fees, calendar) are added.",
       "open": "Open",
-      "nav": "New year checklist"
+      "nav": "New year checklist",
+      "groups": "Create the year's groups",
+      "groupsDescription": "Create the groups for each cohort and year of study."
     },
     "unit": {
       "code": "Code",
@@ -472,6 +476,146 @@
       "coordinators": "Program coordinators",
       "noCoordinators": "No coordinator is assigned. Assign one by giving a user the “Program coordinator” role scoped to this program.",
       "department": "Department"
+    },
+    "cohort": {
+      "title": "Cohorts",
+      "new": "New cohort",
+      "created": "The cohort was created.",
+      "startsIn": "starts in {year}",
+      "plan": "Plan, version {version}",
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "startYear": "Start year",
+        "name": "Name",
+        "plan": "Plan",
+        "groups": "Groups",
+        "status": "Status"
+      },
+      "form": {
+        "program": "Program",
+        "startYear": "Start year",
+        "plan": "Curriculum plan (approved)",
+        "planOption": "Version {version} (from {year})",
+        "noApprovedPlan": "This program has no approved plan. Approve a plan first.",
+        "name": "Cohort name",
+        "nameHint": "E.g. the intake year, or with a suffix for separate intakes.",
+        "create": "Create cohort"
+      },
+      "actions": {
+        "saved": "Saved.",
+        "rename": "Rename",
+        "changePlan": "Change plan",
+        "changePlanTitle": "Change the cohort's plan?",
+        "changePlanBody": "The cohort will follow another approved plan of the program. The change is recorded with the reason.",
+        "deactivate": "Deactivate",
+        "deactivateTitle": "Deactivate this cohort?",
+        "deactivateBody": "The cohort is no longer used for new enrollments. It must have no active groups.",
+        "reactivate": "Reactivate",
+        "reactivateTitle": "Reactivate this cohort?",
+        "reactivateBody": "The cohort is back in use.",
+        "statusChanged": "The status was changed."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "nameTaken": "This name is already used.",
+        "planNotApproved": "Choose an approved plan of this program.",
+        "unknownYear": "The academic year was not found.",
+        "yearClosed": "The academic year is closed.",
+        "beforeCohortStart": "The year starts before the cohort.",
+        "yearOutOfRange": "The program has no such year of study.",
+        "capacityRange": "The capacity must be from 1 to 1000.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "COHORT_INACTIVE": "The cohort is inactive.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "SAME_PLAN": "The cohort already follows this plan.",
+        "ALREADY_ACTIVE": "It is already active.",
+        "ALREADY_INACTIVE": "It is already inactive.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be changed: in use by {names}.",
+        "FORBIDDEN": "You may not do this.",
+        "generic": "The action failed."
+      }
+    },
+    "group": {
+      "title": "Student groups",
+      "empty": "This cohort has no groups yet.",
+      "save": "Save",
+      "saved": "Saved.",
+      "yearShort": "Year {year}",
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "cohort": "Cohort",
+        "year": "Academic year",
+        "yearCode": "Academic year code",
+        "yearOfStudy": "Year of study",
+        "name": "Name",
+        "capacity": "Capacity",
+        "status": "Status"
+      },
+      "form": {
+        "year": "Academic year",
+        "yearOfStudy": "Year of study",
+        "name": "Group name",
+        "capacity": "Capacity",
+        "add": "Add group"
+      },
+      "deactivate": "Deactivate",
+      "deactivateTitle": "Deactivate this group?",
+      "deactivateBody": "The group is no longer used. It cannot be deactivated while it has students.",
+      "reactivate": "Reactivate",
+      "reactivateTitle": "Reactivate this group?",
+      "reactivateBody": "The group is back in use.",
+      "startOfYear": {
+        "nav": "Start of year: create groups",
+        "title": "Create the groups for a year",
+        "groups": "Student groups",
+        "year": "Academic year",
+        "show": "Show",
+        "closed": "The academic year is closed.",
+        "nothing": "There are no groups to create: every cohort already has a group for its year of study, or no active cohort applies to this year.",
+        "intro": "{count} groups with the default name will be created:",
+        "columns": {
+          "program": "Program",
+          "cohort": "Cohort",
+          "yearOfStudy": "Year of study",
+          "name": "Name"
+        },
+        "confirm": "Create {count} groups",
+        "done": "{count} groups were created.",
+        "failed": "Creating the groups failed."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "nameTaken": "This name is already used.",
+        "planNotApproved": "Choose an approved plan of this program.",
+        "unknownYear": "The academic year was not found.",
+        "yearClosed": "The academic year is closed.",
+        "beforeCohortStart": "The year starts before the cohort.",
+        "yearOutOfRange": "The program has no such year of study.",
+        "capacityRange": "The capacity must be from 1 to 1000.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "COHORT_INACTIVE": "The cohort is inactive.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "SAME_PLAN": "The cohort already follows this plan.",
+        "ALREADY_ACTIVE": "It is already active.",
+        "ALREADY_INACTIVE": "It is already inactive.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be changed: in use by {names}.",
+        "FORBIDDEN": "You may not do this.",
+        "generic": "The action failed."
+      }
+    },
+    "dependents": {
+      "cohorts": "cohorts",
+      "groups": "active groups"
     }
   },
   "cur": {

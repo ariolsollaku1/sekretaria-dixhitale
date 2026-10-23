@@ -60,3 +60,17 @@ export {
   type CohortDependent,
   type GroupDependent,
 } from "./server/cohort-dependents";
+export { cohortsTable } from "./server/cohort.table";
+export { groupsTable } from "./server/group.table";
+export { CohortForm } from "./ui/cohort-form";
+export { CohortActions } from "./ui/cohort-actions";
+export { GroupManager } from "./ui/group-manager";
+export { StartOfYearForm } from "./ui/start-of-year-form";
+export {
+  getCohort,
+  listCohortGroups,
+  listProgramOptionsForCohorts,
+  type CohortRecord,
+} from "./server/cohort.queries";
+export { previewStartOfYear } from "./server/group.service";
+export { getPlanDirectory } from "./server/plan-directory";

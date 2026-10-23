@@ -97,8 +97,8 @@ erDiagram
 | `Faculty` | `code` (unique, upper case), `name`, `nameEn?`, `active` |
 | `Department` | `facultyId` (fixed), `code` (unique, upper case), `name`, `nameEn?`, `active`; `headStaffId?` arrives with HR-01 (until then the head is derived from `UserRole`) |
 | `StudyProgram` | `departmentId` (fixed), `code` (unique), `name`, `nameEn?`, `cycle` (FIRST/SECOND), `subtype?` (Master only, from settings), `durationYears` (1/2/3, allowed values per cycle from settings), `totalCredits` (1–600), `active`; `coordinatorStaffId?` arrives with HR-01 (until then derived from `UserRole`) |
-| `Cohort` | `programId`, `startAcademicYearId`, `curriculumPlanId`, `name` |
-| `StudentGroup` | `cohortId`, `academicYearId`, `yearOfStudy`, `name`, `capacity?` |
+| `Cohort` | (ORG-04, implemented) `programId`, `startAcademicYearId`, `curriculumPlanId` (an approved plan of the same program), `name` (unique per program and start year), `active`. |
+| `StudentGroup` | (ORG-04, implemented) `cohortId`, `academicYearId`, `yearOfStudy`, `name` (unique per cohort, year and year of study), `capacity?` (informational), `active`. |
 
 ### CUR — curriculum
 | Entity | Key fields |

@@ -355,7 +355,9 @@
     "status": {
       "PLANNED": "I planifikuar",
       "CURRENT": "Aktual",
-      "CLOSED": "I mbyllur"
+      "CLOSED": "I mbyllur",
+      "active": "Aktive",
+      "inactive": "Joaktive"
     },
     "form": {
       "year": "Viti akademik",
@@ -421,7 +423,9 @@
       "intro": "Hapat për ta nisur vitin e ri. Çdo modul shton hapat e tij këtu.",
       "empty": "Hapat shfaqen këtu ndërsa shtohen modulet përkatëse (grupet, tarifat, kalendari).",
       "open": "Hap",
-      "nav": "Fillimi i vitit të ri"
+      "nav": "Fillimi i vitit të ri",
+      "groups": "Krijo grupet e vitit",
+      "groupsDescription": "Krijo grupet për secilën kohortë dhe vit studimi."
     },
     "unit": {
       "code": "Kodi",
@@ -472,6 +476,146 @@
       "coordinators": "Koordinatorët e programit",
       "noCoordinators": "Asnjë koordinator nuk është caktuar. Caktojeni duke i dhënë një përdoruesi rolin “Koordinator programi” me fushëveprim këtë program.",
       "department": "Departamenti"
+    },
+    "cohort": {
+      "title": "Kohortet",
+      "new": "Kohortë e re",
+      "created": "Kohorta u krijua.",
+      "startsIn": "fillon në {year}",
+      "plan": "Plani, versioni {version}",
+      "status": {
+        "active": "Aktive",
+        "inactive": "Joaktive"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "startYear": "Viti i fillimit",
+        "name": "Emri",
+        "plan": "Plani",
+        "groups": "Grupe",
+        "status": "Statusi"
+      },
+      "form": {
+        "program": "Programi",
+        "startYear": "Viti i fillimit",
+        "plan": "Plani mësimor (i miratuar)",
+        "planOption": "Versioni {version} (nga {year})",
+        "noApprovedPlan": "Ky program nuk ka asnjë plan të miratuar. Miratoni një plan së pari.",
+        "name": "Emri i kohortës",
+        "nameHint": "P.sh. viti i regjistrimit, ose me prapashtesë për regjistrime të veçanta.",
+        "create": "Krijo kohortën"
+      },
+      "actions": {
+        "saved": "U ruajt.",
+        "rename": "Riemërto",
+        "changePlan": "Ndrysho planin",
+        "changePlanTitle": "Të ndryshohet plani i kohortës?",
+        "changePlanBody": "Kohorta do të ndjekë një plan tjetër të miratuar të programit. Ndryshimi regjistrohet me arsyen.",
+        "deactivate": "Çaktivizo",
+        "deactivateTitle": "Të çaktivizohet kohorta?",
+        "deactivateBody": "Kohorta nuk përdoret më për regjistrime të reja. Duhet të mos ketë grupe aktive.",
+        "reactivate": "Riaktivizo",
+        "reactivateTitle": "Të riaktivizohet kohorta?",
+        "reactivateBody": "Kohorta kthehet në përdorim.",
+        "statusChanged": "Statusi u ndryshua."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "nameTaken": "Ky emër përdoret tashmë.",
+        "planNotApproved": "Zgjidhni një plan të miratuar të këtij programi.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "beforeCohortStart": "Viti fillon para kohortës.",
+        "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+        "capacityRange": "Kapaciteti duhet të jetë nga 1 deri në 1000.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "COHORT_INACTIVE": "Kohorta është joaktive.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "SAME_PLAN": "Kohorta ndjek tashmë këtë plan.",
+        "ALREADY_ACTIVE": "Është tashmë aktive.",
+        "ALREADY_INACTIVE": "Është tashmë joaktive.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të ndryshohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "group": {
+      "title": "Grupet e studentëve",
+      "empty": "Kjo kohortë nuk ka ende grupe.",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "yearShort": "Viti {year}",
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "cohort": "Kohorta",
+        "year": "Viti akademik",
+        "yearCode": "Kodi i vitit akademik",
+        "yearOfStudy": "Viti i studimit",
+        "name": "Emri",
+        "capacity": "Kapaciteti",
+        "status": "Statusi"
+      },
+      "form": {
+        "year": "Viti akademik",
+        "yearOfStudy": "Viti i studimit",
+        "name": "Emri i grupit",
+        "capacity": "Kapaciteti",
+        "add": "Shto grupin"
+      },
+      "deactivate": "Çaktivizo",
+      "deactivateTitle": "Të çaktivizohet grupi?",
+      "deactivateBody": "Grupi nuk përdoret më. Nuk mund të çaktivizohet nëse ka studentë.",
+      "reactivate": "Riaktivizo",
+      "reactivateTitle": "Të riaktivizohet grupi?",
+      "reactivateBody": "Grupi kthehet në përdorim.",
+      "startOfYear": {
+        "nav": "Fillimi i vitit: krijo grupet",
+        "title": "Krijimi i grupeve për vitin",
+        "groups": "Grupet e studentëve",
+        "year": "Viti akademik",
+        "show": "Trego",
+        "closed": "Viti akademik është i mbyllur.",
+        "nothing": "Nuk ka grupe për t'u krijuar: çdo kohortë ka tashmë grup për vitin përkatës të studimit, ose nuk ka kohortë aktive për këtë vit.",
+        "intro": "Do të krijohen {count} grupe me emrin e paracaktuar:",
+        "columns": {
+          "program": "Programi",
+          "cohort": "Kohorta",
+          "yearOfStudy": "Viti i studimit",
+          "name": "Emri"
+        },
+        "confirm": "Krijo {count} grupe",
+        "done": "U krijuan {count} grupe.",
+        "failed": "Krijimi i grupeve dështoi."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "nameTaken": "Ky emër përdoret tashmë.",
+        "planNotApproved": "Zgjidhni një plan të miratuar të këtij programi.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "beforeCohortStart": "Viti fillon para kohortës.",
+        "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+        "capacityRange": "Kapaciteti duhet të jetë nga 1 deri në 1000.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "COHORT_INACTIVE": "Kohorta është joaktive.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "SAME_PLAN": "Kohorta ndjek tashmë këtë plan.",
+        "ALREADY_ACTIVE": "Është tashmë aktive.",
+        "ALREADY_INACTIVE": "Është tashmë joaktive.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të ndryshohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "dependents": {
+      "cohorts": "kohorta",
+      "groups": "grupe aktive"
     }
   },
   "cur": {

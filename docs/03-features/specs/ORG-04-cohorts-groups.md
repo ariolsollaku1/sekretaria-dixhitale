@@ -115,14 +115,25 @@ Checks: `year_of_study >= 1`, `capacity BETWEEN 1 AND 1000`.
 - The bulk tool for a year before any cohort started creates nothing and says why.
 - Two writers creating the same group at once: the unique key makes the second fail with the name error.
 
+**Implementation notes:**
+- Routes `/org/cohorts`, `/org/cohorts/new`, `/org/cohorts/[id]`, `/org/groups`,
+  `/org/groups/start-of-year`.
+- ORG cannot import CUR (CUR imports ORG): CUR registers a **plan directory** in ORG
+  (`registerPlanDirectory`), and the plan-dependents registry moved to ORG
+  (`registerPlanDependent`, `blockingPlanDependents`), where cohorts register `org.cohorts`.
+- `registerCohortDependent` / `registerGroupDependent` are the hooks for STU-01 (students block
+  deactivation and plan changes).
+- Group names that collide with an inactive group are revived by the start-of-year tool instead of failing.
+- Dev seed: one cohort of the demo bachelor program on its approved plan, with a group.
+
 ## 4. Tasks
 
 - [x] **T1** — `cohorts.prisma` + migration; permissions; nav. (AC-1, AC-6, AC-12)
 - [x] **T2** — Pure rules (expected year, bulk plan) and schemas with unit tests. (AC-6, AC-9, AC-10)
 - [x] **T3** — Cohort and group services and queries; integration tests. (AC-1..AC-3, AC-5..AC-8)
 - [x] **T4** — Dependents (plan archive, students), bulk start-of-year with checklist step; tests. (AC-4, AC-5, AC-8, AC-9)
-- [ ] **T5** — Tables, pages, forms, i18n. (AC-11)
-- [ ] **T6** — E2E, seed, docs. (all)
+- [x] **T5** — Tables, pages, forms, i18n. (AC-11)
+- [x] **T6** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -138,9 +149,9 @@ Checks: `year_of_study >= 1`, `capacity BETWEEN 1 AND 1000`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

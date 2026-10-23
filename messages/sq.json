@@ -64,6 +64,7 @@
       "staff": "Stafi",
       "myStaffRecord": "Të dhënat e mia",
       "plans": "Planet mësimore",
+      "syllabi": "Syllabuset",
       "cohorts": "Kohortet",
       "studentGroups": "Grupet e studentëve",
       "students": "Studentët",
@@ -936,6 +937,66 @@
         "seminar": "Seminare",
         "lab": "Laborator",
         "total": "Gjithsej"
+      }
+    },
+    "syllabi": {
+      "title": "Syllabuset",
+      "noYear": "Zgjidhni një vit akademik.",
+      "noPlans": "Nuk ka plane të miratuara.",
+      "noPlansHint": "Programet e lëndëve lidhen me planet mësimore të miratuara.",
+      "forYear": "Viti akademik {year}",
+      "plan": "Plani mësimor",
+      "show": "Shfaq",
+      "missing": "{count, plural, =0 {Të gjitha lëndët kanë program të miratuar.} one {# lëndë pa program të miratuar.} other {# lëndë pa program të miratuar.}}",
+      "upload": "Ngarko",
+      "newVersion": "Version i ri",
+      "uploadTitle": "Programi i lëndës {code}",
+      "uploadBody": "Ngarkoni PDF-në; ruhet si skicë dhe bëhet zyrtare kur miratohet.",
+      "file": "Skedari PDF",
+      "notes": "Shënime (opsionale)",
+      "saveDraft": "Ruaj skicën",
+      "uploaded": "Skica u ruajt.",
+      "failed": "Veprimi nuk u krye.",
+      "approve": "Miratoje",
+      "approveTitle": "Të miratohet programi i {code}?",
+      "approveBody": "Versioni i miratuar para tij arkivohet dhe nuk ndryshohet më.",
+      "approved": "Programi u miratua.",
+      "deleteDraft": "Fshij skicën",
+      "deleteTitle": "Të fshihet skica e {code}?",
+      "deleteBody": "Skica fshihet përfundimisht.",
+      "deleted": "Skica u fshi.",
+      "history": "Historiku",
+      "download": "Shkarko v{version}",
+      "downloadDraft": "Skica v{version}",
+      "draftWaiting": "Skicë v{version} në pritje",
+      "carry": "Merr nga viti i mëparshëm",
+      "carryTitle": "Të merren programet në {year}?",
+      "carryBody": "Për lëndët pa program në këtë vit krijohet një skicë me kopjen e programit të fundit të miratuar; duhet miratuar veçmas.",
+      "carried": "{created} skica u krijuan; {existing} ekzistonin; {noSource} pa burim; {sourceMissing} me skedar të munguar.",
+      "state": {
+        "approved": "Miratuar",
+        "draft": "Skicë",
+        "missing": "Mungon"
+      },
+      "status": {
+        "DRAFT": "Skicë",
+        "APPROVED": "Miratuar",
+        "ARCHIVED": "Arkivuar"
+      },
+      "columns": {
+        "course": "Lënda",
+        "yearSemester": "Viti / semestri",
+        "state": "Gjendja",
+        "file": "Skedari",
+        "actions": "Veprime"
+      },
+      "historyColumns": {
+        "version": "Versioni",
+        "state": "Statusi",
+        "file": "Skedari",
+        "notes": "Shënime",
+        "created": "Krijuar",
+        "approved": "Miratuar"
       }
     }
   },

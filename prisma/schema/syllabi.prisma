@@ -1,0 +1,33 @@
+enum SyllabusStatus {
+  DRAFT
+  APPROVED
+  ARCHIVED
+
+  @@map("syllabus_status")
+}
+
+/// The syllabus (PDF) of a plan course for an academic year (CUR-03). Approved and archived
+/// versions are frozen by a trigger; one APPROVED per plan course and year (partial unique index).
+model Syllabus {
+  id             String         @id @default(cuid(2))
+  planCourseId   String         @map("plan_course_id")
+  academicYearId String         @map("academic_year_id")
+  version        Int
+  status         SyllabusStatus @default(DRAFT)
+  /// A PLT-08 file, purpose `syllabus`.
+  fileId         String         @unique @map("file_id")
+  notes          String?
+  approvedAt     DateTime?      @map("approved_at") @db.Timestamptz(3)
+  approvedById   String?        @map("approved_by_id")
+  createdAt      DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?        @map("created_by_id")
+  updatedById    String?        @map("updated_by_id")
+  planCourse     PlanCourse     @relation(fields: [planCourseId], references: [id])
+  academicYear   AcademicYear   @relation(fields: [academicYearId], references: [id])
+
+  @@unique([planCourseId, academicYearId, version])
+  @@index([planCourseId, academicYearId, status])
+  @@index([academicYearId])
+  @@map("syllabi")
+}

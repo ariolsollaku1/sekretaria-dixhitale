@@ -15,6 +15,7 @@ model AcademicYear {
   studentGroups     StudentGroup[]
   cohortsStarted    Cohort[]
   plans             CurriculumPlan[]
+  syllabi           Syllabus[]
   id                String             @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
   code              String             @unique

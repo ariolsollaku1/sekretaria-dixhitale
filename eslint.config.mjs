@@ -7,6 +7,7 @@ export default defineConfig([
   ...nextTs,
   globalIgnores([
     ".next/**",
+    ".claude/**",
     "node_modules/**",
     "coverage/**",
     "src/generated/**",

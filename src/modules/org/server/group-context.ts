@@ -48,3 +48,24 @@ export async function getGroupContext(
       }
     : null;
 }
+
+/** Active groups of an academic year for pickers: "PROGRAM · cohort · group · year N". */
+export async function listGroupsForYear(
+  academicYearId: string,
+  client: Pick<Tx, "studentGroup"> = db,
+) {
+  const groups = await client.studentGroup.findMany({
+    where: { academicYearId, active: true },
+    orderBy: [{ cohort: { program: { code: "asc" } } }, { yearOfStudy: "asc" }, { name: "asc" }],
+    select: {
+      id: true,
+      name: true,
+      yearOfStudy: true,
+      cohort: { select: { name: true, program: { select: { code: true } } } },
+    },
+  });
+  return groups.map((g) => ({
+    id: g.id,
+    label: `${g.cohort.program.code} · ${g.cohort.name} · ${g.name} (${g.yearOfStudy})`,
+  }));
+}

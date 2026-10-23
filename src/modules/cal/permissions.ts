@@ -11,3 +11,30 @@ registerPermissions("cal", {
     secretary: ["cal.event.read", "cal.event.write"],
   },
 });
+
+// AC-7 (CAL-02): the Secretariat enters the timetable; staff read any group's or room's; lecturers
+// and students see their own (roles.md "CAL — calendar, timetable": W/R/r).
+const STAFF_READERS = [
+  "sysadmin",
+  "secretary",
+  "student_affairs",
+  "finance",
+  "hr",
+  "quality",
+  "library",
+  "administration",
+  "head_of_department",
+  "program_coordinator",
+  "erasmus",
+] as const;
+
+registerPermissions("cal", {
+  permissions: ["cal.timetable.read", "cal.timetable.write", "cal.timetable.self"],
+  grants: {
+    ...Object.fromEntries(STAFF_READERS.map((r) => [r, ["cal.timetable.read"]])),
+    sysadmin: ["cal.timetable.read", "cal.timetable.write"],
+    secretary: ["cal.timetable.read", "cal.timetable.write"],
+    lecturer: ["cal.timetable.self"],
+    student: ["cal.timetable.self"],
+  },
+});

@@ -1,0 +1,23 @@
+/// A weekly class slot of a teaching assignment (CAL-02). Planning data: changed and removed with an audit entry.
+model TimetableEntry {
+  id           String             @id @default(cuid(2))
+  assignmentId String             @map("assignment_id")
+  /// 1 = Monday … 7 = Sunday.
+  weekday      Int
+  /// Minutes from midnight, local time.
+  startMinute  Int                @map("start_minute")
+  endMinute    Int                @map("end_minute")
+  room         String?
+  validFrom    DateTime           @map("valid_from") @db.Date
+  validTo      DateTime           @map("valid_to") @db.Date
+  note         String?
+  createdAt    DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById  String?            @map("created_by_id")
+  updatedById  String?            @map("updated_by_id")
+  assignment   TeachingAssignment @relation(fields: [assignmentId], references: [id])
+
+  @@index([assignmentId])
+  @@index([weekday])
+  @@map("timetable_entries")
+}

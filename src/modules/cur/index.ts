@@ -34,3 +34,10 @@ export { TeachingBoard } from "./ui/teaching-board";
 export { TeachingCopy } from "./ui/teaching-copy";
 export { board as teachingBoard, ownAssignments } from "./server/teaching.queries";
 export { teachingLoadTable } from "./server/load.table";
+export {
+  getAssignmentContext,
+  listGroupAssignments,
+  listStaffAssignments,
+  findAssignments,
+  type AssignmentContext,
+} from "./server/assignment-context";

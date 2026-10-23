@@ -15,3 +15,14 @@ export { renderCalendar } from "./domain/ics";
 export { userForToken, createFeedToken, revokeFeedToken } from "./server/feed.service";
 export { audienceFilter } from "./server/event.queries";
 export { listProgramOptions } from "./server/program-options";
+export { TimetableGrid } from "./ui/timetable-grid";
+export { TimetableEditor } from "./ui/timetable-editor";
+export {
+  groupEntries,
+  roomEntries,
+  staffEntries,
+  studentEntries,
+  type EntryView,
+} from "./server/timetable.queries";
+export { TimetableImport } from "./ui/timetable-import";
+export { TEMPLATE_CSV as TIMETABLE_TEMPLATE_CSV } from "./domain/timetable-import";

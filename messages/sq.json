@@ -77,7 +77,9 @@
       "teachingLoad": "Ngarkesa vjetore",
       "hrLists": "Listat e pedagogëve",
       "studentLists": "Listat e Sekretarisë",
-      "studentStatistics": "Statistika"
+      "studentStatistics": "Statistika",
+      "timetable": "Orari i mësimit",
+      "myTimetable": "Orari im"
     },
     "languages": {
       "sq": "Shqip",
@@ -1181,6 +1183,101 @@
     "rollover": {
       "label": "Përgatitni kalendarin akademik",
       "description": "Kopjoni kalendarin e vitit të kaluar dhe rregulloni datat."
+    },
+    "timetable": {
+      "title": "Orari i mësimit",
+      "mine": "Orari im",
+      "roomView": "Orari i sallës",
+      "edit": "Ndrysho orarin",
+      "noYear": "Nuk ka vit akademik të zgjedhur.",
+      "noGroups": "Nuk ka grupe aktive për këtë vit.",
+      "chooseGroup": "Zgjidhni një grup.",
+      "chooseRoom": "Shkruani emrin e sallës.",
+      "group": "Grupi",
+      "onDate": "Në datën (opsionale)",
+      "show": "Shfaq",
+      "empty": "Nuk ka orë në orar.",
+      "noRecord": "Nuk gjetëm orar për ju (llogaria nuk është lidhur me një pedagog ose një student me regjistrim aktiv).",
+      "noAssignments": "Ky grup nuk ka ende pedagogë të caktuar. Caktoni pedagogët te Ngarkesa mësimore.",
+      "add": "Shto orë",
+      "added": "Ora u shtua.",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "remove": "Hiq",
+      "clash": "Përplasje me orë ekzistuese: {clashes}.",
+      "clashKind": {
+        "GROUP": "i njëjti grup",
+        "LECTURER": "i njëjti pedagog",
+        "ROOM": "e njëjta sallë"
+      },
+      "kind": {
+        "LECTURE": "Leksion",
+        "SEMINAR": "Seminar",
+        "LAB": "Laborator"
+      },
+      "weekday": {
+        "1": "E hënë",
+        "2": "E martë",
+        "3": "E mërkurë",
+        "4": "E enjte",
+        "5": "E premte",
+        "6": "E shtunë",
+        "7": "E diel"
+      },
+      "form": {
+        "assignment": "Lënda dhe lloji",
+        "weekday": "Dita",
+        "start": "Fillon",
+        "end": "Mbaron",
+        "room": "Salla",
+        "validFrom": "Vlen nga",
+        "validTo": "Vlen deri"
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "weekdayRange": "Dita nuk është e vlefshme.",
+        "timeRange": "Ora nuk është e vlefshme.",
+        "endBeforeStart": "Mbarimi duhet të jetë pas fillimit.",
+        "invalidDate": "Data nuk është e vlefshme.",
+        "outsideYear": "Datat duhet të jenë brenda vitit akademik.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "generic": "Veprimi nuk u krye."
+      },
+      "import": {
+        "nav": "Importo orarin",
+        "title": "Importi i orarit",
+        "file": "Skedari (.csv ose .xlsx)",
+        "hint": "Kolonat: program, cohort, group, course, kind, weekday, start, end, room, valid_from, valid_to, lecturer_email. Çdo rresht lidhet me caktimin e pedagogut të vitit të zgjedhur (kodi i lëndës dhe lloji); lecturer_email nevojitet vetëm kur ka disa pedagogë për të njëjtin lloj. Dita: 1–7 ose emri; ora: HH:MM. Maksimumi 2000 rreshta, 2 MB.",
+        "choose": "Zgjidh skedarin",
+        "template": "Shkarko modelin CSV",
+        "working": "Duke kontrolluar…",
+        "summary": "{valid} nga {total} rreshta janë të vlefshëm dhe {invalid} kanë gabime.",
+        "errorsTitle": "Gabimet",
+        "row": "Rreshti {row}",
+        "confirm": "Importo {count} orë",
+        "fixFirst": "Rregulloni gabimet dhe zgjidheni skedarin përsëri: importi bëhet i plotë ose aspak.",
+        "done": "U shtuan {created} orë.",
+        "failed": "Importi nuk u krye.",
+        "errors": {
+          "assignmentNotFound": "Nuk u gjet caktim për këtë grup, lëndë dhe lloj në vitin e zgjedhur.",
+          "lecturerNotFound": "Asnjë nga pedagogët e caktuar nuk ka këtë email.",
+          "ambiguousLecturer": "Disa pedagogë: shtoni lecturer_email.",
+          "invalidKind": "Lloji duhet të jetë leksion, seminar ose laborator.",
+          "weekdayRange": "Dita nuk është e vlefshme.",
+          "importHasErrors": "Skedari ka gabime."
+        },
+        "fileErrors": {
+          "invalidEncoding": "Skedari nuk është UTF-8.",
+          "empty": "Skedari është bosh ose ka vetëm titujt.",
+          "tooManyRows": "Më shumë se 2000 rreshta.",
+          "tooLarge": "Skedari është më i madh se 2 MB.",
+          "missingColumns": "Mungojnë kolonat e detyrueshme",
+          "unsupportedFile": "Skedari nuk lexohet.",
+          "FORBIDDEN": "Nuk keni leje.",
+          "UNAUTHENTICATED": "Hyni përsëri."
+        }
+      }
     }
   },
   "ntf": {

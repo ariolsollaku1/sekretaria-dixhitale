@@ -99,13 +99,28 @@ with state filter, retry button on failed rows. Nav: System → "Jobs".
 - Shutdown (`SIGTERM`) stops fetching and waits briefly for active jobs.
 - Time zone: cron expressions are interpreted in `Europe/Tirane`.
 
+**Implementation notes:**
+- pg-boss **12.38**: API differs from older docs (`createQueue` before `work`, `localConcurrency`,
+  `findJobs`, handlers receive an array). Every queue uses the `exclusive` policy, which gives the
+  idempotency of AC-3: one waiting-or-running job per name + `singletonKey`. Hence `enqueue` **requires
+  a key**; cron jobs, which are scheduled without one, can never overlap themselves.
+- The runtime is a factory (`createJobsRuntime`) so tests run real pg-boss instances on the test
+  database; the process-wide instance lives on `globalThis`.
+- Failure output is sanitised (`job failed (<ClassName>)`) and logs carry job name, id and attempt only;
+  tested with an error message containing an e-mail address.
+- Dashboard counts are read from `pgboss.job` because pg-boss's own queue statistics are refreshed by a
+  maintenance cycle and lag; recent jobs are limited to declared queues.
+- `src/instrumentation.ts` starts the jobs after validating the environment (not in `NODE_ENV=test`
+  and not during `next build`). A start-up failure is logged and the web app keeps serving.
+- Retrying uses `boss.retry` and writes `plt.job.retry`; the page lists only declared queues.
+
 ## 4. Tasks
 
 - [x] **T1** — Dependency, permissions, `JOBS_WORKER` env, job registry with validation and unit tests. (AC-1, AC-10)
 - [x] **T2** — Runtime: start/stop, queues, workers, schedules, enqueue, error sanitising; integration tests with a real pg-boss. (AC-2..AC-6, AC-11)
 - [x] **T3** — Nightly file clean-up job; start from `instrumentation.ts`. (AC-9, AC-2)
-- [ ] **T4** — Dashboard queries, page, retry action with audit; nav, i18n. (AC-7, AC-8)
-- [ ] **T5** — E2E for the dashboard, docs (ADR-0008 note, README). (all)
+- [x] **T4** — Dashboard queries, page, retry action with audit; nav, i18n. (AC-7, AC-8)
+- [x] **T5** — E2E for the dashboard, docs (ADR-0008 note, README). (all)
 
 ## 5. Test plan
 
@@ -123,9 +138,9 @@ with state filter, retry button on failed rows. Nav: System → "Jobs".
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (ADR-0008 implementation note, README)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (ADR-0008 implementation note, README)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

@@ -90,3 +90,12 @@ registerNav(
     order: 11,
   },
 );
+registerNav({
+  id: "jobs",
+  labelKey: "jobs",
+  href: "/admin/jobs",
+  icon: "settings",
+  permission: "plt.jobs.read",
+  group: "system",
+  order: 30,
+});

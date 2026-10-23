@@ -106,7 +106,7 @@ test("AC-2..AC-5, 7, 10, 11: the lecturer records absences; the student sees the
   await page.goto(oldUrl);
   await page.waitForLoadState("networkidle");
   await page.getByRole("button", { name: "Ruaj dhe shëno si të zhvilluar" }).click();
-  await expect(page.getByRole("alert")).toContainText("Kjo fushë është e detyrueshme");
+  await expect(page.getByText("Kjo fushë është e detyrueshme.")).toBeVisible();
   await page.getByLabel("Arsyeja e ndryshimit").fill("Lecturer reported it late");
   await page.getByRole("button", { name: "Ruaj dhe shëno si të zhvilluar" }).click();
   await expect(page.getByText("Prania u ruajt")).toBeVisible();

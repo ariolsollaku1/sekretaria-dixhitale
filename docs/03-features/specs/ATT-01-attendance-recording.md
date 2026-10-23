@@ -110,11 +110,11 @@ Checks: `hours BETWEEN 1 AND 12`, `0 <= start < end <= 1440`.
 
 ## 4. Tasks
 
-- [ ] **T1** — Model, migration, permissions, setting, nav. (AC-1, AC-11)
-- [ ] **T2** — Pure rules and schemas with unit tests. (AC-1..AC-3, AC-5, AC-7)
-- [ ] **T3** — Service and queries; integration tests. (AC-2..AC-11)
-- [ ] **T4** — Pages and forms (mobile-first), i18n. (AC-4, AC-9, AC-10, AC-12)
-- [ ] **T5** — Seed, e2e, docs. (all)
+- [x] **T1** — Model, migration, permissions, setting, nav. (AC-1, AC-11)
+- [x] **T2** — Pure rules and schemas with unit tests. (AC-1..AC-3, AC-5, AC-7)
+- [x] **T3** — Service and queries; integration tests. (AC-2..AC-11)
+- [x] **T4** — Pages and forms (mobile-first), i18n. (AC-4, AC-9, AC-10, AC-12)
+- [x] **T5** — Seed, e2e, docs. (all)
 
 ## 5. Test plan
 
@@ -129,4 +129,4 @@ Checks: `hours BETWEEN 1 AND 12`, `0 <= start < end <= 1440`.
 
 ## 6. Definition of done
 
-- [ ] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n sq+en; FEATURES.md `done`
+- [x] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n sq+en; FEATURES.md `done`

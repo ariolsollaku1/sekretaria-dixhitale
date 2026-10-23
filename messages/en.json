@@ -74,7 +74,8 @@
       "formsInbox": "Form inbox",
       "adminForms": "Form definitions",
       "contracts": "Contract expiry",
-      "teachingLoad": "Annual load"
+      "teachingLoad": "Annual load",
+      "hrLists": "Lecturer lists"
     },
     "languages": {
       "sq": "Shqip",
@@ -1397,6 +1398,26 @@
         "ENDING_SOON": "Ending soon",
         "OK": "OK",
         "all": "All"
+      }
+    },
+    "lists": {
+      "title": "Lecturer lists",
+      "presets": "Standard lists",
+      "faculty": "Faculty",
+      "facultyCode": "Faculty code",
+      "programCode": "Program code",
+      "semester": "Teaches in semester",
+      "age": "Age",
+      "ageFrom": "Age from",
+      "ageTo": "Age to",
+      "employed": "Employed",
+      "preset": {
+        "byDepartment": "Employed lecturers by department and faculty",
+        "pae": "Internal (PAE)",
+        "pak": "External (PAK)",
+        "externalEmployer": "External with primary employer",
+        "retiredExternal": "Retired external",
+        "volunteers": "Volunteers"
       }
     }
   },

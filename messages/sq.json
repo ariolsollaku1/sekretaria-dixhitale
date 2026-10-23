@@ -74,7 +74,8 @@
       "formsInbox": "Kutia e formularëve",
       "adminForms": "Përcaktimi i formularëve",
       "contracts": "Mbarimi i kontratave",
-      "teachingLoad": "Ngarkesa vjetore"
+      "teachingLoad": "Ngarkesa vjetore",
+      "hrLists": "Listat e pedagogëve"
     },
     "languages": {
       "sq": "Shqip",
@@ -1397,6 +1398,26 @@
         "ENDING_SOON": "Mbaron së shpejti",
         "OK": "Në rregull",
         "all": "Të gjitha"
+      }
+    },
+    "lists": {
+      "title": "Listat e pedagogëve",
+      "presets": "Lista standarde",
+      "faculty": "Fakulteti",
+      "facultyCode": "Kodi i fakultetit",
+      "programCode": "Kodi i programit",
+      "semester": "Jep mësim në semestrin",
+      "age": "Mosha",
+      "ageFrom": "Mosha nga",
+      "ageTo": "Mosha deri",
+      "employed": "Në punë",
+      "preset": {
+        "byDepartment": "Pedagogët në punë sipas departamentit dhe fakultetit",
+        "pae": "Të brendshëm (PAE)",
+        "pak": "Të jashtëm (PAK)",
+        "externalEmployer": "Të jashtëm me punëdhënësin kryesor",
+        "retiredExternal": "Të jashtëm në pension",
+        "volunteers": "Vullnetarë"
       }
     }
   },

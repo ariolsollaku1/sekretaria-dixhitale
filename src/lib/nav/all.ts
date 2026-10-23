@@ -188,6 +188,15 @@ registerNav(
     order: 30,
   },
   {
+    id: "hr-lists",
+    labelKey: "hrLists",
+    href: "/hr/lists",
+    icon: "chart",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 33,
+  },
+  {
     id: "contracts",
     labelKey: "contracts",
     href: "/hr/contracts",

@@ -19,3 +19,4 @@ export {
 } from "./server/staff-lookup";
 export { contractsTable } from "./server/contract.table";
 import "./server/contract.job";
+export { lecturersTable } from "./server/lecturers.table";

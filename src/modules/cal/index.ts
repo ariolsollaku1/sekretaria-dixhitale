@@ -24,3 +24,5 @@ export {
   studentEntries,
   type EntryView,
 } from "./server/timetable.queries";
+export { TimetableImport } from "./ui/timetable-import";
+export { TEMPLATE_CSV as TIMETABLE_TEMPLATE_CSV } from "./domain/timetable-import";

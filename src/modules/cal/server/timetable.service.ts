@@ -15,57 +15,59 @@ import { candidatesFor, listEntries, toDay, view } from "./timetable.queries";
 type Ctx = ActionContext;
 const date = (d: string) => new Date(`${d}T00:00:00Z`);
 
-/** Semester dates of the assignment, the default validity (AC-3). */
-async function semesterRange(ctx: Ctx, yearId: string, semester: number) {
-  const year = await getYear(yearId, ctx.db);
-  const s = year?.semesters.find((x) => x.number === semester);
-  if (!year || !s) throw new DomainError("NOT_FOUND", "Academic year not found");
-  return { from: s.startDate, to: s.endDate, yearStart: year.startDate, yearEnd: year.endDate };
-}
-
 export const describeClashes = (clashes: readonly Clash[]) =>
   clashes
     .map((c) => `${c.kind}:${c.other.label}${c.other.room ? ` (${c.other.room})` : ""}`)
     .join("; ");
 
-async function check(
-  ctx: Ctx,
-  assignmentId: string,
-  input: Omit<SlotInput, "assignmentId">,
-  excludeId?: string,
+type SlotInputLike = Omit<SlotInput, "assignmentId">;
+
+/** The slot with defaults filled in (AC-3) and its validation errors (AC-1). */
+export async function buildSlot(
+  client: Ctx["db"],
+  a: NonNullable<Awaited<ReturnType<typeof getAssignmentContext>>>,
+  input: SlotInputLike,
 ) {
-  const a = await getAssignmentContext(assignmentId, ctx.db);
-  if (!a) throw new DomainError("NOT_FOUND", "Assignment not found");
-  if (a.yearStatus === "CLOSED") throw new DomainError("CONFLICT", "YEAR_CLOSED");
-  const range = await semesterRange(ctx, a.academicYearId, a.semester);
+  const year = await getYear(a.academicYearId, client);
+  const sem = year?.semesters.find((x) => x.number === a.semester);
+  if (!year || !sem) throw new DomainError("NOT_FOUND", "Academic year not found");
   const slot = {
     weekday: input.weekday,
     startMinute: input.startMinute,
     endMinute: input.endMinute,
     room: input.room,
-    validFrom: input.validFrom ?? range.from,
-    validTo: input.validTo ?? range.to,
+    validFrom: input.validFrom ?? sem.startDate,
+    validTo: input.validTo ?? sem.endDate,
   };
-  const errors = validateSlot(slot);
+  const errors: Record<string, string | undefined> = { ...validateSlot(slot) };
   if (
     !errors.validFrom &&
     !errors.validTo &&
-    (slot.validFrom < range.yearStart || slot.validTo > range.yearEnd)
+    (slot.validFrom < year.startDate || slot.validTo > year.endDate)
   )
     errors.validFrom = "outsideYear";
-  if (Object.keys(errors).length > 0)
-    throw new DomainError(
-      "VALIDATION",
-      "Check the slot",
-      Object.fromEntries(Object.entries(errors).map(([k, v]) => [k, [v!]])),
-    );
   const candidate: Slot = {
     ...slot,
-    id: excludeId,
     groupId: a.groupId,
     staffId: a.staffId,
     label: `${a.courseCode} ${formatTime(slot.startMinute)}–${formatTime(slot.endMinute)}`,
   };
+  return { slot, candidate, errors };
+}
+
+async function check(ctx: Ctx, assignmentId: string, input: SlotInputLike, excludeId?: string) {
+  const a = await getAssignmentContext(assignmentId, ctx.db);
+  if (!a) throw new DomainError("NOT_FOUND", "Assignment not found");
+  if (a.yearStatus === "CLOSED") throw new DomainError("CONFLICT", "YEAR_CLOSED");
+  const { slot, candidate, errors } = await buildSlot(ctx.db, a, input);
+  const bad = Object.entries(errors).filter(([, v]) => v);
+  if (bad.length > 0)
+    throw new DomainError(
+      "VALIDATION",
+      "Check the slot",
+      Object.fromEntries(bad.map(([k, v]) => [k, [v!]])),
+    );
+  candidate.id = excludeId;
   const clashes = findClashes(candidate, await candidatesFor(ctx.db, candidate));
   if (clashes.length > 0) throw new DomainError("CONFLICT", `CLASH:${describeClashes(clashes)}`);
   return slot;

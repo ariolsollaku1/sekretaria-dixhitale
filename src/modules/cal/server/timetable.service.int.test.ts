@@ -355,3 +355,65 @@ describe("views (AC-5)", () => {
     expect(await studentEntries("stu", year)).toEqual([]);
   });
 });
+
+describe("import (CAL-02 AC-6)", () => {
+  const header =
+    "program,cohort,group,course,kind,weekday,start,end,room,valid_from,valid_to,lecturer_email";
+  const csv = (...lines: string[]) => ({
+    name: "t.csv",
+    bytes: new TextEncoder().encode([header, ...lines].join("\n")),
+  });
+  const commit = async (file: ReturnType<typeof csv>) => {
+    const { commitImport } = await import("./timetable-import.service");
+    return run((ctx) => commitImport(ctx, file, year));
+  };
+
+  it("previews valid rows, resolves co-lecturers by e-mail, and reports unknown assignments and clashes inside the file", async () => {
+    const { previewImport } = await import("./timetable-import.service");
+    const p = await previewImport(
+      csv(
+        "p1,C,G1,CA,lecture,1,08:00,09:30,A1,,,",
+        "p1,C,G1,CB,lecture,2,08:00,09:30,A2,,,",
+        "p1,C,G1,CA,lecture,1,09:00,10:00,A3,,,", // clashes with row 2 (same group)
+        "p1,C,G1,CZ,lecture,1,08:00,09:00,A1,,,", // unknown course
+        "p1,C,G2,CA,seminar,1,08:00,09:00,A1,,,", // no seminar assignment
+        "p1,C,G1,CA,lecture,1,11:00,12:00,A1,,,wrong@t.test",
+      ),
+      year,
+      db,
+    );
+    if (!p.ok) throw new Error("preview failed");
+    expect(p.counts).toEqual({ total: 6, valid: 2, invalid: 4 });
+    expect(p.errors.map((e) => [e.row, e.code.split(":")[0]])).toEqual([
+      [4, "CLASH"],
+      [5, "assignmentNotFound"],
+      [6, "assignmentNotFound"],
+      [7, "lecturerNotFound"],
+    ]);
+    expect(await db.timetableEntry.count()).toBe(0);
+  });
+
+  it("creates every row or none", async () => {
+    expect(
+      ok(
+        await commit(
+          csv(
+            "p1,C,G1,CA,Leksion,Monday,8:00,9:30,A1,,,",
+            "p1,C,G1,CB,lecture,e martë,10:00,11:00,,01.10.2026,2027-01-15,",
+          ),
+        ),
+      ),
+    ).toEqual({ created: 2 });
+    expect(await db.timetableEntry.count()).toBe(2);
+    expect(await db.auditLog.count({ where: { action: "cal.timetable.import" } })).toBe(1);
+    // a second file with one clashing row creates nothing
+    const bad = await commit(
+      csv("p1,C,G2,CA,lecture,3,08:00,09:00,B1,,,", "p1,C,G2,CA,lecture,1,08:30,09:00,B2,,,"),
+    );
+    expect(bad).toMatchObject({ ok: false, error: { code: "VALIDATION" } });
+    expect(await db.timetableEntry.count()).toBe(2);
+    expect(await commit({ name: "x.pdf", bytes: new Uint8Array([1]) })).toMatchObject({
+      ok: false,
+    });
+  });
+});

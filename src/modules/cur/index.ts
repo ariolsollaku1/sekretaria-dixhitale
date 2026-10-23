@@ -38,5 +38,6 @@ export {
   getAssignmentContext,
   listGroupAssignments,
   listStaffAssignments,
+  findAssignments,
   type AssignmentContext,
 } from "./server/assignment-context";

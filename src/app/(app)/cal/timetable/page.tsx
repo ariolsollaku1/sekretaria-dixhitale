@@ -41,6 +41,14 @@ export default async function TimetablePage({
         title={t("title")}
         actions={
           <>
+            {mayWrite && (
+              <Link
+                href="/cal/timetable/import"
+                className={buttonVariants({ variant: "secondary" })}
+              >
+                {t("import.nav")}
+              </Link>
+            )}
             <Link href="/cal/timetable/room" className={buttonVariants({ variant: "secondary" })}>
               {t("roomView")}
             </Link>

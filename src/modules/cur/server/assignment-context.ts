@@ -76,3 +76,36 @@ export async function listStaffAssignments(
 ) {
   return (await load(client, { staffId, group: { academicYearId } })).map(view);
 }
+
+/** For the timetable import: the assignments matching names, with the lecturer's e-mail to tell co-lecturers apart. */
+export async function findAssignments(
+  q: {
+    academicYearId: string;
+    programCode: string;
+    cohortName: string;
+    groupName: string;
+    courseCode: string;
+    kind: "LECTURE" | "SEMINAR" | "LAB";
+  },
+  client: Pick<Tx, "teachingAssignment"> = db,
+) {
+  const rows = await client.teachingAssignment.findMany({
+    where: {
+      kind: q.kind,
+      planCourse: { course: { code: q.courseCode.toUpperCase() } },
+      group: {
+        academicYearId: q.academicYearId,
+        name: { equals: q.groupName, mode: "insensitive" },
+        cohort: {
+          name: { equals: q.cohortName, mode: "insensitive" },
+          program: { code: q.programCode.toUpperCase() },
+        },
+      },
+    },
+    include: { ...include, staff: { select: { person: { select: { email: true } } } } },
+  });
+  return rows.map((r) => ({
+    ...view(r),
+    lecturerEmail: r.staff.person.email?.toLowerCase() ?? null,
+  }));
+}

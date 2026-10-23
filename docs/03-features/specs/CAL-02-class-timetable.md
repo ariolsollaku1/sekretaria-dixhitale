@@ -58,14 +58,22 @@ Checks: weekday 1–7, `0 <= start < end <= 1440`, `valid_from <= valid_to`.
 
 Permissions: `cal.timetable.read`, `cal.timetable.write`, `cal.timetable.self`. Routes `/cal/timetable` (group picker + editor), `/cal/timetable/room`, `/cal/timetable/mine`, `/cal/timetable/import`.
 
+**Implementation notes:**
+- CAL reads assignments through the CUR index (`getAssignmentContext`, `listGroupAssignments`,
+  `findAssignments`) and groups through ORG (`listGroupsForYear`); clash detection is pure
+  (`domain/timetable-rules.ts`) and runs on every create/update and in the import preview.
+- Import rows resolve by program, cohort, group, course code and kind in the selected year;
+  `lecturer_email` tells co-lecturers apart. The commit re-validates and creates all rows or none.
+- Dev seed: the seeded lecture meets Mondays 08:00–09:30 in room A1.
+
 ## 4. Tasks
 
 - [x] **T1** — Model, migration, permissions, nav. (AC-1, AC-7)
 - [x] **T2** — Pure rules (time, clash, week grid) with unit tests. (AC-1..AC-3)
 - [x] **T3** — Service and queries; integration tests. (AC-2..AC-5, AC-7)
 - [x] **T4** — Group/room/my views and the editor, i18n. (AC-4, AC-5)
-- [ ] **T5** — CSV/XLSX import. (AC-6)
-- [ ] **T6** — E2E, seed, docs. (all)
+- [x] **T5** — CSV/XLSX import. (AC-6)
+- [x] **T6** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -79,4 +87,4 @@ Permissions: `cal.timetable.read`, `cal.timetable.write`, `cal.timetable.self`. 
 
 ## 6. Definition of done
 
-- [ ] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; FEATURES.md `done`
+- [x] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; FEATURES.md `done`

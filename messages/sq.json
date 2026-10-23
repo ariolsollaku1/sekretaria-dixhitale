@@ -1243,6 +1243,40 @@
         "tooLong": "Teksti është shumë i gjatë.",
         "YEAR_CLOSED": "Viti akademik është i mbyllur.",
         "generic": "Veprimi nuk u krye."
+      },
+      "import": {
+        "nav": "Importo orarin",
+        "title": "Importi i orarit",
+        "file": "Skedari (.csv ose .xlsx)",
+        "hint": "Kolonat: program, cohort, group, course, kind, weekday, start, end, room, valid_from, valid_to, lecturer_email. Çdo rresht lidhet me caktimin e pedagogut të vitit të zgjedhur (kodi i lëndës dhe lloji); lecturer_email nevojitet vetëm kur ka disa pedagogë për të njëjtin lloj. Dita: 1–7 ose emri; ora: HH:MM. Maksimumi 2000 rreshta, 2 MB.",
+        "choose": "Zgjidh skedarin",
+        "template": "Shkarko modelin CSV",
+        "working": "Duke kontrolluar…",
+        "summary": "{valid} nga {total} rreshta janë të vlefshëm dhe {invalid} kanë gabime.",
+        "errorsTitle": "Gabimet",
+        "row": "Rreshti {row}",
+        "confirm": "Importo {count} orë",
+        "fixFirst": "Rregulloni gabimet dhe zgjidheni skedarin përsëri: importi bëhet i plotë ose aspak.",
+        "done": "U shtuan {created} orë.",
+        "failed": "Importi nuk u krye.",
+        "errors": {
+          "assignmentNotFound": "Nuk u gjet caktim për këtë grup, lëndë dhe lloj në vitin e zgjedhur.",
+          "lecturerNotFound": "Asnjë nga pedagogët e caktuar nuk ka këtë email.",
+          "ambiguousLecturer": "Disa pedagogë: shtoni lecturer_email.",
+          "invalidKind": "Lloji duhet të jetë leksion, seminar ose laborator.",
+          "weekdayRange": "Dita nuk është e vlefshme.",
+          "importHasErrors": "Skedari ka gabime."
+        },
+        "fileErrors": {
+          "invalidEncoding": "Skedari nuk është UTF-8.",
+          "empty": "Skedari është bosh ose ka vetëm titujt.",
+          "tooManyRows": "Më shumë se 2000 rreshta.",
+          "tooLarge": "Skedari është më i madh se 2 MB.",
+          "missingColumns": "Mungojnë kolonat e detyrueshme",
+          "unsupportedFile": "Skedari nuk lexohet.",
+          "FORBIDDEN": "Nuk keni leje.",
+          "UNAUTHENTICATED": "Hyni përsëri."
+        }
       }
     }
   },

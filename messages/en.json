@@ -1243,6 +1243,40 @@
         "tooLong": "The text is too long.",
         "YEAR_CLOSED": "The academic year is closed.",
         "generic": "The action failed."
+      },
+      "import": {
+        "nav": "Import timetable",
+        "title": "Timetable import",
+        "file": "File (.csv or .xlsx)",
+        "hint": "Columns: program, cohort, group, course, kind, weekday, start, end, room, valid_from, valid_to, lecturer_email. Each row is matched with a teaching assignment of the selected year (course code and kind); lecturer_email is needed only when several lecturers teach the same kind. Weekday: 1–7 or a name; time: HH:MM. At most 2000 rows, 2 MB.",
+        "choose": "Choose file",
+        "template": "Download CSV template",
+        "working": "Checking…",
+        "summary": "{valid} of {total} rows are valid and {invalid} have errors.",
+        "errorsTitle": "Errors",
+        "row": "Row {row}",
+        "confirm": "Import {count} classes",
+        "fixFirst": "Fix the errors and choose the file again: the import is all or nothing.",
+        "done": "{created} classes were added.",
+        "failed": "The import failed.",
+        "errors": {
+          "assignmentNotFound": "No assignment found for this group, course and kind in the selected year.",
+          "lecturerNotFound": "None of the assigned lecturers has this e-mail.",
+          "ambiguousLecturer": "Several lecturers: add lecturer_email.",
+          "invalidKind": "The kind must be lecture, seminar or laboratory.",
+          "weekdayRange": "The weekday is not valid.",
+          "importHasErrors": "The file has errors."
+        },
+        "fileErrors": {
+          "invalidEncoding": "The file is not UTF-8.",
+          "empty": "The file is empty or has only the headers.",
+          "tooManyRows": "More than 2000 rows.",
+          "tooLarge": "The file is larger than 2 MB.",
+          "missingColumns": "Required columns are missing",
+          "unsupportedFile": "The file cannot be read.",
+          "FORBIDDEN": "You may not.",
+          "UNAUTHENTICATED": "Sign in again."
+        }
       }
     }
   },

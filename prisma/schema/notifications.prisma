@@ -1,0 +1,61 @@
+// PLT-11: in-app notifications and the e-mail outbox.
+
+enum EmailStatus {
+  QUEUED
+  SENT
+  FAILED
+
+  @@map("email_status")
+}
+
+/// Shown in the bell and on /notifications. Texts are rendered in the recipient's locale when created.
+model Notification {
+  id        String    @id @default(cuid(2))
+  userId    String    @map("user_id")
+  type      String
+  title     String
+  body      String
+  /// Relative path only.
+  link      String?
+  /// Optional idempotency key (e.g. reminders): one notification per user + key.
+  dedupeKey String?   @map("dedupe_key")
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  readAt    DateTime? @map("read_at") @db.Timestamptz(3)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dedupeKey])
+  @@index([userId, readAt, createdAt])
+  @@map("notifications")
+}
+
+/// Written in the caller's transaction, sent by the `plt.mail.send` job. Holds the recipient's
+/// address (personal data): never logged, never put into job payloads.
+model EmailOutbox {
+  id            String      @id @default(cuid(2))
+  userId        String?     @map("user_id")
+  toAddress     String      @map("to_address")
+  type          String
+  subject       String
+  html          String
+  text          String
+  status        EmailStatus @default(QUEUED)
+  attempts      Int         @default(0)
+  /// A short code (e.g. "TIMEOUT", "REJECTED"), never the provider's message.
+  lastErrorCode String?     @map("last_error_code")
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  sentAt        DateTime?   @map("sent_at") @db.Timestamptz(3)
+
+  @@index([status, createdAt])
+  @@map("email_outbox")
+}
+
+/// A user's e-mail choice for an optional notification type; no row = the default (on).
+model NotificationPreference {
+  userId String  @map("user_id")
+  type   String
+  email  Boolean
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, type])
+  @@map("notification_preferences")
+}

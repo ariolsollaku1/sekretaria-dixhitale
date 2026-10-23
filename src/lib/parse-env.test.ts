@@ -11,6 +11,35 @@ const valid = {
   BETTER_AUTH_SECRET: "x".repeat(32),
 };
 
+describe("mail settings (PLT-11)", () => {
+  it("defaults to SMTP on localhost:1025", () => {
+    const env = parseEnv(valid);
+    expect([env.MAIL_TRANSPORT, env.SMTP_HOST, env.SMTP_PORT, env.SMTP_SECURE]).toEqual([
+      "smtp",
+      "localhost",
+      1025,
+      "false",
+    ]);
+  });
+  it("requires the Microsoft app registration for the graph transport", () => {
+    expect(() => parseEnv({ ...valid, MAIL_TRANSPORT: "graph" })).toThrow(
+      /MS_TENANT_ID.*MS_CLIENT_ID.*MS_CLIENT_SECRET/s,
+    );
+    expect(
+      parseEnv({
+        ...valid,
+        MAIL_TRANSPORT: "graph",
+        MS_TENANT_ID: "t",
+        MS_CLIENT_ID: "c",
+        MS_CLIENT_SECRET: "s",
+      }).MAIL_TRANSPORT,
+    ).toBe("graph");
+    expect(() => parseEnv({ ...valid, MAIL_TRANSPORT: "carrier-pigeon" })).toThrow(
+      /MAIL_TRANSPORT/,
+    );
+  });
+});
+
 describe("parseEnv", () => {
   it("accepts a valid environment", () => {
     expect(parseEnv(valid).APP_URL).toBe("http://localhost:3100");

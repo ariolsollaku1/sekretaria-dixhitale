@@ -145,9 +145,9 @@ None for own notifications (every signed-in user). `plt.settings.write` (sysadmi
 
 ## 4. Tasks
 
-- [ ] **T1** — Models + migration; env (`MAIL_*`, `SMTP_*`, `MS_*`); nodemailer dependency. (AC-2, AC-7)
-- [ ] **T2** — Pure channel decision and rendering with unit tests; type registry. (AC-1, AC-3, AC-4)
-- [ ] **T3** — Mail transports (SMTP, Graph) with contract tests. (AC-7)
+- [x] **T1** — Models + migration; env (`MAIL_*`, `SMTP_*`, `MS_*`); nodemailer dependency. (AC-2, AC-7)
+- [x] **T2** — Pure channel decision and rendering with unit tests; type registry. (AC-1, AC-3, AC-4)
+- [x] **T3** — Mail transports (SMTP, Graph) with contract tests. (AC-7)
 - [ ] **T4** — `notify()` + outbox jobs (`send`, `flush`) with integration tests incl. rollback. (AC-2, AC-5, AC-6, AC-13)
 - [ ] **T5** — Bell, `/notifications`, mark read, link handling, i18n. (AC-8..AC-10)
 - [ ] **T6** — Preferences page, test message, outbox status on the jobs page. (AC-11, AC-12)

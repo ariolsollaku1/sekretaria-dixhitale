@@ -49,6 +49,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-30 | Announcements: who publishes to whom, format, expiry | no | open | Secretariat / Communications |
 | Q-31 | Staff register: fields, lists and who sees personal data | no | open | HR / DPO |
 | Q-32 | Curriculum plans: totals, versions and approval | no | open | Secretariat / Heads of department |
+| Q-33 | Cohorts and student groups: naming, sizes, who maintains them | no | open | Secretariat |
 
 ---
 
@@ -367,3 +368,18 @@ Decisions taken in conversation that aren't architecture ADRs.
   the sysadmin) approves, and the approval records who and when; electives are a simple flag with no
   grouping rule; an approved plan is immutable and is replaced by a new version.
 - **Impact:** the credit thresholds, the duplicate-course rule, who approves, elective grouping.
+
+### Q-33 — Cohorts and student groups: naming, sizes, who maintains them
+- **Context:** SRC-011, SRC-013 — students are divided into groups; a cohort follows one curriculum plan.
+- **Questions:** How are cohorts named (by intake year, e.g. "2026", with a suffix for evening or
+  part-time intakes)? How are groups named and how large may a group be (a maximum per lecture,
+  seminar, laboratory)? How many groups per year of study are created at the start of a year? Who
+  creates cohorts and groups (secretariat, student affairs, program coordinators)? Can a cohort be
+  moved to another plan version after it has started?
+- **Working assumption:** a cohort has a free name (default the start year code) and is unique per
+  program and start year by name; groups have a free name (default "Grupi 1") and an optional
+  capacity that is informational (not enforced); the "start of year" tool creates one default group
+  per cohort and expected year of study; sysadmin, secretary and student affairs create and change
+  cohorts and groups (the others read); a cohort's plan can be changed to another approved plan of
+  the same program, with a reason, as long as the cohort has no students (checked once STU-01 exists).
+- **Impact:** default names, who writes, the plan-change rule.

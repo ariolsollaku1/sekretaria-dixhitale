@@ -31,10 +31,7 @@ registerTable(
 );
 
 const actor = { id: "sender", email: "s@t.test", name: "S", locale: null, personId: null };
-function run<R>(
-  fn: (ctx: ActionContext) => Promise<R>,
-  user = actor,
-): Promise<ActionResult<R>> {
+function run<R>(fn: (ctx: ActionContext) => Promise<R>, user = actor): Promise<ActionResult<R>> {
   const action = createAction({
     getUser: async () => user,
     can: async () => true,
@@ -169,8 +166,14 @@ describe("sendPendingMessages (AC-3, AC-6, AC-7)", () => {
     await sendPendingMessages();
     const m = await db.message.findFirstOrThrow();
     // simulate: notifications exist, rows and message not updated
-    await db.messageRecipient.updateMany({ where: { state: "DELIVERED" }, data: { state: "QUEUED" } });
-    await db.message.update({ where: { id: m.id }, data: { status: "PENDING", completedAt: null } });
+    await db.messageRecipient.updateMany({
+      where: { state: "DELIVERED" },
+      data: { state: "QUEUED" },
+    });
+    await db.message.update({
+      where: { id: m.id },
+      data: { status: "PENDING", completedAt: null },
+    });
     await sendPendingMessages();
     expect(await db.notification.count()).toBe(2);
     expect(await db.message.findFirstOrThrow()).toMatchObject({ status: "SENT" });
@@ -193,7 +196,9 @@ describe("sendPendingMessages (AC-3, AC-6, AC-7)", () => {
     await sendPendingMessages();
     expect(await db.notification.count({ where: { userId: "u-p1" } })).toBe(1);
     expect(await db.emailOutbox.count({ where: { userId: "u-p1" } })).toBe(0);
-    expect((await db.messageRecipient.findFirstOrThrow({ where: { personId: "p1" } })).emailOutboxId).toBeNull();
+    expect(
+      (await db.messageRecipient.findFirstOrThrow({ where: { personId: "p1" } })).emailOutboxId,
+    ).toBeNull();
   });
 });
 
@@ -205,11 +210,15 @@ describe("templates (AC-4, AC-10)", () => {
     if (!created.ok) throw new Error("create failed");
     const id = created.data.templateId;
     expect((await run((ctx) => svc.archiveTemplate(ctx, id))).ok).toBe(true);
-    expect((await db.messageTemplate.findUniqueOrThrow({ where: { id } })).archivedAt).not.toBeNull();
+    expect(
+      (await db.messageTemplate.findUniqueOrThrow({ where: { id } })).archivedAt,
+    ).not.toBeNull();
     const again = await run((ctx) => svc.archiveTemplate(ctx, id));
     expect(!again.ok && again.error.code).toBe("NOT_FOUND");
     expect(
-      (await db.auditLog.findMany({ where: { action: { startsWith: "ntf.template." } } })).map((a) => a.action).sort(),
+      (await db.auditLog.findMany({ where: { action: { startsWith: "ntf.template." } } }))
+        .map((a) => a.action)
+        .sort(),
     ).toEqual(["ntf.template.archive", "ntf.template.create"]);
   });
 });

@@ -833,6 +833,77 @@
     },
     "dependents": {
       "plans": "curriculum plans"
+    },
+    "teaching": {
+      "title": "Teaching assignments",
+      "list": "List",
+      "noYear": "No academic year selected.",
+      "forYear": "Academic year: {year}",
+      "all": "All",
+      "filter": "Filter",
+      "noGroups": "There are no active groups for this year. Create the groups under “Start of year”.",
+      "noCourses": "The cohort's plan has no courses for this year of study.",
+      "yearOfStudy": "year {year} of study",
+      "courseMeta": "semester {semester} · hours: {lecture} / {seminar} / {lab}",
+      "unassigned": "No lecturer",
+      "hoursUnit": "h",
+      "hoursDefault": "from plan",
+      "assign": "Assign",
+      "save": "Save",
+      "saved": "Saved.",
+      "remove": "Remove",
+      "warnings": "Attention",
+      "warningUnassigned": "{count} courses have no lecturer assigned.",
+      "warningOverloaded": "{name} has {hours} planned hours, above the limit of {max}.",
+      "kind": {
+        "LECTURE": "Lecture",
+        "SEMINAR": "Seminar",
+        "LAB": "Laboratory"
+      },
+      "semesterN": {
+        "1": "Semester 1",
+        "2": "Semester 2"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "group": "Group",
+        "yearOfStudy": "Year of study",
+        "course": "Course",
+        "courseCode": "Course code",
+        "semester": "Semester",
+        "kind": "Kind",
+        "lecturer": "Lecturer",
+        "category": "Category",
+        "hours": "Planned hours"
+      },
+      "copy": {
+        "from": "Copy assignments from year",
+        "submit": "Copy into {year}",
+        "done": "{copied} copied, {skippedExisting} skipped (existing) and {skippedInactive} (inactive lecturer).",
+        "closed": "The academic year is closed.",
+        "failed": "The copy failed."
+      },
+      "mine": {
+        "title": "My teaching",
+        "empty": "You have no assignments for this academic year.",
+        "noStaff": "You have no staff record",
+        "noStaffHint": "Your account is not linked to a staff member. Contact Human Resources."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "hoursRange": "Hours must be a whole number from 0 to 500.",
+        "groupInactive": "The group is inactive.",
+        "yearClosed": "The academic year is closed.",
+        "courseNotInGroup": "The course is not in the cohort's plan for this year of study.",
+        "staffInactive": "The lecturer is inactive.",
+        "staffNotAcademic": "Only academic staff can teach.",
+        "staffUnknown": "The lecturer was not found.",
+        "alreadyAssigned": "This lecturer is already assigned to this kind.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "FORBIDDEN": "You may not assign in this program.",
+        "generic": "The action failed."
+      }
     }
   },
   "jobs": {

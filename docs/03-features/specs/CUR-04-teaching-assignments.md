@@ -103,13 +103,22 @@ Checks: `semester IN (1,2)`, `planned_hours BETWEEN 0 AND 500`.
 - A lecturer removed from the staff register (deactivated) keeps past assignments; new ones are refused.
 - Two writers assigning the same lecturer: the unique key makes the second fail with a clear message.
 
+**Implementation notes:**
+- Routes `/cur/teaching` (board), `/cur/teaching/list` (PLT-10 table), `/cur/teaching/mine`.
+- CUR reads staff and groups through the HR and ORG indexes (`listLecturerOptions`,
+  `getStaffBriefs`, `getOwnStaffId`; `getGroupContext`) and a `group` target resolver in ORG
+  maps a group to its program for scoped writes.
+- The load limit is the setting `cur.teaching.maxPlannedHours` (positive whole number); unset means no warning.
+- `hr.staff.self` and `cur.teaching.self` are not granted to the student role (students have `stu.student.self`).
+- Dev seed: the dev lecturer teaches `DEMO101` (lectures) in the demo group.
+
 ## 4. Tasks
 
 - [x] **T1** — `teaching.prisma` + migration; permissions; ORG group target resolver; nav. (AC-1, AC-9)
 - [x] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-3, AC-5, AC-6)
 - [x] **T3** — HR/ORG helpers, service and queries; integration tests. (AC-2..AC-6, AC-8, AC-9)
-- [ ] **T4** — Board, copy tool, list table, my assignments, i18n. (AC-6..AC-8)
-- [ ] **T5** — E2E, seed, docs. (all)
+- [x] **T4** — Board, copy tool, list table, my assignments, i18n. (AC-6..AC-8)
+- [x] **T5** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -124,9 +133,9 @@ Checks: `semester IN (1,2)`, `planned_hours BETWEEN 0 AND 500`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

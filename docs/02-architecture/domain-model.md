@@ -108,7 +108,7 @@ erDiagram
 | `CurriculumPlan` | (CUR-02, implemented) `programId`, `version` (per program), `validFromAcademicYearId`, `status` (DRAFT/APPROVED/ARCHIVED), `notes?`, `approvedAt/ById`, `archivedAt`. Approved and archived plans are frozen by database triggers. |
 | `PlanCourse` | (CUR-02, implemented) `planId`, `courseId` (unique per plan), `yearOfStudy`, `semester` (1/2), `credits`, `categoryId?`, hours (lecture/seminar/lab), `isElective`; defaults copied from the catalog when added. |
 | `Syllabus` | `planCourseId`, `academicYearId`, `fileId` or structured content, `status` |
-| `TeachingAssignment` | `academicYearId`, `semester`, `planCourseId`, `groupId`, `staffId`, `kind` (LECTURE/SEMINAR/LAB), `plannedHours` |
+| `TeachingAssignment` | (CUR-04, implemented) `groupId`, `planCourseId`, `staffId`, `kind` (LECTURE/SEMINAR/LAB), `semester` (of the plan course), `plannedHours`; unique per group, plan course, kind and lecturer. |
 | `ApprovedDocument` | Archive of approved plan/syllabus/diploma & supplement forms per academic year (SRC-111/112) |
 
 ### STU / ADM — students & admissions

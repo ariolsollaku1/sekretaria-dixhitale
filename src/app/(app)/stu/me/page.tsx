@@ -2,7 +2,9 @@ import { UserX } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { EmptyState } from "@/components/ui/empty-state";
 import { PageHeader } from "@/components/ui/page-header";
+import { ForbiddenView } from "@/components/forbidden-view";
 import { requireUser } from "@/lib/auth";
+import { can } from "@/lib/authz/guard";
 import { getOwnStudent } from "@/modules/stu";
 import {
   EnrollmentsSection,
@@ -14,6 +16,7 @@ import {
 // AC-11: a student sees their own record and nothing else.
 export default async function MyStudentRecordPage() {
   const user = await requireUser("/stu/me");
+  if (!(await can(user, "stu.student.self"))) return <ForbiddenView />;
   const [t, data] = await Promise.all([getTranslations("stu"), getOwnStudent(user)]);
   return (
     <>

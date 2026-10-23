@@ -9,7 +9,7 @@ const READ = ["hr.staff.read"];
 registerPermissions("hr", {
   permissions: ["hr.staff.read", "hr.staff.write", "hr.staff.sensitive", "hr.staff.self"],
   grants: {
-    ...Object.fromEntries(ROLES.map((r) => [r, ["hr.staff.self"]])),
+    ...Object.fromEntries(ROLES.filter((r) => r !== "student").map((r) => [r, ["hr.staff.self"]])),
     sysadmin: [...READ, "hr.staff.sensitive", "hr.staff.self"],
     secretary: [...READ, "hr.staff.self"],
     finance: [...READ, "hr.staff.self"],

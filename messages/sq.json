@@ -833,6 +833,77 @@
     },
     "dependents": {
       "plans": "planet mësimore"
+    },
+    "teaching": {
+      "title": "Ngarkesa mësimore",
+      "list": "Lista",
+      "noYear": "Nuk ka vit akademik të zgjedhur.",
+      "forYear": "Viti akademik: {year}",
+      "all": "Të gjitha",
+      "filter": "Filtro",
+      "noGroups": "Nuk ka grupe aktive për këtë vit. Krijoni grupet në “Fillimi i vitit”.",
+      "noCourses": "Plani i kohortës nuk ka lëndë për këtë vit studimi.",
+      "yearOfStudy": "viti {year} i studimit",
+      "courseMeta": "semestri {semester} · orë: {lecture} / {seminar} / {lab}",
+      "unassigned": "Pa pedagog",
+      "hoursUnit": "orë",
+      "hoursDefault": "nga plani",
+      "assign": "Cakto",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "remove": "Hiq",
+      "warnings": "Kujdes",
+      "warningUnassigned": "{count} lëndë nuk kanë asnjë pedagog të caktuar.",
+      "warningOverloaded": "{name} ka {hours} orë të planifikuara, mbi kufirin {max}.",
+      "kind": {
+        "LECTURE": "Leksione",
+        "SEMINAR": "Seminare",
+        "LAB": "Laborator"
+      },
+      "semesterN": {
+        "1": "Semestri 1",
+        "2": "Semestri 2"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "group": "Grupi",
+        "yearOfStudy": "Viti i studimit",
+        "course": "Lënda",
+        "courseCode": "Kodi i lëndës",
+        "semester": "Semestri",
+        "kind": "Lloji",
+        "lecturer": "Pedagogu",
+        "category": "Kategoria",
+        "hours": "Orë të planifikuara"
+      },
+      "copy": {
+        "from": "Kopjo caktimet nga viti",
+        "submit": "Kopjo në {year}",
+        "done": "U kopjuan {copied}, u anashkaluan {skippedExisting} (ekzistojnë) dhe {skippedInactive} (pedagog joaktiv).",
+        "closed": "Viti akademik është i mbyllur.",
+        "failed": "Kopjimi nuk u krye."
+      },
+      "mine": {
+        "title": "Lëndët e mia",
+        "empty": "Nuk keni caktime për këtë vit akademik.",
+        "noStaff": "Nuk keni të dhëna stafi",
+        "noStaffHint": "Llogaria juaj nuk është lidhur me një anëtar stafi. Kontaktoni Burimet Njerëzore."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "hoursRange": "Orët duhet të jenë një numër i plotë nga 0 deri në 500.",
+        "groupInactive": "Grupi është joaktiv.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "courseNotInGroup": "Lënda nuk është në planin e kohortës për këtë vit studimi.",
+        "staffInactive": "Pedagogu është joaktiv.",
+        "staffNotAcademic": "Vetëm stafi akademik mund të japë mësim.",
+        "staffUnknown": "Pedagogu nuk u gjet.",
+        "alreadyAssigned": "Ky pedagog është caktuar tashmë për këtë lloj.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "FORBIDDEN": "Nuk keni të drejtë të caktoni në këtë program.",
+        "generic": "Veprimi nuk u krye."
+      }
     }
   },
   "jobs": {

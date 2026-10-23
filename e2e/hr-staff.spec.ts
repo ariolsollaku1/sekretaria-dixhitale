@@ -107,7 +107,7 @@ test("AC-10/13: a lecturer sees only their own record; a student is refused", as
   await page.goto("/hr/staff");
   await expect(page.getByRole("heading", { level: 1, name: "Nuk keni leje" })).toBeVisible();
   await page.goto("/hr/me");
-  await expect(page.getByText("Nuk keni të dhëna stafi")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "Nuk keni leje" })).toBeVisible();
 });
 
 test("AC-12: HR imports staff from a file with a preview", async ({ page }) => {

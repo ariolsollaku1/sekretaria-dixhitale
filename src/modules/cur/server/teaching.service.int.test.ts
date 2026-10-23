@@ -35,7 +35,7 @@ const ok = <T>(r: ActionResult<T>): T => {
 
 let dep1: string, dep2: string, prog1: string, prog2: string;
 let y25: string, y26: string, closedYear: string;
-let plan1: string, plan2: string, pcA: string, pcB: string, pcY2: string, pcP2: string;
+let plan1: string, plan2: string, pcA: string, pcY2: string, pcP2: string;
 let group1: string, group2: string, cohort1: string;
 let lecturer: string, lecturer2: string, admin: string, inactive: string;
 
@@ -176,7 +176,7 @@ beforeEach(async () => {
       })
       .then((p) => p.id);
   pcA = await mkPc(plan1, cA, 1, 1);
-  pcB = await mkPc(plan1, cB, 1, 2);
+  await mkPc(plan1, cB, 1, 2);
   pcY2 = await mkPc(plan1, cY2, 2, 1);
   pcP2 = await mkPc(plan2, cP2, 1, 1);
   await db.curriculumPlan.updateMany({ data: { status: "APPROVED" } });

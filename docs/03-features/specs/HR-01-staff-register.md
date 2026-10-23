@@ -44,7 +44,7 @@ are both `Person`s (domain model); this feature introduces `Person` and `Staff`.
 | AC-10 | THE SYSTEM SHALL give every staff member a page with their own record (`hr.staff.self`), and nothing of anybody else's. |
 | AC-11 | THE SYSTEM SHALL provide a detail page (all permitted fields, department, contract dates, history for HR) and an edit page for `hr.staff.write`. |
 | AC-12 | WHEN HR uploads a CSV (UTF-8) or XLSX with the template columns, THE SYSTEM SHALL show a preview with valid rows and row/field errors without saving; WHEN confirmed it SHALL create all rows in one transaction (any invalid row aborts), skipping persons whose national ID or e-mail exists, and report counts; max 2 000 rows / 2 MB. |
-| AC-13 | THE SYSTEM SHALL restrict reads to `hr.staff.read` (sysadmin, secretary, finance, hr, quality, head of department), writes to `hr.staff.write` (hr), sensitive fields to `hr.staff.sensitive` (hr, sysadmin), self view to `hr.staff.self` (every role); no personal data is written to logs. |
+| AC-13 | THE SYSTEM SHALL restrict reads to `hr.staff.read` (sysadmin, secretary, finance, hr, quality, head of department), writes to `hr.staff.write` (hr), sensitive fields to `hr.staff.sensitive` (hr, sysadmin), self view to `hr.staff.self` (every role except student); no personal data is written to logs. |
 
 ### Out of scope
 
@@ -94,7 +94,7 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 | `hr.staff.read` | sysadmin, secretary, finance, hr, quality, head_of_department (scope from assignment) |
 | `hr.staff.write` | hr |
 | `hr.staff.sensitive` | hr, sysadmin |
-| `hr.staff.self` | every role |
+| `hr.staff.self` | every role except student |
 
 ### Server
 

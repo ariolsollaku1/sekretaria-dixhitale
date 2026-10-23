@@ -6,6 +6,7 @@ import { academicYearsSeeder } from "./academic-years";
 import { calEventsSeeder } from "./cal-events";
 import { curCoursesSeeder } from "./cur-courses";
 import { hrStaffSeeder } from "./hr-staff";
+import { curTeachingSeeder } from "./cur-teaching";
 import { curPlansSeeder } from "./cur-plans";
 import { devRolesSeeder } from "./dev-roles";
 import { orgCohortsSeeder } from "./org-cohorts";
@@ -30,6 +31,7 @@ const SEEDERS: Seeder[] = [
   curPlansSeeder,
   orgCohortsSeeder,
   stuStudentsSeeder,
+  curTeachingSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

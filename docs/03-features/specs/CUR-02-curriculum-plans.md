@@ -127,9 +127,9 @@ Scope comes from the assignment; the target resolver `plan` maps a plan to its p
 ## 4. Tasks
 
 - [x] **T1** — `curriculum.prisma` + migration (checks, freeze triggers); permissions; target resolver; nav. (AC-1, AC-4, AC-11)
-- [ ] **T2** — Pure plan rules and schemas with unit tests. (AC-2, AC-3, AC-5)
-- [ ] **T3** — Service and queries (create/copy, courses, approve, archive, delete) with integration tests incl. DB freeze. (AC-3, AC-4, AC-6..AC-8, AC-12)
-- [ ] **T4** — Dependents registrations and plan registry for ORG-04; tests. (AC-8, AC-9)
+- [x] **T2** — Pure plan rules and schemas with unit tests. (AC-2, AC-3, AC-5)
+- [x] **T3** — Service and queries (create/copy, courses, approve, archive, delete) with integration tests incl. DB freeze. (AC-3, AC-4, AC-6..AC-8, AC-12)
+- [x] **T4** — Dependents registrations and plan registry for ORG-04; tests. (AC-8, AC-9)
 - [ ] **T5** — Table, list, new page, editor/read view, totals, print, i18n. (AC-5, AC-10)
 - [ ] **T6** — E2E, seed, docs. (all)
 

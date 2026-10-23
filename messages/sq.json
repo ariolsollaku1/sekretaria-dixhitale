@@ -76,7 +76,8 @@
       "contracts": "Mbarimi i kontratave",
       "teachingLoad": "Ngarkesa vjetore",
       "hrLists": "Listat e pedagogëve",
-      "studentLists": "Listat e Sekretarisë"
+      "studentLists": "Listat e Sekretarisë",
+      "studentStatistics": "Statistika"
     },
     "languages": {
       "sq": "Shqip",
@@ -1620,6 +1621,56 @@
         "registered": "Të regjistruarit në fillim të vitit",
         "deregistered": "Të çregjistruarit gjatë vitit",
         "suspended": "Të pezulluarit gjatë vitit"
+      }
+    },
+    "stats": {
+      "title": "Statistika të studentëve",
+      "rows": "Rreshtat",
+      "cols": "Kolonat",
+      "status": "Statusi i regjistrimit",
+      "allStatuses": "Të gjitha statuset",
+      "programCode": "Kodi i programit",
+      "facultyCode": "Kodi i fakultetit",
+      "cycle": "Cikli",
+      "all": "Të gjithë",
+      "show": "Shfaq",
+      "none": "Nuk ka regjistrime për këto kritere.",
+      "count": "Numri",
+      "total": "Gjithsej",
+      "empty": "(pa të dhëna)",
+      "downloadXlsx": "Shkarko Excel",
+      "downloadCsv": "Shkarko CSV",
+      "dimensions": {
+        "faculty": "Fakulteti",
+        "cycle": "Cikli",
+        "program": "Programi",
+        "yearOfStudy": "Viti i studimit",
+        "gender": "Gjinia",
+        "residence": "Vendbanimi",
+        "ageBand": "Grupmosha",
+        "status": "Statusi",
+        "registrationType": "Lloji i regjistrimit"
+      },
+      "values": {
+        "cycle": {
+          "FIRST": "Cikli i parë (Bachelor)",
+          "SECOND": "Cikli i dytë (Master)"
+        },
+        "gender": {
+          "FEMALE": "Femra",
+          "MALE": "Meshkuj"
+        },
+        "status": {
+          "ACTIVE": "Aktivë",
+          "SUSPENDED": "Të pezulluar",
+          "DEREGISTERED": "Të çregjistruar",
+          "GRADUATED": "Të diplomuar"
+        },
+        "registrationType": {
+          "FIRST_TIME": "Regjistrim i parë",
+          "SECOND_PROGRAM": "Program i dytë",
+          "TRANSFER": "Transferim"
+        }
       }
     }
   },

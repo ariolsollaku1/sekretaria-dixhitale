@@ -235,6 +235,15 @@ registerNav(
     order: 12,
   },
   {
+    id: "student-statistics",
+    labelKey: "studentStatistics",
+    href: "/stu/statistics",
+    icon: "chart",
+    permission: "stu.student.read",
+    group: "students",
+    order: 13,
+  },
+  {
     id: "my-student-record",
     labelKey: "myStudentRecord",
     href: "/stu/me",

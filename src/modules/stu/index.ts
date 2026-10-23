@@ -21,3 +21,6 @@ export {
 export { StatusChange } from "./ui/status-change";
 export { allowedTransitions } from "./domain/status-rules";
 export { studentListsTable } from "./server/lists.table";
+export { statRecords, type StatFilters } from "./server/stat.queries";
+export { TRANSLATED as STAT_TRANSLATED } from "./server/stat.format";
+export { pivot, isDimension, DIMENSIONS, type Dimension } from "./domain/stat-rules";

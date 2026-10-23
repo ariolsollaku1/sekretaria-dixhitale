@@ -11,21 +11,22 @@ enum AcademicYearStatus {
 
 /// The main time axis. At most one CURRENT year (partial unique index in the migration).
 model AcademicYear {
-  studentGroups  StudentGroup[]
-  cohortsStarted Cohort[]
-  plans          CurriculumPlan[]
-  id             String             @id @default(cuid(2))
+  yearRegistrations YearRegistration[]
+  studentGroups     StudentGroup[]
+  cohortsStarted    Cohort[]
+  plans             CurriculumPlan[]
+  id                String             @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
-  code           String             @unique
-  startDate      DateTime           @map("start_date") @db.Date
-  endDate        DateTime           @map("end_date") @db.Date
-  status         AcademicYearStatus @default(PLANNED)
-  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt      DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById    String?            @map("created_by_id")
-  updatedById    String?            @map("updated_by_id")
-  semesters      Semester[]
-  calendarEvents CalendarEvent[]
+  code              String             @unique
+  startDate         DateTime           @map("start_date") @db.Date
+  endDate           DateTime           @map("end_date") @db.Date
+  status            AcademicYearStatus @default(PLANNED)
+  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById       String?            @map("created_by_id")
+  updatedById       String?            @map("updated_by_id")
+  semesters         Semester[]
+  calendarEvents    CalendarEvent[]
 
   @@index([status])
   @@map("academic_years")
@@ -92,6 +93,7 @@ enum StudyCycle {
 
 /// A study program (ORG-03). Cycle, duration and department follow the rules in the spec; never deleted.
 model StudyProgram {
+  enrollments    Enrollment[]
   cohorts        Cohort[]
   plans          CurriculumPlan[]
   id             String           @id @default(cuid(2))

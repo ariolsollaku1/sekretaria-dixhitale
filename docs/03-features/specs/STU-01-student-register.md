@@ -130,7 +130,7 @@ A database sequence `student_number_seq` feeds `studentNumber`.
 
 ## 4. Tasks
 
-- [ ] **T1** — `students.prisma` + migration (sequence, partial unique index); `Person` columns; permissions; nav. (AC-1..AC-3, AC-13)
+- [x] **T1** — `students.prisma` + migration (sequence, partial unique index); `Person` columns; permissions; nav. (AC-1..AC-3, AC-13)
 - [ ] **T2** — Shared people helpers; pure rules and schemas with unit tests. (AC-1, AC-4, AC-7)
 - [ ] **T3** — Services and queries (scope, masking); integration tests. (AC-3..AC-8, AC-10, AC-11)
 - [ ] **T4** — Dependents for ORG-04; table, pages, forms, my record, i18n. (AC-9..AC-12)

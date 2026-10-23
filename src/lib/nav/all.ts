@@ -3,6 +3,7 @@ import "@/modules/cur";
 import "@/modules/cal";
 import "@/modules/ntf";
 import "@/modules/hr";
+import "@/modules/stu";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -167,5 +168,25 @@ registerNav(
     permission: "hr.staff.self",
     group: "administration",
     order: 31,
+  },
+);
+registerNav(
+  {
+    id: "students",
+    labelKey: "students",
+    href: "/stu/students",
+    icon: "graduation",
+    permission: "stu.student.read",
+    group: "students",
+    order: 10,
+  },
+  {
+    id: "my-student-record",
+    labelKey: "myStudentRecord",
+    href: "/stu/me",
+    icon: "graduation",
+    permission: "stu.student.self",
+    group: "students",
+    order: 11,
   },
 );

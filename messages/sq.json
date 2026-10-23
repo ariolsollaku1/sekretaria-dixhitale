@@ -65,7 +65,9 @@
       "myStaffRecord": "Të dhënat e mia",
       "plans": "Planet mësimore",
       "cohorts": "Kohortet",
-      "studentGroups": "Grupet e studentëve"
+      "studentGroups": "Grupet e studentëve",
+      "students": "Studentët",
+      "myStudentRecord": "Të dhënat e mia"
     },
     "languages": {
       "sq": "Shqip",

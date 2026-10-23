@@ -1,0 +1,97 @@
+enum RegistrationType {
+  FIRST_TIME
+  SECOND_PROGRAM
+  TRANSFER
+
+  @@map("registration_type")
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  SUSPENDED
+  DEREGISTERED
+  GRADUATED
+
+  @@map("enrollment_status")
+}
+
+/// The student record of a person (STU-01). The number comes from a database sequence.
+model Student {
+  id            String       @id @default(cuid(2))
+  personId      String       @unique @map("person_id")
+  /// Zero-padded sequence (Q-34 working assumption); never reused.
+  studentNumber String       @unique @default(dbgenerated("lpad((nextval('student_number_seq'::regclass))::text, 6, '0'::text)")) @map("student_number")
+  /// From the Ministry's SMIAL, typed in until INT-01 (Q-01).
+  nim           String?      @unique
+  createdAt     DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById   String?      @map("created_by_id")
+  updatedById   String?      @map("updated_by_id")
+  person        Person       @relation(fields: [personId], references: [id])
+  enrollments   Enrollment[]
+
+  @@map("students")
+}
+
+/// A student's enrollment in a program and cohort; one open (ACTIVE or SUSPENDED) per program.
+model Enrollment {
+  id               String                  @id @default(cuid(2))
+  studentId        String                  @map("student_id")
+  programId        String                  @map("program_id")
+  cohortId         String                  @map("cohort_id")
+  registrationType RegistrationType        @map("registration_type")
+  status           EnrollmentStatus        @default(ACTIVE)
+  startedAt        DateTime                @map("started_at") @db.Date
+  endedAt          DateTime?               @map("ended_at") @db.Date
+  createdAt        DateTime                @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime                @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById      String?                 @map("created_by_id")
+  updatedById      String?                 @map("updated_by_id")
+  student          Student                 @relation(fields: [studentId], references: [id])
+  program          StudyProgram            @relation(fields: [programId], references: [id])
+  cohort           Cohort                  @relation(fields: [cohortId], references: [id])
+  years            YearRegistration[]
+  history          EnrollmentStatusEvent[]
+
+  @@index([studentId])
+  @@index([programId, status])
+  @@index([cohortId])
+  @@map("enrollments")
+}
+
+/// The yearly registration of an enrollment: year of study and group.
+model YearRegistration {
+  id             String       @id @default(cuid(2))
+  enrollmentId   String       @map("enrollment_id")
+  academicYearId String       @map("academic_year_id")
+  yearOfStudy    Int          @map("year_of_study")
+  groupId        String       @map("group_id")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?      @map("created_by_id")
+  updatedById    String?      @map("updated_by_id")
+  enrollment     Enrollment   @relation(fields: [enrollmentId], references: [id])
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+  group          StudentGroup @relation(fields: [groupId], references: [id])
+
+  @@unique([enrollmentId, academicYearId])
+  @@index([groupId])
+  @@map("year_registrations")
+}
+
+/// Status history of an enrollment; STU-02 adds the transitions after creation.
+model EnrollmentStatusEvent {
+  id            String            @id @default(cuid(2))
+  enrollmentId  String            @map("enrollment_id")
+  fromStatus    EnrollmentStatus? @map("from_status")
+  toStatus      EnrollmentStatus  @map("to_status")
+  reason        String?
+  effectiveDate DateTime          @map("effective_date") @db.Date
+  documentRef   String?           @map("document_ref")
+  createdAt     DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  createdById   String?           @map("created_by_id")
+  enrollment    Enrollment        @relation(fields: [enrollmentId], references: [id])
+
+  @@index([enrollmentId, createdAt])
+  @@map("enrollment_status_events")
+}

@@ -65,7 +65,9 @@
       "myStaffRecord": "My staff record",
       "plans": "Curriculum plans",
       "cohorts": "Cohorts",
-      "studentGroups": "Student groups"
+      "studentGroups": "Student groups",
+      "students": "Students",
+      "myStudentRecord": "My student record"
     },
     "languages": {
       "sq": "Shqip",

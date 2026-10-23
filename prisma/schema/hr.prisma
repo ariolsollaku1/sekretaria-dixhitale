@@ -23,6 +23,7 @@ enum StaffCategory {
 
 /// A natural person; staff (HR-01) and students (STU-01) point at it. Personal data lives only here.
 model Person {
+  student     Student?
   id          String   @id @default(cuid(2))
   firstName   String   @map("first_name")
   lastName    String   @map("last_name")
@@ -33,6 +34,9 @@ model Person {
   phone       String?
   email       String?  @unique
   address     String?
+  birthPlace  String?  @map("birth_place")
+  /// City / municipality of residence.
+  residence   String?
   createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
   createdById String?  @map("created_by_id")

@@ -49,3 +49,28 @@ export const changeGroupSchema = z.object({
   yearRegistrationId: z.string().min(1),
   groupId: z.string().min(1, "required"),
 });
+
+// ---- status changes (STU-02) -------------------------------------------------------------------
+const documentRef = z
+  .string()
+  .trim()
+  .max(200, "tooLong")
+  .nullish()
+  .transform((v) => (v ? v : null));
+
+export const STATUS_TARGETS = ["ACTIVE", "SUSPENDED", "DEREGISTERED", "GRADUATED"] as const;
+
+/** AC-2: the reason travels with the action (audited), the rest is validated here. */
+export const changeStatusSchema = z.object({
+  enrollmentId: z.string().min(1),
+  to: z.enum(STATUS_TARGETS),
+  effectiveDate: day,
+  documentRef,
+});
+export const transferSchema = z.object({
+  enrollmentId: z.string().min(1),
+  programId: z.string().min(1, "required"),
+  cohortId: z.string().min(1, "required"),
+  effectiveDate: day,
+  documentRef,
+});

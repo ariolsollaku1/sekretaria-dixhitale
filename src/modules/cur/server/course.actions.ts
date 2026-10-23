@@ -1,7 +1,10 @@
 "use server";
 
 import "../permissions";
-import { action } from "@/lib/actions";
+import { z } from "zod";
+import { action, DomainError } from "@/lib/actions";
+import { getCurrentUser } from "@/lib/auth";
+import { can } from "@/lib/authz/guard";
 import {
   categorySchema,
   courseSchema,
@@ -11,6 +14,7 @@ import {
 } from "../domain/schemas";
 import * as categories from "./category.service";
 import * as courses from "./course.service";
+import { commitImport, previewImport, type ImportFile } from "./import.service";
 
 export const createCourseAction = action({
   permission: "cur.course.write",
@@ -60,4 +64,35 @@ export const reactivateCategoryAction = action({
   input: idSchema,
   requireReason: true,
   handler: (input, ctx) => categories.setCategoryActive(ctx, input.id, true),
+});
+
+// ---- import (CUR-01 AC-9, AC-10) ---------------------------------------------------------------
+
+async function fileFrom(form: FormData): Promise<ImportFile | null> {
+  const file = form.get("file");
+  if (!(file instanceof File)) return null;
+  return { name: file.name, bytes: new Uint8Array(await file.arrayBuffer()) };
+}
+
+/** Preview only: a read-style action, still gated by the course write permission. */
+export async function previewCourseImportAction(form: FormData) {
+  const user = await getCurrentUser();
+  if (!user) return { ok: false as const, error: "UNAUTHENTICATED" };
+  if (!(await can(user, "cur.course.write"))) return { ok: false as const, error: "FORBIDDEN" };
+  const file = await fileFrom(form);
+  if (!file) return { ok: false as const, error: "empty" };
+  return previewImport(user, file);
+}
+
+export const commitCourseImportAction = action({
+  permission: "cur.course.write",
+  input: z.instanceof(FormData),
+  handler: async (form, ctx) => {
+    const file = await fileFrom(form);
+    if (!file)
+      throw new (await import("@/lib/actions")).DomainError("VALIDATION", "empty", {
+        file: ["empty"],
+      });
+    return commitImport(ctx, file, form.get("updateExisting") === "on");
+  },
 });

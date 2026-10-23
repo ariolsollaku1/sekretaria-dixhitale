@@ -151,7 +151,7 @@ Nav: group Teaching → "Courses", "Course categories".
 - [x] **T1** — Models + migration (checks); permissions; target resolvers. (AC-1, AC-12)
 - [x] **T2** — Pure course rules and import parsing/validation with unit tests. (AC-1, AC-5, AC-9..AC-11)
 - [x] **T3** — Category and course services with scoped checks, dependents hook; integration tests. (AC-2..AC-7)
-- [ ] **T4** — Import service (preview + commit), template; integration tests. (AC-9..AC-11)
+- [x] **T4** — Import service (preview + commit), template; integration tests. (AC-9..AC-11)
 - [ ] **T5** — Course table, list/new/detail pages, status dialog. (AC-8)
 - [ ] **T6** — Import page (upload → preview → confirm), categories page, nav, i18n (`cur.*`). (AC-2, AC-9..AC-11)
 - [ ] **T7** — Demo seed, e2e (head of department scoped), docs. (all)

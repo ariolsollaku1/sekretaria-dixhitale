@@ -4,6 +4,15 @@ const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   APP_URL: z.url(),
   DATABASE_URL: z.string().startsWith("postgres"),
+  // Auth (PLT-04)
+  KEYCLOAK_ISSUER: z.url(),
+  /** Back-channel base URL when the app runs in Docker (http://keycloak:8080); defaults to the issuer's origin. */
+  KEYCLOAK_INTERNAL_URL: z.url().optional(),
+  KEYCLOAK_CLIENT_ID: z.string().min(1),
+  KEYCLOAK_CLIENT_SECRET: z.string().min(1),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  SESSION_IDLE_MINUTES: z.coerce.number().int().positive().default(30),
+  SESSION_MAX_HOURS: z.coerce.number().int().positive().default(12),
 });
 
 export type Env = z.infer<typeof schema>;

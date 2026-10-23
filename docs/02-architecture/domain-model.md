@@ -176,5 +176,5 @@ erDiagram
 | `AlumniRecord` | `personId`, employment/further-studies updates over time |
 | `ErasmusApplication` | via `FormSubmission` + status |
 | `LibraryCardRequest`, `LibraryClearance` | depends on PLEJADES (Q-03) |
-| `Announcement` | `title`, `body`, `audience` filter, `publishAt`, `expiresAt` |
+| `Announcement` | (NTF-01, implemented) `title`, plain-text `body`, `status` (DRAFT/PUBLISHED/ARCHIVED), `audience` (ALL/STAFF/STUDENTS/CYCLE/PROGRAM) with `cycle`/`programId`, `publishAt`, `expiresAt`, `pinned`, `emailPush`, `pushedAt`; attachments are `StoredFile` rows (`entityType = Announcement`). |
 | `Event` / `EventRegistration` | extracurricular activities (SRC-037d) |

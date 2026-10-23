@@ -795,5 +795,89 @@
       "label": "Prepare the academic calendar",
       "description": "Copy last year's calendar and adjust the dates."
     }
+  },
+  "ntf": {
+    "title": "Announcements",
+    "manage": "Manage announcements",
+    "new": "New announcement",
+    "edit": "Edit",
+    "empty": "There are no announcements for you right now.",
+    "emptyHint": "New announcements appear here as soon as they are published.",
+    "pinned": "Pinned",
+    "attachments": "Attachments",
+    "page": "Page {page} of {pageCount}",
+    "previous": "Previous",
+    "next": "Next",
+    "status": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Published",
+      "ARCHIVED": "Archived"
+    },
+    "audience": {
+      "ALL": "Everyone",
+      "STAFF": "Staff",
+      "STUDENTS": "Students",
+      "CYCLE": "Study cycle",
+      "PROGRAM": "Program"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "columns": {
+      "title": "Title",
+      "status": "Status",
+      "audience": "Audience",
+      "publish": "Published from",
+      "expires": "Valid until",
+      "pinned": "Pinned"
+    },
+    "form": {
+      "title": "Title",
+      "body": "Text",
+      "bodyHint": "Plain text; line breaks are kept.",
+      "audience": "Addressed to",
+      "cycle": "Cycle",
+      "program": "Program",
+      "publishDate": "Visible from",
+      "publishHint": "Blank = as soon as it is published.",
+      "expiresDate": "Visible until",
+      "expiresHint": "Blank = no end date.",
+      "pinned": "Pin to the top of the list",
+      "emailPush": "Also send an e-mail notification",
+      "emailPushHint": "Recipients get an in-app notification and an e-mail (according to their preferences).",
+      "emailPushUnavailable": "E-mail notification is not available for a cycle or program.",
+      "attachments": "Attachments",
+      "addFile": "Add a file",
+      "removeFile": "Remove",
+      "create": "Save as draft",
+      "save": "Save changes"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "cycleRequired": "Choose the cycle.",
+      "programRequired": "Choose an existing program.",
+      "expiresBeforePublish": "The end date cannot be before the publish date.",
+      "expiresInPast": "The end date has already passed; change it before publishing.",
+      "pushNotForAudience": "E-mail notification is not available for a cycle or program.",
+      "tooManyFiles": "At most 5 files.",
+      "audienceNotAllowed": "You may not address this audience.",
+      "ALREADY_PUBLISHED": "The announcement is already published.",
+      "NOT_PUBLISHED": "Only a published announcement can be archived.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The announcement was saved as a draft.",
+      "saved": "Changes saved.",
+      "published": "The announcement was published.",
+      "archived": "The announcement was archived.",
+      "publish": "Publish",
+      "republish": "Publish again",
+      "archive": "Archive",
+      "archiveTitle": "Archive this announcement?",
+      "archiveBody": "Readers will no longer see it. You can publish it again later."
+    }
   }
 }

@@ -121,6 +121,17 @@ false for CYCLE/PROGRAM. Attachments are `StoredFile` rows with `entityType = "A
 - A removed attachment disappears from the page; the file row is soft-deleted (PLT-08).
 - Recipient count is large: the push works in batches of 200 users, each batch in its own transaction; `pushedAt` is set after the last batch; a crash resumes safely thanks to dedupe keys.
 
+**Implementation notes:**
+- `src/modules/ntf`; routes `/announcements`, `/announcements/[id]`, `/announcements/manage`,
+  `/announcements/new`, `/announcements/[id]/edit`.
+- Authors pick days (Europe/Tirane); `src/lib/i18n/zone.ts` turns them into instants (`publishAt` =
+  start of the day, `expiresAt` = start of the day after the last visible day).
+- Audience resolvers moved to `src/lib/audience` (shared with CAL-01).
+- File purposes of modules register through `src/lib/files/all.ts` (called by the file routes).
+- The push job `ntf.announcement.push` runs every minute; the dedupe key is per user and
+  announcement, so retries never double-notify.
+- Notification types now carry a `label` text (`notifications.<type>.label`) for the preferences page.
+
 ## 4. Tasks
 
 - [x] **T1** — `announcements.prisma` + migration with checks; permissions; nav; notification type + catalog texts. (AC-1, AC-12)
@@ -128,7 +139,7 @@ false for CYCLE/PROGRAM. Attachments are `StoredFile` rows with `entityType = "A
 - [x] **T3** — Service (create, update, publish, archive), queries with audience filter, scope check; integration tests. (AC-3..AC-6, AC-10, AC-11)
 - [x] **T4** — Push job (fan-out in batches, idempotent); integration tests. (AC-7, AC-8)
 - [x] **T5** — Attachment purpose and attach/remove; download access; tests. (AC-9)
-- [ ] **T6** — Feed, detail, form, manage table, i18n, e2e, docs. (all)
+- [x] **T6** — Feed, detail, form, manage table, i18n, e2e, docs. (all)
 
 ## 5. Test plan
 
@@ -144,9 +155,9 @@ false for CYCLE/PROGRAM. Attachments are `StoredFile` rows with `entityType = "A
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

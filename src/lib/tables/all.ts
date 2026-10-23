@@ -5,4 +5,5 @@ import "@/modules/iam";
 import "@/modules/org";
 import "@/modules/cur";
 import "@/modules/cal";
+import "@/modules/ntf";
 import "@/lib/audit/table";

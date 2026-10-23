@@ -795,5 +795,89 @@
       "label": "Përgatitni kalendarin akademik",
       "description": "Kopjoni kalendarin e vitit të kaluar dhe rregulloni datat."
     }
+  },
+  "ntf": {
+    "title": "Njoftime të shkollës",
+    "manage": "Menaxho njoftimet",
+    "new": "Njoftim i ri",
+    "edit": "Ndrysho",
+    "empty": "Nuk ka njoftime për ju tani.",
+    "emptyHint": "Njoftimet e reja shfaqen këtu sapo të publikohen.",
+    "pinned": "I fiksuar",
+    "attachments": "Bashkëngjitjet",
+    "page": "Faqja {page} nga {pageCount}",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "status": {
+      "DRAFT": "Skicë",
+      "PUBLISHED": "Publikuar",
+      "ARCHIVED": "Arkivuar"
+    },
+    "audience": {
+      "ALL": "Të gjithë",
+      "STAFF": "Stafi",
+      "STUDENTS": "Studentët",
+      "CYCLE": "Cikli i studimit",
+      "PROGRAM": "Programi"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "columns": {
+      "title": "Titulli",
+      "status": "Statusi",
+      "audience": "Audienca",
+      "publish": "Publikohet",
+      "expires": "Vlen deri",
+      "pinned": "I fiksuar"
+    },
+    "form": {
+      "title": "Titulli",
+      "body": "Teksti",
+      "bodyHint": "Tekst i thjeshtë; rreshtat e rinj ruhen.",
+      "audience": "Kujt i drejtohet",
+      "cycle": "Cikli",
+      "program": "Programi",
+      "publishDate": "Publikohet nga data",
+      "publishHint": "Bosh = menjëherë pas publikimit.",
+      "expiresDate": "Vlen deri më datën",
+      "expiresHint": "Bosh = pa afat.",
+      "pinned": "Fikso në krye të listës",
+      "emailPush": "Dërgo edhe njoftim me email",
+      "emailPushHint": "Marrësit marrin njoftim në sistem dhe email (sipas preferencave të tyre).",
+      "emailPushUnavailable": "Njoftimi me email nuk është i disponueshëm për ciklin ose programin.",
+      "attachments": "Bashkëngjitjet",
+      "addFile": "Shto skedar",
+      "removeFile": "Hiq",
+      "create": "Ruaj si skicë",
+      "save": "Ruaj ndryshimet"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "cycleRequired": "Zgjidhni ciklin.",
+      "programRequired": "Zgjidhni një program ekzistues.",
+      "expiresBeforePublish": "Data e përfundimit nuk mund të jetë para publikimit.",
+      "expiresInPast": "Data e përfundimit ka kaluar tashmë; ndryshojeni përpara publikimit.",
+      "pushNotForAudience": "Njoftimi me email nuk është i disponueshëm për ciklin ose programin.",
+      "tooManyFiles": "Maksimumi 5 skedarë.",
+      "audienceNotAllowed": "Nuk keni të drejtë t'i drejtoheni kësaj audience.",
+      "ALREADY_PUBLISHED": "Njoftimi është tashmë i publikuar.",
+      "NOT_PUBLISHED": "Vetëm një njoftim i publikuar mund të arkivohet.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Njoftimi u ruajt si skicë.",
+      "saved": "Ndryshimet u ruajtën.",
+      "published": "Njoftimi u publikua.",
+      "archived": "Njoftimi u arkivua.",
+      "publish": "Publiko",
+      "republish": "Publiko përsëri",
+      "archive": "Arkivo",
+      "archiveTitle": "Të arkivohet njoftimi?",
+      "archiveBody": "Njoftimi nuk do të shfaqet më për lexuesit. Mund ta publikoni përsëri më vonë."
+    }
   }
 }

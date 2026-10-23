@@ -84,3 +84,15 @@ export async function listAttachments(announcementId: string) {
     select: { id: true, fileName: true, mimeType: true, size: true },
   });
 }
+
+/** Props for the upload control of the announcement form. */
+export function uploadConfig() {
+  registerNtfPurposes();
+  const purpose = getFilePurpose(ATTACHMENT_PURPOSE)!;
+  return {
+    purpose: purpose.id,
+    maxBytes: purpose.maxBytes,
+    mimeTypes: purpose.mimeTypes,
+    typeLabels: ["PDF", "JPEG", "PNG", "DOCX", "XLSX"],
+  };
+}

@@ -18,7 +18,10 @@ must apply immediately (no stale tokens), and HR/sysadmin manage them in the app
 
 ## Keycloak realm
 
-Realm-as-code in `infra/keycloak/realm-logos.json`, imported on first start (PLT-04).
+Realm-as-code in `infra/keycloak/realm-logos.json`, imported on first start (PLT-04). Placeholders
+(`${APP_URL}`, `${APP_URL_ALT}`, client secrets) are filled from the Keycloak container's
+environment; to change the realm in dev run `pnpm infra:reset`. In production change it in the admin
+console or export/import deliberately: an existing realm is never overwritten by the import.
 
 | Item | Value |
 |---|---|
@@ -30,7 +33,7 @@ Realm-as-code in `infra/keycloak/realm-logos.json`, imported on first start (PLT
 | Required actions on new users | `UPDATE_PASSWORD`, `VERIFY_EMAIL` |
 | Password policy | min length 10, not username, not email, password history 3 |
 | Brute-force detection | on |
-| OTP | available; **required for `sysadmin`** (others optional, Q-18) |
+| OTP | available; **required for `sysadmin`**: members of group `require-otp` (realm role `require-otp`) must enter a code, and set one up on first use (Q-18). IAM-01 puts sysadmins in the group. |
 | Theme | default first; LOGOS branding later |
 | Locales | `en`, `sq` |
 
@@ -69,6 +72,17 @@ Rules:
 - **Logout** ends both the app session and the Keycloak SSO session (RP-initiated logout with
   `id_token_hint`).
 - Deactivating a user in the app (IAM-01) disables the Keycloak user **and** deletes app sessions.
+
+### Implementation (PLT-04)
+
+| | |
+|---|---|
+| Library | Better Auth 1.7 — `genericOAuth` provider `keycloak`, discovery from `KEYCLOAK_INTERNAL_URL` (Docker) or the issuer, PKCE S256, `disableSignUp`, `requireEmailVerification` |
+| Endpoints | `/api/auth/*` (callback `/api/auth/callback/keycloak`), pages `/login`, `/no-access` |
+| Code | `src/lib/auth/` — `server.ts` (instance), `session.ts` (`getCurrentUser`, `requireUser`), `actions.ts` (`signInAction`, `signOutAction`), `policy.ts` (pure rules), `keycloak.ts` (URL helpers), `events.ts` (auth events → audit in PLT-07) |
+| Gate | `src/proxy.ts` redirects when no session cookie; `requireUser()` is the real check and re-reads `users.active` and the absolute session age on every request |
+| Sessions | table `sessions`, sliding idle window `SESSION_IDLE_MINUTES` (30), absolute `SESSION_MAX_HOURS` (12) |
+| Dev users | `infra/keycloak/dev/dev-users.json` (password `Dev-Pass-12345`), created by `pnpm infra:up` + `pnpm db:seed` |
 
 ## Authorization model
 

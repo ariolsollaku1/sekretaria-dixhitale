@@ -29,7 +29,22 @@ pnpm infra:down    # stop (data kept)   |   pnpm infra:reset   # stop and DELETE
 Keycloak dev admin and database passwords are in `.env` (copied from `.env.example`; change the
 host ports there if 5432/8080 are taken). Database commands: `pnpm db:migrate` (dev),
 `db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`. Integration tests use the separate
-`sekretari_test` database (`pnpm test:int`). Auth arrives with PLT-04.
+`sekretari_test` database (`pnpm test:int`).
+
+### Dev logins
+
+`pnpm infra:up` creates these users in Keycloak (realm `logos`) and `pnpm db:seed` the matching app
+users. All share the password `Dev-Pass-12345`. Sign in at http://localhost:3100.
+
+| Email                                                                                                                                                                                                            | Purpose                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `sysadmin@`, `secretary@`, `student-affairs@`, `lecturer@`, `finance@`, `hr@`, `quality@`, `library@`, `administration@`, `student@`, `head-of-department@`, `program-coordinator@`, `erasmus@` `dev.logos.test` | one per role (roles themselves are assigned from PLT-05) |
+| `inactive@dev.logos.test`                                                                                                                                                                                        | app user with `active=false` → refused                   |
+| `stranger@dev.logos.test`                                                                                                                                                                                        | Keycloak user without app user → `/no-access`            |
+
+Keycloak admin console: http://localhost:8080 (admin credentials in `.env`). After changing
+`infra/keycloak/realm-logos.json` run `pnpm infra:reset`, then `pnpm infra:up`, `pnpm db:deploy`,
+`pnpm db:seed`.
 
 ## Documentation
 

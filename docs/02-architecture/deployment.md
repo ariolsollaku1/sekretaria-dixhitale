@@ -8,9 +8,9 @@ the stack must run on any Docker host and keep **all data in one place we contro
 | Service | Image | Purpose | Exposed | Profiles |
 |---|---|---|---|---|
 | `app` | built from `infra/docker/app.Dockerfile` (Next.js standalone) | The web app | 3000 (behind proxy in prod) | `full`, `prod` |
-| `db` | `postgres` (current major) | App DB **and** Keycloak DB (two databases, two users) | 5432 dev only | all |
-| `keycloak` | `quay.io/keycloak/keycloak` | Identity provider | 8080 | all |
-| `gotenberg` | `gotenberg/gotenberg` | HTML → PDF | internal only | all |
+| `db` | `postgres:17-alpine` | App DB **and** Keycloak DB (two databases, two users) | 5432 dev only (127.0.0.1) | always |
+| `keycloak` | `quay.io/keycloak/keycloak:26.4` | Identity provider | 8080 dev only (127.0.0.1); behind proxy in prod | always |
+| `gotenberg` | `gotenberg/gotenberg:8` | HTML → PDF | 3001 dev only (127.0.0.1) | always |
 | `mailpit` | `axllent/mailpit` | Catches outgoing email in dev | 8025 (UI), 1025 (SMTP) | `dev` |
 | `backup` | small image with `pg_dump` + cron | Scheduled DB + files backups (PLT-13) | internal only | `prod` |
 | `proxy` | Caddy | TLS termination, routes `app` and `keycloak` | 80/443 | `prod` |
@@ -22,10 +22,22 @@ Volumes: `pgdata`, `files` (uploaded/generated documents, ADR-0010), `backups`, 
 
 | Env | How it runs | Notes |
 |---|---|---|
-| **Local dev** (default) | `docker compose --profile dev up -d` for infra; `pnpm dev` on host | Fast reload; no issuer mismatch (see auth.md). |
-| **Local full stack** | `docker compose --profile dev --profile full up` | Prod-like check before release. |
+| **Local dev** (default) | `pnpm infra:up` (= `docker compose --profile dev up -d --wait`) for infra; `pnpm dev` on host | Fast reload; no issuer mismatch (see auth.md). Mailpit UI on http://localhost:8025. |
+| **Local full stack** | `pnpm stack:up` (= `--profile dev --profile full up --build`) | Prod-like check before release; app on http://localhost:3000 (`APP_PORT`). |
 | **Test (CI)** | Postgres service + `pnpm test`; Playwright against `full` | Fresh DB per run. |
 | **Production** | `docker compose --profile prod up -d` on the client's server | Keycloak in `start` (optimized) mode, TLS via proxy, backups on. |
+
+### Compose files
+
+`docker-compose.yml` is production-shaped: nothing is published except the proxy's 80/443, and
+Keycloak runs `start`. `docker-compose.dev.yml` adds `127.0.0.1` port bindings and `start-dev`. The
+dev `.env` selects both via `COMPOSE_FILE=docker-compose.yml:docker-compose.dev.yml`; on a
+production host use `COMPOSE_FILE=docker-compose.yml` and `COMPOSE_PROFILES=prod`, set
+`KC_HOSTNAME=https://auth.<domain>`, `DOMAIN` and `ACME_EMAIL`. Host ports are overridable
+(`DB_PORT`, `KEYCLOAK_PORT`, `GOTENBERG_PORT`, `MAILPIT_*_PORT`, `APP_PORT`).
+
+`pnpm infra:reset` deletes the volumes after a typed confirmation; `pnpm infra:smoke` checks the
+stack (healthchecks, Keycloak master realm, database isolation, `TZ`).
 
 ## Configuration
 
@@ -41,6 +53,7 @@ Secrets are never committed.
 | `KEYCLOAK_INTERNAL_URL` | app | `http://keycloak:8080` (full-stack Docker only) |
 | `KEYCLOAK_CLIENT_ID` / `KEYCLOAK_CLIENT_SECRET` | app | `sekretari-web` / … |
 | `KEYCLOAK_ADMIN_CLIENT_ID` / `KEYCLOAK_ADMIN_CLIENT_SECRET` | app | `sekretari-admin` / … |
+| `POSTGRES_*`, `APP_DB_*`, `KC_DB_*`, `DB_PORT`/… , `DOMAIN`, `ACME_EMAIL` | db, proxy, compose | see `.env.example` |
 | `KC_DB_*`, `KC_HOSTNAME`, `KC_HOSTNAME_BACKCHANNEL_DYNAMIC`, `KC_BOOTSTRAP_ADMIN_*` | keycloak | |
 | `GOTENBERG_URL` | app | `http://gotenberg:3000` |
 | `MAIL_TRANSPORT` | app | `smtp` (dev, Mailpit) or `graph` (Microsoft 365, prod — Q-20) |

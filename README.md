@@ -15,7 +15,17 @@ pnpm lint && pnpm typecheck && pnpm test
 pnpm test:e2e            # first time: pnpm exec playwright install chromium
 ```
 
-Docker stack (Postgres, Keycloak, …), database and auth arrive with PLT-02…04.
+### Run locally
+
+```bash
+pnpm infra:up      # Postgres, Keycloak (8080), Gotenberg (3001), Mailpit (8025) on 127.0.0.1
+pnpm infra:smoke   # optional: verify the stack
+pnpm stack:up      # prod-like: also builds and runs the app image on :3000
+pnpm infra:down    # stop (data kept)   |   pnpm infra:reset   # stop and DELETE data
+```
+
+Keycloak dev admin and database passwords are in `.env` (copied from `.env.example`; change the
+host ports there if 5432/8080 are taken). Database layer and auth arrive with PLT-03/04.
 
 ## Documentation
 

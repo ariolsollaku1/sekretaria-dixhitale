@@ -68,19 +68,35 @@ infra/
 `package.json` scripts: `infra:up`, `infra:down`, `infra:logs`, `infra:reset` (prompts), `stack:up`
 (full profile).
 
+**Deviations from the first design (implemented):**
+- Dev vs prod differences are a compose **override file**, not duplicate services:
+  `docker-compose.yml` is production-shaped (no published ports, Keycloak `start`);
+  `docker-compose.dev.yml` publishes ports on `127.0.0.1` and runs Keycloak `start-dev`. `.env`
+  selects it with `COMPOSE_FILE=docker-compose.yml:docker-compose.dev.yml`, so the plain
+  `docker compose --profile dev up -d` of AC-1 still works. Production leaves `COMPOSE_FILE` at the
+  base file. `db`, `keycloak`, `gotenberg` therefore have no profile (always started).
+- Host ports are configurable (`DB_PORT`, `KEYCLOAK_PORT`, …) because 5432/3000 are often taken.
+- `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true` is set in all modes, not only `full`.
+- Keycloak's healthcheck uses bash `/dev/tcp` (the image has no curl/wget); the app healthcheck uses
+  `127.0.0.1` because the server binds IPv4 only.
+- pnpm 12 fails installs with unreviewed build scripts: `pnpm-workspace.yaml` sets
+  `allowBuilds: { unrs-resolver: false }`.
+- Verified: dev infra, full profile, persistence across down/up, reset, Keycloak in production mode.
+  The Caddy proxy was verified by config only (needs a public DNS name for certificates).
+
 Issuer-URL note for full-stack mode: see [auth.md](../../02-architecture/auth.md#development-note--issuer-url-inside-docker)
 (`KC_HOSTNAME=http://localhost:8080` + `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true` in `full`).
 
 ## 4. Tasks
 
-- [ ] **T1** — `infra/postgres/init/01-databases.sh` + `db` service with healthcheck. (AC-2)
-- [ ] **T2** — `keycloak` service (dev mode) using its DB, import dir mounted, healthcheck. (AC-3)
-- [ ] **T3** — `gotenberg`, `mailpit` services; localhost-only port bindings; `TZ`. (AC-4, AC-9)
-- [ ] **T4** — `app.Dockerfile` (multi-stage, standalone, non-root) + entrypoint + `app` service
+- [x] **T1** — `infra/postgres/init/01-databases.sh` + `db` service with healthcheck. (AC-2)
+- [x] **T2** — `keycloak` service (dev mode) using its DB, import dir mounted, healthcheck. (AC-3)
+- [x] **T3** — `gotenberg`, `mailpit` services; localhost-only port bindings; `TZ`. (AC-4, AC-9)
+- [x] **T4** — `app.Dockerfile` (multi-stage, standalone, non-root) + entrypoint + `app` service
       with `full` profile. (AC-5, AC-6)
-- [ ] **T5** — `prod` profile: Caddy proxy + Caddyfile template, Keycloak production settings. (AC-8)
-- [ ] **T6** — `.env.example` complete; pnpm scripts; volumes; `infra:reset` with confirmation. (AC-1, AC-7)
-- [ ] **T7** — `docs/02-architecture/deployment.md` updated with anything that changed; README
+- [x] **T5** — `prod` profile: Caddy proxy + Caddyfile template, Keycloak production settings. (AC-8)
+- [x] **T6** — `.env.example` complete; pnpm scripts; volumes; `infra:reset` with confirmation. (AC-1, AC-7)
+- [x] **T7** — `docs/02-architecture/deployment.md` updated with anything that changed; README
       "Run locally" section.
 
 ## 5. Test plan
@@ -94,6 +110,6 @@ Issuer-URL note for full-stack mode: see [auth.md](../../02-architecture/auth.md
 
 ## 6. Definition of done
 
-- [ ] Fresh clone → `cp .env.example .env` → `pnpm infra:up` works with no manual steps
-- [ ] All tasks ticked; deployment.md accurate
+- [x] Fresh clone → `cp .env.example .env` → `pnpm infra:up` works with no manual steps
+- [x] All tasks ticked; deployment.md accurate
 - [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

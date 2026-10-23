@@ -57,6 +57,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
+| Q-60 | Attendance: hours of a class session | no | open | Secretariat |
+| Q-61 | Attendance: edit window and corrections | no | open | Secretariat |
+| Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
+| Q-63 | Attendance: creating class sessions | no | open | Secretariat |
+| Q-64 | Attendance: who sees what | no | open | Secretariat |
 
 ---
 
@@ -487,3 +492,51 @@ Decisions taken in conversation that aren't architecture ADRs.
   an issued document is never edited — it can be cancelled with a reason (the verification page then
   says so); signatures and stamps are part of the template.
 - **Impact:** the number format per type, the verification page content, cancellation rules.
+
+### Q-60 — Attendance: hours of a class session
+- **Context:** SRC-043, HR-04 delivered hours — a class session carries the hours it counts for.
+- **Questions:** How long is an academic hour (45 minutes?) and are fractions of an hour allowed? Must
+  the hours of a session equal the timetable slot, or may the lecturer change them?
+- **Working assumption:** whole hours (1–12) per session; an academic hour is 45 minutes, so a session
+  generated from the timetable defaults to `round(minutes / 45)` (at least 1); the lecturer may change it.
+- **Impact:** the default, fractional hours, the input of HR-04.
+
+### Q-61 — Attendance: edit window and corrections
+- **Context:** SRC-043 — absences are stored and may be modified in case of error.
+- **Questions:** For how many days after a class may the lecturer still enter or change attendance?
+  Who may correct later, and must a reason be given? May attendance be entered for a class that has not happened yet?
+- **Working assumption:** the lecturer may enter and change the attendance of their own session from
+  the day of the class until 7 days after it (setting `att.editWindowDays`, whole days, 0 or more);
+  not before the class day; after that only the Secretariat, always with a written reason, audited;
+  nobody once the academic year is closed.
+- **Impact:** the window length, who corrects, the reason rule.
+
+### Q-62 — Attendance: statuses, roster and excused absences
+- **Context:** SRC-036b, SRC-043 — the roster of a group is marked present, absent or excused.
+- **Questions:** Who decides that an absence is excused and is a document needed? Does an excused
+  absence count as absence in the attendance percentage (Q-12, ATT-02)? Which students are on the
+  roster (suspended ones, students who changed group)?
+- **Working assumption:** the lecturer (or the Secretariat) marks present / absent / excused with an
+  optional note, no document; ATT-01 only records the status, how it counts is decided in ATT-02 with
+  Q-12; the roster is the students with an active enrollment whose yearly registration in the session's
+  academic year is in the group, as of saving; every roster student gets a mark on save.
+- **Impact:** the roster rule, who sets excused, counting.
+
+### Q-63 — Attendance: creating class sessions
+- **Context:** SRC-043 — attendance is entered per class.
+- **Questions:** Should sessions appear automatically from the timetable, and what about holidays
+  and cancelled classes? May lecturers add extra classes (make-up, replacements)?
+- **Working assumption:** a lecturer (or the Secretariat) generates the sessions of an assignment for
+  a date range from its timetable slots (at most 120 days, existing ones skipped, holidays are not
+  excluded automatically — a class that did not take place is marked cancelled); extra classes are
+  added by hand (date, time, hours, topic); sessions are never deleted, only cancelled.
+- **Impact:** automatic generation, holiday handling, deletion.
+
+### Q-64 — Attendance: who sees what
+- **Context:** SRC-036b, SRC-070 — students see their absences, lecturers theirs, staff reports.
+- **Questions:** May a lecturer see the attendance of colleagues' classes in the same group? May a
+  student see the excused status and notes? Do program coordinators and heads see their programs?
+- **Working assumption:** a lecturer sees and records only sessions of their own assignments; the
+  Secretariat reads and corrects all; heads of department and program coordinators read the sessions
+  of their scope; a student sees only their own absent and excused marks (with the status, without notes).
+- **Impact:** visibility of notes and of colleagues' classes.

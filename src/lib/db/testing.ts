@@ -7,7 +7,8 @@ import { db } from "./client";
 export async function resetDatabase(): Promise<void> {
   const rows = await db.$queryRaw<{ name: string }[]>`select current_database() as name`;
   const name = rows[0]?.name ?? "";
-  if (!name.endsWith("_test")) throw new Error(`resetDatabase refused: "${name}" is not a test DB`);
+  if (!/_test(_[a-z0-9]+)?$/.test(name))
+    throw new Error(`resetDatabase refused: "${name}" is not a test DB`);
 
   const tables = await db.$queryRaw<{ tablename: string }[]>`
     select tablename from pg_tables

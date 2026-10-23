@@ -48,7 +48,8 @@
         "reports": "Reports",
         "system": "System"
       },
-      "audit": "Audit log"
+      "audit": "Audit log",
+      "users": "Users"
     },
     "languages": {
       "sq": "Shqip",
@@ -153,6 +154,110 @@
     "history": {
       "title": "Change history",
       "empty": "This record has no changes yet."
+    }
+  },
+  "iam": {
+    "title": "Users",
+    "new": "New user",
+    "edit": "Edit details",
+    "search": "Search by name or email",
+    "filters": {
+      "role": "Role",
+      "status": "Status",
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive",
+      "apply": "Filter",
+      "reset": "Clear"
+    },
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "roles": "Roles",
+      "status": "Status",
+      "lastLogin": "Last sign-in",
+      "open": "Open"
+    },
+    "neverLoggedIn": "Never",
+    "count": "{count, plural, =0 {No users} one {# user} other {# users}}",
+    "empty": "No users match the filters.",
+    "form": {
+      "email": "Email (used to sign in)",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "roles": "Roles and scope",
+      "addRole": "Add role",
+      "role": "Role",
+      "scope": "Scope",
+      "scopeTarget": "Target",
+      "remove": "Remove",
+      "create": "Create user",
+      "save": "Save changes",
+      "hint": "The user receives an email to set their password.",
+      "selectRole": "Select a role"
+    },
+    "scope": {
+      "INSTITUTION": "Whole institution",
+      "FACULTY": "Faculty",
+      "DEPARTMENT": "Department",
+      "PROGRAM": "Program",
+      "SELF": "Own records only"
+    },
+    "link": {
+      "title": "This email exists only in Keycloak",
+      "body": "You can link the existing account to this new user. No activation email will be sent.",
+      "confirm": "Link the existing account"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "detail": {
+      "back": "Back to users",
+      "roles": "Roles",
+      "noRoles": "This user has no roles.",
+      "addRoleTitle": "Add a role",
+      "since": "Since {date}",
+      "until": "until {date}",
+      "account": "Account",
+      "history": "History"
+    },
+    "actions": {
+      "deactivate": "Deactivate",
+      "deactivateTitle": "Deactivate this user?",
+      "deactivateBody": "The user is signed out everywhere immediately and cannot sign in until reactivated.",
+      "reactivate": "Reactivate",
+      "reactivateTitle": "Reactivate this user?",
+      "reactivateBody": "The user will be able to sign in again.",
+      "reason": "Reason",
+      "reasonHint": "Stored in the audit log.",
+      "resend": "Resend activation email",
+      "resent": "Activation email sent.",
+      "removeRoleTitle": "Remove this role?",
+      "removeRoleBody": "The change applies on the user's next request.",
+      "created": "User created.",
+      "saved": "Changes saved.",
+      "roleAdded": "Role added.",
+      "roleRemoved": "Role removed.",
+      "statusChanged": "Status changed."
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "atLeastOneRole": "Add at least one role.",
+      "emailTaken": "This email is already in use.",
+      "identityLinked": "This Keycloak account belongs to another user.",
+      "SELF_DEACTIVATION": "You cannot deactivate yourself.",
+      "LAST_SYSADMIN": "At least one active system administrator must remain.",
+      "UNAVAILABLE": "The identity service is unavailable. Try again later.",
+      "generic": "The action failed. Please try again.",
+      "DUPLICATE": "The user already has this role with this scope.",
+      "SCOPE_NOT_ALLOWED": "This role is not allowed with this scope.",
+      "SCOPE_ID_REQUIRED": "Choose the scope target.",
+      "NO_RESOLVER": "This scope is not available yet.",
+      "SCOPE_NOT_FOUND": "The chosen target does not exist.",
+      "INVALID_PERIOD": "The period is not valid.",
+      "SCOPE_ID_FORBIDDEN": "This scope takes no target."
     }
   }
 }

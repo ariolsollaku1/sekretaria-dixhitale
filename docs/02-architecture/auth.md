@@ -130,6 +130,14 @@ The app creates/updates/disables Keycloak users through the Keycloak Admin REST 
 Failures to reach Keycloak must not leave half-created users: create in Keycloak first, then the
 app row in a transaction; on app failure, delete the Keycloak user (compensating action).
 
+### Implementation (IAM-01)
+
+`src/modules/iam`: `IdentityProviderAdmin` (interface) with `KeycloakAdmin` (client credentials as
+`sekretari-admin`) and an in-memory fake; `user.service.ts` orchestrates database + identity provider
+with compensation (`ctx.onFailure`) and sends the activation email after commit. The provisioning
+table above is accurate; sysadmins are put in group `require-otp`, deactivation disables the Keycloak
+user and ends its sessions.
+
 ## Development note — issuer URL inside Docker
 
 The browser reaches Keycloak at `http://localhost:8080`, but a containerized app reaches it at

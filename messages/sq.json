@@ -48,7 +48,8 @@
         "reports": "Raportet",
         "system": "Sistemi"
       },
-      "audit": "Evidenca"
+      "audit": "Evidenca",
+      "users": "Përdoruesit"
     },
     "languages": {
       "sq": "Shqip",
@@ -153,6 +154,110 @@
     "history": {
       "title": "Historiku i ndryshimeve",
       "empty": "Ky regjistrim nuk ka ende ndryshime."
+    }
+  },
+  "iam": {
+    "title": "Përdoruesit",
+    "new": "Përdorues i ri",
+    "edit": "Ndrysho të dhënat",
+    "search": "Kërko sipas emrit ose emailit",
+    "filters": {
+      "role": "Roli",
+      "status": "Statusi",
+      "all": "Të gjithë",
+      "active": "Aktiv",
+      "inactive": "Joaktiv",
+      "apply": "Filtro",
+      "reset": "Pastro"
+    },
+    "columns": {
+      "name": "Emri",
+      "email": "Email",
+      "roles": "Rolet",
+      "status": "Statusi",
+      "lastLogin": "Hyrja e fundit",
+      "open": "Hap"
+    },
+    "neverLoggedIn": "Asnjëherë",
+    "count": "{count, plural, =0 {Asnjë përdorues} one {# përdorues} other {# përdorues}}",
+    "empty": "Asnjë përdorues nuk përputhet me filtrat.",
+    "form": {
+      "email": "Email (përdoret për hyrje)",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "roles": "Rolet dhe fushëveprimi",
+      "addRole": "Shto rol",
+      "role": "Roli",
+      "scope": "Fushëveprimi",
+      "scopeTarget": "Objekti",
+      "remove": "Hiq",
+      "create": "Krijo përdoruesin",
+      "save": "Ruaj ndryshimet",
+      "hint": "Përdoruesi merr një email për të vendosur fjalëkalimin.",
+      "selectRole": "Zgjidh rolin"
+    },
+    "scope": {
+      "INSTITUTION": "Gjithë institucioni",
+      "FACULTY": "Fakulteti",
+      "DEPARTMENT": "Departamenti",
+      "PROGRAM": "Programi",
+      "SELF": "Vetëm të dhënat e veta"
+    },
+    "link": {
+      "title": "Ky email ekziston vetëm në Keycloak",
+      "body": "Mund ta lidhni llogarinë ekzistuese me këtë përdorues të ri. Nuk do të dërgohet email aktivizimi.",
+      "confirm": "Lidh llogarinë ekzistuese"
+    },
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Joaktiv"
+    },
+    "detail": {
+      "back": "Kthehu te përdoruesit",
+      "roles": "Rolet",
+      "noRoles": "Ky përdorues nuk ka role.",
+      "addRoleTitle": "Shto një rol",
+      "since": "Që nga {date}",
+      "until": "deri më {date}",
+      "account": "Llogaria",
+      "history": "Historiku"
+    },
+    "actions": {
+      "deactivate": "Çaktivizo",
+      "deactivateTitle": "Çaktivizoni përdoruesin?",
+      "deactivateBody": "Përdoruesi del menjëherë nga të gjitha pajisjet dhe nuk mund të hyjë më derisa të riaktivizohet.",
+      "reactivate": "Riaktivizo",
+      "reactivateTitle": "Riaktivizoni përdoruesin?",
+      "reactivateBody": "Përdoruesi do të mund të hyjë përsëri.",
+      "reason": "Arsyeja",
+      "reasonHint": "Ruhet në evidencën e ndryshimeve.",
+      "resend": "Ridërgo emailin e aktivizimit",
+      "resent": "Emaili i aktivizimit u dërgua.",
+      "removeRoleTitle": "Hiqni rolin?",
+      "removeRoleBody": "Ndryshimi vlen në kërkesën tjetër të përdoruesit.",
+      "created": "Përdoruesi u krijua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "roleAdded": "Roli u shtua.",
+      "roleRemoved": "Roli u hoq.",
+      "statusChanged": "Statusi u ndryshua."
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "invalidEmail": "Shkruani një adresë emaili të vlefshme.",
+      "atLeastOneRole": "Shtoni të paktën një rol.",
+      "emailTaken": "Ky email përdoret tashmë.",
+      "identityLinked": "Kjo llogari Keycloak i përket një përdoruesi tjetër.",
+      "SELF_DEACTIVATION": "Nuk mund të çaktivizoni veten.",
+      "LAST_SYSADMIN": "Duhet të mbetet të paktën një administrator aktiv i sistemit.",
+      "UNAVAILABLE": "Shërbimi i identitetit nuk është i disponueshëm. Provoni më vonë.",
+      "generic": "Veprimi nuk u krye. Provoni përsëri.",
+      "DUPLICATE": "Përdoruesi e ka tashmë këtë rol me këtë fushëveprim.",
+      "SCOPE_NOT_ALLOWED": "Ky rol nuk lejohet me këtë fushëveprim.",
+      "SCOPE_ID_REQUIRED": "Zgjidhni objektin e fushëveprimit.",
+      "NO_RESOLVER": "Ky fushëveprim nuk është ende i disponueshëm.",
+      "SCOPE_NOT_FOUND": "Objekti i zgjedhur nuk ekziston.",
+      "INVALID_PERIOD": "Periudha nuk është e vlefshme.",
+      "SCOPE_ID_FORBIDDEN": "Ky fushëveprim nuk ka objekt."
     }
   }
 }

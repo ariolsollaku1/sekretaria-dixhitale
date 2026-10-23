@@ -25,8 +25,9 @@ export class FakeIdentityProvider implements IdentityProviderAdmin {
     return user;
   }
 
-  private strip({ groups: _g, sessions: _s, ...user }: Stored): IdentityUser {
-    return user;
+  private strip(user: Stored): IdentityUser {
+    const { id, email, firstName, lastName, enabled, emailVerified } = user;
+    return { id, email, firstName, lastName, enabled, emailVerified };
   }
 
   /** Test helper: a user that exists only in the identity provider. */

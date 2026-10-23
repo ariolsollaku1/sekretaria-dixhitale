@@ -2,13 +2,9 @@ import "server-only";
 import { env } from "@/lib/env";
 import { KeycloakAdmin } from "./keycloak-admin";
 import type { IdentityProviderAdmin } from "./identity-provider";
+import { realmFromIssuer } from "./realm";
 
 let instance: IdentityProviderAdmin | undefined;
-
-/** The realm name is the last path segment of the issuer, e.g. .../realms/logos. */
-export function realmFromIssuer(issuer: string): string {
-  return new URL(issuer).pathname.split("/").filter(Boolean).pop() ?? "logos";
-}
 
 /** Production identity provider; overridden in tests through `setIdentityProvider`. */
 export function getIdentityProvider(): IdentityProviderAdmin {

@@ -56,6 +56,8 @@ export function allPermissions(): readonly Permission[] {
 
 export type ScopeResolver = {
   exists(id: string): Promise<boolean>;
+  /** Choices for a scope picker (e.g. all faculties). Without it the UI cannot offer this scope. */
+  options?(): Promise<{ id: string; label: string }[]>;
   /** Parents of the node, e.g. a program -> its department and faculty. */
   ancestors(id: string): Promise<Pick<TargetScope, "facultyId" | "departmentId">>;
 };

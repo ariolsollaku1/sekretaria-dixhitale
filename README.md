@@ -31,6 +31,20 @@ host ports there if 5432/8080 are taken). Database commands: `pnpm db:migrate` (
 `db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`. Integration tests use the separate
 `sekretari_test` database (`pnpm test:int`).
 
+### First install (production)
+
+After `docker compose up -d` and the first start (migrations run on start), create the first system
+administrator, then sign in:
+
+```bash
+pnpm iam:bootstrap-admin --email you@logos.edu.al --first Ana --last Hoxha
+```
+
+It creates (or links) the Keycloak user and the app user with the `sysadmin` role (idempotent) and
+Keycloak emails a link to set the password. System administrators must also set up a one-time-code
+authenticator at the first sign-in (group `require-otp`). Everyone else is created in the app at
+`/admin/users`.
+
 ### Dev logins
 
 `pnpm infra:up` creates these users in Keycloak (realm `logos`) and `pnpm db:seed` the matching app

@@ -12,3 +12,12 @@ registerNav({
   group: "system",
   order: 10,
 });
+registerNav({
+  id: "users",
+  labelKey: "users",
+  href: "/admin/users",
+  icon: "users",
+  permission: "iam.user.read",
+  group: "system",
+  order: 5,
+});

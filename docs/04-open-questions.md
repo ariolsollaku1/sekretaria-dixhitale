@@ -56,6 +56,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-37 | Forms: public submissions, anti-abuse, retention and notifications | no | open | IT / DPO / Secretariat |
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
+| Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
 
 ---
 
@@ -473,3 +474,16 @@ Decisions taken in conversation that aren't architecture ADRs.
   case; every clash of group, lecturer or room is refused; joint classes are not modelled; all seven
   weekdays are allowed.
 - **Impact:** fixed slots, room master data, joint classes.
+
+### Q-40 — Issued documents: numbering, verification and cancellation
+- **Context:** SRC-012, SRC-059 — certificates, transcripts, exam records, contracts and diplomas are issued as official documents (ADR-0007); their layouts and numbering depend on Q-07…Q-10.
+- **Questions:** What is the numbering scheme of each document type (prefix, year, sequence, a
+  register book)? Does the sequence restart each year or run on? Must documents carry a QR code that
+  anyone can scan to confirm them, and what may that page show? Can an issued document be cancelled
+  or replaced, and how is that marked? Which signatures/stamps are printed?
+- **Working assumption:** number = `<PREFIX>-<year>-<5-digit sequence>`, the sequence per type and
+  calendar year, no gaps reused; each document gets a random verification code and a QR code to
+  `/verify/<code>` that shows only the type, number and date of issue and whether it is still valid;
+  an issued document is never edited — it can be cancelled with a reason (the verification page then
+  says so); signatures and stamps are part of the template.
+- **Impact:** the number format per type, the verification page content, cancellation rules.

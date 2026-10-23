@@ -19,6 +19,8 @@ const schema = z
     KEYCLOAK_ADMIN_CLIENT_ID: z.string().min(1).default("sekretari-admin"),
     KEYCLOAK_ADMIN_CLIENT_SECRET: z.string().min(1),
     BETTER_AUTH_SECRET: z.string().min(32),
+    /** PDF conversion (PLT-09, ADR-0007). */
+    GOTENBERG_URL: z.url().default("http://localhost:3001"),
     // Mail (PLT-11, Q-20): "smtp" (Mailpit in development) or "graph" (Microsoft 365).
     MAIL_TRANSPORT: z.enum(["smtp", "graph"]).default("smtp"),
     MAIL_FROM: z.string().min(3).default("no-reply@logos.local"),

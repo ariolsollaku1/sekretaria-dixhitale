@@ -16,6 +16,7 @@ export const PLATFORM_PERMISSIONS = [
   "plt.form.manage",
   "plt.form.inbox",
   "plt.form.submit",
+  "plt.document.manage",
 ] as const;
 
 registerPermissions("iam", {
@@ -35,6 +36,7 @@ registerPermissions("plt", {
     "plt.form.manage",
     "plt.form.inbox",
     "plt.form.submit",
+    "plt.document.manage",
   ],
   grants: {
     sysadmin: [
@@ -45,6 +47,7 @@ registerPermissions("plt", {
       "plt.jobs.read",
       "plt.jobs.manage",
       "plt.form.manage",
+      "plt.document.manage",
     ],
   },
 });

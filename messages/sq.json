@@ -79,7 +79,8 @@
       "studentLists": "Listat e Sekretarisë",
       "studentStatistics": "Statistika",
       "timetable": "Orari i mësimit",
-      "myTimetable": "Orari im"
+      "myTimetable": "Orari im",
+      "documents": "Dokumentet zyrtare"
     },
     "languages": {
       "sq": "Shqip",
@@ -1913,6 +1914,96 @@
         "reasonRequired": "Shkruani arsyen.",
         "generic": "Veprimi nuk u krye."
       }
+    }
+  },
+  "documents": {
+    "types": {
+      "plt_sample": "Dokument provë"
+    },
+    "admin": {
+      "title": "Dokumentet zyrtare",
+      "new": "Shabllon i ri",
+      "templates": "Shabllonet",
+      "empty": "Nuk ka shabllone.",
+      "emptyHint": "Krijoni një skicë HTML, shikojeni si PDF dhe publikojeni.",
+      "issuedList": "Dokumentet e lëshuara",
+      "issuedEmpty": "Asnjë dokument i lëshuar.",
+      "issuedEmptyHint": "Dokumentet shfaqen këtu sapo një modul i lëshon.",
+      "type": "Lloji",
+      "language": "Gjuha",
+      "validFrom": "E vlefshme nga",
+      "validTo": "E vlefshme deri (opsionale)",
+      "html": "HTML i shabllonit",
+      "htmlHint": "Ndryshoret: {vars}. Blloqe: {blocks}.",
+      "notes": "Shënime",
+      "saveDraft": "Ruaj skicën",
+      "saved": "Skica u ruajt.",
+      "preview": "Shiko si PDF",
+      "publish": "Publiko",
+      "publishTitle": "Të publikohet shablloni?",
+      "publishBody": "Pas publikimit shablloni nuk ndryshohet më; për ndryshime krijohet një version i ri.",
+      "published": "Shablloni u publikua.",
+      "archive": "Arkivo",
+      "archiveTitle": "Të arkivohet shablloni?",
+      "archiveBody": "Nuk do të përdoret më për dokumente të reja.",
+      "archived": "Shablloni u arkivua.",
+      "discard": "Fshij skicën",
+      "discardTitle": "Të fshihet skica?",
+      "discardBody": "Skica fshihet përfundimisht.",
+      "discarded": "Skica u fshi.",
+      "test": "Dokument provë",
+      "testHint": "Lëshon një dokument të llojit provë me shabllonin e publikuar, për të provuar numërimin dhe kodin QR.",
+      "testSq": "Lësho provë (SQ)",
+      "testEn": "Lësho provë (EN)",
+      "testIssued": "U lëshua {number}.",
+      "noTemplate": "Nuk ka shabllon të publikuar të vlefshëm.",
+      "unavailable": "Shërbimi i PDF nuk është i arritshëm.",
+      "cancel": "Anulo",
+      "cancelTitle": "Të anulohet {number}?",
+      "cancelBody": "Numri dhe skedari ruhen; faqja e verifikimit tregon dokumentin si të anuluar.",
+      "reason": "Arsyeja",
+      "reasonRequired": "Arsyeja është e detyrueshme.",
+      "cancelConfirm": "Anulo dokumentin",
+      "cancelled": "Dokumenti u anulua.",
+      "line": "rreshti",
+      "status": {
+        "DRAFT": "Skicë",
+        "PUBLISHED": "Publikuar",
+        "ARCHIVED": "Arkivuar",
+        "valid": "I vlefshëm",
+        "cancelled": "Anuluar"
+      },
+      "columns": {
+        "type": "Lloji",
+        "language": "Gjuha",
+        "version": "Versioni",
+        "validity": "Vlefshmëria",
+        "status": "Statusi",
+        "number": "Numri",
+        "issuedAt": "Lëshuar",
+        "actions": "Veprime"
+      },
+      "errors": {
+        "unclosedBlock": "Blloku nuk është mbyllur",
+        "unexpectedClose": "Mbyllje pa hapje",
+        "badTag": "Etiketë e pavlefshme",
+        "tooDeep": "Shumë blloqe të ngulitura",
+        "required": "E detyrueshme",
+        "tooLong": "Shumë i gjatë",
+        "badLanguage": "Gjuhë e pavlefshme",
+        "badDate": "Datë e pavlefshme",
+        "beforeFrom": "Para datës së fillimit",
+        "unknownType": "Lloj i panjohur"
+      }
+    },
+    "verify": {
+      "title": "Verifikimi i dokumentit",
+      "valid": "I vlefshëm",
+      "cancelled": "Anuluar",
+      "type": "Lloji",
+      "number": "Numri",
+      "issuedOn": "Lëshuar më",
+      "tooMany": "Shumë kërkesa. Provoni përsëri pas pak."
     }
   }
 }

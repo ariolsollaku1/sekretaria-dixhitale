@@ -54,6 +54,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-35 | Teaching assignments: kinds, load limits and who assigns | no | open | Heads of department / HR |
 | Q-36 | Student status changes: allowed transitions and documents | no | open | Secretariat |
 | Q-37 | Forms: public submissions, anti-abuse, retention and notifications | no | open | IT / DPO / Secretariat |
+| Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 
 ---
 
@@ -448,3 +449,15 @@ Decisions taken in conversation that aren't architecture ADRs.
   state changes; file fields are available in logged-in forms only; each definition names the roles
   that handle its submissions (plus the sysadmin).
 - **Impact:** CAPTCHA, retention, anonymous e-mails, public file uploads.
+
+### Q-38 — Contract expiry: horizon, who is told and what happens at the end
+- **Context:** SRC-061 — the system lists the academic staff whose engagement ended according to the contract end date.
+- **Questions:** How many days ahead should HR be warned about a contract ending? Who is told (HR
+  only, the head of department too)? How often? Should the staff member's account be disabled
+  automatically after the end date, and the person removed from the lecturer lists? Are open-ended
+  contracts (no end date) normal, and how are renewals recorded (HR-02)?
+- **Working assumption:** warning horizon 60 days (setting `hr.contractHorizonDays`); HR users are
+  notified once a week (Monday 07:00 Europe/Tirane) when something ended or is about to end; staff
+  without an end date never expire; nothing changes automatically — HR ends the employment by hand
+  (and IAM-02 will later disable the account on that event).
+- **Impact:** the horizon, recipients and rhythm; automatic effects.

@@ -143,6 +143,8 @@ test("AC-4..AC-9: a visitor submits without login; the Secretariat handles it; o
   await expect(page.getByRole("button", { name: "Kalo te: Përfunduar" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Kalo te: Në shqyrtim" })).toHaveCount(0);
   await expect(page.getByText("Po e shikojmë", { exact: true })).toBeVisible();
+  // a toast that is still animating in would trip the contrast check
+  await expect(page.locator("[data-sonner-toast]")).toHaveCount(0, { timeout: 10_000 });
   const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
   expect(
     axe.violations

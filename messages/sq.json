@@ -72,7 +72,8 @@
       "myTeaching": "Lëndët e mia",
       "forms": "Formularët",
       "formsInbox": "Kutia e formularëve",
-      "adminForms": "Përcaktimi i formularëve"
+      "adminForms": "Përcaktimi i formularëve",
+      "contracts": "Mbarimi i kontratave"
     },
     "languages": {
       "sq": "Shqip",
@@ -1000,6 +1001,13 @@
         "title": "Statusi i studimeve u ndryshua",
         "body": "{status, select, SUSPENDED {Studimet tuaja u pezulluan.} ACTIVE {Studimet tuaja u rifilluan.} DEREGISTERED {U çregjistruat nga programi.} GRADUATED {Urime, studimet tuaja u përfunduan me diplomim.} other {Statusi i studimeve tuaja u ndryshua.}}"
       }
+    },
+    "hr": {
+      "contracts": {
+        "label": "Mbarimi i kontratave të stafit",
+        "title": "Kontrata që mbarojnë",
+        "body": "{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}."
+      }
     }
   },
   "mail": {
@@ -1027,6 +1035,12 @@
       "status": {
         "subject": "Statusi i studimeve tuaja u ndryshua",
         "body": "Përshëndetje,\n\n{status, select, SUSPENDED {studimet tuaja u pezulluan.} ACTIVE {studimet tuaja u rifilluan.} DEREGISTERED {u çregjistruat nga programi.} GRADUATED {studimet tuaja u përfunduan me diplomim.} other {statusi i studimeve tuaja u ndryshua.}}\n\nDetajet shihen në Sekretarin Dixhital."
+      }
+    },
+    "hr": {
+      "contracts": {
+        "subject": "Kontrata që mbarojnë këtë javë",
+        "body": "Përshëndetje,\n\n{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}.\n\nListën e shihni në Sekretarin Dixhital."
       }
     }
   },
@@ -1351,6 +1365,18 @@
         "importHasErrors": "Skedari ka gabime; asgjë nuk u ruajt.",
         "FORBIDDEN": "Nuk keni leje për importin.",
         "UNAUTHENTICATED": "Hyni përsëri për të vazhduar."
+      }
+    },
+    "contracts": {
+      "title": "Mbarimi i kontratave",
+      "intro": "Stafi në punë me kontratë që ka mbaruar ose po mbaron së shpejti (horizonti caktohet te cilësimi hr.contractHorizonDays, 60 ditë si parazgjedhje). Asgjë nuk ndryshon automatikisht: mbyllja e punësimit bëhet nga Burimet Njerëzore.",
+      "daysLeft": "Ditë të mbetura",
+      "state": "Gjendja",
+      "states": {
+        "ENDED": "Ka mbaruar",
+        "ENDING_SOON": "Mbaron së shpejti",
+        "OK": "Në rregull",
+        "all": "Të gjitha"
       }
     }
   },

@@ -179,6 +179,15 @@ registerNav(
     order: 30,
   },
   {
+    id: "contracts",
+    labelKey: "contracts",
+    href: "/hr/contracts",
+    icon: "briefcase",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 32,
+  },
+  {
     id: "my-staff-record",
     labelKey: "myStaffRecord",
     href: "/hr/me",

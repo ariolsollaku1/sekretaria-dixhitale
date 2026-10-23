@@ -72,7 +72,8 @@
       "myTeaching": "My teaching",
       "forms": "Forms",
       "formsInbox": "Form inbox",
-      "adminForms": "Form definitions"
+      "adminForms": "Form definitions",
+      "contracts": "Contract expiry"
     },
     "languages": {
       "sq": "Shqip",
@@ -1000,6 +1001,13 @@
         "title": "Your study status changed",
         "body": "{status, select, SUSPENDED {Your studies were suspended.} ACTIVE {Your studies were resumed.} DEREGISTERED {You were deregistered from the program.} GRADUATED {Congratulations, your studies were completed with graduation.} other {The status of your studies changed.}}"
       }
+    },
+    "hr": {
+      "contracts": {
+        "label": "Staff contract expiry",
+        "title": "Contracts ending",
+        "body": "{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}."
+      }
     }
   },
   "mail": {
@@ -1027,6 +1035,12 @@
       "status": {
         "subject": "Your study status changed",
         "body": "Hello,\n\n{status, select, SUSPENDED {your studies were suspended.} ACTIVE {your studies were resumed.} DEREGISTERED {you were deregistered from the program.} GRADUATED {your studies were completed with graduation.} other {the status of your studies changed.}}\n\nThe details are in the Digital Secretariat."
+      }
+    },
+    "hr": {
+      "contracts": {
+        "subject": "Contracts ending this week",
+        "body": "Hello,\n\n{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}.\n\nThe list is in the Digital Secretariat."
       }
     }
   },
@@ -1351,6 +1365,18 @@
         "importHasErrors": "The file has errors; nothing was saved.",
         "FORBIDDEN": "You may not import.",
         "UNAUTHENTICATED": "Sign in again to continue."
+      }
+    },
+    "contracts": {
+      "title": "Contract expiry",
+      "intro": "Employed staff whose contract has ended or is about to end (the horizon is the setting hr.contractHorizonDays, 60 days by default). Nothing changes automatically: Human Resources ends the employment.",
+      "daysLeft": "Days left",
+      "state": "State",
+      "states": {
+        "ENDED": "Ended",
+        "ENDING_SOON": "Ending soon",
+        "OK": "OK",
+        "all": "All"
       }
     }
   },

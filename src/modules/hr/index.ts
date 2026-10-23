@@ -17,3 +17,5 @@ export {
   getOwnStaffId,
   type StaffBrief,
 } from "./server/staff-lookup";
+export { contractsTable } from "./server/contract.table";
+import "./server/contract.job";

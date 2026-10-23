@@ -39,3 +39,38 @@ model Semester {
   @@unique([academicYearId, number])
   @@map("semesters")
 }
+
+/// Top-level unit of the academic structure (ORG-02). Never deleted, only deactivated.
+model Faculty {
+  id          String       @id @default(cuid(2))
+  /// Normalised upper case, unique across faculties and departments (checked in the service).
+  code        String       @unique
+  name        String
+  nameEn      String?      @map("name_en")
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?      @map("created_by_id")
+  updatedById String?      @map("updated_by_id")
+  departments Department[]
+
+  @@map("faculties")
+}
+
+model Department {
+  id          String   @id @default(cuid(2))
+  /// Fixed after creation.
+  facultyId   String   @map("faculty_id")
+  code        String   @unique
+  name        String
+  nameEn      String?  @map("name_en")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?  @map("created_by_id")
+  updatedById String?  @map("updated_by_id")
+  faculty     Faculty  @relation(fields: [facultyId], references: [id])
+
+  @@index([facultyId])
+  @@map("departments")
+}

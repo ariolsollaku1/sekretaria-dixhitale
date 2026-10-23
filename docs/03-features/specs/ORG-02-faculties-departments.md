@@ -137,10 +137,10 @@ Nav: group Administration, "Faculties" and "Departments".
 
 ## 4. Tasks
 
-- [ ] **T1** — Models + migration (case-insensitive unique indexes); permissions. (AC-1, AC-11)
-- [ ] **T2** — Pure unit rules and schemas with unit tests. (AC-2, AC-4, AC-6)
-- [ ] **T3** — Faculty and department services, queries, actions; integration tests. (AC-1..AC-6, AC-9)
-- [ ] **T4** — Scope resolvers registered; integration with `assignRole` and the role editor options. (AC-7, AC-8)
+- [x] **T1** — Models + migration (case-insensitive unique indexes); permissions. (AC-1, AC-11)
+- [x] **T2** — Pure unit rules and schemas with unit tests. (AC-2, AC-4, AC-6)
+- [x] **T3** — Faculty and department services, queries, actions; integration tests. (AC-1..AC-6, AC-9)
+- [x] **T4** — Scope resolvers registered; integration with `assignRole` and the role editor options. (AC-7, AC-8)
 - [ ] **T5** — Faculty table and pages. (AC-10)
 - [ ] **T6** — Department table and pages (heads of department). (AC-9, AC-10)
 - [ ] **T7** — Nav, i18n (`org.*`), demo seed + dev head-of-department role, e2e, docs. (AC-12 and all)

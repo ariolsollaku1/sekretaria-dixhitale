@@ -1,6 +1,7 @@
 // Public surface of the ORG module: other code imports only from here.
 import "./permissions";
 import "./server/year.provider";
+import "./server/scope-resolvers";
 
 export { YearForm } from "./ui/year-form";
 export { MakeCurrentButton } from "./ui/make-current-button";

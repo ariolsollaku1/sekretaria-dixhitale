@@ -13,10 +13,13 @@ const READERS = [
   "program_coordinator",
 ] as const;
 
+const READ = ["org.year.read", "org.faculty.read", "org.department.read"];
+const WRITE = ["org.year.write", "org.faculty.write", "org.department.write"];
+
 registerPermissions("org", {
-  permissions: ["org.year.read", "org.year.write"],
+  permissions: [...READ, ...WRITE],
   grants: {
-    ...Object.fromEntries(READERS.map((r) => [r, ["org.year.read"]])),
-    sysadmin: ["org.year.read", "org.year.write"],
+    ...Object.fromEntries(READERS.map((r) => [r, READ])),
+    sysadmin: [...READ, ...WRITE],
   },
 });

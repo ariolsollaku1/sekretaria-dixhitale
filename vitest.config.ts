@@ -12,6 +12,12 @@ const alias = { "@": fileURLToPath(new URL("./src", import.meta.url)) };
 
 export default defineConfig({
   test: {
+    // `pnpm test:coverage`: the authorization decision logic must stay fully covered (PLT-05).
+    coverage: {
+      provider: "v8",
+      include: ["src/lib/authz/check.ts"],
+      thresholds: { statements: 100, branches: 100, functions: 100, lines: 100 },
+    },
     projects: [
       {
         resolve: { alias },

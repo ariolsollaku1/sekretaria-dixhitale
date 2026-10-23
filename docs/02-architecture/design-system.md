@@ -74,6 +74,16 @@ Academic-year switcher (fixed header slot) · role/scope indicator · irreversib
 dialog · page/list template (header, filter bar, `DataTable`, pagination, states) · multi-step form
 (forms engine, ADR-0009) · document preview (Gotenberg output, ADR-0007).
 
+## Implemented (PLT-06)
+
+Shell: sidebar from `md` (768 px), drawer below; top bar holds the academic-year select (only when
+years exist), language select, notifications slot, user menu. Components in `src/components/ui`:
+`Button` (primary/secondary/ghost/destructive, 44 px), `Input`, `Label`, `Dialog` (modal and
+drawer), `DropdownMenu`, `StatusBadge`, `EmptyState`, `ErrorState`, `PageHeader`, `FormField`,
+`ConfirmDialog`, `Skeleton`, `Toaster`. Registries: `registerNav` (`src/lib/nav`),
+`registerWidget` (`src/lib/dashboard`), `registerAcademicYearProvider` (`src/lib/academic-year`).
+The component is named `StatusBadge` in code (the rule above calls it StatusChip).
+
 ## Adding to the system
 
 1. Look for an existing shadcn/ui primitive or pattern first.

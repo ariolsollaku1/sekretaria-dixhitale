@@ -23,6 +23,11 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sekretari
       SHADOW_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sekretari_shadow
       TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/sekretari_test
+      KEYCLOAK_ISSUER: http://localhost:8080/realms/logos
+      KEYCLOAK_CLIENT_ID: sekretari-web
+      KEYCLOAK_CLIENT_SECRET: ci-only-secret
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ci-only-admin-secret
+      BETTER_AUTH_SECRET: ci-only-secret-ci-only-secret-ci-only
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -35,7 +40,9 @@ jobs:
         run: psql "postgresql://postgres:postgres@localhost:5432/postgres" -c 'create database sekretari_test'
       - run: pnpm lint
       - run: pnpm typecheck
+      - run: pnpm i18n:check
       - run: pnpm test
+      - run: pnpm test:coverage
       - run: pnpm build
       - run: node scripts/features.mjs --check
 

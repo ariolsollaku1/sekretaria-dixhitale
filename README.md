@@ -29,7 +29,36 @@ pnpm infra:down    # stop (data kept)   |   pnpm infra:reset   # stop and DELETE
 Keycloak dev admin and database passwords are in `.env` (copied from `.env.example`; change the
 host ports there if 5432/8080 are taken). Database commands: `pnpm db:migrate` (dev),
 `db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`. Integration tests use the separate
-`sekretari_test` database (`pnpm test:int`). Auth arrives with PLT-04.
+`sekretari_test` database (`pnpm test:int`).
+
+### First install (production)
+
+After `docker compose up -d` and the first start (migrations run on start), create the first system
+administrator, then sign in:
+
+```bash
+pnpm iam:bootstrap-admin --email you@logos.edu.al --first Ana --last Hoxha
+```
+
+It creates (or links) the Keycloak user and the app user with the `sysadmin` role (idempotent) and
+Keycloak emails a link to set the password. System administrators must also set up a one-time-code
+authenticator at the first sign-in (group `require-otp`). Everyone else is created in the app at
+`/admin/users`.
+
+### Dev logins
+
+`pnpm infra:up` creates these users in Keycloak (realm `logos`) and `pnpm db:seed` the matching app
+users. All share the password `Dev-Pass-12345`. Sign in at http://localhost:3100.
+
+| Email                                                                                                                                                                                                            | Purpose                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `sysadmin@`, `secretary@`, `student-affairs@`, `lecturer@`, `finance@`, `hr@`, `quality@`, `library@`, `administration@`, `student@`, `head-of-department@`, `program-coordinator@`, `erasmus@` `dev.logos.test` | one per role (roles themselves are assigned from PLT-05) |
+| `inactive@dev.logos.test`                                                                                                                                                                                        | app user with `active=false` → refused                   |
+| `stranger@dev.logos.test`                                                                                                                                                                                        | Keycloak user without app user → `/no-access`            |
+
+Keycloak admin console: http://localhost:8080 (admin credentials in `.env`). After changing
+`infra/keycloak/realm-logos.json` run `pnpm infra:reset`, then `pnpm infra:up`, `pnpm db:deploy`,
+`pnpm db:seed`.
 
 ## Documentation
 

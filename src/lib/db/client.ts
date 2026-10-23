@@ -1,6 +1,6 @@
 import "server-only";
-import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/generated/prisma/client";
+import { createAdapter } from "./adapter";
 
 // Prisma 7 talks to Postgres through a driver adapter. In dev, hot reloads re-evaluate this module,
 // so the instance is cached on globalThis to avoid exhausting connections (AC-2).
@@ -10,7 +10,7 @@ function getClient(): PrismaClient {
   if (!globalForDb.prisma) {
     const connectionString = process.env.DATABASE_URL;
     if (!connectionString) throw new Error("DATABASE_URL is not set");
-    globalForDb.prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+    globalForDb.prisma = new PrismaClient({ adapter: createAdapter(connectionString) });
   }
   return globalForDb.prisma;
 }

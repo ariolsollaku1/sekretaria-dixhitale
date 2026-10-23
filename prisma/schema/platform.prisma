@@ -7,3 +7,86 @@ model SystemSetting {
 
   @@map("system_settings")
 }
+
+/// Fixed role list (roles.md); hyphenated keys there are underscored here.
+enum Role {
+  sysadmin
+  secretary
+  student_affairs
+  lecturer
+  finance
+  hr
+  quality
+  library
+  administration
+  student
+  head_of_department
+  program_coordinator
+  erasmus
+
+  @@map("role")
+}
+
+/// What a role assignment covers. INSTITUTION ⊃ FACULTY ⊃ DEPARTMENT ⊃ PROGRAM; SELF = own records.
+enum ScopeType {
+  INSTITUTION
+  FACULTY
+  DEPARTMENT
+  PROGRAM
+  SELF
+
+  @@map("scope_type")
+}
+
+/// A user can hold several assignments, each with its own scope and validity window.
+model UserRole {
+  id          String    @id @default(cuid(2))
+  userId      String    @map("user_id")
+  role        Role
+  scopeType   ScopeType @map("scope_type")
+  /// Faculty/department/program id; null for INSTITUTION and SELF.
+  scopeId     String?   @map("scope_id")
+  validFrom   DateTime  @default(now()) @map("valid_from") @db.Timestamptz(3)
+  validTo     DateTime? @map("valid_to") @db.Timestamptz(3)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  createdById String?   @map("created_by_id")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // NULLS NOT DISTINCT (added in the migration) so INSTITUTION/SELF rows cannot be duplicated.
+  @@unique([userId, role, scopeType, scopeId])
+  @@index([userId])
+  @@map("user_roles")
+}
+
+enum AuditActorType {
+  USER
+  SYSTEM
+  PUBLIC
+
+  @@map("audit_actor_type")
+}
+
+/// Append-only trace of business mutations and auth events. UPDATE/DELETE are rejected by a
+/// trigger (see the migration). No foreign key to users: the trace must outlive any user row.
+model AuditLog {
+  id          String         @id @default(cuid(2))
+  at          DateTime       @default(now()) @db.Timestamptz(3)
+  actorType   AuditActorType @map("actor_type")
+  actorUserId String?        @map("actor_user_id")
+  /// `<module>.<resource>.<verb>`, e.g. `stu.student.update`
+  action      String
+  entityType  String         @map("entity_type")
+  entityId    String?        @map("entity_id")
+  /// Only the changed fields; sensitive values are masked.
+  before      Json?
+  after       Json?
+  reason      String?
+  requestId   String?        @map("request_id")
+  ip          String?
+  userAgent   String?        @map("user_agent")
+
+  @@index([entityType, entityId, at])
+  @@index([actorUserId, at])
+  @@index([at])
+  @@map("audit_logs")
+}

@@ -113,19 +113,55 @@ SSO idle 30 min / max 12 h aligned with AC-6; brute-force: lockout after 5 failu
   keeps emails in sync.
 - Two app users with the same email can't exist (`@unique`).
 
+**Implementation notes (deviations from the first design):**
+- Better Auth **1.7.12**, core `signInSocial` + the `genericOAuth` plugin (`providerId: "keycloak"`,
+  OIDC discovery, PKCE, `disableSignUp`; `requireEmailVerification` is deliberately off: on the
+  first, linking login the library tests a stale user object and refuses with `email_not_verified`). Sign-in goes through a
+  server action (`signInAction`), not the browser client. `nextCookies()` sets cookies from actions.
+- Linking: Keycloak is **not** in `trustedProviders`, so first-login linking by email needs
+  Keycloak's `email_verified`; `requireLocalEmailVerified: false` because admin-created users have
+  no verified flag. Later logins match by `sub` (`accounts.account_id`).
+- Inactive users are refused in `databaseHooks.session.create.before` (library error redirect to
+  `/no-access`); every request re-reads `users.active` in `getCurrentUser()` (no cookie cache).
+- Sessions: `expiresIn` = idle minutes with `updateAge` 60 s (sliding); the absolute limit is
+  checked in `getCurrentUser()` from `created_at`. OAuth tokens are stored encrypted; the ID token
+  is kept for logout.
+- **AC-4 end of the Keycloak session:** a denied login has no account row, hence no `id_token_hint`.
+  `/no-access` links to Keycloak's logout endpoint with `client_id` and `post_logout_redirect_uri`
+  only; Keycloak asks the user to confirm. Normal sign-out (AC-7) uses the hint and needs no click.
+- **AC-9 OTP:** realm role `require-otp` is granted by group `require-otp`; a custom browser flow
+  (`browser-logos`) adds `Condition - user role` → `OTP Form`. Users without a configured OTP are
+  prompted to set one up. Group membership for sysadmins is IAM-01's job.
+- **AC-10 dev users:** realm import is all-or-nothing, so dev users are not in a second realm file.
+  `infra/keycloak/dev/dev-users.json` is the single source; `scripts/keycloak-dev-users.mjs`
+  (run by `pnpm infra:up`) adds them through Keycloak's partial-import API and
+  `prisma/seed/dev-users.ts` creates the matching app users. Role assignments arrive with PLT-05.
+- Realm placeholders `${APP_URL}`, `${APP_URL_ALT}` (the containerized app), client secrets come
+  from the Keycloak container environment. Changing the realm file needs `pnpm infra:reset`.
+- `/(app)` pages are protected by `src/proxy.ts` (cookie presence) plus `requireUser()`.
+- UI copy lives in `src/lib/auth/copy.ts` (sq/en) until PLT-06 introduces next-intl.
+- E2E needs the compose stack (Keycloak), so it runs locally (`pnpm infra:up && pnpm test:e2e`), not
+  in the CI job, which has only a Postgres service.
+- **Bug found and fixed on the way (PLT-03 follow-up):** Prisma's pg adapter sends dates as UTC
+  strings without offset and Postgres read them in the session zone (`TZ=Europe/Tirane`), shifting
+  every stored timestamp by 2 h. Fix: `createAdapter()` pins the session to UTC and the `db`
+  service runs `-c timezone=UTC`. Regression test: `timestamps.int.test.ts`.
+- `env` is now validated lazily (first use and in `instrumentation.ts`), so `next build` works
+  without runtime variables.
+
 ## 4. Tasks
 
 - [x] **T1** — Realm file `realm-logos.json` (clients `sekretari-web`, `sekretari-admin`, policies,
       locales, `require-otp` group) + dev users file; verify import on clean `infra:reset`. (AC-9, AC-10)
-- [ ] **T2** — Better Auth setup with Prisma adapter + `auth.prisma` models + migration. (AC-2, AC-5)
-- [ ] **T3** — Sign-in guard: active-user match by `sub`/verified email, link on first login,
+- [x] **T2** — Better Auth setup with Prisma adapter + `auth.prisma` models + migration. (AC-2, AC-5)
+- [x] **T3** — Sign-in guard: active-user match by `sub`/verified email, link on first login,
       reject otherwise (no user creation). Unit-test the decision function. (AC-3, AC-4, AC-8)
-- [ ] **T4** — Session lifetime rules (idle/max) + config vars in `env.ts`/`.env.example`. (AC-6)
-- [ ] **T5** — `getCurrentUser` / `requireUser`; proxy redirect; login and no-access pages. (AC-1, AC-11)
-- [ ] **T6** — Sign-out with Keycloak RP-initiated logout. (AC-7)
-- [ ] **T7** — Auth events (structured log now; hook point for PLT-07). (AC-12)
-- [ ] **T8** — Dev seed users; README table of dev logins. (AC-10)
-- [ ] **T9** — E2E tests against the dev stack.
+- [x] **T4** — Session lifetime rules (idle/max) + config vars in `env.ts`/`.env.example`. (AC-6)
+- [x] **T5** — `getCurrentUser` / `requireUser`; proxy redirect; login and no-access pages. (AC-1, AC-11)
+- [x] **T6** — Sign-out with Keycloak RP-initiated logout. (AC-7)
+- [x] **T7** — Auth events (structured log now; hook point for PLT-07). (AC-12)
+- [x] **T8** — Dev seed users; README table of dev logins. (AC-10)
+- [x] **T9** — E2E tests against the dev stack.
 
 ## 5. Test plan
 
@@ -141,6 +177,6 @@ SSO idle 30 min / max 12 h aligned with AC-6; brute-force: lockout after 5 failu
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, ACs covered; E2E runs in CI against the compose stack (or documented as local-only with reason)
-- [ ] auth.md updated with any deviation (library options, URLs)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, ACs covered; E2E runs in CI against the compose stack (or documented as local-only with reason)
+- [x] auth.md updated with any deviation (library options, URLs)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

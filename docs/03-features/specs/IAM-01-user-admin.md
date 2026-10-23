@@ -83,17 +83,41 @@ Nav entry: group "System", permission `iam.user.read`.
 - Concurrent edits → last write wins, but every change is audited; role assignment unique constraint
   prevents duplicates.
 
+**Implementation notes:**
+- First feature built as a module: `src/modules/iam/{domain,server,ui}` with `index.ts`; pages in
+  `src/app/(app)/admin/users/*` stay thin. Code uses the shared action wrapper (PLT-07).
+- The action wrapper gained `ctx.onFailure(fn)` (compensation, also when the commit fails) and
+  `ctx.afterCommit(fn)` (activation email only after the data is committed), and a typed
+  `UNAVAILABLE` error code for an identity-provider outage.
+- Keycloak: realm file now has the SMTP block (`KC_SMTP_*`, default Mailpit), the service account
+  also holds `query-groups`, and the web client accepts `${APP_URL}/login*` (target of the
+  "execute actions" email). Existing dev realms need `pnpm infra:reset`. Production mail transport
+  is Q-20 (open): point `KC_SMTP_*` at the client's relay meanwhile.
+- AC-3: an identity that exists only in Keycloak yields `CONFLICT: IDP_USER_EXISTS`; resubmitting
+  with `linkExisting` creates the `accounts` row immediately (no activation email).
+- AC-7 is enforced by `canDeactivate` / `canRevokeSysadmin` (pure). The UI hides the deactivate
+  button on your own page.
+- Scope pickers: `registerScopeResolver(type, { exists, ancestors, options })` — `options` feeds the
+  editor; without it only INSTITUTION and SELF are offered, so department-scoped roles stay hidden
+  until ORG-02/03 register their resolvers.
+- AC-12: `pnpm iam:bootstrap-admin` runs `scripts/iam-bootstrap-admin.ts` through tsx with
+  `--conditions=react-server` (so `server-only` resolves). It is idempotent and tested with the fake.
+- Contract tests (`identity-provider.contract.ts`) run against the fake always and against the real
+  Keycloak when reachable (skipped in CI, which only has Postgres); the e2e covers the full
+  create → email → set password → first login path with real Keycloak and Mailpit.
+- `KEYCLOAK_ADMIN_CLIENT_SECRET` is now a required variable.
+
 ## 4. Tasks
 
-- [ ] **T1** — `IdentityProviderAdmin` interface, Keycloak implementation, in-memory fake; contract
+- [x] **T1** — `IdentityProviderAdmin` interface, Keycloak implementation, in-memory fake; contract
       tests run against the fake always and against real Keycloak in E2E. (AC-2, AC-6, AC-8, AC-9)
-- [ ] **T2** — Domain rules + unit tests. (AC-7)
-- [ ] **T3** — `userService` with transaction + compensation + audit. (AC-2, AC-3, AC-4, AC-5, AC-6, AC-8, AC-9, AC-10)
-- [ ] **T4** — Queries + list page with search/filters/pagination. (AC-1, AC-13)
-- [ ] **T5** — Create/edit pages with role-assignment editor. (AC-2, AC-3, AC-5)
-- [ ] **T6** — Detail page: deactivate/reactivate (reason), resend activation, history. (AC-6, AC-10, AC-11)
-- [ ] **T7** — Bootstrap CLI + README "first install" section. (AC-12)
-- [ ] **T8** — i18n keys (`iam.*`) in `sq` and `en`; nav entry.
+- [x] **T2** — Domain rules + unit tests. (AC-7)
+- [x] **T3** — `userService` with transaction + compensation + audit. (AC-2, AC-3, AC-4, AC-5, AC-6, AC-8, AC-9, AC-10)
+- [x] **T4** — Queries + list page with search/filters/pagination. (AC-1, AC-13)
+- [x] **T5** — Create/edit pages with role-assignment editor. (AC-2, AC-3, AC-5)
+- [x] **T6** — Detail page: deactivate/reactivate (reason), resend activation, history. (AC-6, AC-10, AC-11)
+- [x] **T7** — Bootstrap CLI + README "first install" section. (AC-12)
+- [x] **T8** — i18n keys (`iam.*`) in `sq` and `en`; nav entry.
 
 ## 5. Test plan
 
@@ -109,6 +133,6 @@ Nav entry: group "System", permission `iam.user.read`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, ACs covered; E2E with real Keycloak + Mailpit passes
-- [ ] auth.md provisioning table still accurate
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, ACs covered; E2E with real Keycloak + Mailpit passes
+- [x] auth.md provisioning table still accurate
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

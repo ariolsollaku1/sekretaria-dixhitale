@@ -1,1 +1,263 @@
-{}
+{
+  "common": {
+    "save": "Ruaj",
+    "cancel": "Anulo",
+    "close": "Mbyll",
+    "confirm": "Konfirmo",
+    "delete": "Fshi",
+    "edit": "Ndrysho",
+    "back": "Kthehu",
+    "retry": "Provo përsëri",
+    "loading": "Duke ngarkuar…",
+    "breadcrumb": "Rruga e faqes",
+    "search": "Kërko",
+    "yes": "Po",
+    "no": "Jo",
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Joaktiv",
+      "pending": "Në pritje",
+      "approved": "Miratuar",
+      "rejected": "Refuzuar",
+      "draft": "Draft"
+    }
+  },
+  "shell": {
+    "appName": "Sekretari Dixhitale",
+    "institution": "Kolegji Universitar LOGOS",
+    "skipToContent": "Kalo te përmbajtja",
+    "openMenu": "Hap menynë",
+    "closeMenu": "Mbyll menynë",
+    "navigation": "Navigimi kryesor",
+    "language": "Gjuha",
+    "academicYear": "Viti akademik",
+    "notifications": "Njoftimet",
+    "userMenu": "Menyja e përdoruesit",
+    "signedInAs": "Hyrë si",
+    "signOut": "Dil",
+    "home": "Ballina",
+    "nav": {
+      "dashboard": "Paneli",
+      "groups": {
+        "students": "Studentët",
+        "teaching": "Mësimdhënia",
+        "exams": "Provimet",
+        "finance": "Financa",
+        "hr": "Burimet njerëzore",
+        "administration": "Administrata",
+        "reports": "Raportet",
+        "system": "Sistemi"
+      },
+      "audit": "Evidenca",
+      "users": "Përdoruesit"
+    },
+    "languages": {
+      "sq": "Shqip",
+      "en": "English"
+    }
+  },
+  "dashboard": {
+    "welcome": "Përshëndetje, {name}",
+    "subtitle": "Mirë se vini në Sekretarin Dixhitale.",
+    "widgetsEmpty": "Nuk ka ende kartela për t’u shfaqur.",
+    "widgetsEmptyHint": "Kartelat shfaqen këtu kur aktivizohen modulet që ju përkasin."
+  },
+  "auth": {
+    "signIn": "Hyr",
+    "signOut": "Dil",
+    "hello": "Përshëndetje",
+    "reasons": {
+      "expired": "Sesioni juaj ka skaduar. Hyni përsëri.",
+      "signed-out": "Keni dalë nga sistemi.",
+      "unavailable": "Shërbimi i hyrjes nuk është i disponueshëm. Provoni pak më vonë.",
+      "error": "Hyrja nuk u krye. Provoni përsëri."
+    },
+    "noAccess": {
+      "title": "Nuk keni qasje",
+      "body": "Llogaria juaj nuk është e aktivizuar në Sekretarin Dixhitale. Kontaktoni zyrën e sekretarisë ose administratorin e sistemit.",
+      "action": "Dil nga llogaria"
+    }
+  },
+  "errors": {
+    "forbidden": {
+      "title": "Nuk keni leje",
+      "body": "Roli juaj nuk e lejon këtë veprim. Kontaktoni administratorin nëse mendoni se është gabim."
+    },
+    "notFound": {
+      "title": "Faqja nuk u gjet",
+      "body": "Adresa nuk ekziston ose është zhvendosur."
+    },
+    "server": {
+      "title": "Diçka shkoi keq",
+      "body": "Ndodhi një gabim i papritur. Provoni përsëri; nëse vazhdon, njoftoni administratorin.",
+      "reference": "Kodi i referencës"
+    },
+    "backHome": "Kthehu te ballina"
+  },
+  "roles": {
+    "sysadmin": "Administrator sistemi",
+    "secretary": "Sekretari",
+    "student_affairs": "Zyra e Çështjeve të Studentëve",
+    "lecturer": "Pedagog",
+    "finance": "Financa",
+    "hr": "Burimet njerëzore",
+    "quality": "Njësia e Sigurimit të Cilësisë",
+    "library": "Bibliotekë",
+    "administration": "Administrata",
+    "student": "Student",
+    "head_of_department": "Përgjegjës departamenti",
+    "program_coordinator": "Koordinator programi",
+    "erasmus": "Përgjegjës Erasmus"
+  },
+  "audit": {
+    "title": "Evidenca e ndryshimeve",
+    "filters": {
+      "actor": "Përdoruesi (email ose “system”/“public”)",
+      "action": "Veprimi (p.sh. auth.)",
+      "entityType": "Lloji i entitetit",
+      "entityId": "ID e entitetit",
+      "from": "Nga data",
+      "to": "Deri më datë",
+      "apply": "Filtro",
+      "reset": "Pastro"
+    },
+    "columns": {
+      "time": "Koha",
+      "actor": "Autori",
+      "action": "Veprimi",
+      "entity": "Entiteti",
+      "open": "Hap"
+    },
+    "empty": "Asnjë shënim nuk përputhet me filtrat.",
+    "count": "{count, plural, =0 {Asnjë shënim} one {# shënim} other {# shënime}}",
+    "page": "Faqja {page} nga {pageCount}",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "detail": {
+      "title": "Shënimi i evidencës",
+      "back": "Kthehu te evidenca",
+      "meta": "Të dhënat",
+      "reason": "Arsyeja",
+      "request": "Kërkesa",
+      "ip": "IP",
+      "userAgent": "Shfletuesi",
+      "changes": "Ndryshimet",
+      "field": "Fusha",
+      "before": "Para",
+      "after": "Pas",
+      "noChanges": "Pa fusha të ndryshuara."
+    },
+    "actors": {
+      "system": "Sistemi",
+      "public": "Publik"
+    },
+    "history": {
+      "title": "Historiku i ndryshimeve",
+      "empty": "Ky regjistrim nuk ka ende ndryshime."
+    }
+  },
+  "iam": {
+    "title": "Përdoruesit",
+    "new": "Përdorues i ri",
+    "edit": "Ndrysho të dhënat",
+    "search": "Kërko sipas emrit ose emailit",
+    "filters": {
+      "role": "Roli",
+      "status": "Statusi",
+      "all": "Të gjithë",
+      "active": "Aktiv",
+      "inactive": "Joaktiv",
+      "apply": "Filtro",
+      "reset": "Pastro"
+    },
+    "columns": {
+      "name": "Emri",
+      "email": "Email",
+      "roles": "Rolet",
+      "status": "Statusi",
+      "lastLogin": "Hyrja e fundit",
+      "open": "Hap"
+    },
+    "neverLoggedIn": "Asnjëherë",
+    "count": "{count, plural, =0 {Asnjë përdorues} one {# përdorues} other {# përdorues}}",
+    "empty": "Asnjë përdorues nuk përputhet me filtrat.",
+    "form": {
+      "email": "Email (përdoret për hyrje)",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "roles": "Rolet dhe fushëveprimi",
+      "addRole": "Shto rol",
+      "role": "Roli",
+      "scope": "Fushëveprimi",
+      "scopeTarget": "Objekti",
+      "remove": "Hiq",
+      "create": "Krijo përdoruesin",
+      "save": "Ruaj ndryshimet",
+      "hint": "Përdoruesi merr një email për të vendosur fjalëkalimin.",
+      "selectRole": "Zgjidh rolin"
+    },
+    "scope": {
+      "INSTITUTION": "Gjithë institucioni",
+      "FACULTY": "Fakulteti",
+      "DEPARTMENT": "Departamenti",
+      "PROGRAM": "Programi",
+      "SELF": "Vetëm të dhënat e veta"
+    },
+    "link": {
+      "title": "Ky email ekziston vetëm në Keycloak",
+      "body": "Mund ta lidhni llogarinë ekzistuese me këtë përdorues të ri. Nuk do të dërgohet email aktivizimi.",
+      "confirm": "Lidh llogarinë ekzistuese"
+    },
+    "status": {
+      "active": "Aktiv",
+      "inactive": "Joaktiv"
+    },
+    "detail": {
+      "back": "Kthehu te përdoruesit",
+      "roles": "Rolet",
+      "noRoles": "Ky përdorues nuk ka role.",
+      "addRoleTitle": "Shto një rol",
+      "since": "Që nga {date}",
+      "until": "deri më {date}",
+      "account": "Llogaria",
+      "history": "Historiku"
+    },
+    "actions": {
+      "deactivate": "Çaktivizo",
+      "deactivateTitle": "Çaktivizoni përdoruesin?",
+      "deactivateBody": "Përdoruesi del menjëherë nga të gjitha pajisjet dhe nuk mund të hyjë më derisa të riaktivizohet.",
+      "reactivate": "Riaktivizo",
+      "reactivateTitle": "Riaktivizoni përdoruesin?",
+      "reactivateBody": "Përdoruesi do të mund të hyjë përsëri.",
+      "reason": "Arsyeja",
+      "reasonHint": "Ruhet në evidencën e ndryshimeve.",
+      "resend": "Ridërgo emailin e aktivizimit",
+      "resent": "Emaili i aktivizimit u dërgua.",
+      "removeRoleTitle": "Hiqni rolin?",
+      "removeRoleBody": "Ndryshimi vlen në kërkesën tjetër të përdoruesit.",
+      "created": "Përdoruesi u krijua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "roleAdded": "Roli u shtua.",
+      "roleRemoved": "Roli u hoq.",
+      "statusChanged": "Statusi u ndryshua."
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "invalidEmail": "Shkruani një adresë emaili të vlefshme.",
+      "atLeastOneRole": "Shtoni të paktën një rol.",
+      "emailTaken": "Ky email përdoret tashmë.",
+      "identityLinked": "Kjo llogari Keycloak i përket një përdoruesi tjetër.",
+      "SELF_DEACTIVATION": "Nuk mund të çaktivizoni veten.",
+      "LAST_SYSADMIN": "Duhet të mbetet të paktën një administrator aktiv i sistemit.",
+      "UNAVAILABLE": "Shërbimi i identitetit nuk është i disponueshëm. Provoni më vonë.",
+      "generic": "Veprimi nuk u krye. Provoni përsëri.",
+      "DUPLICATE": "Përdoruesi e ka tashmë këtë rol me këtë fushëveprim.",
+      "SCOPE_NOT_ALLOWED": "Ky rol nuk lejohet me këtë fushëveprim.",
+      "SCOPE_ID_REQUIRED": "Zgjidhni objektin e fushëveprimit.",
+      "NO_RESOLVER": "Ky fushëveprim nuk është ende i disponueshëm.",
+      "SCOPE_NOT_FOUND": "Objekti i zgjedhur nuk ekziston.",
+      "INVALID_PERIOD": "Periudha nuk është e vlefshme.",
+      "SCOPE_ID_FORBIDDEN": "Ky fushëveprim nuk ka objekt."
+    }
+  }
+}

@@ -1,1 +1,263 @@
-{}
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "breadcrumb": "Breadcrumb",
+    "search": "Search",
+    "yes": "Yes",
+    "no": "No",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "draft": "Draft"
+    }
+  },
+  "shell": {
+    "appName": "Digital Secretariat",
+    "institution": "LOGOS University College",
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "navigation": "Main navigation",
+    "language": "Language",
+    "academicYear": "Academic year",
+    "notifications": "Notifications",
+    "userMenu": "User menu",
+    "signedInAs": "Signed in as",
+    "signOut": "Sign out",
+    "home": "Home",
+    "nav": {
+      "dashboard": "Dashboard",
+      "groups": {
+        "students": "Students",
+        "teaching": "Teaching",
+        "exams": "Exams",
+        "finance": "Finance",
+        "hr": "Human resources",
+        "administration": "Administration",
+        "reports": "Reports",
+        "system": "System"
+      },
+      "audit": "Audit log",
+      "users": "Users"
+    },
+    "languages": {
+      "sq": "Shqip",
+      "en": "English"
+    }
+  },
+  "dashboard": {
+    "welcome": "Hello, {name}",
+    "subtitle": "Welcome to the Digital Secretariat.",
+    "widgetsEmpty": "No cards to show yet.",
+    "widgetsEmptyHint": "Cards appear here as the modules that apply to you are enabled."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "hello": "Hello",
+    "reasons": {
+      "expired": "Your session has expired. Please sign in again.",
+      "signed-out": "You have been signed out.",
+      "unavailable": "The sign-in service is unavailable. Please try again shortly.",
+      "error": "Sign-in failed. Please try again."
+    },
+    "noAccess": {
+      "title": "No access",
+      "body": "Your account is not enabled in the Digital Secretariat. Contact the secretariat or the system administrator.",
+      "action": "Sign out of your account"
+    }
+  },
+  "errors": {
+    "forbidden": {
+      "title": "Not allowed",
+      "body": "Your role does not allow this. Contact the administrator if you think this is a mistake."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "The address does not exist or has moved."
+    },
+    "server": {
+      "title": "Something went wrong",
+      "body": "An unexpected error occurred. Try again; if it continues, tell the administrator.",
+      "reference": "Reference code"
+    },
+    "backHome": "Back to home"
+  },
+  "roles": {
+    "sysadmin": "System administrator",
+    "secretary": "Secretary",
+    "student_affairs": "Student Affairs Office",
+    "lecturer": "Lecturer",
+    "finance": "Finance",
+    "hr": "Human Resources",
+    "quality": "Quality Assurance",
+    "library": "Librarian",
+    "administration": "Administration",
+    "student": "Student",
+    "head_of_department": "Head of department",
+    "program_coordinator": "Program coordinator",
+    "erasmus": "Erasmus officer"
+  },
+  "audit": {
+    "title": "Audit log",
+    "filters": {
+      "actor": "Actor (email or “system”/“public”)",
+      "action": "Action (e.g. auth.)",
+      "entityType": "Entity type",
+      "entityId": "Entity ID",
+      "from": "From date",
+      "to": "To date",
+      "apply": "Filter",
+      "reset": "Clear"
+    },
+    "columns": {
+      "time": "Time",
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Entity",
+      "open": "Open"
+    },
+    "empty": "No entries match the filters.",
+    "count": "{count, plural, =0 {No entries} one {# entry} other {# entries}}",
+    "page": "Page {page} of {pageCount}",
+    "previous": "Previous",
+    "next": "Next",
+    "detail": {
+      "title": "Audit entry",
+      "back": "Back to the audit log",
+      "meta": "Details",
+      "reason": "Reason",
+      "request": "Request",
+      "ip": "IP",
+      "userAgent": "Browser",
+      "changes": "Changes",
+      "field": "Field",
+      "before": "Before",
+      "after": "After",
+      "noChanges": "No changed fields."
+    },
+    "actors": {
+      "system": "System",
+      "public": "Public"
+    },
+    "history": {
+      "title": "Change history",
+      "empty": "This record has no changes yet."
+    }
+  },
+  "iam": {
+    "title": "Users",
+    "new": "New user",
+    "edit": "Edit details",
+    "search": "Search by name or email",
+    "filters": {
+      "role": "Role",
+      "status": "Status",
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive",
+      "apply": "Filter",
+      "reset": "Clear"
+    },
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "roles": "Roles",
+      "status": "Status",
+      "lastLogin": "Last sign-in",
+      "open": "Open"
+    },
+    "neverLoggedIn": "Never",
+    "count": "{count, plural, =0 {No users} one {# user} other {# users}}",
+    "empty": "No users match the filters.",
+    "form": {
+      "email": "Email (used to sign in)",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "roles": "Roles and scope",
+      "addRole": "Add role",
+      "role": "Role",
+      "scope": "Scope",
+      "scopeTarget": "Target",
+      "remove": "Remove",
+      "create": "Create user",
+      "save": "Save changes",
+      "hint": "The user receives an email to set their password.",
+      "selectRole": "Select a role"
+    },
+    "scope": {
+      "INSTITUTION": "Whole institution",
+      "FACULTY": "Faculty",
+      "DEPARTMENT": "Department",
+      "PROGRAM": "Program",
+      "SELF": "Own records only"
+    },
+    "link": {
+      "title": "This email exists only in Keycloak",
+      "body": "You can link the existing account to this new user. No activation email will be sent.",
+      "confirm": "Link the existing account"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "detail": {
+      "back": "Back to users",
+      "roles": "Roles",
+      "noRoles": "This user has no roles.",
+      "addRoleTitle": "Add a role",
+      "since": "Since {date}",
+      "until": "until {date}",
+      "account": "Account",
+      "history": "History"
+    },
+    "actions": {
+      "deactivate": "Deactivate",
+      "deactivateTitle": "Deactivate this user?",
+      "deactivateBody": "The user is signed out everywhere immediately and cannot sign in until reactivated.",
+      "reactivate": "Reactivate",
+      "reactivateTitle": "Reactivate this user?",
+      "reactivateBody": "The user will be able to sign in again.",
+      "reason": "Reason",
+      "reasonHint": "Stored in the audit log.",
+      "resend": "Resend activation email",
+      "resent": "Activation email sent.",
+      "removeRoleTitle": "Remove this role?",
+      "removeRoleBody": "The change applies on the user's next request.",
+      "created": "User created.",
+      "saved": "Changes saved.",
+      "roleAdded": "Role added.",
+      "roleRemoved": "Role removed.",
+      "statusChanged": "Status changed."
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email address.",
+      "atLeastOneRole": "Add at least one role.",
+      "emailTaken": "This email is already in use.",
+      "identityLinked": "This Keycloak account belongs to another user.",
+      "SELF_DEACTIVATION": "You cannot deactivate yourself.",
+      "LAST_SYSADMIN": "At least one active system administrator must remain.",
+      "UNAVAILABLE": "The identity service is unavailable. Try again later.",
+      "generic": "The action failed. Please try again.",
+      "DUPLICATE": "The user already has this role with this scope.",
+      "SCOPE_NOT_ALLOWED": "This role is not allowed with this scope.",
+      "SCOPE_ID_REQUIRED": "Choose the scope target.",
+      "NO_RESOLVER": "This scope is not available yet.",
+      "SCOPE_NOT_FOUND": "The chosen target does not exist.",
+      "INVALID_PERIOD": "The period is not valid.",
+      "SCOPE_ID_FORBIDDEN": "This scope takes no target."
+    }
+  }
+}

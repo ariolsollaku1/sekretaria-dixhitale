@@ -10,6 +10,8 @@ services:
   db:
     image: postgres:17-alpine
     restart: unless-stopped
+    # TZ (Europe/Tirane) only affects logs; data and sessions run in UTC (conventions.md).
+    command: ["postgres", "-c", "timezone=UTC", "-c", "log_timezone=Europe/Tirane"]
     environment:
       <<: *tz
       POSTGRES_USER: ${POSTGRES_USER:?set in .env}
@@ -41,6 +43,11 @@ services:
       APP_URL_ALT: ${APP_URL_ALT:-${APP_URL}}
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET:?set in .env}
       KEYCLOAK_ADMIN_CLIENT_SECRET: ${KEYCLOAK_ADMIN_CLIENT_SECRET:?set in .env}
+      # Outgoing mail of Keycloak ("set your password" emails). Dev: Mailpit. Production mail
+      # transport is decided in Q-20; point these at the client's SMTP relay meanwhile.
+      KC_SMTP_HOST: ${KC_SMTP_HOST:-mailpit}
+      KC_SMTP_PORT: ${KC_SMTP_PORT:-1025}
+      KC_SMTP_FROM: ${KC_SMTP_FROM:-no-reply@logos.local}
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?set in .env}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?set in .env}
       KC_DB: postgres

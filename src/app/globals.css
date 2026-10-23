@@ -1,1 +1,91 @@
 @import "tailwindcss";
+@import "@fontsource/ibm-plex-sans/latin-400.css";
+@import "@fontsource/ibm-plex-sans/latin-600.css";
+@import "@fontsource/ibm-plex-sans/latin-ext-400.css";
+@import "@fontsource/ibm-plex-sans/latin-ext-600.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+
+/* Design tokens (docs/02-architecture/design-system.md). Palette is provisional until LOGOS brand
+   colors are supplied: a rebrand changes only this block (--brand maps to --primary). */
+:root {
+  --background: #f6f7f9;
+  --foreground: #17202e;
+  --card: #ffffff;
+  --card-foreground: #17202e;
+  --popover: #ffffff;
+  --popover-foreground: #17202e;
+  --muted: #eceff3;
+  --muted-foreground: #4a5668;
+  --brand: #1f3a5f;
+  --primary: var(--brand);
+  --primary-foreground: #ffffff;
+  --secondary: #e4ecf7;
+  --secondary-foreground: #17202e;
+  --accent: #e4ecf7;
+  --accent-foreground: #17202e;
+  --border: #d5dbe4;
+  --input: #9aa6b8;
+  --ring: #2e5a94;
+  --success: #1b6b4a;
+  --success-bg: #e3f3ec;
+  --warning: #7a4300;
+  --warning-bg: #fdf0dc;
+  --danger: #a32020;
+  --danger-bg: #fbe8e8;
+  --info: #1d4f91;
+  --info-bg: #e4ecf7;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-brand: var(--brand);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --radius-chip: 0.25rem;
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Visible focus everywhere: 2px ring with 2px offset (design-system.md). */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.font-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

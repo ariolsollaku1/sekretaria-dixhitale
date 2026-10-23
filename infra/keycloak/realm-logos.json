@@ -12,7 +12,10 @@
   "verifyEmail": true,
   "rememberMe": false,
   "internationalizationEnabled": true,
-  "supportedLocales": ["sq", "en"],
+  "supportedLocales": [
+    "sq",
+    "en"
+  ],
   "defaultLocale": "sq",
   "ssoSessionIdleTimeout": 1800,
   "ssoSessionMaxLifespan": 43200,
@@ -41,7 +44,9 @@
     {
       "name": "require-otp",
       "path": "/require-otp",
-      "realmRoles": ["require-otp"]
+      "realmRoles": [
+        "require-otp"
+      ]
     }
   ],
   "authenticationFlows": [
@@ -52,8 +57,20 @@
       "topLevel": true,
       "builtIn": false,
       "authenticationExecutions": [
-        { "authenticator": "auth-cookie", "authenticatorFlow": false, "requirement": "ALTERNATIVE", "priority": 10, "userSetupAllowed": false },
-        { "authenticatorFlow": true, "requirement": "ALTERNATIVE", "priority": 20, "flowAlias": "browser-logos forms", "userSetupAllowed": false }
+        {
+          "authenticator": "auth-cookie",
+          "authenticatorFlow": false,
+          "requirement": "ALTERNATIVE",
+          "priority": 10,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticatorFlow": true,
+          "requirement": "ALTERNATIVE",
+          "priority": 20,
+          "flowAlias": "browser-logos forms",
+          "userSetupAllowed": false
+        }
       ]
     },
     {
@@ -63,8 +80,20 @@
       "topLevel": false,
       "builtIn": false,
       "authenticationExecutions": [
-        { "authenticator": "auth-username-password-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false },
-        { "authenticatorFlow": true, "requirement": "CONDITIONAL", "priority": 20, "flowAlias": "browser-logos conditional otp", "userSetupAllowed": false }
+        {
+          "authenticator": "auth-username-password-form",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 10,
+          "userSetupAllowed": false
+        },
+        {
+          "authenticatorFlow": true,
+          "requirement": "CONDITIONAL",
+          "priority": 20,
+          "flowAlias": "browser-logos conditional otp",
+          "userSetupAllowed": false
+        }
       ]
     },
     {
@@ -74,15 +103,31 @@
       "topLevel": false,
       "builtIn": false,
       "authenticationExecutions": [
-        { "authenticator": "conditional-user-role", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false, "authenticatorConfig": "require-otp-role" },
-        { "authenticator": "auth-otp-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 20, "userSetupAllowed": false }
+        {
+          "authenticator": "conditional-user-role",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 10,
+          "userSetupAllowed": false,
+          "authenticatorConfig": "require-otp-role"
+        },
+        {
+          "authenticator": "auth-otp-form",
+          "authenticatorFlow": false,
+          "requirement": "REQUIRED",
+          "priority": 20,
+          "userSetupAllowed": false
+        }
       ]
     }
   ],
   "authenticatorConfig": [
     {
       "alias": "require-otp-role",
-      "config": { "condUserRole": "require-otp", "negate": "false" }
+      "config": {
+        "condUserRole": "require-otp",
+        "negate": "false"
+      }
     }
   ],
   "clients": [
@@ -99,11 +144,18 @@
       "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": false,
       "rootUrl": "${APP_URL}",
-      "redirectUris": ["${APP_URL}/api/auth/*", "${APP_URL_ALT}/api/auth/*"],
-      "webOrigins": ["+"],
+      "redirectUris": [
+        "${APP_URL}/api/auth/*",
+        "${APP_URL_ALT}/api/auth/*",
+        "${APP_URL}/login*",
+        "${APP_URL_ALT}/login*"
+      ],
+      "webOrigins": [
+        "+"
+      ],
       "attributes": {
         "pkce.code.challenge.method": "S256",
-        "post.logout.redirect.uris": "${APP_URL}/login##${APP_URL_ALT}/login"
+        "post.logout.redirect.uris": "${APP_URL}/login*##${APP_URL_ALT}/login*"
       }
     },
     {
@@ -126,8 +178,22 @@
       "enabled": true,
       "serviceAccountClientId": "sekretari-admin",
       "clientRoles": {
-        "realm-management": ["manage-users", "view-users", "query-users"]
+        "realm-management": [
+          "manage-users",
+          "view-users",
+          "query-users",
+          "query-groups"
+        ]
       }
     }
-  ]
+  ],
+  "smtpServer": {
+    "host": "${KC_SMTP_HOST}",
+    "port": "${KC_SMTP_PORT}",
+    "from": "${KC_SMTP_FROM}",
+    "fromDisplayName": "Sekretari Dixhitale",
+    "auth": "false",
+    "ssl": "false",
+    "starttls": "false"
+  }
 }

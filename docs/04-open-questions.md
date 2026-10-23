@@ -43,6 +43,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-24 | Fee structure & installment rules | no | open | Finance |
 | Q-25 | Evaluation questionnaires content | no | answered | NJSBC / HR |
 | Q-26 | Hosting & data location | no | answered | Client |
+| Q-27 | Uploaded files: size/type limits & retention | no | open | Secretariat / DPO |
 
 ---
 
@@ -260,6 +261,17 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
   average of 1–5 scale questions.
 - **Answer (2026-10-03):** Working assumption adopted — the forms engine (ADR-0009) is ours; the
   question content is configuration that NJSBC/HR enter before go-live, so it blocks nothing.
+
+### Q-27 — Uploaded files: size/type limits & retention
+- **Questions:** What is the largest file a candidate, student or staff member may upload, and
+  which formats are acceptable (PDF only? images? Office documents)? How long must uploaded
+  documents (application papers, signed records, contracts) be kept, and what happens to them when a
+  candidate is rejected or a student leaves? Is antivirus scanning required?
+- **Working assumption:** 10 MB per file; PDF, JPEG and PNG (plus DOCX/XLSX for staff purposes) —
+  all configurable per upload purpose in code; no virus scanning; files are never deleted once
+  attached (soft-deleted only); unattached uploads older than 24 h are purged. Retention periods
+  follow the answer to Q-16.
+- **Impact:** only configuration values (per-purpose limits) and the cleanup/retention job.
 
 ### Q-26 — Hosting & data location
 - **Answer (2026-10-03):** Deployment is not a concern for the documentation phase; the client will

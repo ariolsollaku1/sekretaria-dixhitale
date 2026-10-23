@@ -81,7 +81,7 @@ erDiagram
 | `UserRole` | Role assignment: `role`, `scopeType`, `scopeId`, `validFrom/To`. |
 | `Session`, `Account`, `Verification` | Better Auth tables (names per library). |
 | `AuditLog` | `actorId`, `action`, `entityType`, `entityId`, `before`, `after` (JSON), `ip`, `at`. |
-| `StoredFile` | `storageKey`, `fileName`, `mimeType`, `size`, `sha256`, `uploadedById`. |
+| `StoredFile` | `storageKey`, `purpose`, `fileName`, `mimeType`, `size`, `sha256`, `status` (PENDING/ATTACHED), `entityType`/`entityId`, `uploadedById`, `deletedAt`. |
 | `DocumentTemplate` | Versioned HTML templates for PDFs, per `type` and validity (academic year). |
 | `Notification` | In-app notification per user: `type`, `payload`, `readAt`. |
 | `EmailOutbox` | Queued/sent emails with status, for traceability. |

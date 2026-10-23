@@ -19,6 +19,16 @@ layouts precisely, support Albanian characters, and be versioned per academic ye
   an `IssuedDocument` row; reprints reuse the stored file, not a regeneration.
 - Fonts are bundled in the Gotenberg image/template (no external font fetches).
 
+## Implementation note (PLT-09)
+
+- The template store is `DocumentTemplate` with a small purpose-built syntax (`{{x}}` escaped,
+  `{{{x}}}` raw, `{{#if}}`, `{{#each}}`), not Handlebars: no helpers, no code, own properties only.
+- The number (`PREFIX-YYYY-NNNNN`, per type and year) and the PDF are produced inside the caller's
+  transaction; a failed conversion rolls the number back. Gotenberg is called over HTTP with
+  `preferCssPageSize`, so the template's `@page` rule decides margins.
+- Each document carries a random verification code and a QR code (inline SVG) pointing at the public
+  `/verify/<code>` page, which shows only type, number, date and status.
+
 ## Consequences
 
 - Designers can build layouts with familiar HTML/CSS (`@page`, print CSS).

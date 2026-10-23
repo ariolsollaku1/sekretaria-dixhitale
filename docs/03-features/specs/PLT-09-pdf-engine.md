@@ -76,8 +76,8 @@ model IssuedDocument   { id, type, number @unique, templateId, language, fileId 
 - [x] **T1** — Models, migration (counter, frozen templates), permission, nav, env. (AC-1, AC-11)
 - [x] **T2** — Pure template renderer and number format with unit tests; type registry. (AC-2, AC-5, AC-6)
 - [x] **T3** — Gotenberg client, QR, template service, issue service, cancel; integration tests. (AC-3..AC-7, AC-9)
-- [ ] **T4** — Admin pages (templates, preview, issued list, test document), verify page, i18n. (AC-8, AC-10)
-- [ ] **T5** — E2E, docs. (all)
+- [x] **T4** — Admin pages (templates, preview, issued list, test document), verify page, i18n. (AC-8, AC-10)
+- [x] **T5** — E2E, docs. (all)
 
 ## 5. Test plan
 
@@ -93,4 +93,4 @@ model IssuedDocument   { id, type, number @unique, templateId, language, fileId 
 
 ## 6. Definition of done
 
-- [ ] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; docs (ADR-0007 note); FEATURES.md `done`
+- [x] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; docs (ADR-0007 note); FEATURES.md `done`

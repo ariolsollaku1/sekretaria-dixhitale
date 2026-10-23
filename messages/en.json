@@ -1915,5 +1915,95 @@
         "generic": "The action failed."
       }
     }
+  },
+  "documents": {
+    "types": {
+      "plt_sample": "Test document"
+    },
+    "admin": {
+      "title": "Official documents",
+      "new": "New template",
+      "templates": "Templates",
+      "empty": "No templates.",
+      "emptyHint": "Create an HTML draft, preview it as a PDF and publish it.",
+      "issuedList": "Issued documents",
+      "issuedEmpty": "No documents issued.",
+      "issuedEmptyHint": "Documents appear here as soon as a module issues one.",
+      "type": "Type",
+      "language": "Language",
+      "validFrom": "Valid from",
+      "validTo": "Valid until (optional)",
+      "html": "Template HTML",
+      "htmlHint": "Variables: {vars}. Blocks: {blocks}.",
+      "notes": "Notes",
+      "saveDraft": "Save draft",
+      "saved": "Draft saved.",
+      "preview": "Preview as PDF",
+      "publish": "Publish",
+      "publishTitle": "Publish the template?",
+      "publishBody": "Once published a template never changes; edits become a new version.",
+      "published": "Template published.",
+      "archive": "Archive",
+      "archiveTitle": "Archive the template?",
+      "archiveBody": "It will no longer be used for new documents.",
+      "archived": "Template archived.",
+      "discard": "Discard draft",
+      "discardTitle": "Discard the draft?",
+      "discardBody": "The draft is deleted permanently.",
+      "discarded": "Draft discarded.",
+      "test": "Test document",
+      "testHint": "Issues a test-type document with the published template, to try numbering and the QR code.",
+      "testSq": "Issue test (SQ)",
+      "testEn": "Issue test (EN)",
+      "testIssued": "Issued {number}.",
+      "noTemplate": "No valid published template.",
+      "unavailable": "The PDF service is unreachable.",
+      "cancel": "Cancel",
+      "cancelTitle": "Cancel {number}?",
+      "cancelBody": "The number and file are kept; the verification page shows the document as cancelled.",
+      "reason": "Reason",
+      "reasonRequired": "A reason is required.",
+      "cancelConfirm": "Cancel document",
+      "cancelled": "Document cancelled.",
+      "line": "line",
+      "status": {
+        "DRAFT": "Draft",
+        "PUBLISHED": "Published",
+        "ARCHIVED": "Archived",
+        "valid": "Valid",
+        "cancelled": "Cancelled"
+      },
+      "columns": {
+        "type": "Type",
+        "language": "Language",
+        "version": "Version",
+        "validity": "Validity",
+        "status": "Status",
+        "number": "Number",
+        "issuedAt": "Issued",
+        "actions": "Actions"
+      },
+      "errors": {
+        "unclosedBlock": "Block is not closed",
+        "unexpectedClose": "Closing tag without opening",
+        "badTag": "Invalid tag",
+        "tooDeep": "Blocks nested too deeply",
+        "required": "Required",
+        "tooLong": "Too long",
+        "badLanguage": "Invalid language",
+        "badDate": "Invalid date",
+        "beforeFrom": "Before the start date",
+        "unknownType": "Unknown type"
+      }
+    },
+    "verify": {
+      "title": "Document verification",
+      "valid": "Valid",
+      "cancelled": "Cancelled",
+      "type": "Type",
+      "number": "Number",
+      "issuedOn": "Issued on",
+      "tooMany": "Too many requests. Try again shortly."
+    }
   }
 }

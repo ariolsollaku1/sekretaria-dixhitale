@@ -28,3 +28,36 @@ export async function mayReadDocument(
   const def = getDocumentType(doc.type);
   return def?.canRead ? def.canRead(user, doc) : false;
 }
+
+export async function listTemplates() {
+  return db.documentTemplate.findMany({
+    orderBy: [{ type: "asc" }, { language: "asc" }, { version: "desc" }],
+    select: {
+      id: true,
+      type: true,
+      version: true,
+      language: true,
+      status: true,
+      validFrom: true,
+      validTo: true,
+    },
+  });
+}
+
+export const getTemplate = (id: string) => db.documentTemplate.findUnique({ where: { id } });
+
+export async function listIssued(limit = 200) {
+  return db.issuedDocument.findMany({
+    orderBy: { issuedAt: "desc" },
+    take: limit,
+    select: {
+      id: true,
+      type: true,
+      number: true,
+      fileId: true,
+      issuedAt: true,
+      cancelledAt: true,
+      language: true,
+    },
+  });
+}

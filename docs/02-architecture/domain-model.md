@@ -86,6 +86,7 @@ erDiagram
 | `Notification` | In-app notification per user: `type`, `payload`, `readAt`. |
 | `EmailOutbox` | Queued/sent emails with status, for traceability. |
 | `FormDefinition` / `FormSubmission` / `FormSubmissionEvent` | Forms engine (ADR-0009, PLT-15 implemented): versioned JSON definitions (one PUBLISHED per key, frozen once published), submissions with a reference code and JSON answers, history events; `RateLimitHit` backs the public rate limit. |
+| `DocumentTemplate` / `DocumentCounter` / `IssuedDocument` | PDF engine (ADR-0007, PLT-09 implemented): versioned HTML templates per type and language (frozen once published), an atomic counter per type and year, and numbered, stored, never-edited issued documents with a verification code (cancelled, never deleted). |
 | `SavedFilter` | A user's named table filter: `userId`, `tableId`, `name`, `query` (PLT-10). |
 | `SystemSetting` | Runtime settings: `key` (PK) → JSON `value`, `updatedAt`, `updatedById` (PLT-03, implemented). |
 

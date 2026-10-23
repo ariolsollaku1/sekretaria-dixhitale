@@ -1,6 +1,6 @@
 import "server-only";
 import { db } from "@/lib/db";
-import { registerProgramDependent } from "@/modules/org";
+import { registerPlanDirectory, registerProgramDependent } from "@/modules/org";
 import { registerCourseDependent } from "./course-dependents";
 
 // AC-9: a course in a draft or approved plan, and a program with a draft or approved plan, cannot
@@ -19,25 +19,35 @@ registerProgramDependent({
     db.curriculumPlan.count({ where: { programId, status: { in: ["DRAFT", "APPROVED"] } } }),
 });
 
-// AC-8: cohorts (ORG-04) register here so an approved plan in use cannot be archived.
-export type PlanDependent = {
-  id: string;
-  labelKey: string;
-  countActive(planId: string): Promise<number>;
-};
-const dependents = new Map<string, PlanDependent>();
-
-export function registerPlanDependent(d: PlanDependent): void {
-  dependents.set(d.id, d);
-}
-export function resetPlanDependents(): void {
-  dependents.clear();
-}
-export async function blockingPlanDependents(planId: string) {
-  const out: { id: string; labelKey: string; count: number }[] = [];
-  for (const d of dependents.values()) {
-    const count = await d.countActive(planId);
-    if (count > 0) out.push({ id: d.id, labelKey: d.labelKey, count });
-  }
-  return out;
-}
+// ORG-04: cohorts look plans up through this directory (ORG cannot import CUR).
+registerPlanDirectory({
+  get: async (planId) => {
+    const p = await db.curriculumPlan.findUnique({
+      where: { id: planId },
+      include: { validFrom: { select: { code: true } } },
+    });
+    return p
+      ? {
+          id: p.id,
+          programId: p.programId,
+          version: p.version,
+          status: p.status,
+          validFrom: p.validFrom.code,
+        }
+      : null;
+  },
+  listApproved: async (programId) => {
+    const plans = await db.curriculumPlan.findMany({
+      where: { programId, status: "APPROVED" },
+      orderBy: { version: "desc" },
+      include: { validFrom: { select: { code: true } } },
+    });
+    return plans.map((p) => ({
+      id: p.id,
+      programId: p.programId,
+      version: p.version,
+      status: p.status,
+      validFrom: p.validFrom.code,
+    }));
+  },
+});

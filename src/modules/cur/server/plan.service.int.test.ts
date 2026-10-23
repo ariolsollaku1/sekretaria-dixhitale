@@ -2,10 +2,9 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { createAction, type ActionContext, type ActionResult } from "@/lib/actions";
 import { db, withTransaction } from "@/lib/db";
-import { blockingDependents } from "@/modules/org";
+import { blockingDependents, registerPlanDependent, resetPlanDependents } from "@/modules/org";
 import "@/modules/cur";
 import { blockingCourseDependents } from "./course-dependents";
-import { registerPlanDependent, resetPlanDependents } from "./plan-dependents";
 import { getPlan, planWhere } from "./plan.queries";
 import * as plans from "./plan.service";
 

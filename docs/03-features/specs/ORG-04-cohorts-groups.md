@@ -119,8 +119,8 @@ Checks: `year_of_study >= 1`, `capacity BETWEEN 1 AND 1000`.
 
 - [x] **T1** — `cohorts.prisma` + migration; permissions; nav. (AC-1, AC-6, AC-12)
 - [x] **T2** — Pure rules (expected year, bulk plan) and schemas with unit tests. (AC-6, AC-9, AC-10)
-- [ ] **T3** — Cohort and group services and queries; integration tests. (AC-1..AC-3, AC-5..AC-8)
-- [ ] **T4** — Dependents (plan archive, students), bulk start-of-year with checklist step; tests. (AC-4, AC-5, AC-8, AC-9)
+- [x] **T3** — Cohort and group services and queries; integration tests. (AC-1..AC-3, AC-5..AC-8)
+- [x] **T4** — Dependents (plan archive, students), bulk start-of-year with checklist step; tests. (AC-4, AC-5, AC-8, AC-9)
 - [ ] **T5** — Tables, pages, forms, i18n. (AC-11)
 - [ ] **T6** — E2E, seed, docs. (all)
 

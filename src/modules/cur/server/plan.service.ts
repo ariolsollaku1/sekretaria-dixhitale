@@ -8,7 +8,7 @@ import type {
   CreatePlanInput,
   UpdatePlanCourseInput,
 } from "../domain/plan-schemas";
-import { blockingPlanDependents } from "./plan-dependents";
+import { blockingPlanDependents } from "@/modules/org";
 import { getPlanRow, type PlanRecord } from "./plan.queries";
 
 type Ctx = ActionContext;

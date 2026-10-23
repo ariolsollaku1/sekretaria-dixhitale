@@ -2,6 +2,7 @@
 import "./permissions";
 import "./server/year.provider";
 import "./server/scope-resolvers";
+import "./server/cohort-registrations";
 
 export { YearForm } from "./ui/year-form";
 export { UnitForm } from "./ui/unit-form";
@@ -45,3 +46,17 @@ export {
   visibleChecklist,
   type ChecklistItem,
 } from "./server/rollover";
+export {
+  registerPlanDependent,
+  resetPlanDependents,
+  blockingPlanDependents,
+  type PlanDependent,
+} from "./server/plan-dependents";
+export { registerPlanDirectory, type PlanInfo } from "./server/plan-directory";
+export {
+  registerCohortDependent,
+  registerGroupDependent,
+  resetCohortDependents,
+  type CohortDependent,
+  type GroupDependent,
+} from "./server/cohort-dependents";

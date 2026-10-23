@@ -15,11 +15,7 @@ export { CourseImport } from "./ui/course-import";
 export { CategoryManager } from "./ui/category-manager";
 export { TEMPLATE_CSV } from "./domain/import";
 import "./server/plan-dependents";
-export {
-  registerPlanDependent,
-  blockingPlanDependents,
-  type PlanDependent,
-} from "./server/plan-dependents";
+
 export { plansTable } from "./server/plan.table";
 export { PlanCreateForm } from "./ui/plan-create-form";
 export { PlanActions } from "./ui/plan-actions";

@@ -72,6 +72,9 @@ Exact permissions per feature are defined in each feature spec.
 | RPT — reports | R | R | R | | R | R | R | | | | R | R |
 
 Notes:
+- CUR catalog (CUR-01): `cur.course.write` is held by the sysadmin (institution) and by the head of
+  department **for their own department**; program coordinators read the catalog (their write
+  access concerns plans and syllabi).
 - SRC-087 requires that payment lists are visible to **both** Finance and Secretariat.
 - SRC-063…069 are HR data that must be **readable by Finance**.
 - SRC-111 requires approved diploma/supplement forms to be readable by Department, Secretariat,

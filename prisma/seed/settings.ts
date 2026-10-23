@@ -4,6 +4,13 @@ import type { Seeder } from "./types";
 const DEFAULTS: Record<string, unknown> = {
   "app.defaultLocale": "sq", // Q-17
   "app.timezone": "Europe/Tirane",
+  // ORG-03: allowed program durations per cycle and Master subtypes (defaults from the ORG brief;
+  // the institution can change them without a deployment).
+  "org.programDurations": { FIRST: [3], SECOND: [1, 2] },
+  "org.programSubtypes": [
+    { code: "PROFESSIONAL", nameSq: "Master profesional", nameEn: "Professional Master" },
+    { code: "SCIENTIFIC", nameSq: "Master shkencor", nameEn: "Master of Science" },
+  ],
 };
 
 export const settingsSeeder: Seeder = {

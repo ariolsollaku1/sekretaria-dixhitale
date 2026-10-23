@@ -25,3 +25,10 @@ scholarships, approved plans and diploma formats).
 
 - Queries almost always include an academic-year filter — index `academicYearId` everywhere.
 - History is naturally preserved per year (SRC-112: past approved plans/formats stay accessible).
+
+## Implementation notes (ORG-01)
+
+- Switching the current year is one transaction that closes the previous year and sets the new one
+  (reason required, both audited); the database allows at most one `CURRENT` row.
+- Other modules call `assertYearWritable(yearId)` before writing year-bound records; closed years
+  are read-only except through audited corrections owned by the respective module.

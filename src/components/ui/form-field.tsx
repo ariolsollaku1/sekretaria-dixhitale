@@ -20,11 +20,14 @@ export function FormField<T extends FieldValues, N extends FieldPath<T>>({
   label,
   description,
   render,
+  formatError,
 }: {
   control: Control<T>;
   name: N;
   label: string;
   description?: string;
+  /** Maps the validation message (a catalog key from the shared Zod schema) to display text. */
+  formatError?: (message: string) => string;
   render: (args: {
     field: ControllerRenderProps<T, N>;
     id: string;
@@ -60,7 +63,9 @@ export function FormField<T extends FieldValues, N extends FieldPath<T>>({
             })}
             {fieldState.error && (
               <p id={errorId} role="alert" className="text-danger text-[13px] font-semibold">
-                {fieldState.error.message}
+                {formatError
+                  ? formatError(fieldState.error.message ?? "")
+                  : fieldState.error.message}
               </p>
             )}
           </div>

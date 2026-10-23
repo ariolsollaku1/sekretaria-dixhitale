@@ -130,6 +130,12 @@ The app creates/updates/disables Keycloak users through the Keycloak Admin REST 
 Failures to reach Keycloak must not leave half-created users: create in Keycloak first, then the
 app row in a transaction; on app failure, delete the Keycloak user (compensating action).
 
+### Scope resolvers (ORG-02)
+
+`registerScopeResolver(type, { exists, options, ancestors })` is how modules make a scope usable.
+ORG-02 registers `FACULTY` and `DEPARTMENT` (active units only; `ancestors(department)` returns its
+faculty); ORG-03 adds `PROGRAM` (ancestors: department and faculty). Until a resolver exists the IAM role editor hides that scope.
+
 ### Implementation (IAM-01)
 
 `src/modules/iam`: `IdentityProviderAdmin` (interface) with `KeycloakAdmin` (client credentials as

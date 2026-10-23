@@ -30,3 +30,76 @@ it("gives each dev user their role and keeps it idempotent", async () => {
   });
   expect(sec.roles).toMatchObject([{ role: "secretary", scopeType: "INSTITUTION", scopeId: null }]);
 });
+
+it("seeds three demo academic years with exactly one current, idempotently (ORG-01 AC-13)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  const years = await db.academicYear.findMany({
+    orderBy: { code: "asc" },
+    include: { semesters: true },
+  });
+  expect(years.map((y) => [y.code, y.status, y.semesters.length])).toEqual([
+    ["2025-2026", "CLOSED", 2],
+    ["2026-2027", "CURRENT", 2],
+    ["2027-2028", "PLANNED", 2],
+  ]);
+});
+
+it("seeds neutral demo faculties and departments and scopes the dev head of department to one (ORG-02 AC-12)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    (await db.faculty.findMany({ orderBy: { code: "asc" }, select: { code: true } })).map(
+      (f) => f.code,
+    ),
+  ).toEqual(["DEMO-A", "DEMO-B"]);
+  expect(await db.department.count()).toBe(3);
+  const head = await db.user.findUniqueOrThrow({
+    where: { email: "head-of-department@dev.logos.test" },
+    include: { roles: true },
+  });
+  const a1 = await db.department.findUniqueOrThrow({ where: { code: "DEMO-A1" } });
+  expect(head.roles).toMatchObject([
+    { role: "head_of_department", scopeType: "DEPARTMENT", scopeId: a1.id },
+  ]);
+});
+
+it("seeds demo programs and scopes the dev program coordinator to one (ORG-03 AC-12)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    await db.studyProgram.findMany({
+      orderBy: { code: "asc" },
+      select: { code: true, cycle: true },
+    }),
+  ).toEqual([
+    { code: "DEMO-BSC", cycle: "FIRST" },
+    { code: "DEMO-MSC", cycle: "SECOND" },
+  ]);
+  const pc = await db.user.findUniqueOrThrow({
+    where: { email: "program-coordinator@dev.logos.test" },
+    include: { roles: true },
+  });
+  const bsc = await db.studyProgram.findUniqueOrThrow({ where: { code: "DEMO-BSC" } });
+  expect(pc.roles).toMatchObject([
+    { role: "program_coordinator", scopeType: "PROGRAM", scopeId: bsc.id },
+  ]);
+  const settings = await db.systemSetting.findMany({
+    where: { key: { startsWith: "org." } },
+    orderBy: { key: "asc" },
+  });
+  expect(settings.map((s) => s.key)).toEqual(["org.programDurations", "org.programSubtypes"]);
+});
+
+it("seeds demo course categories and courses idempotently (CUR-01)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    (await db.courseCategory.findMany({ orderBy: { code: "asc" } })).map((c) => c.code),
+  ).toEqual(["COMPULSORY", "ELECTIVE"]);
+  expect((await db.course.findMany({ orderBy: { code: "asc" } })).map((c) => c.code)).toEqual([
+    "DEMO101",
+    "DEMO102",
+    "DEMO201",
+  ]);
+});

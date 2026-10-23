@@ -26,8 +26,8 @@ test("AC-3: sorting by a header toggles direction, keeps the URL, and marks aria
   page,
 }) => {
   await signInAs(page, "sysadmin@dev.logos.test");
-  await page.goto("/admin/users");
-  const asc = await names(page);
+  await page.goto("/admin/users?size=100");
+  const asc = [...new Set(await names(page))]; // names can repeat; ties keep a fixed secondary order
   expect(asc.length).toBeGreaterThan(5);
   await expect(page.getByRole("columnheader", { name: "Emri" })).toHaveAttribute(
     "aria-sort",
@@ -40,7 +40,7 @@ test("AC-3: sorting by a header toggles direction, keeps the URL, and marks aria
     "aria-sort",
     "descending",
   );
-  expect(await names(page)).toEqual([...asc].reverse());
+  expect([...new Set(await names(page))]).toEqual([...asc].reverse());
 });
 
 test("AC-3: page size and next/previous keep the other parameters", async ({ page }) => {

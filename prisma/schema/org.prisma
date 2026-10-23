@@ -1,0 +1,110 @@
+// ORG module: academic structure (ORG-01...04). Year-dependent records elsewhere carry
+// `academicYearId` (ADR-0006).
+
+enum AcademicYearStatus {
+  PLANNED
+  CURRENT
+  CLOSED
+
+  @@map("academic_year_status")
+}
+
+/// The main time axis. At most one CURRENT year (partial unique index in the migration).
+model AcademicYear {
+  id          String             @id @default(cuid(2))
+  /// Derived from the dates: "2026-2027".
+  code        String             @unique
+  startDate   DateTime           @map("start_date") @db.Date
+  endDate     DateTime           @map("end_date") @db.Date
+  status      AcademicYearStatus @default(PLANNED)
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?            @map("created_by_id")
+  updatedById String?            @map("updated_by_id")
+  semesters   Semester[]
+
+  @@index([status])
+  @@map("academic_years")
+}
+
+model Semester {
+  id             String       @id @default(cuid(2))
+  academicYearId String       @map("academic_year_id")
+  /// 1 or 2 (check constraint in the migration)
+  number         Int
+  startDate      DateTime     @map("start_date") @db.Date
+  endDate        DateTime     @map("end_date") @db.Date
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+
+  @@unique([academicYearId, number])
+  @@map("semesters")
+}
+
+/// Top-level unit of the academic structure (ORG-02). Never deleted, only deactivated.
+model Faculty {
+  id          String       @id @default(cuid(2))
+  /// Normalised upper case, unique across faculties and departments (checked in the service).
+  code        String       @unique
+  name        String
+  nameEn      String?      @map("name_en")
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?      @map("created_by_id")
+  updatedById String?      @map("updated_by_id")
+  departments Department[]
+
+  @@map("faculties")
+}
+
+model Department {
+  id          String   @id @default(cuid(2))
+  /// Fixed after creation.
+  facultyId   String   @map("faculty_id")
+  code        String   @unique
+  name        String
+  nameEn      String?  @map("name_en")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?  @map("created_by_id")
+  updatedById String?  @map("updated_by_id")
+  faculty     Faculty  @relation(fields: [facultyId], references: [id])
+  programs    StudyProgram[]
+  courses     Course[]
+
+  @@index([facultyId])
+  @@map("departments")
+}
+
+/// Fixed list (SRC-011): first cycle = Bachelor, second cycle = Master.
+enum StudyCycle {
+  FIRST
+  SECOND
+
+  @@map("study_cycle")
+}
+
+/// A study program (ORG-03). Cycle, duration and department follow the rules in the spec; never deleted.
+model StudyProgram {
+  id            String     @id @default(cuid(2))
+  /// Fixed after creation.
+  departmentId  String     @map("department_id")
+  cycle         StudyCycle
+  /// Master subtype (a code from the setting `org.programSubtypes`); null for the first cycle.
+  subtype       String?
+  code          String     @unique
+  name          String
+  nameEn        String?    @map("name_en")
+  durationYears Int        @map("duration_years")
+  totalCredits  Int        @map("total_credits")
+  active        Boolean    @default(true)
+  createdAt     DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById   String?    @map("created_by_id")
+  updatedById   String?    @map("updated_by_id")
+  department    Department @relation(fields: [departmentId], references: [id])
+
+  @@index([departmentId])
+  @@map("study_programs")
+}

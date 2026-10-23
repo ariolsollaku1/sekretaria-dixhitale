@@ -40,8 +40,9 @@ test("AC-1/10: the shell shows the dashboard with welcome message and empty widg
   );
   await expect(page.getByRole("navigation", { name: "Navigimi kryesor" })).toBeVisible();
   await expect(page.getByText("Nuk ka ende kartela")).toBeVisible();
-  // AC-7: no academic years exist yet, so the selector is hidden.
-  await expect(page.getByLabel("Viti akademik")).toHaveCount(0);
+  // PLT-06 AC-7 + ORG-01 AC-9: years exist, so the selector is shown and defaults to the current one.
+  await expect(page.getByLabel("Viti akademik")).toHaveValue(/.+/);
+  await expect(page.getByLabel("Viti akademik").locator("option:checked")).toHaveText("2026-2027");
 });
 
 test("AC-4: switching to English changes labels and survives a reload", async ({ page }) => {

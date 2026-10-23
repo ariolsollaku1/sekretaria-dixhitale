@@ -94,16 +94,17 @@ erDiagram
 |---|---|
 | `AcademicYear` | `code` ("2026-2027"), `startDate`, `endDate`, `status` (PLANNED/CURRENT/CLOSED) |
 | `Semester` | `academicYearId`, `number` (1/2), dates |
-| `Faculty` | `code`, `name`, `active` |
-| `Department` | `facultyId`, `code`, `name`, `headStaffId?`, `active` |
-| `StudyProgram` | `departmentId`, `code`, `name`, `cycle` (FIRST/SECOND), `durationYears` (1/2/3), `totalCredits`, `coordinatorStaffId?`, `active` |
+| `Faculty` | `code` (unique, upper case), `name`, `nameEn?`, `active` |
+| `Department` | `facultyId` (fixed), `code` (unique, upper case), `name`, `nameEn?`, `active`; `headStaffId?` arrives with HR-01 (until then the head is derived from `UserRole`) |
+| `StudyProgram` | `departmentId` (fixed), `code` (unique), `name`, `nameEn?`, `cycle` (FIRST/SECOND), `subtype?` (Master only, from settings), `durationYears` (1/2/3, allowed values per cycle from settings), `totalCredits` (1–600), `active`; `coordinatorStaffId?` arrives with HR-01 (until then derived from `UserRole`) |
 | `Cohort` | `programId`, `startAcademicYearId`, `curriculumPlanId`, `name` |
 | `StudentGroup` | `cohortId`, `academicYearId`, `yearOfStudy`, `name`, `capacity?` |
 
 ### CUR — curriculum
 | Entity | Key fields |
 |---|---|
-| `Course` | `code`, `name`, `defaultCredits`, `category`, `hoursLecture`, `hoursSeminar`, `hoursLab`, `active` |
+| `CourseCategory` | `code`, `nameSq`, `nameEn`, `active` (administrator-maintained list, Q-28) |
+| `Course` | `code` (unique), `name`, `nameEn?`, `defaultCredits` (0–60), `categoryId?`, `hoursLecture`, `hoursSeminar`, `hoursLab` (0–500), `departmentId`, `active` |
 | `CurriculumPlan` | `programId`, `version`, `validFromAcademicYearId`, `status` (DRAFT/APPROVED/ARCHIVED), `approvedAt`, `approvedById` |
 | `PlanCourse` | `planId`, `courseId`, `yearOfStudy`, `semester`, `credits`, `category`, hours, `isElective` |
 | `Syllabus` | `planCourseId`, `academicYearId`, `fileId` or structured content, `status` |

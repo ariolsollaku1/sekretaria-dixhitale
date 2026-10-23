@@ -48,6 +48,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-29 | Academic calendar: week numbering & carrying it over | no | open | Secretariat |
 | Q-30 | Announcements: who publishes to whom, format, expiry | no | open | Secretariat / Communications |
 | Q-31 | Staff register: fields, lists and who sees personal data | no | open | HR / DPO |
+| Q-32 | Curriculum plans: totals, versions and approval | no | open | Secretariat / Heads of department |
 
 ---
 
@@ -351,3 +352,18 @@ Decisions taken in conversation that aren't architecture ADRs.
   every other reader sees the rest. Heads of department see their department's staff; a staff member
   sees only their own record. The import uses the template columns shown on the import page.
 - **Impact:** field list, controlled lists for degree/title, visibility of personal fields.
+
+### Q-32 — Curriculum plans: totals, versions and approval
+- **Context:** SRC-013, SRC-026, SRC-110, SRC-111/112 — the 1/2/3-year plan per program and cohort,
+  approved plans kept as an archive.
+- **Questions:** How many credits per semester and per year must a plan have (30 / 60 / 180 / 120?),
+  and is a plan with other totals refused or only warned about? May the same course appear twice in a
+  plan (e.g. a two-semester course)? Who approves a plan (head of department, program coordinator,
+  the academic council) and is the decision recorded elsewhere? How are electives grouped (choose N
+  from a list)? Can an approved plan be corrected, or only replaced by a new version?
+- **Working assumption:** 30 credits per semester (setting `cur.plan.creditsPerSemester`) and the
+  program's total credits for the whole plan; deviations are warnings, never blockers; a course
+  appears at most once per plan; the head of department or program coordinator of the program (or
+  the sysadmin) approves, and the approval records who and when; electives are a simple flag with no
+  grouping rule; an approved plan is immutable and is replaced by a new version.
+- **Impact:** the credit thresholds, the duplicate-course rule, who approves, elective grouping.

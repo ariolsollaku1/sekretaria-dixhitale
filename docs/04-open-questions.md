@@ -45,6 +45,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-26 | Hosting & data location | no | answered | Client |
 | Q-27 | Uploaded files: size/type limits & retention | no | open | Secretariat / DPO |
 | Q-28 | Course categories & credit values | no | open | Secretariat / Heads of department |
+| Q-29 | Academic calendar: week numbering & carrying it over | no | open | Secretariat |
 
 ---
 
@@ -304,3 +305,16 @@ Decisions taken in conversation that aren't architecture ADRs.
 | 2026-10-03 | No deadline pressure — build in roadmap order, phase by phase. |
 | 2026-10-03 | Stack: Next.js + PostgreSQL, Keycloak for authentication, Docker for deployment. |
 | 2026-10-03 | Answered internally: Q-06, Q-17, Q-18, Q-19, Q-20, Q-21, Q-25. Research findings (DNS, LOGOS website, ASCAL 2017 report, Law 124/2024) added to Q-04, Q-08, Q-11, Q-12, Q-14, Q-16, Q-23 — to confirm with the client. |
+
+### Q-29 — Academic calendar: week numbering & carrying it over
+- **Context:** SRC-025 — the calendar is "organized by weeks"; the Secretariat prepares a new one each year.
+- **Questions:** Is week 1 the first week of the academic year, the first teaching week, or the first
+  week of each semester? Which weekday does a week start on? When a new year's calendar is prepared
+  from the previous one, should the dates move by whole weeks (keeping weekdays), or are all dates
+  entered again? Which event types are needed besides teaching week, holiday, deadline, exam period,
+  registration period and general event?
+- **Working assumption:** weeks run Monday to Sunday; week 1 is the week containing the academic
+  year's start date and numbering continues through the year. Copying a calendar moves each date by
+  the whole number of weeks closest to the difference between the two year start dates (weekdays are
+  kept). The six event types above are a fixed list in code.
+- **Impact:** only the week-numbering helper and the copy shift (one pure module) and the type list.

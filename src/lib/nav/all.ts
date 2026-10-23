@@ -226,6 +226,15 @@ registerNav(
     order: 10,
   },
   {
+    id: "student-lists",
+    labelKey: "studentLists",
+    href: "/stu/lists",
+    icon: "clipboard",
+    permission: "stu.student.read",
+    group: "students",
+    order: 12,
+  },
+  {
     id: "my-student-record",
     labelKey: "myStudentRecord",
     href: "/stu/me",

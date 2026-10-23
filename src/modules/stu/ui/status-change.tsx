@@ -1,0 +1,3 @@
+export function StatusChange(_props: Record<string, unknown>) {
+  return null;
+}

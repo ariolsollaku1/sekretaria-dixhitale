@@ -78,7 +78,7 @@ transfer, the target cohort).
 ## 4. Tasks
 
 - [x] **T1** — Transition rules with unit tests. (AC-1, AC-3)
-- [ ] **T2** — Services, hooks and student notification; integration tests. (AC-2..AC-5, AC-7)
+- [x] **T2** — Services, hooks and student notification; integration tests. (AC-2..AC-5, AC-7)
 - [ ] **T3** — Dialogs on the enrollments tab, history details, i18n, e2e, docs. (AC-6, all)
 
 ## 5. Test plan

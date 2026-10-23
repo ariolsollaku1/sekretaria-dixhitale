@@ -985,6 +985,13 @@
         "title": "New announcement: {title}",
         "body": "A new announcement was published: {title}."
       }
+    },
+    "stu": {
+      "status": {
+        "label": "Changes of study status",
+        "title": "Your study status changed",
+        "body": "{status, select, SUSPENDED {Your studies were suspended.} ACTIVE {Your studies were resumed.} DEREGISTERED {You were deregistered from the program.} GRADUATED {Congratulations, your studies were completed with graduation.} other {The status of your studies changed.}}"
+      }
     }
   },
   "mail": {
@@ -1002,6 +1009,12 @@
       "announcement": {
         "subject": "New announcement: {title}",
         "body": "A new announcement was published in the Digital Secretariat:\n\n{title}"
+      }
+    },
+    "stu": {
+      "status": {
+        "subject": "Your study status changed",
+        "body": "Hello,\n\n{status, select, SUSPENDED {your studies were suspended.} ACTIVE {your studies were resumed.} DEREGISTERED {you were deregistered from the program.} GRADUATED {your studies were completed with graduation.} other {the status of your studies changed.}}\n\nThe details are in the Digital Secretariat."
       }
     }
   },

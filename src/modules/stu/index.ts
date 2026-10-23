@@ -12,3 +12,11 @@ export {
   type StudentView,
   type EnrollmentRecord,
 } from "./server/student.queries";
+import "./server/status-notification";
+export {
+  registerStatusChangeHandler,
+  resetStatusChangeHandlers,
+  type StatusChangeEvent,
+} from "./server/status-hooks";
+export { StatusChange } from "./ui/status-change";
+export { allowedTransitions } from "./domain/status-rules";

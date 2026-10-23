@@ -985,6 +985,13 @@
         "title": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri: {title}."
       }
+    },
+    "stu": {
+      "status": {
+        "label": "Ndryshime të statusit të studimeve",
+        "title": "Statusi i studimeve u ndryshua",
+        "body": "{status, select, SUSPENDED {Studimet tuaja u pezulluan.} ACTIVE {Studimet tuaja u rifilluan.} DEREGISTERED {U çregjistruat nga programi.} GRADUATED {Urime, studimet tuaja u përfunduan me diplomim.} other {Statusi i studimeve tuaja u ndryshua.}}"
+      }
     }
   },
   "mail": {
@@ -1002,6 +1009,12 @@
       "announcement": {
         "subject": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri në Sekretarin Dixhital:\n\n{title}"
+      }
+    },
+    "stu": {
+      "status": {
+        "subject": "Statusi i studimeve tuaja u ndryshua",
+        "body": "Përshëndetje,\n\n{status, select, SUSPENDED {studimet tuaja u pezulluan.} ACTIVE {studimet tuaja u rifilluan.} DEREGISTERED {u çregjistruat nga programi.} GRADUATED {studimet tuaja u përfunduan me diplomim.} other {statusi i studimeve tuaja u ndryshua.}}\n\nDetajet shihen në Sekretarin Dixhital."
       }
     }
   },

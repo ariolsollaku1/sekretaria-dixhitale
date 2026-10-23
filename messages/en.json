@@ -82,6 +82,7 @@
       "timetable": "Class timetable",
       "myTimetable": "My timetable",
       "documents": "Official documents",
+      "messages": "Messages",
       "myAttendance": "My classes",
       "attendanceSessions": "Attendance",
       "myAbsences": "My absences"
@@ -1083,6 +1084,11 @@
         "label": "New announcements",
         "title": "New announcement: {title}",
         "body": "A new announcement was published: {title}."
+      },
+      "message": {
+        "label": "Messages from the college",
+        "title": "Message from the college",
+        "body": "You have a new message."
       }
     },
     "stu": {
@@ -1119,6 +1125,10 @@
       "announcement": {
         "subject": "New announcement: {title}",
         "body": "A new announcement was published in the Digital Secretariat:\n\n{title}"
+      },
+      "message": {
+        "subject": "Message from the college",
+        "body": "You have a new message in the Digital Secretariat."
       }
     },
     "stu": {
@@ -2068,6 +2078,88 @@
       "number": "Number",
       "issuedOn": "Issued on",
       "tooMany": "Too many requests. Try again shortly."
+    }
+  },
+  "msg": {
+    "title": "Messages",
+    "intro": "Messages you sent to the people of a list. To write a new one, open a list (for example the student lists) and choose \"Message these people\".",
+    "action": "Message these people",
+    "columns": {
+      "subject": "Subject",
+      "sentAt": "Sent",
+      "source": "List",
+      "recipients": "People",
+      "noAccount": "Without account",
+      "status": "Status"
+    },
+    "status": {
+      "PENDING": "Sending",
+      "SENT": "Sent"
+    },
+    "source": {
+      "stu_lists": "Student lists",
+      "hr_lecturers": "Lecturer lists"
+    },
+    "compose": {
+      "title": "New message",
+      "backHint": "Go back to the list and change the filters.",
+      "recipients": "This message goes to {count} people from: {list}.",
+      "template": "Start from a template",
+      "subject": "Subject",
+      "body": "Message",
+      "bodyHint": "Plain text. You can use '{firstName}', '{lastName}' and '{fullName}'; they are replaced for each person.",
+      "send": "Send message",
+      "confirmTitle": "Send this message?",
+      "confirmBody": "The message will be sent to {count} people and cannot be recalled.",
+      "confirm": "Send",
+      "sent": "The message was queued for sending."
+    },
+    "templates": {
+      "title": "Message templates",
+      "empty": "There are no templates yet.",
+      "new": "New template",
+      "name": "Template name",
+      "create": "Save template",
+      "saved": "Template saved.",
+      "saveAs": "Save this wording as a template",
+      "save": "Save as template",
+      "archive": "Archive",
+      "archiveTitle": "Archive this template?",
+      "archiveBody": "The template \"{name}\" will no longer be offered. Messages already sent are not affected.",
+      "archived": "Template archived.",
+      "failed": "The template could not be archived."
+    },
+    "detail": {
+      "from": "Sent by {name}",
+      "log": "Delivery log",
+      "summary": "{total} people: {delivered} delivered, {queued} waiting, {noAccount} without a portal account.",
+      "person": "Person",
+      "state": "Notice in the portal",
+      "email": "E-mail",
+      "pages": "Pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {pageCount}"
+    },
+    "delivery": {
+      "QUEUED": "Waiting",
+      "DELIVERED": "Delivered",
+      "NO_ACCOUNT": "No portal account"
+    },
+    "emailState": {
+      "NONE": "Not sent",
+      "QUEUED": "Queued",
+      "SENT": "Sent",
+      "FAILED": "Failed"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "This text is too long.",
+      "unknownPlaceholder": "Only '{firstName}', '{lastName}' and '{fullName}' can be used in curly brackets.",
+      "tooMany": "This list has more than 2000 people. Narrow the filters and try again.",
+      "noRecipients": "There is nobody in this list, so there is nobody to write to.",
+      "forbidden": "You may not send messages to this list.",
+      "generic": "Something went wrong. Please try again."
     }
   },
   "att": {

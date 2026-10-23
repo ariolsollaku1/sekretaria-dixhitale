@@ -187,6 +187,15 @@ registerNav({
   group: "teaching",
   order: 6,
 });
+registerNav({
+  id: "messages",
+  labelKey: "messages",
+  href: "/messages",
+  icon: "bell",
+  permission: "ntf.message.send",
+  group: "administration",
+  order: 6,
+});
 registerNav(
   {
     id: "staff",

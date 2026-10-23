@@ -1,11 +1,7 @@
-# Portainer stack override for the shared server: publishes Keycloak on loopback only.
-# Plain HTTP must not be exposed on the public IP; reach it through an SSH tunnel or a TLS proxy.
-# Deployed together with docker-compose.yml (Portainer "additional files").
+# Portainer stack override for the shared server (deployed with docker-compose.yml as an
+# "additional file"). Nothing is published to the host: public TLS and routing are handled by the
+# shared edge Caddy stack (infra/edge/compose.yml), which reaches the services over Docker networks.
 services:
-  keycloak:
-    ports:
-      - "127.0.0.1:${KEYCLOAK_PORT:-8081}:8080"
-
   # The app image is built by CI and published to GHCR (.github/workflows/ci.yml); the server
   # only pulls it. Enabled with COMPOSE_PROFILES=full. Public TLS/routing is the shared edge proxy.
   app:

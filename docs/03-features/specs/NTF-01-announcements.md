@@ -36,7 +36,7 @@ audience resolution (cycle/program) which this feature reuses through `src/lib/a
 | AC-2 | IF the title or body is empty or too long, the audience lacks its cycle/program, or `expiresAt` is not after `publishAt`, THEN THE SYSTEM SHALL refuse with field errors. |
 | AC-3 | WHEN an author publishes a draft (or republishes an archived one) with a publish time (default now), THE SYSTEM SHALL set `PUBLISHED`; THE SYSTEM SHALL show it to readers only from `publishAt` until `expiresAt`. |
 | AC-4 | THE SYSTEM SHALL let an author archive a published announcement (hidden from readers, kept) and SHALL never delete announcements. |
-| AC-5 | THE SYSTEM SHALL show readers a feed of the announcements visible to them, pinned first then newest first, with paging, and a detail page; staff-only audiences are invisible to students and student-only ones to staff-only users; `CYCLE`/`PROGRAM` audiences follow the audience resolvers (staff see all, a student-only user sees those the resolvers give them). |
+| AC-5 | THE SYSTEM SHALL show readers a feed of the announcements visible to them, pinned first then newest first, with paging, and a detail page; `STAFF` notices are invisible to students (staff see student notices too, as they author and teach them); `CYCLE`/`PROGRAM` audiences follow the audience resolvers (staff see all, a student-only user sees those the resolvers give them). |
 | AC-6 | IF a user may not see an announcement, THEN THE SYSTEM SHALL answer as if it did not exist (404). |
 | AC-7 | WHEN `emailPush` is set, THE SYSTEM SHALL, once `publishAt` has passed, notify every recipient (in-app + e-mail per their preferences) exactly once; recipients are all active users (`ALL`), users with a role other than student (`STAFF`) or with the student role (`STUDENTS`). `emailPush` is refused for `CYCLE` and `PROGRAM` (no reverse resolution yet). |
 | AC-8 | THE SYSTEM SHALL run the push as a background job that survives restarts and cannot double-send (per-user dedupe key `announcement:<id>`), and SHALL record `pushedAt`. |
@@ -124,7 +124,7 @@ false for CYCLE/PROGRAM. Attachments are `StoredFile` rows with `entityType = "A
 ## 4. Tasks
 
 - [x] **T1** — `announcements.prisma` + migration with checks; permissions; nav; notification type + catalog texts. (AC-1, AC-12)
-- [ ] **T2** — Pure schemas and visibility helpers with unit tests. (AC-1, AC-2, AC-3, AC-5)
+- [x] **T2** — Pure schemas and visibility helpers with unit tests. (AC-1, AC-2, AC-3, AC-5)
 - [ ] **T3** — Service (create, update, publish, archive), queries with audience filter, scope check; integration tests. (AC-3..AC-6, AC-10, AC-11)
 - [ ] **T4** — Push job (fan-out in batches, idempotent); integration tests. (AC-7, AC-8)
 - [ ] **T5** — Attachment purpose and attach/remove; download access; tests. (AC-9)

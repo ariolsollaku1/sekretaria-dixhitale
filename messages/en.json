@@ -76,7 +76,8 @@
       "contracts": "Contract expiry",
       "teachingLoad": "Annual load",
       "hrLists": "Lecturer lists",
-      "studentLists": "Secretariat lists"
+      "studentLists": "Secretariat lists",
+      "studentStatistics": "Statistics"
     },
     "languages": {
       "sq": "Shqip",
@@ -1620,6 +1621,56 @@
         "registered": "Registered at the start of the year",
         "deregistered": "Deregistered during the year",
         "suspended": "Suspended during the year"
+      }
+    },
+    "stats": {
+      "title": "Student statistics",
+      "rows": "Rows",
+      "cols": "Columns",
+      "status": "Enrollment status",
+      "allStatuses": "All statuses",
+      "programCode": "Program code",
+      "facultyCode": "Faculty code",
+      "cycle": "Cycle",
+      "all": "All",
+      "show": "Show",
+      "none": "There are no enrollments for these criteria.",
+      "count": "Count",
+      "total": "Total",
+      "empty": "(no data)",
+      "downloadXlsx": "Download Excel",
+      "downloadCsv": "Download CSV",
+      "dimensions": {
+        "faculty": "Faculty",
+        "cycle": "Cycle",
+        "program": "Program",
+        "yearOfStudy": "Year of study",
+        "gender": "Gender",
+        "residence": "Residence",
+        "ageBand": "Age band",
+        "status": "Status",
+        "registrationType": "Registration type"
+      },
+      "values": {
+        "cycle": {
+          "FIRST": "First cycle (Bachelor)",
+          "SECOND": "Second cycle (Master)"
+        },
+        "gender": {
+          "FEMALE": "Female",
+          "MALE": "Male"
+        },
+        "status": {
+          "ACTIVE": "Active",
+          "SUSPENDED": "Suspended",
+          "DEREGISTERED": "Deregistered",
+          "GRADUATED": "Graduated"
+        },
+        "registrationType": {
+          "FIRST_TIME": "First registration",
+          "SECOND_PROGRAM": "Second program",
+          "TRANSFER": "Transfer"
+        }
       }
     }
   },

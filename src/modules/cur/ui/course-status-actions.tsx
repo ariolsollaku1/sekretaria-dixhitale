@@ -19,6 +19,7 @@ import { deactivateCourseAction, reactivateCourseAction } from "../server/course
 /** AC-6: deactivate / reactivate a course with a mandatory reason. */
 export function CourseStatusActions({ id, active }: { id: string; active: boolean }) {
   const t = useTranslations("cur");
+  const root = useTranslations();
   const tc = useTranslations("common");
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -48,7 +49,7 @@ export function CourseStatusActions({ id, active }: { id: string; active: boolea
           const names = (rest ?? "")
             .split(",")
             .map((p) => p.split("="))
-            .map(([k, n]) => `${t.has(k as never) ? t(k as never) : k} (${n})`);
+            .map(([k, n]) => `${root.has(k as never) ? root(k as never) : k} (${n})`);
           toast.error(t("errors.HAS_DEPENDENTS", { names: names.join(", ") }));
         } else if (result.error.code === "FORBIDDEN") toast.error(t("errors.FORBIDDEN"));
         else

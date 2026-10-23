@@ -33,6 +33,7 @@ export function UnitStatusActions({
   active: boolean;
 }) {
   const t = useTranslations("org");
+  const root = useTranslations();
   const tc = useTranslations("common");
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -66,7 +67,7 @@ export function UnitStatusActions({
           const names = (count ?? "")
             .split(",")
             .map((p) => p.split("="))
-            .map(([key, n]) => `${t.has(key as never) ? t(key as never) : key} (${n})`);
+            .map(([key, n]) => `${root.has(key as never) ? root(key as never) : key} (${n})`);
           toast.error(t("errors.HAS_DEPENDENTS", { names: names.join(", ") }));
           return;
         }

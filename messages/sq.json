@@ -60,7 +60,7 @@
       "jobs": "Punët në sfond",
       "notifications": "Njoftimet",
       "calendar": "Kalendari akademik",
-      "announcements": "Njoftime e shkollës",
+      "announcements": "Njoftimet e shkollës",
       "staff": "Stafi",
       "myStaffRecord": "Të dhënat e mia",
       "plans": "Planet mësimore"
@@ -582,6 +582,107 @@
       "unknownCategory": "Kategoria me këtë kod nuk ekziston ose është joaktive.",
       "unknownDepartment": "Departamenti me këtë kod nuk ekziston ose është joaktiv.",
       "departmentNotPermitted": "Nuk keni leje për këtë departament."
+    },
+    "plan": {
+      "title": "Planet mësimore",
+      "new": "Plan i ri",
+      "planTitle": "Plani {program}, versioni {version}",
+      "validFromShort": "vlen nga viti {year}",
+      "approvedOn": "Miratuar më {date}",
+      "totals": "Totalet",
+      "sums": "{credits} kredite · orë: {lecture} leksione / {seminar} seminare / {lab} laborator",
+      "year": "Viti {year}",
+      "semester": "Semestri {semester}",
+      "yes": "Po",
+      "noPrograms": "Nuk keni asnjë program për të cilin mund të bëni plane.",
+      "created": "Plani (versioni {version}) u krijua si skicë.",
+      "status": {
+        "DRAFT": "Skicë",
+        "APPROVED": "Miratuar",
+        "ARCHIVED": "Arkivuar"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "version": "Versioni",
+        "validFrom": "Vlen nga",
+        "status": "Statusi",
+        "courses": "Lëndë",
+        "credits": "Kredite",
+        "approvedOn": "Miratuar më",
+        "course": "Lënda",
+        "category": "Kategoria",
+        "hours": "Orë (L / S / Lab)",
+        "elective": "Zgjedhore"
+      },
+      "form": {
+        "program": "Programi",
+        "validFrom": "Vlen nga viti akademik",
+        "copyFrom": "Fillo nga një plan ekzistues",
+        "copyNone": "Plan bosh",
+        "copyOption": "Versioni {version} ({status}, nga {year})",
+        "notes": "Shënime",
+        "create": "Krijo skicën"
+      },
+      "editor": {
+        "saved": "U ruajt.",
+        "credits": "Kredite",
+        "lecture": "Leksione",
+        "seminar": "Seminare",
+        "lab": "Lab",
+        "category": "Kategoria",
+        "elective": "Zgjedhore",
+        "save": "Ruaj",
+        "remove": "Hiq",
+        "saveMeta": "Ruaj të dhënat e planit",
+        "addCourse": "Shto lëndë nga katalogu",
+        "year": "Viti",
+        "semester": "Semestri",
+        "add": "Shto",
+        "addHint": "Kreditet, kategoria dhe orët merren nga katalogu; mund t'i ndryshoni pasi të shtohet lënda.",
+        "emptySemester": "Nuk ka lëndë."
+      },
+      "warnings": {
+        "semesterCredits": "Viti {year}, semestri {semester}: {actual} kredite në vend të {expected}.",
+        "totalCredits": "Plani ka {actual} kredite në total, programi kërkon {expected}."
+      },
+      "actions": {
+        "approve": "Miratoje",
+        "approveTitle": "Të miratohet plani?",
+        "approveBody": "Pas miratimit plani ngrin dhe nuk ndryshohet më; për ndryshime krijohet një version i ri.",
+        "approved": "Plani u miratua.",
+        "archive": "Arkivoje",
+        "archiveTitle": "Të arkivohet plani?",
+        "archiveBody": "Plani mbetet i lexueshëm por nuk përdoret më për kohorte të reja.",
+        "archived": "Plani u arkivua.",
+        "reason": "Arsyeja",
+        "delete": "Fshije skicën",
+        "deleteTitle": "Të fshihet skica?",
+        "deleteBody": "Skica dhe lëndët e saj fshihen përfundimisht. Planet e miratuara nuk fshihen kurrë.",
+        "deleted": "Skica u fshi."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "PLAN_FROZEN": "Plani është miratuar dhe nuk ndryshohet më.",
+        "PLAN_EMPTY": "Plani nuk ka asnjë lëndë.",
+        "NOT_APPROVED": "Vetëm një plan i miratuar mund të arkivohet.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "unknownPlan": "Plani burim nuk u gjet ose është i një programi tjetër.",
+        "unknownCourse": "Lënda nuk u gjet.",
+        "inactiveCourse": "Lënda është joaktive.",
+        "alreadyInPlan": "Lënda është tashmë në plan.",
+        "yearOutOfRange": "Viti nuk ekziston në këtë program.",
+        "semesterOutOfRange": "Semestri duhet të jetë 1 ose 2.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të arkivohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë të ndryshoni planet e këtij programi.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "dependents": {
+      "plans": "planet mësimore"
     }
   },
   "jobs": {

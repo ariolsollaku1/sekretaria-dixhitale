@@ -124,14 +124,23 @@ Scope comes from the assignment; the target resolver `plan` maps a plan to its p
 - Copying a plan whose courses were deactivated since: inactive courses are skipped and counted.
 - Approving requires the plan to belong to a program inside the approver's scope.
 
+**Implementation notes:**
+- Routes `/cur/plans`, `/cur/plans/new`, `/cur/plans/[id]` (editor for a writer's draft, printable
+  read view otherwise). Printing is the browser's (`print:hidden` on the editor).
+- Audit actions are `cur.plan.*` and `cur.plan_course.*` (the audit format allows three segments).
+- Dependents: the labels in `HAS_DEPENDENTS` are catalog keys resolved from the catalog root
+  (`cur.dependents.plans`); the status dialogs of ORG and CUR now resolve them that way.
+- ORG-04 registers `registerPlanDependent` (exported from the CUR index) so cohorts block archiving.
+- Dev seed: an approved plan for the demo bachelor program.
+
 ## 4. Tasks
 
 - [x] **T1** — `curriculum.prisma` + migration (checks, freeze triggers); permissions; target resolver; nav. (AC-1, AC-4, AC-11)
 - [x] **T2** — Pure plan rules and schemas with unit tests. (AC-2, AC-3, AC-5)
 - [x] **T3** — Service and queries (create/copy, courses, approve, archive, delete) with integration tests incl. DB freeze. (AC-3, AC-4, AC-6..AC-8, AC-12)
 - [x] **T4** — Dependents registrations and plan registry for ORG-04; tests. (AC-8, AC-9)
-- [ ] **T5** — Table, list, new page, editor/read view, totals, print, i18n. (AC-5, AC-10)
-- [ ] **T6** — E2E, seed, docs. (all)
+- [x] **T5** — Table, list, new page, editor/read view, totals, print, i18n. (AC-5, AC-10)
+- [x] **T6** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -148,9 +157,9 @@ Scope comes from the assignment; the target resolver `plan` maps a plan to its p
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

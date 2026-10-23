@@ -20,3 +20,16 @@ export {
   blockingPlanDependents,
   type PlanDependent,
 } from "./server/plan-dependents";
+export { plansTable } from "./server/plan.table";
+export { PlanCreateForm } from "./ui/plan-create-form";
+export { PlanActions } from "./ui/plan-actions";
+export { PlanEditor, type EditorRow } from "./ui/plan-editor";
+export {
+  getPlan,
+  listCourseOptions,
+  writablePrograms,
+  listProgramPlans,
+  getCreditsPerSemester,
+  type PlanRecord,
+} from "./server/plan.queries";
+export { planTotals, type PlanTotals, type PlanWarning } from "./domain/plan-rules";

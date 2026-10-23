@@ -105,8 +105,8 @@ erDiagram
 |---|---|
 | `CourseCategory` | `code`, `nameSq`, `nameEn`, `active` (administrator-maintained list, Q-28) |
 | `Course` | `code` (unique), `name`, `nameEn?`, `defaultCredits` (0–60), `categoryId?`, `hoursLecture`, `hoursSeminar`, `hoursLab` (0–500), `departmentId`, `active` |
-| `CurriculumPlan` | `programId`, `version`, `validFromAcademicYearId`, `status` (DRAFT/APPROVED/ARCHIVED), `approvedAt`, `approvedById` |
-| `PlanCourse` | `planId`, `courseId`, `yearOfStudy`, `semester`, `credits`, `category`, hours, `isElective` |
+| `CurriculumPlan` | (CUR-02, implemented) `programId`, `version` (per program), `validFromAcademicYearId`, `status` (DRAFT/APPROVED/ARCHIVED), `notes?`, `approvedAt/ById`, `archivedAt`. Approved and archived plans are frozen by database triggers. |
+| `PlanCourse` | (CUR-02, implemented) `planId`, `courseId` (unique per plan), `yearOfStudy`, `semester` (1/2), `credits`, `categoryId?`, hours (lecture/seminar/lab), `isElective`; defaults copied from the catalog when added. |
 | `Syllabus` | `planCourseId`, `academicYearId`, `fileId` or structured content, `status` |
 | `TeachingAssignment` | `academicYearId`, `semester`, `planCourseId`, `groupId`, `staffId`, `kind` (LECTURE/SEMINAR/LAB), `plannedHours` |
 | `ApprovedDocument` | Archive of approved plan/syllabus/diploma & supplement forms per academic year (SRC-111/112) |

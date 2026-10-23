@@ -582,6 +582,107 @@
       "unknownCategory": "No active category has this code.",
       "unknownDepartment": "No active department has this code.",
       "departmentNotPermitted": "You may not write in this department."
+    },
+    "plan": {
+      "title": "Curriculum plans",
+      "new": "New plan",
+      "planTitle": "Plan {program}, version {version}",
+      "validFromShort": "valid from year {year}",
+      "approvedOn": "Approved on {date}",
+      "totals": "Totals",
+      "sums": "{credits} credits · hours: {lecture} lecture / {seminar} seminar / {lab} lab",
+      "year": "Year {year}",
+      "semester": "Semester {semester}",
+      "yes": "Yes",
+      "noPrograms": "You have no program you can make plans for.",
+      "created": "The plan (version {version}) was created as a draft.",
+      "status": {
+        "DRAFT": "Draft",
+        "APPROVED": "Approved",
+        "ARCHIVED": "Archived"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "version": "Version",
+        "validFrom": "Valid from",
+        "status": "Status",
+        "courses": "Courses",
+        "credits": "Credits",
+        "approvedOn": "Approved on",
+        "course": "Course",
+        "category": "Category",
+        "hours": "Hours (L / S / Lab)",
+        "elective": "Elective"
+      },
+      "form": {
+        "program": "Program",
+        "validFrom": "Valid from academic year",
+        "copyFrom": "Start from an existing plan",
+        "copyNone": "Empty plan",
+        "copyOption": "Version {version} ({status}, from {year})",
+        "notes": "Notes",
+        "create": "Create draft"
+      },
+      "editor": {
+        "saved": "Saved.",
+        "credits": "Credits",
+        "lecture": "Lecture",
+        "seminar": "Seminar",
+        "lab": "Lab",
+        "category": "Category",
+        "elective": "Elective",
+        "save": "Save",
+        "remove": "Remove",
+        "saveMeta": "Save plan details",
+        "addCourse": "Add a course from the catalog",
+        "year": "Year",
+        "semester": "Semester",
+        "add": "Add",
+        "addHint": "Credits, category and hours come from the catalog; you can change them once the course is added.",
+        "emptySemester": "No courses."
+      },
+      "warnings": {
+        "semesterCredits": "Year {year}, semester {semester}: {actual} credits instead of {expected}.",
+        "totalCredits": "The plan has {actual} credits in total, the program requires {expected}."
+      },
+      "actions": {
+        "approve": "Approve",
+        "approveTitle": "Approve this plan?",
+        "approveBody": "After approval the plan is frozen and cannot change; changes need a new version.",
+        "approved": "The plan was approved.",
+        "archive": "Archive",
+        "archiveTitle": "Archive this plan?",
+        "archiveBody": "The plan stays readable but is no longer used for new cohorts.",
+        "archived": "The plan was archived.",
+        "reason": "Reason",
+        "delete": "Delete draft",
+        "deleteTitle": "Delete this draft?",
+        "deleteBody": "The draft and its courses are deleted for good. Approved plans are never deleted.",
+        "deleted": "The draft was deleted."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "PLAN_FROZEN": "The plan is approved and cannot change any more.",
+        "PLAN_EMPTY": "The plan has no courses.",
+        "NOT_APPROVED": "Only an approved plan can be archived.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "unknownYear": "The academic year was not found.",
+        "unknownPlan": "The source plan was not found or belongs to another program.",
+        "unknownCourse": "The course was not found.",
+        "inactiveCourse": "The course is inactive.",
+        "alreadyInPlan": "The course is already in the plan.",
+        "yearOutOfRange": "The program has no such year.",
+        "semesterOutOfRange": "The semester must be 1 or 2.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be archived: in use by {names}.",
+        "FORBIDDEN": "You may not change the plans of this program.",
+        "generic": "The action failed."
+      }
+    },
+    "dependents": {
+      "plans": "curriculum plans"
     }
   },
   "jobs": {

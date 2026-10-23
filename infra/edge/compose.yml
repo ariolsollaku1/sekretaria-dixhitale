@@ -1,5 +1,5 @@
 # Shared edge proxy (Caddy) for the server: owns ports 80/443 for api.0ec.ai (personal-finance)
-# and kc-sd.0ec.ai (Keycloak). Cloudflare terminates public TLS (SSL mode: Full strict);
+# kc-sd.0ec.ai (Keycloak) and sd.0ec.ai (the app). Cloudflare terminates public TLS (SSL mode: Full strict);
 # Caddy presents the wildcard Cloudflare Origin CA certificate kept in /opt/finance-backend/cert.
 # Deployed as its own Portainer stack ("edge"); the Caddyfile is embedded so no repo checkout is needed.
 name: edge
@@ -41,7 +41,7 @@ configs:
         tls /etc/caddy/ssl/orig.cert /etc/caddy/ssl/origin.key
       }
 
-      http://api.0ec.ai, http://kc-sd.0ec.ai {
+      http://api.0ec.ai, http://kc-sd.0ec.ai, http://sd.0ec.ai {
         redir https://{host}{uri} permanent
       }
 
@@ -67,6 +67,11 @@ configs:
       kc-sd.0ec.ai {
         import origin_tls
         reverse_proxy sekretaria-dixhitale-keycloak-1:8080
+      }
+
+      sd.0ec.ai {
+        import origin_tls
+        reverse_proxy sekretaria-dixhitale-app-1:3000
       }
 
 networks:

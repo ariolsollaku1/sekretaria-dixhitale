@@ -11,3 +11,5 @@ services:
   app:
     image: ghcr.io/ariolsollaku1/sekretaria-dixhitale:${APP_IMAGE_TAG:-latest}
     pull_policy: always
+    # No .env file on the server: configuration comes from the Portainer stack variables.
+    env_file: !reset []

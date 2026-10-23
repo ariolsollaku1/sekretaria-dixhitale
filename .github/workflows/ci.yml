@@ -69,6 +69,6 @@ jobs:
             ${{ env.IMAGE }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: Redeploy on Portainer
+      - name: Redeploy on Portainer (self-signed certificate, hence -k)
         if: env.PORTAINER_WEBHOOK_URL != ''
-        run: curl -fsS -X POST "$PORTAINER_WEBHOOK_URL"
+        run: curl -fsSk -X POST "$PORTAINER_WEBHOOK_URL"

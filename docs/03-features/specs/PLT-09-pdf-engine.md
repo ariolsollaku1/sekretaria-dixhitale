@@ -74,8 +74,8 @@ model IssuedDocument   { id, type, number @unique, templateId, language, fileId 
 ## 4. Tasks
 
 - [x] **T1** — Models, migration (counter, frozen templates), permission, nav, env. (AC-1, AC-11)
-- [ ] **T2** — Pure template renderer and number format with unit tests; type registry. (AC-2, AC-5, AC-6)
-- [ ] **T3** — Gotenberg client, QR, template service, issue service, cancel; integration tests. (AC-3..AC-7, AC-9)
+- [x] **T2** — Pure template renderer and number format with unit tests; type registry. (AC-2, AC-5, AC-6)
+- [x] **T3** — Gotenberg client, QR, template service, issue service, cancel; integration tests. (AC-3..AC-7, AC-9)
 - [ ] **T4** — Admin pages (templates, preview, issued list, test document), verify page, i18n. (AC-8, AC-10)
 - [ ] **T5** — E2E, docs. (all)
 

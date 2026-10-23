@@ -49,7 +49,8 @@
         "system": "System"
       },
       "audit": "Audit log",
-      "users": "Users"
+      "users": "Users",
+      "files": "Files"
     },
     "languages": {
       "sq": "Shqip",
@@ -258,6 +259,72 @@
       "SCOPE_NOT_FOUND": "The chosen target does not exist.",
       "INVALID_PERIOD": "The period is not valid.",
       "SCOPE_ID_FORBIDDEN": "This scope takes no target."
+    }
+  },
+  "files": {
+    "title": "Files",
+    "upload": "Upload a file",
+    "choose": "Choose a file",
+    "hint": "Maximum {max}. Allowed types: {types}.",
+    "uploading": "Uploading…",
+    "uploaded": "Uploaded: {name}",
+    "mine": "My uploads",
+    "empty": "You have not uploaded any files yet.",
+    "columns": {
+      "name": "File",
+      "type": "Type",
+      "size": "Size",
+      "time": "Time",
+      "status": "Status",
+      "download": "Download"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "ATTACHED": "Attached"
+    },
+    "errors": {
+      "TOO_LARGE": "The file is too large.",
+      "EMPTY": "The file is empty.",
+      "UNSUPPORTED_TYPE": "This file type is not allowed.",
+      "TYPE_MISMATCH": "The content does not match the file type.",
+      "FORBIDDEN": "You are not allowed to upload files.",
+      "UNAUTHENTICATED": "Sign in again to continue.",
+      "UNKNOWN_PURPOSE": "Uploading is not available.",
+      "BAD_REQUEST": "Choose a file.",
+      "INTERNAL": "The upload failed. Try again."
+    }
+  },
+  "table": {
+    "apply": "Filter",
+    "clear": "Clear filters",
+    "all": "All",
+    "columns": "Columns",
+    "chooseColumns": "Choose columns",
+    "exportXlsx": "Excel (xlsx)",
+    "exportCsv": "CSV",
+    "print": "Print",
+    "count": "{count, plural, =0 {No results} one {# result} other {# results}}",
+    "empty": "No results",
+    "emptyFiltered": "Try changing or clearing the filters.",
+    "pagination": "Result pages",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {page} of {pageCount}",
+    "pageSize": "Results per page",
+    "error": "The list could not be loaded",
+    "errorHint": "Try again; if it continues, tell the administrator.",
+    "retry": "Try again",
+    "saved": {
+      "title": "Saved filters",
+      "none": "You have no saved filters yet.",
+      "name": "Filter name",
+      "save": "Save current filter",
+      "saved": "Filter saved.",
+      "nameTaken": "This name is already used.",
+      "nameRequired": "Enter a name.",
+      "limit": "You reached the limit of saved filters.",
+      "failed": "The action failed.",
+      "delete": "Delete filter"
     }
   }
 }

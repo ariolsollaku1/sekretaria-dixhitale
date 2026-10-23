@@ -15,6 +15,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   roles         UserRole[]
+  savedFilters  SavedFilter[]
 
   @@map("users")
 }

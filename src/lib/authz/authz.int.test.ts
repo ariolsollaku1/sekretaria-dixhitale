@@ -11,7 +11,7 @@ import {
 } from "./index";
 import { registerPermissions, registerScopeResolver, registerTargetResolver } from "./registry";
 import { ForbiddenError } from "./check";
-import "./permissions";
+import { PLATFORM_PERMISSIONS } from "./permissions";
 
 async function makeUser(email: string, active = true) {
   return db.user.create({ data: { email, name: email, active } });
@@ -30,17 +30,15 @@ describe("platform permissions (AC-11)", () => {
       await assignRole(tx, admin.id, { role: "sysadmin", scopeType: "INSTITUTION" });
       await assignRole(tx, sec.id, { role: "secretary", scopeType: "INSTITUTION" });
     });
-    for (const p of ["iam.user.read", "iam.user.write", "plt.audit.read", "plt.settings.write"]) {
+    // plt.view.save is the exception: every role holds it (PLT-10).
+    const sysadminOnly = PLATFORM_PERMISSIONS.filter((p) => p !== "plt.view.save");
+    for (const p of sysadminOnly) {
       expect(await can(admin, p)).toBe(true);
       expect(await can(sec, p)).toBe(false);
     }
-    expect(await permissionsFor(admin)).toEqual([
-      "iam.user.read",
-      "iam.user.write",
-      "plt.audit.read",
-      "plt.settings.write",
-    ]);
-    expect(await permissionsFor(sec)).toEqual([]);
+    expect(await can(sec, "plt.view.save")).toBe(true);
+    expect(await permissionsFor(admin)).toEqual([...PLATFORM_PERMISSIONS].sort());
+    expect(await permissionsFor(sec)).toEqual(["plt.view.save"]);
   });
 });
 

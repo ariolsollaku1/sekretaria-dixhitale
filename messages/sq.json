@@ -49,7 +49,8 @@
         "system": "Sistemi"
       },
       "audit": "Evidenca",
-      "users": "Përdoruesit"
+      "users": "Përdoruesit",
+      "files": "Skedarët"
     },
     "languages": {
       "sq": "Shqip",
@@ -258,6 +259,72 @@
       "SCOPE_NOT_FOUND": "Objekti i zgjedhur nuk ekziston.",
       "INVALID_PERIOD": "Periudha nuk është e vlefshme.",
       "SCOPE_ID_FORBIDDEN": "Ky fushëveprim nuk ka objekt."
+    }
+  },
+  "files": {
+    "title": "Skedarët",
+    "upload": "Ngarko skedar",
+    "choose": "Zgjidh skedarin",
+    "hint": "Maksimumi {max}. Lloje të lejuara: {types}.",
+    "uploading": "Duke ngarkuar…",
+    "uploaded": "U ngarkua: {name}",
+    "mine": "Ngarkimet e mia",
+    "empty": "Nuk keni ngarkuar ende skedarë.",
+    "columns": {
+      "name": "Skedari",
+      "type": "Lloji",
+      "size": "Madhësia",
+      "time": "Koha",
+      "status": "Statusi",
+      "download": "Shkarko"
+    },
+    "status": {
+      "PENDING": "Në pritje",
+      "ATTACHED": "I bashkëngjitur"
+    },
+    "errors": {
+      "TOO_LARGE": "Skedari është shumë i madh.",
+      "EMPTY": "Skedari është bosh.",
+      "UNSUPPORTED_TYPE": "Ky lloj skedari nuk lejohet.",
+      "TYPE_MISMATCH": "Përmbajtja nuk përputhet me llojin e skedarit.",
+      "FORBIDDEN": "Nuk keni leje të ngarkoni skedarë.",
+      "UNAUTHENTICATED": "Hyni përsëri për të vazhduar.",
+      "UNKNOWN_PURPOSE": "Ngarkimi nuk është i disponueshëm.",
+      "BAD_REQUEST": "Zgjidhni një skedar.",
+      "INTERNAL": "Ngarkimi dështoi. Provoni përsëri."
+    }
+  },
+  "table": {
+    "apply": "Filtro",
+    "clear": "Pastro filtrat",
+    "all": "Të gjitha",
+    "columns": "Kolonat",
+    "chooseColumns": "Zgjidh kolonat",
+    "exportXlsx": "Excel (xlsx)",
+    "exportCsv": "CSV",
+    "print": "Printo",
+    "count": "{count, plural, =0 {Asnjë rezultat} one {# rezultat} other {# rezultate}}",
+    "empty": "Asnjë rezultat",
+    "emptyFiltered": "Provoni të ndryshoni ose të pastroni filtrat.",
+    "pagination": "Faqet e rezultateve",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "page": "Faqja {page} nga {pageCount}",
+    "pageSize": "Rezultate për faqe",
+    "error": "Lista nuk u ngarkua",
+    "errorHint": "Provoni përsëri; nëse vazhdon, njoftoni administratorin.",
+    "retry": "Provo përsëri",
+    "saved": {
+      "title": "Filtrat e ruajtur",
+      "none": "Nuk keni ende filtra të ruajtur.",
+      "name": "Emri i filtrit",
+      "save": "Ruaj filtrin aktual",
+      "saved": "Filtri u ruajt.",
+      "nameTaken": "Ky emër përdoret tashmë.",
+      "nameRequired": "Shkruani një emër.",
+      "limit": "Keni arritur kufirin e filtrave të ruajtur.",
+      "failed": "Veprimi nuk u krye.",
+      "delete": "Fshi filtrin"
     }
   }
 }

@@ -62,7 +62,7 @@ test("AC-6: the login that just happened is in the trail and filters by action p
     page.getByRole("row").filter({ hasText: "auth.session.login" }).first(),
   ).toBeVisible();
   await page.goto("/admin/audit?actor=nobody-matches-this");
-  await expect(page.getByText("Asnjë shënim nuk përputhet")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Asnjë rezultat" })).toBeVisible();
 });
 
 test("AC-6: a secretary gets the 403 view and no menu entry", async ({ page }) => {

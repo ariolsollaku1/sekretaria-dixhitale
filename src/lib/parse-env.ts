@@ -4,6 +4,8 @@ const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   APP_URL: z.url(),
   DATABASE_URL: z.string().startsWith("postgres"),
+  /** Root of the file volume (`/data/files` in Docker). */
+  FILES_DIR: z.string().min(1).default("./.data/files"),
   DEFAULT_LOCALE: z.enum(["sq", "en"]).default("sq"),
   // Auth (PLT-04)
   KEYCLOAK_ISSUER: z.url(),

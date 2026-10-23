@@ -71,7 +71,9 @@ issued documents also require a **reason** field from the user.
 
 - shadcn/ui components in `src/components/ui`; Tailwind for layout. No other component library.
 - Forms: React Hook Form + Zod resolver using the **same schema** as the server action.
-- Tables: shared `DataTable` (PLT-10) with server-side pagination, sorting, filters and export.
+- Tables: declare them with `defineTable` and render `<TablePage def … />` (PLT-10): URL-synced
+  server-side pagination, sorting, filters, column chooser, saved filters, Excel/CSV export and print.
+  The table's `fetch` applies the user's scope filter; register the table in `src/lib/tables/all.ts`.
 - All user-visible strings via next-intl (`t("…")`) — no hard-coded copy (ADR-0011).
 - Every page works at 360 px width and is keyboard-navigable; form fields have labels; color is
   never the only signal (WCAG 2.1 AA as the target).

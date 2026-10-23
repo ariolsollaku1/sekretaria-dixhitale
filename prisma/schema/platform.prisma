@@ -90,3 +90,50 @@ model AuditLog {
   @@index([at])
   @@map("audit_logs")
 }
+
+enum FileStatus {
+  PENDING
+  ATTACHED
+
+  @@map("file_status")
+}
+
+/// Metadata of an uploaded or generated file; the bytes live in the Storage (PLT-08, ADR-0010).
+model StoredFile {
+  id           String     @id @default(cuid(2))
+  /// Opaque key `yyyy/mm/<id>`; never derived from user input.
+  storageKey   String     @unique @map("storage_key")
+  purpose      String
+  /// Sanitized original name, for display and the download header only.
+  fileName     String     @map("file_name")
+  mimeType     String     @map("mime_type")
+  size         Int
+  sha256       String
+  status       FileStatus @default(PENDING)
+  entityType   String?    @map("entity_type")
+  entityId     String?    @map("entity_id")
+  uploadedById String     @map("uploaded_by_id")
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  attachedAt   DateTime?  @map("attached_at") @db.Timestamptz(3)
+  deletedAt    DateTime?  @map("deleted_at") @db.Timestamptz(3)
+  deletedById  String?    @map("deleted_by_id")
+
+  @@index([entityType, entityId])
+  @@index([status, createdAt])
+  @@map("stored_files")
+}
+
+/// A user's named filter on a table (PLT-10): the URL query of the filters, without paging.
+model SavedFilter {
+  id        String   @id @default(cuid(2))
+  userId    String   @map("user_id")
+  tableId   String   @map("table_id")
+  name      String
+  query     String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tableId, name])
+  @@index([userId, tableId])
+  @@map("saved_filters")
+}

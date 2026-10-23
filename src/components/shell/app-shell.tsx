@@ -34,7 +34,7 @@ export function AppShell({ sections, user, academicYear, children }: ShellProps)
       </a>
       <form id={SIGN_OUT_FORM} action={signOutAction} />
       <div className="flex min-h-screen">
-        <aside className="border-border bg-card hidden w-64 shrink-0 border-r md:block">
+        <aside className="border-border bg-card hidden w-64 shrink-0 border-r md:block print:hidden">
           <div className="p-4">
             <p className="text-brand text-lg font-semibold">{t("appName")}</p>
             <p className="text-muted-foreground text-[13px]">{t("institution")}</p>
@@ -45,7 +45,7 @@ export function AppShell({ sections, user, academicYear, children }: ShellProps)
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="border-border bg-card flex flex-wrap items-center gap-2 border-b px-3 py-2 md:px-6">
+          <header className="border-border bg-card flex flex-wrap items-center gap-2 border-b px-3 py-2 md:px-6 print:hidden">
             <Button
               variant="ghost"
               size="icon"

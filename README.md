@@ -31,6 +31,12 @@ host ports there if 5432/8080 are taken). Database commands: `pnpm db:migrate` (
 `db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`. Integration tests use the separate
 `sekretari_test` database (`pnpm test:int`).
 
+### Files
+
+Uploaded and generated files live on the `files` Docker volume (`FILES_DIR`, default `./.data/files`
+for host development), addressed by opaque keys and served only through `/api/files/<id>` after a
+permission check. Back up the databases **and** this volume together.
+
 ### First install (production)
 
 After `docker compose up -d` and the first start (migrations run on start), create the first system

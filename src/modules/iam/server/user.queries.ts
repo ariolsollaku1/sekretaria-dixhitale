@@ -1,68 +1,8 @@
 import "server-only";
-import type { Prisma } from "@/generated/prisma/client";
 import { db } from "@/lib/db";
 import { getScopeResolver } from "@/lib/authz/registry";
 import { ALLOWED_SCOPES, ID_SCOPES, ROLES, type Role, type ScopeType } from "@/lib/authz/roles";
 import { canResendActivation } from "../domain/rules";
-
-export const USERS_PAGE_SIZE = 25;
-
-export type UserFilters = { q?: string; role?: string; status?: string };
-
-export type UserListRow = {
-  id: string;
-  name: string;
-  email: string;
-  active: boolean;
-  lastLoginAt: Date | null;
-  roles: Role[];
-};
-
-function where(filters: UserFilters): Prisma.UserWhereInput {
-  const w: Prisma.UserWhereInput = {};
-  const q = filters.q?.trim();
-  if (q)
-    w.OR = [
-      { name: { contains: q, mode: "insensitive" } },
-      { email: { contains: q, mode: "insensitive" } },
-    ];
-  if (filters.role && (ROLES as readonly string[]).includes(filters.role))
-    w.roles = { some: { role: filters.role as Role } };
-  if (filters.status === "active") w.active = true;
-  if (filters.status === "inactive") w.active = false;
-  return w;
-}
-
-/** AC-1: search by name/email, filter by role and status, server-side pagination. */
-export async function listUsers(filters: UserFilters, page: number) {
-  const w = where(filters);
-  const total = await db.user.count({ where: w });
-  const pageCount = Math.max(1, Math.ceil(total / USERS_PAGE_SIZE));
-  const current = Math.min(Math.max(1, Math.floor(page) || 1), pageCount);
-  const rows = await db.user.findMany({
-    where: w,
-    orderBy: [{ name: "asc" }, { id: "asc" }],
-    skip: (current - 1) * USERS_PAGE_SIZE,
-    take: USERS_PAGE_SIZE,
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      active: true,
-      lastLoginAt: true,
-      roles: { select: { role: true } },
-    },
-  });
-  const list: UserListRow[] = rows.map((r) => ({
-    id: r.id,
-    name: r.name,
-    email: r.email,
-    active: r.active,
-    lastLoginAt: r.lastLoginAt,
-    roles: [...new Set(r.roles.map((x) => x.role))],
-  }));
-  return { rows: list, total, page: current, pageCount };
-}
 
 export async function getUserDetail(id: string) {
   const user = await db.user.findUnique({

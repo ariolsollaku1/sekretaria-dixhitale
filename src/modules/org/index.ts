@@ -76,3 +76,4 @@ export {
 } from "./server/cohort.queries";
 export { previewStartOfYear } from "./server/group.service";
 export { getPlanDirectory } from "./server/plan-directory";
+export { getGroupContext, type GroupContext } from "./server/group-context";

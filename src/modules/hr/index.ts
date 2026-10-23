@@ -11,3 +11,9 @@ export {
   listDepartmentOptions,
   type StaffView,
 } from "./server/staff.queries";
+export {
+  listLecturerOptions,
+  getStaffBriefs,
+  getOwnStaffId,
+  type StaffBrief,
+} from "./server/staff-lookup";

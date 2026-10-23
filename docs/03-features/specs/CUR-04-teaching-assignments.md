@@ -106,8 +106,8 @@ Checks: `semester IN (1,2)`, `planned_hours BETWEEN 0 AND 500`.
 ## 4. Tasks
 
 - [x] **T1** — `teaching.prisma` + migration; permissions; ORG group target resolver; nav. (AC-1, AC-9)
-- [ ] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-3, AC-5, AC-6)
-- [ ] **T3** — HR/ORG helpers, service and queries; integration tests. (AC-2..AC-6, AC-8, AC-9)
+- [x] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-3, AC-5, AC-6)
+- [x] **T3** — HR/ORG helpers, service and queries; integration tests. (AC-2..AC-6, AC-8, AC-9)
 - [ ] **T4** — Board, copy tool, list table, my assignments, i18n. (AC-6..AC-8)
 - [ ] **T5** — E2E, seed, docs. (all)
 

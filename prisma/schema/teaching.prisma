@@ -9,6 +9,7 @@ enum TeachingKind {
 /// A lecturer teaching one kind of a plan course to a group (CUR-04); planning data.
 model TeachingAssignment {
   timetable    TimetableEntry[]
+  sessions     ClassSession[]
   id           String           @id @default(cuid(2))
   groupId      String           @map("group_id")
   planCourseId String           @map("plan_course_id")

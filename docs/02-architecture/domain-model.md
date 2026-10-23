@@ -54,7 +54,7 @@ erDiagram
   StudentGroup ||--o{ TeachingAssignment : for
 
   TeachingAssignment ||--o{ ClassSession : "held as"
-  ClassSession ||--o{ AttendanceRecord : records
+  ClassSession ||--o{ AttendanceMark : records
 
   ExamSession ||--o{ Exam : schedules
   Exam }o--|| PlanCourse : for
@@ -130,8 +130,8 @@ erDiagram
 | `CalendarEvent` | (CAL-01, implemented) `academicYearId`, `type` (TEACHING_WEEK/HOLIDAY/DEADLINE/EXAM_PERIOD/REGISTRATION_PERIOD/EVENT), `title`, `startDate`/`endDate` (inclusive, all-day), `description`, `audience` (ALL/CYCLE/PROGRAM) with `cycle`/`programId`, `active` (cancelled, never deleted). |
 | `CalendarFeedToken` | (CAL-01) one per user: hash of the secret iCal link. |
 | `TimetableEntry` | `teachingAssignmentId`, `weekday`, `startTime`, `endTime`, `room`, `validFrom/To` |
-| `ClassSession` | `teachingAssignmentId`, `date`, `hours`, `held` (bool) — basis for attendance and delivered hours |
-| `AttendanceRecord` | `classSessionId`, `enrollmentId`, `status` (PRESENT/ABSENT/EXCUSED) |
+| `ClassSession` | `assignmentId`, `date`, `startMinute`, `endMinute`, `hours` (whole academic hours), `topic`, `status` (PLANNED/HELD/CANCELLED), `timetableEntryId?`, `heldAt` — basis for attendance and delivered hours (HR-04); never deleted, only cancelled (ATT-01) |
+| `AttendanceMark` | `sessionId`, `studentId`, `status` (PRESENT/ABSENT/EXCUSED), `note`, `markedById` — one per roster student per session (ATT-01) |
 
 ### EXM — exams & grades
 | Entity | Key fields |

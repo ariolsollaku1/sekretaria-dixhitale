@@ -20,6 +20,10 @@ adopted as the design in **Q-18** (2026-10-03).
 
 ## Roles
 
+The **Key** column is the display key; in code and the database the enum values use underscores
+(`student-affairs` → `student_affairs`, `head-of-department` → `head_of_department`,
+`program-coordinator` → `program_coordinator`).
+
 | Key | Role | Source | Typical scope | Description |
 |---|---|---|---|---|
 | `sysadmin` | System administrator | SRC-010 | institution | Manages users, roles, system settings, templates. |

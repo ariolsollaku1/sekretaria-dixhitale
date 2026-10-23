@@ -17,6 +17,10 @@ const copy = {
       action: "Dil nga llogaria",
     },
     hello: "Përshëndetje",
+    forbidden: {
+      title: "Nuk keni leje",
+      body: "Roli juaj nuk e lejon këtë veprim. Kontaktoni administratorin nëse mendoni se është gabim.",
+    },
   },
   en: {
     title: "Digital Secretariat",
@@ -35,6 +39,10 @@ const copy = {
       action: "Sign out of your account",
     },
     hello: "Hello",
+    forbidden: {
+      title: "Not allowed",
+      body: "Your role does not allow this. Contact the administrator if you think this is a mistake.",
+    },
   },
 } as const;
 

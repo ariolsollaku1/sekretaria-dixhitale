@@ -105,6 +105,16 @@ User ──< UserRole >── role (enum)
   error), `scopeFilter(user, permission)` (returns a Prisma `where` fragment to restrict lists).
 - **List queries must use `scopeFilter`**, so out-of-scope rows never leave the database.
 
+### Implementation (PLT-05)
+
+Code in `src/lib/authz/`: `roles.ts` (enum, allowed scopes per role), `registry.ts` (modules register
+`registerPermissions(module, { permissions, grants })`, `registerScopeResolver`,
+`registerTargetResolver`), `check.ts` (pure decisions), `guard.ts` (`can`, `assertCan`,
+`requirePermission`, `grantScopes`, `permissionsFor`), `assignments.ts` (`assignRole`,
+`revokeRole`), `client.tsx` (`PermissionsProvider`, `useCan`). Assignments are read per request
+and never cached across requests. The role → permissions map is therefore not one file but each
+module's registration (platform ones in `permissions.ts`).
+
 ## Account provisioning (IAM-01, IAM-02)
 
 The app creates/updates/disables Keycloak users through the Keycloak Admin REST API using the

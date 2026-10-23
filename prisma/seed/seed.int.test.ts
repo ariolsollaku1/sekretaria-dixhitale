@@ -18,3 +18,15 @@ it("keeps values an administrator changed", async () => {
     "UTC",
   );
 });
+
+it("gives each dev user their role and keeps it idempotent", async () => {
+  await runSeeds(db, "dev");
+  const count = await db.userRole.count();
+  await runSeeds(db, "dev");
+  expect(await db.userRole.count()).toBe(count);
+  const sec = await db.user.findUniqueOrThrow({
+    where: { email: "secretary@dev.logos.test" },
+    include: { roles: true },
+  });
+  expect(sec.roles).toMatchObject([{ role: "secretary", scopeType: "INSTITUTION", scopeId: null }]);
+});

@@ -3,8 +3,8 @@ import type { Seeder } from "./types";
 
 type DevUser = { role: string; email: string; name: string; appUser: boolean; active?: boolean };
 
-// Same file the Keycloak dev-user script reads, so both sides cannot drift. Role assignments come
-// with PLT-05 (UserRole); until then these rows only let the person sign in.
+// Same file the Keycloak dev-user script reads, so both sides cannot drift. Role assignments are
+// created by dev-roles.ts.
 const file = new URL("../../infra/keycloak/dev/dev-users.json", import.meta.url);
 
 export const devUsersSeeder: Seeder = {

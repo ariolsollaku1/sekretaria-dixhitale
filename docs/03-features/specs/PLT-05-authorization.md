@@ -93,17 +93,35 @@ restricted with `grantScopes`).
 **Lecturer "own assignments"** is modeled as scope `SELF` + target resolvers that return
 `ownerUserIds` (e.g. all lecturers assigned to a teaching assignment) — no special case in the engine.
 
+**Implementation notes:**
+- `check.ts` is the pure decision core (`canOf`, `grantScopesOf`, `flattenPermissions`,
+  `ForbiddenError`); `guard.ts` adds loading and target resolution (`can`, `assertCan`,
+  `requirePermission`, `grantScopes`, `permissionsFor`). `pnpm test:coverage` enforces 100 % on
+  `check.ts` and runs in CI.
+- Role keys are underscored in code (`student_affairs`); roles.md keeps its hyphenated display keys.
+- Unknown permission strings throw (programmer error) instead of silently denying.
+- A target that cannot be resolved (unknown kind or id) is **denied**. Missing ancestors of a target
+  are filled from the registered scope resolvers (`program → department → faculty`).
+- Pages: test `can(...)` and render `<ForbiddenView />` (Next's `forbidden()` is still
+  experimental). Actions: `actionErrorFrom(error)` returns `{ ok:false, error:{ code:"FORBIDDEN" } }`;
+  the shared action wrapper (first module feature) calls it.
+- `revokeRole` deletes the row (technical data); PLT-07 will keep the history. A unique index with
+  `NULLS NOT DISTINCT` stops duplicate INSTITUTION/SELF assignments (edited into the migration).
+- Dev seed assigns every dev role except `head_of_department` and `program_coordinator`, which need
+  real departments/programs (ORG-02/03).
+- `src/app/(app)/layout.tsx` provides `PermissionsProvider`; PLT-06 replaces it with the app shell.
+
 ## 4. Tasks
 
 - [x] **T1** — Prisma enums + `UserRole` + migration. (AC-1, AC-2)
-- [ ] **T2** — Registry for permissions, scope resolvers, target resolvers; platform permissions. (AC-3, AC-11)
-- [ ] **T3** — `can` / `requirePermission` / `grantScopes` with per-request loading. (AC-4, AC-5, AC-7, AC-8)
-- [ ] **T4** — `ForbiddenError` handling: 403 page component + action wrapper integration
+- [x] **T2** — Registry for permissions, scope resolvers, target resolvers; platform permissions. (AC-3, AC-11)
+- [x] **T3** — `can` / `requirePermission` / `grantScopes` with per-request loading. (AC-4, AC-5, AC-7, AC-8)
+- [x] **T4** — `ForbiddenError` handling: 403 page component + action wrapper integration
       (wrapper itself lands with the first module, but the error mapping lives here). (AC-6)
-- [ ] **T5** — Assignment validation service (`assignRole`, `revokeRole`) enforcing allowed scope
+- [x] **T5** — Assignment validation service (`assignRole`, `revokeRole`) enforcing allowed scope
       types per role and resolver existence (used by IAM-01). (AC-9)
-- [ ] **T6** — Client `PermissionsProvider` / `useCan`. (AC-10)
-- [ ] **T7** — Seed: dev users get roles (one per role; secretary with INSTITUTION scope).
+- [x] **T6** — Client `PermissionsProvider` / `useCan`. (AC-10)
+- [x] **T7** — Seed: dev users get roles (one per role; secretary with INSTITUTION scope).
 
 ## 5. Test plan
 
@@ -118,6 +136,6 @@ restricted with `grantScopes`).
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked; 100 % branch coverage on `check.ts`
-- [ ] auth.md and roles.md still accurate
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked; 100 % branch coverage on `check.ts`
+- [x] auth.md and roles.md still accurate
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

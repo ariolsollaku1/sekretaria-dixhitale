@@ -3,3 +3,4 @@ import "server-only";
 import "@/lib/files/jobs";
 import "@/lib/notify/jobs";
 import "@/modules/ntf";
+import "@/lib/ratelimit/jobs";

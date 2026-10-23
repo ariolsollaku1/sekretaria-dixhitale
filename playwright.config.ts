@@ -14,6 +14,7 @@ export default defineConfig({
   testDir: "e2e",
   // One worker: tests share Keycloak dev users and the first login of a user links its account.
   workers: 1,
+  globalSetup: "./e2e/global-setup.ts",
   use: { baseURL },
   webServer: {
     command: `pnpm dev --port ${port}`,

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import pg from "pg";
-import { signInAs } from "./support/keycloak";
+import { signInAs, signOut } from "./support/keycloak";
 
 const SECRETARY = "secretary@dev.logos.test";
 
@@ -85,7 +85,7 @@ test("AC-6: idle-expired and over-age sessions are rejected", async ({ page }) =
 
 test("AC-7: after sign-out Keycloak asks for credentials again", async ({ page }) => {
   await signInAs(page, SECRETARY);
-  await page.getByRole("button", { name: /dil|sign out/i }).click();
+  await signOut(page);
   await expect(page).toHaveURL(/\/login/);
   await page.goto("/");
   await expect(page).toHaveURL(/\/login/);

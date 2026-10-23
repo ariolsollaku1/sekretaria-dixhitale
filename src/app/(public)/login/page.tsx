@@ -1,6 +1,8 @@
+import { getTranslations } from "next-intl/server";
+import { Button } from "@/components/ui/button";
 import { signInAction } from "@/lib/auth/actions";
-import { getCopy, isReason } from "@/lib/auth/copy";
 import { safeCallbackUrl } from "@/lib/auth/policy";
+import { isLoginReason } from "@/lib/auth/reasons";
 
 export default async function LoginPage({
   searchParams,
@@ -8,23 +10,26 @@ export default async function LoginPage({
   searchParams: Promise<{ callbackUrl?: string; reason?: string }>;
 }) {
   const { callbackUrl, reason } = await searchParams;
-  const t = getCopy();
+  const t = await getTranslations();
   return (
-    <main className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 p-8">
+    <main
+      id="main-content"
+      className="mx-auto flex min-h-screen max-w-sm flex-col justify-center gap-6 p-8"
+    >
       <header>
-        <h1 className="text-2xl font-semibold">{t.title}</h1>
-        <p className="mt-1 text-sm">{t.institution}</p>
+        <h1 className="text-[32px] leading-tight font-semibold">{t("shell.appName")}</h1>
+        <p className="text-muted-foreground mt-1 text-sm">{t("shell.institution")}</p>
       </header>
-      {isReason(reason) && (
-        <p role="status" className="rounded border p-3 text-sm">
-          {t.reasons[reason]}
+      {isLoginReason(reason) && (
+        <p role="status" className="rounded-control border-border bg-card border p-3 text-sm">
+          {t(`auth.reasons.${reason}`)}
         </p>
       )}
       <form action={signInAction}>
         <input type="hidden" name="callbackUrl" value={safeCallbackUrl(callbackUrl)} />
-        <button type="submit" className="w-full rounded bg-black px-4 py-2 text-white">
-          {t.signIn}
-        </button>
+        <Button type="submit" className="w-full">
+          {t("auth.signIn")}
+        </Button>
       </form>
     </main>
   );

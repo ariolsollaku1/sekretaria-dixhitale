@@ -1,1 +1,110 @@
-{}
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back",
+    "retry": "Try again",
+    "loading": "Loading…",
+    "breadcrumb": "Breadcrumb",
+    "search": "Search",
+    "yes": "Yes",
+    "no": "No",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "draft": "Draft"
+    }
+  },
+  "shell": {
+    "appName": "Digital Secretariat",
+    "institution": "LOGOS University College",
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "navigation": "Main navigation",
+    "language": "Language",
+    "academicYear": "Academic year",
+    "notifications": "Notifications",
+    "userMenu": "User menu",
+    "signedInAs": "Signed in as",
+    "signOut": "Sign out",
+    "home": "Home",
+    "nav": {
+      "dashboard": "Dashboard",
+      "groups": {
+        "students": "Students",
+        "teaching": "Teaching",
+        "exams": "Exams",
+        "finance": "Finance",
+        "hr": "Human resources",
+        "administration": "Administration",
+        "reports": "Reports",
+        "system": "System"
+      }
+    },
+    "languages": {
+      "sq": "Shqip",
+      "en": "English"
+    }
+  },
+  "dashboard": {
+    "welcome": "Hello, {name}",
+    "subtitle": "Welcome to the Digital Secretariat.",
+    "widgetsEmpty": "No cards to show yet.",
+    "widgetsEmptyHint": "Cards appear here as the modules that apply to you are enabled."
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "hello": "Hello",
+    "reasons": {
+      "expired": "Your session has expired. Please sign in again.",
+      "signed-out": "You have been signed out.",
+      "unavailable": "The sign-in service is unavailable. Please try again shortly.",
+      "error": "Sign-in failed. Please try again."
+    },
+    "noAccess": {
+      "title": "No access",
+      "body": "Your account is not enabled in the Digital Secretariat. Contact the secretariat or the system administrator.",
+      "action": "Sign out of your account"
+    }
+  },
+  "errors": {
+    "forbidden": {
+      "title": "Not allowed",
+      "body": "Your role does not allow this. Contact the administrator if you think this is a mistake."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "The address does not exist or has moved."
+    },
+    "server": {
+      "title": "Something went wrong",
+      "body": "An unexpected error occurred. Try again; if it continues, tell the administrator.",
+      "reference": "Reference code"
+    },
+    "backHome": "Back to home"
+  },
+  "roles": {
+    "sysadmin": "System administrator",
+    "secretary": "Secretary",
+    "student_affairs": "Student Affairs Office",
+    "lecturer": "Lecturer",
+    "finance": "Finance",
+    "hr": "Human Resources",
+    "quality": "Quality Assurance",
+    "library": "Librarian",
+    "administration": "Administration",
+    "student": "Student",
+    "head_of_department": "Head of department",
+    "program_coordinator": "Program coordinator",
+    "erasmus": "Erasmus officer"
+  }
+}

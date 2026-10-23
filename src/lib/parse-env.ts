@@ -4,6 +4,7 @@ const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   APP_URL: z.url(),
   DATABASE_URL: z.string().startsWith("postgres"),
+  DEFAULT_LOCALE: z.enum(["sq", "en"]).default("sq"),
   // Auth (PLT-04)
   KEYCLOAK_ISSUER: z.url(),
   /** Back-channel base URL when the app runs in Docker (http://keycloak:8080); defaults to the issuer's origin. */

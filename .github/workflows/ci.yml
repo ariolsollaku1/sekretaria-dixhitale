@@ -39,6 +39,7 @@ jobs:
         run: psql "postgresql://postgres:postgres@localhost:5432/postgres" -c 'create database sekretari_test'
       - run: pnpm lint
       - run: pnpm typecheck
+      - run: pnpm i18n:check
       - run: pnpm test
       - run: pnpm test:coverage
       - run: pnpm build

@@ -64,17 +64,39 @@ with a `--brand` token until assets are provided), dark mode (optional; tokens p
   DB once ORG-01 lands (registered provider, same registry pattern).
 - **Dashboard widgets:** `registerWidget({ id, permission, component, order })`.
 
+**Implementation notes:**
+- shadcn/ui was **not** run through its CLI (interactive, network); components are written in its
+  style on Radix primitives (`dialog`, `dropdown-menu`, `label`, `slot`) with `class-variance-authority`,
+  `clsx` and `tailwind-merge`. Fonts come from `@fontsource` (IBM Plex), bundled, no runtime fetch.
+- Components in `src/components/ui`: button, input, label, skeleton, dialog (also the mobile drawer),
+  dropdown-menu, status-badge (`StatusBadge`, label + icon + tone), empty-state, error-state,
+  page-header (breadcrumbs), form-field (React Hook Form `Controller` with aria wiring),
+  confirm-dialog, toaster (sonner). Tokens are in `src/app/globals.css`.
+- Locale: `src/i18n/request.ts` (next-intl without URL prefix): `User.locale` → cookie
+  `NEXT_LOCALE` → `DEFAULT_LOCALE`; `setLocaleAction` writes both. Catalog keys are typed from
+  `messages/en.json` (`src/global.d.ts`); `pnpm i18n:check` fails CI when `sq` lacks a key.
+- The auth pages' temporary `copy.ts` was replaced by the catalogs. Role labels are `roles.*`.
+- Nav entries use a curated icon name (`NavIcon`) resolved client-side; labels are `shell.nav.<key>`.
+- User menu shows name, email and roles (there is no separate profile page yet); sign-out submits
+  the shell's form through the menu item's `onSelect`.
+- Unknown URLs render the in-shell 404 through `(app)/[...slug]` → `notFound()`; `(app)/error.tsx`
+  is the 500 view with the error digest; `global-error.tsx` is bilingual because it has no providers.
+- `formatGrade` only formats a number (≤ 2 decimals); the grading scale is not assumed.
+- E2E: `e2e/shell.spec.ts` (shell, locale, 360 px drawer, 404, axe on login, dashboard, 404, open
+  drawer). A global setup warms the dev server so the first Keycloak callback does not race route
+  compilation.
+
 ## 4. Tasks
 
-- [ ] **T1** — shadcn/ui init, theme tokens, base components (AC-8) and error pages (AC-9).
-- [ ] **T2** — next-intl setup, catalogs with `shell`/`common` keys in `sq` and `en`, locale
+- [x] **T1** — shadcn/ui init, theme tokens, base components (AC-8) and error pages (AC-9).
+- [x] **T2** — next-intl setup, catalogs with `shell`/`common` keys in `sq` and `en`, locale
       switcher persisting to `User.locale` + cookie, `i18n:check` script in CI. (AC-4, AC-5)
-- [ ] **T3** — Formatting helpers + unit tests (sq/en, Europe/Tirane). (AC-6)
-- [ ] **T4** — Nav registry + permission filtering + AppShell (sidebar, top bar, user menu with
+- [x] **T3** — Formatting helpers + unit tests (sq/en, Europe/Tirane). (AC-6)
+- [x] **T4** — Nav registry + permission filtering + AppShell (sidebar, top bar, user menu with
       sign-out from PLT-04), responsive drawer. (AC-1, AC-2, AC-3)
-- [ ] **T5** — Academic-year context (null provider until ORG-01). (AC-7)
-- [ ] **T6** — Dashboard with widget registry. (AC-10)
-- [ ] **T7** — Accessibility pass (axe check in Playwright for shell pages). (AC-11)
+- [x] **T5** — Academic-year context (null provider until ORG-01). (AC-7)
+- [x] **T6** — Dashboard with widget registry. (AC-10)
+- [x] **T7** — Accessibility pass (axe check in Playwright for shell pages). (AC-11)
 
 ## 5. Test plan
 
@@ -89,6 +111,6 @@ with a `--brand` token until assets are provided), dark mode (optional; tokens p
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, ACs covered
-- [ ] Screenshot of shell (desktop + mobile) attached to the PR
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, ACs covered
+- [ ] Screenshot of shell (desktop + mobile) attached to the PR — to do when the PR is opened (`pnpm dev`, sign in as any dev user)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

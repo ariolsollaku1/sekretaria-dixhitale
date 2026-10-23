@@ -20,3 +20,9 @@ export async function signInAs(page: Page, email: string) {
   await expect(page).toHaveURL(/\/login/);
   await loginWithKeycloak(page, email);
 }
+
+/** Opens the user menu and signs out (the control moved into the shell's user menu). */
+export async function signOut(page: Page) {
+  await page.getByRole("button", { name: /menyja e përdoruesit|user menu/i }).click();
+  await page.getByRole("menuitem", { name: /dil|sign out/i }).click();
+}

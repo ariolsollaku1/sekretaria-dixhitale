@@ -1,23 +1,37 @@
-import { signOutAction } from "@/lib/auth/actions";
-import { getCopy } from "@/lib/auth/copy";
+import { LayoutDashboard } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { EmptyState } from "@/components/ui/empty-state";
+import { PageHeader } from "@/components/ui/page-header";
 import { requireUser } from "@/lib/auth";
+import { permissionsFor } from "@/lib/authz/guard";
+import { visibleWidgets } from "@/lib/dashboard/widgets";
 
-// Placeholder until PLT-06 (app shell & i18n) replaces it.
-export default async function HomePage() {
+// AC-10: welcome message and a widgets area modules register cards into.
+export default async function DashboardPage() {
   const user = await requireUser("/");
-  const t = getCopy();
+  const t = await getTranslations("dashboard");
+  const widgets = visibleWidgets(new Set(await permissionsFor(user)));
   return (
-    <main className="mx-auto max-w-2xl p-8">
-      <h1 className="text-2xl font-semibold">{t.title}</h1>
-      <p className="mt-2 text-sm">{t.institution}</p>
-      <p className="mt-6 text-sm" data-testid="current-user">
-        {t.hello}, {user.name}
+    <>
+      <PageHeader title={t("welcome", { name: user.name })} />
+      <p className="text-muted-foreground -mt-4 mb-6" data-testid="current-user">
+        {user.name}
       </p>
-      <form action={signOutAction} className="mt-4">
-        <button type="submit" className="rounded border px-3 py-1 text-sm">
-          {t.signOut}
-        </button>
-      </form>
-    </main>
+      {widgets.length === 0 ? (
+        <EmptyState
+          icon={LayoutDashboard}
+          title={t("widgetsEmpty")}
+          description={t("widgetsEmptyHint")}
+        />
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {widgets.map(async (w) => (
+            <section key={w.id} className="rounded-card border-border bg-card border p-4">
+              {await w.component()}
+            </section>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

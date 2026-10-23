@@ -48,6 +48,11 @@ services:
       KC_SMTP_HOST: ${KC_SMTP_HOST:-mailpit}
       KC_SMTP_PORT: ${KC_SMTP_PORT:-1025}
       KC_SMTP_FROM: ${KC_SMTP_FROM:-no-reply@logos.local}
+      # Authenticated relay (production: Amazon SES, port 587 + STARTTLS). Unset = plain Mailpit.
+      KC_SMTP_AUTH: ${KC_SMTP_AUTH:-false}
+      KC_SMTP_STARTTLS: ${KC_SMTP_STARTTLS:-false}
+      KC_SMTP_USER: ${KC_SMTP_USER:-}
+      KC_SMTP_PASSWORD: ${KC_SMTP_PASSWORD:-}
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?set in .env}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?set in .env}
       KC_DB: postgres

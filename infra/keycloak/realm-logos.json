@@ -192,8 +192,10 @@
     "port": "${KC_SMTP_PORT}",
     "from": "${KC_SMTP_FROM}",
     "fromDisplayName": "Sekretari Dixhitale",
-    "auth": "false",
+    "auth": "${KC_SMTP_AUTH}",
+    "user": "${KC_SMTP_USER}",
+    "password": "${KC_SMTP_PASSWORD}",
     "ssl": "false",
-    "starttls": "false"
+    "starttls": "${KC_SMTP_STARTTLS}"
   }
 }

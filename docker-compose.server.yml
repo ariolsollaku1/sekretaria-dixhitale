@@ -1,0 +1,18 @@
+# Portainer stack override for the shared server (deployed with docker-compose.yml as an
+# "additional file"). Nothing is published to the host: public TLS and routing are handled by the
+# shared edge Caddy stack (infra/edge/compose.yml), which reaches the services over Docker networks.
+services:
+  # The app image is built by CI and published to GHCR (.github/workflows/ci.yml); the server
+  # only pulls it. Enabled with COMPOSE_PROFILES=full. Public TLS/routing is the shared edge proxy.
+  app:
+    image: ghcr.io/ariolsollaku1/sekretaria-dixhitale:${APP_IMAGE_TAG:-latest}
+    pull_policy: always
+    # No .env file on the server: configuration comes from the Portainer stack variables.
+    env_file: !reset []
+    environment:
+      # Public issuer; the app reaches Keycloak internally through KEYCLOAK_INTERNAL_URL (base compose).
+      KEYCLOAK_ISSUER: ${KEYCLOAK_ISSUER:?set in the Portainer stack variables}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID:-sekretari-web}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET:?set in the Portainer stack variables}
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ${KEYCLOAK_ADMIN_CLIENT_SECRET:?set in the Portainer stack variables}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?set in the Portainer stack variables}

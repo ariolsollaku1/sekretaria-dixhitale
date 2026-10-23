@@ -90,6 +90,28 @@ Migration adds a trigger `audit_logs_immutable` raising an exception on `UPDATE`
 | `/admin/audit` | sysadmin | filters + paginated table + detail drawer with diff |
 | `<EntityHistory>` | per module permission | compact timeline on detail pages |
 
+**Implementation notes:**
+- The shared **action wrapper** (`src/lib/actions`, `action({ permission, input, requireReason,
+  target, handler })`) was built here because audit and `requireReason` live in it; it also covers
+  authentication, permission (+ scoped target check), Zod, the transaction and the typed result.
+  Handlers get `ctx = { user, db: tx, audit, reason }`; they throw `DomainError` for expected
+  failures. `createAction(deps)` takes its dependencies, so it is integration-tested without a session.
+- `ctx.audit({ action, entityType, entityId, before, after, reason })` takes the full entity fields;
+  only the changed ones are stored, sensitive keys (any depth, case-insensitive; extend with
+  `registerSensitiveFields`) become `***`. An update that changes nothing writes no row.
+- `audit_logs` has no FK to users and no UPDATE/DELETE (trigger `audit_logs_immutable`). TRUNCATE
+  is not blocked on purpose, because `resetDatabase()` in tests needs it.
+- Auth events (`auth.session.login|denied|logout`) are written outside a transaction and never block
+  sign-in or sign-out; denied logins have actor PUBLIC and `{ reason }` in `after`.
+- `/admin/audit` (permission `plt.audit.read`, nav group System) filters through GET parameters;
+  dates are Europe/Tirane calendar days (`zonedDayBounds`). Detail is a page, not a drawer.
+- `<EntityHistory entityType entityId permission />` (`src/components/audit/entity-history.tsx`)
+  checks the permission itself and renders nothing without it.
+- Logging: `src/lib/logger.ts` drops personal-data keys; ESLint `no-console` is an error in `src/`.
+- Bug found by the e2e run and fixed (PLT-04): with `requireEmailVerification` the first, linking
+  login failed with `email_not_verified` (stale user object); the flag is off, linking still needs
+  Keycloak's `email_verified`. Regression test in `e2e/auth.spec.ts`.
+
 ## 4. Tasks
 
 - [x] **T1** — Model + migration + immutability trigger. (AC-1, AC-4)
@@ -97,7 +119,7 @@ Migration adds a trigger `audit_logs_immutable` raising an exception on `UPDATE`
 - [x] **T3** — Auditor + request context + integration with `withTransaction`/action wrapper,
       `requireReason`. (AC-2, AC-8)
 - [x] **T4** — Auth events wired from PLT-04. (AC-5)
-- [ ] **T5** — `/admin/audit` page and `<EntityHistory>` component. (AC-6, AC-7)
+- [x] **T5** — `/admin/audit` page and `<EntityHistory>` component. (AC-6, AC-7)
 - [x] **T6** — Logging guideline + a lint/grep check in CI for obvious PII in log calls (e.g.
       `console.log` banned in `src/`; use `logger` with id-only fields). (AC-9)
 
@@ -113,6 +135,6 @@ Migration adds a trigger `audit_logs_immutable` raising an exception on `UPDATE`
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, ACs covered
-- [ ] conventions.md "Audit" section still matches the API
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, ACs covered
+- [x] conventions.md "Audit" section still matches the API
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

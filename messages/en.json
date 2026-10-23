@@ -47,7 +47,8 @@
         "administration": "Administration",
         "reports": "Reports",
         "system": "System"
-      }
+      },
+      "audit": "Audit log"
     },
     "languages": {
       "sq": "Shqip",
@@ -106,5 +107,52 @@
     "head_of_department": "Head of department",
     "program_coordinator": "Program coordinator",
     "erasmus": "Erasmus officer"
+  },
+  "audit": {
+    "title": "Audit log",
+    "filters": {
+      "actor": "Actor (email or “system”/“public”)",
+      "action": "Action (e.g. auth.)",
+      "entityType": "Entity type",
+      "entityId": "Entity ID",
+      "from": "From date",
+      "to": "To date",
+      "apply": "Filter",
+      "reset": "Clear"
+    },
+    "columns": {
+      "time": "Time",
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Entity",
+      "open": "Open"
+    },
+    "empty": "No entries match the filters.",
+    "count": "{count, plural, =0 {No entries} one {# entry} other {# entries}}",
+    "page": "Page {page} of {pageCount}",
+    "previous": "Previous",
+    "next": "Next",
+    "detail": {
+      "title": "Audit entry",
+      "back": "Back to the audit log",
+      "meta": "Details",
+      "reason": "Reason",
+      "request": "Request",
+      "ip": "IP",
+      "userAgent": "Browser",
+      "changes": "Changes",
+      "field": "Field",
+      "before": "Before",
+      "after": "After",
+      "noChanges": "No changed fields."
+    },
+    "actors": {
+      "system": "System",
+      "public": "Public"
+    },
+    "history": {
+      "title": "Change history",
+      "empty": "This record has no changes yet."
+    }
   }
 }

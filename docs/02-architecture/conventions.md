@@ -62,7 +62,9 @@ integrations, health checks, job triggers. They use the same `requirePermission`
 ## Audit
 
 Every create/update/delete/status change of business data writes an `AuditLog` row in the same
-transaction via `ctx.audit(...)` (PLT-07). Grade changes, enrollment status changes, payments and
+transaction via `ctx.audit({ action, entityType, entityId, before, after, reason })` (PLT-07; pass
+the full entity fields, the diff and masking are done for you). Log with `src/lib/logger.ts`, never
+`console`. Grade changes, enrollment status changes, payments and
 issued documents also require a **reason** field from the user.
 
 ## UI

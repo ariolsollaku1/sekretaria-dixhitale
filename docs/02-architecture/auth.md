@@ -77,7 +77,7 @@ Rules:
 
 | | |
 |---|---|
-| Library | Better Auth 1.7 — `genericOAuth` provider `keycloak`, discovery from `KEYCLOAK_INTERNAL_URL` (Docker) or the issuer, PKCE S256, `disableSignUp`, `requireEmailVerification` |
+| Library | Better Auth 1.7 — `genericOAuth` provider `keycloak`, discovery from `KEYCLOAK_INTERNAL_URL` (Docker) or the issuer, PKCE S256, `disableSignUp`; first-login linking by email needs Keycloak's `email_verified` |
 | Endpoints | `/api/auth/*` (callback `/api/auth/callback/keycloak`), pages `/login`, `/no-access` |
 | Code | `src/lib/auth/` — `server.ts` (instance), `session.ts` (`getCurrentUser`, `requireUser`), `actions.ts` (`signInAction`, `signOutAction`), `policy.ts` (pure rules), `keycloak.ts` (URL helpers), `events.ts` (auth events → audit in PLT-07) |
 | Gate | `src/proxy.ts` redirects when no session cookie; `requireUser()` is the real check and re-reads `users.active` and the absolute session age on every request |

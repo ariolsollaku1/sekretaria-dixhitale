@@ -115,7 +115,8 @@ SSO idle 30 min / max 12 h aligned with AC-6; brute-force: lockout after 5 failu
 
 **Implementation notes (deviations from the first design):**
 - Better Auth **1.7.12**, core `signInSocial` + the `genericOAuth` plugin (`providerId: "keycloak"`,
-  OIDC discovery, PKCE, `disableSignUp`, `requireEmailVerification`). Sign-in goes through a
+  OIDC discovery, PKCE, `disableSignUp`; `requireEmailVerification` is deliberately off: on the
+  first, linking login the library tests a stale user object and refuses with `email_not_verified`). Sign-in goes through a
   server action (`signInAction`), not the browser client. `nextCookies()` sets cookies from actions.
 - Linking: Keycloak is **not** in `trustedProviders`, so first-login linking by email needs
   Keycloak's `email_verified`; `requireLocalEmailVerified: false` because admin-created users have

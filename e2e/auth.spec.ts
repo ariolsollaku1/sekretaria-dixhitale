@@ -106,3 +106,25 @@ test("AC-8: a deactivated app user is refused", async ({ page }) => {
   await signInAs(page, "inactive@dev.logos.test");
   await expect(page).toHaveURL(/\/no-access/);
 });
+
+test("AC-3: the very first login of a not-yet-linked user succeeds (regression: email_not_verified)", async ({
+  page,
+}) => {
+  const email = "administration@dev.logos.test";
+  await sql("delete from sessions where user_id = (select id from users where email = $1)", [
+    email,
+  ]);
+  await sql("delete from accounts where user_id = (select id from users where email = $1)", [
+    email,
+  ]);
+  await sql("update users set email_verified = false where email = $1", [email]);
+  await signInAs(page, email);
+  await expect(page.getByTestId("current-user")).toContainText("Dev Administration", {
+    timeout: 30_000,
+  });
+  const res = await sql(
+    "select u.email_verified, count(a.id)::int as accounts from users u join accounts a on a.user_id = u.id where u.email = $1 group by 1",
+    [email],
+  );
+  expect(res.rows[0]).toEqual({ email_verified: true, accounts: 1 });
+});

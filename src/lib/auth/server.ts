@@ -83,7 +83,9 @@ function createAuth() {
             scopes: ["openid", "email", "profile"],
             pkce: true, // S256, matches the realm client's pkce.code.challenge.method
             disableSignUp: true, // no implicit sign-up: only pre-created users may sign in (Q-19)
-            requireEmailVerification: true,
+            // Not requireEmailVerification: on the very first (linking) login the library checks a
+            // stale user object and refuses with email_not_verified. Linking by email already
+            // requires Keycloak's email_verified (the provider is not in trustedProviders).
             overrideUserInfo: false,
           },
         ],

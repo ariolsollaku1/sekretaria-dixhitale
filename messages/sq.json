@@ -47,7 +47,8 @@
         "administration": "Administrata",
         "reports": "Raportet",
         "system": "Sistemi"
-      }
+      },
+      "audit": "Evidenca"
     },
     "languages": {
       "sq": "Shqip",
@@ -106,5 +107,52 @@
     "head_of_department": "Përgjegjës departamenti",
     "program_coordinator": "Koordinator programi",
     "erasmus": "Përgjegjës Erasmus"
+  },
+  "audit": {
+    "title": "Evidenca e ndryshimeve",
+    "filters": {
+      "actor": "Përdoruesi (email ose “system”/“public”)",
+      "action": "Veprimi (p.sh. auth.)",
+      "entityType": "Lloji i entitetit",
+      "entityId": "ID e entitetit",
+      "from": "Nga data",
+      "to": "Deri më datë",
+      "apply": "Filtro",
+      "reset": "Pastro"
+    },
+    "columns": {
+      "time": "Koha",
+      "actor": "Autori",
+      "action": "Veprimi",
+      "entity": "Entiteti",
+      "open": "Hap"
+    },
+    "empty": "Asnjë shënim nuk përputhet me filtrat.",
+    "count": "{count, plural, =0 {Asnjë shënim} one {# shënim} other {# shënime}}",
+    "page": "Faqja {page} nga {pageCount}",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "detail": {
+      "title": "Shënimi i evidencës",
+      "back": "Kthehu te evidenca",
+      "meta": "Të dhënat",
+      "reason": "Arsyeja",
+      "request": "Kërkesa",
+      "ip": "IP",
+      "userAgent": "Shfletuesi",
+      "changes": "Ndryshimet",
+      "field": "Fusha",
+      "before": "Para",
+      "after": "Pas",
+      "noChanges": "Pa fusha të ndryshuara."
+    },
+    "actors": {
+      "system": "Sistemi",
+      "public": "Publik"
+    },
+    "history": {
+      "title": "Historiku i ndryshimeve",
+      "empty": "Ky regjistrim nuk ka ende ndryshime."
+    }
   }
 }

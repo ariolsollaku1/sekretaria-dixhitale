@@ -71,6 +71,7 @@ model Department {
   updatedById String?  @map("updated_by_id")
   faculty     Faculty  @relation(fields: [facultyId], references: [id])
   programs    StudyProgram[]
+  courses     Course[]
 
   @@index([facultyId])
   @@map("departments")

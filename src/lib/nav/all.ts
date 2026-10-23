@@ -1,4 +1,5 @@
 import "@/modules/org"; // registers the ORG permissions and the academic-year provider
+import "@/modules/cur";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never

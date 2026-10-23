@@ -3,4 +3,5 @@ import "server-only";
 // a table by id. Add one import per table.
 import "@/modules/iam";
 import "@/modules/org";
+import "@/modules/cur";
 import "@/lib/audit/table";

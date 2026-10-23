@@ -1,5 +1,5 @@
 import "server-only";
-import { registerScopeResolver } from "@/lib/authz/registry";
+import { registerScopeResolver, registerTargetResolver } from "@/lib/authz/registry";
 import { db } from "@/lib/db";
 
 // AC-7: PLT-05 scope resolvers. Only active units can be newly assigned; the role editor of IAM-01
@@ -68,3 +68,19 @@ registerScopeResolver("PROGRAM", {
     return p ? { departmentId: p.department.id, facultyId: p.department.facultyId } : {};
   },
 });
+
+// Target resolvers: lets scoped permissions be checked against an organisational unit itself, e.g.
+// "may this head of department write in department D?" (CUR-01). ancestors() adds the faculty.
+registerTargetResolver("department", async (id) =>
+  (await db.department.findUnique({ where: { id }, select: { id: true } }))
+    ? { departmentId: id }
+    : null,
+);
+registerTargetResolver("faculty", async (id) =>
+  (await db.faculty.findUnique({ where: { id }, select: { id: true } })) ? { facultyId: id } : null,
+);
+registerTargetResolver("program", async (id) =>
+  (await db.studyProgram.findUnique({ where: { id }, select: { id: true } }))
+    ? { programId: id }
+    : null,
+);

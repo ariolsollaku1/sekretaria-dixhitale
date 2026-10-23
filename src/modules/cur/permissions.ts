@@ -53,3 +53,20 @@ registerPermissions("cur", {
     program_coordinator: ["cur.teaching.read", "cur.teaching.self"],
   },
 });
+
+// AC-9/AC-10 (CUR-03): syllabi. `view` opens approved ones (as for plans, students included);
+// `read` adds drafts and archived versions; `write` is scoped to the plan's program.
+registerPermissions("cur", {
+  permissions: ["cur.syllabus.view", "cur.syllabus.read", "cur.syllabus.write"],
+  grants: {
+    sysadmin: ["cur.syllabus.view", "cur.syllabus.read", "cur.syllabus.write"],
+    head_of_department: ["cur.syllabus.view", "cur.syllabus.read", "cur.syllabus.write"],
+    program_coordinator: ["cur.syllabus.view", "cur.syllabus.read", "cur.syllabus.write"],
+    secretary: ["cur.syllabus.view", "cur.syllabus.read"],
+    student_affairs: ["cur.syllabus.view", "cur.syllabus.read"],
+    hr: ["cur.syllabus.view", "cur.syllabus.read"],
+    quality: ["cur.syllabus.view", "cur.syllabus.read"],
+    lecturer: ["cur.syllabus.view"],
+    student: ["cur.syllabus.view"],
+  },
+});

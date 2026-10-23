@@ -110,8 +110,8 @@ and forbids deleting them.
 
 ## 4. Tasks
 
-- [ ] **T1** — `syllabus.prisma` + migration (partial unique, freeze trigger); permissions; file purpose; nav. (AC-1, AC-5, AC-9, AC-10)
-- [ ] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-4, AC-7, AC-8)
+- [x] **T1** — `syllabus.prisma` + migration (partial unique, freeze trigger); permissions; file purpose; nav. (AC-1, AC-5, AC-9, AC-10)
+- [x] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-4, AC-7, AC-8)
 - [ ] **T3** — Service and queries; integration tests. (AC-2..AC-10)
 - [ ] **T4** — Board, history page, upload / approve / carry-forward UI, i18n. (AC-6..AC-8)
 - [ ] **T5** — E2E, seed, docs. (all)

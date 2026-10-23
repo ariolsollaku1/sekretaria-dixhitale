@@ -41,3 +41,4 @@ export {
   findAssignments,
   type AssignmentContext,
 } from "./server/assignment-context";
+export { registerCurPurposes, SYLLABUS_PURPOSE } from "./server/syllabus.purposes";

@@ -1,0 +1,14 @@
+# Production reverse proxy. DOMAIN and ACME_EMAIL come from the compose environment.
+{
+	email {$ACME_EMAIL}
+}
+
+app.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:3000
+}
+
+auth.{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy keycloak:8080
+}

@@ -291,9 +291,6 @@ describe("queries (AC-9)", () => {
     const f = id(await faculty());
     await department(f, "D1");
     expect((await getFaculty(f))?.departments.map((d) => d.code)).toEqual(["D1"]);
-    await run((ctx) => units.deactivateDepartment(ctx, id({ id: "x" } as never)), "x").catch(
-      () => undefined,
-    );
     expect((await listFacultyOptions()).map((o) => o.id)).toEqual([f]);
   });
 });

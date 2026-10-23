@@ -96,9 +96,9 @@ model Department {
 }
 ```
 
-A migration adds a case-insensitive uniqueness guard across both tables: unique indexes on
-`upper(code)` per table plus an app-level cross-table check inside the transaction (a `codes` view
-is not needed).
+Codes are stored normalised (upper case), so a plain unique index per table is case-insensitive in
+practice; the cross-table check (a department code may not equal a faculty code) is done in the
+service inside the transaction.
 
 ### Permissions
 
@@ -135,15 +135,29 @@ Nav: group Administration, "Faculties" and "Departments".
 - Deactivating a faculty requires deactivating its departments first (one by one, each audited).
 - The role editor never offers inactive units; an old assignment to one still displays by id/label.
 
+**Implementation notes:**
+- The department table filters by *faculty code* (text, contains) instead of a faculty dropdown,
+  because select options are static in a table definition.
+- `FormField` got a `formatError` prop: shared Zod schemas emit catalog keys (`invalidCode`,
+  `required`), forms translate them; server errors that are already text pass through. The same
+  fix applies to the ORG-01 year form.
+- Scope resolvers (`FACULTY`, `DEPARTMENT`) live in `scope-resolvers.ts` and are registered by the
+  module index; only active units can be newly assigned and the IAM role editor lists them.
+- Seed: neutral demo units `DEMO-A` (departments `DEMO-A1`, `DEMO-A2`) and `DEMO-B` (`DEMO-B1`);
+  the dev head-of-department user is scoped to `DEMO-A1`. Seeds run org units before roles.
+- Heads of department are derived from role assignments (users with an active, valid
+  `head_of_department` role scoped to the department); HR-01 adds `headStaffId`.
+- Deactivation errors travel as `CODE:count` in the message so the UI can show the count.
+
 ## 4. Tasks
 
 - [x] **T1** — Models + migration (case-insensitive unique indexes); permissions. (AC-1, AC-11)
 - [x] **T2** — Pure unit rules and schemas with unit tests. (AC-2, AC-4, AC-6)
 - [x] **T3** — Faculty and department services, queries, actions; integration tests. (AC-1..AC-6, AC-9)
 - [x] **T4** — Scope resolvers registered; integration with `assignRole` and the role editor options. (AC-7, AC-8)
-- [ ] **T5** — Faculty table and pages. (AC-10)
-- [ ] **T6** — Department table and pages (heads of department). (AC-9, AC-10)
-- [ ] **T7** — Nav, i18n (`org.*`), demo seed + dev head-of-department role, e2e, docs. (AC-12 and all)
+- [x] **T5** — Faculty table and pages. (AC-10)
+- [x] **T6** — Department table and pages (heads of department). (AC-9, AC-10)
+- [x] **T7** — Nav, i18n (`org.*`), demo seed + dev head-of-department role, e2e, docs. (AC-12 and all)
 
 ## 5. Test plan
 
@@ -161,9 +175,9 @@ Nav: group Administration, "Faculties" and "Departments".
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief, auth.md scope resolvers note)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief, auth.md scope resolvers note)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

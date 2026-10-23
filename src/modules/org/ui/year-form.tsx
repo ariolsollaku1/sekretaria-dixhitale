@@ -70,6 +70,7 @@ export function YearForm(props: Props & { defaults?: YearFormInput }) {
       control={form.control}
       name={name}
       label={label}
+      formatError={(m) => (t.has(`errors.${m}` as never) ? t(`errors.${m}` as never) : m)}
       render={({ field, ...a11y }) => <Input type="date" {...field} {...a11y} />}
     />
   );

@@ -40,3 +40,23 @@ registerNav({
   group: "administration",
   order: 10,
 });
+registerNav(
+  {
+    id: "faculties",
+    labelKey: "faculties",
+    href: "/org/faculties",
+    icon: "building",
+    permission: "org.faculty.read",
+    group: "administration",
+    order: 20,
+  },
+  {
+    id: "departments",
+    labelKey: "departments",
+    href: "/org/departments",
+    icon: "building",
+    permission: "org.department.read",
+    group: "administration",
+    order: 21,
+  },
+);

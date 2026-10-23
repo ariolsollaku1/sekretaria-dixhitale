@@ -94,8 +94,8 @@ erDiagram
 |---|---|
 | `AcademicYear` | `code` ("2026-2027"), `startDate`, `endDate`, `status` (PLANNED/CURRENT/CLOSED) |
 | `Semester` | `academicYearId`, `number` (1/2), dates |
-| `Faculty` | `code`, `name`, `active` |
-| `Department` | `facultyId`, `code`, `name`, `headStaffId?`, `active` |
+| `Faculty` | `code` (unique, upper case), `name`, `nameEn?`, `active` |
+| `Department` | `facultyId` (fixed), `code` (unique, upper case), `name`, `nameEn?`, `active`; `headStaffId?` arrives with HR-01 (until then the head is derived from `UserRole`) |
 | `StudyProgram` | `departmentId`, `code`, `name`, `cycle` (FIRST/SECOND), `durationYears` (1/2/3), `totalCredits`, `coordinatorStaffId?`, `active` |
 | `Cohort` | `programId`, `startAcademicYearId`, `curriculumPlanId`, `name` |
 | `StudentGroup` | `cohortId`, `academicYearId`, `yearOfStudy`, `name`, `capacity?` |

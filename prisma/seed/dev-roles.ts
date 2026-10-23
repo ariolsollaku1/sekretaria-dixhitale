@@ -22,8 +22,8 @@ const ROLE_KEYS = new Set([
   "erasmus",
 ]);
 
-// Role -> scope for dev assignments. Department/program-scoped roles need real faculties,
-// departments and programs, so they are assigned once ORG-02/ORG-03 exist (null = skipped).
+// Role -> scope for dev assignments. Program-scoped roles need programs (ORG-03), so they are
+// skipped for now (null); the head of department is handled separately (needs a department).
 const DEV_SCOPE: Record<string, "INSTITUTION" | "SELF" | null> = {
   sysadmin: "INSTITUTION",
   secretary: "INSTITUTION",
@@ -48,9 +48,34 @@ export const devRolesSeeder: Seeder = {
     for (const u of users.filter((u) => u.appUser)) {
       const role = u.role.replaceAll("-", "_");
       const scopeType = DEV_SCOPE[role];
-      if (!ROLE_KEYS.has(role) || !scopeType) continue;
+      if (!ROLE_KEYS.has(role)) continue;
       const user = await db.user.findUnique({ where: { email: u.email } });
       if (!user) continue;
+
+      // Scoped roles need real units (ORG-02): the dev head of department leads demo department A1.
+      if (role === "head_of_department") {
+        const department = await db.department.findUnique({ where: { code: "DEMO-A1" } });
+        if (!department) continue;
+        const has = await db.userRole.findFirst({
+          where: {
+            userId: user.id,
+            role: "head_of_department",
+            scopeType: "DEPARTMENT",
+            scopeId: department.id,
+          },
+        });
+        if (!has)
+          await db.userRole.create({
+            data: {
+              userId: user.id,
+              role: "head_of_department",
+              scopeType: "DEPARTMENT",
+              scopeId: department.id,
+            },
+          });
+        continue;
+      }
+      if (!scopeType) continue;
       const exists = await db.userRole.findFirst({
         where: { userId: user.id, role: role as never, scopeType },
       });

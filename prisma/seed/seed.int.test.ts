@@ -44,3 +44,22 @@ it("seeds three demo academic years with exactly one current, idempotently (ORG-
     ["2027-2028", "PLANNED", 2],
   ]);
 });
+
+it("seeds neutral demo faculties and departments and scopes the dev head of department to one (ORG-02 AC-12)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    (await db.faculty.findMany({ orderBy: { code: "asc" }, select: { code: true } })).map(
+      (f) => f.code,
+    ),
+  ).toEqual(["DEMO-A", "DEMO-B"]);
+  expect(await db.department.count()).toBe(3);
+  const head = await db.user.findUniqueOrThrow({
+    where: { email: "head-of-department@dev.logos.test" },
+    include: { roles: true },
+  });
+  const a1 = await db.department.findUniqueOrThrow({ where: { code: "DEMO-A1" } });
+  expect(head.roles).toMatchObject([
+    { role: "head_of_department", scopeType: "DEPARTMENT", scopeId: a1.id },
+  ]);
+});

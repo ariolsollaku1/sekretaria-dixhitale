@@ -51,7 +51,9 @@
       "audit": "Evidenca",
       "users": "Përdoruesit",
       "files": "Skedarët",
-      "years": "Vitet akademike"
+      "years": "Vitet akademike",
+      "faculties": "Fakultetet",
+      "departments": "Departamentet"
     },
     "languages": {
       "sq": "Shqip",
@@ -369,7 +371,8 @@
       "makeCurrentBody": "Viti {code} bëhet viti aktual i sistemit.",
       "makeCurrentBodyClosing": "Viti {code} bëhet aktual dhe viti {previous} mbyllet: bëhet vetëm për lexim dhe nuk rihapet. Veprimi regjistrohet në evidencë.",
       "reason": "Arsyeja",
-      "reasonHint": "Ruhet në evidencën e ndryshimeve."
+      "reasonHint": "Ruhet në evidencën e ndryshimeve.",
+      "statusChanged": "Statusi u ndryshua."
     },
     "errors": {
       "invalidDate": "Shkruani një datë të vlefshme.",
@@ -377,12 +380,20 @@
       "overlap": "Ky vit mbivendoset me një vit tjetër akademik.",
       "semesterOutside": "Semestri duhet të jetë brenda vitit akademik.",
       "semesterOrder": "Semestri 2 duhet të fillojë pasi mbaron semestri 1.",
-      "codeTaken": "Ekziston tashmë një vit me të njëjtin kod.",
+      "codeTaken": "Ky kod përdoret tashmë nga një fakultet ose departament.",
       "YEAR_CLOSED": "Viti është i mbyllur dhe nuk ndryshohet.",
       "NOT_PLANNED": "Vetëm një vit i planifikuar mund të bëhet aktual.",
       "CURRENT_EXISTS": "Një ndryshim tjetër po bëhej njëkohësisht. Provoni përsëri.",
       "reasonRequired": "Arsyeja është e detyrueshme.",
-      "generic": "Veprimi nuk u krye. Provoni përsëri."
+      "generic": "Veprimi nuk u krye. Provoni përsëri.",
+      "invalidCode": "Kodi duhet të ketë 2–12 karaktere (A–Z, 0–9, - ose _).",
+      "required": "Kjo fushë është e detyrueshme.",
+      "facultyInactive": "Fakulteti është joaktiv.",
+      "facultyNotFound": "Fakulteti nuk u gjet.",
+      "ALREADY_INACTIVE": "Njësia është tashmë joaktive.",
+      "ALREADY_ACTIVE": "Njësia është tashmë aktive.",
+      "HAS_ACTIVE_DEPARTMENTS": "Fakulteti ka ende {count} departamente aktive. Çaktivizojini së pari.",
+      "FACULTY_INACTIVE": "Fakulteti i departamentit është joaktiv. Riaktivizojeni së pari fakultetin."
     },
     "rollover": {
       "title": "Fillimi i vitit të ri akademik",
@@ -390,6 +401,36 @@
       "empty": "Hapat shfaqen këtu ndërsa shtohen modulet përkatëse (grupet, tarifat, kalendari).",
       "open": "Hap",
       "nav": "Fillimi i vitit të ri"
+    },
+    "unit": {
+      "code": "Kodi",
+      "codeHint": "2–12 karaktere: shkronja A–Z, shifra, vizë ose nënvizë.",
+      "name": "Emri",
+      "nameEn": "Emri në anglisht (opsional)",
+      "faculty": "Fakulteti",
+      "facultyCode": "Kodi i fakultetit",
+      "departments": "Departamentet",
+      "search": "Kërko sipas kodit ose emrit",
+      "active": "Aktiv",
+      "inactive": "Joaktiv",
+      "create": "Krijo",
+      "createFaculty": "Fakultet i ri",
+      "createDepartment": "Departament i ri",
+      "faculties": "Fakultetet",
+      "departmentsTitle": "Departamentet",
+      "deactivate": "Çaktivizo",
+      "deactivateTitle": "Çaktivizoni njësinë?",
+      "deactivateBody": "Njësia nuk mund të marrë më përdorues ose njësi të reja, por historiku ruhet.",
+      "reactivate": "Riaktivizo",
+      "reactivateTitle": "Riaktivizoni njësinë?",
+      "reactivateBody": "Njësia bëhet sërish e përdorshme.",
+      "heads": "Përgjegjësit e departamentit",
+      "noHeads": "Asnjë përgjegjës nuk është caktuar. Caktojeni duke i dhënë një përdoruesi rolin “Përgjegjës departamenti” me fushëveprim këtë departament.",
+      "assignHint": "Rolet caktohen te përdoruesit.",
+      "departmentsOf": "Departamentet e fakultetit",
+      "noDepartments": "Ky fakultet nuk ka ende departamente.",
+      "newDepartment": "Shto departament",
+      "inactiveNote": "Kjo njësi është joaktive."
     }
   }
 }

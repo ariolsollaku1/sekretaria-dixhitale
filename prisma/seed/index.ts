@@ -4,11 +4,19 @@ import { PrismaClient } from "../../src/generated/prisma/client";
 import { createAdapter } from "../../src/lib/db/adapter";
 import { academicYearsSeeder } from "./academic-years";
 import { devRolesSeeder } from "./dev-roles";
+import { orgUnitsSeeder } from "./org-units";
 import { devUsersSeeder } from "./dev-users";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
-const SEEDERS: Seeder[] = [settingsSeeder, devUsersSeeder, devRolesSeeder, academicYearsSeeder];
+// Order matters: org units before dev roles, because the dev head of department is scoped to one.
+const SEEDERS: Seeder[] = [
+  settingsSeeder,
+  devUsersSeeder,
+  orgUnitsSeeder,
+  devRolesSeeder,
+  academicYearsSeeder,
+];
 
 function parseEnv(args: string[]): SeedEnv {
   const i = args.indexOf("--env");

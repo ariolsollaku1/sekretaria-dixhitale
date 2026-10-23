@@ -51,7 +51,9 @@
       "audit": "Audit log",
       "users": "Users",
       "files": "Files",
-      "years": "Academic years"
+      "years": "Academic years",
+      "faculties": "Faculties",
+      "departments": "Departments"
     },
     "languages": {
       "sq": "Shqip",
@@ -369,7 +371,8 @@
       "makeCurrentBody": "{code} becomes the system's current academic year.",
       "makeCurrentBodyClosing": "{code} becomes current and {previous} is closed: it becomes read-only and cannot be reopened. This is recorded in the audit log.",
       "reason": "Reason",
-      "reasonHint": "Stored in the audit log."
+      "reasonHint": "Stored in the audit log.",
+      "statusChanged": "Status changed."
     },
     "errors": {
       "invalidDate": "Enter a valid date.",
@@ -377,12 +380,20 @@
       "overlap": "This year overlaps another academic year.",
       "semesterOutside": "The semester must lie inside the academic year.",
       "semesterOrder": "Semester 2 must start after semester 1 ends.",
-      "codeTaken": "A year with the same code already exists.",
+      "codeTaken": "This code is already used by a faculty or department.",
       "YEAR_CLOSED": "The year is closed and cannot be changed.",
       "NOT_PLANNED": "Only a planned year can be made current.",
       "CURRENT_EXISTS": "Another change happened at the same time. Try again.",
       "reasonRequired": "A reason is required.",
-      "generic": "The action failed. Please try again."
+      "generic": "The action failed. Please try again.",
+      "invalidCode": "The code needs 2–12 characters (A–Z, 0–9, - or _).",
+      "required": "This field is required.",
+      "facultyInactive": "The faculty is inactive.",
+      "facultyNotFound": "The faculty was not found.",
+      "ALREADY_INACTIVE": "The unit is already inactive.",
+      "ALREADY_ACTIVE": "The unit is already active.",
+      "HAS_ACTIVE_DEPARTMENTS": "The faculty still has {count} active departments. Deactivate them first.",
+      "FACULTY_INACTIVE": "The department's faculty is inactive. Reactivate the faculty first."
     },
     "rollover": {
       "title": "Start a new academic year",
@@ -390,6 +401,36 @@
       "empty": "Steps appear here as the related modules (groups, fees, calendar) are added.",
       "open": "Open",
       "nav": "New year checklist"
+    },
+    "unit": {
+      "code": "Code",
+      "codeHint": "2–12 characters: letters A–Z, digits, hyphen or underscore.",
+      "name": "Name",
+      "nameEn": "English name (optional)",
+      "faculty": "Faculty",
+      "facultyCode": "Faculty code",
+      "departments": "Departments",
+      "search": "Search by code or name",
+      "active": "Active",
+      "inactive": "Inactive",
+      "create": "Create",
+      "createFaculty": "New faculty",
+      "createDepartment": "New department",
+      "faculties": "Faculties",
+      "departmentsTitle": "Departments",
+      "deactivate": "Deactivate",
+      "deactivateTitle": "Deactivate this unit?",
+      "deactivateBody": "The unit can no longer receive users or new units, but its history is kept.",
+      "reactivate": "Reactivate",
+      "reactivateTitle": "Reactivate this unit?",
+      "reactivateBody": "The unit becomes usable again.",
+      "heads": "Heads of department",
+      "noHeads": "No head is assigned. Assign one by giving a user the “Head of department” role scoped to this department.",
+      "assignHint": "Roles are assigned on the user pages.",
+      "departmentsOf": "Departments of this faculty",
+      "noDepartments": "This faculty has no departments yet.",
+      "newDepartment": "Add department",
+      "inactiveNote": "This unit is inactive."
     }
   }
 }

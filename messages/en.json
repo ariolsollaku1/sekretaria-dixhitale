@@ -67,7 +67,9 @@
       "cohorts": "Cohorts",
       "studentGroups": "Student groups",
       "students": "Students",
-      "myStudentRecord": "My student record"
+      "myStudentRecord": "My student record",
+      "teaching": "Teaching assignments",
+      "myTeaching": "My teaching"
     },
     "languages": {
       "sq": "Shqip",

@@ -1,3 +1,4 @@
+import { ROLES } from "@/lib/authz/roles";
 import { registerPermissions } from "@/lib/authz/registry";
 
 // AC-12 (CUR-01). The write permission is role-based; its *scope* comes from the assignment, so a
@@ -31,5 +32,24 @@ registerPermissions("cur", {
     quality: ["cur.plan.read", "cur.plan.view"],
     lecturer: ["cur.plan.view"],
     student: ["cur.plan.view"],
+  },
+});
+
+// AC-9 (CUR-04): teaching assignments. Writes are scoped to the group's program (a head of
+// department assigns inside their department); everyone with a staff record sees their own.
+registerPermissions("cur", {
+  permissions: ["cur.teaching.read", "cur.teaching.write", "cur.teaching.self"],
+  grants: {
+    ...Object.fromEntries(
+      ROLES.filter((r) => r !== "student").map((r) => [r, ["cur.teaching.self"]]),
+    ),
+    sysadmin: ["cur.teaching.read", "cur.teaching.write", "cur.teaching.self"],
+    secretary: ["cur.teaching.read", "cur.teaching.write", "cur.teaching.self"],
+    head_of_department: ["cur.teaching.read", "cur.teaching.write", "cur.teaching.self"],
+    student_affairs: ["cur.teaching.read", "cur.teaching.self"],
+    finance: ["cur.teaching.read", "cur.teaching.self"],
+    hr: ["cur.teaching.read", "cur.teaching.self"],
+    quality: ["cur.teaching.read", "cur.teaching.self"],
+    program_coordinator: ["cur.teaching.read", "cur.teaching.self"],
   },
 });

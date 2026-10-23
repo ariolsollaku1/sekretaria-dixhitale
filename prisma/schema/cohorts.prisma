@@ -23,21 +23,22 @@ model Cohort {
 
 /// A teaching group of a cohort for one academic year and year of study (ORG-04).
 model StudentGroup {
-  yearRegistrations YearRegistration[]
-  id                String             @id @default(cuid(2))
-  cohortId          String             @map("cohort_id")
-  academicYearId    String             @map("academic_year_id")
-  yearOfStudy       Int                @map("year_of_study")
-  name              String
+  teachingAssignments TeachingAssignment[]
+  yearRegistrations   YearRegistration[]
+  id                  String               @id @default(cuid(2))
+  cohortId            String               @map("cohort_id")
+  academicYearId      String               @map("academic_year_id")
+  yearOfStudy         Int                  @map("year_of_study")
+  name                String
   /// Informational until STU-01 defines enrollment limits.
-  capacity          Int?
-  active            Boolean            @default(true)
-  createdAt         DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt         DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById       String?            @map("created_by_id")
-  updatedById       String?            @map("updated_by_id")
-  cohort            Cohort             @relation(fields: [cohortId], references: [id])
-  academicYear      AcademicYear       @relation(fields: [academicYearId], references: [id])
+  capacity            Int?
+  active              Boolean              @default(true)
+  createdAt           DateTime             @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt           DateTime             @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById         String?              @map("created_by_id")
+  updatedById         String?              @map("updated_by_id")
+  cohort              Cohort               @relation(fields: [cohortId], references: [id])
+  academicYear        AcademicYear         @relation(fields: [academicYearId], references: [id])
 
   @@unique([cohortId, academicYearId, yearOfStudy, name])
   @@index([academicYearId])

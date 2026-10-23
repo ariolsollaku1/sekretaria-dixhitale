@@ -40,7 +40,7 @@ exams (CAL-03), grades, the teaching-load report (CUR-05) and evaluations (QA-01
 | AC-5 | WHEN an authorized user copies the assignments of one academic year into another, THE SYSTEM SHALL, for each target group, copy those of the source group with the same name in the same program and year of study for the same course, kind and lecturer, skip existing ones and inactive lecturers (reporting counts), and write one audit entry. |
 | AC-6 | THE SYSTEM SHALL show, for an academic year, each active group with the courses of its plan for its year of study and the assignments per kind, and a warning list of courses without any assignment and (when `cur.teaching.maxPlannedHours` is set) of lecturers whose planned hours exceed it. |
 | AC-7 | THE SYSTEM SHALL list assignments in a PLT-10 table (year, program, group, course, semester, kind, lecturer, hours) with filters, within the user's program scope, and exportable. |
-| AC-8 | THE SYSTEM SHALL give every staff member a page with their own assignments (`cur.teaching.self`), for the selected academic year, and nothing of anybody else's. |
+| AC-8 | THE SYSTEM SHALL give every staff member a page with their own assignments (`cur.teaching.self`, every role but student), for the selected academic year, and nothing of anybody else's. |
 | AC-9 | THE SYSTEM SHALL restrict writes to `cur.teaching.write` (sysadmin, secretary, head of department — for groups of programs inside their scope) and reads to `cur.teaching.read` (those and student affairs, HR, quality, program coordinator, finance; scoped), and audit every change. |
 
 ### Out of scope
@@ -77,7 +77,7 @@ Checks: `semester IN (1,2)`, `planned_hours BETWEEN 0 AND 500`.
 |---|---|
 | `cur.teaching.read` | sysadmin, secretary, student_affairs, finance, hr, quality, head_of_department, program_coordinator |
 | `cur.teaching.write` | sysadmin, secretary, head_of_department |
-| `cur.teaching.self` | every role |
+| `cur.teaching.self` | every role except student |
 
 ### Server
 
@@ -105,7 +105,7 @@ Checks: `semester IN (1,2)`, `planned_hours BETWEEN 0 AND 500`.
 
 ## 4. Tasks
 
-- [ ] **T1** — `teaching.prisma` + migration; permissions; ORG group target resolver; nav. (AC-1, AC-9)
+- [x] **T1** — `teaching.prisma` + migration; permissions; ORG group target resolver; nav. (AC-1, AC-9)
 - [ ] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-3, AC-5, AC-6)
 - [ ] **T3** — HR/ORG helpers, service and queries; integration tests. (AC-2..AC-6, AC-8, AC-9)
 - [ ] **T4** — Board, copy tool, list table, my assignments, i18n. (AC-6..AC-8)

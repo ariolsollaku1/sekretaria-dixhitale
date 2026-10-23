@@ -1,0 +1,31 @@
+enum TeachingKind {
+  LECTURE
+  SEMINAR
+  LAB
+
+  @@map("teaching_kind")
+}
+
+/// A lecturer teaching one kind of a plan course to a group (CUR-04); planning data.
+model TeachingAssignment {
+  id           String       @id @default(cuid(2))
+  groupId      String       @map("group_id")
+  planCourseId String       @map("plan_course_id")
+  staffId      String       @map("staff_id")
+  kind         TeachingKind
+  /// Of the plan course (denormalized for queries).
+  semester     Int
+  plannedHours Int          @map("planned_hours")
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById  String?      @map("created_by_id")
+  updatedById  String?      @map("updated_by_id")
+  group        StudentGroup @relation(fields: [groupId], references: [id])
+  planCourse   PlanCourse   @relation(fields: [planCourseId], references: [id])
+  staff        Staff        @relation(fields: [staffId], references: [id])
+
+  @@unique([groupId, planCourseId, kind, staffId])
+  @@index([staffId])
+  @@index([planCourseId])
+  @@map("teaching_assignments")
+}

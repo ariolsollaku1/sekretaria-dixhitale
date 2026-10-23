@@ -67,7 +67,9 @@
       "cohorts": "Kohortet",
       "studentGroups": "Grupet e studentëve",
       "students": "Studentët",
-      "myStudentRecord": "Të dhënat e mia"
+      "myStudentRecord": "Të dhënat e mia",
+      "teaching": "Ngarkesa mësimore",
+      "myTeaching": "Lëndët e mia"
     },
     "languages": {
       "sq": "Shqip",

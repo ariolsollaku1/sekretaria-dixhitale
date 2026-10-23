@@ -57,6 +57,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
+| Q-41 | Syllabi: format, who uploads and approves, carrying forward | no | open | Heads of department / Quality |
 | Q-65 | Full data export: contents, format and what is left out | no | open | IT / DPO |
 | Q-66 | Backups: frequency, retention, recovery targets | no | open | IT / Management |
 | Q-67 | Backups: off-site copy, encryption and who runs `pg_dump` | no | open | IT / Client host |
@@ -492,6 +493,12 @@ Decisions taken in conversation that aren't architecture ADRs.
   an issued document is never edited — it can be cancelled with a reason (the verification page then
   says so); signatures and stamps are part of the template.
 - **Impact:** the number format per type, the verification page content, cancellation rules.
+
+### Q-41 — Syllabi: format, who uploads and approves, carrying forward
+- **Context:** SRC-055, SRC-110, SRC-112 — the curriculum plan and the syllabi of each program for each academic year are kept, approved and archived; students ask for them (further studies, employment).
+- **Questions:** Is a syllabus a document the lecturer or department writes (PDF/Word) or a structured form (objectives, contents, literature, assessment…)? Who uploads (the lecturer, the head of department, the program coordinator) and who approves? Is a syllabus re-approved every academic year or only when it changes? Must students see it before enrolling?
+- **Working assumption:** version 1 stores a PDF per course of an approved plan and academic year (the structured form is a later increment); the program coordinator, the head of department (inside their scope) and the sysadmin upload and approve; each upload is a new version, approving a version archives the previous one; the previous approved syllabus of the course can be carried forward into a new year as a draft that still needs approval; approved syllabi are readable by everyone who may see the plan, students included; drafts and archived versions only by staff.
+- **Impact:** the format (a structured form would need its fields), the roles that upload and approve, the carry-forward rule.
 
 ### Q-65 — Full data export: contents, format and what is left out
 - **Context:** SRC-151 — data must be convertible to standard programmes for migration (PLT-13).

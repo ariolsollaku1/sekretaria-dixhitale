@@ -12,3 +12,4 @@ test-results
 next-env.d.ts
 src/generated
 .data
+.claude/worktrees/

@@ -881,5 +881,129 @@
       "archiveTitle": "Archive this announcement?",
       "archiveBody": "Readers will no longer see it. You can publish it again later."
     }
+  },
+  "hr": {
+    "title": "Staff",
+    "new": "New staff member",
+    "edit": "Edit",
+    "yes": "Yes",
+    "no": "No",
+    "kind": {
+      "ACADEMIC": "Academic",
+      "ADMINISTRATIVE": "Administrative"
+    },
+    "category": {
+      "PAE": "PAE (internal, full-time)",
+      "PAK": "PAK (external, part-time)",
+      "VOLUNTEER": "Volunteer"
+    },
+    "gender": {
+      "FEMALE": "Female",
+      "MALE": "Male"
+    },
+    "status": {
+      "active": "Employed",
+      "inactive": "Ended"
+    },
+    "columns": {
+      "name": "Name",
+      "kind": "Kind",
+      "category": "Category",
+      "degree": "Degree",
+      "title": "Title",
+      "department": "Department",
+      "departmentCode": "Department code",
+      "retired": "Retired",
+      "contractStart": "Contract start",
+      "contractEnd": "Contract end",
+      "status": "Status",
+      "search": "Search by name"
+    },
+    "form": {
+      "person": "Personal data",
+      "employment": "Employment",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "fatherName": "Father's name",
+      "gender": "Gender",
+      "birthDate": "Date of birth",
+      "nationalId": "National ID number",
+      "phone": "Phone",
+      "email": "E-mail",
+      "address": "Address",
+      "kind": "Kind of staff",
+      "category": "Category",
+      "degree": "Degree",
+      "titleField": "Title",
+      "department": "Department",
+      "primaryEmployer": "Primary employer",
+      "retired": "Retired",
+      "contractStart": "Contract start",
+      "contractEnd": "Contract end",
+      "create": "Register",
+      "save": "Save changes"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "invalidEmail": "The e-mail is not valid.",
+      "birthDateRange": "The birth date must be between 1900 and today.",
+      "endBeforeStart": "The end cannot be before the start.",
+      "unknownDepartment": "The department does not exist or is not active.",
+      "personConflict": "The national ID and the e-mail belong to different persons.",
+      "alreadyStaff": "This person is already in the staff register.",
+      "alreadyUsed": "This national ID or e-mail is used by another person.",
+      "reasonRequired": "Enter the reason.",
+      "importHasErrors": "The file has errors; nothing was saved.",
+      "duplicateInFile": "Repeated in the file.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The staff member was registered.",
+      "saved": "Changes saved.",
+      "statusChanged": "The status was changed.",
+      "deactivate": "End employment",
+      "deactivateTitle": "End employment?",
+      "deactivateBody": "The data is kept; the person no longer counts as employed.",
+      "reactivate": "Resume employment",
+      "reactivateTitle": "Resume employment?",
+      "reactivateBody": "The person returns to the list of employed staff.",
+      "reason": "Reason"
+    },
+    "me": {
+      "title": "My staff record",
+      "none": "You have no staff record",
+      "noneHint": "Your account is not linked to a staff member. Contact Human Resources."
+    },
+    "import": {
+      "nav": "Import from Excel",
+      "title": "Staff import",
+      "file": "File (.csv or .xlsx)",
+      "hint": "The first row has the headers: first_name, last_name, father_name, gender, birth_date, national_id, email, phone, address, kind, category, degree, title, department, primary_employer, contract_start, contract_end. Gender: F/M; kind: academic/administrative; category: PAE/PAK/VOLUNTEER; dates: YYYY-MM-DD or DD.MM.YYYY. At most 2000 rows, 2 MB.",
+      "choose": "Choose file",
+      "template": "Download CSV template",
+      "working": "Checking…",
+      "summary": "{valid} of {total} rows are valid ({created} new, {existing} already exist and are skipped) and {invalid} have errors.",
+      "errors": "Errors",
+      "row": "Row {row}",
+      "new": "New",
+      "exists": "Exists",
+      "truncated": "Showing {shown} of {total} rows.",
+      "confirm": "Import {count} members",
+      "fixFirst": "Fix the errors in the file and choose it again: the import is all or nothing.",
+      "done": "{created} created, {skipped} skipped.",
+      "fileErrors": {
+        "invalidEncoding": "The file is not UTF-8. Save it as “CSV UTF-8” or use .xlsx.",
+        "empty": "The file is empty or has only the headers.",
+        "tooManyRows": "The file has more than 2000 rows.",
+        "tooLarge": "The file is larger than 2 MB.",
+        "missingColumns": "Required columns are missing",
+        "unsupportedFile": "The file cannot be read. Use .csv or .xlsx.",
+        "importHasErrors": "The file has errors; nothing was saved.",
+        "FORBIDDEN": "You may not import.",
+        "UNAUTHENTICATED": "Sign in again to continue."
+      }
+    }
   }
 }

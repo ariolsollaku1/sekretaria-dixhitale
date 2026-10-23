@@ -6,4 +6,5 @@ import "@/modules/org";
 import "@/modules/cur";
 import "@/modules/cal";
 import "@/modules/ntf";
+import "@/modules/hr";
 import "@/lib/audit/table";

@@ -114,7 +114,7 @@ erDiagram
 ### STU / ADM — students & admissions
 | Entity | Key fields |
 |---|---|
-| `Person` | `firstName`, `lastName`, `fatherName`, `gender`, `birthDate`, `birthPlace`, `nationalId`, `phone`, `email`, `address`, `residence` (city/municipality) |
+| `Person` | (HR-01, implemented; STU-01 reuses it) `firstName`, `lastName`, `fatherName?`, `gender` (FEMALE/MALE), `birthDate`, `nationalId?` (unique), `phone?`, `email?` (unique), `address?`. `User.personId` points at it. `residence` and birth place arrive with STU-01. |
 | `Lead` | interest-form contact: name, email, phone, program of interest, source (website/campaign/event), consent |
 | `Application` | `personData` (snapshot), `programId`, `academicYearId`, `highSchoolAverage`, documents, `status` (SUBMITTED/IN_REVIEW/ACCEPTED/REJECTED/ENROLLED) |
 | `Student` | `personId`, `nim?` (from SMIAL), `studentNumber` (internal) |
@@ -164,7 +164,7 @@ erDiagram
 ### HR / OFF — staff & administration
 | Entity | Key fields |
 |---|---|
-| `Staff` | `personId`, `kind` (ACADEMIC/ADMINISTRATIVE), `category` (PAE/PAK/VOLUNTEER), `degree`, `title`, `departmentId?`, `retired`, `primaryEmployer?` |
+| `Staff` | (HR-01, implemented) `personId` (unique), `kind` (ACADEMIC/ADMINISTRATIVE), `category` (PAE/PAK/VOLUNTEER), `degree?`, `title?`, `departmentId?`, `retired`, `primaryEmployer?` (PAK only), `contractStart`, `contractEnd?`, `active` (employment ended = false; never deleted). |
 | `EmploymentContract` | `staffId`, `type`, `startDate`, `endDate`, `fileId` |
 | `PerformanceEvaluation` | `staffId`, `evaluatorId`, `period`, form submission ref, `score` |
 | Staff requests | via `FormSubmission` (leave, supplies, certificates, authorizations) |

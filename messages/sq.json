@@ -881,5 +881,129 @@
       "archiveTitle": "Të arkivohet njoftimi?",
       "archiveBody": "Njoftimi nuk do të shfaqet më për lexuesit. Mund ta publikoni përsëri më vonë."
     }
+  },
+  "hr": {
+    "title": "Stafi",
+    "new": "Anëtar i ri i stafit",
+    "edit": "Ndrysho",
+    "yes": "Po",
+    "no": "Jo",
+    "kind": {
+      "ACADEMIC": "Akademik",
+      "ADMINISTRATIVE": "Administrativ"
+    },
+    "category": {
+      "PAE": "PAE (i brendshëm, me kohë të plotë)",
+      "PAK": "PAK (i jashtëm, me kohë të pjesshme)",
+      "VOLUNTEER": "Vullnetar"
+    },
+    "gender": {
+      "FEMALE": "Femër",
+      "MALE": "Mashkull"
+    },
+    "status": {
+      "active": "Në punë",
+      "inactive": "Përfunduar"
+    },
+    "columns": {
+      "name": "Emri",
+      "kind": "Lloji",
+      "category": "Kategoria",
+      "degree": "Gradë",
+      "title": "Titulli",
+      "department": "Departamenti",
+      "departmentCode": "Kodi i departamentit",
+      "retired": "Në pension",
+      "contractStart": "Fillimi i kontratës",
+      "contractEnd": "Mbarimi i kontratës",
+      "status": "Statusi",
+      "search": "Kërko emrin"
+    },
+    "form": {
+      "person": "Të dhëna personale",
+      "employment": "Të dhëna pune",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "fatherName": "Emri i babait",
+      "gender": "Gjinia",
+      "birthDate": "Data e lindjes",
+      "nationalId": "Numri personal (NID)",
+      "phone": "Telefoni",
+      "email": "Email",
+      "address": "Adresa",
+      "kind": "Lloji i stafit",
+      "category": "Kategoria",
+      "degree": "Grada shkencore",
+      "titleField": "Titulli",
+      "department": "Departamenti",
+      "primaryEmployer": "Punëdhënësi kryesor",
+      "retired": "Në pension",
+      "contractStart": "Fillimi i kontratës",
+      "contractEnd": "Mbarimi i kontratës",
+      "create": "Regjistro",
+      "save": "Ruaj ndryshimet"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "invalidEmail": "Email-i nuk është i vlefshëm.",
+      "birthDateRange": "Data e lindjes duhet të jetë midis 1900 dhe sot.",
+      "endBeforeStart": "Mbarimi nuk mund të jetë para fillimit.",
+      "unknownDepartment": "Departamenti nuk ekziston ose nuk është aktiv.",
+      "personConflict": "Numri personal dhe email-i i përkasin personave të ndryshëm.",
+      "alreadyStaff": "Ky person është tashmë në regjistrin e stafit.",
+      "alreadyUsed": "Ky numër personal ose email përdoret nga një person tjetër.",
+      "reasonRequired": "Shkruani arsyen.",
+      "importHasErrors": "Skedari ka gabime; asgjë nuk u ruajt.",
+      "duplicateInFile": "Përsëritet në skedar.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Anëtari i stafit u regjistrua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "statusChanged": "Statusi u ndryshua.",
+      "deactivate": "Mbyll punësimin",
+      "deactivateTitle": "Të mbyllet punësimi?",
+      "deactivateBody": "Të dhënat ruhen; personi nuk numërohet më si në punë.",
+      "reactivate": "Rihap punësimin",
+      "reactivateTitle": "Të rihapet punësimi?",
+      "reactivateBody": "Personi kthehet në listën e stafit në punë.",
+      "reason": "Arsyeja"
+    },
+    "me": {
+      "title": "Të dhënat e mia si staf",
+      "none": "Nuk keni të dhëna stafi",
+      "noneHint": "Llogaria juaj nuk është lidhur me një anëtar stafi. Kontaktoni Burimet Njerëzore."
+    },
+    "import": {
+      "nav": "Importo nga Excel",
+      "title": "Importi i stafit",
+      "file": "Skedari (.csv ose .xlsx)",
+      "hint": "Rreshti i parë ka titujt: first_name, last_name, father_name, gender, birth_date, national_id, email, phone, address, kind, category, degree, title, department, primary_employer, contract_start, contract_end. Gjinia: F/M; lloji: academic/administrative; kategoria: PAE/PAK/VOLUNTEER; datat: VVVV-MM-DD ose DD.MM.VVVV. Maksimumi 2000 rreshta, 2 MB.",
+      "choose": "Zgjidh skedarin",
+      "template": "Shkarko modelin CSV",
+      "working": "Duke kontrolluar…",
+      "summary": "{valid} nga {total} rreshta janë të vlefshëm ({created} të rinj, {existing} ekzistojnë dhe anashkalohen) dhe {invalid} kanë gabime.",
+      "errors": "Gabimet",
+      "row": "Rreshti {row}",
+      "new": "I ri",
+      "exists": "Ekziston",
+      "truncated": "Po shfaqen {shown} nga {total} rreshta.",
+      "confirm": "Importo {count} anëtarë",
+      "fixFirst": "Rregulloni gabimet në skedar dhe zgjidheni përsëri: importi bëhet i plotë ose aspak.",
+      "done": "U krijuan {created}, u anashkaluan {skipped}.",
+      "fileErrors": {
+        "invalidEncoding": "Skedari nuk është UTF-8. Ruajeni si “CSV UTF-8” ose përdorni .xlsx.",
+        "empty": "Skedari është bosh ose ka vetëm titujt.",
+        "tooManyRows": "Skedari ka më shumë se 2000 rreshta.",
+        "tooLarge": "Skedari është më i madh se 2 MB.",
+        "missingColumns": "Mungojnë kolonat e detyrueshme",
+        "unsupportedFile": "Skedari nuk lexohet. Përdorni .csv ose .xlsx.",
+        "importHasErrors": "Skedari ka gabime; asgjë nuk u ruajt.",
+        "FORBIDDEN": "Nuk keni leje për importin.",
+        "UNAUTHENTICATED": "Hyni përsëri për të vazhduar."
+      }
+    }
   }
 }

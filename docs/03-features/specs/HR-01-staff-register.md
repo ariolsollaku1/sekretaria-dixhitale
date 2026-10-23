@@ -124,14 +124,22 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 - Deactivated staff stay in lists (status filter) and keep their history.
 - Import numbers dates as `YYYY-MM-DD` or Excel dates.
 
+**Implementation notes:**
+- `src/modules/hr`; routes `/hr/staff`, `/hr/staff/new`, `/hr/staff/[id]`, `/hr/staff/[id]/edit`,
+  `/hr/staff/import` (+ `/template`), `/hr/me`.
+- CSV/XLSX reading and header mapping moved to `src/lib/import` and shared with CUR-01.
+- National ID, birth date and address are not list columns at all, so the list and export cannot
+  leak them; the detail/edit queries mask them without `hr.staff.sensitive`.
+- Dev seed gives the dev lecturer a staff record linked to their account.
+
 ## 4. Tasks
 
 - [x] **T1** — `hr.prisma` + migration (Person, Staff, FK from users); permissions; nav. (AC-1, AC-13)
 - [x] **T2** — Extract shared import helpers; schemas and import validation with unit tests. (AC-2, AC-4, AC-12)
 - [x] **T3** — Service and queries (scope, masking, account link); integration tests. (AC-3..AC-10)
 - [x] **T4** — Import preview/commit; tests. (AC-12)
-- [ ] **T5** — Table, pages, forms, import UI, my record, i18n. (AC-8..AC-12)
-- [ ] **T6** — E2E, seed, docs. (all)
+- [x] **T5** — Table, pages, forms, import UI, my record, i18n. (AC-8..AC-12)
+- [x] **T6** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -148,9 +156,9 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

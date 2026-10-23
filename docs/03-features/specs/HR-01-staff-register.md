@@ -127,7 +127,7 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 ## 4. Tasks
 
 - [x] **T1** — `hr.prisma` + migration (Person, Staff, FK from users); permissions; nav. (AC-1, AC-13)
-- [ ] **T2** — Extract shared import helpers; schemas and import validation with unit tests. (AC-2, AC-4, AC-12)
+- [x] **T2** — Extract shared import helpers; schemas and import validation with unit tests. (AC-2, AC-4, AC-12)
 - [ ] **T3** — Service and queries (scope, masking, account link); integration tests. (AC-3..AC-10)
 - [ ] **T4** — Import preview/commit; tests. (AC-12)
 - [ ] **T5** — Table, pages, forms, import UI, my record, i18n. (AC-8..AC-12)

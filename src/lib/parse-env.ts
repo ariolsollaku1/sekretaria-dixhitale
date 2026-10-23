@@ -3,6 +3,7 @@ import { z } from "zod";
 const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   APP_URL: z.url(),
+  DATABASE_URL: z.string().startsWith("postgres"),
 });
 
 export type Env = z.infer<typeof schema>;

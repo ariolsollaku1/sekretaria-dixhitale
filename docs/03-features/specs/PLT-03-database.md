@@ -83,7 +83,7 @@ path differs from older versions — follow the current Prisma docs, not memory.
 
 - [x] **T1** — Install Prisma; `prisma/schema/base.prisma` + `platform.prisma` (`SystemSetting`);
       first migration. (AC-1, AC-9)
-- [ ] **T2** — `src/lib/db/client.ts`, `transaction.ts`, `settings.ts` + unit tests where pure. (AC-2, AC-5)
+- [x] **T2** — `src/lib/db/client.ts`, `transaction.ts`, `settings.ts` + unit tests where pure. (AC-2, AC-5)
 - [ ] **T3** — Scripts in package.json; entrypoint runs `migrate deploy`. (AC-3, AC-4)
 - [ ] **T4** — Seed runner + example idempotent seeder (default settings). (AC-6)
 - [ ] **T5** — Test DB: `sekretari_test` created by postgres init script (dev only), Vitest

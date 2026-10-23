@@ -228,3 +228,55 @@ describe("result shapes", () => {
     expect(await db.systemSetting.count()).toBe(0);
   });
 });
+
+describe("compensation and after-commit hooks", () => {
+  const run = (fail: boolean) => {
+    const log: string[] = [];
+    const a = makeAction()({
+      permission: "plt.settings.write",
+      input: z.object({}),
+      handler: async (_i, ctx) => {
+        ctx.onFailure(async () => void log.push("undo-first"));
+        ctx.onFailure(async () => {
+          log.push("undo-second");
+          throw new Error("undo itself failed");
+        });
+        ctx.afterCommit(async () => void log.push("after-commit"));
+        if (fail) throw new DomainError("CONFLICT", "nope");
+        return "ok";
+      },
+    });
+    return { a, log };
+  };
+
+  it("runs compensations in reverse order when the handler fails, and not the after-commit hooks", async () => {
+    const { a, log } = run(true);
+    expect(await a({})).toMatchObject({ ok: false, error: { code: "CONFLICT" } });
+    expect(log).toEqual(["undo-second", "undo-first"]); // a failing undo does not stop the others
+  });
+
+  it("runs after-commit hooks only on success, never compensations", async () => {
+    const { a, log } = run(false);
+    expect(await a({})).toEqual({ ok: true, data: "ok" });
+    expect(log).toEqual(["after-commit"]);
+  });
+
+  it("compensates when the commit itself fails", async () => {
+    const log: string[] = [];
+    const a = makeAction({
+      transaction: async (fn) => {
+        await fn({} as never);
+        throw new Error("commit failed");
+      },
+    })({
+      permission: "plt.settings.write",
+      input: z.object({}),
+      handler: async (_i, ctx) => {
+        ctx.onFailure(async () => void log.push("undo"));
+        return 1;
+      },
+    });
+    expect(await a({})).toMatchObject({ ok: false, error: { code: "INTERNAL" } });
+    expect(log).toEqual(["undo"]);
+  });
+});

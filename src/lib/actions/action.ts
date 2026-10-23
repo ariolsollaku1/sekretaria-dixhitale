@@ -12,7 +12,13 @@ import { logger } from "@/lib/logger";
 // typed result instead of thrown errors.
 
 export type ActionErrorCode =
-  "UNAUTHENTICATED" | "FORBIDDEN" | "VALIDATION" | "NOT_FOUND" | "CONFLICT" | "INTERNAL";
+  | "UNAUTHENTICATED"
+  | "FORBIDDEN"
+  | "VALIDATION"
+  | "NOT_FOUND"
+  | "CONFLICT"
+  | "UNAVAILABLE"
+  | "INTERNAL";
 
 export type ActionError = {
   code: ActionErrorCode;
@@ -24,7 +30,7 @@ export type ActionResult<T> = { ok: true; data: T } | { ok: false; error: Action
 /** Handlers throw this for expected failures; everything else becomes INTERNAL. */
 export class DomainError extends Error {
   constructor(
-    readonly code: "NOT_FOUND" | "CONFLICT" | "VALIDATION",
+    readonly code: "NOT_FOUND" | "CONFLICT" | "VALIDATION" | "UNAVAILABLE",
     message: string,
     readonly fieldErrors?: Record<string, string[]>,
   ) {
@@ -41,6 +47,13 @@ export type ActionContext = {
   audit: Audit;
   /** The user's reason when `requireReason` is set (AC-8). */
   reason: string | null;
+  /**
+   * Compensation for side effects outside the database (e.g. a user created in Keycloak). Runs, last
+   * registered first, if the handler throws OR the commit fails. Never throws into the caller.
+   */
+  onFailure: (fn: () => Promise<void>) => void;
+  /** Runs after a successful commit (e.g. sending an email); failures are logged, not returned. */
+  afterCommit: (fn: () => Promise<void>) => void;
 };
 
 type Deps = {
@@ -60,6 +73,18 @@ type Options<S extends z.ZodType, R> = {
   requireReason?: boolean;
   handler: (input: z.output<S>, ctx: ActionContext) => Promise<R>;
 };
+
+type Hook = () => Promise<void>;
+
+async function runHooks(hooks: Hook[], message: string, permission: string) {
+  for (const hook of hooks) {
+    try {
+      await hook();
+    } catch (error) {
+      logger.error(message, { permission, error: (error as Error).name });
+    }
+  }
+}
 
 const reasonSchema = z.string().trim().min(1, "Reason is required");
 
@@ -105,14 +130,25 @@ export function createAction(deps: Deps) {
         }
 
         const request = await deps.request();
-        const data = await deps.transaction(async (tx) =>
-          options.handler(input, {
-            user,
-            db: tx,
-            audit: createAuditor(tx, { type: "USER", userId: user.id }, request),
-            reason,
-          }),
-        );
+        const failureHooks: Hook[] = [];
+        const commitHooks: Hook[] = [];
+        let data: R;
+        try {
+          data = await deps.transaction(async (tx) =>
+            options.handler(input, {
+              user,
+              db: tx,
+              audit: createAuditor(tx, { type: "USER", userId: user.id }, request),
+              reason,
+              onFailure: (fn) => void failureHooks.push(fn),
+              afterCommit: (fn) => void commitHooks.push(fn),
+            }),
+          );
+        } catch (error) {
+          await runHooks(failureHooks.reverse(), "compensation failed", options.permission);
+          throw error;
+        }
+        await runHooks(commitHooks, "after-commit hook failed", options.permission);
         return { ok: true, data };
       } catch (error) {
         if (error instanceof ForbiddenError) return forbiddenResult();

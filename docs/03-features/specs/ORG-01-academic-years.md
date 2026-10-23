@@ -146,9 +146,9 @@ and `CHECK (number IN (1, 2))`, `CHECK (start_date < end_date)`.
 
 ## 4. Tasks
 
-- [ ] **T1** — `org.prisma` models + migration (partial unique index, checks); permissions and grants. (AC-1, AC-2, AC-4, AC-12)
-- [ ] **T2** — Pure year rules + Zod schemas with unit tests. (AC-1, AC-3, AC-6)
-- [ ] **T3** — Services (`createYear`, `updateYear`, `makeCurrent`), queries, writability helpers, provider registration; integration tests. (AC-5..AC-9)
+- [x] **T1** — `org.prisma` models + migration (partial unique index, checks); permissions and grants. (AC-1, AC-2, AC-4, AC-12)
+- [x] **T2** — Pure year rules + Zod schemas with unit tests. (AC-1, AC-3, AC-6)
+- [x] **T3** — Services (`createYear`, `updateYear`, `makeCurrent`), queries, writability helpers, provider registration; integration tests. (AC-5..AC-9)
 - [ ] **T4** — Table, list and create pages. (AC-10, AC-12)
 - [ ] **T5** — Detail/edit page, make-current dialog, history. (AC-8, AC-10)
 - [ ] **T6** — Checklist registry and rollover page. (AC-11)

@@ -1,0 +1,41 @@
+// ORG module: academic structure (ORG-01...04). Year-dependent records elsewhere carry
+// `academicYearId` (ADR-0006).
+
+enum AcademicYearStatus {
+  PLANNED
+  CURRENT
+  CLOSED
+
+  @@map("academic_year_status")
+}
+
+/// The main time axis. At most one CURRENT year (partial unique index in the migration).
+model AcademicYear {
+  id          String             @id @default(cuid(2))
+  /// Derived from the dates: "2026-2027".
+  code        String             @unique
+  startDate   DateTime           @map("start_date") @db.Date
+  endDate     DateTime           @map("end_date") @db.Date
+  status      AcademicYearStatus @default(PLANNED)
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?            @map("created_by_id")
+  updatedById String?            @map("updated_by_id")
+  semesters   Semester[]
+
+  @@index([status])
+  @@map("academic_years")
+}
+
+model Semester {
+  id             String       @id @default(cuid(2))
+  academicYearId String       @map("academic_year_id")
+  /// 1 or 2 (check constraint in the migration)
+  number         Int
+  startDate      DateTime     @map("start_date") @db.Date
+  endDate        DateTime     @map("end_date") @db.Date
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id])
+
+  @@unique([academicYearId, number])
+  @@map("semesters")
+}

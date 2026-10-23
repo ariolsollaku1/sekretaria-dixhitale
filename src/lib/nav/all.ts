@@ -21,3 +21,12 @@ registerNav({
   group: "system",
   order: 5,
 });
+registerNav({
+  id: "files",
+  labelKey: "files",
+  href: "/admin/files",
+  icon: "file",
+  permission: "plt.file.read",
+  group: "system",
+  order: 20,
+});

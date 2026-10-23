@@ -150,6 +150,23 @@ the route does it explicitly).
 - Concurrent `attachFile` on one file → the conditional update (`where status = PENDING`) lets one
   win; the other gets `ALREADY_ATTACHED`.
 
+**Implementation notes:**
+- The purpose travels in the query string (`POST /api/files?purpose=<id>`) so permission and
+  `Content-Length` are checked before the body is read.
+- `attachFile` / `removeFile` take the action context (`{ db, audit, user }`) rather than a bare
+  transaction, so they audit themselves (`plt.file.attach`, `plt.file.remove`).
+- The orphan sweep claims the row first (`deleteMany where status = PENDING`) and only then deletes
+  the object, so a file attached concurrently can never lose its bytes.
+- Storage ids are 24 hex characters from `crypto.randomBytes` (no extra dependency); the DB id equals
+  the key's last segment.
+- `general` is the reference purpose (`plt.file.upload` / `plt.file.read`, PDF/JPEG/PNG/DOCX/XLSX,
+  10 MB); real features register their own with `registerFilePurpose` (see `platform-purposes.ts`).
+- Browser pre-checks live in `<FileUpload>`; the server stays the authority (the e2e uploads a script
+  disguised as a PDF and sees it refused).
+- `/admin/files` lists the signed-in user's own latest uploads (a pending file is readable only by
+  its uploader until it is attached).
+- `.data` (default `FILES_DIR`) is git-ignored.
+
 ## 4. Tasks
 
 - [x] **T1** — `StoredFile` model + `FileStatus` + migration; `plt.file.*` permissions. (AC-3, AC-14)
@@ -158,10 +175,10 @@ the route does it explicitly).
 - [x] **T3** — Pure `mime` detection / allow-list / `sanitizeFileName` + purpose registry, unit tests. (AC-2, AC-4, AC-6)
 - [x] **T4** — `files.service`: `storeUpload`, `attachFile`, `removeFile`, `verifyFile`,
       `cleanupOrphans` with audit, integration tests. (AC-3, AC-9, AC-10, AC-11, AC-13)
-- [ ] **T5** — Routes `POST /api/files`, `GET /api/files/[id]` with headers and permission checks;
+- [x] **T5** — Routes `POST /api/files`, `GET /api/files/[id]` with headers and permission checks;
       `general` purpose. (AC-5, AC-7, AC-8, AC-14)
-- [ ] **T6** — `<FileUpload>` component, `/admin/files` demo page, nav entry, i18n (`files.*`). (AC-12)
-- [ ] **T7** — E2E (upload → list → download, forbidden, oversize, wrong type); docs: ADR-0010
+- [x] **T6** — `<FileUpload>` component, `/admin/files` demo page, nav entry, i18n (`files.*`). (AC-12)
+- [x] **T7** — E2E (upload → list → download, forbidden, oversize, wrong type); docs: ADR-0010
       note, README (volume = backup scope), domain model. (all)
 
 ## 5. Test plan
@@ -185,9 +202,9 @@ the route does it explicitly).
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied (size limit, MIME allow-list, outside web root, permission-checked route)
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, ADR-0010 consequences, README backup scope)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied (size limit, MIME allow-list, outside web root, permission-checked route)
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, ADR-0010 consequences, README backup scope)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

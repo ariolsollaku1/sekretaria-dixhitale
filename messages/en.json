@@ -49,7 +49,8 @@
         "system": "System"
       },
       "audit": "Audit log",
-      "users": "Users"
+      "users": "Users",
+      "files": "Files"
     },
     "languages": {
       "sq": "Shqip",
@@ -258,6 +259,39 @@
       "SCOPE_NOT_FOUND": "The chosen target does not exist.",
       "INVALID_PERIOD": "The period is not valid.",
       "SCOPE_ID_FORBIDDEN": "This scope takes no target."
+    }
+  },
+  "files": {
+    "title": "Files",
+    "upload": "Upload a file",
+    "choose": "Choose a file",
+    "hint": "Maximum {max}. Allowed types: {types}.",
+    "uploading": "Uploading…",
+    "uploaded": "Uploaded: {name}",
+    "mine": "My uploads",
+    "empty": "You have not uploaded any files yet.",
+    "columns": {
+      "name": "File",
+      "type": "Type",
+      "size": "Size",
+      "time": "Time",
+      "status": "Status",
+      "download": "Download"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "ATTACHED": "Attached"
+    },
+    "errors": {
+      "TOO_LARGE": "The file is too large.",
+      "EMPTY": "The file is empty.",
+      "UNSUPPORTED_TYPE": "This file type is not allowed.",
+      "TYPE_MISMATCH": "The content does not match the file type.",
+      "FORBIDDEN": "You are not allowed to upload files.",
+      "UNAUTHENTICATED": "Sign in again to continue.",
+      "UNKNOWN_PURPOSE": "Uploading is not available.",
+      "BAD_REQUEST": "Choose a file.",
+      "INTERNAL": "The upload failed. Try again."
     }
   }
 }

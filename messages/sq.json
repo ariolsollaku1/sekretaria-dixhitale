@@ -49,7 +49,8 @@
         "system": "Sistemi"
       },
       "audit": "Evidenca",
-      "users": "Përdoruesit"
+      "users": "Përdoruesit",
+      "files": "Skedarët"
     },
     "languages": {
       "sq": "Shqip",
@@ -258,6 +259,39 @@
       "SCOPE_NOT_FOUND": "Objekti i zgjedhur nuk ekziston.",
       "INVALID_PERIOD": "Periudha nuk është e vlefshme.",
       "SCOPE_ID_FORBIDDEN": "Ky fushëveprim nuk ka objekt."
+    }
+  },
+  "files": {
+    "title": "Skedarët",
+    "upload": "Ngarko skedar",
+    "choose": "Zgjidh skedarin",
+    "hint": "Maksimumi {max}. Lloje të lejuara: {types}.",
+    "uploading": "Duke ngarkuar…",
+    "uploaded": "U ngarkua: {name}",
+    "mine": "Ngarkimet e mia",
+    "empty": "Nuk keni ngarkuar ende skedarë.",
+    "columns": {
+      "name": "Skedari",
+      "type": "Lloji",
+      "size": "Madhësia",
+      "time": "Koha",
+      "status": "Statusi",
+      "download": "Shkarko"
+    },
+    "status": {
+      "PENDING": "Në pritje",
+      "ATTACHED": "I bashkëngjitur"
+    },
+    "errors": {
+      "TOO_LARGE": "Skedari është shumë i madh.",
+      "EMPTY": "Skedari është bosh.",
+      "UNSUPPORTED_TYPE": "Ky lloj skedari nuk lejohet.",
+      "TYPE_MISMATCH": "Përmbajtja nuk përputhet me llojin e skedarit.",
+      "FORBIDDEN": "Nuk keni leje të ngarkoni skedarë.",
+      "UNAUTHENTICATED": "Hyni përsëri për të vazhduar.",
+      "UNKNOWN_PURPOSE": "Ngarkimi nuk është i disponueshëm.",
+      "BAD_REQUEST": "Zgjidhni një skedar.",
+      "INTERNAL": "Ngarkimi dështoi. Provoni përsëri."
     }
   }
 }

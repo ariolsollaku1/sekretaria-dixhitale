@@ -1474,6 +1474,59 @@
       "alreadyRegistered": "The student is already registered for this academic year.",
       "FORBIDDEN": "You may not do this.",
       "generic": "The action failed."
+    },
+    "change": {
+      "actions": "Status changes",
+      "done": "The status was changed.",
+      "effectiveDate": "Effective date",
+      "documentRef": "Document (request/decision no., optional)",
+      "reason": "Reason",
+      "targetCohort": "New cohort",
+      "noCohorts": "There is no other active cohort to transfer to.",
+      "suspend": {
+        "action": "Suspend",
+        "title": "Suspend the studies?",
+        "body": "The student stays in the register but is not active until they resume."
+      },
+      "resume": {
+        "action": "Resume",
+        "title": "Resume the studies?",
+        "body": "The student returns to active status."
+      },
+      "deregister": {
+        "action": "Deregister",
+        "title": "Deregister the student?",
+        "body": "The enrollment is closed on the chosen date and is not reopened."
+      },
+      "graduate": {
+        "action": "Graduate",
+        "title": "Record the graduation?",
+        "body": "The enrollment is closed as graduated. The Secretariat checks the obligations."
+      },
+      "transfer": {
+        "action": "Transfer",
+        "title": "Transfer the student?",
+        "body": "The current enrollment is closed as deregistered and a new enrollment (transfer) opens in the chosen cohort."
+      },
+      "errors": {
+        "transitionNotAllowed": "This change is not allowed from the current status.",
+        "invalidDate": "The date is not valid.",
+        "beforeStart": "The date is before the enrollment started.",
+        "beforePreviousChange": "The date is before the previous change.",
+        "inFuture": "The date cannot be in the future.",
+        "reasonRequired": "Enter the reason.",
+        "cohortRequired": "Choose the new cohort.",
+        "tooLong": "The text is too long.",
+        "required": "This field is required.",
+        "unknownProgram": "The program was not found.",
+        "cohortMismatch": "The cohort is not active or does not belong to the program.",
+        "alreadyEnrolled": "The student already has an active or suspended enrollment in that program.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "generic": "The action failed."
+      }
+    },
+    "history": {
+      "document": "Document"
     }
   }
 }

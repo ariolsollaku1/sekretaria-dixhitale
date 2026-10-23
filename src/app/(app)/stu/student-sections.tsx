@@ -6,6 +6,7 @@ import {
   AddEnrollment,
   ChangeGroup,
   RegisterYear,
+  StatusChange,
   listCohortOptions,
   listGroupOptions,
   type EnrollmentRecord,
@@ -107,6 +108,15 @@ export async function EnrollmentsSection({
                   </td>
                   <td className="font-tabular p-3">{day(e.startedAt)}</td>
                   <td className="font-tabular p-3">{e.endedAt ? day(e.endedAt) : "—"}</td>
+                  {canWrite && (
+                    <td className="p-3">
+                      <StatusChange
+                        enrollmentId={e.id}
+                        status={e.status}
+                        cohorts={cohorts.filter((c) => c.id !== e.cohort.id)}
+                      />
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
@@ -214,6 +224,11 @@ export async function HistorySection({ enrollments }: { enrollments: EnrollmentR
                   · {formatPlainDate(toDay(h.effectiveDate), l)} · {formatDateTime(h.createdAt, l)}
                 </span>
                 {h.reason && <p className="mt-1">{h.reason}</p>}
+                {h.documentRef && (
+                  <p className="text-muted-foreground mt-1">
+                    {t("history.document")}: {h.documentRef}
+                  </p>
+                )}
               </li>
             ))}
           </ol>

@@ -1474,6 +1474,59 @@
       "alreadyRegistered": "Studenti është regjistruar tashmë për këtë vit akademik.",
       "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
       "generic": "Veprimi nuk u krye."
+    },
+    "change": {
+      "actions": "Ndryshime statusi",
+      "done": "Statusi u ndryshua.",
+      "effectiveDate": "Data e hyrjes në fuqi",
+      "documentRef": "Dokumenti (nr. vendimi/kërkese, opsional)",
+      "reason": "Arsyeja",
+      "targetCohort": "Kohorta e re",
+      "noCohorts": "Nuk ka kohortë tjetër aktive për transferim.",
+      "suspend": {
+        "action": "Pezullo",
+        "title": "Të pezullohen studimet?",
+        "body": "Studenti mbetet në regjistër por nuk është më aktiv derisa të rifillojë."
+      },
+      "resume": {
+        "action": "Rifillo",
+        "title": "Të rifillojnë studimet?",
+        "body": "Studenti kthehet në statusin aktiv."
+      },
+      "deregister": {
+        "action": "Çregjistro",
+        "title": "Të çregjistrohet studenti?",
+        "body": "Regjistrimi mbyllet në datën e zgjedhur dhe nuk rihapet."
+      },
+      "graduate": {
+        "action": "Diplomo",
+        "title": "Të regjistrohet diplomimi?",
+        "body": "Regjistrimi mbyllet si i diplomuar. Kontrolli i detyrimeve bëhet nga Sekretaria."
+      },
+      "transfer": {
+        "action": "Transfero",
+        "title": "Të transferohet studenti?",
+        "body": "Regjistrimi aktual mbyllet si i çregjistruar dhe hapet një regjistrim i ri (transferim) te kohorta e zgjedhur."
+      },
+      "errors": {
+        "transitionNotAllowed": "Ky ndryshim nuk lejohet nga statusi aktual.",
+        "invalidDate": "Data nuk është e vlefshme.",
+        "beforeStart": "Data është para fillimit të regjistrimit.",
+        "beforePreviousChange": "Data është para ndryshimit të mëparshëm.",
+        "inFuture": "Data nuk mund të jetë në të ardhmen.",
+        "reasonRequired": "Shkruani arsyen.",
+        "cohortRequired": "Zgjidhni kohortën e re.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "required": "Kjo fushë është e detyrueshme.",
+        "unknownProgram": "Programi nuk u gjet.",
+        "cohortMismatch": "Kohorta nuk është aktive ose nuk i përket programit.",
+        "alreadyEnrolled": "Studenti ka tashmë një regjistrim aktiv ose të pezulluar në atë program.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "history": {
+      "document": "Dokumenti"
     }
   }
 }

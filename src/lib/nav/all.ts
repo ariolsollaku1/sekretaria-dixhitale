@@ -64,6 +64,26 @@ registerNav(
     order: 21,
   },
 );
+registerNav(
+  {
+    id: "cohorts",
+    labelKey: "cohorts",
+    href: "/org/cohorts",
+    icon: "users",
+    permission: "org.cohort.read",
+    group: "administration",
+    order: 23,
+  },
+  {
+    id: "student-groups",
+    labelKey: "studentGroups",
+    href: "/org/groups",
+    icon: "users",
+    permission: "org.group.read",
+    group: "administration",
+    order: 24,
+  },
+);
 registerNav({
   id: "programs",
   labelKey: "programs",

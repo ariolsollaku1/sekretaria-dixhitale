@@ -63,7 +63,9 @@
       "announcements": "Njoftimet e shkollës",
       "staff": "Stafi",
       "myStaffRecord": "Të dhënat e mia",
-      "plans": "Planet mësimore"
+      "plans": "Planet mësimore",
+      "cohorts": "Kohortet",
+      "studentGroups": "Grupet e studentëve"
     },
     "languages": {
       "sq": "Shqip",

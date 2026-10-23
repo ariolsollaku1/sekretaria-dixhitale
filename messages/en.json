@@ -63,7 +63,9 @@
       "announcements": "Announcements",
       "staff": "Staff",
       "myStaffRecord": "My staff record",
-      "plans": "Curriculum plans"
+      "plans": "Curriculum plans",
+      "cohorts": "Cohorts",
+      "studentGroups": "Student groups"
     },
     "languages": {
       "sq": "Shqip",

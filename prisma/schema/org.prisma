@@ -11,6 +11,8 @@ enum AcademicYearStatus {
 
 /// The main time axis. At most one CURRENT year (partial unique index in the migration).
 model AcademicYear {
+  studentGroups  StudentGroup[]
+  cohortsStarted Cohort[]
   plans          CurriculumPlan[]
   id             String             @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
@@ -90,6 +92,7 @@ enum StudyCycle {
 
 /// A study program (ORG-03). Cycle, duration and department follow the rules in the spec; never deleted.
 model StudyProgram {
+  cohorts        Cohort[]
   plans          CurriculumPlan[]
   id             String           @id @default(cuid(2))
   /// Fixed after creation.

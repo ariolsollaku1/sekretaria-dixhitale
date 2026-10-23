@@ -73,7 +73,9 @@
       "forms": "Formularët",
       "formsInbox": "Kutia e formularëve",
       "adminForms": "Përcaktimi i formularëve",
-      "contracts": "Mbarimi i kontratave"
+      "contracts": "Mbarimi i kontratave",
+      "teachingLoad": "Ngarkesa vjetore",
+      "hrLists": "Listat e pedagogëve"
     },
     "languages": {
       "sq": "Shqip",
@@ -908,6 +910,25 @@
         "FORBIDDEN": "Nuk keni të drejtë të caktoni në këtë program.",
         "generic": "Veprimi nuk u krye."
       }
+    },
+    "load": {
+      "title": "Ngarkesa mësimore vjetore",
+      "intro": "Orët e planifikuara për pedagog në vitin akademik të zgjedhur, sipas semestrit dhe llojit. Orët e zhvilluara shtohen kur të ndërtohet moduli i regjistrimit të tyre.",
+      "columns": {
+        "lecturer": "Pedagogu",
+        "category": "Kategoria",
+        "department": "Departamenti",
+        "departmentCode": "Kodi i departamentit",
+        "programCode": "Kodi i programit",
+        "semester": "Semestri",
+        "courses": "Lëndë",
+        "sem1": "Semestri 1",
+        "sem2": "Semestri 2",
+        "lecture": "Leksione",
+        "seminar": "Seminare",
+        "lab": "Laborator",
+        "total": "Gjithsej"
+      }
     }
   },
   "jobs": {
@@ -1377,6 +1398,26 @@
         "ENDING_SOON": "Mbaron së shpejti",
         "OK": "Në rregull",
         "all": "Të gjitha"
+      }
+    },
+    "lists": {
+      "title": "Listat e pedagogëve",
+      "presets": "Lista standarde",
+      "faculty": "Fakulteti",
+      "facultyCode": "Kodi i fakultetit",
+      "programCode": "Kodi i programit",
+      "semester": "Jep mësim në semestrin",
+      "age": "Mosha",
+      "ageFrom": "Mosha nga",
+      "ageTo": "Mosha deri",
+      "employed": "Në punë",
+      "preset": {
+        "byDepartment": "Pedagogët në punë sipas departamentit dhe fakultetit",
+        "pae": "Të brendshëm (PAE)",
+        "pak": "Të jashtëm (PAK)",
+        "externalEmployer": "Të jashtëm me punëdhënësin kryesor",
+        "retiredExternal": "Të jashtëm në pension",
+        "volunteers": "Vullnetarë"
       }
     }
   },

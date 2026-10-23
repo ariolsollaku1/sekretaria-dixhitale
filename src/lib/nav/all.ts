@@ -123,6 +123,15 @@ registerNav(
     order: 13,
   },
   {
+    id: "teaching-load",
+    labelKey: "teachingLoad",
+    href: "/cur/teaching/load",
+    icon: "chart",
+    permission: "cur.teaching.read",
+    group: "teaching",
+    order: 15,
+  },
+  {
     id: "my-teaching",
     labelKey: "myTeaching",
     href: "/cur/teaching/mine",
@@ -177,6 +186,15 @@ registerNav(
     permission: "hr.staff.read",
     group: "administration",
     order: 30,
+  },
+  {
+    id: "hr-lists",
+    labelKey: "hrLists",
+    href: "/hr/lists",
+    icon: "chart",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 33,
   },
   {
     id: "contracts",

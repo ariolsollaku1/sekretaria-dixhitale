@@ -21,6 +21,7 @@ export type StaffBrief = {
   active: boolean;
   kind: "ACADEMIC" | "ADMINISTRATIVE";
   category: "PAE" | "PAK" | "VOLUNTEER";
+  departmentCode: string | null;
 };
 
 export async function getStaffBriefs(
@@ -34,6 +35,7 @@ export async function getStaffBriefs(
       active: true,
       kind: true,
       category: true,
+      department: { select: { code: true } },
       person: { select: { firstName: true, lastName: true } },
     },
   });
@@ -46,6 +48,7 @@ export async function getStaffBriefs(
         active: s.active,
         kind: s.kind,
         category: s.category,
+        departmentCode: s.department?.code ?? null,
       },
     ]),
   );

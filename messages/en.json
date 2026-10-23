@@ -73,7 +73,9 @@
       "forms": "Forms",
       "formsInbox": "Form inbox",
       "adminForms": "Form definitions",
-      "contracts": "Contract expiry"
+      "contracts": "Contract expiry",
+      "teachingLoad": "Annual load",
+      "hrLists": "Lecturer lists"
     },
     "languages": {
       "sq": "Shqip",
@@ -908,6 +910,25 @@
         "FORBIDDEN": "You may not assign in this program.",
         "generic": "The action failed."
       }
+    },
+    "load": {
+      "title": "Annual teaching load",
+      "intro": "Planned hours per lecturer for the selected academic year, by semester and kind. Delivered hours will be added when their recording exists.",
+      "columns": {
+        "lecturer": "Lecturer",
+        "category": "Category",
+        "department": "Department",
+        "departmentCode": "Department code",
+        "programCode": "Program code",
+        "semester": "Semester",
+        "courses": "Courses",
+        "sem1": "Semester 1",
+        "sem2": "Semester 2",
+        "lecture": "Lecture",
+        "seminar": "Seminar",
+        "lab": "Laboratory",
+        "total": "Total"
+      }
     }
   },
   "jobs": {
@@ -1377,6 +1398,26 @@
         "ENDING_SOON": "Ending soon",
         "OK": "OK",
         "all": "All"
+      }
+    },
+    "lists": {
+      "title": "Lecturer lists",
+      "presets": "Standard lists",
+      "faculty": "Faculty",
+      "facultyCode": "Faculty code",
+      "programCode": "Program code",
+      "semester": "Teaches in semester",
+      "age": "Age",
+      "ageFrom": "Age from",
+      "ageTo": "Age to",
+      "employed": "Employed",
+      "preset": {
+        "byDepartment": "Employed lecturers by department and faculty",
+        "pae": "Internal (PAE)",
+        "pak": "External (PAK)",
+        "externalEmployer": "External with primary employer",
+        "retiredExternal": "Retired external",
+        "volunteers": "Volunteers"
       }
     }
   },

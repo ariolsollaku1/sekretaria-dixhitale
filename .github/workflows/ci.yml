@@ -66,6 +66,25 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # BuildKit cache mounts live in the builder and vanish with the runner: persist them between runs.
+      - uses: actions/cache@v4
+        id: mounts
+        with:
+          path: |
+            mount-next
+            mount-pnpm
+          key: docker-mounts-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.run_id }}
+          restore-keys: |
+            docker-mounts-${{ hashFiles('pnpm-lock.yaml') }}-
+            docker-mounts-
+      - uses: reproducible-containers/buildkit-cache-dance@v3.4.0
+        with:
+          cache-map: |
+            {
+              "mount-next": {"target": "/app/.next/cache", "id": "next"},
+              "mount-pnpm": {"target": "/root/.local/share/pnpm/store", "id": "pnpm"}
+            }
+          skip-extraction: ${{ steps.mounts.outputs.cache-hit }}
       - uses: docker/build-push-action@v6
         with:
           context: .

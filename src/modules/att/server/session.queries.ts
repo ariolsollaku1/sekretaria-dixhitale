@@ -93,16 +93,16 @@ export async function ownSessions(userId: string, yearId: string, assignmentId?:
   const staffId = await getOwnStaffId(userId);
   if (!staffId) return null;
   return list({
-    assignment: { staffId, group: { academicYearId: yearId }, ...(assignmentId ? { id: assignmentId } : {}) },
+    assignment: {
+      staffId,
+      group: { academicYearId: yearId },
+      ...(assignmentId ? { id: assignmentId } : {}),
+    },
   });
 }
 
 /** AC-9/AC-11: a group's sessions, only where the reader's scope covers the group; else null. */
-export async function groupSessions(
-  user: { id: string },
-  groupId: string,
-  assignmentId?: string,
-) {
+export async function groupSessions(user: { id: string }, groupId: string, assignmentId?: string) {
   const target = { kind: "group", id: groupId } as const;
   const allowed =
     (await can(user, "att.attendance.read", target)) ||
@@ -161,7 +161,13 @@ export type Access = {
 /** What the viewer may do with a session (the services re-check on every write). */
 export async function accessFor(
   user: { id: string },
-  session: { date: string; status: string; assignmentStaffId: string; groupId: string; yearStatus: string },
+  session: {
+    date: string;
+    status: string;
+    assignmentStaffId: string;
+    groupId: string;
+    yearStatus: string;
+  },
 ): Promise<Access> {
   const target = { kind: "group", id: session.groupId } as const;
   const corrector = await can(user, "att.attendance.correct", target);
@@ -185,7 +191,10 @@ export type SessionDetail = SessionView & {
   yearStatus: "PLANNED" | "CURRENT" | "CLOSED";
   academicYearId: string;
   assignmentStaffId: string;
-  roster: (RosterStudent & { status: "PRESENT" | "ABSENT" | "EXCUSED" | null; note: string | null })[];
+  roster: (RosterStudent & {
+    status: "PRESENT" | "ABSENT" | "EXCUSED" | null;
+    note: string | null;
+  })[];
   access: Access;
 };
 

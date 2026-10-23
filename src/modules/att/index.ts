@@ -13,4 +13,4 @@ export {
 export { SessionForms } from "./ui/session-forms";
 export { SessionList } from "./ui/session-list";
 export { AttendanceForm } from "./ui/attendance-form";
-export { defaultHours, todayInTirane } from "./domain/session-rules";
+export { addDays, clampDay, defaultHours, formatTime, todayInTirane } from "./domain/session-rules";

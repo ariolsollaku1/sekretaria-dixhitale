@@ -6,7 +6,11 @@ const minute = z
   .int("timeRange")
   .min(0, "timeRange")
   .max(1440, "timeRange");
-const hours = z.number({ error: "hoursRange" }).int("hoursRange").min(1, "hoursRange").max(12, "hoursRange");
+const hours = z
+  .number({ error: "hoursRange" })
+  .int("hoursRange")
+  .min(1, "hoursRange")
+  .max(12, "hoursRange");
 const text = (max: number) =>
   z
     .string()

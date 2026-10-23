@@ -245,9 +245,15 @@ beforeEach(async () => {
   sOther = await student("stu5", group2, "ACTIVE", true);
 
   await user("lec1", "lecturer", l1.personId, ["SELF", ""]);
-  await db.userRole.updateMany({ where: { userId: "lec1" }, data: { scopeType: "SELF", scopeId: null } });
+  await db.userRole.updateMany({
+    where: { userId: "lec1" },
+    data: { scopeType: "SELF", scopeId: null },
+  });
   await user("lec2", "lecturer", l2.personId);
-  await db.userRole.updateMany({ where: { userId: "lec2" }, data: { scopeType: "SELF", scopeId: null } });
+  await db.userRole.updateMany({
+    where: { userId: "lec2" },
+    data: { scopeType: "SELF", scopeId: null },
+  });
   await user("sec", "secretary");
   await user("hod1", "head_of_department", undefined, ["DEPARTMENT", dep1]);
   await user("hod2", "head_of_department", undefined, ["DEPARTMENT", dep2]);
@@ -280,7 +286,9 @@ describe("generateSessions (AC-2)", () => {
   it("creates a session per timetable day in the range, skips existing ones, audits", async () => {
     const from = ago(13);
     const to = ago(7); // 7 days: exactly one Monday and one Wednesday
-    const r1 = ok(await run((ctx) => svc.generateSessions(ctx, "record", { assignmentId: a1, from, to })));
+    const r1 = ok(
+      await run((ctx) => svc.generateSessions(ctx, "record", { assignmentId: a1, from, to })),
+    );
     expect(r1).toEqual({ created: 2, skipped: 0 });
     const rows = await db.classSession.findMany({ orderBy: { date: "asc" } });
     expect(rows.map((r) => isoWeekday(r.date.toISOString().slice(0, 10))).sort()).toEqual([1, 3]);
@@ -290,7 +298,9 @@ describe("generateSessions (AC-2)", () => {
       status: "PLANNED",
     });
     expect(rows.find((r) => r.startMinute === 600)?.hours).toBe(1);
-    const r2 = ok(await run((ctx) => svc.generateSessions(ctx, "record", { assignmentId: a1, from, to })));
+    const r2 = ok(
+      await run((ctx) => svc.generateSessions(ctx, "record", { assignmentId: a1, from, to })),
+    );
     expect(r2).toEqual({ created: 0, skipped: 2 });
     expect(await db.auditLog.count({ where: { action: "att.session.generate" } })).toBe(2);
   });
@@ -307,7 +317,11 @@ describe("generateSessions (AC-2)", () => {
     );
     expect(long).toMatchObject({ ok: false, error: { fieldErrors: { to: ["rangeTooLong"] } } });
     const closed = await run((ctx) =>
-      svc.generateSessions(ctx, "record", { assignmentId: aClosed, from: "2020-10-01", to: "2020-10-07" }),
+      svc.generateSessions(ctx, "record", {
+        assignmentId: aClosed,
+        from: "2020-10-01",
+        to: "2020-10-07",
+      }),
     );
     expect(code(closed)).toBe("CONFLICT:YEAR_CLOSED");
   });
@@ -364,7 +378,9 @@ describe("addSession (AC-1, AC-3)", () => {
 describe("saveAttendance (AC-4..AC-7)", () => {
   it("stores one mark per roster student, holds the session, audits", async () => {
     const { sessionId } = ok(await session());
-    const r = ok(await save(sessionId, "record", { marks: marks({ [s2]: "ABSENT", [s3]: "EXCUSED" }) }));
+    const r = ok(
+      await save(sessionId, "record", { marks: marks({ [s2]: "ABSENT", [s3]: "EXCUSED" }) }),
+    );
     expect(r.counts).toEqual({ present: 1, absent: 1, excused: 1 });
     const s = await db.classSession.findUniqueOrThrow({ where: { id: sessionId } });
     expect(s).toMatchObject({ status: "HELD", topic: "Intro", hours: 2 });
@@ -379,16 +395,25 @@ describe("saveAttendance (AC-4..AC-7)", () => {
     ok(await save(sessionId));
     const first = (await db.classSession.findUniqueOrThrow({ where: { id: sessionId } })).heldAt;
     ok(await save(sessionId, "record", { marks: marks({ [s1]: "ABSENT" }) }));
-    expect((await db.attendanceMark.findUniqueOrThrow({ where: { sessionId_studentId: { sessionId, studentId: s1 } } })).status).toBe("ABSENT");
-    expect((await db.classSession.findUniqueOrThrow({ where: { id: sessionId } })).heldAt).toEqual(first);
+    expect(
+      (
+        await db.attendanceMark.findUniqueOrThrow({
+          where: { sessionId_studentId: { sessionId, studentId: s1 } },
+        })
+      ).status,
+    ).toBe("ABSENT");
+    expect((await db.classSession.findUniqueOrThrow({ where: { id: sessionId } })).heldAt).toEqual(
+      first,
+    );
     expect(await db.attendanceMark.count({ where: { sessionId } })).toBe(3);
   });
 
   it("the roster excludes suspended students and other groups; marks must be complete", async () => {
     const { sessionId } = ok(await session());
-    expect(
-      await save(sessionId, "record", { marks: marks().slice(0, 2) }),
-    ).toMatchObject({ ok: false, error: { code: "VALIDATION" } });
+    expect(await save(sessionId, "record", { marks: marks().slice(0, 2) })).toMatchObject({
+      ok: false,
+      error: { code: "VALIDATION" },
+    });
     expect(
       await save(sessionId, "record", {
         marks: [...marks(), { studentId: sSusp, status: "PRESENT", note: null }],
@@ -414,7 +439,9 @@ describe("saveAttendance (AC-4..AC-7)", () => {
     ok(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: gone })));
     expect(code(await save(gone))).toBe("CONFLICT:CANCELLED");
     actorId = "lec2";
-    const mine = (await db.classSession.findFirstOrThrow({ where: { date: new Date(`${ago(7)}T00:00:00Z`) } })).id;
+    const mine = (
+      await db.classSession.findFirstOrThrow({ where: { date: new Date(`${ago(7)}T00:00:00Z`) } })
+    ).id;
     expect(await save(mine)).toMatchObject({ ok: false, error: { code: "FORBIDDEN" } });
   });
 
@@ -511,18 +538,30 @@ describe("updateSession / cancelSession (AC-8)", () => {
   it("cancels a planned session; a held one only by the Secretariat with a reason; marks stay", async () => {
     const planned = ok(await session({ date: ago(2) })).sessionId;
     ok(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: planned })));
-    expect((await db.classSession.findUniqueOrThrow({ where: { id: planned } })).status).toBe("CANCELLED");
-    expect(code(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: planned })))).toBe("CONFLICT:CANCELLED");
+    expect((await db.classSession.findUniqueOrThrow({ where: { id: planned } })).status).toBe(
+      "CANCELLED",
+    );
+    expect(code(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: planned })))).toBe(
+      "CONFLICT:CANCELLED",
+    );
 
     const held = ok(await session()).sessionId;
     ok(await save(held));
-    expect(code(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: held })))).toBe("CONFLICT:HELD_LOCKED");
+    expect(code(await run((ctx) => svc.cancelSession(ctx, "record", { sessionId: held })))).toBe(
+      "CONFLICT:HELD_LOCKED",
+    );
     actorId = "sec";
-    expect(await run((ctx) => svc.cancelSession(ctx, "correct", { sessionId: held }))).toMatchObject({
+    expect(
+      await run((ctx) => svc.cancelSession(ctx, "correct", { sessionId: held })),
+    ).toMatchObject({
       ok: false,
       error: { fieldErrors: { reason: ["required"] } },
     });
-    ok(await run((ctx) => svc.cancelSession(ctx, "correct", { sessionId: held, reason: "Room closed" })));
+    ok(
+      await run((ctx) =>
+        svc.cancelSession(ctx, "correct", { sessionId: held, reason: "Room closed" }),
+      ),
+    );
     expect(await db.attendanceMark.count({ where: { sessionId: held } })).toBe(3);
     expect(await db.classSession.count()).toBe(2); // never deleted
   });
@@ -534,7 +573,10 @@ describe("queries (AC-9..AC-11)", () => {
     ok(await save(a, "record", { marks: marks({ [s2]: "ABSENT" }) }));
     const own = await ownSessions("lec1", yearId);
     expect(own).toHaveLength(1);
-    expect(own![0]).toMatchObject({ status: "HELD", counts: { present: 2, absent: 1, excused: 0 } });
+    expect(own![0]).toMatchObject({
+      status: "HELD",
+      counts: { present: 2, absent: 1, excused: 0 },
+    });
     expect(await ownSessions("lec2", yearId)).toEqual([]);
     expect(await ownSessions("sec", yearId)).toBeNull();
   });
@@ -550,9 +592,17 @@ describe("queries (AC-9..AC-11)", () => {
 
   it("session detail: owner edits, others read or see nothing", async () => {
     const { sessionId } = ok(await session());
-    expect((await getSessionDetail({ id: "lec1" }, sessionId))?.access).toMatchObject({ read: true, edit: "record" });
-    expect((await getSessionDetail({ id: "sec" }, sessionId))?.access).toMatchObject({ edit: "correct" });
-    expect((await getSessionDetail({ id: "hod1" }, sessionId))?.access).toMatchObject({ read: true, edit: null });
+    expect((await getSessionDetail({ id: "lec1" }, sessionId))?.access).toMatchObject({
+      read: true,
+      edit: "record",
+    });
+    expect((await getSessionDetail({ id: "sec" }, sessionId))?.access).toMatchObject({
+      edit: "correct",
+    });
+    expect((await getSessionDetail({ id: "hod1" }, sessionId))?.access).toMatchObject({
+      read: true,
+      edit: null,
+    });
     expect(await getSessionDetail({ id: "lec2" }, sessionId)).toBeNull();
     expect(await getSessionDetail({ id: "hod2" }, sessionId)).toBeNull();
     expect(await getSessionDetail({ id: "u-stu1" }, sessionId)).toBeNull();

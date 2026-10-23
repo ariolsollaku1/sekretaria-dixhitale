@@ -80,7 +80,10 @@
       "studentStatistics": "Statistics",
       "timetable": "Class timetable",
       "myTimetable": "My timetable",
-      "documents": "Official documents"
+      "documents": "Official documents",
+      "myAttendance": "My classes",
+      "attendanceSessions": "Attendance",
+      "myAbsences": "My absences"
     },
     "languages": {
       "sq": "Shqip",
@@ -2004,6 +2007,104 @@
       "number": "Number",
       "issuedOn": "Issued on",
       "tooMany": "Too many requests. Try again shortly."
+    }
+  },
+  "att": {
+    "noAssignments": "You have no teaching assignments in this academic year.",
+    "noYear": "No academic year is selected.",
+    "noGroups": "There are no groups in this academic year.",
+    "chooseGroup": "Choose a group to see its classes.",
+    "group": "Group",
+    "show": "Show",
+    "all": "All",
+    "sessions": "Classes",
+    "sessionsTitle": "Attendance",
+    "noSessions": "No classes yet.",
+    "open": "Open",
+    "hoursCount": "{count, plural, one {# hour} other {# hours}}",
+    "counts": "Absent: {absent} · Excused: {excused}",
+    "kind": {
+      "LECTURE": "Lecture",
+      "SEMINAR": "Seminar",
+      "LAB": "Laboratory"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "HELD": "Held",
+      "CANCELLED": "Cancelled"
+    },
+    "mark": {
+      "PRESENT": "Present",
+      "ABSENT": "Absent",
+      "EXCUSED": "Excused"
+    },
+    "notMarked": "Not marked",
+    "noRoster": "No students are registered in this group.",
+    "allPresent": "Everyone present",
+    "saveHeld": "Save and mark as held",
+    "cancelClass": "Cancel class",
+    "saved": "Attendance saved",
+    "cancelled": "Class cancelled",
+    "added": "Class added",
+    "generated": "{created, plural, one {# class created} other {# classes created}}, {skipped} already existed",
+    "generate": {
+      "title": "Create classes from the timetable",
+      "submit": "Create classes",
+      "hint": "Creates a class for every timetable slot of the assignment in the date range (at most 120 days). Existing classes are kept."
+    },
+    "extra": {
+      "title": "Add an extra class",
+      "submit": "Add class"
+    },
+    "form": {
+      "assignment": "Course",
+      "from": "From",
+      "to": "To",
+      "date": "Date",
+      "start": "Start",
+      "end": "End",
+      "hours": "Hours",
+      "topic": "Topic",
+      "note": "Note",
+      "reason": "Reason for the change",
+      "reasonHint": "Required for the Secretariat: it is recorded in the audit log."
+    },
+    "mine": {
+      "title": "My classes",
+      "noStaff": "No staff record is linked to your account.",
+      "noStaffHint": "Ask HR to link your account to your staff record."
+    },
+    "absences": {
+      "title": "My absences",
+      "empty": "No absences recorded this academic year.",
+      "noStudent": "No student record is linked to your account.",
+      "noStudentHint": "Contact the Secretariat."
+    },
+    "blocked": {
+      "FUTURE": "This class has not taken place yet; attendance can be entered from the day of the class.",
+      "WINDOW_CLOSED": "The period for entering attendance ({days} days after the class) has ended. Ask the Secretariat to correct it.",
+      "CANCELLED": "This class was cancelled.",
+      "YEAR_CLOSED": "The academic year is closed."
+    },
+    "errors": {
+      "generic": "Something went wrong. Check the entries and try again.",
+      "FORBIDDEN": "You are not allowed to do this.",
+      "invalidDate": "Enter a valid date.",
+      "endBeforeStart": "The end must be after the start.",
+      "rangeTooLong": "The range may be at most 120 days.",
+      "outsideYear": "The date must be inside the academic year.",
+      "timeRange": "Enter a valid time.",
+      "hoursRange": "Hours must be a whole number from 1 to 12.",
+      "heldFixed": "A held class keeps its date and time.",
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "incomplete": "Every student must be marked.",
+      "FUTURE": "The class has not taken place yet.",
+      "WINDOW_CLOSED": "The period for entering attendance has ended; the Secretariat can correct it.",
+      "CANCELLED": "The class is cancelled.",
+      "YEAR_CLOSED": "The academic year is closed.",
+      "HELD_LOCKED": "A held class can only be cancelled by the Secretariat, with a reason.",
+      "DUPLICATE": "A class with this date and start time already exists."
     }
   }
 }

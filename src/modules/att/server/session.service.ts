@@ -52,7 +52,8 @@ async function authorize(ctx: Ctx, mode: Mode, a: AssignmentContext) {
       throw new ForbiddenError("att.attendance.correct");
     return;
   }
-  if (!(await can(ctx.user, "att.attendance.record"))) throw new ForbiddenError("att.attendance.record");
+  if (!(await can(ctx.user, "att.attendance.record")))
+    throw new ForbiddenError("att.attendance.record");
   if ((await getOwnStaffId(ctx.user.id)) !== a.staffId)
     throw new ForbiddenError("att.attendance.record");
 }
@@ -174,12 +175,7 @@ async function loadSession(ctx: Ctx, sessionId: string) {
 }
 
 /** AC-6/AC-7: a lecturer's gate on an already dated session; the Secretariat needs a reason instead. */
-async function gate(
-  ctx: Ctx,
-  mode: Mode,
-  sessionDate: string,
-  reason: string | null | undefined,
-) {
+async function gate(ctx: Ctx, mode: Mode, sessionDate: string, reason: string | null | undefined) {
   if (mode === "correct") return needReason(reason);
   const g = lecturerMayRecord(sessionDate, todayInTirane(), await getWindowDays(ctx.db));
   if (!g.ok) throw new DomainError("CONFLICT", g.reason);
@@ -199,7 +195,11 @@ export async function saveAttendance(ctx: Ctx, mode: Mode, input: SaveAttendance
   if (!marksOk(problems)) throw new DomainError("VALIDATION", "MARKS", { marks: ["incomplete"] });
 
   const before = s.marks.map((m) => ({ studentId: m.studentId, status: m.status, note: m.note }));
-  const after = input.marks.map((m) => ({ studentId: m.studentId, status: m.status, note: m.note }));
+  const after = input.marks.map((m) => ({
+    studentId: m.studentId,
+    status: m.status,
+    note: m.note,
+  }));
   for (const m of input.marks) {
     await ctx.db.attendanceMark.upsert({
       where: { sessionId_studentId: { sessionId: s.id, studentId: m.studentId } },

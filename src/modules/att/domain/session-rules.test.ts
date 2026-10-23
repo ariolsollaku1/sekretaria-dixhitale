@@ -99,7 +99,10 @@ describe("validateSession (AC-1, AC-3)", () => {
 
 describe("lecturerMayRecord (AC-6, AC-7)", () => {
   it("not before the class day", () => {
-    expect(lecturerMayRecord("2026-10-10", "2026-10-09", 7)).toEqual({ ok: false, reason: "FUTURE" });
+    expect(lecturerMayRecord("2026-10-10", "2026-10-09", 7)).toEqual({
+      ok: false,
+      reason: "FUTURE",
+    });
   });
   it("on the day and through the window", () => {
     expect(lecturerMayRecord("2026-10-09", "2026-10-09", 7)).toEqual({ ok: true });

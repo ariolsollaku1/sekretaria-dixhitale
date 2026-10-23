@@ -11,11 +11,13 @@ export const ACADEMIC_HOUR_MINUTES = 45;
 
 export function isDay(value: string): boolean {
   return (
-    /^\d{4}-\d{2}-\d{2}$/.test(value) && new Date(`${value}T00:00:00Z`).toISOString().startsWith(value)
+    /^\d{4}-\d{2}-\d{2}$/.test(value) &&
+    new Date(`${value}T00:00:00Z`).toISOString().startsWith(value)
   );
 }
 
-export const addDays = (day: string, n: number) => new Date(ms(day) + n * DAY_MS).toISOString().slice(0, 10);
+export const addDays = (day: string, n: number) =>
+  new Date(ms(day) + n * DAY_MS).toISOString().slice(0, 10);
 export const diffDays = (from: string, to: string) => Math.round((ms(to) - ms(from)) / DAY_MS);
 /** 1 = Monday … 7 = Sunday, like the timetable. */
 export const isoWeekday = (day: string) => ((new Date(`${day}T00:00:00Z`).getUTCDay() + 6) % 7) + 1;
@@ -101,9 +103,7 @@ export function validateRange(
   return e;
 }
 
-export type SessionErrors = Partial<
-  Record<"date" | "startMinute" | "endMinute" | "hours", string>
->;
+export type SessionErrors = Partial<Record<"date" | "startMinute" | "endMinute" | "hours", string>>;
 /** AC-1/AC-3 */
 export function validateSession(
   s: { date: string; startMinute: number; endMinute: number; hours: number },
@@ -116,21 +116,24 @@ export function validateSession(
     e.startMinute = "timeRange";
   if (!Number.isInteger(s.endMinute) || s.endMinute <= 0 || s.endMinute > 1440)
     e.endMinute = "timeRange";
-  if (!e.startMinute && !e.endMinute && s.endMinute <= s.startMinute) e.endMinute = "endBeforeStart";
+  if (!e.startMinute && !e.endMinute && s.endMinute <= s.startMinute)
+    e.endMinute = "endBeforeStart";
   if (!Number.isInteger(s.hours) || s.hours < MIN_HOURS || s.hours > MAX_HOURS)
     e.hours = "hoursRange";
   return e;
 }
 
-export type EditCheck =
-  | { ok: true }
-  | { ok: false; reason: "FUTURE" | "WINDOW_CLOSED" };
+export type EditCheck = { ok: true } | { ok: false; reason: "FUTURE" | "WINDOW_CLOSED" };
 
 /**
  * AC-6/AC-7: may the owner lecturer record on this session date today? Not before the class day;
  * until `windowDays` days after it (Q-61).
  */
-export function lecturerMayRecord(sessionDate: string, today: string, windowDays: number): EditCheck {
+export function lecturerMayRecord(
+  sessionDate: string,
+  today: string,
+  windowDays: number,
+): EditCheck {
   if (sessionDate > today) return { ok: false, reason: "FUTURE" };
   if (diffDays(sessionDate, today) > windowDays) return { ok: false, reason: "WINDOW_CLOSED" };
   return { ok: true };
@@ -177,3 +180,18 @@ export function changedStudents(
     .filter((m) => old.get(m.studentId) !== `${m.status}|${m.note ?? ""}`)
     .map((m) => m.studentId);
 }
+
+/** "08:30" -> 510; null when it is not a time of day. */
+export function parseTime(value: string): number | null {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(value.trim());
+  if (!m) return null;
+  const minutes = Number(m[1]) * 60 + Number(m[2]);
+  return Number(m[2]) < 60 && minutes <= 1440 ? minutes : null;
+}
+
+export const formatTime = (minutes: number): string =>
+  `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
+
+/** `day` limited to the academic year's dates. */
+export const clampDay = (day: string, year: { startDate: string; endDate: string }): string =>
+  day < year.startDate ? year.startDate : day > year.endDate ? year.endDate : day;

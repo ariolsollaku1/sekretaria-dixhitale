@@ -2,6 +2,8 @@
 # dev mode. Selected through COMPOSE_FILE in .env; leave it out in production.
 services:
   db:
+    environment:
+      CREATE_DEV_DATABASES: "true"
     ports:
       - "127.0.0.1:${DB_PORT:-5432}:5432"
 

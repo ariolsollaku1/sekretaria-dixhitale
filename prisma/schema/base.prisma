@@ -1,0 +1,9 @@
+// Generator and datasource only; models live in one file per module (conventions.md).
+generator client {
+  provider = "prisma-client"
+  output   = "../../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}

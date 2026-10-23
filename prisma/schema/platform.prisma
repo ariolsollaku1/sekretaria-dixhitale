@@ -1,0 +1,9 @@
+/// Runtime-configurable settings (key -> JSON value). Validated with Zod in src/lib/db/settings.ts.
+model SystemSetting {
+  key         String   @id
+  value       Json
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  updatedById String?  @map("updated_by_id")
+
+  @@map("system_settings")
+}

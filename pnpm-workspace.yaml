@@ -1,3 +1,8 @@
-# unrs-resolver (eslint resolver) ships prebuilt binaries; its install script is not needed.
+# Build scripts policy. Prisma's scripts fetch the schema engine used by `prisma migrate`.
+# The others ship prebuilt binaries and need no script.
 allowBuilds:
+  prisma: true
+  "@prisma/engines": true
   unrs-resolver: false
+  esbuild: false
+  workerd: false

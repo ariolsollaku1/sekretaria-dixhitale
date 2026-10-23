@@ -73,7 +73,8 @@
       "forms": "Formularët",
       "formsInbox": "Kutia e formularëve",
       "adminForms": "Përcaktimi i formularëve",
-      "contracts": "Mbarimi i kontratave"
+      "contracts": "Mbarimi i kontratave",
+      "teachingLoad": "Ngarkesa vjetore"
     },
     "languages": {
       "sq": "Shqip",
@@ -907,6 +908,25 @@
         "YEAR_CLOSED": "Viti akademik është i mbyllur.",
         "FORBIDDEN": "Nuk keni të drejtë të caktoni në këtë program.",
         "generic": "Veprimi nuk u krye."
+      }
+    },
+    "load": {
+      "title": "Ngarkesa mësimore vjetore",
+      "intro": "Orët e planifikuara për pedagog në vitin akademik të zgjedhur, sipas semestrit dhe llojit. Orët e zhvilluara shtohen kur të ndërtohet moduli i regjistrimit të tyre.",
+      "columns": {
+        "lecturer": "Pedagogu",
+        "category": "Kategoria",
+        "department": "Departamenti",
+        "departmentCode": "Kodi i departamentit",
+        "programCode": "Kodi i programit",
+        "semester": "Semestri",
+        "courses": "Lëndë",
+        "sem1": "Semestri 1",
+        "sem2": "Semestri 2",
+        "lecture": "Leksione",
+        "seminar": "Seminare",
+        "lab": "Laborator",
+        "total": "Gjithsej"
       }
     }
   },

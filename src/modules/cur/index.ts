@@ -33,3 +33,4 @@ export { teachingTable } from "./server/teaching.table";
 export { TeachingBoard } from "./ui/teaching-board";
 export { TeachingCopy } from "./ui/teaching-copy";
 export { board as teachingBoard, ownAssignments } from "./server/teaching.queries";
+export { teachingLoadTable } from "./server/load.table";

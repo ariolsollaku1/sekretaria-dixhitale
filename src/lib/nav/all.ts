@@ -123,6 +123,15 @@ registerNav(
     order: 13,
   },
   {
+    id: "teaching-load",
+    labelKey: "teachingLoad",
+    href: "/cur/teaching/load",
+    icon: "chart",
+    permission: "cur.teaching.read",
+    group: "teaching",
+    order: 15,
+  },
+  {
     id: "my-teaching",
     labelKey: "myTeaching",
     href: "/cur/teaching/mine",

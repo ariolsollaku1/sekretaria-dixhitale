@@ -73,7 +73,8 @@
       "forms": "Forms",
       "formsInbox": "Form inbox",
       "adminForms": "Form definitions",
-      "contracts": "Contract expiry"
+      "contracts": "Contract expiry",
+      "teachingLoad": "Annual load"
     },
     "languages": {
       "sq": "Shqip",
@@ -907,6 +908,25 @@
         "YEAR_CLOSED": "The academic year is closed.",
         "FORBIDDEN": "You may not assign in this program.",
         "generic": "The action failed."
+      }
+    },
+    "load": {
+      "title": "Annual teaching load",
+      "intro": "Planned hours per lecturer for the selected academic year, by semester and kind. Delivered hours will be added when their recording exists.",
+      "columns": {
+        "lecturer": "Lecturer",
+        "category": "Category",
+        "department": "Department",
+        "departmentCode": "Department code",
+        "programCode": "Program code",
+        "semester": "Semester",
+        "courses": "Courses",
+        "sem1": "Semester 1",
+        "sem2": "Semester 2",
+        "lecture": "Lecture",
+        "seminar": "Seminar",
+        "lab": "Laboratory",
+        "total": "Total"
       }
     }
   },

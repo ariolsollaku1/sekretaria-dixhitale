@@ -137,3 +137,44 @@ model SavedFilter {
   @@index([userId, tableId])
   @@map("saved_filters")
 }
+
+enum BackupRunKind {
+  EXPORT
+  INTEGRITY
+
+  @@map("backup_run_kind")
+}
+
+enum BackupRunStatus {
+  RUNNING
+  SUCCEEDED
+  FAILED
+
+  @@map("backup_run_status")
+}
+
+/// One run of the full export or the integrity check (PLT-13). Never deleted by code; an export's
+/// ZIP lives at `<FILES_DIR>/exports/<fileName>` until retention purges it (`purgedAt`).
+model BackupRun {
+  id            String          @id @default(cuid(2))
+  kind          BackupRunKind
+  status        BackupRunStatus @default(RUNNING)
+  /// Null = scheduled by the job system.
+  requestedById String?         @map("requested_by_id")
+  startedAt     DateTime        @default(now()) @map("started_at") @db.Timestamptz(3)
+  finishedAt    DateTime?       @map("finished_at") @db.Timestamptz(3)
+  tableCount    Int             @default(0) @map("table_count")
+  rowCount      Int             @default(0) @map("row_count")
+  fileCount     Int             @default(0) @map("file_count")
+  /// Integrity check: files / exports that are missing or do not match; export: files left out.
+  problemCount  Int             @default(0) @map("problem_count")
+  sizeBytes     BigInt?         @map("size_bytes")
+  sha256        String?
+  fileName      String?         @map("file_name")
+  purgedAt      DateTime?       @map("purged_at") @db.Timestamptz(3)
+  /// Short code only (never an error message: it could contain personal data).
+  errorCode     String?         @map("error_code")
+
+  @@index([kind, startedAt])
+  @@map("backup_runs")
+}

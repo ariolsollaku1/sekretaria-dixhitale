@@ -95,7 +95,7 @@ restricted with `grantScopes`).
 
 ## 4. Tasks
 
-- [ ] **T1** — Prisma enums + `UserRole` + migration. (AC-1, AC-2)
+- [x] **T1** — Prisma enums + `UserRole` + migration. (AC-1, AC-2)
 - [ ] **T2** — Registry for permissions, scope resolvers, target resolvers; platform permissions. (AC-3, AC-11)
 - [ ] **T3** — `can` / `requirePermission` / `grantScopes` with per-request loading. (AC-4, AC-5, AC-7, AC-8)
 - [ ] **T4** — `ForbiddenError` handling: 403 page component + action wrapper integration

@@ -664,5 +664,121 @@
         "body": "Përshëndetje {name},\n\nky është një mesazh prove nga Sekretari Dixhitale. Nëse e lexoni, dërgimi i postës funksionon."
       }
     }
+  },
+  "cal": {
+    "title": "Kalendari akademik",
+    "new": "Ngjarje e re",
+    "noYear": "Nuk ka vit akademik të zgjedhur",
+    "noYearHint": "Krijoni një vit akademik ose zgjidhni një në krye të faqes.",
+    "empty": "Ky vit nuk ka ende ngjarje.",
+    "emptyHint": "Sekretaria i shton periudhat, pushimet dhe afatet; mund të kopjohet edhe kalendari i vitit të kaluar.",
+    "views": {
+      "label": "Pamja e kalendarit",
+      "agenda": "Sipas javëve",
+      "month": "Muaji",
+      "list": "Lista"
+    },
+    "week": {
+      "title": "Java {number}",
+      "short": "Java"
+    },
+    "month": {
+      "prev": "Muaji i mëparshëm",
+      "next": "Muaji tjetër"
+    },
+    "type": {
+      "TEACHING_WEEK": "Javë mësimi",
+      "HOLIDAY": "Pushim",
+      "DEADLINE": "Afat",
+      "EXAM_PERIOD": "Periudhë provimesh",
+      "REGISTRATION_PERIOD": "Periudhë regjistrimi",
+      "EVENT": "Ngjarje"
+    },
+    "audience": {
+      "ALL": "Të gjithë",
+      "CYCLE": "Cikli i studimit",
+      "PROGRAM": "Programi"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "status": {
+      "active": "Aktive",
+      "cancelled": "Anuluar"
+    },
+    "columns": {
+      "title": "Titulli",
+      "type": "Lloji",
+      "start": "Fillon",
+      "end": "Mbaron",
+      "audience": "Audienca",
+      "status": "Statusi"
+    },
+    "form": {
+      "title": "Titulli",
+      "type": "Lloji",
+      "startDate": "Data e fillimit",
+      "endDate": "Data e mbarimit",
+      "description": "Përshkrimi",
+      "audience": "Audienca",
+      "cycle": "Cikli",
+      "program": "Programi",
+      "create": "Krijo ngjarjen",
+      "save": "Ruaj ndryshimet",
+      "forYear": "Viti akademik: {year}"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "endBeforeStart": "Data e mbarimit nuk mund të jetë para fillimit.",
+      "cycleRequired": "Zgjidhni ciklin.",
+      "programRequired": "Zgjidhni një program ekzistues.",
+      "outsideYear": "Datat duhet të jenë brenda vitit akademik.",
+      "YEAR_CLOSED": "Viti akademik është i mbyllur; kalendari nuk ndryshohet.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Ngjarja u krijua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "cancelled": "Ngjarja u anulua.",
+      "restored": "Ngjarja u rikthye.",
+      "cancel": "Anulo ngjarjen",
+      "restore": "Rikthe ngjarjen",
+      "cancelTitle": "Të anulohet ngjarja?",
+      "cancelBody": "Ngjarja nuk do të shfaqet më për të tjerët. Mund ta riktheni më vonë."
+    },
+    "detail": {
+      "weeks": "Java {weeks}",
+      "edit": "Ndrysho",
+      "closedNote": "Viti akademik është i mbyllur; kalendari është vetëm për lexim."
+    },
+    "feed": {
+      "title": "Abonohu në kalendar",
+      "hint": "Shtoni kalendarin në aplikacionin tuaj (Google, Outlook, Apple) me një lidhje private vetëm për ju.",
+      "link": "Lidhja juaj",
+      "shownOnce": "Kopjojeni tani: lidhja shfaqet vetëm një herë. Mos e ndani me të tjerët.",
+      "create": "Krijo lidhjen",
+      "regenerate": "Krijo lidhje të re",
+      "revoke": "Fshi lidhjen",
+      "revoked": "Lidhja u fshi.",
+      "failed": "Veprimi nuk u krye."
+    },
+    "copy": {
+      "nav": "Kopjo nga viti tjetër",
+      "title": "Kopjo kalendarin",
+      "intro": "Ngjarjet aktive të vitit të zgjedhur kopjohen te viti {year}, të zhvendosura me javë të plota (ditët e javës ruhen). Ngjarjet që dalin jashtë vitit anashkalohen.",
+      "from": "Kopjo nga viti",
+      "submit": "Kopjo kalendarin",
+      "done": "U kopjuan {copied} ngjarje, {skipped} u anashkaluan.",
+      "notEmpty": "Viti ka tashmë ngjarje; kopjimi bëhet vetëm në një vit pa ngjarje.",
+      "closed": "Viti akademik është i mbyllur; nuk mund të kopjohet kalendari në të.",
+      "failed": "Kopjimi nuk u krye."
+    },
+    "rollover": {
+      "label": "Përgatitni kalendarin akademik",
+      "description": "Kopjoni kalendarin e vitit të kaluar dhe rregulloni datat."
+    }
   }
 }

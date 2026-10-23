@@ -135,14 +135,25 @@ Migration adds `CHECK (start_date <= end_date)` and a check that audience/cycle/
 - Feed requested with a malformed token → 404 without touching the database.
 - Dates are pure calendar dates; no time-zone arithmetic.
 
+**Implementation notes:**
+- `src/modules/cal` is the fourth module; routes `/calendar` (views `agenda`, `month`, `list`),
+  `/calendar/events/new`, `/calendar/events/[id]`, `/calendar/copy`, and `/api/calendar/<token>.ics`.
+- Week numbers are computed (Q-29 assumption) in `domain/week-rules.ts`; the list view uses the
+  PLT-10 table `cal.events` on the year selected in the header.
+- Feed token: 32 random bytes (base64url), SHA-256 stored; the route is outside the login proxy
+  (`/api` is exempt) and answers 404 for anything invalid.
+- The audience resolver (`registerAudienceResolver`) is the hook STU uses to give students their
+  cycle and programs; until then a student-only user sees `ALL` events.
+- The "start a new year" checklist (ORG-01) gets the step `cal.calendar` → `/calendar/copy`.
+
 ## 4. Tasks
 
 - [x] **T1** — `calendar.prisma` + migration with checks; permissions and grants; shell nav. (AC-1, AC-14)
 - [x] **T2** — Pure week/shift/month rules, ICS rendering and event validation with unit tests. (AC-2, AC-3, AC-6, AC-10, AC-12)
 - [x] **T3** — Event service (create, update, cancel, restore, copy) and queries with audience resolver; integration tests. (AC-4, AC-5, AC-9..AC-11, AC-14)
 - [x] **T4** — Feed tokens and the ICS route; integration tests. (AC-12, AC-13)
-- [ ] **T5** — Calendar page (agenda, month, list table), event form and detail. (AC-7, AC-8)
-- [ ] **T6** — Copy page, checklist step, feed panel, i18n, seed, e2e, docs. (all)
+- [x] **T5** — Calendar page (agenda, month, list table), event form and detail. (AC-7, AC-8)
+- [x] **T6** — Copy page, checklist step, feed panel, i18n, seed, e2e, docs. (all)
 
 ## 5. Test plan
 
@@ -160,9 +171,9 @@ Migration adds `CHECK (start_date <= end_date)` and a check that audience/cycle/
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

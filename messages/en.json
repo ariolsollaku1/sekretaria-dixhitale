@@ -664,5 +664,121 @@
         "body": "Hello {name},\n\nthis is a test message from the Digital Secretariat. If you are reading it, mail delivery works."
       }
     }
+  },
+  "cal": {
+    "title": "Academic calendar",
+    "new": "New event",
+    "noYear": "No academic year selected",
+    "noYearHint": "Create an academic year or pick one at the top of the page.",
+    "empty": "This year has no events yet.",
+    "emptyHint": "The Secretariat adds periods, holidays and deadlines; last year's calendar can also be copied.",
+    "views": {
+      "label": "Calendar view",
+      "agenda": "By week",
+      "month": "Month",
+      "list": "List"
+    },
+    "week": {
+      "title": "Week {number}",
+      "short": "Wk"
+    },
+    "month": {
+      "prev": "Previous month",
+      "next": "Next month"
+    },
+    "type": {
+      "TEACHING_WEEK": "Teaching week",
+      "HOLIDAY": "Holiday",
+      "DEADLINE": "Deadline",
+      "EXAM_PERIOD": "Exam period",
+      "REGISTRATION_PERIOD": "Registration period",
+      "EVENT": "Event"
+    },
+    "audience": {
+      "ALL": "Everyone",
+      "CYCLE": "Study cycle",
+      "PROGRAM": "Program"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "status": {
+      "active": "Active",
+      "cancelled": "Cancelled"
+    },
+    "columns": {
+      "title": "Title",
+      "type": "Type",
+      "start": "Starts",
+      "end": "Ends",
+      "audience": "Audience",
+      "status": "Status"
+    },
+    "form": {
+      "title": "Title",
+      "type": "Type",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "description": "Description",
+      "audience": "Audience",
+      "cycle": "Cycle",
+      "program": "Program",
+      "create": "Create event",
+      "save": "Save changes",
+      "forYear": "Academic year: {year}"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "endBeforeStart": "The end date cannot be before the start.",
+      "cycleRequired": "Choose the cycle.",
+      "programRequired": "Choose an existing program.",
+      "outsideYear": "The dates must be inside the academic year.",
+      "YEAR_CLOSED": "The academic year is closed; its calendar cannot be changed.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The event was created.",
+      "saved": "Changes saved.",
+      "cancelled": "The event was cancelled.",
+      "restored": "The event was restored.",
+      "cancel": "Cancel event",
+      "restore": "Restore event",
+      "cancelTitle": "Cancel this event?",
+      "cancelBody": "The event will no longer be shown to others. You can restore it later."
+    },
+    "detail": {
+      "weeks": "Week {weeks}",
+      "edit": "Edit",
+      "closedNote": "The academic year is closed; the calendar is read-only."
+    },
+    "feed": {
+      "title": "Subscribe to the calendar",
+      "hint": "Add the calendar to your own app (Google, Outlook, Apple) with a private link meant only for you.",
+      "link": "Your link",
+      "shownOnce": "Copy it now: the link is shown only once. Do not share it.",
+      "create": "Create link",
+      "regenerate": "Create a new link",
+      "revoke": "Delete link",
+      "revoked": "The link was deleted.",
+      "failed": "The action failed."
+    },
+    "copy": {
+      "nav": "Copy from another year",
+      "title": "Copy the calendar",
+      "intro": "The active events of the chosen year are copied into {year}, moved by whole weeks (weekdays are kept). Events that fall outside the year are skipped.",
+      "from": "Copy from year",
+      "submit": "Copy calendar",
+      "done": "{copied} events copied, {skipped} skipped.",
+      "notEmpty": "The year already has events; copying works only into a year without events.",
+      "closed": "The academic year is closed; a calendar cannot be copied into it.",
+      "failed": "The copy failed."
+    },
+    "rollover": {
+      "label": "Prepare the academic calendar",
+      "description": "Copy last year's calendar and adjust the dates."
+    }
   }
 }

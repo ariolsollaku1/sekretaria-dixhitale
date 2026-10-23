@@ -4,4 +4,5 @@ import "server-only";
 import "@/modules/iam";
 import "@/modules/org";
 import "@/modules/cur";
+import "@/modules/cal";
 import "@/lib/audit/table";

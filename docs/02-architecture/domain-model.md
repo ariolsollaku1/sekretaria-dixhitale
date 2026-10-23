@@ -125,7 +125,8 @@ erDiagram
 ### CAL / ATT — calendar, timetable, attendance
 | Entity | Key fields |
 |---|---|
-| `CalendarEvent` | `academicYearId`, `type` (TEACHING_WEEK/HOLIDAY/DEADLINE/EXAM_PERIOD/EVENT), `title`, `start`, `end`, `audience` |
+| `CalendarEvent` | (CAL-01, implemented) `academicYearId`, `type` (TEACHING_WEEK/HOLIDAY/DEADLINE/EXAM_PERIOD/REGISTRATION_PERIOD/EVENT), `title`, `startDate`/`endDate` (inclusive, all-day), `description`, `audience` (ALL/CYCLE/PROGRAM) with `cycle`/`programId`, `active` (cancelled, never deleted). |
+| `CalendarFeedToken` | (CAL-01) one per user: hash of the secret iCal link. |
 | `TimetableEntry` | `teachingAssignmentId`, `weekday`, `startTime`, `endTime`, `room`, `validFrom/To` |
 | `ClassSession` | `teachingAssignmentId`, `date`, `hours`, `held` (bool) — basis for attendance and delivered hours |
 | `AttendanceRecord` | `classSessionId`, `enrollmentId`, `status` (PRESENT/ABSENT/EXCUSED) |

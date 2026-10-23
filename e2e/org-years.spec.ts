@@ -176,7 +176,7 @@ test("AC-8/AC-10: editing a planned year updates the details and the history sho
   }
 });
 
-test("AC-11: the new-year checklist page explains that steps arrive with the modules", async ({
+test("AC-11: the checklist lists the steps a user may use, and explains when there are none", async ({
   page,
 }) => {
   await signInAs(page, "secretary@dev.logos.test");
@@ -184,6 +184,12 @@ test("AC-11: the new-year checklist page explains that steps arrive with the mod
   await expect(
     page.getByRole("heading", { level: 1, name: "Fillimi i vitit të ri akademik" }),
   ).toBeVisible();
+  // CAL-01 registers the calendar step for those who can edit the calendar
+  await expect(page.getByText("Përgatitni kalendarin akademik")).toBeVisible();
+
+  await page.context().clearCookies();
+  await signInAs(page, "lecturer@dev.logos.test");
+  await page.goto("/org/years/rollover");
   await expect(page.getByRole("heading", { level: 2, name: /Hapat shfaqen këtu/ })).toBeVisible();
 });
 

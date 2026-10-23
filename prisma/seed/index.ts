@@ -3,6 +3,7 @@
 import { PrismaClient } from "../../src/generated/prisma/client";
 import { createAdapter } from "../../src/lib/db/adapter";
 import { academicYearsSeeder } from "./academic-years";
+import { calEventsSeeder } from "./cal-events";
 import { curCoursesSeeder } from "./cur-courses";
 import { devRolesSeeder } from "./dev-roles";
 import { orgProgramsSeeder } from "./org-programs";
@@ -20,6 +21,7 @@ const SEEDERS: Seeder[] = [
   curCoursesSeeder,
   devRolesSeeder,
   academicYearsSeeder,
+  calEventsSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

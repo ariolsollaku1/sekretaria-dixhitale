@@ -2,8 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { createAction, type ActionContext } from "@/lib/actions";
 import { db, withTransaction } from "@/lib/db";
-import "@/modules/cal";
-import { createFeedToken, revokeFeedToken } from "@/modules/cal/server/feed.service";
+import { createFeedToken, revokeFeedToken } from "@/modules/cal";
 import { GET } from "./[token]/route";
 
 let userId: string;

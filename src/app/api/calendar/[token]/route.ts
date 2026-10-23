@@ -1,6 +1,4 @@
-import { renderCalendar } from "@/modules/cal/domain/ics";
-import { feedEvents } from "@/modules/cal/server/event.queries";
-import { userForToken } from "@/modules/cal/server/feed.service";
+import { feedEvents, renderCalendar, userForToken } from "@/modules/cal";
 
 export const dynamic = "force-dynamic";
 

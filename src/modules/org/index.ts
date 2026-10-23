@@ -36,6 +36,7 @@ export {
   isYearWritable,
   assertYearWritable,
   YearClosedError,
+  listYearOptions,
   type YearView,
 } from "./server/year.queries";
 export {

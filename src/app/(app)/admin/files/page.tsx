@@ -9,7 +9,7 @@ import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import { db } from "@/lib/db";
 import { MIME } from "@/lib/files/mime";
-import { registerPlatformPurposes } from "@/lib/files/platform-purposes";
+import { registerAllPurposes } from "@/lib/files/all";
 import { getFilePurpose } from "@/lib/files/purposes";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDateTime, formatNumber } from "@/lib/i18n/format";
@@ -26,7 +26,7 @@ const TYPE_LABELS: Record<string, string> = {
 export default async function FilesPage() {
   const user = await requireUser("/admin/files");
   if (!(await can(user, "plt.file.read"))) return <ForbiddenView />;
-  registerPlatformPurposes();
+  registerAllPurposes();
   const purpose = getFilePurpose("general")!;
   const [t, locale, files, mayUpload] = await Promise.all([
     getTranslations("files"),

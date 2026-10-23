@@ -4,6 +4,7 @@ import { ForbiddenError } from "@/lib/authz/check";
 import { zonedDayStart, zonedNextDayStart } from "@/lib/i18n/zone";
 import type { AnnouncementInput } from "../domain/schemas";
 import { getAnnouncement, mayTarget, type AnnouncementView } from "./announcement.queries";
+import { attachFiles } from "./attachments";
 
 type Ctx = ActionContext;
 
@@ -50,7 +51,11 @@ function assertWindow(publishAt: Date | null, expiresAt: Date | null) {
 }
 
 /** AC-1/AC-2/AC-10: a new announcement starts as a draft. */
-export async function createAnnouncement(ctx: Ctx, input: AnnouncementInput) {
+export async function createAnnouncement(
+  ctx: Ctx,
+  input: AnnouncementInput,
+  fileIds: string[] = [],
+) {
   await checkTarget(ctx, input);
   const { publishAt, expiresAt } = windowOf(input, null);
   assertWindow(publishAt, expiresAt);
@@ -69,6 +74,7 @@ export async function createAnnouncement(ctx: Ctx, input: AnnouncementInput) {
       updatedById: ctx.user.id,
     },
   });
+  await attachFiles(ctx, created.id, fileIds);
   await ctx.audit({
     action: "ntf.announcement.create",
     entityType: "Announcement",
@@ -79,7 +85,12 @@ export async function createAnnouncement(ctx: Ctx, input: AnnouncementInput) {
   return { announcementId: created.id };
 }
 
-export async function updateAnnouncement(ctx: Ctx, id: string, input: AnnouncementInput) {
+export async function updateAnnouncement(
+  ctx: Ctx,
+  id: string,
+  input: AnnouncementInput,
+  fileIds: string[] = [],
+) {
   const before = await getAnnouncement(id, ctx.db);
   if (!before) throw new DomainError("NOT_FOUND", "Announcement not found");
   // both the old and the new audience must be within the author's reach
@@ -104,6 +115,7 @@ export async function updateAnnouncement(ctx: Ctx, id: string, input: Announceme
       updatedById: ctx.user.id,
     },
   });
+  await attachFiles(ctx, id, fileIds);
   await ctx.audit({
     action: "ntf.announcement.update",
     entityType: "Announcement",

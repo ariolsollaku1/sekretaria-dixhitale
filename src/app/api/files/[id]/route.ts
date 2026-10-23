@@ -1,7 +1,7 @@
 import { getCurrentUser } from "@/lib/auth";
 import { openFile } from "@/lib/files/files.service";
 import { contentDisposition } from "@/lib/files/mime";
-import { registerPlatformPurposes } from "@/lib/files/platform-purposes";
+import { registerAllPurposes } from "@/lib/files/all";
 import { logger } from "@/lib/logger";
 
 export const dynamic = "force-dynamic";
@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 // The only way to read a stored file (ADR-0010): never served statically. Unknown, deleted and
 // unreadable files all answer 404 so ids reveal nothing.
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
-  registerPlatformPurposes();
+  registerAllPurposes();
   const user = await getCurrentUser();
   if (!user)
     return Response.json({ ok: false, error: { code: "UNAUTHENTICATED" } }, { status: 401 });

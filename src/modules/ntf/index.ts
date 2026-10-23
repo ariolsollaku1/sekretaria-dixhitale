@@ -2,3 +2,4 @@
 import "./permissions";
 import "./server/types";
 import "./server/push";
+export { registerNtfPurposes, ATTACHMENT_PURPOSE } from "./server/attachments";

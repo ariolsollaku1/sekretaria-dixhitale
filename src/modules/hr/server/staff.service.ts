@@ -1,6 +1,6 @@
 import "server-only";
-import { Prisma } from "@/generated/prisma/client";
 import { DomainError, type ActionContext } from "@/lib/actions";
+import { linkAccountByEmail, personsUsing } from "@/lib/people";
 import type { StaffInput } from "../domain/schemas";
 import { fullView, getStaffRow, type StaffView } from "./staff.queries";
 
@@ -48,22 +48,10 @@ const fail = (field: string, code: string): never => {
   throw new DomainError("VALIDATION", "Check the fields", { [field]: [code] });
 };
 
-/** The persons that already use this national ID or e-mail. */
-async function personsUsing(ctx: Ctx, input: StaffInput, exceptPersonId?: string) {
-  const or: Prisma.PersonWhereInput[] = [];
-  if (input.nationalId) or.push({ nationalId: input.nationalId });
-  if (input.email) or.push({ email: input.email });
-  if (or.length === 0) return [];
-  return ctx.db.person.findMany({
-    where: { OR: or, ...(exceptPersonId ? { id: { not: exceptPersonId } } : {}) },
-    include: { staff: { select: { id: true } } },
-  });
-}
-
 /** AC-1..AC-5 */
 export async function createStaff(ctx: Ctx, input: StaffInput) {
   await checkDepartment(ctx, input.departmentId);
-  const matches = await personsUsing(ctx, input);
+  const matches = await personsUsing(ctx.db, input);
   let personId: string;
 
   if (matches.length > 1) {
@@ -117,13 +105,7 @@ export async function createStaff(ctx: Ctx, input: StaffInput) {
   });
 
   // AC-5: a login account with the same e-mail and no person yet becomes this person's account.
-  const email = input.email;
-  if (email) {
-    await ctx.db.user.updateMany({
-      where: { email: { equals: email, mode: "insensitive" }, personId: null },
-      data: { personId },
-    });
-  }
+  await linkAccountByEmail(ctx.db, input.email, personId);
 
   await ctx.audit({
     action: "hr.staff.create",
@@ -140,7 +122,7 @@ export async function updateStaff(ctx: Ctx, staffId: string, input: StaffInput) 
   if (!row) throw new DomainError("NOT_FOUND", "Staff member not found");
   const before = fullView(row);
   await checkDepartment(ctx, input.departmentId);
-  const clash = (await personsUsing(ctx, input, row.personId))[0];
+  const clash = (await personsUsing(ctx.db, input, row.personId))[0];
   if (clash)
     fail(
       clash.nationalId && clash.nationalId === input.nationalId ? "nationalId" : "email",

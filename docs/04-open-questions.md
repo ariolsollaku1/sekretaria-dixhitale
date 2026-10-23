@@ -53,6 +53,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-34 | Student register: student number, NIM, fields and visibility | no | open | Secretariat / DPO |
 | Q-35 | Teaching assignments: kinds, load limits and who assigns | no | open | Heads of department / HR |
 | Q-36 | Student status changes: allowed transitions and documents | no | open | Secretariat |
+| Q-37 | Forms: public submissions, anti-abuse, retention and notifications | no | open | IT / DPO / Secretariat |
 
 ---
 
@@ -432,3 +433,18 @@ Decisions taken in conversation that aren't architecture ADRs.
   change) and may carry a document reference (free text); graduation is recorded by the Secretariat
   without automatic checks until EXM/FIN exist; the Secretariat and Student Affairs perform changes.
 - **Impact:** the transition table, required documents, graduation preconditions.
+
+### Q-37 — Forms: public submissions, anti-abuse, retention and notifications
+- **Context:** SRC-037, SRC-133 — forms are opened from the LOGOS website without logging in; their data flow into the system (ADR-0009).
+- **Questions:** Which forms are public (no login) and which need a login? Is a CAPTCHA required
+  (which service is acceptable for personal data)? How long are submissions kept, and what happens to
+  the personal data of rejected or abandoned ones (Q-16)? Must an anonymous submitter get an e-mail
+  confirmation and status updates? May public forms carry file uploads (documents, photos), and of
+  what size and type? Who sees the submissions of each form?
+- **Working assumption:** a form's definition says whether it is public or needs a login; public
+  forms are protected by a hidden honeypot field and a rate limit (5 submissions per IP and form per
+  10 minutes) — no CAPTCHA yet; submissions are kept (soft states only), retention follows Q-16;
+  anonymous submitters get a reference code on screen only; logged-in submitters are notified of
+  state changes; file fields are available in logged-in forms only; each definition names the roles
+  that handle its submissions (plus the sysadmin).
+- **Impact:** CAPTCHA, retention, anonymous e-mails, public file uploads.

@@ -47,6 +47,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-28 | Course categories & credit values | no | open | Secretariat / Heads of department |
 | Q-29 | Academic calendar: week numbering & carrying it over | no | open | Secretariat |
 | Q-30 | Announcements: who publishes to whom, format, expiry | no | open | Secretariat / Communications |
+| Q-31 | Staff register: fields, lists and who sees personal data | no | open | HR / DPO |
 
 ---
 
@@ -333,3 +334,20 @@ Decisions taken in conversation that aren't architecture ADRs.
   scope; text is plain (line breaks kept, no HTML); no default expiry (the author sets one); no
   approval step; audiences are those five. A website feed is not provided.
 - **Impact:** audience list, the format of the body, defaults — not the structure.
+
+### Q-31 — Staff register: fields, lists and who sees personal data
+- **Context:** SRC-027, SRC-060, SRC-062, SRC-063 — lecturers (PAE internal full-time, PAK external
+  part-time), administrative staff, data for the employment contract and for Finance.
+- **Questions:** Which data must be kept for every staff member (national ID number, birth date and
+  place, address, phone, bank details, social-security number)? Are degrees and titles chosen from a
+  fixed list (which?) or typed? Can one person work in several departments? Which categories exist
+  besides PAE, PAK and volunteer? Which offices may see national ID, birth date and address
+  (Finance? Heads of department?) and who only the qualifications? How should the existing staff
+  list be loaded (Excel columns)?
+- **Working assumption:** a staff record holds name, father's name, gender (female/male), birth
+  date, national ID number (optional, unique), phone, e-mail, address, kind, category, degree and
+  title (typed text), one department, retired flag, primary employer (external staff), contract
+  start (required) and end (optional). HR and the sysadmin see national ID, birth date and address;
+  every other reader sees the rest. Heads of department see their department's staff; a staff member
+  sees only their own record. The import uses the template columns shown on the import page.
+- **Impact:** field list, controlled lists for degree/title, visibility of personal fields.

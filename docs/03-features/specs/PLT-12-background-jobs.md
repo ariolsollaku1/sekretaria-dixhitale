@@ -101,9 +101,9 @@ with state filter, retry button on failed rows. Nav: System → "Jobs".
 
 ## 4. Tasks
 
-- [ ] **T1** — Dependency, permissions, `JOBS_WORKER` env, job registry with validation and unit tests. (AC-1, AC-10)
-- [ ] **T2** — Runtime: start/stop, queues, workers, schedules, enqueue, error sanitising; integration tests with a real pg-boss. (AC-2..AC-6, AC-11)
-- [ ] **T3** — Nightly file clean-up job; start from `instrumentation.ts`. (AC-9, AC-2)
+- [x] **T1** — Dependency, permissions, `JOBS_WORKER` env, job registry with validation and unit tests. (AC-1, AC-10)
+- [x] **T2** — Runtime: start/stop, queues, workers, schedules, enqueue, error sanitising; integration tests with a real pg-boss. (AC-2..AC-6, AC-11)
+- [x] **T3** — Nightly file clean-up job; start from `instrumentation.ts`. (AC-9, AC-2)
 - [ ] **T4** — Dashboard queries, page, retry action with audit; nav, i18n. (AC-7, AC-8)
 - [ ] **T5** — E2E for the dashboard, docs (ADR-0008 note, README). (all)
 

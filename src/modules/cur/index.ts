@@ -42,3 +42,9 @@ export {
   type AssignmentContext,
 } from "./server/assignment-context";
 export { registerCurPurposes, SYLLABUS_PURPOSE } from "./server/syllabus.purposes";
+export { SyllabusBoard, CarryForwardButton, type SyllabusRowView } from "./ui/syllabus-board";
+export {
+  board as syllabusBoard,
+  history as syllabusHistory,
+  listSyllabusPlans,
+} from "./server/syllabus.queries";

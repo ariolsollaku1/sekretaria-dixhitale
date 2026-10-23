@@ -108,13 +108,19 @@ and forbids deleting them.
 - Carry forward with nothing to copy reports `0 created`.
 - A source file missing on the volume is skipped and reported, not fatal.
 
+**Implementation notes:**
+- Routes `/cur/syllabi` (board for the selected year and a chosen approved plan; `?plan=`) and `/cur/syllabi/[planCourseId]?year=` (history, staff only).
+- Carry forward copies the stored bytes into a new file row (files stay one-to-one with a syllabus); a missing source object is counted and skipped.
+- A lecturer or student sees approved versions only; draft and archived files answer 404 on the files route.
+- Dev data: the demo approved plan's courses (DEMO101…) can take syllabi.
+
 ## 4. Tasks
 
 - [x] **T1** — `syllabus.prisma` + migration (partial unique, freeze trigger); permissions; file purpose; nav. (AC-1, AC-5, AC-9, AC-10)
 - [x] **T2** — Pure rules and schemas with unit tests. (AC-2, AC-4, AC-7, AC-8)
 - [x] **T3** — Service and queries; integration tests. (AC-2..AC-10)
-- [ ] **T4** — Board, history page, upload / approve / carry-forward UI, i18n. (AC-6..AC-8)
-- [ ] **T5** — E2E, seed, docs. (all)
+- [x] **T4** — Board, history page, upload / approve / carry-forward UI, i18n. (AC-6..AC-8)
+- [x] **T5** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -129,9 +135,9 @@ and forbids deleting them.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

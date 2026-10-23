@@ -935,6 +935,66 @@
         "lab": "Laboratory",
         "total": "Total"
       }
+    },
+    "syllabi": {
+      "title": "Syllabi",
+      "noYear": "Select an academic year.",
+      "noPlans": "No approved plans.",
+      "noPlansHint": "Syllabi are attached to the courses of approved curriculum plans.",
+      "forYear": "Academic year {year}",
+      "plan": "Curriculum plan",
+      "show": "Show",
+      "missing": "{count, plural, =0 {Every course has an approved syllabus.} one {# course without an approved syllabus.} other {# courses without an approved syllabus.}}",
+      "upload": "Upload",
+      "newVersion": "New version",
+      "uploadTitle": "Syllabus of {code}",
+      "uploadBody": "Upload the PDF; it is saved as a draft and becomes official when approved.",
+      "file": "PDF file",
+      "notes": "Notes (optional)",
+      "saveDraft": "Save draft",
+      "uploaded": "Draft saved.",
+      "failed": "The action failed.",
+      "approve": "Approve",
+      "approveTitle": "Approve the syllabus of {code}?",
+      "approveBody": "The previously approved version is archived and never changes again.",
+      "approved": "Syllabus approved.",
+      "deleteDraft": "Delete draft",
+      "deleteTitle": "Delete the draft of {code}?",
+      "deleteBody": "The draft is deleted permanently.",
+      "deleted": "Draft deleted.",
+      "history": "History",
+      "download": "Download v{version}",
+      "downloadDraft": "Draft v{version}",
+      "draftWaiting": "Draft v{version} waiting",
+      "carry": "Carry forward",
+      "carryTitle": "Carry syllabi forward into {year}?",
+      "carryBody": "For courses without a syllabus this year, a draft is created from the latest approved one; each must be approved separately.",
+      "carried": "{created} drafts created; {existing} already present; {noSource} without a source; {sourceMissing} with a missing file.",
+      "state": {
+        "approved": "Approved",
+        "draft": "Draft",
+        "missing": "Missing"
+      },
+      "status": {
+        "DRAFT": "Draft",
+        "APPROVED": "Approved",
+        "ARCHIVED": "Archived"
+      },
+      "columns": {
+        "course": "Course",
+        "yearSemester": "Year / semester",
+        "state": "State",
+        "file": "File",
+        "actions": "Actions"
+      },
+      "historyColumns": {
+        "version": "Version",
+        "state": "Status",
+        "file": "File",
+        "notes": "Notes",
+        "created": "Created",
+        "approved": "Approved"
+      }
     }
   },
   "jobs": {

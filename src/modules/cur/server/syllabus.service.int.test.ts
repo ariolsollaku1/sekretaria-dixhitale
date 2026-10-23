@@ -471,14 +471,6 @@ describe("file read rule (AC-9)", () => {
     const a = ok(await upload());
     const draft = await db.syllabus.findUniqueOrThrow({ where: { id: a.syllabusId } });
     const view = (userId: string) =>
-      ({
-        id: draft.fileId,
-        purpose: SYLLABUS_PURPOSE,
-        status: "ATTACHED" as const,
-        entityType: "Syllabus",
-        entityId: draft.id,
-        uploadedById: "admin",
-      }) &&
       getFilePurpose(SYLLABUS_PURPOSE)!.canRead(
         { id: userId },
         {

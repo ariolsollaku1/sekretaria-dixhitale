@@ -60,8 +60,8 @@ Permissions: `cal.timetable.read`, `cal.timetable.write`, `cal.timetable.self`. 
 
 ## 4. Tasks
 
-- [ ] **T1** — Model, migration, permissions, nav. (AC-1, AC-7)
-- [ ] **T2** — Pure rules (time, clash, week grid) with unit tests. (AC-1..AC-3)
+- [x] **T1** — Model, migration, permissions, nav. (AC-1, AC-7)
+- [x] **T2** — Pure rules (time, clash, week grid) with unit tests. (AC-1..AC-3)
 - [ ] **T3** — Service and queries; integration tests. (AC-2..AC-5, AC-7)
 - [ ] **T4** — Group/room/my views and the editor, i18n. (AC-4, AC-5)
 - [ ] **T5** — CSV/XLSX import. (AC-6)

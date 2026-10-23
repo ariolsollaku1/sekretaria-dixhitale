@@ -282,3 +282,23 @@ registerNav(
     order: 40,
   },
 );
+registerNav(
+  {
+    id: "timetable",
+    labelKey: "timetable",
+    href: "/cal/timetable",
+    icon: "calendar",
+    permission: "cal.timetable.read",
+    group: "teaching",
+    order: 7,
+  },
+  {
+    id: "my-timetable",
+    labelKey: "myTimetable",
+    href: "/cal/timetable/mine",
+    icon: "calendar",
+    permission: "cal.timetable.self",
+    group: "teaching",
+    order: 8,
+  },
+);

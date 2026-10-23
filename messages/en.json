@@ -77,7 +77,9 @@
       "teachingLoad": "Annual load",
       "hrLists": "Lecturer lists",
       "studentLists": "Secretariat lists",
-      "studentStatistics": "Statistics"
+      "studentStatistics": "Statistics",
+      "timetable": "Class timetable",
+      "myTimetable": "My timetable"
     },
     "languages": {
       "sq": "Shqip",

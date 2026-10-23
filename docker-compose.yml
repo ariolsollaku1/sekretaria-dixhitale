@@ -1,0 +1,154 @@
+# Base stack, production-shaped: nothing is published to the host except the proxy.
+# docker-compose.dev.yml (selected through COMPOSE_FILE in .env) publishes dev ports on 127.0.0.1.
+# Profiles: dev (Mailpit) | full (containerized app) | prod (app + Caddy proxy).
+name: sekretari
+
+x-tz: &tz
+  TZ: ${TZ:-Europe/Tirane}
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      <<: *tz
+      POSTGRES_USER: ${POSTGRES_USER:?set in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env}
+      APP_DB_NAME: ${APP_DB_NAME:?set in .env}
+      APP_DB_USER: ${APP_DB_USER:?set in .env}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?set in .env}
+      KC_DB_NAME: ${KC_DB_NAME:?set in .env}
+      KC_DB_USER: ${KC_DB_USER:?set in .env}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD:?set in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4
+    restart: unless-stopped
+    # Production mode by default; the dev override switches to start-dev.
+    command: ["start", "--import-realm"]
+    environment:
+      <<: *tz
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?set in .env}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?set in .env}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db:5432/${KC_DB_NAME}
+      KC_DB_USERNAME: ${KC_DB_USER}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_HOSTNAME: ${KC_HOSTNAME:?set in .env}
+      # TLS ends at the proxy; Keycloak trusts its X-Forwarded-* headers.
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
+      # Lets the containerized app call http://keycloak:8080 while tokens carry the public issuer.
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
+      # Health endpoints live on the management port (9000), never published.
+      KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./infra/keycloak:/opt/keycloak/data/import:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      # The image has no curl/wget: speak HTTP over bash's /dev/tcp.
+      test:
+        - CMD-SHELL
+        - >-
+          exec 3<>/dev/tcp/127.0.0.1/9000 &&
+          printf 'GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3 &&
+          grep -q '"status": "UP"' <&3
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    restart: unless-stopped
+    environment:
+      <<: *tz
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    profiles: [dev]
+    restart: unless-stopped
+    environment:
+      <<: *tz
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: infra/docker/app.Dockerfile
+    image: sekretari-app:local
+    profiles: [full, prod]
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      <<: *tz
+      # Container-side addresses override the host-oriented values in .env.
+      DATABASE_URL: postgresql://${APP_DB_USER}:${APP_DB_PASSWORD}@db:5432/${APP_DB_NAME}
+      GOTENBERG_URL: http://gotenberg:3000
+      KEYCLOAK_INTERNAL_URL: http://keycloak:8080
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+      FILES_DIR: /data/files
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+    volumes:
+      - files:/data/files
+    depends_on:
+      db:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+      gotenberg:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  proxy:
+    image: caddy:2
+    profiles: [prod]
+    restart: unless-stopped
+    environment:
+      <<: *tz
+      DOMAIN: ${DOMAIN:?set in .env}
+      ACME_EMAIL: ${ACME_EMAIL:?set in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  files:
+  caddy-data:
+  caddy-config:

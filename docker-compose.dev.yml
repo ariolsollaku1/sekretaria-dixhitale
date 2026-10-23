@@ -1,0 +1,24 @@
+# Development override: publishes service ports on 127.0.0.1 only (AC-4) and runs Keycloak in
+# dev mode. Selected through COMPOSE_FILE in .env; leave it out in production.
+services:
+  db:
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+
+  keycloak:
+    command: ["start-dev", "--import-realm"]
+    ports:
+      - "127.0.0.1:${KEYCLOAK_PORT:-8080}:8080"
+
+  gotenberg:
+    ports:
+      - "127.0.0.1:${GOTENBERG_PORT:-3001}:3000"
+
+  mailpit:
+    ports:
+      - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-1025}:1025"
+
+  app:
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"

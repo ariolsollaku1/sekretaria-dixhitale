@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createAction, type ActionContext, type ActionResult } from "@/lib/actions";
 import { db, withTransaction } from "@/lib/db";
 import "@/modules/org";
-import { clearAudienceResolvers, registerAudienceResolver } from "./audience";
+import { clearAudienceResolvers, registerAudienceResolver } from "@/lib/audience";
 import { feedEvents, listEvents } from "./event.queries";
 import * as events from "./event.service";
 

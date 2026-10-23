@@ -1,7 +1,7 @@
 // Public surface of the CAL module: other code imports only from here.
 import "./permissions";
 import "./server/rollover";
-export { registerAudienceResolver, type Audience } from "./server/audience";
+export { registerAudienceResolver, type Audience } from "@/lib/audience";
 export { listEvents, getEvent, feedEvents, type EventView } from "./server/event.queries";
 export { hasFeedToken } from "./server/feed.service";
 export { calendarEventsTable } from "./server/event.table";

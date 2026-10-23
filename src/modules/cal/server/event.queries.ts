@@ -1,7 +1,7 @@
 import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { db, type Tx } from "@/lib/db";
-import { resolveAudience } from "./audience";
+import { resolveAudience } from "@/lib/audience";
 
 type Client = Pick<Tx, "calendarEvent" | "userRole">;
 

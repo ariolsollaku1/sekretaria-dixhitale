@@ -46,6 +46,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-27 | Uploaded files: size/type limits & retention | no | open | Secretariat / DPO |
 | Q-28 | Course categories & credit values | no | open | Secretariat / Heads of department |
 | Q-29 | Academic calendar: week numbering & carrying it over | no | open | Secretariat |
+| Q-30 | Announcements: who publishes to whom, format, expiry | no | open | Secretariat / Communications |
 
 ---
 
@@ -318,3 +319,17 @@ Decisions taken in conversation that aren't architecture ADRs.
   the whole number of weeks closest to the difference between the two year start dates (weekdays are
   kept). The six event types above are a fixed list in code.
 - **Impact:** only the week-numbering helper and the copy shift (one pure module) and the type list.
+
+### Q-30 — Announcements: who publishes to whom, format, expiry
+- **Context:** SRC-033, SRC-035, SRC-036c — notices, open lectures, workshops, registration deadlines.
+- **Questions:** Which offices may publish to everyone, and which only to their own faculty,
+  program or department? Is plain text enough or are formatting (bold, lists, links) and images
+  needed? Should notices expire by default (e.g. after the event date)? Must a notice be approved
+  before it appears? Which audiences matter besides everyone, staff, students, cycle and program
+  (faculty, year of study, group)? Should the public website show announcements (needs a rate-limited
+  public endpoint, not built yet)?
+- **Working assumption:** offices with the publish permission may publish to everyone, staff,
+  students and a cycle when their role is institution-wide, and to a program only inside their own
+  scope; text is plain (line breaks kept, no HTML); no default expiry (the author sets one); no
+  approval step; audiences are those five. A website feed is not provided.
+- **Impact:** audience list, the format of the body, defaults — not the structure.

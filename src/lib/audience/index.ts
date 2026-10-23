@@ -1,4 +1,4 @@
-// AC-9: who a cycle/program audience reaches. STU registers a resolver once enrollments exist
+// Who a cycle/program audience reaches (CAL-01 AC-9, NTF-01). STU registers a resolver once enrollments exist
 // (a student's cycle and programs); until then a student-only user sees the `ALL` events only.
 export type Audience = { cycles: ("FIRST" | "SECOND")[]; programIds: string[] };
 export type AudienceResolver = (userId: string) => Promise<Audience>;

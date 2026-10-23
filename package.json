@@ -15,7 +15,13 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --project unit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "infra:up": "docker compose --profile dev up -d --wait",
+    "infra:down": "docker compose --profile dev --profile full --profile prod down",
+    "infra:logs": "docker compose --profile dev logs -f",
+    "infra:reset": "node scripts/infra-reset.mjs",
+    "stack:up": "docker compose --profile dev --profile full up -d --build --wait",
+    "infra:smoke": "bash scripts/infra-smoke.sh"
   },
   "dependencies": {
     "next": "^16.3.8",

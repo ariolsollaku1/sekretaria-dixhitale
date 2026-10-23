@@ -57,6 +57,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
+| Q-41 | Syllabi: format, who uploads and approves, carrying forward | no | open | Heads of department / Quality |
 | Q-55 | Student portal: requesting a correction of own data | no | open | Secretariat |
 | Q-56 | Student portal: which curriculum courses a student sees | no | open | Academic Affairs |
 | Q-57 | Student portal: access after the studies end (suspended, deregistered, graduated) | no | open | Secretariat / Management |
@@ -493,6 +494,11 @@ Decisions taken in conversation that aren't architecture ADRs.
   says so); signatures and stamps are part of the template.
 - **Impact:** the number format per type, the verification page content, cancellation rules.
 
+### Q-41 — Syllabi: format, who uploads and approves, carrying forward
+- **Context:** SRC-055, SRC-110, SRC-112 — the curriculum plan and the syllabi of each program for each academic year are kept, approved and archived; students ask for them (further studies, employment).
+- **Questions:** Is a syllabus a document the lecturer or department writes (PDF/Word) or a structured form (objectives, contents, literature, assessment…)? Who uploads (the lecturer, the head of department, the program coordinator) and who approves? Is a syllabus re-approved every academic year or only when it changes? Must students see it before enrolling?
+- **Working assumption:** version 1 stores a PDF per course of an approved plan and academic year (the structured form is a later increment); the program coordinator, the head of department (inside their scope) and the sysadmin upload and approve; each upload is a new version, approving a version archives the previous one; the previous approved syllabus of the course can be carried forward into a new year as a draft that still needs approval; approved syllabi are readable by everyone who may see the plan, students included; drafts and archived versions only by staff.
+- **Impact:** the format (a structured form would need its fields), the roles that upload and approve, the carry-forward rule.
 ### Q-55 — Student portal: requesting a correction of own data
 - **Context:** SRC-036, SRC-020 — the portal shows a student their data read-only; the brief mentions "request correction".
 - **Questions:** How does a student ask for a correction (a request form, e-mail to the Secretariat, in person)? Which fields may they ask to change? Who approves?

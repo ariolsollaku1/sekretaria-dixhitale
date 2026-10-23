@@ -302,3 +302,12 @@ registerNav(
     order: 8,
   },
 );
+registerNav({
+  id: "documents",
+  labelKey: "documents",
+  href: "/admin/documents",
+  icon: "file",
+  permission: "plt.document.manage",
+  group: "system",
+  order: 41,
+});

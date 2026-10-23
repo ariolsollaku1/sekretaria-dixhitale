@@ -1,0 +1,64 @@
+enum DocumentTemplateStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+
+  @@map("document_template_status")
+}
+
+/// A versioned HTML template of a document type (PLT-09, ADR-0007); frozen once published.
+model DocumentTemplate {
+  id          String                 @id @default(cuid(2))
+  type        String
+  version     Int
+  language    String
+  validFrom   DateTime               @map("valid_from") @db.Date
+  validTo     DateTime?              @map("valid_to") @db.Date
+  status      DocumentTemplateStatus @default(DRAFT)
+  html        String
+  notes       String?
+  createdAt   DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  publishedAt DateTime?              @map("published_at") @db.Timestamptz(3)
+  createdById String?                @map("created_by_id")
+  updatedById String?                @map("updated_by_id")
+  issued      IssuedDocument[]
+
+  @@unique([type, version, language])
+  @@index([type, status])
+  @@map("document_templates")
+}
+
+/// The last number given per type and calendar year (atomic increment).
+model DocumentCounter {
+  type String
+  year Int
+  last Int
+
+  @@id([type, year])
+  @@map("document_counters")
+}
+
+/// A numbered, stored PDF (PLT-09). Never edited; cancelled with a reason.
+model IssuedDocument {
+  id            String           @id @default(cuid(2))
+  type          String
+  number        String           @unique
+  templateId    String           @map("template_id")
+  language      String
+  fileId        String           @unique @map("file_id")
+  sha256        String
+  verifyCode    String           @unique @map("verify_code")
+  subjectType   String?          @map("subject_type")
+  subjectId     String?          @map("subject_id")
+  issuedAt      DateTime         @default(now()) @map("issued_at") @db.Timestamptz(3)
+  issuedById    String?          @map("issued_by_id")
+  cancelledAt   DateTime?        @map("cancelled_at") @db.Timestamptz(3)
+  cancelledById String?          @map("cancelled_by_id")
+  cancelReason  String?          @map("cancel_reason")
+  template      DocumentTemplate @relation(fields: [templateId], references: [id])
+
+  @@index([type, issuedAt])
+  @@index([subjectType, subjectId])
+  @@map("issued_documents")
+}

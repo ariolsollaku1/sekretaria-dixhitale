@@ -92,7 +92,7 @@ Migration adds a trigger `audit_logs_immutable` raising an exception on `UPDATE`
 
 ## 4. Tasks
 
-- [ ] **T1** — Model + migration + immutability trigger. (AC-1, AC-4)
+- [x] **T1** — Model + migration + immutability trigger. (AC-1, AC-4)
 - [ ] **T2** — `diffFields` with masking + unit tests. (AC-3)
 - [ ] **T3** — Auditor + request context + integration with `withTransaction`/action wrapper,
       `requireReason`. (AC-2, AC-8)

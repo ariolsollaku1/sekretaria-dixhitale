@@ -57,3 +57,36 @@ model UserRole {
   @@index([userId])
   @@map("user_roles")
 }
+
+enum AuditActorType {
+  USER
+  SYSTEM
+  PUBLIC
+
+  @@map("audit_actor_type")
+}
+
+/// Append-only trace of business mutations and auth events. UPDATE/DELETE are rejected by a
+/// trigger (see the migration). No foreign key to users: the trace must outlive any user row.
+model AuditLog {
+  id          String         @id @default(cuid(2))
+  at          DateTime       @default(now()) @db.Timestamptz(3)
+  actorType   AuditActorType @map("actor_type")
+  actorUserId String?        @map("actor_user_id")
+  /// `<module>.<resource>.<verb>`, e.g. `stu.student.update`
+  action      String
+  entityType  String         @map("entity_type")
+  entityId    String?        @map("entity_id")
+  /// Only the changed fields; sensitive values are masked.
+  before      Json?
+  after       Json?
+  reason      String?
+  requestId   String?        @map("request_id")
+  ip          String?
+  userAgent   String?        @map("user_agent")
+
+  @@index([entityType, entityId, at])
+  @@index([actorUserId, at])
+  @@index([at])
+  @@map("audit_logs")
+}

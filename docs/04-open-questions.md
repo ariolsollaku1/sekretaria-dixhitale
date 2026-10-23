@@ -52,6 +52,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-33 | Cohorts and student groups: naming, sizes, who maintains them | no | open | Secretariat |
 | Q-34 | Student register: student number, NIM, fields and visibility | no | open | Secretariat / DPO |
 | Q-35 | Teaching assignments: kinds, load limits and who assigns | no | open | Heads of department / HR |
+| Q-36 | Student status changes: allowed transitions and documents | no | open | Secretariat |
 
 ---
 
@@ -417,3 +418,17 @@ Decisions taken in conversation that aren't architecture ADRs.
   (`cur.teaching.maxPlannedHours`, annual planned hours) that is **off by default** and only warns;
   the head of department (own department), the Secretariat and the sysadmin assign, without approval.
 - **Impact:** the kinds, the load limit and its unit, who may be assigned and who assigns.
+
+### Q-36 — Student status changes: allowed transitions and documents
+- **Context:** SRC-053, SRC-054, SRC-059 — lists of deregistered and suspended students; graduation closes the studies.
+- **Questions:** Which changes exist (suspension, resumption, deregistration, transfer to another
+  program, graduation) and which are reversible — can a deregistered student be reinstated? Is a
+  document required for each (a student request, a decision number)? What must be settled before
+  graduation (grades, fees)? May a suspension be backdated? Who may perform each change?
+- **Working assumption:** allowed: ACTIVE → SUSPENDED, DEREGISTERED or GRADUATED; SUSPENDED →
+  ACTIVE (resumption) or DEREGISTERED; DEREGISTERED and GRADUATED are final; a transfer closes the
+  enrollment as DEREGISTERED and opens a new ACTIVE one of type TRANSFER in the other program; every
+  change needs a reason and an effective date (not before the enrollment's start or the previous
+  change) and may carry a document reference (free text); graduation is recorded by the Secretariat
+  without automatic checks until EXM/FIN exist; the Secretariat and Student Affairs perform changes.
+- **Impact:** the transition table, required documents, graduation preconditions.

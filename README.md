@@ -10,8 +10,10 @@ Requires Node >= 22 (`.nvmrc`) and pnpm (`corepack enable`).
 ```bash
 pnpm install
 cp .env.example .env     # APP_URL port must match the dev script (3100)
+pnpm infra:up            # Postgres etc. (see "Run locally" below)
+pnpm db:migrate          # apply/create migrations; pnpm db:seed for default settings
 pnpm dev                 # http://localhost:3100 (health: /api/health)
-pnpm lint && pnpm typecheck && pnpm test
+pnpm lint && pnpm typecheck && pnpm test   # test = unit + integration (needs `pnpm infra:up`)
 pnpm test:e2e            # first time: pnpm exec playwright install chromium
 ```
 
@@ -25,7 +27,9 @@ pnpm infra:down    # stop (data kept)   |   pnpm infra:reset   # stop and DELETE
 ```
 
 Keycloak dev admin and database passwords are in `.env` (copied from `.env.example`; change the
-host ports there if 5432/8080 are taken). Database layer and auth arrive with PLT-03/04.
+host ports there if 5432/8080 are taken). Database commands: `pnpm db:migrate` (dev),
+`db:deploy`, `db:seed`, `db:reset`, `db:studio`, `db:generate`. Integration tests use the separate
+`sekretari_test` database (`pnpm test:int`). Auth arrives with PLT-04.
 
 ## Documentation
 

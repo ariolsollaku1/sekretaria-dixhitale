@@ -5,7 +5,8 @@ import { db } from "./client";
  * connected database name ends in `_test`, so a misconfigured DATABASE_URL cannot wipe real data.
  */
 export async function resetDatabase(): Promise<void> {
-  const [{ name }] = await db.$queryRaw<{ name: string }[]>`select current_database() as name`;
+  const rows = await db.$queryRaw<{ name: string }[]>`select current_database() as name`;
+  const name = rows[0]?.name ?? "";
   if (!name.endsWith("_test")) throw new Error(`resetDatabase refused: "${name}" is not a test DB`);
 
   const tables = await db.$queryRaw<{ tablename: string }[]>`

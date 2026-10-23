@@ -86,6 +86,7 @@ erDiagram
 | `Notification` | In-app notification per user: `type`, `payload`, `readAt`. |
 | `EmailOutbox` | Queued/sent emails with status, for traceability. |
 | `FormDefinition` / `FormSubmission` / `FormSubmissionEvent` | Forms engine (ADR-0009). |
+| `SystemSetting` | Runtime settings: `key` (PK) → JSON `value`, `updatedAt`, `updatedById` (PLT-03, implemented). |
 
 ### ORG — structure
 | Entity | Key fields |

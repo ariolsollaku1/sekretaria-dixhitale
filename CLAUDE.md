@@ -68,7 +68,8 @@ pnpm infra:up | infra:down | infra:reset   # Postgres, Keycloak, Gotenberg, Mail
 pnpm dev                                    # app on http://localhost:3100
 pnpm lint && pnpm typecheck && pnpm test    # must pass before a feature is done
 pnpm test:e2e                               # Playwright
-pnpm db:migrate | db:seed | db:reset        # Prisma
+pnpm db:migrate | db:deploy | db:seed | db:reset | db:studio   # Prisma 7 (prisma.config.ts)
+pnpm test:unit | test:int                   # Vitest projects (integration needs infra:up)
 node scripts/features.mjs [--write|--check|--ready]
 ```
 

@@ -6,12 +6,20 @@ import { PrismaClient } from "@/generated/prisma/client";
 // so the instance is cached on globalThis to avoid exhausting connections (AC-2).
 const globalForDb = globalThis as unknown as { prisma?: PrismaClient };
 
-function createClient(): PrismaClient {
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) throw new Error("DATABASE_URL is not set");
-  return new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+function getClient(): PrismaClient {
+  if (!globalForDb.prisma) {
+    const connectionString = process.env.DATABASE_URL;
+    if (!connectionString) throw new Error("DATABASE_URL is not set");
+    globalForDb.prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+  }
+  return globalForDb.prisma;
 }
 
-export const db: PrismaClient = globalForDb.prisma ?? createClient();
-
-if (process.env.NODE_ENV !== "production") globalForDb.prisma = db;
+// Lazy: `next build` imports route modules without a database URL, so connect on first use.
+export const db: PrismaClient = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    const client = getClient();
+    const value = Reflect.get(client, prop, client);
+    return typeof value === "function" ? value.bind(client) : value;
+  },
+});

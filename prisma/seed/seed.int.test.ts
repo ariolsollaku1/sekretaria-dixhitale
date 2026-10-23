@@ -30,3 +30,17 @@ it("gives each dev user their role and keeps it idempotent", async () => {
   });
   expect(sec.roles).toMatchObject([{ role: "secretary", scopeType: "INSTITUTION", scopeId: null }]);
 });
+
+it("seeds three demo academic years with exactly one current, idempotently (ORG-01 AC-13)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  const years = await db.academicYear.findMany({
+    orderBy: { code: "asc" },
+    include: { semesters: true },
+  });
+  expect(years.map((y) => [y.code, y.status, y.semesters.length])).toEqual([
+    ["2025-2026", "CLOSED", 2],
+    ["2026-2027", "CURRENT", 2],
+    ["2027-2028", "PLANNED", 2],
+  ]);
+});

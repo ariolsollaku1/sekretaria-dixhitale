@@ -50,7 +50,8 @@
       },
       "audit": "Audit log",
       "users": "Users",
-      "files": "Files"
+      "files": "Files",
+      "years": "Academic years"
     },
     "languages": {
       "sq": "Shqip",
@@ -325,6 +326,70 @@
       "limit": "You reached the limit of saved filters.",
       "failed": "The action failed.",
       "delete": "Delete filter"
+    }
+  },
+  "org": {
+    "title": "Academic years",
+    "new": "New academic year",
+    "columns": {
+      "code": "Year",
+      "start": "Start",
+      "end": "End",
+      "status": "Status",
+      "semesters": "Semesters"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "CURRENT": "Current",
+      "CLOSED": "Closed"
+    },
+    "form": {
+      "year": "Academic year",
+      "semester": "Semester {number}",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "create": "Create academic year",
+      "save": "Save changes"
+    },
+    "detail": {
+      "semesters": "Semesters",
+      "semester": "Semester {number}",
+      "edit": "Edit dates",
+      "history": "History",
+      "noCurrent": "No year is current. Make a planned year current.",
+      "closedNote": "This year is closed and read-only.",
+      "back": "Back to academic years"
+    },
+    "actions": {
+      "created": "Academic year created.",
+      "saved": "Changes saved.",
+      "madeCurrent": "{code} is now the current year.",
+      "makeCurrent": "Make current",
+      "makeCurrentTitle": "Make {code} the current year?",
+      "makeCurrentBody": "{code} becomes the system's current academic year.",
+      "makeCurrentBodyClosing": "{code} becomes current and {previous} is closed: it becomes read-only and cannot be reopened. This is recorded in the audit log.",
+      "reason": "Reason",
+      "reasonHint": "Stored in the audit log."
+    },
+    "errors": {
+      "invalidDate": "Enter a valid date.",
+      "endBeforeStart": "The end date must be after the start date.",
+      "overlap": "This year overlaps another academic year.",
+      "semesterOutside": "The semester must lie inside the academic year.",
+      "semesterOrder": "Semester 2 must start after semester 1 ends.",
+      "codeTaken": "A year with the same code already exists.",
+      "YEAR_CLOSED": "The year is closed and cannot be changed.",
+      "NOT_PLANNED": "Only a planned year can be made current.",
+      "CURRENT_EXISTS": "Another change happened at the same time. Try again.",
+      "reasonRequired": "A reason is required.",
+      "generic": "The action failed. Please try again."
+    },
+    "rollover": {
+      "title": "Start a new academic year",
+      "intro": "The steps to start the new year. Each module adds its own steps here.",
+      "empty": "Steps appear here as the related modules (groups, fees, calendar) are added.",
+      "open": "Open",
+      "nav": "New year checklist"
     }
   }
 }

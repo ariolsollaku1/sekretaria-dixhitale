@@ -2,12 +2,13 @@
 // running twice yields the same data (AC-6). Later features add their seeder to SEEDERS in order.
 import { PrismaClient } from "../../src/generated/prisma/client";
 import { createAdapter } from "../../src/lib/db/adapter";
+import { academicYearsSeeder } from "./academic-years";
 import { devRolesSeeder } from "./dev-roles";
 import { devUsersSeeder } from "./dev-users";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
-const SEEDERS: Seeder[] = [settingsSeeder, devUsersSeeder, devRolesSeeder];
+const SEEDERS: Seeder[] = [settingsSeeder, devUsersSeeder, devRolesSeeder, academicYearsSeeder];
 
 function parseEnv(args: string[]): SeedEnv {
   const i = args.indexOf("--env");

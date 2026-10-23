@@ -144,15 +144,32 @@ and `CHECK (number IN (1, 2))`, `CHECK (start_date < end_date)`.
 - Cookie `ay` pointing to a deleted/unknown year falls back to the current year (PLT-06 behaviour).
 - Dates are pure calendar dates (`@db.Date`), displayed without time zone shifts.
 
+**Implementation notes:**
+- `src/modules/org` is the second module. Its `index.ts` registers the permissions and the PLT-06
+  academic-year provider as import side effects, which `src/lib/nav/all.ts` and
+  `src/lib/tables/all.ts` pull in; other modules use `getCurrentAcademicYear`, `isYearWritable`,
+  `assertYearWritable` and `registerYearChecklistItem` from the index.
+- Pure rules work on `YYYY-MM-DD` strings, so there is no time-zone arithmetic; the database
+  guarantees (single CURRENT via a partial unique index, date and semester-number checks) are in
+  the migration.
+- Switching years: the old current year is closed first, then the new one set (the partial unique
+  index allows one CURRENT at any instant); a concurrent switch that loses gets `CURRENT_EXISTS`.
+- Demo seed `prisma/seed/academic-years.ts` (dev/demo) makes the header selector appear in
+  development; the shell e2e now asserts the selector instead of its absence.
+- Routes: `/org/years`, `/org/years/new`, `/org/years/[id]`, `/org/years/rollover`; nav group
+  Administration. There is no delete (a mistaken planned year is edited).
+- E2E cleanup: tests that create data (years, users) remove it before/after
+  (`e2e/support/cleanup.ts` also deletes e2e users from Keycloak).
+
 ## 4. Tasks
 
 - [x] **T1** — `org.prisma` models + migration (partial unique index, checks); permissions and grants. (AC-1, AC-2, AC-4, AC-12)
 - [x] **T2** — Pure year rules + Zod schemas with unit tests. (AC-1, AC-3, AC-6)
 - [x] **T3** — Services (`createYear`, `updateYear`, `makeCurrent`), queries, writability helpers, provider registration; integration tests. (AC-5..AC-9)
-- [ ] **T4** — Table, list and create pages. (AC-10, AC-12)
-- [ ] **T5** — Detail/edit page, make-current dialog, history. (AC-8, AC-10)
-- [ ] **T6** — Checklist registry and rollover page. (AC-11)
-- [ ] **T7** — Seed, nav, i18n (`org.*`), e2e, docs. (AC-13 and all)
+- [x] **T4** — Table, list and create pages. (AC-10, AC-12)
+- [x] **T5** — Detail/edit page, make-current dialog, history. (AC-8, AC-10)
+- [x] **T6** — Checklist registry and rollover page. (AC-11)
+- [x] **T7** — Seed, nav, i18n (`org.*`), e2e, docs. (AC-13 and all)
 
 ## 5. Test plan
 
@@ -173,9 +190,9 @@ and `CHECK (number IN (1, 2))`, `CHECK (start_date < end_date)`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, ADR-0006 consequences, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, ADR-0006 consequences, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

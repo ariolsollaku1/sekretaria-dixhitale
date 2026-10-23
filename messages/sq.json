@@ -50,7 +50,8 @@
       },
       "audit": "Evidenca",
       "users": "Përdoruesit",
-      "files": "Skedarët"
+      "files": "Skedarët",
+      "years": "Vitet akademike"
     },
     "languages": {
       "sq": "Shqip",
@@ -325,6 +326,70 @@
       "limit": "Keni arritur kufirin e filtrave të ruajtur.",
       "failed": "Veprimi nuk u krye.",
       "delete": "Fshi filtrin"
+    }
+  },
+  "org": {
+    "title": "Vitet akademike",
+    "new": "Vit akademik i ri",
+    "columns": {
+      "code": "Viti",
+      "start": "Fillimi",
+      "end": "Mbarimi",
+      "status": "Statusi",
+      "semesters": "Semestrat"
+    },
+    "status": {
+      "PLANNED": "I planifikuar",
+      "CURRENT": "Aktual",
+      "CLOSED": "I mbyllur"
+    },
+    "form": {
+      "year": "Viti akademik",
+      "semester": "Semestri {number}",
+      "startDate": "Data e fillimit",
+      "endDate": "Data e mbarimit",
+      "create": "Krijo vitin akademik",
+      "save": "Ruaj ndryshimet"
+    },
+    "detail": {
+      "semesters": "Semestrat",
+      "semester": "Semestri {number}",
+      "edit": "Ndrysho datat",
+      "history": "Historiku",
+      "noCurrent": "Asnjë vit nuk është aktual. Bëni aktual një vit të planifikuar.",
+      "closedNote": "Ky vit është i mbyllur dhe vetëm për lexim.",
+      "back": "Kthehu te vitet akademike"
+    },
+    "actions": {
+      "created": "Viti akademik u krijua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "madeCurrent": "Viti {code} është tani aktual.",
+      "makeCurrent": "Bëje aktual",
+      "makeCurrentTitle": "Bëni aktual vitin {code}?",
+      "makeCurrentBody": "Viti {code} bëhet viti aktual i sistemit.",
+      "makeCurrentBodyClosing": "Viti {code} bëhet aktual dhe viti {previous} mbyllet: bëhet vetëm për lexim dhe nuk rihapet. Veprimi regjistrohet në evidencë.",
+      "reason": "Arsyeja",
+      "reasonHint": "Ruhet në evidencën e ndryshimeve."
+    },
+    "errors": {
+      "invalidDate": "Shkruani një datë të vlefshme.",
+      "endBeforeStart": "Data e mbarimit duhet të jetë pas fillimit.",
+      "overlap": "Ky vit mbivendoset me një vit tjetër akademik.",
+      "semesterOutside": "Semestri duhet të jetë brenda vitit akademik.",
+      "semesterOrder": "Semestri 2 duhet të fillojë pasi mbaron semestri 1.",
+      "codeTaken": "Ekziston tashmë një vit me të njëjtin kod.",
+      "YEAR_CLOSED": "Viti është i mbyllur dhe nuk ndryshohet.",
+      "NOT_PLANNED": "Vetëm një vit i planifikuar mund të bëhet aktual.",
+      "CURRENT_EXISTS": "Një ndryshim tjetër po bëhej njëkohësisht. Provoni përsëri.",
+      "reasonRequired": "Arsyeja është e detyrueshme.",
+      "generic": "Veprimi nuk u krye. Provoni përsëri."
+    },
+    "rollover": {
+      "title": "Fillimi i vitit të ri akademik",
+      "intro": "Hapat për ta nisur vitin e ri. Çdo modul shton hapat e tij këtu.",
+      "empty": "Hapat shfaqen këtu ndërsa shtohen modulet përkatëse (grupet, tarifat, kalendari).",
+      "open": "Hap",
+      "nav": "Fillimi i vitit të ri"
     }
   }
 }

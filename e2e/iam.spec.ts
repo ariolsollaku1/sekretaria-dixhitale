@@ -2,9 +2,12 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import pg from "pg";
 import { waitForMailLink } from "./support/mailpit";
+import { deleteTestUsers } from "./support/cleanup";
 import { loginWithKeycloak, signInAs } from "./support/keycloak";
 
 const PASSWORD = "Secretary-Pass-2026!";
+
+test.afterAll(() => deleteTestUsers("new.secretary."));
 
 async function sql(text: string, params: unknown[] = []) {
   const client = new pg.Client({ connectionString: process.env.DATABASE_URL });

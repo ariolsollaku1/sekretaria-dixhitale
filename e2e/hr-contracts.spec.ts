@@ -24,7 +24,7 @@ test.beforeEach(async () => {
   );
   void ended;
   await sql(
-    "insert into staff (id, person_id, kind, category, contract_start, contract_end, active, created_at, updated_at) values ('e2e-s1', 'e2e-p1', 'ACADEMIC', 'PAK', '2020-09-01', current_date - 5, true, now(), now()), ('e2e-s2', 'e2e-p2', 'ACADEMIC', 'PAE', '2020-09-01', current_date + 3000, true, now(), now())",
+    "insert into staff (id, person_id, kind, category, contract_start, contract_end, active, created_at, updated_at) values ('e2e-s1', 'e2e-p1', 'ACADEMIC', 'PAK', '2020-09-01', (now() at time zone 'Europe/Tirane')::date - 5, true, now(), now()), ('e2e-s2', 'e2e-p2', 'ACADEMIC', 'PAE', '2020-09-01', (now() at time zone 'Europe/Tirane')::date + 3000, true, now(), now())",
   );
 });
 test.afterEach(cleanup);

@@ -114,6 +114,15 @@ registerNav(
     order: 12,
   },
   {
+    id: "syllabi",
+    labelKey: "syllabi",
+    href: "/cur/syllabi",
+    icon: "clipboard",
+    permission: "cur.syllabus.view",
+    group: "teaching",
+    order: 12.5,
+  },
+  {
     id: "teaching",
     labelKey: "teaching",
     href: "/cur/teaching",

@@ -1,0 +1,20 @@
+{
+  "password": "Dev-Pass-12345",
+  "users": [
+    { "role": "sysadmin", "email": "sysadmin@dev.logos.test", "name": "Dev Sysadmin", "appUser": true },
+    { "role": "secretary", "email": "secretary@dev.logos.test", "name": "Dev Secretary", "appUser": true },
+    { "role": "student-affairs", "email": "student-affairs@dev.logos.test", "name": "Dev Student Affairs", "appUser": true },
+    { "role": "lecturer", "email": "lecturer@dev.logos.test", "name": "Dev Lecturer", "appUser": true },
+    { "role": "finance", "email": "finance@dev.logos.test", "name": "Dev Finance", "appUser": true },
+    { "role": "hr", "email": "hr@dev.logos.test", "name": "Dev HR", "appUser": true },
+    { "role": "quality", "email": "quality@dev.logos.test", "name": "Dev Quality", "appUser": true },
+    { "role": "library", "email": "library@dev.logos.test", "name": "Dev Library", "appUser": true },
+    { "role": "administration", "email": "administration@dev.logos.test", "name": "Dev Administration", "appUser": true },
+    { "role": "student", "email": "student@dev.logos.test", "name": "Dev Student", "appUser": true },
+    { "role": "head-of-department", "email": "head-of-department@dev.logos.test", "name": "Dev Head Of Department", "appUser": true },
+    { "role": "program-coordinator", "email": "program-coordinator@dev.logos.test", "name": "Dev Program Coordinator", "appUser": true },
+    { "role": "erasmus", "email": "erasmus@dev.logos.test", "name": "Dev Erasmus", "appUser": true },
+    { "role": "inactive", "email": "inactive@dev.logos.test", "name": "Dev Inactive", "appUser": true, "active": false },
+    { "role": "stranger", "email": "stranger@dev.logos.test", "name": "Dev Stranger", "appUser": false }
+  ]
+}

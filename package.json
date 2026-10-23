@@ -18,7 +18,7 @@
     "test:unit": "vitest run --project unit",
     "test:int": "vitest run --project integration",
     "test:e2e": "playwright test",
-    "infra:up": "docker compose --profile dev up -d --wait",
+    "infra:up": "docker compose --profile dev up -d --wait && node scripts/keycloak-dev-users.mjs",
     "infra:down": "docker compose --profile dev --profile full --profile prod down",
     "infra:logs": "docker compose --profile dev logs -f",
     "infra:reset": "node scripts/infra-reset.mjs",

@@ -115,7 +115,7 @@ SSO idle 30 min / max 12 h aligned with AC-6; brute-force: lockout after 5 failu
 
 ## 4. Tasks
 
-- [ ] **T1** — Realm file `realm-logos.json` (clients `sekretari-web`, `sekretari-admin`, policies,
+- [x] **T1** — Realm file `realm-logos.json` (clients `sekretari-web`, `sekretari-admin`, policies,
       locales, `require-otp` group) + dev users file; verify import on clean `infra:reset`. (AC-9, AC-10)
 - [ ] **T2** — Better Auth setup with Prisma adapter + `auth.prisma` models + migration. (AC-2, AC-5)
 - [ ] **T3** — Sign-in guard: active-user match by `sub`/verified email, link on first login,

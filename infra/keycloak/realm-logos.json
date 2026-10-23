@@ -1,0 +1,133 @@
+{
+  "realm": "logos",
+  "displayName": "Kolegji Universitar LOGOS",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "registrationEmailAsUsername": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "verifyEmail": true,
+  "rememberMe": false,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["sq", "en"],
+  "defaultLocale": "sq",
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 43200,
+  "accessTokenLifespan": 300,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "failureFactor": 5,
+  "waitIncrementSeconds": 900,
+  "maxFailureWaitSeconds": 900,
+  "maxDeltaTimeSeconds": 43200,
+  "passwordPolicy": "length(10) and notUsername and notEmail and passwordHistory(3)",
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyDigits": 6,
+  "otpPolicyPeriod": 30,
+  "browserFlow": "browser-logos",
+  "roles": {
+    "realm": [
+      {
+        "name": "require-otp",
+        "description": "Granted through group require-otp; the browser flow then demands a second factor (Q-18: mandatory for sysadmin)."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "require-otp",
+      "path": "/require-otp",
+      "realmRoles": ["require-otp"]
+    }
+  ],
+  "authenticationFlows": [
+    {
+      "alias": "browser-logos",
+      "description": "Browser flow with a conditional OTP step for members of group require-otp",
+      "providerId": "basic-flow",
+      "topLevel": true,
+      "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "auth-cookie", "authenticatorFlow": false, "requirement": "ALTERNATIVE", "priority": 10, "userSetupAllowed": false },
+        { "authenticatorFlow": true, "requirement": "ALTERNATIVE", "priority": 20, "flowAlias": "browser-logos forms", "userSetupAllowed": false }
+      ]
+    },
+    {
+      "alias": "browser-logos forms",
+      "description": "Username/password, then the conditional OTP subflow",
+      "providerId": "basic-flow",
+      "topLevel": false,
+      "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "auth-username-password-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false },
+        { "authenticatorFlow": true, "requirement": "CONDITIONAL", "priority": 20, "flowAlias": "browser-logos conditional otp", "userSetupAllowed": false }
+      ]
+    },
+    {
+      "alias": "browser-logos conditional otp",
+      "description": "OTP is required when the user has the realm role require-otp",
+      "providerId": "basic-flow",
+      "topLevel": false,
+      "builtIn": false,
+      "authenticationExecutions": [
+        { "authenticator": "conditional-user-role", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 10, "userSetupAllowed": false, "authenticatorConfig": "require-otp-role" },
+        { "authenticator": "auth-otp-form", "authenticatorFlow": false, "requirement": "REQUIRED", "priority": 20, "userSetupAllowed": false }
+      ]
+    }
+  ],
+  "authenticatorConfig": [
+    {
+      "alias": "require-otp-role",
+      "config": { "condUserRole": "require-otp", "negate": "false" }
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "sekretari-web",
+      "name": "Sekretari Dixhitale (web)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "${KEYCLOAK_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "rootUrl": "${APP_URL}",
+      "redirectUris": ["${APP_URL}/api/auth/*", "${APP_URL_ALT}/api/auth/*"],
+      "webOrigins": ["+"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "${APP_URL}/login##${APP_URL_ALT}/login"
+      }
+    },
+    {
+      "clientId": "sekretari-admin",
+      "name": "Sekretari Dixhitale (user provisioning)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "${KEYCLOAK_ADMIN_CLIENT_SECRET}",
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true
+    }
+  ],
+  "users": [
+    {
+      "username": "service-account-sekretari-admin",
+      "enabled": true,
+      "serviceAccountClientId": "sekretari-admin",
+      "clientRoles": {
+        "realm-management": ["manage-users", "view-users", "query-users"]
+      }
+    }
+  ]
+}

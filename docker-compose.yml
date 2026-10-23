@@ -36,6 +36,11 @@ services:
     command: ["start", "--import-realm"]
     environment:
       <<: *tz
+      # Substituted into infra/keycloak/realm-logos.json (${VAR}) on realm import.
+      APP_URL: ${APP_URL:?set in .env}
+      APP_URL_ALT: ${APP_URL_ALT:-${APP_URL}}
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET:?set in .env}
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ${KEYCLOAK_ADMIN_CLIENT_SECRET:?set in .env}
       KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:?set in .env}
       KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:?set in .env}
       KC_DB: postgres
@@ -105,6 +110,7 @@ services:
       DATABASE_URL: postgresql://${APP_DB_USER}:${APP_DB_PASSWORD}@db:5432/${APP_DB_NAME}
       GOTENBERG_URL: http://gotenberg:3000
       KEYCLOAK_INTERNAL_URL: http://keycloak:8080
+      APP_URL: ${APP_URL_ALT:-${APP_URL}}
       SMTP_HOST: mailpit
       SMTP_PORT: "1025"
       FILES_DIR: /data/files

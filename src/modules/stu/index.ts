@@ -20,3 +20,4 @@ export {
 } from "./server/status-hooks";
 export { StatusChange } from "./ui/status-change";
 export { allowedTransitions } from "./domain/status-rules";
+export { studentListsTable } from "./server/lists.table";

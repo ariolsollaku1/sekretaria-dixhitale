@@ -75,7 +75,8 @@
       "adminForms": "Përcaktimi i formularëve",
       "contracts": "Mbarimi i kontratave",
       "teachingLoad": "Ngarkesa vjetore",
-      "hrLists": "Listat e pedagogëve"
+      "hrLists": "Listat e pedagogëve",
+      "studentLists": "Listat e Sekretarisë"
     },
     "languages": {
       "sq": "Shqip",
@@ -1606,6 +1607,20 @@
     },
     "history": {
       "document": "Dokumenti"
+    },
+    "lists": {
+      "title": "Listat e Sekretarisë",
+      "intro": "Listat vjetore për vitin akademik të zgjedhur: të regjistruarit në fillim të vitit, të çregjistruarit dhe ata që pezulluan studimet gjatë vitit.",
+      "list": "Lista",
+      "faculty": "Fakulteti",
+      "facultyCode": "Kodi i fakultetit",
+      "date": "Data",
+      "documentRef": "Dokumenti",
+      "kinds": {
+        "registered": "Të regjistruarit në fillim të vitit",
+        "deregistered": "Të çregjistruarit gjatë vitit",
+        "suspended": "Të pezulluarit gjatë vitit"
+      }
     }
   },
   "forms": {

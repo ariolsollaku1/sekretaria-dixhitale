@@ -75,7 +75,8 @@
       "adminForms": "Form definitions",
       "contracts": "Contract expiry",
       "teachingLoad": "Annual load",
-      "hrLists": "Lecturer lists"
+      "hrLists": "Lecturer lists",
+      "studentLists": "Secretariat lists"
     },
     "languages": {
       "sq": "Shqip",
@@ -1606,6 +1607,20 @@
     },
     "history": {
       "document": "Document"
+    },
+    "lists": {
+      "title": "Secretariat lists",
+      "intro": "The yearly lists for the selected academic year: students registered at the start of the year, deregistered, and those who suspended their studies during the year.",
+      "list": "List",
+      "faculty": "Faculty",
+      "facultyCode": "Faculty code",
+      "date": "Date",
+      "documentRef": "Document",
+      "kinds": {
+        "registered": "Registered at the start of the year",
+        "deregistered": "Deregistered during the year",
+        "suspended": "Suspended during the year"
+      }
     }
   },
   "forms": {

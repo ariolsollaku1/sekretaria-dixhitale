@@ -17,7 +17,8 @@ FROM base AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build
+# The generated Prisma client (src/generated, gitignored) is not in the build context: generate it here.
+RUN pnpm exec prisma generate && pnpm build
 
 # Prisma CLI used only by the entrypoint for `migrate deploy` (the standalone bundle has no CLI).
 # Kept in its own directory so it cannot clash with the app's traced node_modules.

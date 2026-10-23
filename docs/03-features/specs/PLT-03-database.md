@@ -85,8 +85,8 @@ path differs from older versions — follow the current Prisma docs, not memory.
       first migration. (AC-1, AC-9)
 - [x] **T2** — `src/lib/db/client.ts`, `transaction.ts`, `settings.ts` + unit tests where pure. (AC-2, AC-5)
 - [x] **T3** — Scripts in package.json; entrypoint runs `migrate deploy`. (AC-3, AC-4)
-- [ ] **T4** — Seed runner + example idempotent seeder (default settings). (AC-6)
-- [ ] **T5** — Test DB: `sekretari_test` created by postgres init script (dev only), Vitest
+- [x] **T4** — Seed runner + example idempotent seeder (default settings). (AC-6)
+- [x] **T5** — Test DB: `sekretari_test` created by postgres init script (dev only), Vitest
       integration project, `resetDatabase()`; integration test for settings. (AC-7)
 - [ ] **T6** — Health route DB check. (AC-8)
 - [ ] **T7** — Document `db:*` commands in README and CLAUDE.md if they differ.

@@ -43,7 +43,9 @@ jobs:
       - run: pnpm i18n:check
       - run: pnpm test
       - run: pnpm test:coverage
-      - run: pnpm build
+      - name: Build (main only)
+        if: github.ref == 'refs/heads/main'
+        run: pnpm build
       - run: node scripts/features.mjs --check
 
   # Build the app image and push it to GHCR once the checks pass on main.

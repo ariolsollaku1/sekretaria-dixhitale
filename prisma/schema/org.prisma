@@ -11,17 +11,18 @@ enum AcademicYearStatus {
 
 /// The main time axis. At most one CURRENT year (partial unique index in the migration).
 model AcademicYear {
-  id          String             @id @default(cuid(2))
+  id             String             @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
-  code        String             @unique
-  startDate   DateTime           @map("start_date") @db.Date
-  endDate     DateTime           @map("end_date") @db.Date
-  status      AcademicYearStatus @default(PLANNED)
-  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById String?            @map("created_by_id")
-  updatedById String?            @map("updated_by_id")
-  semesters   Semester[]
+  code           String             @unique
+  startDate      DateTime           @map("start_date") @db.Date
+  endDate        DateTime           @map("end_date") @db.Date
+  status         AcademicYearStatus @default(PLANNED)
+  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?            @map("created_by_id")
+  updatedById    String?            @map("updated_by_id")
+  semesters      Semester[]
+  calendarEvents CalendarEvent[]
 
   @@index([status])
   @@map("academic_years")
@@ -58,18 +59,18 @@ model Faculty {
 }
 
 model Department {
-  id          String   @id @default(cuid(2))
+  id          String         @id @default(cuid(2))
   /// Fixed after creation.
-  facultyId   String   @map("faculty_id")
-  code        String   @unique
+  facultyId   String         @map("faculty_id")
+  code        String         @unique
   name        String
-  nameEn      String?  @map("name_en")
-  active      Boolean  @default(true)
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById String?  @map("created_by_id")
-  updatedById String?  @map("updated_by_id")
-  faculty     Faculty  @relation(fields: [facultyId], references: [id])
+  nameEn      String?        @map("name_en")
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?        @map("created_by_id")
+  updatedById String?        @map("updated_by_id")
+  faculty     Faculty        @relation(fields: [facultyId], references: [id])
   programs    StudyProgram[]
   courses     Course[]
 
@@ -87,23 +88,24 @@ enum StudyCycle {
 
 /// A study program (ORG-03). Cycle, duration and department follow the rules in the spec; never deleted.
 model StudyProgram {
-  id            String     @id @default(cuid(2))
+  id             String          @id @default(cuid(2))
   /// Fixed after creation.
-  departmentId  String     @map("department_id")
-  cycle         StudyCycle
+  departmentId   String          @map("department_id")
+  cycle          StudyCycle
   /// Master subtype (a code from the setting `org.programSubtypes`); null for the first cycle.
-  subtype       String?
-  code          String     @unique
-  name          String
-  nameEn        String?    @map("name_en")
-  durationYears Int        @map("duration_years")
-  totalCredits  Int        @map("total_credits")
-  active        Boolean    @default(true)
-  createdAt     DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt     DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById   String?    @map("created_by_id")
-  updatedById   String?    @map("updated_by_id")
-  department    Department @relation(fields: [departmentId], references: [id])
+  subtype        String?
+  code           String          @unique
+  name           String
+  nameEn         String?         @map("name_en")
+  durationYears  Int             @map("duration_years")
+  totalCredits   Int             @map("total_credits")
+  active         Boolean         @default(true)
+  createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?         @map("created_by_id")
+  updatedById    String?         @map("updated_by_id")
+  department     Department      @relation(fields: [departmentId], references: [id])
+  calendarEvents CalendarEvent[]
 
   @@index([departmentId])
   @@map("study_programs")

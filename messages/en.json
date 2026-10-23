@@ -1255,5 +1255,139 @@
         "UNAUTHENTICATED": "Sign in again to continue."
       }
     }
+  },
+  "stu": {
+    "title": "Students",
+    "new": "New student",
+    "edit": "Edit",
+    "tabs": {
+      "label": "Parts of the student file",
+      "personal": "Personal data",
+      "enrollments": "Enrollments",
+      "years": "Yearly registrations",
+      "history": "Status history"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspended",
+      "DEREGISTERED": "Deregistered",
+      "GRADUATED": "Graduated"
+    },
+    "gender": {
+      "FEMALE": "Female",
+      "MALE": "Male"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "yearN": {
+      "1": "Year 1",
+      "2": "Year 2",
+      "3": "Year 3"
+    },
+    "registrationType": {
+      "FIRST_TIME": "First registration",
+      "SECOND_PROGRAM": "Second program",
+      "TRANSFER": "Transfer"
+    },
+    "columns": {
+      "studentNumber": "Student no.",
+      "name": "Name",
+      "nim": "NIM",
+      "program": "Program",
+      "programCode": "Program code",
+      "cohort": "Cohort",
+      "yearOfStudy": "Year of study",
+      "group": "Group",
+      "groupName": "Group name",
+      "status": "Status",
+      "gender": "Gender",
+      "residence": "Residence",
+      "search": "Search (name, no., NIM)",
+      "cycle": "Cycle",
+      "academicYearCode": "Academic year code"
+    },
+    "form": {
+      "person": "Personal data",
+      "enrollment": "First enrollment",
+      "enrollNow": "Enroll in a program now",
+      "noCohorts": "There is no active cohort. Create a cohort first.",
+      "cohort": "Cohort",
+      "registrationType": "Registration type",
+      "startedAt": "Start date",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "fatherName": "Father's name",
+      "gender": "Gender",
+      "birthDate": "Date of birth",
+      "birthPlace": "Place of birth",
+      "nationalId": "National ID number",
+      "nim": "NIM (from SMIAL)",
+      "phone": "Phone",
+      "email": "E-mail",
+      "residence": "Residence (city/municipality)",
+      "address": "Address",
+      "studentNumber": "Student no.",
+      "create": "Register student",
+      "save": "Save changes",
+      "academicYear": "Academic year",
+      "yearOfStudy": "Year of study",
+      "group": "Group",
+      "noGroup": "There is no group for this year and year of study."
+    },
+    "enrollments": {
+      "empty": "The student has no enrollments.",
+      "add": "Enroll in another program",
+      "endedAt": "Ended on"
+    },
+    "years": {
+      "empty": "No yearly registration.",
+      "yearOfStudy": "Year {year} of study",
+      "group": "Group {group}",
+      "changeGroup": "Change group"
+    },
+    "actions": {
+      "created": "The student was registered.",
+      "saved": "Saved.",
+      "enrolled": "The enrollment was added.",
+      "enroll": "Enroll",
+      "registered": "The year was registered.",
+      "register": "Register year",
+      "changeGroup": "Save group"
+    },
+    "me": {
+      "title": "My student record",
+      "none": "You have no student record",
+      "noneHint": "Your account is not linked to a student. Contact the Secretariat."
+    },
+    "dependents": {
+      "enrollments": "active enrollments",
+      "yearRegistrations": "yearly registrations"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "invalidEmail": "The e-mail is not valid.",
+      "birthDateRange": "The birth date must be between 1900 and today.",
+      "nimInvalid": "The NIM is not valid.",
+      "nimTaken": "This NIM belongs to another student.",
+      "personConflict": "The national ID and the e-mail belong to different persons.",
+      "alreadyStudent": "This person is already a student.",
+      "alreadyUsed": "This national ID or e-mail is used by another person.",
+      "unknownProgram": "The program was not found.",
+      "cohortMismatch": "The cohort is not active or does not belong to this program.",
+      "alreadyEnrolled": "The student already has an active or suspended enrollment in this program.",
+      "PROGRAM_INACTIVE": "The program is inactive.",
+      "unknownYear": "The academic year was not found.",
+      "yearOutOfRange": "The program has no such year of study.",
+      "yearClosed": "The academic year is closed.",
+      "enrollmentNotActive": "The enrollment is not active.",
+      "groupMismatch": "The group must belong to the student's cohort, for this academic year and year of study.",
+      "alreadyRegistered": "The student is already registered for this academic year.",
+      "FORBIDDEN": "You may not do this.",
+      "generic": "The action failed."
+    }
   }
 }

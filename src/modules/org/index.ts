@@ -57,6 +57,8 @@ export {
   registerCohortDependent,
   registerGroupDependent,
   resetCohortDependents,
+  blockingCohortDependents,
+  blockingGroupDependents,
   type CohortDependent,
   type GroupDependent,
 } from "./server/cohort-dependents";

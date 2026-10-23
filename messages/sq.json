@@ -1255,5 +1255,139 @@
         "UNAUTHENTICATED": "Hyni përsëri për të vazhduar."
       }
     }
+  },
+  "stu": {
+    "title": "Studentët",
+    "new": "Student i ri",
+    "edit": "Ndrysho",
+    "tabs": {
+      "label": "Pjesët e dosjes së studentit",
+      "personal": "Të dhëna personale",
+      "enrollments": "Regjistrimet",
+      "years": "Regjistrimet vjetore",
+      "history": "Historiku i statusit"
+    },
+    "status": {
+      "ACTIVE": "Aktiv",
+      "SUSPENDED": "I pezulluar",
+      "DEREGISTERED": "I çregjistruar",
+      "GRADUATED": "I diplomuar"
+    },
+    "gender": {
+      "FEMALE": "Femër",
+      "MALE": "Mashkull"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "yearN": {
+      "1": "Viti 1",
+      "2": "Viti 2",
+      "3": "Viti 3"
+    },
+    "registrationType": {
+      "FIRST_TIME": "Regjistrim i parë",
+      "SECOND_PROGRAM": "Program i dytë",
+      "TRANSFER": "Transferim"
+    },
+    "columns": {
+      "studentNumber": "Nr. i studentit",
+      "name": "Emri",
+      "nim": "NIM",
+      "program": "Programi",
+      "programCode": "Kodi i programit",
+      "cohort": "Kohorta",
+      "yearOfStudy": "Viti i studimit",
+      "group": "Grupi",
+      "groupName": "Emri i grupit",
+      "status": "Statusi",
+      "gender": "Gjinia",
+      "residence": "Vendbanimi",
+      "search": "Kërko (emri, nr., NIM)",
+      "cycle": "Cikli",
+      "academicYearCode": "Kodi i vitit akademik"
+    },
+    "form": {
+      "person": "Të dhëna personale",
+      "enrollment": "Regjistrimi i parë",
+      "enrollNow": "Regjistro menjëherë në një program",
+      "noCohorts": "Nuk ka kohortë aktive. Krijoni një kohortë së pari.",
+      "cohort": "Kohorta",
+      "registrationType": "Lloji i regjistrimit",
+      "startedAt": "Data e fillimit",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "fatherName": "Emri i babait",
+      "gender": "Gjinia",
+      "birthDate": "Data e lindjes",
+      "birthPlace": "Vendi i lindjes",
+      "nationalId": "Numri personal (NID)",
+      "nim": "NIM (nga SMIAL)",
+      "phone": "Telefoni",
+      "email": "Email",
+      "residence": "Vendbanimi (qyteti/bashkia)",
+      "address": "Adresa",
+      "studentNumber": "Nr. i studentit",
+      "create": "Regjistro studentin",
+      "save": "Ruaj ndryshimet",
+      "academicYear": "Viti akademik",
+      "yearOfStudy": "Viti i studimit",
+      "group": "Grupi",
+      "noGroup": "Nuk ka grup për këtë vit dhe vit studimi."
+    },
+    "enrollments": {
+      "empty": "Studenti nuk ka regjistrime.",
+      "add": "Regjistro në një program tjetër",
+      "endedAt": "Mbaron më"
+    },
+    "years": {
+      "empty": "Nuk ka regjistrim vjetor.",
+      "yearOfStudy": "Viti {year} i studimit",
+      "group": "Grupi {group}",
+      "changeGroup": "Ndrysho grupin"
+    },
+    "actions": {
+      "created": "Studenti u regjistrua.",
+      "saved": "U ruajt.",
+      "enrolled": "Regjistrimi u shtua.",
+      "enroll": "Regjistro",
+      "registered": "Viti u regjistrua.",
+      "register": "Regjistro vitin",
+      "changeGroup": "Ruaj grupin"
+    },
+    "me": {
+      "title": "Të dhënat e mia si student",
+      "none": "Nuk keni dosje studenti",
+      "noneHint": "Llogaria juaj nuk është lidhur me një student. Kontaktoni Sekretarinë."
+    },
+    "dependents": {
+      "enrollments": "regjistrime aktive",
+      "yearRegistrations": "regjistrime vjetore"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "invalidEmail": "Email-i nuk është i vlefshëm.",
+      "birthDateRange": "Data e lindjes duhet të jetë midis 1900 dhe sot.",
+      "nimInvalid": "NIM nuk është i vlefshëm.",
+      "nimTaken": "Ky NIM i përket një studenti tjetër.",
+      "personConflict": "Numri personal dhe email-i i përkasin personave të ndryshëm.",
+      "alreadyStudent": "Ky person është tashmë student.",
+      "alreadyUsed": "Ky numër personal ose email përdoret nga një person tjetër.",
+      "unknownProgram": "Programi nuk u gjet.",
+      "cohortMismatch": "Kohorta nuk është aktive ose nuk i përket këtij programi.",
+      "alreadyEnrolled": "Studenti ka tashmë një regjistrim aktiv ose të pezulluar në këtë program.",
+      "PROGRAM_INACTIVE": "Programi është joaktiv.",
+      "unknownYear": "Viti akademik nuk u gjet.",
+      "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+      "yearClosed": "Viti akademik është i mbyllur.",
+      "enrollmentNotActive": "Regjistrimi nuk është aktiv.",
+      "groupMismatch": "Grupi duhet të jetë i kohortës së studentit, për këtë vit akademik dhe vit studimi.",
+      "alreadyRegistered": "Studenti është regjistruar tashmë për këtë vit akademik.",
+      "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+      "generic": "Veprimi nuk u krye."
+    }
   }
 }

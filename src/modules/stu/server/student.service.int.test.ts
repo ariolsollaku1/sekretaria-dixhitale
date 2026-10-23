@@ -2,11 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { createAction, type ActionContext, type ActionResult } from "@/lib/actions";
 import { db, withTransaction } from "@/lib/db";
-import {
-  blockingCohortDependents,
-  blockingGroupDependents,
-} from "@/modules/org/server/cohort-dependents";
-import "@/modules/org";
+import { blockingCohortDependents, blockingGroupDependents } from "@/modules/org";
 import "@/modules/cur";
 import "@/modules/stu";
 import { personalSchema, type PersonalFormInput } from "../domain/schemas";

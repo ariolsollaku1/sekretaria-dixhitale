@@ -128,13 +128,23 @@ A database sequence `student_number_seq` feeds `studentNumber`.
 - Registering for a year needs a group: the form says so when the cohort has none for that year and links to the groups.
 - Concurrent enrollments of the same student in one program: the partial unique index decides.
 
+**Implementation notes:**
+- `src/modules/stu`; routes `/stu/students` (+ `/new`, `/[id]` with tabs by `?tab=`, `/[id]/edit`) and `/stu/me`.
+- `Person` helpers shared with HR-01 live in `src/lib/people` (conflict lookup, account linking) and
+  the personal-field validation in `src/lib/people/schema.ts`.
+- ORG-04 hooks: active enrollments block deactivating a cohort / changing its plan; year
+  registrations block deactivating a group (`registerCohortDependent`, `registerGroupDependent`).
+- The list has one row per student, showing the enrollment that matches the filters (else the open
+  one, else the latest); identifiers are not columns at all.
+- Dev seed: the dev student gets a record, an enrollment in the demo cohort and a year registration.
+
 ## 4. Tasks
 
 - [x] **T1** — `students.prisma` + migration (sequence, partial unique index); `Person` columns; permissions; nav. (AC-1..AC-3, AC-13)
 - [x] **T2** — Shared people helpers; pure rules and schemas with unit tests. (AC-1, AC-4, AC-7)
 - [x] **T3** — Services and queries (scope, masking); integration tests. (AC-3..AC-8, AC-10, AC-11)
-- [ ] **T4** — Dependents for ORG-04; table, pages, forms, my record, i18n. (AC-9..AC-12)
-- [ ] **T5** — E2E, seed, docs. (all)
+- [x] **T4** — Dependents for ORG-04; table, pages, forms, my record, i18n. (AC-9..AC-12)
+- [x] **T5** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -152,9 +162,9 @@ A database sequence `student_number_seq` feeds `studentNumber`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

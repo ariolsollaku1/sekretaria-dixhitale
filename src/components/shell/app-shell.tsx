@@ -9,6 +9,7 @@ import { AcademicYearProvider } from "@/lib/academic-year/client";
 import { AcademicYearSelect, type AcademicYearView } from "./academic-year-select";
 import { LocaleSwitcher } from "./locale-switcher";
 import { NavList, type NavSectionView } from "./nav-list";
+import { NotificationBell, type BellItem } from "@/components/notifications/notification-bell";
 import { UserMenu } from "./user-menu";
 
 const SIGN_OUT_FORM = "shell-signout";
@@ -17,11 +18,12 @@ export type ShellProps = {
   sections: NavSectionView[];
   user: { name: string; email: string; roles: string[] };
   academicYear: AcademicYearView | null;
+  notifications: { unread: number; items: BellItem[] };
   children: ReactNode;
 };
 
 /** AC-1/AC-3: sidebar on md+, drawer below; top bar with year, language, notifications slot, user. */
-export function AppShell({ sections, user, academicYear, children }: ShellProps) {
+export function AppShell({ sections, user, academicYear, notifications, children }: ShellProps) {
   const t = useTranslations("shell");
   const [drawerOpen, setDrawerOpen] = useState(false);
   return (
@@ -59,8 +61,7 @@ export function AppShell({ sections, user, academicYear, children }: ShellProps)
             <div className="ml-auto flex flex-wrap items-center gap-2">
               {academicYear && <AcademicYearSelect {...academicYear} />}
               <LocaleSwitcher />
-              {/* Notifications slot: PLT-11 renders the bell here. */}
-              <div data-slot="notifications" />
+              <NotificationBell unread={notifications.unread} items={notifications.items} />
               <UserMenu {...user} signOutFormId={SIGN_OUT_FORM} />
             </div>
           </header>

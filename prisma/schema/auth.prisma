@@ -16,6 +16,8 @@ model User {
   accounts      Account[]
   roles         UserRole[]
   savedFilters  SavedFilter[]
+  notifications Notification[]
+  notificationPreferences NotificationPreference[]
 
   @@map("users")
 }

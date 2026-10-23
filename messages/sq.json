@@ -57,7 +57,8 @@
       "programs": "Programet",
       "courses": "Lëndët",
       "courseCategories": "Kategoritë e lëndëve",
-      "jobs": "Punët në sfond"
+      "jobs": "Punët në sfond",
+      "notifications": "Njoftimet"
     },
     "languages": {
       "sq": "Shqip",
@@ -610,6 +611,57 @@
       "completed": "Përfunduar",
       "cancelled": "Anuluar",
       "failed": "Dështuar"
+    },
+    "outbox": {
+      "title": "Dërgesat e postës",
+      "queued": "Në pritje",
+      "sent": "Dërguar",
+      "failed": "Dështuar"
+    }
+  },
+  "notifications": {
+    "title": "Njoftimet",
+    "empty": "Nuk keni njoftime.",
+    "unread": "E palexuar",
+    "markRead": "Shëno si të lexuar",
+    "markAllRead": "Shëno të gjitha si të lexuara",
+    "openList": "Të gjitha njoftimet",
+    "bell": "Njoftimet",
+    "bellCount": "{count, plural, =0 {Asnjë njoftim i palexuar} one {# njoftim i palexuar} other {# njoftime të palexuara}}",
+    "preferences": "Preferencat",
+    "page": "Faqja {page} nga {pageCount}",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "plt": {
+      "test": {
+        "title": "Njoftim provë",
+        "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë."
+      }
+    },
+    "prefs": {
+      "title": "Preferencat e njoftimeve",
+      "intro": "Zgjidhni cilat njoftime opsionale ju vijnë edhe me email. Njoftimet e detyrueshme dërgohen gjithmonë.",
+      "email": "Dërgo edhe me email",
+      "always": "Dërgohet gjithmonë",
+      "saved": "Preferenca u ruajt.",
+      "testTitle": "Verifikimi i postës",
+      "testHint": "Dërgoni vetes një mesazh prove (njoftim + email).",
+      "testButton": "Më dërgo një mesazh prove",
+      "testSent": "Mesazhi i provës u dërgua. Shikoni zilen dhe postën.",
+      "testFailed": "Mesazhi i provës nuk u dërgua."
+    },
+    "open": "Hap"
+  },
+  "mail": {
+    "common": {
+      "footer": "Ky mesazh u dërgua automatikisht nga Sekretari Dixhitale i Kolegjit Universitar LOGOS.",
+      "open": "Hapni në sistem"
+    },
+    "plt": {
+      "test": {
+        "subject": "Mesazh prove nga Sekretari Dixhitale",
+        "body": "Përshëndetje {name},\n\nky është një mesazh prove nga Sekretari Dixhitale. Nëse e lexoni, dërgimi i postës funksionon."
+      }
     }
   }
 }

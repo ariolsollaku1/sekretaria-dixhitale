@@ -12,6 +12,7 @@ export const PLATFORM_PERMISSIONS = [
   "plt.view.save",
   "plt.jobs.read",
   "plt.jobs.manage",
+  "plt.notification.use",
 ] as const;
 
 registerPermissions("iam", {
@@ -27,6 +28,7 @@ registerPermissions("plt", {
     "plt.view.save",
     "plt.jobs.read",
     "plt.jobs.manage",
+    "plt.notification.use",
   ],
   grants: {
     sysadmin: [
@@ -39,8 +41,9 @@ registerPermissions("plt", {
     ],
   },
 });
-// PLT-10: saving a personal table filter is not sensitive, so every role may.
+// Own-data conveniences that every role has: saving a table filter (PLT-10) and reading / managing
+// one's own notifications (PLT-11).
 registerPermissions("plt", {
   permissions: [],
-  grants: Object.fromEntries(ROLES.map((r) => [r, ["plt.view.save"]])),
+  grants: Object.fromEntries(ROLES.map((r) => [r, ["plt.view.save", "plt.notification.use"]])),
 });

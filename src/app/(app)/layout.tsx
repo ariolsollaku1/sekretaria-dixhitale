@@ -7,6 +7,7 @@ import { PermissionsProvider } from "@/lib/authz/client";
 import { permissionsFor } from "@/lib/authz/guard";
 import { loadActorContext } from "@/lib/authz/load";
 import { getSelectedAcademicYear, listAcademicYears } from "@/lib/academic-year/context";
+import { bellData } from "@/lib/notify/queries";
 import { allNavEntries, visibleNav } from "@/lib/nav/registry";
 import "@/lib/nav/all";
 
@@ -34,6 +35,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
     ? { options: years, selected: await getSelectedAcademicYear() }
     : null;
 
+  const bell = await bellData(user.id);
   const ctx = await loadActorContext(user.id);
   const roles = [...new Set(ctx?.assignments.map((a) => a.role) ?? [])].map((r) => tRoles(r));
 
@@ -43,6 +45,16 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         sections={sections}
         user={{ name: user.name, email: user.email, roles }}
         academicYear={academicYear}
+        notifications={{
+          unread: bell.unread,
+          items: bell.latest.map(({ id, title, body, link, read }) => ({
+            id,
+            title,
+            body,
+            link,
+            read,
+          })),
+        }}
       >
         {children}
       </AppShell>

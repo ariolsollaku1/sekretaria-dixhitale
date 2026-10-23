@@ -50,6 +50,7 @@ test("AC-2/3/4/5/7: a sysadmin creates a Master program; durations follow the cy
 }) => {
   await signInAs(page, "sysadmin@dev.logos.test");
   await page.goto("/org/programs/new");
+  await page.waitForLoadState("networkidle");
 
   // Bachelor only offers 3 years
   await expect(page.getByLabel("Kohëzgjatja").locator("option")).toHaveText(["3 vite"]);

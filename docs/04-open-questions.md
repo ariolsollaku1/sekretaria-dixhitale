@@ -57,6 +57,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
+| Q-55 | Student portal: requesting a correction of own data | no | open | Secretariat |
+| Q-56 | Student portal: which curriculum courses a student sees | no | open | Academic Affairs |
+| Q-57 | Student portal: access after the studies end (suspended, deregistered, graduated) | no | open | Secretariat / Management |
+| Q-58 | Student portal: how much the home page shows (horizons and counts) | no | open | Secretariat |
+| Q-59 | Student portal: where the home page lives | no | open | Secretariat |
 
 ---
 
@@ -487,3 +492,33 @@ Decisions taken in conversation that aren't architecture ADRs.
   an issued document is never edited — it can be cancelled with a reason (the verification page then
   says so); signatures and stamps are part of the template.
 - **Impact:** the number format per type, the verification page content, cancellation rules.
+
+### Q-55 — Student portal: requesting a correction of own data
+- **Context:** SRC-036, SRC-020 — the portal shows a student their data read-only; the brief mentions "request correction".
+- **Questions:** How does a student ask for a correction (a request form, e-mail to the Secretariat, in person)? Which fields may they ask to change? Who approves?
+- **Working assumption:** STU-03 only displays the data read-only with a note to contact the Secretariat; no correction flow is built until STU-07 (student requests) defines one.
+- **Impact:** a "request correction" action and its approval chain.
+
+### Q-56 — Student portal: which curriculum courses a student sees
+- **Context:** SRC-036 — the portal builds on the curriculum plan of the student's cohort (CUR-02).
+- **Questions:** Should a student see the whole plan, only the current year of study, or only courses they may register for? Are elective courses shown? Is a plan visible while still a draft?
+- **Working assumption:** the courses of the student's current year of study from the cohort's plan, grouped by semester, with credits and an elective mark; a plan in draft is never shown.
+- **Impact:** the course list and its filter.
+
+### Q-57 — Student portal: access after the studies end
+- **Context:** SRC-036, SRC-054 — students may be suspended, deregistered or graduated.
+- **Questions:** May such a student still sign in and see their home page and record? For how long? Are timetable and announcements still shown?
+- **Working assumption:** the account keeps working (account lifecycle is IAM-02); the home page shows the status prominently, lists past enrollments, and shows the timetable, calendar and plan only for active enrollments.
+- **Impact:** what a former student sees, and the cut-off.
+
+### Q-58 — Student portal: how much the home page shows
+- **Context:** SRC-036c, SRC-036d — calendar, timetable and announcements shown on the home page.
+- **Questions:** How many items and how far ahead are useful (next events, announcements, notifications)?
+- **Working assumption:** today's classes, the next 5 calendar events that end today or later, the latest 3 announcements and the latest 5 notifications (with the unread count); each links to its full page.
+- **Impact:** the counts and horizon only.
+
+### Q-59 — Student portal: where the home page lives
+- **Context:** SRC-036 — the platform has a dashboard at `/` with module widgets (PLT-06).
+- **Questions:** Should students land on a dedicated page or on the shared dashboard?
+- **Working assumption:** a dedicated page `/stu/home` (first item of the student menu) plus a "My studies" widget on the dashboard that links to it.
+- **Impact:** navigation and the post-login landing page.

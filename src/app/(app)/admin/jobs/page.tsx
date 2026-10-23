@@ -21,6 +21,7 @@ import {
 } from "@/lib/jobs/dashboard";
 import { listJobs } from "@/lib/jobs/registry";
 import { RetryJobButton } from "@/lib/jobs/retry-button";
+import { outboxCounts } from "@/lib/notify/queries";
 import "@/lib/jobs/all";
 
 const TONE: Record<string, StatusTone> = {
@@ -51,10 +52,12 @@ export default async function JobsPage({
   let queues: QueueRow[] = [];
   let jobs: JobRow[] = [];
   let failed = false;
+  let outbox = { queued: 0, sent: 0, failed: 0 };
   try {
-    [queues, jobs] = await Promise.all([
+    [queues, jobs, outbox] = await Promise.all([
       queueOverview(),
       recentJobs({ state: params.state, queue: params.queue }),
+      outboxCounts(),
     ]);
   } catch {
     failed = true;
@@ -109,6 +112,26 @@ export default async function JobsPage({
                 </tbody>
               </table>
             </div>
+          </section>
+
+          <section aria-labelledby="outbox-title" className="mb-8">
+            <h2 id="outbox-title" className="mb-3 text-2xl font-semibold">
+              {t("outbox.title")}
+            </h2>
+            <ul className="flex flex-wrap gap-3 text-sm">
+              <li className="rounded-card border-border bg-card border px-4 py-2">
+                {t("outbox.queued")}:{" "}
+                <span className="font-tabular font-semibold">{outbox.queued}</span>
+              </li>
+              <li className="rounded-card border-border bg-card border px-4 py-2">
+                {t("outbox.sent")}:{" "}
+                <span className="font-tabular font-semibold">{outbox.sent}</span>
+              </li>
+              <li className="rounded-card border-border bg-card border px-4 py-2">
+                {t("outbox.failed")}:{" "}
+                <span className="font-tabular font-semibold">{outbox.failed}</span>
+              </li>
+            </ul>
           </section>
 
           <section aria-labelledby="recent-title">

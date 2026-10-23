@@ -57,7 +57,8 @@
       "programs": "Programs",
       "courses": "Courses",
       "courseCategories": "Course categories",
-      "jobs": "Jobs"
+      "jobs": "Jobs",
+      "notifications": "Notifications"
     },
     "languages": {
       "sq": "Shqip",
@@ -610,6 +611,12 @@
       "completed": "Completed",
       "cancelled": "Cancelled",
       "failed": "Failed"
+    },
+    "outbox": {
+      "title": "E-mail outbox",
+      "queued": "Queued",
+      "sent": "Sent",
+      "failed": "Failed"
     }
   },
   "notifications": {
@@ -641,11 +648,9 @@
       "testHint": "Send yourself a test message (notification + e-mail).",
       "testButton": "Send me a test message",
       "testSent": "Test message sent. Check the bell and your mailbox.",
-      "testFailed": "The test message could not be sent.",
-      "typeLabels": {
-        "plt.test": "Test message"
-      }
-    }
+      "testFailed": "The test message could not be sent."
+    },
+    "open": "Open"
   },
   "mail": {
     "common": {

@@ -31,14 +31,15 @@ describe("platform permissions (AC-11)", () => {
       await assignRole(tx, sec.id, { role: "secretary", scopeType: "INSTITUTION" });
     });
     // plt.view.save is the exception: every role holds it (PLT-10).
-    const sysadminOnly = PLATFORM_PERMISSIONS.filter((p) => p !== "plt.view.save");
+    const everyRole = ["plt.view.save", "plt.notification.use"];
+    const sysadminOnly = PLATFORM_PERMISSIONS.filter((p) => !everyRole.includes(p));
     for (const p of sysadminOnly) {
       expect(await can(admin, p)).toBe(true);
       expect(await can(sec, p)).toBe(false);
     }
-    expect(await can(sec, "plt.view.save")).toBe(true);
+    for (const p of everyRole) expect(await can(sec, p)).toBe(true);
     expect(await permissionsFor(admin)).toEqual([...PLATFORM_PERMISSIONS].sort());
-    expect(await permissionsFor(sec)).toEqual(["plt.view.save"]);
+    expect(await permissionsFor(sec)).toEqual(["plt.notification.use", "plt.view.save"]);
   });
 });
 

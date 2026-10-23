@@ -57,7 +57,8 @@
       "programs": "Programet",
       "courses": "Lëndët",
       "courseCategories": "Kategoritë e lëndëve",
-      "jobs": "Punët në sfond"
+      "jobs": "Punët në sfond",
+      "notifications": "Njoftimet"
     },
     "languages": {
       "sq": "Shqip",
@@ -610,6 +611,12 @@
       "completed": "Përfunduar",
       "cancelled": "Anuluar",
       "failed": "Dështuar"
+    },
+    "outbox": {
+      "title": "Dërgesat e postës",
+      "queued": "Në pritje",
+      "sent": "Dërguar",
+      "failed": "Dështuar"
     }
   },
   "notifications": {
@@ -641,11 +648,9 @@
       "testHint": "Dërgoni vetes një mesazh prove (njoftim + email).",
       "testButton": "Më dërgo një mesazh prove",
       "testSent": "Mesazhi i provës u dërgua. Shikoni zilen dhe postën.",
-      "testFailed": "Mesazhi i provës nuk u dërgua.",
-      "typeLabels": {
-        "plt.test": "Mesazh prove"
-      }
-    }
+      "testFailed": "Mesazhi i provës nuk u dërgua."
+    },
+    "open": "Hap"
   },
   "mail": {
     "common": {

@@ -2,8 +2,7 @@
 // No I/O. The XLSX reader lives in the server layer and hands rows of strings to `rowsFromTable`.
 import { MAX_CREDITS, MAX_HOURS, parseWholeNumber, validateCourseCode } from "./course-rules";
 
-export const MAX_IMPORT_ROWS = 2000;
-export const MAX_IMPORT_BYTES = 2 * 1024 * 1024;
+export { MAX_IMPORT_BYTES, MAX_IMPORT_ROWS } from "@/lib/import/table";
 
 export const TEMPLATE_COLUMNS = [
   "code",
@@ -20,69 +19,8 @@ const REQUIRED = ["code", "name", "credits", "department"] as const;
 
 export const TEMPLATE_CSV = `﻿${TEMPLATE_COLUMNS.join(",")}\r\n`;
 
-export type FileError =
-  "invalidEncoding" | "empty" | "tooManyRows" | "tooLarge" | "missingColumns" | "unsupportedFile";
-
-/** UTF-8 only (with or without BOM). Guessing a legacy encoding would silently corrupt ë and ç. */
-export function decodeCsv(
-  bytes: Uint8Array,
-): { ok: true; text: string } | { ok: false; error: FileError } {
-  try {
-    return {
-      ok: true,
-      text: new TextDecoder("utf-8", { fatal: true, ignoreBOM: false })
-        .decode(bytes)
-        .replace(/^﻿/, ""),
-    };
-  } catch {
-    return { ok: false, error: "invalidEncoding" };
-  }
-}
-
-/** RFC 4180 parser; the delimiter (`,` or `;`) is taken from the header line. */
-export function parseCsv(text: string): string[][] {
-  const firstLine = text.split(/\r\n|\n|\r/, 1)[0] ?? "";
-  const outside = firstLine.replace(/"[^"]*"/g, "");
-  const delimiter =
-    (outside.match(/;/g)?.length ?? 0) > (outside.match(/,/g)?.length ?? 0) ? ";" : ",";
-
-  const rows: string[][] = [];
-  let row: string[] = [];
-  let field = "";
-  let quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i]!;
-    if (quoted) {
-      if (c === '"') {
-        if (text[i + 1] === '"') {
-          field += '"';
-          i++;
-        } else quoted = false;
-      } else field += c;
-    } else if (c === '"') quoted = true;
-    else if (c === delimiter) {
-      row.push(field);
-      field = "";
-    } else if (c === "\n" || c === "\r") {
-      if (c === "\r" && text[i + 1] === "\n") i++;
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = "";
-    } else field += c;
-  }
-  if (field !== "" || row.length > 0) {
-    row.push(field);
-    rows.push(row);
-  }
-  return rows.filter((r) => r.some((cell) => cell.trim() !== ""));
-}
-
-const normalizeHeader = (h: string) =>
-  h
-    .trim()
-    .toLowerCase()
-    .replace(/[\s-]+/g, "_");
+export { decodeCsv, normalizeHeader, parseCsv, type FileError } from "@/lib/import/table";
+import { MAX_IMPORT_ROWS as MAX_ROWS, normalizeHeader, type FileError } from "@/lib/import/table";
 
 export type RawRecord = { row: number } & Partial<
   Record<(typeof TEMPLATE_COLUMNS)[number], string>
@@ -98,7 +36,7 @@ export function rowsFromTable(
   if (missing.length > 0) return { ok: false, error: "missingColumns", missing: [...missing] };
   const body = table.slice(1);
   if (body.length === 0) return { ok: false, error: "empty" };
-  if (body.length > MAX_IMPORT_ROWS) return { ok: false, error: "tooManyRows" };
+  if (body.length > MAX_ROWS) return { ok: false, error: "tooManyRows" };
   const records = body.map((cells, i) => {
     const rec: RawRecord = { row: i + 2 };
     headers.forEach((h, idx) => {

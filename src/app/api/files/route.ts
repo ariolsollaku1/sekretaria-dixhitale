@@ -1,7 +1,7 @@
 import { getCurrentUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import { FileError, storeUpload, type FileErrorCode } from "@/lib/files/files.service";
-import { registerPlatformPurposes } from "@/lib/files/platform-purposes";
+import { registerAllPurposes } from "@/lib/files/all";
 import { getFilePurpose } from "@/lib/files/purposes";
 import { logger } from "@/lib/logger";
 
@@ -28,7 +28,7 @@ const fail = (code: FileErrorCode | "UNAUTHENTICATED" | "BAD_REQUEST", status: n
 // so permission and size can be checked before the body is read (conventions: size limit, MIME
 // allow-list, stored outside the web root, permission-checked).
 export async function POST(request: Request) {
-  registerPlatformPurposes();
+  registerAllPurposes();
   const user = await getCurrentUser();
   if (!user) return fail("UNAUTHENTICATED", 401);
 

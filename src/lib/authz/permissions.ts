@@ -13,6 +13,9 @@ export const PLATFORM_PERMISSIONS = [
   "plt.jobs.read",
   "plt.jobs.manage",
   "plt.notification.use",
+  "plt.form.manage",
+  "plt.form.inbox",
+  "plt.form.submit",
 ] as const;
 
 registerPermissions("iam", {
@@ -29,6 +32,9 @@ registerPermissions("plt", {
     "plt.jobs.read",
     "plt.jobs.manage",
     "plt.notification.use",
+    "plt.form.manage",
+    "plt.form.inbox",
+    "plt.form.submit",
   ],
   grants: {
     sysadmin: [
@@ -38,6 +44,7 @@ registerPermissions("plt", {
       "plt.file.read",
       "plt.jobs.read",
       "plt.jobs.manage",
+      "plt.form.manage",
     ],
   },
 });
@@ -46,4 +53,16 @@ registerPermissions("plt", {
 registerPermissions("plt", {
   permissions: [],
   grants: Object.fromEntries(ROLES.map((r) => [r, ["plt.view.save", "plt.notification.use"]])),
+});
+
+// PLT-15: every signed-in user may submit authenticated forms and follow their own submissions;
+// staff roles may open the inbox (which each form narrows to its `ownerRoles`).
+registerPermissions("plt", {
+  permissions: [],
+  grants: Object.fromEntries(
+    ROLES.map((r) => [
+      r,
+      r === "student" ? ["plt.form.submit"] : ["plt.form.submit", "plt.form.inbox"],
+    ]),
+  ),
 });

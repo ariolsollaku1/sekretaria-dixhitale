@@ -30,8 +30,14 @@ describe("platform permissions (AC-11)", () => {
       await assignRole(tx, admin.id, { role: "sysadmin", scopeType: "INSTITUTION" });
       await assignRole(tx, sec.id, { role: "secretary", scopeType: "INSTITUTION" });
     });
-    // plt.view.save is the exception: every role holds it (PLT-10).
-    const everyRole = ["plt.view.save", "plt.notification.use"];
+    // Own-data conveniences every role holds: saved filters (PLT-10), notifications (PLT-11) and
+    // submitting forms (PLT-15); staff roles also open the form inbox.
+    const everyRole = [
+      "plt.view.save",
+      "plt.notification.use",
+      "plt.form.submit",
+      "plt.form.inbox",
+    ];
     const sysadminOnly = PLATFORM_PERMISSIONS.filter((p) => !everyRole.includes(p));
     for (const p of sysadminOnly) {
       expect(await can(admin, p)).toBe(true);
@@ -39,7 +45,12 @@ describe("platform permissions (AC-11)", () => {
     }
     for (const p of everyRole) expect(await can(sec, p)).toBe(true);
     expect(await permissionsFor(admin)).toEqual([...PLATFORM_PERMISSIONS].sort());
-    expect(await permissionsFor(sec)).toEqual(["plt.notification.use", "plt.view.save"]);
+    expect(await permissionsFor(sec)).toEqual([
+      "plt.form.inbox",
+      "plt.form.submit",
+      "plt.notification.use",
+      "plt.view.save",
+    ]);
   });
 });
 

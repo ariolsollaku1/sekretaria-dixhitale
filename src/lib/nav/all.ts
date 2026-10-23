@@ -1,5 +1,9 @@
 import "@/modules/org"; // registers the ORG permissions and the academic-year provider
 import "@/modules/cur";
+import "@/modules/cal";
+import "@/modules/ntf";
+import "@/modules/hr";
+import "@/modules/stu";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -61,6 +65,26 @@ registerNav(
     order: 21,
   },
 );
+registerNav(
+  {
+    id: "cohorts",
+    labelKey: "cohorts",
+    href: "/org/cohorts",
+    icon: "users",
+    permission: "org.cohort.read",
+    group: "administration",
+    order: 23,
+  },
+  {
+    id: "student-groups",
+    labelKey: "studentGroups",
+    href: "/org/groups",
+    icon: "users",
+    permission: "org.group.read",
+    group: "administration",
+    order: 24,
+  },
+);
 registerNav({
   id: "programs",
   labelKey: "programs",
@@ -81,6 +105,33 @@ registerNav(
     order: 10,
   },
   {
+    id: "plans",
+    labelKey: "plans",
+    href: "/cur/plans",
+    icon: "clipboard",
+    permission: "cur.plan.view",
+    group: "teaching",
+    order: 12,
+  },
+  {
+    id: "teaching",
+    labelKey: "teaching",
+    href: "/cur/teaching",
+    icon: "book",
+    permission: "cur.teaching.read",
+    group: "teaching",
+    order: 13,
+  },
+  {
+    id: "my-teaching",
+    labelKey: "myTeaching",
+    href: "/cur/teaching/mine",
+    icon: "book",
+    permission: "cur.teaching.self",
+    group: "teaching",
+    order: 14,
+  },
+  {
     id: "course-categories",
     labelKey: "courseCategories",
     href: "/cur/categories",
@@ -99,3 +150,99 @@ registerNav({
   group: "system",
   order: 30,
 });
+registerNav({
+  id: "calendar",
+  labelKey: "calendar",
+  href: "/calendar",
+  icon: "calendar",
+  permission: "cal.event.read",
+  group: "teaching",
+  order: 5,
+});
+registerNav({
+  id: "announcements",
+  labelKey: "announcements",
+  href: "/announcements",
+  icon: "bell",
+  permission: "ntf.announcement.read",
+  group: "teaching",
+  order: 6,
+});
+registerNav(
+  {
+    id: "staff",
+    labelKey: "staff",
+    href: "/hr/staff",
+    icon: "users",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 30,
+  },
+  {
+    id: "contracts",
+    labelKey: "contracts",
+    href: "/hr/contracts",
+    icon: "briefcase",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 32,
+  },
+  {
+    id: "my-staff-record",
+    labelKey: "myStaffRecord",
+    href: "/hr/me",
+    icon: "briefcase",
+    permission: "hr.staff.self",
+    group: "administration",
+    order: 31,
+  },
+);
+registerNav(
+  {
+    id: "students",
+    labelKey: "students",
+    href: "/stu/students",
+    icon: "graduation",
+    permission: "stu.student.read",
+    group: "students",
+    order: 10,
+  },
+  {
+    id: "my-student-record",
+    labelKey: "myStudentRecord",
+    href: "/stu/me",
+    icon: "graduation",
+    permission: "stu.student.self",
+    group: "students",
+    order: 11,
+  },
+);
+registerNav(
+  {
+    id: "forms",
+    labelKey: "forms",
+    href: "/forms",
+    icon: "clipboard",
+    permission: "plt.form.submit",
+    group: "students",
+    order: 90,
+  },
+  {
+    id: "forms-inbox",
+    labelKey: "formsInbox",
+    href: "/forms/inbox",
+    icon: "clipboard",
+    permission: "plt.form.inbox",
+    group: "administration",
+    order: 40,
+  },
+  {
+    id: "admin-forms",
+    labelKey: "adminForms",
+    href: "/admin/forms",
+    icon: "settings",
+    permission: "plt.form.manage",
+    group: "system",
+    order: 40,
+  },
+);

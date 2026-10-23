@@ -2,6 +2,7 @@
 import "./permissions";
 import "./server/year.provider";
 import "./server/scope-resolvers";
+import "./server/cohort-registrations";
 
 export { YearForm } from "./ui/year-form";
 export { UnitForm } from "./ui/unit-form";
@@ -36,6 +37,7 @@ export {
   isYearWritable,
   assertYearWritable,
   YearClosedError,
+  listYearOptions,
   type YearView,
 } from "./server/year.queries";
 export {
@@ -44,3 +46,34 @@ export {
   visibleChecklist,
   type ChecklistItem,
 } from "./server/rollover";
+export {
+  registerPlanDependent,
+  resetPlanDependents,
+  blockingPlanDependents,
+  type PlanDependent,
+} from "./server/plan-dependents";
+export { registerPlanDirectory, type PlanInfo } from "./server/plan-directory";
+export {
+  registerCohortDependent,
+  registerGroupDependent,
+  resetCohortDependents,
+  blockingCohortDependents,
+  blockingGroupDependents,
+  type CohortDependent,
+  type GroupDependent,
+} from "./server/cohort-dependents";
+export { cohortsTable } from "./server/cohort.table";
+export { groupsTable } from "./server/group.table";
+export { CohortForm } from "./ui/cohort-form";
+export { CohortActions } from "./ui/cohort-actions";
+export { GroupManager } from "./ui/group-manager";
+export { StartOfYearForm } from "./ui/start-of-year-form";
+export {
+  getCohort,
+  listCohortGroups,
+  listProgramOptionsForCohorts,
+  type CohortRecord,
+} from "./server/cohort.queries";
+export { previewStartOfYear } from "./server/group.service";
+export { getPlanDirectory } from "./server/plan-directory";
+export { getGroupContext, type GroupContext } from "./server/group-context";

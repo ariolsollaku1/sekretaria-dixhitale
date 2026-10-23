@@ -58,7 +58,22 @@
       "courses": "Lëndët",
       "courseCategories": "Kategoritë e lëndëve",
       "jobs": "Punët në sfond",
-      "notifications": "Njoftimet"
+      "notifications": "Njoftimet",
+      "calendar": "Kalendari akademik",
+      "announcements": "Njoftimet e shkollës",
+      "staff": "Stafi",
+      "myStaffRecord": "Të dhënat e mia",
+      "plans": "Planet mësimore",
+      "cohorts": "Kohortet",
+      "studentGroups": "Grupet e studentëve",
+      "students": "Studentët",
+      "myStudentRecord": "Të dhënat e mia",
+      "teaching": "Ngarkesa mësimore",
+      "myTeaching": "Lëndët e mia",
+      "forms": "Formularët",
+      "formsInbox": "Kutia e formularëve",
+      "adminForms": "Përcaktimi i formularëve",
+      "contracts": "Mbarimi i kontratave"
     },
     "languages": {
       "sq": "Shqip",
@@ -348,7 +363,9 @@
     "status": {
       "PLANNED": "I planifikuar",
       "CURRENT": "Aktual",
-      "CLOSED": "I mbyllur"
+      "CLOSED": "I mbyllur",
+      "active": "Aktive",
+      "inactive": "Joaktive"
     },
     "form": {
       "year": "Viti akademik",
@@ -414,7 +431,9 @@
       "intro": "Hapat për ta nisur vitin e ri. Çdo modul shton hapat e tij këtu.",
       "empty": "Hapat shfaqen këtu ndërsa shtohen modulet përkatëse (grupet, tarifat, kalendari).",
       "open": "Hap",
-      "nav": "Fillimi i vitit të ri"
+      "nav": "Fillimi i vitit të ri",
+      "groups": "Krijo grupet e vitit",
+      "groupsDescription": "Krijo grupet për secilën kohortë dhe vit studimi."
     },
     "unit": {
       "code": "Kodi",
@@ -465,6 +484,146 @@
       "coordinators": "Koordinatorët e programit",
       "noCoordinators": "Asnjë koordinator nuk është caktuar. Caktojeni duke i dhënë një përdoruesi rolin “Koordinator programi” me fushëveprim këtë program.",
       "department": "Departamenti"
+    },
+    "cohort": {
+      "title": "Kohortet",
+      "new": "Kohortë e re",
+      "created": "Kohorta u krijua.",
+      "startsIn": "fillon në {year}",
+      "plan": "Plani, versioni {version}",
+      "status": {
+        "active": "Aktive",
+        "inactive": "Joaktive"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "startYear": "Viti i fillimit",
+        "name": "Emri",
+        "plan": "Plani",
+        "groups": "Grupe",
+        "status": "Statusi"
+      },
+      "form": {
+        "program": "Programi",
+        "startYear": "Viti i fillimit",
+        "plan": "Plani mësimor (i miratuar)",
+        "planOption": "Versioni {version} (nga {year})",
+        "noApprovedPlan": "Ky program nuk ka asnjë plan të miratuar. Miratoni një plan së pari.",
+        "name": "Emri i kohortës",
+        "nameHint": "P.sh. viti i regjistrimit, ose me prapashtesë për regjistrime të veçanta.",
+        "create": "Krijo kohortën"
+      },
+      "actions": {
+        "saved": "U ruajt.",
+        "rename": "Riemërto",
+        "changePlan": "Ndrysho planin",
+        "changePlanTitle": "Të ndryshohet plani i kohortës?",
+        "changePlanBody": "Kohorta do të ndjekë një plan tjetër të miratuar të programit. Ndryshimi regjistrohet me arsyen.",
+        "deactivate": "Çaktivizo",
+        "deactivateTitle": "Të çaktivizohet kohorta?",
+        "deactivateBody": "Kohorta nuk përdoret më për regjistrime të reja. Duhet të mos ketë grupe aktive.",
+        "reactivate": "Riaktivizo",
+        "reactivateTitle": "Të riaktivizohet kohorta?",
+        "reactivateBody": "Kohorta kthehet në përdorim.",
+        "statusChanged": "Statusi u ndryshua."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "nameTaken": "Ky emër përdoret tashmë.",
+        "planNotApproved": "Zgjidhni një plan të miratuar të këtij programi.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "beforeCohortStart": "Viti fillon para kohortës.",
+        "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+        "capacityRange": "Kapaciteti duhet të jetë nga 1 deri në 1000.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "COHORT_INACTIVE": "Kohorta është joaktive.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "SAME_PLAN": "Kohorta ndjek tashmë këtë plan.",
+        "ALREADY_ACTIVE": "Është tashmë aktive.",
+        "ALREADY_INACTIVE": "Është tashmë joaktive.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të ndryshohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "group": {
+      "title": "Grupet e studentëve",
+      "empty": "Kjo kohortë nuk ka ende grupe.",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "yearShort": "Viti {year}",
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "cohort": "Kohorta",
+        "year": "Viti akademik",
+        "yearCode": "Kodi i vitit akademik",
+        "yearOfStudy": "Viti i studimit",
+        "name": "Emri",
+        "capacity": "Kapaciteti",
+        "status": "Statusi"
+      },
+      "form": {
+        "year": "Viti akademik",
+        "yearOfStudy": "Viti i studimit",
+        "name": "Emri i grupit",
+        "capacity": "Kapaciteti",
+        "add": "Shto grupin"
+      },
+      "deactivate": "Çaktivizo",
+      "deactivateTitle": "Të çaktivizohet grupi?",
+      "deactivateBody": "Grupi nuk përdoret më. Nuk mund të çaktivizohet nëse ka studentë.",
+      "reactivate": "Riaktivizo",
+      "reactivateTitle": "Të riaktivizohet grupi?",
+      "reactivateBody": "Grupi kthehet në përdorim.",
+      "startOfYear": {
+        "nav": "Fillimi i vitit: krijo grupet",
+        "title": "Krijimi i grupeve për vitin",
+        "groups": "Grupet e studentëve",
+        "year": "Viti akademik",
+        "show": "Trego",
+        "closed": "Viti akademik është i mbyllur.",
+        "nothing": "Nuk ka grupe për t'u krijuar: çdo kohortë ka tashmë grup për vitin përkatës të studimit, ose nuk ka kohortë aktive për këtë vit.",
+        "intro": "Do të krijohen {count} grupe me emrin e paracaktuar:",
+        "columns": {
+          "program": "Programi",
+          "cohort": "Kohorta",
+          "yearOfStudy": "Viti i studimit",
+          "name": "Emri"
+        },
+        "confirm": "Krijo {count} grupe",
+        "done": "U krijuan {count} grupe.",
+        "failed": "Krijimi i grupeve dështoi."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "nameTaken": "Ky emër përdoret tashmë.",
+        "planNotApproved": "Zgjidhni një plan të miratuar të këtij programi.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "beforeCohortStart": "Viti fillon para kohortës.",
+        "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+        "capacityRange": "Kapaciteti duhet të jetë nga 1 deri në 1000.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "COHORT_INACTIVE": "Kohorta është joaktive.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "SAME_PLAN": "Kohorta ndjek tashmë këtë plan.",
+        "ALREADY_ACTIVE": "Është tashmë aktive.",
+        "ALREADY_INACTIVE": "Është tashmë joaktive.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të ndryshohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "dependents": {
+      "cohorts": "kohorta",
+      "groups": "grupe aktive"
     }
   },
   "cur": {
@@ -577,6 +736,178 @@
       "unknownCategory": "Kategoria me këtë kod nuk ekziston ose është joaktive.",
       "unknownDepartment": "Departamenti me këtë kod nuk ekziston ose është joaktiv.",
       "departmentNotPermitted": "Nuk keni leje për këtë departament."
+    },
+    "plan": {
+      "title": "Planet mësimore",
+      "new": "Plan i ri",
+      "planTitle": "Plani {program}, versioni {version}",
+      "validFromShort": "vlen nga viti {year}",
+      "approvedOn": "Miratuar më {date}",
+      "totals": "Totalet",
+      "sums": "{credits} kredite · orë: {lecture} leksione / {seminar} seminare / {lab} laborator",
+      "year": "Viti {year}",
+      "semester": "Semestri {semester}",
+      "yes": "Po",
+      "noPrograms": "Nuk keni asnjë program për të cilin mund të bëni plane.",
+      "created": "Plani (versioni {version}) u krijua si skicë.",
+      "status": {
+        "DRAFT": "Skicë",
+        "APPROVED": "Miratuar",
+        "ARCHIVED": "Arkivuar"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "version": "Versioni",
+        "validFrom": "Vlen nga",
+        "status": "Statusi",
+        "courses": "Lëndë",
+        "credits": "Kredite",
+        "approvedOn": "Miratuar më",
+        "course": "Lënda",
+        "category": "Kategoria",
+        "hours": "Orë (L / S / Lab)",
+        "elective": "Zgjedhore"
+      },
+      "form": {
+        "program": "Programi",
+        "validFrom": "Vlen nga viti akademik",
+        "copyFrom": "Fillo nga një plan ekzistues",
+        "copyNone": "Plan bosh",
+        "copyOption": "Versioni {version} ({status}, nga {year})",
+        "notes": "Shënime",
+        "create": "Krijo skicën"
+      },
+      "editor": {
+        "saved": "U ruajt.",
+        "credits": "Kredite",
+        "lecture": "Leksione",
+        "seminar": "Seminare",
+        "lab": "Lab",
+        "category": "Kategoria",
+        "elective": "Zgjedhore",
+        "save": "Ruaj",
+        "remove": "Hiq",
+        "saveMeta": "Ruaj të dhënat e planit",
+        "addCourse": "Shto lëndë nga katalogu",
+        "year": "Viti",
+        "semester": "Semestri",
+        "add": "Shto",
+        "addHint": "Kreditet, kategoria dhe orët merren nga katalogu; mund t'i ndryshoni pasi të shtohet lënda.",
+        "emptySemester": "Nuk ka lëndë."
+      },
+      "warnings": {
+        "semesterCredits": "Viti {year}, semestri {semester}: {actual} kredite në vend të {expected}.",
+        "totalCredits": "Plani ka {actual} kredite në total, programi kërkon {expected}."
+      },
+      "actions": {
+        "approve": "Miratoje",
+        "approveTitle": "Të miratohet plani?",
+        "approveBody": "Pas miratimit plani ngrin dhe nuk ndryshohet më; për ndryshime krijohet një version i ri.",
+        "approved": "Plani u miratua.",
+        "archive": "Arkivoje",
+        "archiveTitle": "Të arkivohet plani?",
+        "archiveBody": "Plani mbetet i lexueshëm por nuk përdoret më për kohorte të reja.",
+        "archived": "Plani u arkivua.",
+        "reason": "Arsyeja",
+        "delete": "Fshije skicën",
+        "deleteTitle": "Të fshihet skica?",
+        "deleteBody": "Skica dhe lëndët e saj fshihen përfundimisht. Planet e miratuara nuk fshihen kurrë.",
+        "deleted": "Skica u fshi."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "PLAN_FROZEN": "Plani është miratuar dhe nuk ndryshohet më.",
+        "PLAN_EMPTY": "Plani nuk ka asnjë lëndë.",
+        "NOT_APPROVED": "Vetëm një plan i miratuar mund të arkivohet.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "unknownYear": "Viti akademik nuk u gjet.",
+        "unknownPlan": "Plani burim nuk u gjet ose është i një programi tjetër.",
+        "unknownCourse": "Lënda nuk u gjet.",
+        "inactiveCourse": "Lënda është joaktive.",
+        "alreadyInPlan": "Lënda është tashmë në plan.",
+        "yearOutOfRange": "Viti nuk ekziston në këtë program.",
+        "semesterOutOfRange": "Semestri duhet të jetë 1 ose 2.",
+        "reasonRequired": "Shkruani arsyen.",
+        "HAS_DEPENDENTS": "Nuk mund të arkivohet: përdoret nga {names}.",
+        "FORBIDDEN": "Nuk keni të drejtë të ndryshoni planet e këtij programi.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "dependents": {
+      "plans": "planet mësimore"
+    },
+    "teaching": {
+      "title": "Ngarkesa mësimore",
+      "list": "Lista",
+      "noYear": "Nuk ka vit akademik të zgjedhur.",
+      "forYear": "Viti akademik: {year}",
+      "all": "Të gjitha",
+      "filter": "Filtro",
+      "noGroups": "Nuk ka grupe aktive për këtë vit. Krijoni grupet në “Fillimi i vitit”.",
+      "noCourses": "Plani i kohortës nuk ka lëndë për këtë vit studimi.",
+      "yearOfStudy": "viti {year} i studimit",
+      "courseMeta": "semestri {semester} · orë: {lecture} / {seminar} / {lab}",
+      "unassigned": "Pa pedagog",
+      "hoursUnit": "orë",
+      "hoursDefault": "nga plani",
+      "assign": "Cakto",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "remove": "Hiq",
+      "warnings": "Kujdes",
+      "warningUnassigned": "{count} lëndë nuk kanë asnjë pedagog të caktuar.",
+      "warningOverloaded": "{name} ka {hours} orë të planifikuara, mbi kufirin {max}.",
+      "kind": {
+        "LECTURE": "Leksione",
+        "SEMINAR": "Seminare",
+        "LAB": "Laborator"
+      },
+      "semesterN": {
+        "1": "Semestri 1",
+        "2": "Semestri 2"
+      },
+      "columns": {
+        "program": "Programi",
+        "programCode": "Kodi i programit",
+        "group": "Grupi",
+        "yearOfStudy": "Viti i studimit",
+        "course": "Lënda",
+        "courseCode": "Kodi i lëndës",
+        "semester": "Semestri",
+        "kind": "Lloji",
+        "lecturer": "Pedagogu",
+        "category": "Kategoria",
+        "hours": "Orë të planifikuara"
+      },
+      "copy": {
+        "from": "Kopjo caktimet nga viti",
+        "submit": "Kopjo në {year}",
+        "done": "U kopjuan {copied}, u anashkaluan {skippedExisting} (ekzistojnë) dhe {skippedInactive} (pedagog joaktiv).",
+        "closed": "Viti akademik është i mbyllur.",
+        "failed": "Kopjimi nuk u krye."
+      },
+      "mine": {
+        "title": "Lëndët e mia",
+        "empty": "Nuk keni caktime për këtë vit akademik.",
+        "noStaff": "Nuk keni të dhëna stafi",
+        "noStaffHint": "Llogaria juaj nuk është lidhur me një anëtar stafi. Kontaktoni Burimet Njerëzore."
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "hoursRange": "Orët duhet të jenë një numër i plotë nga 0 deri në 500.",
+        "groupInactive": "Grupi është joaktiv.",
+        "yearClosed": "Viti akademik është i mbyllur.",
+        "courseNotInGroup": "Lënda nuk është në planin e kohortës për këtë vit studimi.",
+        "staffInactive": "Pedagogu është joaktiv.",
+        "staffNotAcademic": "Vetëm stafi akademik mund të japë mësim.",
+        "staffUnknown": "Pedagogu nuk u gjet.",
+        "alreadyAssigned": "Ky pedagog është caktuar tashmë për këtë lloj.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "FORBIDDEN": "Nuk keni të drejtë të caktoni në këtë program.",
+        "generic": "Veprimi nuk u krye."
+      }
     }
   },
   "jobs": {
@@ -635,7 +966,13 @@
     "plt": {
       "test": {
         "title": "Njoftim provë",
-        "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë."
+        "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë.",
+        "label": "Mesazh prove"
+      },
+      "form-status": {
+        "label": "Ndryshime në formularët që keni dërguar",
+        "title": "Formulari juaj u përditësua",
+        "body": "Formulari “{form}” është tani në gjendjen: {state}."
       }
     },
     "prefs": {
@@ -650,7 +987,28 @@
       "testSent": "Mesazhi i provës u dërgua. Shikoni zilen dhe postën.",
       "testFailed": "Mesazhi i provës nuk u dërgua."
     },
-    "open": "Hap"
+    "open": "Hap",
+    "ntf": {
+      "announcement": {
+        "label": "Njoftime të reja të shkollës",
+        "title": "Njoftim i ri: {title}",
+        "body": "Është publikuar një njoftim i ri: {title}."
+      }
+    },
+    "stu": {
+      "status": {
+        "label": "Ndryshime të statusit të studimeve",
+        "title": "Statusi i studimeve u ndryshua",
+        "body": "{status, select, SUSPENDED {Studimet tuaja u pezulluan.} ACTIVE {Studimet tuaja u rifilluan.} DEREGISTERED {U çregjistruat nga programi.} GRADUATED {Urime, studimet tuaja u përfunduan me diplomim.} other {Statusi i studimeve tuaja u ndryshua.}}"
+      }
+    },
+    "hr": {
+      "contracts": {
+        "label": "Mbarimi i kontratave të stafit",
+        "title": "Kontrata që mbarojnë",
+        "body": "{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}."
+      }
+    }
   },
   "mail": {
     "common": {
@@ -661,6 +1019,695 @@
       "test": {
         "subject": "Mesazh prove nga Sekretari Dixhitale",
         "body": "Përshëndetje {name},\n\nky është një mesazh prove nga Sekretari Dixhitale. Nëse e lexoni, dërgimi i postës funksionon."
+      },
+      "form-status": {
+        "subject": "Formulari juaj u përditësua: {form}",
+        "body": "Formulari “{form}” që dërguat është tani në gjendjen: {state}."
+      }
+    },
+    "ntf": {
+      "announcement": {
+        "subject": "Njoftim i ri: {title}",
+        "body": "Është publikuar një njoftim i ri në Sekretarin Dixhital:\n\n{title}"
+      }
+    },
+    "stu": {
+      "status": {
+        "subject": "Statusi i studimeve tuaja u ndryshua",
+        "body": "Përshëndetje,\n\n{status, select, SUSPENDED {studimet tuaja u pezulluan.} ACTIVE {studimet tuaja u rifilluan.} DEREGISTERED {u çregjistruat nga programi.} GRADUATED {studimet tuaja u përfunduan me diplomim.} other {statusi i studimeve tuaja u ndryshua.}}\n\nDetajet shihen në Sekretarin Dixhital."
+      }
+    },
+    "hr": {
+      "contracts": {
+        "subject": "Kontrata që mbarojnë këtë javë",
+        "body": "Përshëndetje,\n\n{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}.\n\nListën e shihni në Sekretarin Dixhital."
+      }
+    }
+  },
+  "cal": {
+    "title": "Kalendari akademik",
+    "new": "Ngjarje e re",
+    "noYear": "Nuk ka vit akademik të zgjedhur",
+    "noYearHint": "Krijoni një vit akademik ose zgjidhni një në krye të faqes.",
+    "empty": "Ky vit nuk ka ende ngjarje.",
+    "emptyHint": "Sekretaria i shton periudhat, pushimet dhe afatet; mund të kopjohet edhe kalendari i vitit të kaluar.",
+    "views": {
+      "label": "Pamja e kalendarit",
+      "agenda": "Sipas javëve",
+      "month": "Muaji",
+      "list": "Lista"
+    },
+    "week": {
+      "title": "Java {number}",
+      "short": "Java"
+    },
+    "month": {
+      "prev": "Muaji i mëparshëm",
+      "next": "Muaji tjetër"
+    },
+    "type": {
+      "TEACHING_WEEK": "Javë mësimi",
+      "HOLIDAY": "Pushim",
+      "DEADLINE": "Afat",
+      "EXAM_PERIOD": "Periudhë provimesh",
+      "REGISTRATION_PERIOD": "Periudhë regjistrimi",
+      "EVENT": "Ngjarje"
+    },
+    "audience": {
+      "ALL": "Të gjithë",
+      "CYCLE": "Cikli i studimit",
+      "PROGRAM": "Programi"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "status": {
+      "active": "Aktive",
+      "cancelled": "Anuluar"
+    },
+    "columns": {
+      "title": "Titulli",
+      "type": "Lloji",
+      "start": "Fillon",
+      "end": "Mbaron",
+      "audience": "Audienca",
+      "status": "Statusi"
+    },
+    "form": {
+      "title": "Titulli",
+      "type": "Lloji",
+      "startDate": "Data e fillimit",
+      "endDate": "Data e mbarimit",
+      "description": "Përshkrimi",
+      "audience": "Audienca",
+      "cycle": "Cikli",
+      "program": "Programi",
+      "create": "Krijo ngjarjen",
+      "save": "Ruaj ndryshimet",
+      "forYear": "Viti akademik: {year}"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "endBeforeStart": "Data e mbarimit nuk mund të jetë para fillimit.",
+      "cycleRequired": "Zgjidhni ciklin.",
+      "programRequired": "Zgjidhni një program ekzistues.",
+      "outsideYear": "Datat duhet të jenë brenda vitit akademik.",
+      "YEAR_CLOSED": "Viti akademik është i mbyllur; kalendari nuk ndryshohet.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Ngjarja u krijua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "cancelled": "Ngjarja u anulua.",
+      "restored": "Ngjarja u rikthye.",
+      "cancel": "Anulo ngjarjen",
+      "restore": "Rikthe ngjarjen",
+      "cancelTitle": "Të anulohet ngjarja?",
+      "cancelBody": "Ngjarja nuk do të shfaqet më për të tjerët. Mund ta riktheni më vonë."
+    },
+    "detail": {
+      "weeks": "Java {weeks}",
+      "edit": "Ndrysho",
+      "closedNote": "Viti akademik është i mbyllur; kalendari është vetëm për lexim."
+    },
+    "feed": {
+      "title": "Abonohu në kalendar",
+      "hint": "Shtoni kalendarin në aplikacionin tuaj (Google, Outlook, Apple) me një lidhje private vetëm për ju.",
+      "link": "Lidhja juaj",
+      "shownOnce": "Kopjojeni tani: lidhja shfaqet vetëm një herë. Mos e ndani me të tjerët.",
+      "create": "Krijo lidhjen",
+      "regenerate": "Krijo lidhje të re",
+      "revoke": "Fshi lidhjen",
+      "revoked": "Lidhja u fshi.",
+      "failed": "Veprimi nuk u krye."
+    },
+    "copy": {
+      "nav": "Kopjo nga viti tjetër",
+      "title": "Kopjo kalendarin",
+      "intro": "Ngjarjet aktive të vitit të zgjedhur kopjohen te viti {year}, të zhvendosura me javë të plota (ditët e javës ruhen). Ngjarjet që dalin jashtë vitit anashkalohen.",
+      "from": "Kopjo nga viti",
+      "submit": "Kopjo kalendarin",
+      "done": "U kopjuan {copied} ngjarje, {skipped} u anashkaluan.",
+      "notEmpty": "Viti ka tashmë ngjarje; kopjimi bëhet vetëm në një vit pa ngjarje.",
+      "closed": "Viti akademik është i mbyllur; nuk mund të kopjohet kalendari në të.",
+      "failed": "Kopjimi nuk u krye."
+    },
+    "rollover": {
+      "label": "Përgatitni kalendarin akademik",
+      "description": "Kopjoni kalendarin e vitit të kaluar dhe rregulloni datat."
+    }
+  },
+  "ntf": {
+    "title": "Njoftime të shkollës",
+    "manage": "Menaxho njoftimet",
+    "new": "Njoftim i ri",
+    "edit": "Ndrysho",
+    "empty": "Nuk ka njoftime për ju tani.",
+    "emptyHint": "Njoftimet e reja shfaqen këtu sapo të publikohen.",
+    "pinned": "I fiksuar",
+    "attachments": "Bashkëngjitjet",
+    "page": "Faqja {page} nga {pageCount}",
+    "previous": "E mëparshmja",
+    "next": "Tjetra",
+    "status": {
+      "DRAFT": "Skicë",
+      "PUBLISHED": "Publikuar",
+      "ARCHIVED": "Arkivuar"
+    },
+    "audience": {
+      "ALL": "Të gjithë",
+      "STAFF": "Stafi",
+      "STUDENTS": "Studentët",
+      "CYCLE": "Cikli i studimit",
+      "PROGRAM": "Programi"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "columns": {
+      "title": "Titulli",
+      "status": "Statusi",
+      "audience": "Audienca",
+      "publish": "Publikohet",
+      "expires": "Vlen deri",
+      "pinned": "I fiksuar"
+    },
+    "form": {
+      "title": "Titulli",
+      "body": "Teksti",
+      "bodyHint": "Tekst i thjeshtë; rreshtat e rinj ruhen.",
+      "audience": "Kujt i drejtohet",
+      "cycle": "Cikli",
+      "program": "Programi",
+      "publishDate": "Publikohet nga data",
+      "publishHint": "Bosh = menjëherë pas publikimit.",
+      "expiresDate": "Vlen deri më datën",
+      "expiresHint": "Bosh = pa afat.",
+      "pinned": "Fikso në krye të listës",
+      "emailPush": "Dërgo edhe njoftim me email",
+      "emailPushHint": "Marrësit marrin njoftim në sistem dhe email (sipas preferencave të tyre).",
+      "emailPushUnavailable": "Njoftimi me email nuk është i disponueshëm për ciklin ose programin.",
+      "attachments": "Bashkëngjitjet",
+      "addFile": "Shto skedar",
+      "removeFile": "Hiq",
+      "create": "Ruaj si skicë",
+      "save": "Ruaj ndryshimet"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "cycleRequired": "Zgjidhni ciklin.",
+      "programRequired": "Zgjidhni një program ekzistues.",
+      "expiresBeforePublish": "Data e përfundimit nuk mund të jetë para publikimit.",
+      "expiresInPast": "Data e përfundimit ka kaluar tashmë; ndryshojeni përpara publikimit.",
+      "pushNotForAudience": "Njoftimi me email nuk është i disponueshëm për ciklin ose programin.",
+      "tooManyFiles": "Maksimumi 5 skedarë.",
+      "audienceNotAllowed": "Nuk keni të drejtë t'i drejtoheni kësaj audience.",
+      "ALREADY_PUBLISHED": "Njoftimi është tashmë i publikuar.",
+      "NOT_PUBLISHED": "Vetëm një njoftim i publikuar mund të arkivohet.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Njoftimi u ruajt si skicë.",
+      "saved": "Ndryshimet u ruajtën.",
+      "published": "Njoftimi u publikua.",
+      "archived": "Njoftimi u arkivua.",
+      "publish": "Publiko",
+      "republish": "Publiko përsëri",
+      "archive": "Arkivo",
+      "archiveTitle": "Të arkivohet njoftimi?",
+      "archiveBody": "Njoftimi nuk do të shfaqet më për lexuesit. Mund ta publikoni përsëri më vonë."
+    }
+  },
+  "hr": {
+    "title": "Stafi",
+    "new": "Anëtar i ri i stafit",
+    "edit": "Ndrysho",
+    "yes": "Po",
+    "no": "Jo",
+    "kind": {
+      "ACADEMIC": "Akademik",
+      "ADMINISTRATIVE": "Administrativ"
+    },
+    "category": {
+      "PAE": "PAE (i brendshëm, me kohë të plotë)",
+      "PAK": "PAK (i jashtëm, me kohë të pjesshme)",
+      "VOLUNTEER": "Vullnetar"
+    },
+    "gender": {
+      "FEMALE": "Femër",
+      "MALE": "Mashkull"
+    },
+    "status": {
+      "active": "Në punë",
+      "inactive": "Përfunduar"
+    },
+    "columns": {
+      "name": "Emri",
+      "kind": "Lloji",
+      "category": "Kategoria",
+      "degree": "Gradë",
+      "title": "Titulli",
+      "department": "Departamenti",
+      "departmentCode": "Kodi i departamentit",
+      "retired": "Në pension",
+      "contractStart": "Fillimi i kontratës",
+      "contractEnd": "Mbarimi i kontratës",
+      "status": "Statusi",
+      "search": "Kërko emrin"
+    },
+    "form": {
+      "person": "Të dhëna personale",
+      "employment": "Të dhëna pune",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "fatherName": "Emri i babait",
+      "gender": "Gjinia",
+      "birthDate": "Data e lindjes",
+      "nationalId": "Numri personal (NID)",
+      "phone": "Telefoni",
+      "email": "Email",
+      "address": "Adresa",
+      "kind": "Lloji i stafit",
+      "category": "Kategoria",
+      "degree": "Grada shkencore",
+      "titleField": "Titulli",
+      "department": "Departamenti",
+      "primaryEmployer": "Punëdhënësi kryesor",
+      "retired": "Në pension",
+      "contractStart": "Fillimi i kontratës",
+      "contractEnd": "Mbarimi i kontratës",
+      "create": "Regjistro",
+      "save": "Ruaj ndryshimet"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "invalidEmail": "Email-i nuk është i vlefshëm.",
+      "birthDateRange": "Data e lindjes duhet të jetë midis 1900 dhe sot.",
+      "endBeforeStart": "Mbarimi nuk mund të jetë para fillimit.",
+      "unknownDepartment": "Departamenti nuk ekziston ose nuk është aktiv.",
+      "personConflict": "Numri personal dhe email-i i përkasin personave të ndryshëm.",
+      "alreadyStaff": "Ky person është tashmë në regjistrin e stafit.",
+      "alreadyUsed": "Ky numër personal ose email përdoret nga një person tjetër.",
+      "reasonRequired": "Shkruani arsyen.",
+      "importHasErrors": "Skedari ka gabime; asgjë nuk u ruajt.",
+      "duplicateInFile": "Përsëritet në skedar.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "actions": {
+      "created": "Anëtari i stafit u regjistrua.",
+      "saved": "Ndryshimet u ruajtën.",
+      "statusChanged": "Statusi u ndryshua.",
+      "deactivate": "Mbyll punësimin",
+      "deactivateTitle": "Të mbyllet punësimi?",
+      "deactivateBody": "Të dhënat ruhen; personi nuk numërohet më si në punë.",
+      "reactivate": "Rihap punësimin",
+      "reactivateTitle": "Të rihapet punësimi?",
+      "reactivateBody": "Personi kthehet në listën e stafit në punë.",
+      "reason": "Arsyeja"
+    },
+    "me": {
+      "title": "Të dhënat e mia si staf",
+      "none": "Nuk keni të dhëna stafi",
+      "noneHint": "Llogaria juaj nuk është lidhur me një anëtar stafi. Kontaktoni Burimet Njerëzore."
+    },
+    "import": {
+      "nav": "Importo nga Excel",
+      "title": "Importi i stafit",
+      "file": "Skedari (.csv ose .xlsx)",
+      "hint": "Rreshti i parë ka titujt: first_name, last_name, father_name, gender, birth_date, national_id, email, phone, address, kind, category, degree, title, department, primary_employer, contract_start, contract_end. Gjinia: F/M; lloji: academic/administrative; kategoria: PAE/PAK/VOLUNTEER; datat: VVVV-MM-DD ose DD.MM.VVVV. Maksimumi 2000 rreshta, 2 MB.",
+      "choose": "Zgjidh skedarin",
+      "template": "Shkarko modelin CSV",
+      "working": "Duke kontrolluar…",
+      "summary": "{valid} nga {total} rreshta janë të vlefshëm ({created} të rinj, {existing} ekzistojnë dhe anashkalohen) dhe {invalid} kanë gabime.",
+      "errors": "Gabimet",
+      "row": "Rreshti {row}",
+      "new": "I ri",
+      "exists": "Ekziston",
+      "truncated": "Po shfaqen {shown} nga {total} rreshta.",
+      "confirm": "Importo {count} anëtarë",
+      "fixFirst": "Rregulloni gabimet në skedar dhe zgjidheni përsëri: importi bëhet i plotë ose aspak.",
+      "done": "U krijuan {created}, u anashkaluan {skipped}.",
+      "fileErrors": {
+        "invalidEncoding": "Skedari nuk është UTF-8. Ruajeni si “CSV UTF-8” ose përdorni .xlsx.",
+        "empty": "Skedari është bosh ose ka vetëm titujt.",
+        "tooManyRows": "Skedari ka më shumë se 2000 rreshta.",
+        "tooLarge": "Skedari është më i madh se 2 MB.",
+        "missingColumns": "Mungojnë kolonat e detyrueshme",
+        "unsupportedFile": "Skedari nuk lexohet. Përdorni .csv ose .xlsx.",
+        "importHasErrors": "Skedari ka gabime; asgjë nuk u ruajt.",
+        "FORBIDDEN": "Nuk keni leje për importin.",
+        "UNAUTHENTICATED": "Hyni përsëri për të vazhduar."
+      }
+    },
+    "contracts": {
+      "title": "Mbarimi i kontratave",
+      "intro": "Stafi në punë me kontratë që ka mbaruar ose po mbaron së shpejti (horizonti caktohet te cilësimi hr.contractHorizonDays, 60 ditë si parazgjedhje). Asgjë nuk ndryshon automatikisht: mbyllja e punësimit bëhet nga Burimet Njerëzore.",
+      "daysLeft": "Ditë të mbetura",
+      "state": "Gjendja",
+      "states": {
+        "ENDED": "Ka mbaruar",
+        "ENDING_SOON": "Mbaron së shpejti",
+        "OK": "Në rregull",
+        "all": "Të gjitha"
+      }
+    }
+  },
+  "stu": {
+    "title": "Studentët",
+    "new": "Student i ri",
+    "edit": "Ndrysho",
+    "tabs": {
+      "label": "Pjesët e dosjes së studentit",
+      "personal": "Të dhëna personale",
+      "enrollments": "Regjistrimet",
+      "years": "Regjistrimet vjetore",
+      "history": "Historiku i statusit"
+    },
+    "status": {
+      "ACTIVE": "Aktiv",
+      "SUSPENDED": "I pezulluar",
+      "DEREGISTERED": "I çregjistruar",
+      "GRADUATED": "I diplomuar"
+    },
+    "gender": {
+      "FEMALE": "Femër",
+      "MALE": "Mashkull"
+    },
+    "cycle": {
+      "FIRST": "Cikli i parë (Bachelor)",
+      "SECOND": "Cikli i dytë (Master)"
+    },
+    "yearN": {
+      "1": "Viti 1",
+      "2": "Viti 2",
+      "3": "Viti 3"
+    },
+    "registrationType": {
+      "FIRST_TIME": "Regjistrim i parë",
+      "SECOND_PROGRAM": "Program i dytë",
+      "TRANSFER": "Transferim"
+    },
+    "columns": {
+      "studentNumber": "Nr. i studentit",
+      "name": "Emri",
+      "nim": "NIM",
+      "program": "Programi",
+      "programCode": "Kodi i programit",
+      "cohort": "Kohorta",
+      "yearOfStudy": "Viti i studimit",
+      "group": "Grupi",
+      "groupName": "Emri i grupit",
+      "status": "Statusi",
+      "gender": "Gjinia",
+      "residence": "Vendbanimi",
+      "search": "Kërko (emri, nr., NIM)",
+      "cycle": "Cikli",
+      "academicYearCode": "Kodi i vitit akademik"
+    },
+    "form": {
+      "person": "Të dhëna personale",
+      "enrollment": "Regjistrimi i parë",
+      "enrollNow": "Regjistro menjëherë në një program",
+      "noCohorts": "Nuk ka kohortë aktive. Krijoni një kohortë së pari.",
+      "cohort": "Kohorta",
+      "registrationType": "Lloji i regjistrimit",
+      "startedAt": "Data e fillimit",
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "fatherName": "Emri i babait",
+      "gender": "Gjinia",
+      "birthDate": "Data e lindjes",
+      "birthPlace": "Vendi i lindjes",
+      "nationalId": "Numri personal (NID)",
+      "nim": "NIM (nga SMIAL)",
+      "phone": "Telefoni",
+      "email": "Email",
+      "residence": "Vendbanimi (qyteti/bashkia)",
+      "address": "Adresa",
+      "studentNumber": "Nr. i studentit",
+      "create": "Regjistro studentin",
+      "save": "Ruaj ndryshimet",
+      "academicYear": "Viti akademik",
+      "yearOfStudy": "Viti i studimit",
+      "group": "Grupi",
+      "noGroup": "Nuk ka grup për këtë vit dhe vit studimi."
+    },
+    "enrollments": {
+      "empty": "Studenti nuk ka regjistrime.",
+      "add": "Regjistro në një program tjetër",
+      "endedAt": "Mbaron më"
+    },
+    "years": {
+      "empty": "Nuk ka regjistrim vjetor.",
+      "yearOfStudy": "Viti {year} i studimit",
+      "group": "Grupi {group}",
+      "changeGroup": "Ndrysho grupin"
+    },
+    "actions": {
+      "created": "Studenti u regjistrua.",
+      "saved": "U ruajt.",
+      "enrolled": "Regjistrimi u shtua.",
+      "enroll": "Regjistro",
+      "registered": "Viti u regjistrua.",
+      "register": "Regjistro vitin",
+      "changeGroup": "Ruaj grupin"
+    },
+    "me": {
+      "title": "Të dhënat e mia si student",
+      "none": "Nuk keni dosje studenti",
+      "noneHint": "Llogaria juaj nuk është lidhur me një student. Kontaktoni Sekretarinë."
+    },
+    "dependents": {
+      "enrollments": "regjistrime aktive",
+      "yearRegistrations": "regjistrime vjetore"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "invalidEmail": "Email-i nuk është i vlefshëm.",
+      "birthDateRange": "Data e lindjes duhet të jetë midis 1900 dhe sot.",
+      "nimInvalid": "NIM nuk është i vlefshëm.",
+      "nimTaken": "Ky NIM i përket një studenti tjetër.",
+      "personConflict": "Numri personal dhe email-i i përkasin personave të ndryshëm.",
+      "alreadyStudent": "Ky person është tashmë student.",
+      "alreadyUsed": "Ky numër personal ose email përdoret nga një person tjetër.",
+      "unknownProgram": "Programi nuk u gjet.",
+      "cohortMismatch": "Kohorta nuk është aktive ose nuk i përket këtij programi.",
+      "alreadyEnrolled": "Studenti ka tashmë një regjistrim aktiv ose të pezulluar në këtë program.",
+      "PROGRAM_INACTIVE": "Programi është joaktiv.",
+      "unknownYear": "Viti akademik nuk u gjet.",
+      "yearOutOfRange": "Programi nuk ka një vit të tillë studimi.",
+      "yearClosed": "Viti akademik është i mbyllur.",
+      "enrollmentNotActive": "Regjistrimi nuk është aktiv.",
+      "groupMismatch": "Grupi duhet të jetë i kohortës së studentit, për këtë vit akademik dhe vit studimi.",
+      "alreadyRegistered": "Studenti është regjistruar tashmë për këtë vit akademik.",
+      "FORBIDDEN": "Nuk keni të drejtë për këtë veprim.",
+      "generic": "Veprimi nuk u krye."
+    },
+    "change": {
+      "actions": "Ndryshime statusi",
+      "done": "Statusi u ndryshua.",
+      "effectiveDate": "Data e hyrjes në fuqi",
+      "documentRef": "Dokumenti (nr. vendimi/kërkese, opsional)",
+      "reason": "Arsyeja",
+      "targetCohort": "Kohorta e re",
+      "noCohorts": "Nuk ka kohortë tjetër aktive për transferim.",
+      "suspend": {
+        "action": "Pezullo",
+        "title": "Të pezullohen studimet?",
+        "body": "Studenti mbetet në regjistër por nuk është më aktiv derisa të rifillojë."
+      },
+      "resume": {
+        "action": "Rifillo",
+        "title": "Të rifillojnë studimet?",
+        "body": "Studenti kthehet në statusin aktiv."
+      },
+      "deregister": {
+        "action": "Çregjistro",
+        "title": "Të çregjistrohet studenti?",
+        "body": "Regjistrimi mbyllet në datën e zgjedhur dhe nuk rihapet."
+      },
+      "graduate": {
+        "action": "Diplomo",
+        "title": "Të regjistrohet diplomimi?",
+        "body": "Regjistrimi mbyllet si i diplomuar. Kontrolli i detyrimeve bëhet nga Sekretaria."
+      },
+      "transfer": {
+        "action": "Transfero",
+        "title": "Të transferohet studenti?",
+        "body": "Regjistrimi aktual mbyllet si i çregjistruar dhe hapet një regjistrim i ri (transferim) te kohorta e zgjedhur."
+      },
+      "errors": {
+        "transitionNotAllowed": "Ky ndryshim nuk lejohet nga statusi aktual.",
+        "invalidDate": "Data nuk është e vlefshme.",
+        "beforeStart": "Data është para fillimit të regjistrimit.",
+        "beforePreviousChange": "Data është para ndryshimit të mëparshëm.",
+        "inFuture": "Data nuk mund të jetë në të ardhmen.",
+        "reasonRequired": "Shkruani arsyen.",
+        "cohortRequired": "Zgjidhni kohortën e re.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "required": "Kjo fushë është e detyrueshme.",
+        "unknownProgram": "Programi nuk u gjet.",
+        "cohortMismatch": "Kohorta nuk është aktive ose nuk i përket programit.",
+        "alreadyEnrolled": "Studenti ka tashmë një regjistrim aktiv ose të pezulluar në atë program.",
+        "PROGRAM_INACTIVE": "Programi është joaktiv.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "history": {
+      "document": "Dokumenti"
+    }
+  },
+  "forms": {
+    "title": "Formularët",
+    "none": "Nuk ka formularë të disponueshëm.",
+    "noneHint": "Formularët shfaqen këtu kur publikohen.",
+    "submit": "Dërgo",
+    "previewNote": "Parashikim: nuk dërgon asgjë.",
+    "thanks": "Faleminderit, formulari u dërgua.",
+    "yourReference": "Referenca juaj është:",
+    "keepReference": "Ruajeni këtë kod për çdo pyetje mbi kërkesën.",
+    "rateLimited": "Keni dërguar shumë formularë. Provoni përsëri pas pak minutash.",
+    "notAvailable": "Formulari nuk është i disponueshëm ose nuk u dërgua.",
+    "filesUnavailable": "Ngarkimi i skedarëve nuk është i disponueshëm këtu.",
+    "yes": "Po",
+    "no": "Jo",
+    "anonymous": "Anonim",
+    "assignedToMe": "Të caktuara mua",
+    "unassigned": "Pa caktuar",
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "tooShort": "Teksti është shumë i shkurtër.",
+      "invalidEmail": "Email-i nuk është i vlefshëm.",
+      "invalidPhone": "Numri i telefonit nuk është i vlefshëm.",
+      "invalidNumber": "Shkruani një numër.",
+      "notInteger": "Shkruani një numër të plotë.",
+      "belowMin": "Vlera është shumë e vogël.",
+      "aboveMax": "Vlera është shumë e madhe.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "invalidOption": "Zgjidhni një nga opsionet.",
+      "filesNotAllowed": "Skedarët nuk lejohen në këtë formular.",
+      "invalidFile": "Skedari nuk është i vlefshëm.",
+      "invalid": "Vlera nuk është e vlefshme."
+    },
+    "columns": {
+      "reference": "Referenca",
+      "form": "Formulari",
+      "formKey": "Çelësi i formularit",
+      "state": "Gjendja",
+      "stateKey": "Çelësi i gjendjes",
+      "submitter": "Dërguesi",
+      "assignee": "I caktuar",
+      "submittedAt": "Dërguar më"
+    },
+    "mine": {
+      "nav": "Dërgesat e mia",
+      "title": "Dërgesat e mia",
+      "empty": "Nuk keni dërguar asnjë formular."
+    },
+    "inbox": {
+      "title": "Kutia e formularëve",
+      "answers": "Përgjigjet",
+      "actions": "Veprime",
+      "history": "Historiku",
+      "assignedTo": "I caktuar: {name}",
+      "download": "Shkarko skedarin",
+      "assignee": "I caktuar",
+      "nobody": "Askush",
+      "assign": "Cakto",
+      "comment": "Koment (i brendshëm)",
+      "addComment": "Shto koment",
+      "moveTo": "Kalo te: {state}",
+      "stateChanged": "Gjendja u ndryshua.",
+      "assigned": "U caktua.",
+      "events": {
+        "SUBMITTED": "Dërguar",
+        "ASSIGNED": "Caktim",
+        "COMMENT": "Koment",
+        "STATE": "Gjendje"
+      },
+      "errors": {
+        "TRANSITION_NOT_ALLOWED": "Ky kalim nuk lejohet.",
+        "HANDLER_MISSING": "Nuk ka program që e kryen miratimin për këtë formular.",
+        "assigneeCannotHandle": "Ky përdorues nuk i trajton këto formularë.",
+        "required": "Shkruani tekstin.",
+        "generic": "Veprimi nuk u krye."
+      }
+    },
+    "admin": {
+      "title": "Përcaktimi i formularëve",
+      "new": "Formular i ri",
+      "empty": "Nuk ka formularë.",
+      "emptyHint": "Krijoni të parin me JSON dhe publikojeni.",
+      "key": "Çelësi",
+      "keyHint": "Shkronja të vogla, shifra dhe viza; hapet te /f/<çelësi> ose /forms/<çelësi>.",
+      "audience": "Kush e plotëson",
+      "audiencePublic": "Publik (pa hyrje)",
+      "audienceAuthenticated": "Me hyrje",
+      "ownerRoles": "Kush i trajton dërgesat",
+      "ownerRolesHint": "Administratori i sistemit i trajton gjithmonë.",
+      "definition": "Përcaktimi (JSON)",
+      "valid": "Përcaktimi është i vlefshëm.",
+      "saveDraft": "Ruaj skicën",
+      "saved": "Skica u ruajt.",
+      "publish": "Publiko",
+      "publishTitle": "Të publikohet formulari?",
+      "publishBody": "Ky version bëhet ai i shërbyer; versioni i mëparshëm arkivohet dhe nuk ndryshohet më.",
+      "published": "Formulari u publikua.",
+      "archive": "Hiq nga shërbimi",
+      "archiveTitle": "Të hiqet formulari nga shërbimi?",
+      "archiveBody": "Faqja e formularit nuk do të hapet më derisa të publikohet një version i ri.",
+      "archived": "Formulari u hoq nga shërbimi.",
+      "deleteDraft": "Fshij skicën",
+      "deleteTitle": "Të fshihet skica?",
+      "deleteBody": "Skica fshihet përfundimisht.",
+      "preview": "Parashikimi",
+      "status": {
+        "DRAFT": "Skicë",
+        "PUBLISHED": "Publikuar",
+        "ARCHIVED": "Arkivuar"
+      },
+      "columns": {
+        "version": "Versioni",
+        "title": "Titulli",
+        "status": "Statusi",
+        "submissions": "Dërgesa"
+      },
+      "errors": {
+        "invalidJson": "JSON nuk është i vlefshëm.",
+        "invalid": "Vlera nuk është e vlefshme.",
+        "labelRequired": "Etiketa shqipe është e detyrueshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "badKey": "Çelësi: shkronja të vogla fillimisht, pastaj shkronja, shifra ose _.",
+        "noFields": "Duhet të paktën një fushë.",
+        "tooManyFields": "Shumë fusha.",
+        "badHandler": "Çelësi i programit nuk është i vlefshëm.",
+        "duplicateKey": "Çelës i përsëritur.",
+        "unknownCondition": "Kushti i referohet një fushe që nuk është më parë.",
+        "optionsRequired": "Zgjedhja kërkon opsione.",
+        "duplicateOption": "Opsion i përsëritur.",
+        "minAboveMax": "Minimumi është mbi maksimumin.",
+        "duplicateState": "Gjendje e përsëritur.",
+        "unknownState": "Gjendje e panjohur.",
+        "noFinalState": "Duhet të paktën një gjendje përfundimtare (final).",
+        "finalHasExit": "Një gjendje përfundimtare nuk mund të ketë dalje.",
+        "fileNotPublic": "Fushat skedar nuk lejohen në formularët publikë.",
+        "unknownRole": "Rol i panjohur.",
+        "NOT_DRAFT": "Vetëm skicat ndryshohen.",
+        "NOT_PUBLISHED": "Formulari nuk është i publikuar.",
+        "VERSION_TAKEN": "Versioni ekziston tashmë.",
+        "reasonRequired": "Shkruani arsyen.",
+        "generic": "Veprimi nuk u krye."
       }
     }
   }

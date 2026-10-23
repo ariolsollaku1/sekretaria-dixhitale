@@ -45,6 +45,16 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-26 | Hosting & data location | no | answered | Client |
 | Q-27 | Uploaded files: size/type limits & retention | no | open | Secretariat / DPO |
 | Q-28 | Course categories & credit values | no | open | Secretariat / Heads of department |
+| Q-29 | Academic calendar: week numbering & carrying it over | no | open | Secretariat |
+| Q-30 | Announcements: who publishes to whom, format, expiry | no | open | Secretariat / Communications |
+| Q-31 | Staff register: fields, lists and who sees personal data | no | open | HR / DPO |
+| Q-32 | Curriculum plans: totals, versions and approval | no | open | Secretariat / Heads of department |
+| Q-33 | Cohorts and student groups: naming, sizes, who maintains them | no | open | Secretariat |
+| Q-34 | Student register: student number, NIM, fields and visibility | no | open | Secretariat / DPO |
+| Q-35 | Teaching assignments: kinds, load limits and who assigns | no | open | Heads of department / HR |
+| Q-36 | Student status changes: allowed transitions and documents | no | open | Secretariat |
+| Q-37 | Forms: public submissions, anti-abuse, retention and notifications | no | open | IT / DPO / Secretariat |
+| Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
 
 ---
 
@@ -304,3 +314,150 @@ Decisions taken in conversation that aren't architecture ADRs.
 | 2026-10-03 | No deadline pressure — build in roadmap order, phase by phase. |
 | 2026-10-03 | Stack: Next.js + PostgreSQL, Keycloak for authentication, Docker for deployment. |
 | 2026-10-03 | Answered internally: Q-06, Q-17, Q-18, Q-19, Q-20, Q-21, Q-25. Research findings (DNS, LOGOS website, ASCAL 2017 report, Law 124/2024) added to Q-04, Q-08, Q-11, Q-12, Q-14, Q-16, Q-23 — to confirm with the client. |
+
+### Q-29 — Academic calendar: week numbering & carrying it over
+- **Context:** SRC-025 — the calendar is "organized by weeks"; the Secretariat prepares a new one each year.
+- **Questions:** Is week 1 the first week of the academic year, the first teaching week, or the first
+  week of each semester? Which weekday does a week start on? When a new year's calendar is prepared
+  from the previous one, should the dates move by whole weeks (keeping weekdays), or are all dates
+  entered again? Which event types are needed besides teaching week, holiday, deadline, exam period,
+  registration period and general event?
+- **Working assumption:** weeks run Monday to Sunday; week 1 is the week containing the academic
+  year's start date and numbering continues through the year. Copying a calendar moves each date by
+  the whole number of weeks closest to the difference between the two year start dates (weekdays are
+  kept). The six event types above are a fixed list in code.
+- **Impact:** only the week-numbering helper and the copy shift (one pure module) and the type list.
+
+### Q-30 — Announcements: who publishes to whom, format, expiry
+- **Context:** SRC-033, SRC-035, SRC-036c — notices, open lectures, workshops, registration deadlines.
+- **Questions:** Which offices may publish to everyone, and which only to their own faculty,
+  program or department? Is plain text enough or are formatting (bold, lists, links) and images
+  needed? Should notices expire by default (e.g. after the event date)? Must a notice be approved
+  before it appears? Which audiences matter besides everyone, staff, students, cycle and program
+  (faculty, year of study, group)? Should the public website show announcements (needs a rate-limited
+  public endpoint, not built yet)?
+- **Working assumption:** offices with the publish permission may publish to everyone, staff,
+  students and a cycle when their role is institution-wide, and to a program only inside their own
+  scope; text is plain (line breaks kept, no HTML); no default expiry (the author sets one); no
+  approval step; audiences are those five. A website feed is not provided.
+- **Impact:** audience list, the format of the body, defaults — not the structure.
+
+### Q-31 — Staff register: fields, lists and who sees personal data
+- **Context:** SRC-027, SRC-060, SRC-062, SRC-063 — lecturers (PAE internal full-time, PAK external
+  part-time), administrative staff, data for the employment contract and for Finance.
+- **Questions:** Which data must be kept for every staff member (national ID number, birth date and
+  place, address, phone, bank details, social-security number)? Are degrees and titles chosen from a
+  fixed list (which?) or typed? Can one person work in several departments? Which categories exist
+  besides PAE, PAK and volunteer? Which offices may see national ID, birth date and address
+  (Finance? Heads of department?) and who only the qualifications? How should the existing staff
+  list be loaded (Excel columns)?
+- **Working assumption:** a staff record holds name, father's name, gender (female/male), birth
+  date, national ID number (optional, unique), phone, e-mail, address, kind, category, degree and
+  title (typed text), one department, retired flag, primary employer (external staff), contract
+  start (required) and end (optional). HR and the sysadmin see national ID, birth date and address;
+  every other reader sees the rest. Heads of department see their department's staff; a staff member
+  sees only their own record. The import uses the template columns shown on the import page.
+- **Impact:** field list, controlled lists for degree/title, visibility of personal fields.
+
+### Q-32 — Curriculum plans: totals, versions and approval
+- **Context:** SRC-013, SRC-026, SRC-110, SRC-111/112 — the 1/2/3-year plan per program and cohort,
+  approved plans kept as an archive.
+- **Questions:** How many credits per semester and per year must a plan have (30 / 60 / 180 / 120?),
+  and is a plan with other totals refused or only warned about? May the same course appear twice in a
+  plan (e.g. a two-semester course)? Who approves a plan (head of department, program coordinator,
+  the academic council) and is the decision recorded elsewhere? How are electives grouped (choose N
+  from a list)? Can an approved plan be corrected, or only replaced by a new version?
+- **Working assumption:** 30 credits per semester (setting `cur.plan.creditsPerSemester`) and the
+  program's total credits for the whole plan; deviations are warnings, never blockers; a course
+  appears at most once per plan; the head of department or program coordinator of the program (or
+  the sysadmin) approves, and the approval records who and when; electives are a simple flag with no
+  grouping rule; an approved plan is immutable and is replaced by a new version.
+- **Impact:** the credit thresholds, the duplicate-course rule, who approves, elective grouping.
+
+### Q-33 — Cohorts and student groups: naming, sizes, who maintains them
+- **Context:** SRC-011, SRC-013 — students are divided into groups; a cohort follows one curriculum plan.
+- **Questions:** How are cohorts named (by intake year, e.g. "2026", with a suffix for evening or
+  part-time intakes)? How are groups named and how large may a group be (a maximum per lecture,
+  seminar, laboratory)? How many groups per year of study are created at the start of a year? Who
+  creates cohorts and groups (secretariat, student affairs, program coordinators)? Can a cohort be
+  moved to another plan version after it has started?
+- **Working assumption:** a cohort has a free name (default the start year code) and is unique per
+  program and start year by name; groups have a free name (default "Grupi 1") and an optional
+  capacity that is informational (not enforced); the "start of year" tool creates one default group
+  per cohort and expected year of study; sysadmin, secretary and student affairs create and change
+  cohorts and groups (the others read); a cohort's plan can be changed to another approved plan of
+  the same program, with a reason, as long as the cohort has no students (checked once STU-01 exists).
+- **Impact:** default names, who writes, the plan-change rule.
+
+### Q-34 — Student register: student number, NIM, fields and visibility
+- **Context:** SRC-012, SRC-020, SRC-023, SRC-040 — the Main Register; NIM comes from the Ministry's SMIAL (Q-01).
+- **Questions:** What is the format of the internal student number (sequence, year prefix, program
+  code)? What does a NIM look like (length, characters) and is it always present for a registered
+  student? Which personal data must the register hold beyond name, father's name, gender, birth date
+  and place, national ID number, phone, e-mail, address and residence (e.g. citizenship, nationality,
+  parent contacts, photo)? Which offices may see national ID number, birth date and address? Can a
+  student be enrolled in two programs at the same time (second program, double degree)?
+- **Working assumption:** the internal student number is a zero-padded sequence of 6 digits
+  (`000001`, `000002`, …) generated by the database and never reused; the NIM is typed text up to 30
+  characters (upper case, unique, optional) until the SMIAL exchange (INT-01); the personal fields are
+  those listed, with national ID, birth date and address visible only to the Secretariat, Student
+  Affairs and the sysadmin; a student may hold one ACTIVE or SUSPENDED enrollment per program and
+  several programs at once (second program is a registration type).
+- **Impact:** number format, NIM validation, field list, visibility.
+
+### Q-35 — Teaching assignments: kinds, load limits and who assigns
+- **Context:** SRC-026, SRC-027, SRC-066 — the curriculum plan names the lecturer; hours delivered are recorded per lecturer.
+- **Questions:** Are lectures, seminars and laboratory sessions always assigned separately (and can
+  one course have several lecturers of the same kind)? What is the maximum teaching load of a
+  full-time (PAE) and of a part-time (PAK) lecturer, per semester or year, and is it counted in
+  hours or in credits? May administrative staff or volunteers teach? Who assigns lecturers (head of
+  department, the Secretariat) and is an approval needed? Do co-lecturers of one course share the
+  planned hours or each carry the full hours?
+- **Working assumption:** an assignment is one lecturer for one kind (lecture, seminar or
+  laboratory) of one plan course in one group, with its planned hours (default: the plan course's
+  hours for that kind); several lecturers per kind are allowed and each carries the hours entered;
+  only active academic staff can be assigned; the load limit is a setting
+  (`cur.teaching.maxPlannedHours`, annual planned hours) that is **off by default** and only warns;
+  the head of department (own department), the Secretariat and the sysadmin assign, without approval.
+- **Impact:** the kinds, the load limit and its unit, who may be assigned and who assigns.
+
+### Q-36 — Student status changes: allowed transitions and documents
+- **Context:** SRC-053, SRC-054, SRC-059 — lists of deregistered and suspended students; graduation closes the studies.
+- **Questions:** Which changes exist (suspension, resumption, deregistration, transfer to another
+  program, graduation) and which are reversible — can a deregistered student be reinstated? Is a
+  document required for each (a student request, a decision number)? What must be settled before
+  graduation (grades, fees)? May a suspension be backdated? Who may perform each change?
+- **Working assumption:** allowed: ACTIVE → SUSPENDED, DEREGISTERED or GRADUATED; SUSPENDED →
+  ACTIVE (resumption) or DEREGISTERED; DEREGISTERED and GRADUATED are final; a transfer closes the
+  enrollment as DEREGISTERED and opens a new ACTIVE one of type TRANSFER in the other program; every
+  change needs a reason and an effective date (not before the enrollment's start or the previous
+  change) and may carry a document reference (free text); graduation is recorded by the Secretariat
+  without automatic checks until EXM/FIN exist; the Secretariat and Student Affairs perform changes.
+- **Impact:** the transition table, required documents, graduation preconditions.
+
+### Q-37 — Forms: public submissions, anti-abuse, retention and notifications
+- **Context:** SRC-037, SRC-133 — forms are opened from the LOGOS website without logging in; their data flow into the system (ADR-0009).
+- **Questions:** Which forms are public (no login) and which need a login? Is a CAPTCHA required
+  (which service is acceptable for personal data)? How long are submissions kept, and what happens to
+  the personal data of rejected or abandoned ones (Q-16)? Must an anonymous submitter get an e-mail
+  confirmation and status updates? May public forms carry file uploads (documents, photos), and of
+  what size and type? Who sees the submissions of each form?
+- **Working assumption:** a form's definition says whether it is public or needs a login; public
+  forms are protected by a hidden honeypot field and a rate limit (5 submissions per IP and form per
+  10 minutes) — no CAPTCHA yet; submissions are kept (soft states only), retention follows Q-16;
+  anonymous submitters get a reference code on screen only; logged-in submitters are notified of
+  state changes; file fields are available in logged-in forms only; each definition names the roles
+  that handle its submissions (plus the sysadmin).
+- **Impact:** CAPTCHA, retention, anonymous e-mails, public file uploads.
+
+### Q-38 — Contract expiry: horizon, who is told and what happens at the end
+- **Context:** SRC-061 — the system lists the academic staff whose engagement ended according to the contract end date.
+- **Questions:** How many days ahead should HR be warned about a contract ending? Who is told (HR
+  only, the head of department too)? How often? Should the staff member's account be disabled
+  automatically after the end date, and the person removed from the lecturer lists? Are open-ended
+  contracts (no end date) normal, and how are renewals recorded (HR-02)?
+- **Working assumption:** warning horizon 60 days (setting `hr.contractHorizonDays`); HR users are
+  notified once a week (Monday 07:00 Europe/Tirane) when something ended or is about to end; staff
+  without an end date never expire; nothing changes automatically — HR ends the employment by hand
+  (and IAM-02 will later disable the account on that event).
+- **Impact:** the horizon, recipients and rhythm; automatic effects.

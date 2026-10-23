@@ -9,6 +9,9 @@ Code: `src/modules/ntf`. Delivery (in-app + email) is PLT-11.
 - **Scope:** announcement with title, body (rich text), attachments, audience (all, staff,
   students, by faculty/program/year/group), publish/expire dates, pin; portal feed; optional email
   push; public announcements page (for the website).
+- **Built (v1, see the spec):** plain-text body, five audiences (all, staff, students, cycle, program),
+  publish/expire days, pin, e-mail push, attachments. Rich text, faculty/year/group audiences and the
+  public website page are deferred (Q-30).
 
 ### NTF-02 — Events & extracurricular registration
 - **Goal:** students register for conferences, workshops and other activities and are notified (SRC-035, SRC-037d).

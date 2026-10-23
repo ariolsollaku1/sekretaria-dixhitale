@@ -1,23 +1,27 @@
 // Better Auth tables (names and required fields per the library), adapted to our conventions.
 // `User` is the app's source of truth for who may sign in (auth.md); roles come in PLT-05.
 model User {
-  id            String    @id @default(cuid(2))
-  email         String    @unique
-  emailVerified Boolean   @default(false) @map("email_verified")
-  name          String
-  image         String?
-  active        Boolean   @default(true)
-  personId      String?   @unique @map("person_id") // FK added when Person exists (STU-01/HR-01)
-  locale        String? // UI preference (PLT-06)
-  lastLoginAt   DateTime? @map("last_login_at") @db.Timestamptz(3)
-  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
-  sessions      Session[]
-  accounts      Account[]
-  roles         UserRole[]
-  savedFilters  SavedFilter[]
-  notifications Notification[]
+  formsSubmitted          FormSubmission[]         @relation("FormSubmitter")
+  formsAssigned           FormSubmission[]         @relation("FormAssignee")
+  id                      String                   @id @default(cuid(2))
+  email                   String                   @unique
+  emailVerified           Boolean                  @default(false) @map("email_verified")
+  name                    String
+  image                   String?
+  active                  Boolean                  @default(true)
+  personId                String?                  @unique @map("person_id")
+  person                  Person?                  @relation(fields: [personId], references: [id])
+  locale                  String? // UI preference (PLT-06)
+  lastLoginAt             DateTime?                @map("last_login_at") @db.Timestamptz(3)
+  createdAt               DateTime                 @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime                 @updatedAt @map("updated_at") @db.Timestamptz(3)
+  sessions                Session[]
+  accounts                Account[]
+  roles                   UserRole[]
+  savedFilters            SavedFilter[]
+  notifications           Notification[]
   notificationPreferences NotificationPreference[]
+  calendarFeedToken       CalendarFeedToken?
 
   @@map("users")
 }

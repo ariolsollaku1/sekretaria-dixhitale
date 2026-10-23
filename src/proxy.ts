@@ -12,6 +12,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Everything except the public pages, the API (own checks), and Next internals / static files.
-  matcher: ["/((?!api|login|no-access|_next/static|_next/image|favicon.ico).*)"],
+  // Everything except the public pages (login, public forms under /f/), the API (own checks), and
+  // Next internals / static files.
+  matcher: ["/((?!api|login|no-access|f/|_next/static|_next/image|favicon.ico).*)"],
 };

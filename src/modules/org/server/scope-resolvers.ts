@@ -84,3 +84,12 @@ registerTargetResolver("program", async (id) =>
     ? { programId: id }
     : null,
 );
+
+// ORG-04 / CUR-04: a student group is "in" its cohort's program.
+registerTargetResolver("group", async (id) => {
+  const group = await db.studentGroup.findUnique({
+    where: { id },
+    select: { cohort: { select: { programId: true } } },
+  });
+  return group ? { programId: group.cohort.programId } : null;
+});

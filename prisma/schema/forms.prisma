@@ -1,0 +1,91 @@
+enum FormStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+
+  @@map("form_status")
+}
+
+enum FormAudience {
+  PUBLIC
+  AUTHENTICATED
+
+  @@map("form_audience")
+}
+
+enum FormEventKind {
+  SUBMITTED
+  STATE
+  ASSIGNED
+  COMMENT
+
+  @@map("form_event_kind")
+}
+
+/// A versioned form definition (PLT-15, ADR-0009); at most one PUBLISHED version per key.
+model FormDefinition {
+  id          String           @id @default(cuid(2))
+  key         String
+  version     Int
+  status      FormStatus       @default(DRAFT)
+  audience    FormAudience
+  /// Roles whose members handle the submissions (the sysadmin always can).
+  ownerRoles  Role[]           @map("owner_roles")
+  definition  Json
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+  publishedAt DateTime?        @map("published_at") @db.Timestamptz(3)
+  createdById String?          @map("created_by_id")
+  updatedById String?          @map("updated_by_id")
+  submissions FormSubmission[]
+
+  @@unique([key, version])
+  @@map("form_definitions")
+}
+
+/// The answers to a form (validated against the definition version they were made on).
+model FormSubmission {
+  id           String                @id @default(cuid(2))
+  definitionId String                @map("definition_id")
+  /// Short code the submitter keeps.
+  reference    String                @unique
+  submitterId  String?               @map("submitter_id")
+  answers      Json
+  state        String
+  assigneeId   String?               @map("assignee_id")
+  submittedAt  DateTime              @default(now()) @map("submitted_at") @db.Timestamptz(3)
+  updatedAt    DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  definition   FormDefinition        @relation(fields: [definitionId], references: [id])
+  submitter    User?                 @relation("FormSubmitter", fields: [submitterId], references: [id])
+  assignee     User?                 @relation("FormAssignee", fields: [assigneeId], references: [id])
+  events       FormSubmissionEvent[]
+
+  @@index([definitionId, state])
+  @@index([submitterId])
+  @@map("form_submissions")
+}
+
+model FormSubmissionEvent {
+  id           String         @id @default(cuid(2))
+  submissionId String         @map("submission_id")
+  kind         FormEventKind
+  fromState    String?        @map("from_state")
+  toState      String?        @map("to_state")
+  comment      String?
+  actorId      String?        @map("actor_id")
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  submission   FormSubmission @relation(fields: [submissionId], references: [id])
+
+  @@index([submissionId, createdAt])
+  @@map("form_submission_events")
+}
+
+/// Sliding-window counters for public endpoints (src/lib/ratelimit).
+model RateLimitHit {
+  id     String   @id @default(cuid(2))
+  bucket String
+  at     DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([bucket, at])
+  @@map("rate_limit_hits")
+}

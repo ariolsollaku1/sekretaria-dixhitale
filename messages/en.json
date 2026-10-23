@@ -58,7 +58,22 @@
       "courses": "Courses",
       "courseCategories": "Course categories",
       "jobs": "Jobs",
-      "notifications": "Notifications"
+      "notifications": "Notifications",
+      "calendar": "Academic calendar",
+      "announcements": "Announcements",
+      "staff": "Staff",
+      "myStaffRecord": "My staff record",
+      "plans": "Curriculum plans",
+      "cohorts": "Cohorts",
+      "studentGroups": "Student groups",
+      "students": "Students",
+      "myStudentRecord": "My student record",
+      "teaching": "Teaching assignments",
+      "myTeaching": "My teaching",
+      "forms": "Forms",
+      "formsInbox": "Form inbox",
+      "adminForms": "Form definitions",
+      "contracts": "Contract expiry"
     },
     "languages": {
       "sq": "Shqip",
@@ -348,7 +363,9 @@
     "status": {
       "PLANNED": "Planned",
       "CURRENT": "Current",
-      "CLOSED": "Closed"
+      "CLOSED": "Closed",
+      "active": "Active",
+      "inactive": "Inactive"
     },
     "form": {
       "year": "Academic year",
@@ -414,7 +431,9 @@
       "intro": "The steps to start the new year. Each module adds its own steps here.",
       "empty": "Steps appear here as the related modules (groups, fees, calendar) are added.",
       "open": "Open",
-      "nav": "New year checklist"
+      "nav": "New year checklist",
+      "groups": "Create the year's groups",
+      "groupsDescription": "Create the groups for each cohort and year of study."
     },
     "unit": {
       "code": "Code",
@@ -465,6 +484,146 @@
       "coordinators": "Program coordinators",
       "noCoordinators": "No coordinator is assigned. Assign one by giving a user the “Program coordinator” role scoped to this program.",
       "department": "Department"
+    },
+    "cohort": {
+      "title": "Cohorts",
+      "new": "New cohort",
+      "created": "The cohort was created.",
+      "startsIn": "starts in {year}",
+      "plan": "Plan, version {version}",
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "startYear": "Start year",
+        "name": "Name",
+        "plan": "Plan",
+        "groups": "Groups",
+        "status": "Status"
+      },
+      "form": {
+        "program": "Program",
+        "startYear": "Start year",
+        "plan": "Curriculum plan (approved)",
+        "planOption": "Version {version} (from {year})",
+        "noApprovedPlan": "This program has no approved plan. Approve a plan first.",
+        "name": "Cohort name",
+        "nameHint": "E.g. the intake year, or with a suffix for separate intakes.",
+        "create": "Create cohort"
+      },
+      "actions": {
+        "saved": "Saved.",
+        "rename": "Rename",
+        "changePlan": "Change plan",
+        "changePlanTitle": "Change the cohort's plan?",
+        "changePlanBody": "The cohort will follow another approved plan of the program. The change is recorded with the reason.",
+        "deactivate": "Deactivate",
+        "deactivateTitle": "Deactivate this cohort?",
+        "deactivateBody": "The cohort is no longer used for new enrollments. It must have no active groups.",
+        "reactivate": "Reactivate",
+        "reactivateTitle": "Reactivate this cohort?",
+        "reactivateBody": "The cohort is back in use.",
+        "statusChanged": "The status was changed."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "nameTaken": "This name is already used.",
+        "planNotApproved": "Choose an approved plan of this program.",
+        "unknownYear": "The academic year was not found.",
+        "yearClosed": "The academic year is closed.",
+        "beforeCohortStart": "The year starts before the cohort.",
+        "yearOutOfRange": "The program has no such year of study.",
+        "capacityRange": "The capacity must be from 1 to 1000.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "COHORT_INACTIVE": "The cohort is inactive.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "SAME_PLAN": "The cohort already follows this plan.",
+        "ALREADY_ACTIVE": "It is already active.",
+        "ALREADY_INACTIVE": "It is already inactive.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be changed: in use by {names}.",
+        "FORBIDDEN": "You may not do this.",
+        "generic": "The action failed."
+      }
+    },
+    "group": {
+      "title": "Student groups",
+      "empty": "This cohort has no groups yet.",
+      "save": "Save",
+      "saved": "Saved.",
+      "yearShort": "Year {year}",
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "cohort": "Cohort",
+        "year": "Academic year",
+        "yearCode": "Academic year code",
+        "yearOfStudy": "Year of study",
+        "name": "Name",
+        "capacity": "Capacity",
+        "status": "Status"
+      },
+      "form": {
+        "year": "Academic year",
+        "yearOfStudy": "Year of study",
+        "name": "Group name",
+        "capacity": "Capacity",
+        "add": "Add group"
+      },
+      "deactivate": "Deactivate",
+      "deactivateTitle": "Deactivate this group?",
+      "deactivateBody": "The group is no longer used. It cannot be deactivated while it has students.",
+      "reactivate": "Reactivate",
+      "reactivateTitle": "Reactivate this group?",
+      "reactivateBody": "The group is back in use.",
+      "startOfYear": {
+        "nav": "Start of year: create groups",
+        "title": "Create the groups for a year",
+        "groups": "Student groups",
+        "year": "Academic year",
+        "show": "Show",
+        "closed": "The academic year is closed.",
+        "nothing": "There are no groups to create: every cohort already has a group for its year of study, or no active cohort applies to this year.",
+        "intro": "{count} groups with the default name will be created:",
+        "columns": {
+          "program": "Program",
+          "cohort": "Cohort",
+          "yearOfStudy": "Year of study",
+          "name": "Name"
+        },
+        "confirm": "Create {count} groups",
+        "done": "{count} groups were created.",
+        "failed": "Creating the groups failed."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "nameTaken": "This name is already used.",
+        "planNotApproved": "Choose an approved plan of this program.",
+        "unknownYear": "The academic year was not found.",
+        "yearClosed": "The academic year is closed.",
+        "beforeCohortStart": "The year starts before the cohort.",
+        "yearOutOfRange": "The program has no such year of study.",
+        "capacityRange": "The capacity must be from 1 to 1000.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "COHORT_INACTIVE": "The cohort is inactive.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "SAME_PLAN": "The cohort already follows this plan.",
+        "ALREADY_ACTIVE": "It is already active.",
+        "ALREADY_INACTIVE": "It is already inactive.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be changed: in use by {names}.",
+        "FORBIDDEN": "You may not do this.",
+        "generic": "The action failed."
+      }
+    },
+    "dependents": {
+      "cohorts": "cohorts",
+      "groups": "active groups"
     }
   },
   "cur": {
@@ -577,6 +736,178 @@
       "unknownCategory": "No active category has this code.",
       "unknownDepartment": "No active department has this code.",
       "departmentNotPermitted": "You may not write in this department."
+    },
+    "plan": {
+      "title": "Curriculum plans",
+      "new": "New plan",
+      "planTitle": "Plan {program}, version {version}",
+      "validFromShort": "valid from year {year}",
+      "approvedOn": "Approved on {date}",
+      "totals": "Totals",
+      "sums": "{credits} credits · hours: {lecture} lecture / {seminar} seminar / {lab} lab",
+      "year": "Year {year}",
+      "semester": "Semester {semester}",
+      "yes": "Yes",
+      "noPrograms": "You have no program you can make plans for.",
+      "created": "The plan (version {version}) was created as a draft.",
+      "status": {
+        "DRAFT": "Draft",
+        "APPROVED": "Approved",
+        "ARCHIVED": "Archived"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "version": "Version",
+        "validFrom": "Valid from",
+        "status": "Status",
+        "courses": "Courses",
+        "credits": "Credits",
+        "approvedOn": "Approved on",
+        "course": "Course",
+        "category": "Category",
+        "hours": "Hours (L / S / Lab)",
+        "elective": "Elective"
+      },
+      "form": {
+        "program": "Program",
+        "validFrom": "Valid from academic year",
+        "copyFrom": "Start from an existing plan",
+        "copyNone": "Empty plan",
+        "copyOption": "Version {version} ({status}, from {year})",
+        "notes": "Notes",
+        "create": "Create draft"
+      },
+      "editor": {
+        "saved": "Saved.",
+        "credits": "Credits",
+        "lecture": "Lecture",
+        "seminar": "Seminar",
+        "lab": "Lab",
+        "category": "Category",
+        "elective": "Elective",
+        "save": "Save",
+        "remove": "Remove",
+        "saveMeta": "Save plan details",
+        "addCourse": "Add a course from the catalog",
+        "year": "Year",
+        "semester": "Semester",
+        "add": "Add",
+        "addHint": "Credits, category and hours come from the catalog; you can change them once the course is added.",
+        "emptySemester": "No courses."
+      },
+      "warnings": {
+        "semesterCredits": "Year {year}, semester {semester}: {actual} credits instead of {expected}.",
+        "totalCredits": "The plan has {actual} credits in total, the program requires {expected}."
+      },
+      "actions": {
+        "approve": "Approve",
+        "approveTitle": "Approve this plan?",
+        "approveBody": "After approval the plan is frozen and cannot change; changes need a new version.",
+        "approved": "The plan was approved.",
+        "archive": "Archive",
+        "archiveTitle": "Archive this plan?",
+        "archiveBody": "The plan stays readable but is no longer used for new cohorts.",
+        "archived": "The plan was archived.",
+        "reason": "Reason",
+        "delete": "Delete draft",
+        "deleteTitle": "Delete this draft?",
+        "deleteBody": "The draft and its courses are deleted for good. Approved plans are never deleted.",
+        "deleted": "The draft was deleted."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "tooLong": "The text is too long.",
+        "PLAN_FROZEN": "The plan is approved and cannot change any more.",
+        "PLAN_EMPTY": "The plan has no courses.",
+        "NOT_APPROVED": "Only an approved plan can be archived.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "unknownYear": "The academic year was not found.",
+        "unknownPlan": "The source plan was not found or belongs to another program.",
+        "unknownCourse": "The course was not found.",
+        "inactiveCourse": "The course is inactive.",
+        "alreadyInPlan": "The course is already in the plan.",
+        "yearOutOfRange": "The program has no such year.",
+        "semesterOutOfRange": "The semester must be 1 or 2.",
+        "reasonRequired": "Enter the reason.",
+        "HAS_DEPENDENTS": "Cannot be archived: in use by {names}.",
+        "FORBIDDEN": "You may not change the plans of this program.",
+        "generic": "The action failed."
+      }
+    },
+    "dependents": {
+      "plans": "curriculum plans"
+    },
+    "teaching": {
+      "title": "Teaching assignments",
+      "list": "List",
+      "noYear": "No academic year selected.",
+      "forYear": "Academic year: {year}",
+      "all": "All",
+      "filter": "Filter",
+      "noGroups": "There are no active groups for this year. Create the groups under “Start of year”.",
+      "noCourses": "The cohort's plan has no courses for this year of study.",
+      "yearOfStudy": "year {year} of study",
+      "courseMeta": "semester {semester} · hours: {lecture} / {seminar} / {lab}",
+      "unassigned": "No lecturer",
+      "hoursUnit": "h",
+      "hoursDefault": "from plan",
+      "assign": "Assign",
+      "save": "Save",
+      "saved": "Saved.",
+      "remove": "Remove",
+      "warnings": "Attention",
+      "warningUnassigned": "{count} courses have no lecturer assigned.",
+      "warningOverloaded": "{name} has {hours} planned hours, above the limit of {max}.",
+      "kind": {
+        "LECTURE": "Lecture",
+        "SEMINAR": "Seminar",
+        "LAB": "Laboratory"
+      },
+      "semesterN": {
+        "1": "Semester 1",
+        "2": "Semester 2"
+      },
+      "columns": {
+        "program": "Program",
+        "programCode": "Program code",
+        "group": "Group",
+        "yearOfStudy": "Year of study",
+        "course": "Course",
+        "courseCode": "Course code",
+        "semester": "Semester",
+        "kind": "Kind",
+        "lecturer": "Lecturer",
+        "category": "Category",
+        "hours": "Planned hours"
+      },
+      "copy": {
+        "from": "Copy assignments from year",
+        "submit": "Copy into {year}",
+        "done": "{copied} copied, {skippedExisting} skipped (existing) and {skippedInactive} (inactive lecturer).",
+        "closed": "The academic year is closed.",
+        "failed": "The copy failed."
+      },
+      "mine": {
+        "title": "My teaching",
+        "empty": "You have no assignments for this academic year.",
+        "noStaff": "You have no staff record",
+        "noStaffHint": "Your account is not linked to a staff member. Contact Human Resources."
+      },
+      "errors": {
+        "required": "This field is required.",
+        "hoursRange": "Hours must be a whole number from 0 to 500.",
+        "groupInactive": "The group is inactive.",
+        "yearClosed": "The academic year is closed.",
+        "courseNotInGroup": "The course is not in the cohort's plan for this year of study.",
+        "staffInactive": "The lecturer is inactive.",
+        "staffNotAcademic": "Only academic staff can teach.",
+        "staffUnknown": "The lecturer was not found.",
+        "alreadyAssigned": "This lecturer is already assigned to this kind.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "FORBIDDEN": "You may not assign in this program.",
+        "generic": "The action failed."
+      }
     }
   },
   "jobs": {
@@ -635,7 +966,13 @@
     "plt": {
       "test": {
         "title": "Test notification",
-        "body": "This is a test notification from {name}. If you can see it, notifications work."
+        "body": "This is a test notification from {name}. If you can see it, notifications work.",
+        "label": "Test message"
+      },
+      "form-status": {
+        "label": "Changes to forms you submitted",
+        "title": "Your form was updated",
+        "body": "The form “{form}” is now: {state}."
       }
     },
     "prefs": {
@@ -650,7 +987,28 @@
       "testSent": "Test message sent. Check the bell and your mailbox.",
       "testFailed": "The test message could not be sent."
     },
-    "open": "Open"
+    "open": "Open",
+    "ntf": {
+      "announcement": {
+        "label": "New announcements",
+        "title": "New announcement: {title}",
+        "body": "A new announcement was published: {title}."
+      }
+    },
+    "stu": {
+      "status": {
+        "label": "Changes of study status",
+        "title": "Your study status changed",
+        "body": "{status, select, SUSPENDED {Your studies were suspended.} ACTIVE {Your studies were resumed.} DEREGISTERED {You were deregistered from the program.} GRADUATED {Congratulations, your studies were completed with graduation.} other {The status of your studies changed.}}"
+      }
+    },
+    "hr": {
+      "contracts": {
+        "label": "Staff contract expiry",
+        "title": "Contracts ending",
+        "body": "{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}."
+      }
+    }
   },
   "mail": {
     "common": {
@@ -661,6 +1019,695 @@
       "test": {
         "subject": "Test message from the Digital Secretariat",
         "body": "Hello {name},\n\nthis is a test message from the Digital Secretariat. If you are reading it, mail delivery works."
+      },
+      "form-status": {
+        "subject": "Your form was updated: {form}",
+        "body": "The form “{form}” you submitted is now: {state}."
+      }
+    },
+    "ntf": {
+      "announcement": {
+        "subject": "New announcement: {title}",
+        "body": "A new announcement was published in the Digital Secretariat:\n\n{title}"
+      }
+    },
+    "stu": {
+      "status": {
+        "subject": "Your study status changed",
+        "body": "Hello,\n\n{status, select, SUSPENDED {your studies were suspended.} ACTIVE {your studies were resumed.} DEREGISTERED {you were deregistered from the program.} GRADUATED {your studies were completed with graduation.} other {the status of your studies changed.}}\n\nThe details are in the Digital Secretariat."
+      }
+    },
+    "hr": {
+      "contracts": {
+        "subject": "Contracts ending this week",
+        "body": "Hello,\n\n{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}.\n\nThe list is in the Digital Secretariat."
+      }
+    }
+  },
+  "cal": {
+    "title": "Academic calendar",
+    "new": "New event",
+    "noYear": "No academic year selected",
+    "noYearHint": "Create an academic year or pick one at the top of the page.",
+    "empty": "This year has no events yet.",
+    "emptyHint": "The Secretariat adds periods, holidays and deadlines; last year's calendar can also be copied.",
+    "views": {
+      "label": "Calendar view",
+      "agenda": "By week",
+      "month": "Month",
+      "list": "List"
+    },
+    "week": {
+      "title": "Week {number}",
+      "short": "Wk"
+    },
+    "month": {
+      "prev": "Previous month",
+      "next": "Next month"
+    },
+    "type": {
+      "TEACHING_WEEK": "Teaching week",
+      "HOLIDAY": "Holiday",
+      "DEADLINE": "Deadline",
+      "EXAM_PERIOD": "Exam period",
+      "REGISTRATION_PERIOD": "Registration period",
+      "EVENT": "Event"
+    },
+    "audience": {
+      "ALL": "Everyone",
+      "CYCLE": "Study cycle",
+      "PROGRAM": "Program"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "status": {
+      "active": "Active",
+      "cancelled": "Cancelled"
+    },
+    "columns": {
+      "title": "Title",
+      "type": "Type",
+      "start": "Starts",
+      "end": "Ends",
+      "audience": "Audience",
+      "status": "Status"
+    },
+    "form": {
+      "title": "Title",
+      "type": "Type",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "description": "Description",
+      "audience": "Audience",
+      "cycle": "Cycle",
+      "program": "Program",
+      "create": "Create event",
+      "save": "Save changes",
+      "forYear": "Academic year: {year}"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "endBeforeStart": "The end date cannot be before the start.",
+      "cycleRequired": "Choose the cycle.",
+      "programRequired": "Choose an existing program.",
+      "outsideYear": "The dates must be inside the academic year.",
+      "YEAR_CLOSED": "The academic year is closed; its calendar cannot be changed.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The event was created.",
+      "saved": "Changes saved.",
+      "cancelled": "The event was cancelled.",
+      "restored": "The event was restored.",
+      "cancel": "Cancel event",
+      "restore": "Restore event",
+      "cancelTitle": "Cancel this event?",
+      "cancelBody": "The event will no longer be shown to others. You can restore it later."
+    },
+    "detail": {
+      "weeks": "Week {weeks}",
+      "edit": "Edit",
+      "closedNote": "The academic year is closed; the calendar is read-only."
+    },
+    "feed": {
+      "title": "Subscribe to the calendar",
+      "hint": "Add the calendar to your own app (Google, Outlook, Apple) with a private link meant only for you.",
+      "link": "Your link",
+      "shownOnce": "Copy it now: the link is shown only once. Do not share it.",
+      "create": "Create link",
+      "regenerate": "Create a new link",
+      "revoke": "Delete link",
+      "revoked": "The link was deleted.",
+      "failed": "The action failed."
+    },
+    "copy": {
+      "nav": "Copy from another year",
+      "title": "Copy the calendar",
+      "intro": "The active events of the chosen year are copied into {year}, moved by whole weeks (weekdays are kept). Events that fall outside the year are skipped.",
+      "from": "Copy from year",
+      "submit": "Copy calendar",
+      "done": "{copied} events copied, {skipped} skipped.",
+      "notEmpty": "The year already has events; copying works only into a year without events.",
+      "closed": "The academic year is closed; a calendar cannot be copied into it.",
+      "failed": "The copy failed."
+    },
+    "rollover": {
+      "label": "Prepare the academic calendar",
+      "description": "Copy last year's calendar and adjust the dates."
+    }
+  },
+  "ntf": {
+    "title": "Announcements",
+    "manage": "Manage announcements",
+    "new": "New announcement",
+    "edit": "Edit",
+    "empty": "There are no announcements for you right now.",
+    "emptyHint": "New announcements appear here as soon as they are published.",
+    "pinned": "Pinned",
+    "attachments": "Attachments",
+    "page": "Page {page} of {pageCount}",
+    "previous": "Previous",
+    "next": "Next",
+    "status": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Published",
+      "ARCHIVED": "Archived"
+    },
+    "audience": {
+      "ALL": "Everyone",
+      "STAFF": "Staff",
+      "STUDENTS": "Students",
+      "CYCLE": "Study cycle",
+      "PROGRAM": "Program"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "columns": {
+      "title": "Title",
+      "status": "Status",
+      "audience": "Audience",
+      "publish": "Published from",
+      "expires": "Valid until",
+      "pinned": "Pinned"
+    },
+    "form": {
+      "title": "Title",
+      "body": "Text",
+      "bodyHint": "Plain text; line breaks are kept.",
+      "audience": "Addressed to",
+      "cycle": "Cycle",
+      "program": "Program",
+      "publishDate": "Visible from",
+      "publishHint": "Blank = as soon as it is published.",
+      "expiresDate": "Visible until",
+      "expiresHint": "Blank = no end date.",
+      "pinned": "Pin to the top of the list",
+      "emailPush": "Also send an e-mail notification",
+      "emailPushHint": "Recipients get an in-app notification and an e-mail (according to their preferences).",
+      "emailPushUnavailable": "E-mail notification is not available for a cycle or program.",
+      "attachments": "Attachments",
+      "addFile": "Add a file",
+      "removeFile": "Remove",
+      "create": "Save as draft",
+      "save": "Save changes"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "cycleRequired": "Choose the cycle.",
+      "programRequired": "Choose an existing program.",
+      "expiresBeforePublish": "The end date cannot be before the publish date.",
+      "expiresInPast": "The end date has already passed; change it before publishing.",
+      "pushNotForAudience": "E-mail notification is not available for a cycle or program.",
+      "tooManyFiles": "At most 5 files.",
+      "audienceNotAllowed": "You may not address this audience.",
+      "ALREADY_PUBLISHED": "The announcement is already published.",
+      "NOT_PUBLISHED": "Only a published announcement can be archived.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The announcement was saved as a draft.",
+      "saved": "Changes saved.",
+      "published": "The announcement was published.",
+      "archived": "The announcement was archived.",
+      "publish": "Publish",
+      "republish": "Publish again",
+      "archive": "Archive",
+      "archiveTitle": "Archive this announcement?",
+      "archiveBody": "Readers will no longer see it. You can publish it again later."
+    }
+  },
+  "hr": {
+    "title": "Staff",
+    "new": "New staff member",
+    "edit": "Edit",
+    "yes": "Yes",
+    "no": "No",
+    "kind": {
+      "ACADEMIC": "Academic",
+      "ADMINISTRATIVE": "Administrative"
+    },
+    "category": {
+      "PAE": "PAE (internal, full-time)",
+      "PAK": "PAK (external, part-time)",
+      "VOLUNTEER": "Volunteer"
+    },
+    "gender": {
+      "FEMALE": "Female",
+      "MALE": "Male"
+    },
+    "status": {
+      "active": "Employed",
+      "inactive": "Ended"
+    },
+    "columns": {
+      "name": "Name",
+      "kind": "Kind",
+      "category": "Category",
+      "degree": "Degree",
+      "title": "Title",
+      "department": "Department",
+      "departmentCode": "Department code",
+      "retired": "Retired",
+      "contractStart": "Contract start",
+      "contractEnd": "Contract end",
+      "status": "Status",
+      "search": "Search by name"
+    },
+    "form": {
+      "person": "Personal data",
+      "employment": "Employment",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "fatherName": "Father's name",
+      "gender": "Gender",
+      "birthDate": "Date of birth",
+      "nationalId": "National ID number",
+      "phone": "Phone",
+      "email": "E-mail",
+      "address": "Address",
+      "kind": "Kind of staff",
+      "category": "Category",
+      "degree": "Degree",
+      "titleField": "Title",
+      "department": "Department",
+      "primaryEmployer": "Primary employer",
+      "retired": "Retired",
+      "contractStart": "Contract start",
+      "contractEnd": "Contract end",
+      "create": "Register",
+      "save": "Save changes"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "invalidEmail": "The e-mail is not valid.",
+      "birthDateRange": "The birth date must be between 1900 and today.",
+      "endBeforeStart": "The end cannot be before the start.",
+      "unknownDepartment": "The department does not exist or is not active.",
+      "personConflict": "The national ID and the e-mail belong to different persons.",
+      "alreadyStaff": "This person is already in the staff register.",
+      "alreadyUsed": "This national ID or e-mail is used by another person.",
+      "reasonRequired": "Enter the reason.",
+      "importHasErrors": "The file has errors; nothing was saved.",
+      "duplicateInFile": "Repeated in the file.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The staff member was registered.",
+      "saved": "Changes saved.",
+      "statusChanged": "The status was changed.",
+      "deactivate": "End employment",
+      "deactivateTitle": "End employment?",
+      "deactivateBody": "The data is kept; the person no longer counts as employed.",
+      "reactivate": "Resume employment",
+      "reactivateTitle": "Resume employment?",
+      "reactivateBody": "The person returns to the list of employed staff.",
+      "reason": "Reason"
+    },
+    "me": {
+      "title": "My staff record",
+      "none": "You have no staff record",
+      "noneHint": "Your account is not linked to a staff member. Contact Human Resources."
+    },
+    "import": {
+      "nav": "Import from Excel",
+      "title": "Staff import",
+      "file": "File (.csv or .xlsx)",
+      "hint": "The first row has the headers: first_name, last_name, father_name, gender, birth_date, national_id, email, phone, address, kind, category, degree, title, department, primary_employer, contract_start, contract_end. Gender: F/M; kind: academic/administrative; category: PAE/PAK/VOLUNTEER; dates: YYYY-MM-DD or DD.MM.YYYY. At most 2000 rows, 2 MB.",
+      "choose": "Choose file",
+      "template": "Download CSV template",
+      "working": "Checking…",
+      "summary": "{valid} of {total} rows are valid ({created} new, {existing} already exist and are skipped) and {invalid} have errors.",
+      "errors": "Errors",
+      "row": "Row {row}",
+      "new": "New",
+      "exists": "Exists",
+      "truncated": "Showing {shown} of {total} rows.",
+      "confirm": "Import {count} members",
+      "fixFirst": "Fix the errors in the file and choose it again: the import is all or nothing.",
+      "done": "{created} created, {skipped} skipped.",
+      "fileErrors": {
+        "invalidEncoding": "The file is not UTF-8. Save it as “CSV UTF-8” or use .xlsx.",
+        "empty": "The file is empty or has only the headers.",
+        "tooManyRows": "The file has more than 2000 rows.",
+        "tooLarge": "The file is larger than 2 MB.",
+        "missingColumns": "Required columns are missing",
+        "unsupportedFile": "The file cannot be read. Use .csv or .xlsx.",
+        "importHasErrors": "The file has errors; nothing was saved.",
+        "FORBIDDEN": "You may not import.",
+        "UNAUTHENTICATED": "Sign in again to continue."
+      }
+    },
+    "contracts": {
+      "title": "Contract expiry",
+      "intro": "Employed staff whose contract has ended or is about to end (the horizon is the setting hr.contractHorizonDays, 60 days by default). Nothing changes automatically: Human Resources ends the employment.",
+      "daysLeft": "Days left",
+      "state": "State",
+      "states": {
+        "ENDED": "Ended",
+        "ENDING_SOON": "Ending soon",
+        "OK": "OK",
+        "all": "All"
+      }
+    }
+  },
+  "stu": {
+    "title": "Students",
+    "new": "New student",
+    "edit": "Edit",
+    "tabs": {
+      "label": "Parts of the student file",
+      "personal": "Personal data",
+      "enrollments": "Enrollments",
+      "years": "Yearly registrations",
+      "history": "Status history"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspended",
+      "DEREGISTERED": "Deregistered",
+      "GRADUATED": "Graduated"
+    },
+    "gender": {
+      "FEMALE": "Female",
+      "MALE": "Male"
+    },
+    "cycle": {
+      "FIRST": "First cycle (Bachelor)",
+      "SECOND": "Second cycle (Master)"
+    },
+    "yearN": {
+      "1": "Year 1",
+      "2": "Year 2",
+      "3": "Year 3"
+    },
+    "registrationType": {
+      "FIRST_TIME": "First registration",
+      "SECOND_PROGRAM": "Second program",
+      "TRANSFER": "Transfer"
+    },
+    "columns": {
+      "studentNumber": "Student no.",
+      "name": "Name",
+      "nim": "NIM",
+      "program": "Program",
+      "programCode": "Program code",
+      "cohort": "Cohort",
+      "yearOfStudy": "Year of study",
+      "group": "Group",
+      "groupName": "Group name",
+      "status": "Status",
+      "gender": "Gender",
+      "residence": "Residence",
+      "search": "Search (name, no., NIM)",
+      "cycle": "Cycle",
+      "academicYearCode": "Academic year code"
+    },
+    "form": {
+      "person": "Personal data",
+      "enrollment": "First enrollment",
+      "enrollNow": "Enroll in a program now",
+      "noCohorts": "There is no active cohort. Create a cohort first.",
+      "cohort": "Cohort",
+      "registrationType": "Registration type",
+      "startedAt": "Start date",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "fatherName": "Father's name",
+      "gender": "Gender",
+      "birthDate": "Date of birth",
+      "birthPlace": "Place of birth",
+      "nationalId": "National ID number",
+      "nim": "NIM (from SMIAL)",
+      "phone": "Phone",
+      "email": "E-mail",
+      "residence": "Residence (city/municipality)",
+      "address": "Address",
+      "studentNumber": "Student no.",
+      "create": "Register student",
+      "save": "Save changes",
+      "academicYear": "Academic year",
+      "yearOfStudy": "Year of study",
+      "group": "Group",
+      "noGroup": "There is no group for this year and year of study."
+    },
+    "enrollments": {
+      "empty": "The student has no enrollments.",
+      "add": "Enroll in another program",
+      "endedAt": "Ended on"
+    },
+    "years": {
+      "empty": "No yearly registration.",
+      "yearOfStudy": "Year {year} of study",
+      "group": "Group {group}",
+      "changeGroup": "Change group"
+    },
+    "actions": {
+      "created": "The student was registered.",
+      "saved": "Saved.",
+      "enrolled": "The enrollment was added.",
+      "enroll": "Enroll",
+      "registered": "The year was registered.",
+      "register": "Register year",
+      "changeGroup": "Save group"
+    },
+    "me": {
+      "title": "My student record",
+      "none": "You have no student record",
+      "noneHint": "Your account is not linked to a student. Contact the Secretariat."
+    },
+    "dependents": {
+      "enrollments": "active enrollments",
+      "yearRegistrations": "yearly registrations"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "invalidEmail": "The e-mail is not valid.",
+      "birthDateRange": "The birth date must be between 1900 and today.",
+      "nimInvalid": "The NIM is not valid.",
+      "nimTaken": "This NIM belongs to another student.",
+      "personConflict": "The national ID and the e-mail belong to different persons.",
+      "alreadyStudent": "This person is already a student.",
+      "alreadyUsed": "This national ID or e-mail is used by another person.",
+      "unknownProgram": "The program was not found.",
+      "cohortMismatch": "The cohort is not active or does not belong to this program.",
+      "alreadyEnrolled": "The student already has an active or suspended enrollment in this program.",
+      "PROGRAM_INACTIVE": "The program is inactive.",
+      "unknownYear": "The academic year was not found.",
+      "yearOutOfRange": "The program has no such year of study.",
+      "yearClosed": "The academic year is closed.",
+      "enrollmentNotActive": "The enrollment is not active.",
+      "groupMismatch": "The group must belong to the student's cohort, for this academic year and year of study.",
+      "alreadyRegistered": "The student is already registered for this academic year.",
+      "FORBIDDEN": "You may not do this.",
+      "generic": "The action failed."
+    },
+    "change": {
+      "actions": "Status changes",
+      "done": "The status was changed.",
+      "effectiveDate": "Effective date",
+      "documentRef": "Document (request/decision no., optional)",
+      "reason": "Reason",
+      "targetCohort": "New cohort",
+      "noCohorts": "There is no other active cohort to transfer to.",
+      "suspend": {
+        "action": "Suspend",
+        "title": "Suspend the studies?",
+        "body": "The student stays in the register but is not active until they resume."
+      },
+      "resume": {
+        "action": "Resume",
+        "title": "Resume the studies?",
+        "body": "The student returns to active status."
+      },
+      "deregister": {
+        "action": "Deregister",
+        "title": "Deregister the student?",
+        "body": "The enrollment is closed on the chosen date and is not reopened."
+      },
+      "graduate": {
+        "action": "Graduate",
+        "title": "Record the graduation?",
+        "body": "The enrollment is closed as graduated. The Secretariat checks the obligations."
+      },
+      "transfer": {
+        "action": "Transfer",
+        "title": "Transfer the student?",
+        "body": "The current enrollment is closed as deregistered and a new enrollment (transfer) opens in the chosen cohort."
+      },
+      "errors": {
+        "transitionNotAllowed": "This change is not allowed from the current status.",
+        "invalidDate": "The date is not valid.",
+        "beforeStart": "The date is before the enrollment started.",
+        "beforePreviousChange": "The date is before the previous change.",
+        "inFuture": "The date cannot be in the future.",
+        "reasonRequired": "Enter the reason.",
+        "cohortRequired": "Choose the new cohort.",
+        "tooLong": "The text is too long.",
+        "required": "This field is required.",
+        "unknownProgram": "The program was not found.",
+        "cohortMismatch": "The cohort is not active or does not belong to the program.",
+        "alreadyEnrolled": "The student already has an active or suspended enrollment in that program.",
+        "PROGRAM_INACTIVE": "The program is inactive.",
+        "generic": "The action failed."
+      }
+    },
+    "history": {
+      "document": "Document"
+    }
+  },
+  "forms": {
+    "title": "Forms",
+    "none": "There are no forms available.",
+    "noneHint": "Forms appear here when they are published.",
+    "submit": "Submit",
+    "previewNote": "Preview: nothing is sent.",
+    "thanks": "Thank you, the form was submitted.",
+    "yourReference": "Your reference is:",
+    "keepReference": "Keep this code for any question about your request.",
+    "rateLimited": "You have submitted too many forms. Try again in a few minutes.",
+    "notAvailable": "The form is not available or was not submitted.",
+    "filesUnavailable": "File upload is not available here.",
+    "yes": "Yes",
+    "no": "No",
+    "anonymous": "Anonymous",
+    "assignedToMe": "Assigned to me",
+    "unassigned": "Unassigned",
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "tooShort": "The text is too short.",
+      "invalidEmail": "The e-mail is not valid.",
+      "invalidPhone": "The phone number is not valid.",
+      "invalidNumber": "Enter a number.",
+      "notInteger": "Enter a whole number.",
+      "belowMin": "The value is too small.",
+      "aboveMax": "The value is too large.",
+      "invalidDate": "The date is not valid.",
+      "invalidOption": "Choose one of the options.",
+      "filesNotAllowed": "Files are not allowed in this form.",
+      "invalidFile": "The file is not valid.",
+      "invalid": "The value is not valid."
+    },
+    "columns": {
+      "reference": "Reference",
+      "form": "Form",
+      "formKey": "Form key",
+      "state": "State",
+      "stateKey": "State key",
+      "submitter": "Submitted by",
+      "assignee": "Assigned to",
+      "submittedAt": "Submitted on"
+    },
+    "mine": {
+      "nav": "My submissions",
+      "title": "My submissions",
+      "empty": "You have not submitted any form."
+    },
+    "inbox": {
+      "title": "Form inbox",
+      "answers": "Answers",
+      "actions": "Actions",
+      "history": "History",
+      "assignedTo": "Assigned to {name}",
+      "download": "Download file",
+      "assignee": "Assigned to",
+      "nobody": "Nobody",
+      "assign": "Assign",
+      "comment": "Comment (internal)",
+      "addComment": "Add comment",
+      "moveTo": "Move to: {state}",
+      "stateChanged": "The state was changed.",
+      "assigned": "Assigned.",
+      "events": {
+        "SUBMITTED": "Submitted",
+        "ASSIGNED": "Assignment",
+        "COMMENT": "Comment",
+        "STATE": "State"
+      },
+      "errors": {
+        "TRANSITION_NOT_ALLOWED": "This transition is not allowed.",
+        "HANDLER_MISSING": "No module handles the approval of this form.",
+        "assigneeCannotHandle": "This user does not handle these forms.",
+        "required": "Enter the text.",
+        "generic": "The action failed."
+      }
+    },
+    "admin": {
+      "title": "Form definitions",
+      "new": "New form",
+      "empty": "There are no forms.",
+      "emptyHint": "Create the first one with JSON and publish it.",
+      "key": "Key",
+      "keyHint": "Lower-case letters, digits and hyphens; opened at /f/<key> or /forms/<key>.",
+      "audience": "Who fills it in",
+      "audiencePublic": "Public (no login)",
+      "audienceAuthenticated": "Signed-in users",
+      "ownerRoles": "Who handles the submissions",
+      "ownerRolesHint": "The system administrator always can.",
+      "definition": "Definition (JSON)",
+      "valid": "The definition is valid.",
+      "saveDraft": "Save draft",
+      "saved": "The draft was saved.",
+      "publish": "Publish",
+      "publishTitle": "Publish this form?",
+      "publishBody": "This version becomes the served one; the previous version is archived and never changes.",
+      "published": "The form was published.",
+      "archive": "Take out of service",
+      "archiveTitle": "Take this form out of service?",
+      "archiveBody": "The form page will not open until a new version is published.",
+      "archived": "The form was taken out of service.",
+      "deleteDraft": "Delete draft",
+      "deleteTitle": "Delete this draft?",
+      "deleteBody": "The draft is deleted for good.",
+      "preview": "Preview",
+      "status": {
+        "DRAFT": "Draft",
+        "PUBLISHED": "Published",
+        "ARCHIVED": "Archived"
+      },
+      "columns": {
+        "version": "Version",
+        "title": "Title",
+        "status": "Status",
+        "submissions": "Submissions"
+      },
+      "errors": {
+        "invalidJson": "The JSON is not valid.",
+        "invalid": "The value is not valid.",
+        "labelRequired": "The Albanian label is required.",
+        "tooLong": "The text is too long.",
+        "badKey": "Key: a lower-case letter first, then letters, digits or _.",
+        "noFields": "At least one field is needed.",
+        "tooManyFields": "Too many fields.",
+        "badHandler": "The handler key is not valid.",
+        "duplicateKey": "Duplicate key.",
+        "unknownCondition": "The condition refers to a field that is not earlier.",
+        "optionsRequired": "A choice field needs options.",
+        "duplicateOption": "Duplicate option.",
+        "minAboveMax": "The minimum is above the maximum.",
+        "duplicateState": "Duplicate state.",
+        "unknownState": "Unknown state.",
+        "noFinalState": "At least one final state is needed.",
+        "finalHasExit": "A final state cannot have exits.",
+        "fileNotPublic": "File fields are not allowed in public forms.",
+        "unknownRole": "Unknown role.",
+        "NOT_DRAFT": "Only drafts can be changed.",
+        "NOT_PUBLISHED": "The form is not published.",
+        "VERSION_TAKEN": "The version already exists.",
+        "reasonRequired": "Enter the reason.",
+        "generic": "The action failed."
       }
     }
   }

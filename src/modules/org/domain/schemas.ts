@@ -82,3 +82,42 @@ export type ProgramFormInput = z.input<typeof programSchema>;
 export const updateProgramSchema = programSchema
   .omit({ departmentId: true })
   .extend({ programId: z.string().min(1) });
+
+// ---- cohorts and groups (ORG-04) ---------------------------------------------------------------
+const cohortName = z.string().trim().min(1, "required").max(100, "tooLong");
+
+export const cohortSchema = z.object({
+  programId: z.string().min(1, "required"),
+  startAcademicYearId: z.string().min(1, "required"),
+  curriculumPlanId: z.string().min(1, "required"),
+  name: cohortName,
+});
+export type CohortInput = z.infer<typeof cohortSchema>;
+export const updateCohortSchema = z.object({ cohortId: z.string().min(1), name: cohortName });
+export const changeCohortPlanSchema = z.object({
+  cohortId: z.string().min(1),
+  curriculumPlanId: z.string().min(1, "required"),
+});
+export const cohortStatusSchema = z.object({ cohortId: z.string().min(1) });
+
+export const groupSchema = z.object({
+  cohortId: z.string().min(1, "required"),
+  academicYearId: z.string().min(1, "required"),
+  yearOfStudy: z.number({ error: "yearOutOfRange" }).int("yearOutOfRange").min(1, "yearOutOfRange"),
+  name: cohortName,
+  capacity: z
+    .number({ error: "capacityRange" })
+    .int("capacityRange")
+    .min(1, "capacityRange")
+    .max(1000, "capacityRange")
+    .nullish()
+    .transform((v) => v ?? null),
+});
+export type GroupInput = z.infer<typeof groupSchema>;
+export const updateGroupSchema = z.object({
+  groupId: z.string().min(1),
+  name: cohortName,
+  capacity: groupSchema.shape.capacity,
+});
+export const groupStatusSchema = z.object({ groupId: z.string().min(1) });
+export const bulkGroupsSchema = z.object({ academicYearId: z.string().min(1, "required") });

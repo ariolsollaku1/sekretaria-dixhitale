@@ -1,0 +1,55 @@
+enum CalendarEventType {
+  TEACHING_WEEK
+  HOLIDAY
+  DEADLINE
+  EXAM_PERIOD
+  REGISTRATION_PERIOD
+  EVENT
+
+  @@map("calendar_event_type")
+}
+
+enum CalendarAudience {
+  ALL
+  CYCLE
+  PROGRAM
+
+  @@map("calendar_audience")
+}
+
+/// A dated entry of the academic calendar (CAL-01). All-day, inclusive dates; cancelled, never deleted.
+model CalendarEvent {
+  id             String            @id @default(cuid(2))
+  academicYearId String            @map("academic_year_id")
+  title          String
+  type           CalendarEventType
+  startDate      DateTime          @map("start_date") @db.Date
+  endDate        DateTime          @map("end_date") @db.Date
+  description    String?
+  audience       CalendarAudience  @default(ALL)
+  /// Set when audience = CYCLE.
+  cycle          StudyCycle?
+  /// Set when audience = PROGRAM.
+  programId      String?           @map("program_id")
+  active         Boolean           @default(true)
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?           @map("created_by_id")
+  updatedById    String?           @map("updated_by_id")
+  academicYear   AcademicYear      @relation(fields: [academicYearId], references: [id])
+  program        StudyProgram?     @relation(fields: [programId], references: [id])
+
+  @@index([academicYearId, startDate])
+  @@map("calendar_events")
+}
+
+/// Secret subscription link of one user's iCal feed; only the hash is stored (CAL-01 AC-13).
+model CalendarFeedToken {
+  id        String   @id @default(cuid(2))
+  userId    String   @unique @map("user_id")
+  tokenHash String   @unique @map("token_hash")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("calendar_feed_tokens")
+}

@@ -51,6 +51,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-32 | Curriculum plans: totals, versions and approval | no | open | Secretariat / Heads of department |
 | Q-33 | Cohorts and student groups: naming, sizes, who maintains them | no | open | Secretariat |
 | Q-34 | Student register: student number, NIM, fields and visibility | no | open | Secretariat / DPO |
+| Q-35 | Teaching assignments: kinds, load limits and who assigns | no | open | Heads of department / HR |
 
 ---
 
@@ -400,3 +401,19 @@ Decisions taken in conversation that aren't architecture ADRs.
   Affairs and the sysadmin; a student may hold one ACTIVE or SUSPENDED enrollment per program and
   several programs at once (second program is a registration type).
 - **Impact:** number format, NIM validation, field list, visibility.
+
+### Q-35 — Teaching assignments: kinds, load limits and who assigns
+- **Context:** SRC-026, SRC-027, SRC-066 — the curriculum plan names the lecturer; hours delivered are recorded per lecturer.
+- **Questions:** Are lectures, seminars and laboratory sessions always assigned separately (and can
+  one course have several lecturers of the same kind)? What is the maximum teaching load of a
+  full-time (PAE) and of a part-time (PAK) lecturer, per semester or year, and is it counted in
+  hours or in credits? May administrative staff or volunteers teach? Who assigns lecturers (head of
+  department, the Secretariat) and is an approval needed? Do co-lecturers of one course share the
+  planned hours or each carry the full hours?
+- **Working assumption:** an assignment is one lecturer for one kind (lecture, seminar or
+  laboratory) of one plan course in one group, with its planned hours (default: the plan course's
+  hours for that kind); several lecturers per kind are allowed and each carries the hours entered;
+  only active academic staff can be assigned; the load limit is a setting
+  (`cur.teaching.maxPlannedHours`, annual planned hours) that is **off by default** and only warns;
+  the head of department (own department), the Secretariat and the sysadmin assign, without approval.
+- **Impact:** the kinds, the load limit and its unit, who may be assigned and who assigns.

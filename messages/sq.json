@@ -967,6 +967,11 @@
         "title": "Njoftim provë",
         "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë.",
         "label": "Mesazh prove"
+      },
+      "form-status": {
+        "label": "Ndryshime në formularët që keni dërguar",
+        "title": "Formulari juaj u përditësua",
+        "body": "Formulari “{form}” është tani në gjendjen: {state}."
       }
     },
     "prefs": {
@@ -1006,6 +1011,10 @@
       "test": {
         "subject": "Mesazh prove nga Sekretari Dixhitale",
         "body": "Përshëndetje {name},\n\nky është një mesazh prove nga Sekretari Dixhitale. Nëse e lexoni, dërgimi i postës funksionon."
+      },
+      "form-status": {
+        "subject": "Formulari juaj u përditësua: {form}",
+        "body": "Formulari “{form}” që dërguat është tani në gjendjen: {state}."
       }
     },
     "ntf": {

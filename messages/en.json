@@ -967,6 +967,11 @@
         "title": "Test notification",
         "body": "This is a test notification from {name}. If you can see it, notifications work.",
         "label": "Test message"
+      },
+      "form-status": {
+        "label": "Changes to forms you submitted",
+        "title": "Your form was updated",
+        "body": "The form “{form}” is now: {state}."
       }
     },
     "prefs": {
@@ -1006,6 +1011,10 @@
       "test": {
         "subject": "Test message from the Digital Secretariat",
         "body": "Hello {name},\n\nthis is a test message from the Digital Secretariat. If you are reading it, mail delivery works."
+      },
+      "form-status": {
+        "subject": "Your form was updated: {form}",
+        "body": "The form “{form}” you submitted is now: {state}."
       }
     },
     "ntf": {

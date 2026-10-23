@@ -92,3 +92,74 @@ export async function listAuthenticatedForms() {
     return s ? [s] : [];
   });
 }
+
+// ---- inbox (AC-7) --------------------------------------------------------------------------------
+import type { Prisma } from "@/generated/prisma/client";
+import { currentRoles, mayHandle } from "./access";
+
+/** The submissions a user may handle: the sysadmin all, others those of forms they own a role of. */
+export async function inboxWhere(userId: string): Promise<Prisma.FormSubmissionWhereInput> {
+  const roles = await currentRoles(userId);
+  if (roles.includes("sysadmin")) return {};
+  if (roles.length === 0) return { id: { in: [] } };
+  return { definition: { ownerRoles: { hasSome: roles as never } } };
+}
+
+export async function getSubmission(userId: string, id: string) {
+  const row = await db.formSubmission.findFirst({
+    where: { AND: [{ id }, await inboxWhere(userId)] },
+    include: {
+      definition: true,
+      submitter: { select: { id: true, name: true, email: true } },
+      assignee: { select: { id: true, name: true } },
+      events: { orderBy: { createdAt: "asc" } },
+    },
+  });
+  if (!row) return null;
+  const form = served({ ...row.definition });
+  if (!form) return null;
+  const actorIds = [...new Set(row.events.map((e) => e.actorId).filter((x): x is string => !!x))];
+  const actors = await db.user.findMany({
+    where: { id: { in: actorIds } },
+    select: { id: true, name: true },
+  });
+  return { submission: row, form, actors: new Map(actors.map((a) => [a.id, a.name])) };
+}
+
+/** Staff who could be assigned a submission of this form. */
+export async function listAssignees(ownerRoles: readonly string[]) {
+  const now = new Date();
+  const users = await db.user.findMany({
+    where: {
+      active: true,
+      roles: {
+        some: {
+          role: { in: [...ownerRoles, "sysadmin"] as never },
+          validFrom: { lte: now },
+          OR: [{ validTo: null }, { validTo: { gt: now } }],
+        },
+      },
+    },
+    orderBy: { name: "asc" },
+    select: { id: true, name: true },
+  });
+  return users;
+}
+
+/** A signed-in user's own submissions. */
+export async function mySubmissions(userId: string) {
+  const rows = await db.formSubmission.findMany({
+    where: { submitterId: userId },
+    orderBy: { submittedAt: "desc" },
+    include: { definition: true },
+    take: 100,
+  });
+  return rows.flatMap((r) => {
+    const form = served({ ...r.definition });
+    return form
+      ? [{ id: r.id, reference: r.reference, state: r.state, submittedAt: r.submittedAt, form }]
+      : [];
+  });
+}
+
+export { mayHandle };

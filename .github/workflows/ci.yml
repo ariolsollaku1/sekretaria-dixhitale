@@ -26,6 +26,7 @@ jobs:
       KEYCLOAK_ISSUER: http://localhost:8080/realms/logos
       KEYCLOAK_CLIENT_ID: sekretari-web
       KEYCLOAK_CLIENT_SECRET: ci-only-secret
+      KEYCLOAK_ADMIN_CLIENT_SECRET: ci-only-admin-secret
       BETTER_AUTH_SECRET: ci-only-secret-ci-only-secret-ci-only
     steps:
       - uses: actions/checkout@v4

@@ -11,6 +11,8 @@ const schema = z.object({
   KEYCLOAK_INTERNAL_URL: z.url().optional(),
   KEYCLOAK_CLIENT_ID: z.string().min(1),
   KEYCLOAK_CLIENT_SECRET: z.string().min(1),
+  KEYCLOAK_ADMIN_CLIENT_ID: z.string().min(1).default("sekretari-admin"),
+  KEYCLOAK_ADMIN_CLIENT_SECRET: z.string().min(1),
   BETTER_AUTH_SECRET: z.string().min(32),
   SESSION_IDLE_MINUTES: z.coerce.number().int().positive().default(30),
   SESSION_MAX_HOURS: z.coerce.number().int().positive().default(12),

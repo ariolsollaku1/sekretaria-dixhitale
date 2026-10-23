@@ -85,7 +85,7 @@ Nav entry: group "System", permission `iam.user.read`.
 
 ## 4. Tasks
 
-- [ ] **T1** — `IdentityProviderAdmin` interface, Keycloak implementation, in-memory fake; contract
+- [x] **T1** — `IdentityProviderAdmin` interface, Keycloak implementation, in-memory fake; contract
       tests run against the fake always and against real Keycloak in E2E. (AC-2, AC-6, AC-8, AC-9)
 - [ ] **T2** — Domain rules + unit tests. (AC-7)
 - [ ] **T3** — `userService` with transaction + compensation + audit. (AC-2, AC-3, AC-4, AC-5, AC-6, AC-8, AC-9, AC-10)

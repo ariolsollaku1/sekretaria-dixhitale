@@ -7,6 +7,7 @@ const valid = {
   KEYCLOAK_ISSUER: "http://localhost:8080/realms/logos",
   KEYCLOAK_CLIENT_ID: "sekretari-web",
   KEYCLOAK_CLIENT_SECRET: "secret",
+  KEYCLOAK_ADMIN_CLIENT_SECRET: "admin-secret",
   BETTER_AUTH_SECRET: "x".repeat(32),
 };
 

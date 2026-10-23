@@ -55,6 +55,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-36 | Student status changes: allowed transitions and documents | no | open | Secretariat |
 | Q-37 | Forms: public submissions, anti-abuse, retention and notifications | no | open | IT / DPO / Secretariat |
 | Q-38 | Contract expiry: horizon, who is told and what happens at the end | no | open | HR |
+| Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 
 ---
 
@@ -461,3 +462,14 @@ Decisions taken in conversation that aren't architecture ADRs.
   without an end date never expire; nothing changes automatically — HR ends the employment by hand
   (and IAM-02 will later disable the account on that event).
 - **Impact:** the horizon, recipients and rhythm; automatic effects.
+
+### Q-39 — Timetable: rooms, time slots and clashes
+- **Context:** SRC-034, SRC-036d — class timetable; Q-21 says the Secretariat enters it.
+- **Questions:** Does LOGOS have fixed time slots (e.g. 45-minute periods) or free start/end times?
+  Is there a list of rooms with capacities, and must a room be booked once? May a lecturer teach
+  several groups together (a joint class)? Which weekdays are used (Saturday)? Is a clash ever
+  allowed with a warning?
+- **Working assumption:** free start and end times; rooms are free text compared without regard to
+  case; every clash of group, lecturer or room is refused; joint classes are not modelled; all seven
+  weekdays are allowed.
+- **Impact:** fixed slots, room master data, joint classes.

@@ -140,7 +140,7 @@ Migration adds `CHECK (start_date <= end_date)` and a check that audience/cycle/
 - [x] **T1** — `calendar.prisma` + migration with checks; permissions and grants; shell nav. (AC-1, AC-14)
 - [x] **T2** — Pure week/shift/month rules, ICS rendering and event validation with unit tests. (AC-2, AC-3, AC-6, AC-10, AC-12)
 - [x] **T3** — Event service (create, update, cancel, restore, copy) and queries with audience resolver; integration tests. (AC-4, AC-5, AC-9..AC-11, AC-14)
-- [ ] **T4** — Feed tokens and the ICS route; integration tests. (AC-12, AC-13)
+- [x] **T4** — Feed tokens and the ICS route; integration tests. (AC-12, AC-13)
 - [ ] **T5** — Calendar page (agenda, month, list table), event form and detail. (AC-7, AC-8)
 - [ ] **T6** — Copy page, checklist step, feed panel, i18n, seed, e2e, docs. (all)
 

@@ -2,3 +2,4 @@
 import "./permissions";
 export { registerAudienceResolver, type Audience } from "./server/audience";
 export { listEvents, getEvent, feedEvents, type EventView } from "./server/event.queries";
+export { hasFeedToken } from "./server/feed.service";

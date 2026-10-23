@@ -124,9 +124,9 @@ scrollable box · pagination. The shell and controls carry `print:hidden`.
 
 ## 4. Tasks
 
-- [ ] **T1** — `SavedFilter` model + migration, `plt.view.save` granted to all roles, `fflate` (+ `exceljs` as dev dependency for verifying XLSX). (AC-6)
-- [ ] **T2** — Pure `params` module with unit tests. (AC-2, AC-3, AC-4, AC-5)
-- [ ] **T3** — Pure `export` module (CSV, XLSX, injection guard) with unit tests that re-read the XLSX. (AC-7, AC-10)
+- [x] **T1** — `SavedFilter` model + migration, `plt.view.save` granted to all roles, `fflate` (+ `exceljs` as dev dependency for verifying XLSX). (AC-6)
+- [x] **T2** — Pure `params` module with unit tests. (AC-2, AC-3, AC-4, AC-5)
+- [x] **T3** — Pure `export` module (CSV, XLSX, injection guard) with unit tests that re-read the XLSX. (AC-7, AC-10)
 - [ ] **T4** — Table registry, `runTable`, export route with permission, row cap and audit; integration tests. (AC-1, AC-7, AC-8, AC-9)
 - [ ] **T5** — `DataTable` components: filters, sort headers, pagination, column chooser, export menu, print, states, i18n (`table.*`). (AC-3, AC-4, AC-5, AC-11, AC-12)
 - [ ] **T6** — Saved filters: actions, query, UI, integration tests. (AC-6)

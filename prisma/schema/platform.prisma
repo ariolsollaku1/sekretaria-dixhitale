@@ -122,3 +122,18 @@ model StoredFile {
   @@index([status, createdAt])
   @@map("stored_files")
 }
+
+/// A user's named filter on a table (PLT-10): the URL query of the filters, without paging.
+model SavedFilter {
+  id        String   @id @default(cuid(2))
+  userId    String   @map("user_id")
+  tableId   String   @map("table_id")
+  name      String
+  query     String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tableId, name])
+  @@index([userId, tableId])
+  @@map("saved_filters")
+}

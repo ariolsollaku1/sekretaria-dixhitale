@@ -1,0 +1,70 @@
+enum Gender {
+  FEMALE
+  MALE
+
+  @@map("gender")
+}
+
+enum StaffKind {
+  ACADEMIC
+  ADMINISTRATIVE
+
+  @@map("staff_kind")
+}
+
+/// PAE = internal full-time, PAK = external part-time (SRC-060).
+enum StaffCategory {
+  PAE
+  PAK
+  VOLUNTEER
+
+  @@map("staff_category")
+}
+
+/// A natural person; staff (HR-01) and students (STU-01) point at it. Personal data lives only here.
+model Person {
+  id          String   @id @default(cuid(2))
+  firstName   String   @map("first_name")
+  lastName    String   @map("last_name")
+  fatherName  String?  @map("father_name")
+  gender      Gender
+  birthDate   DateTime @map("birth_date") @db.Date
+  nationalId  String?  @unique @map("national_id")
+  phone       String?
+  email       String?  @unique
+  address     String?
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?  @map("created_by_id")
+  updatedById String?  @map("updated_by_id")
+  user        User?
+  staff       Staff?
+
+  @@map("persons")
+}
+
+/// A staff member (HR-01); never deleted — `active=false` ends employment.
+model Staff {
+  id              String        @id @default(cuid(2))
+  personId        String        @unique @map("person_id")
+  kind            StaffKind
+  category        StaffCategory
+  degree          String?
+  title           String?
+  departmentId    String?       @map("department_id")
+  retired         Boolean       @default(false)
+  /// Only for category PAK.
+  primaryEmployer String?       @map("primary_employer")
+  contractStart   DateTime      @map("contract_start") @db.Date
+  contractEnd     DateTime?     @map("contract_end") @db.Date
+  active          Boolean       @default(true)
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById     String?       @map("created_by_id")
+  updatedById     String?       @map("updated_by_id")
+  person          Person        @relation(fields: [personId], references: [id])
+  department      Department?   @relation(fields: [departmentId], references: [id])
+
+  @@index([departmentId])
+  @@map("staff")
+}

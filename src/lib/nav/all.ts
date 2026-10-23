@@ -2,6 +2,7 @@ import "@/modules/org"; // registers the ORG permissions and the academic-year p
 import "@/modules/cur";
 import "@/modules/cal";
 import "@/modules/ntf";
+import "@/modules/hr";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -119,3 +120,23 @@ registerNav({
   group: "teaching",
   order: 6,
 });
+registerNav(
+  {
+    id: "staff",
+    labelKey: "staff",
+    href: "/hr/staff",
+    icon: "users",
+    permission: "hr.staff.read",
+    group: "administration",
+    order: 30,
+  },
+  {
+    id: "my-staff-record",
+    labelKey: "myStaffRecord",
+    href: "/hr/me",
+    icon: "briefcase",
+    permission: "hr.staff.self",
+    group: "administration",
+    order: 31,
+  },
+);

@@ -60,7 +60,9 @@
       "jobs": "Punët në sfond",
       "notifications": "Njoftimet",
       "calendar": "Kalendari akademik",
-      "announcements": "Njoftime e shkollës"
+      "announcements": "Njoftime e shkollës",
+      "staff": "Stafi",
+      "myStaffRecord": "Të dhënat e mia"
     },
     "languages": {
       "sq": "Shqip",

@@ -7,7 +7,8 @@ model User {
   name                    String
   image                   String?
   active                  Boolean                  @default(true)
-  personId                String?                  @unique @map("person_id") // FK added when Person exists (STU-01/HR-01)
+  personId                String?                  @unique @map("person_id")
+  person                  Person?                  @relation(fields: [personId], references: [id])
   locale                  String? // UI preference (PLT-06)
   lastLoginAt             DateTime?                @map("last_login_at") @db.Timestamptz(3)
   createdAt               DateTime                 @default(now()) @map("created_at") @db.Timestamptz(3)

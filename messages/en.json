@@ -60,7 +60,9 @@
       "jobs": "Jobs",
       "notifications": "Notifications",
       "calendar": "Academic calendar",
-      "announcements": "Announcements"
+      "announcements": "Announcements",
+      "staff": "Staff",
+      "myStaffRecord": "My staff record"
     },
     "languages": {
       "sq": "Shqip",

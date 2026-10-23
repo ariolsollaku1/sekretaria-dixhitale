@@ -73,6 +73,7 @@ model Department {
   faculty     Faculty        @relation(fields: [facultyId], references: [id])
   programs    StudyProgram[]
   courses     Course[]
+  staff       Staff[]
 
   @@index([facultyId])
   @@map("departments")

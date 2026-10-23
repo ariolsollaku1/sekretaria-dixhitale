@@ -520,5 +520,5 @@ Decisions taken in conversation that aren't architecture ADRs.
 ### Q-54 — Targeted messages: retention of content and delivery log
 - **Context:** NTF-03 — delivery log; the content may refer to a person's obligations.
 - **Questions:** How long are sent messages and their per-person delivery results kept? Who may read them?
-- **Working assumption:** kept indefinitely (no hard deletes); the sender sees the messages they sent and system administrators see all; the log stores person ids and delivery state only, never the e-mail address.
+- **Working assumption:** kept indefinitely (no hard deletes); the sender sees the messages they sent and system administrators (holders of `plt.audit.read`) see all; the log stores person ids and delivery state only, never the e-mail address.
 - **Impact:** retention period, wider access (e.g. head of office).

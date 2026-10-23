@@ -102,12 +102,19 @@ model MessageTemplate {    // table message_templates
 - A user disabled after the send is still logged `DELIVERED` (in-app row exists), e-mail is skipped by `notify`.
 - Notification link is `/notifications`; no personal data in logs (ids and counts only).
 
+**Implementation notes:**
+- Routes `/messages`, `/messages/new`, `/messages/[id]`, `/messages/templates`; nav entry "Messages".
+- `TableDef.recipient` is the only platform hook; `notify()` gained an optional `raw` text and returns `outboxId`.
+- Recipients are the rows the list returns for the user (page size cap + 1), so scope and filters are the list's own.
+- The job `ntf.message.send` runs every minute (like the announcement push); a message with nobody to reach is `SENT` at once.
+- Visibility of a message: its sender, and holders of `plt.audit.read` (system administrators); others get 404.
+
 ## 4. Tasks
 
-- [ ] **T1** — `messages.prisma` + migration; permission, nav, notification type; `TableDef.recipient`, `notify` raw. (AC-1, AC-9)
-- [ ] **T2** — Pure placeholder/schemas with unit tests. (AC-3)
-- [ ] **T3** — Services (resolve, send, templates), job; integration tests. (AC-2, AC-4..AC-7, AC-10)
-- [ ] **T4** — Queries, pages, "Message these people" on STU/HR lists, i18n, e2e, docs. (AC-1, AC-8, AC-9)
+- [x] **T1** — `messages.prisma` + migration; permission, nav, notification type; `TableDef.recipient`, `notify` raw. (AC-1, AC-9)
+- [x] **T2** — Pure placeholder/schemas with unit tests. (AC-3)
+- [x] **T3** — Services (resolve, send, templates), job; integration tests. (AC-2, AC-4..AC-7, AC-10)
+- [x] **T4** — Queries, pages, "Message these people" on STU/HR lists, i18n, e2e, docs. (AC-1, AC-8, AC-9)
 
 ## 5. Test plan
 
@@ -121,9 +128,9 @@ model MessageTemplate {    // table message_templates
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

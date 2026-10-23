@@ -126,13 +126,25 @@ buttons "Run export now" / "Run integrity check now", runs table with download l
   export, not a spreadsheet report), noted in the README.
 - Disk full or storage error: run `failed`, code `STORAGE`.
 
+**Implementation notes:**
+- Tables are discovered from `information_schema` (public schema) and paged by `ctid`, so no key or
+  sort column is needed; CSV values are the Postgres text form (session time zone UTC), JSONL rows
+  come from `row_to_json`, so numbers keep their exact digits. The ZIP is streamed with fflate to
+  `<FILES_DIR>/exports/export-<stamp>-<rand>.zip` (written as `.part`, renamed when complete).
+- Jobs run with `retryLimit: 0` (a failed export is visible and can be started again); a manual
+  start enqueues with the key `manual`, so a second click while one is waiting or running is refused.
+  The run row is created by the job, so a manual run appears on the page once the worker picks it up.
+- An integrity run with problems is `failed` (banner on the page) but the job itself completes.
+- The shared test guard accepts database names like `sekretari_test_<id>` (`_test` followed by an
+  optional suffix) so parallel worktrees can have their own test database.
+
 ## 4. Tasks
 
-- [ ] **T1** — Model + migration, permissions, nav, env/constants, domain helpers (CSV, manifest, retention, table filter) with unit tests. (AC-3, AC-4, AC-6, AC-11)
-- [ ] **T2** — Export service and job with integration tests (real Postgres, temp storage; unzip and verify content). (AC-1..AC-6)
-- [ ] **T3** — Integrity service and job with integration tests. (AC-7)
-- [ ] **T4** — Queries, actions, download route, `/admin/backups` page, i18n sq + en. (AC-8..AC-11)
-- [ ] **T5** — `scripts/backup.sh`, `scripts/restore.sh`, runbook, docs, e2e. (AC-12, all)
+- [x] **T1** — Model + migration, permissions, nav, env/constants, domain helpers (CSV, manifest, retention, table filter) with unit tests. (AC-3, AC-4, AC-6, AC-11)
+- [x] **T2** — Export service and job with integration tests (real Postgres, temp storage; unzip and verify content). (AC-1..AC-6)
+- [x] **T3** — Integrity service and job with integration tests. (AC-7)
+- [x] **T4** — Queries, actions, download route, `/admin/backups` page, i18n sq + en. (AC-8..AC-11)
+- [x] **T5** — `scripts/backup.sh`, `scripts/restore.sh`, runbook, docs, e2e. (AC-12, all)
 
 ## 5. Test plan
 
@@ -146,13 +158,13 @@ buttons "Run export now" / "Run integrity check now", runs table with download l
 | AC-6 | unit + integration | retention keeps newest 7, purges older ZIPs and marks runs |
 | AC-7 | integration | integrity finds a missing/modified file and a tampered export; passes on a clean set |
 | AC-8..AC-11 | integration + e2e | page lists runs, start enqueues and audits, second start refused, download streams and audits, secretary 403, purged 404 |
-| AC-12 | manual | script shellcheck-style review; documented dry run |
+| AC-12 | manual | both scripts run against the dev Postgres container: backup set, restore into a new database, refusal to overwrite, verification failure on a corrupted file |
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, deployment.md, runbook)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, deployment.md, runbook)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

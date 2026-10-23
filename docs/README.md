@@ -10,7 +10,7 @@ time ([ADR-0001](02-architecture/adr/0001-spec-driven-docs.md)).
 |---|---|
 | [00-source/](00-source/) | what the client asked for — [English translation](00-source/requirements-en.md) with `SRC-xxx` IDs, [Albanian original](00-source/requirements-sq.md), and the original `.docx` |
 | [01-product/](01-product/) | the [vision](01-product/vision.md), [roles & access](01-product/roles.md), [glossary](01-product/glossary.md) (Albanian ↔ English ↔ code names) |
-| [02-architecture/](02-architecture/) | [overview](02-architecture/overview.md), [auth](02-architecture/auth.md), [deployment](02-architecture/deployment.md), [domain model](02-architecture/domain-model.md), [conventions](02-architecture/conventions.md), [ADRs](02-architecture/adr/) |
+| [02-architecture/](02-architecture/) | [overview](02-architecture/overview.md), [auth](02-architecture/auth.md), [deployment](02-architecture/deployment.md), [domain model](02-architecture/domain-model.md), [backup & restore](02-architecture/backup-restore.md), [conventions](02-architecture/conventions.md), [ADRs](02-architecture/adr/) |
 | [03-features/](03-features/) | the [feature registry](03-features/FEATURES.md) (status, dependencies, blockers), [module briefs](03-features/modules/), [full specs](03-features/specs/) |
 | [04-open-questions.md](04-open-questions.md) | what we don't know yet and which features it blocks |
 | [05-roadmap.md](05-roadmap.md) | build order (phases P0–P8) and which questions to ask before each phase |

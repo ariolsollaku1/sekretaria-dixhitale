@@ -34,3 +34,37 @@ registerScopeResolver("DEPARTMENT", {
     return d ? { facultyId: d.facultyId } : {};
   },
 });
+
+// ORG-03 AC-8: program scope. A program's ancestors let faculty- and department-scoped roles
+// contain it (target.programId -> departmentId/facultyId in PLT-05's expandTargetScope).
+registerScopeResolver("PROGRAM", {
+  exists: async (id) =>
+    !!(await db.studyProgram.findFirst({ where: { id, active: true }, select: { id: true } })),
+  options: async () => {
+    const rows = await db.studyProgram.findMany({
+      where: { active: true, department: { active: true, faculty: { active: true } } },
+      orderBy: [
+        { department: { faculty: { code: "asc" } } },
+        { department: { code: "asc" } },
+        { code: "asc" },
+      ],
+      select: {
+        id: true,
+        code: true,
+        name: true,
+        department: { select: { code: true, faculty: { select: { code: true } } } },
+      },
+    });
+    return rows.map((p) => ({
+      id: p.id,
+      label: `${p.department.faculty.code} / ${p.department.code} / ${p.code} — ${p.name}`,
+    }));
+  },
+  ancestors: async (id) => {
+    const p = await db.studyProgram.findUnique({
+      where: { id },
+      select: { department: { select: { id: true, facultyId: true } } },
+    });
+    return p ? { departmentId: p.department.id, facultyId: p.department.facultyId } : {};
+  },
+});

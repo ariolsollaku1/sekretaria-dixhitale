@@ -121,10 +121,10 @@ Check constraints: `duration_years BETWEEN 1 AND 3`, `total_credits BETWEEN 1 AN
 
 ## 4. Tasks
 
-- [ ] **T1** — Model + migration with checks; permissions; default settings seeded. (AC-1, AC-2, AC-11)
-- [ ] **T2** — Pure program rules and schemas (config-driven) with unit tests. (AC-2..AC-4)
-- [ ] **T3** — Dependents registry; services; queries; integration tests. (AC-5..AC-7, AC-9)
-- [ ] **T4** — `PROGRAM` scope resolver and role-editor integration test. (AC-8)
+- [x] **T1** — Model + migration with checks; permissions; default settings seeded. (AC-1, AC-2, AC-11)
+- [x] **T2** — Pure program rules and schemas (config-driven) with unit tests. (AC-2..AC-4)
+- [x] **T3** — Dependents registry; services; queries; integration tests. (AC-5..AC-7, AC-9)
+- [x] **T4** — `PROGRAM` scope resolver and role-editor integration test. (AC-8)
 - [ ] **T5** — Table, list/new/detail pages, status dialog. (AC-10)
 - [ ] **T6** — Nav, i18n (`org.program.*`), demo seed and dev coordinator role. (AC-12)
 - [ ] **T7** — E2E and docs. (all)

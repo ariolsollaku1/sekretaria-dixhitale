@@ -13,8 +13,8 @@ const READERS = [
   "program_coordinator",
 ] as const;
 
-const READ = ["org.year.read", "org.faculty.read", "org.department.read"];
-const WRITE = ["org.year.write", "org.faculty.write", "org.department.write"];
+const READ = ["org.year.read", "org.faculty.read", "org.department.read", "org.program.read"];
+const WRITE = ["org.year.write", "org.faculty.write", "org.department.write", "org.program.write"];
 
 registerPermissions("org", {
   permissions: [...READ, ...WRITE],

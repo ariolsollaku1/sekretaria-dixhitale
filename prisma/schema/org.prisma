@@ -70,7 +70,40 @@ model Department {
   createdById String?  @map("created_by_id")
   updatedById String?  @map("updated_by_id")
   faculty     Faculty  @relation(fields: [facultyId], references: [id])
+  programs    StudyProgram[]
 
   @@index([facultyId])
   @@map("departments")
+}
+
+/// Fixed list (SRC-011): first cycle = Bachelor, second cycle = Master.
+enum StudyCycle {
+  FIRST
+  SECOND
+
+  @@map("study_cycle")
+}
+
+/// A study program (ORG-03). Cycle, duration and department follow the rules in the spec; never deleted.
+model StudyProgram {
+  id            String     @id @default(cuid(2))
+  /// Fixed after creation.
+  departmentId  String     @map("department_id")
+  cycle         StudyCycle
+  /// Master subtype (a code from the setting `org.programSubtypes`); null for the first cycle.
+  subtype       String?
+  code          String     @unique
+  name          String
+  nameEn        String?    @map("name_en")
+  durationYears Int        @map("duration_years")
+  totalCredits  Int        @map("total_credits")
+  active        Boolean    @default(true)
+  createdAt     DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById   String?    @map("created_by_id")
+  updatedById   String?    @map("updated_by_id")
+  department    Department @relation(fields: [departmentId], references: [id])
+
+  @@index([departmentId])
+  @@map("study_programs")
 }

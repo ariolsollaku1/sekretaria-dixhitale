@@ -45,3 +45,40 @@ export type DepartmentFormInput = z.input<typeof departmentSchema>;
 export const updateDepartmentSchema = facultySchema.extend({ departmentId: z.string().min(1) });
 
 export const unitIdSchema = z.object({ id: z.string().min(1) });
+
+// ---- study programs (ORG-03) -------------------------------------------------------------------
+import { validateProgramCode } from "./program-rules";
+
+const programCode = z.string().transform((v, ctx) => {
+  const check = validateProgramCode(v);
+  if (!check.ok) {
+    ctx.addIssue({ code: "custom", message: check.reason });
+    return z.NEVER;
+  }
+  return check.code;
+});
+
+export const programSchema = z.object({
+  departmentId: z.string().min(1, "required"),
+  cycle: z.enum(["FIRST", "SECOND"]),
+  subtype: z
+    .string()
+    .trim()
+    .nullish()
+    .transform((v) => (v ? v : null)),
+  code: programCode,
+  name: z.string().trim().min(1, "required").max(150),
+  nameEn: z
+    .string()
+    .trim()
+    .max(150)
+    .nullish()
+    .transform((v) => (v ? v : null)),
+  durationYears: z.coerce.number().int().min(1, "required").max(3),
+  totalCredits: z.coerce.number().int().min(1, "creditsRange").max(600, "creditsRange"),
+});
+export type ProgramFormInput = z.input<typeof programSchema>;
+/** The department is fixed after creation. */
+export const updateProgramSchema = programSchema
+  .omit({ departmentId: true })
+  .extend({ programId: z.string().min(1) });

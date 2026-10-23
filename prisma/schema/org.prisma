@@ -106,6 +106,7 @@ model StudyProgram {
   updatedById    String?         @map("updated_by_id")
   department     Department      @relation(fields: [departmentId], references: [id])
   calendarEvents CalendarEvent[]
+  announcements  Announcement[]
 
   @@index([departmentId])
   @@map("study_programs")

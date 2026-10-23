@@ -1,6 +1,7 @@
 import "@/modules/org"; // registers the ORG permissions and the academic-year provider
 import "@/modules/cur";
 import "@/modules/cal";
+import "@/modules/ntf";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -108,4 +109,13 @@ registerNav({
   permission: "cal.event.read",
   group: "teaching",
   order: 5,
+});
+registerNav({
+  id: "announcements",
+  labelKey: "announcements",
+  href: "/announcements",
+  icon: "bell",
+  permission: "ntf.announcement.read",
+  group: "teaching",
+  order: 6,
 });

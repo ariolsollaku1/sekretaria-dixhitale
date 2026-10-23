@@ -59,7 +59,8 @@
       "courseCategories": "Course categories",
       "jobs": "Jobs",
       "notifications": "Notifications",
-      "calendar": "Academic calendar"
+      "calendar": "Academic calendar",
+      "announcements": "Announcements"
     },
     "languages": {
       "sq": "Shqip",
@@ -636,7 +637,8 @@
     "plt": {
       "test": {
         "title": "Test notification",
-        "body": "This is a test notification from {name}. If you can see it, notifications work."
+        "body": "This is a test notification from {name}. If you can see it, notifications work.",
+        "label": "Test message"
       }
     },
     "prefs": {
@@ -651,7 +653,14 @@
       "testSent": "Test message sent. Check the bell and your mailbox.",
       "testFailed": "The test message could not be sent."
     },
-    "open": "Open"
+    "open": "Open",
+    "ntf": {
+      "announcement": {
+        "label": "New announcements",
+        "title": "New announcement: {title}",
+        "body": "A new announcement was published: {title}."
+      }
+    }
   },
   "mail": {
     "common": {
@@ -662,6 +671,12 @@
       "test": {
         "subject": "Test message from the Digital Secretariat",
         "body": "Hello {name},\n\nthis is a test message from the Digital Secretariat. If you are reading it, mail delivery works."
+      }
+    },
+    "ntf": {
+      "announcement": {
+        "subject": "New announcement: {title}",
+        "body": "A new announcement was published in the Digital Secretariat:\n\n{title}"
       }
     }
   },

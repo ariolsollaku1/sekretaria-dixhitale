@@ -123,7 +123,7 @@ false for CYCLE/PROGRAM. Attachments are `StoredFile` rows with `entityType = "A
 
 ## 4. Tasks
 
-- [ ] **T1** — `announcements.prisma` + migration with checks; permissions; nav; notification type + catalog texts. (AC-1, AC-12)
+- [x] **T1** — `announcements.prisma` + migration with checks; permissions; nav; notification type + catalog texts. (AC-1, AC-12)
 - [ ] **T2** — Pure schemas and visibility helpers with unit tests. (AC-1, AC-2, AC-3, AC-5)
 - [ ] **T3** — Service (create, update, publish, archive), queries with audience filter, scope check; integration tests. (AC-3..AC-6, AC-10, AC-11)
 - [ ] **T4** — Push job (fan-out in batches, idempotent); integration tests. (AC-7, AC-8)

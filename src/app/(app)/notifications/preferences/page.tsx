@@ -22,7 +22,7 @@ export default async function NotificationPreferencesPage() {
       <PreferencesForm
         rows={rows.map((r) => ({
           ...r,
-          label: tl(`${r.type}.title` as never),
+          label: tl(`${r.type}.label` as never),
         }))}
         canTest={canTest}
       />

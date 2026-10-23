@@ -59,7 +59,8 @@
       "courseCategories": "Kategoritë e lëndëve",
       "jobs": "Punët në sfond",
       "notifications": "Njoftimet",
-      "calendar": "Kalendari akademik"
+      "calendar": "Kalendari akademik",
+      "announcements": "Njoftime e shkollës"
     },
     "languages": {
       "sq": "Shqip",
@@ -636,7 +637,8 @@
     "plt": {
       "test": {
         "title": "Njoftim provë",
-        "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë."
+        "body": "Ky është një njoftim prove nga {name}. Nëse e shihni, njoftimet funksionojnë.",
+        "label": "Mesazh prove"
       }
     },
     "prefs": {
@@ -651,7 +653,14 @@
       "testSent": "Mesazhi i provës u dërgua. Shikoni zilen dhe postën.",
       "testFailed": "Mesazhi i provës nuk u dërgua."
     },
-    "open": "Hap"
+    "open": "Hap",
+    "ntf": {
+      "announcement": {
+        "label": "Njoftime të reja të shkollës",
+        "title": "Njoftim i ri: {title}",
+        "body": "Është publikuar një njoftim i ri: {title}."
+      }
+    }
   },
   "mail": {
     "common": {
@@ -662,6 +671,12 @@
       "test": {
         "subject": "Mesazh prove nga Sekretari Dixhitale",
         "body": "Përshëndetje {name},\n\nky është një mesazh prove nga Sekretari Dixhitale. Nëse e lexoni, dërgimi i postës funksionon."
+      }
+    },
+    "ntf": {
+      "announcement": {
+        "subject": "Njoftim i ri: {title}",
+        "body": "Është publikuar një njoftim i ri në Sekretarin Dixhital:\n\n{title}"
       }
     }
   },

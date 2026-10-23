@@ -58,6 +58,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
 | Q-41 | Syllabi: format, who uploads and approves, carrying forward | no | open | Heads of department / Quality |
+| Q-50 | Targeted messages: who may send, consent and opt-out | no | open | Secretariat / Legal |
+| Q-51 | Targeted messages: recipient limits and sending rhythm | no | open | Secretariat / IT |
+| Q-52 | Targeted messages: templates and placeholders | no | open | Secretariat |
+| Q-53 | Targeted messages: people without a portal account | no | open | Secretariat / IT |
+| Q-54 | Targeted messages: retention of content and delivery log | no | open | Secretariat / Legal |
 
 ---
 
@@ -494,3 +499,33 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Is a syllabus a document the lecturer or department writes (PDF/Word) or a structured form (objectives, contents, literature, assessment…)? Who uploads (the lecturer, the head of department, the program coordinator) and who approves? Is a syllabus re-approved every academic year or only when it changes? Must students see it before enrolling?
 - **Working assumption:** version 1 stores a PDF per course of an approved plan and academic year (the structured form is a later increment); the program coordinator, the head of department (inside their scope) and the sysadmin upload and approve; each upload is a new version, approving a version archives the previous one; the previous approved syllabus of the course can be carried forward into a new year as a draft that still needs approval; approved syllabi are readable by everyone who may see the plan, students included; drafts and archived versions only by staff.
 - **Impact:** the format (a structured form would need its fields), the roles that upload and approve, the carry-forward rule.
+
+### Q-50 — Targeted messages: who may send, consent and opt-out
+- **Context:** SRC-057 — contact the students of a list (e.g. backlog students) about sessions and academic and financial obligations; NTF-03.
+- **Questions:** Which offices may message which lists? Must students consent to e-mail from the college, and may they switch it off? Are obligation notices (fees, exam sessions) mandatory?
+- **Working assumption:** sending needs `ntf.message.send` (system administrator, secretary, student affairs, finance, HR, administration, head of department, program coordinator) **and** read access to the list the recipients come from, so the list's own scope limits who can be reached. A message is a normal (optional) notification type: everyone gets the in-app notice, the e-mail follows the recipient's preference (default on). Nothing is mandatory.
+- **Impact:** the sender roles, a mandatory type for obligations, an unsubscribe rule.
+
+### Q-51 — Targeted messages: recipient limits and sending rhythm
+- **Context:** NTF-03; the Microsoft 365 mailbox has sending limits (Q-20).
+- **Questions:** Largest audience of one message? Daily mail quota of the mailbox? May the same person be messaged repeatedly?
+- **Working assumption:** at most 2 000 recipients per message (narrow the filters otherwise), sent in batches of 200 by a background job; no per-day quota and no throttling of repeated messages in v1.
+- **Impact:** the cap, throttling, approval for large audiences.
+
+### Q-52 — Targeted messages: templates and placeholders
+- **Context:** NTF-03 — "compose with templates/placeholders".
+- **Questions:** Which standard texts does the Secretariat use (session reminder, obligation notice…)? Which personal data may a text contain? Are templates shared or personal?
+- **Working assumption:** no official wording is shipped. Senders save their own templates (name, subject, text) which every sender sees and which are archived, never deleted. Placeholders are only `{firstName}`, `{lastName}` and `{fullName}`; any other `{…}` is refused. Plain text, no attachments, no reply handling.
+- **Impact:** a list of official templates, more placeholders (student number, program, amount due), attachments.
+
+### Q-53 — Targeted messages: people without a portal account
+- **Context:** NTF-03; students and staff exist as persons before their account is provisioned (IAM-02).
+- **Questions:** Should the college write to the personal e-mail kept on the person record when there is no account?
+- **Working assumption:** only portal users are reached (in-app notice + e-mail to the account address). People without an account are kept in the delivery log as "no account" and nothing is sent to the address on the person record.
+- **Impact:** a second delivery path to the personal e-mail address.
+
+### Q-54 — Targeted messages: retention of content and delivery log
+- **Context:** NTF-03 — delivery log; the content may refer to a person's obligations.
+- **Questions:** How long are sent messages and their per-person delivery results kept? Who may read them?
+- **Working assumption:** kept indefinitely (no hard deletes); the sender sees the messages they sent and system administrators (holders of `plt.audit.read`) see all; the log stores person ids and delivery state only, never the e-mail address.
+- **Impact:** retention period, wider access (e.g. head of office).

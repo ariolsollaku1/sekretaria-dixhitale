@@ -44,15 +44,23 @@ export function renderMessage(args: {
   link?: string | null;
   appUrl: string;
   appName?: string;
+  /** Sender-written text (NTF-03) used instead of the catalog texts of the type. */
+  raw?: { title: string; body: string; subject: string };
 }): RenderedMessage {
-  const inApp = translator(args.locale, args.messages, `notifications.${args.type}`);
-  const mail = translator(args.locale, args.messages, `mail.${args.type}`);
   const common = translator(args.locale, args.messages, "mail.common");
 
-  const title = inApp("title", args.params);
-  const body = inApp("body", args.params);
-  const subject = mail("subject", args.params);
-  const mailBody = mail("body", args.params);
+  let title: string, body: string, subject: string, mailBody: string;
+  if (args.raw) {
+    ({ title, body, subject } = args.raw);
+    mailBody = args.raw.body;
+  } else {
+    const inApp = translator(args.locale, args.messages, `notifications.${args.type}`);
+    const mail = translator(args.locale, args.messages, `mail.${args.type}`);
+    title = inApp("title", args.params);
+    body = inApp("body", args.params);
+    subject = mail("subject", args.params);
+    mailBody = mail("body", args.params);
+  }
   const href = args.link ? new URL(args.link, args.appUrl).toString() : null;
   const footer = common("footer");
   const openLabel = common("open");

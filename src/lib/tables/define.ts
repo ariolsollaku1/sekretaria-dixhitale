@@ -29,6 +29,11 @@ export type TableDef<Row = unknown> = TableShape & {
   values: Record<string, (row: Row, ctx: CellContext) => ExportValue>;
   /** Optional on-screen rendering per column key (links, badges). Not used by exports. */
   cells?: Record<string, (row: Row, ctx: CellContext) => ReactNode>;
+  /**
+   * NTF-03: makes the table a source for "Message these people": the person id of a row. The
+   * recipients are exactly the rows `fetch` returns for the user (same permission, scope, filters).
+   */
+  recipient?(row: Row): string;
   /** `page`/`pageSize` are already validated; the export asks for one big page. */
   fetch(params: TableParams, ctx: FetchContext): Promise<FetchResult<Row>>;
 };

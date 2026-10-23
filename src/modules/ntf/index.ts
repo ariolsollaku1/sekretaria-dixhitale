@@ -16,3 +16,19 @@ export {
 export { listAttachments } from "./server/attachments";
 export { listProgramOptions } from "./server/program-options";
 export { uploadConfig } from "./server/attachments";
+// NTF-03 messaging
+import "./server/message.job";
+export { messagesTable } from "./server/message.table";
+export { resolveRecipients, sourceExportName } from "./server/recipients";
+export {
+  getMessageDetail,
+  getDeliveryLog,
+  listTemplates,
+  type MessageDetail,
+  type LogRow,
+  type TemplateRow,
+} from "./server/message.queries";
+export { MessageForm } from "./ui/message-form";
+export { TemplateForm } from "./ui/template-form";
+export { TemplateArchive } from "./ui/template-archive";
+export { MessageThesePeople } from "./ui/message-link";

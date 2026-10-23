@@ -81,7 +81,8 @@
       "studentStatistics": "Statistika",
       "timetable": "Orari i mësimit",
       "myTimetable": "Orari im",
-      "documents": "Dokumentet zyrtare"
+      "documents": "Dokumentet zyrtare",
+      "messages": "Mesazhet"
     },
     "languages": {
       "sq": "Shqip",
@@ -1080,6 +1081,11 @@
         "label": "Njoftime të reja të shkollës",
         "title": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri: {title}."
+      },
+      "message": {
+        "label": "Mesazhet nga kolegji",
+        "title": "Mesazh nga kolegji",
+        "body": "Keni një mesazh të ri."
       }
     },
     "stu": {
@@ -1116,6 +1122,10 @@
       "announcement": {
         "subject": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri në Sekretarin Dixhital:\n\n{title}"
+      },
+      "message": {
+        "subject": "Mesazh nga kolegji",
+        "body": "Keni një mesazh të ri në Sekretarinë Dixhitale."
       }
     },
     "stu": {
@@ -2065,6 +2075,88 @@
       "number": "Numri",
       "issuedOn": "Lëshuar më",
       "tooMany": "Shumë kërkesa. Provoni përsëri pas pak."
+    }
+  },
+  "msg": {
+    "title": "Mesazhet",
+    "intro": "Mesazhet që keni dërguar personave të një liste. Për të shkruar një të ri, hapni një listë (p.sh. listat e studentëve) dhe zgjidhni \"Dërgo mesazh këtyre personave\".",
+    "action": "Dërgo mesazh këtyre personave",
+    "columns": {
+      "subject": "Subjekti",
+      "sentAt": "Dërguar",
+      "source": "Lista",
+      "recipients": "Persona",
+      "noAccount": "Pa llogari",
+      "status": "Statusi"
+    },
+    "status": {
+      "PENDING": "Në dërgim",
+      "SENT": "Dërguar"
+    },
+    "source": {
+      "stu_lists": "Listat e studentëve",
+      "hr_lecturers": "Listat e pedagogëve"
+    },
+    "compose": {
+      "title": "Mesazh i ri",
+      "backHint": "Kthehuni te lista dhe ndryshoni filtrat.",
+      "recipients": "Ky mesazh i dërgohet {count} personave nga: {list}.",
+      "template": "Fillo nga një shabllon",
+      "subject": "Subjekti",
+      "body": "Mesazhi",
+      "bodyHint": "Tekst i thjeshtë. Mund të përdorni '{firstName}', '{lastName}' dhe '{fullName}'; zëvendësohen për çdo person.",
+      "send": "Dërgo mesazhin",
+      "confirmTitle": "Ta dërgoni këtë mesazh?",
+      "confirmBody": "Mesazhi do t'u dërgohet {count} personave dhe nuk mund të tërhiqet.",
+      "confirm": "Dërgo",
+      "sent": "Mesazhi u vu në radhë për dërgim."
+    },
+    "templates": {
+      "title": "Shabllonet e mesazheve",
+      "empty": "Ende nuk ka shabllone.",
+      "new": "Shabllon i ri",
+      "name": "Emri i shabllonit",
+      "create": "Ruaj shabllonin",
+      "saved": "Shablloni u ruajt.",
+      "saveAs": "Ruaje këtë tekst si shabllon",
+      "save": "Ruaj si shabllon",
+      "archive": "Arkivo",
+      "archiveTitle": "Ta arkivoni këtë shabllon?",
+      "archiveBody": "Shablloni \"{name}\" nuk do të ofrohet më. Mesazhet e dërguara nuk preken.",
+      "archived": "Shablloni u arkivua.",
+      "failed": "Shablloni nuk u arkivua."
+    },
+    "detail": {
+      "from": "Dërguar nga {name}",
+      "log": "Regjistri i dërgimit",
+      "summary": "{total} persona: {delivered} të dërguar, {queued} në pritje, {noAccount} pa llogari në portal.",
+      "person": "Personi",
+      "state": "Njoftimi në portal",
+      "email": "Emaili",
+      "pages": "Faqet",
+      "previous": "Para",
+      "next": "Pas",
+      "page": "Faqja {page} nga {pageCount}"
+    },
+    "delivery": {
+      "QUEUED": "Në pritje",
+      "DELIVERED": "Dërguar",
+      "NO_ACCOUNT": "Pa llogari në portal"
+    },
+    "emailState": {
+      "NONE": "Nuk u dërgua",
+      "QUEUED": "Në radhë",
+      "SENT": "Dërguar",
+      "FAILED": "Dështoi"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Ky tekst është shumë i gjatë.",
+      "unknownPlaceholder": "Në kllapa gjarpërore mund të përdoren vetëm '{firstName}', '{lastName}' dhe '{fullName}'.",
+      "tooMany": "Kjo listë ka më shumë se 2000 persona. Ngushtoni filtrat dhe provoni përsëri.",
+      "noRecipients": "Në këtë listë nuk ka askënd, ndaj nuk ka kujt t'i shkruhet.",
+      "forbidden": "Nuk keni të drejtë të dërgoni mesazhe te kjo listë.",
+      "generic": "Diçka shkoi keq. Provoni përsëri."
     }
   }
 }

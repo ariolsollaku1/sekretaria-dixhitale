@@ -6,6 +6,8 @@ export const PLATFORM_PERMISSIONS = [
   "iam.user.write",
   "plt.audit.read",
   "plt.settings.write",
+  "plt.file.upload",
+  "plt.file.read",
 ] as const;
 
 registerPermissions("iam", {
@@ -13,6 +15,8 @@ registerPermissions("iam", {
   grants: { sysadmin: ["iam.user.read", "iam.user.write"] },
 });
 registerPermissions("plt", {
-  permissions: ["plt.audit.read", "plt.settings.write"],
-  grants: { sysadmin: ["plt.audit.read", "plt.settings.write"] },
+  permissions: ["plt.audit.read", "plt.settings.write", "plt.file.upload", "plt.file.read"],
+  grants: {
+    sysadmin: ["plt.audit.read", "plt.settings.write", "plt.file.upload", "plt.file.read"],
+  },
 });

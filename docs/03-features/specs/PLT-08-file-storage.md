@@ -152,10 +152,10 @@ the route does it explicitly).
 
 ## 4. Tasks
 
-- [ ] **T1** — `StoredFile` model + `FileStatus` + migration; `plt.file.*` permissions. (AC-3, AC-14)
-- [ ] **T2** — `Storage` interface and `LocalStorage` with tests (key format, traversal, atomic put,
+- [x] **T1** — `StoredFile` model + `FileStatus` + migration; `plt.file.*` permissions. (AC-3, AC-14)
+- [x] **T2** — `Storage` interface and `LocalStorage` with tests (key format, traversal, atomic put,
       delete, exists). (AC-1, AC-6)
-- [ ] **T3** — Pure `mime` detection / allow-list / `sanitizeFileName` + purpose registry, unit tests. (AC-2, AC-4, AC-6)
+- [x] **T3** — Pure `mime` detection / allow-list / `sanitizeFileName` + purpose registry, unit tests. (AC-2, AC-4, AC-6)
 - [ ] **T4** — `files.service`: `storeUpload`, `attachFile`, `removeFile`, `verifyFile`,
       `cleanupOrphans` with audit, integration tests. (AC-3, AC-9, AC-10, AC-11, AC-13)
 - [ ] **T5** — Routes `POST /api/files`, `GET /api/files/[id]` with headers and permission checks;

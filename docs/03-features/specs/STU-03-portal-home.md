@@ -40,6 +40,7 @@ absences, requests, obligations) through the dashboard widget registry or sectio
 | AC-8 | THE SYSTEM SHALL never show another student's data: every query is keyed on the signed-in user's own person; a user without a student record sees an empty state. |
 | AC-9 | WHILE the student has no ACTIVE enrollment, THE SYSTEM SHALL show the status and past enrollments but no plan courses, classes or events (Q-57). |
 | AC-10 | THE SYSTEM SHALL show personal data read-only with a note to contact the Secretariat for corrections (Q-55), and log no personal data. |
+| AC-11 | THE SYSTEM SHALL register the audience resolver CAL-01/NTF-01 left to STU: a student's cycles and programs are those of their ACTIVE enrollments, so events and announcements for a cycle or program reach them. |
 
 ### Out of scope
 
@@ -65,6 +66,7 @@ Reuses `stu.student.self` (role student). Cross-module data is read through each
 
 | Kind | Name | Purpose |
 |---|---|---|
+| resolver | `server/audience.ts` | `registerAudienceResolver` for ACTIVE enrollments (AC-11) |
 | domain | `domain/home-rules.ts` | pure: pick the open enrollments, the current-year registration, today's classes filter, upcoming events filter, group plan courses by semester |
 | query | `server/home.queries.ts` | `getPortalHome(user)` assembling the sections |
 | ui | `ui/portal-home.tsx` | server component with the sections, reused by the page and the widget |
@@ -84,24 +86,29 @@ Reuses `stu.student.self` (role student). Cross-module data is read through each
 
 ## 4. Tasks
 
-- [ ] **T1** — Pure rules with unit tests. (AC-2..AC-5, AC-9)
-- [ ] **T2** — `getPortalHome` query + integration tests (own data only, plan, timetable, events, announcements, notifications). (AC-2..AC-9)
-- [ ] **T3** — Page, widget, nav, i18n sq/en. (AC-1, AC-7, AC-10)
-- [ ] **T4** — E2E (main flow + forbidden), seed check, docs. (all)
+- [x] **T1** — Pure rules with unit tests. (AC-2..AC-5, AC-9)
+- [x] **T2** — `getPortalHome` query + integration tests (own data only, plan, timetable, events, announcements, notifications). (AC-2..AC-9, AC-11)
+- [x] **T3** — Page, widget, nav, i18n sq/en. (AC-1, AC-7, AC-10)
+- [x] **T4** — E2E (main flow + forbidden), seed check, docs. (all)
+
+**Implementation notes:**
+- Page `/stu/home` (nav item first in the student group), widget `stu.studies` on the dashboard.
+- Today's classes use Europe/Tirane; events are those of the CURRENT academic year.
+- Integration tests need a database named `*_test`; the per-agent `sekretari_test_<id>` names fail that guard, so they were run on `sekretari_test`.
 
 ## 5. Test plan
 
 | AC | Test type | Test |
 |---|---|---|
 | AC-2..AC-5, AC-9 | unit | `home-rules.test.ts` |
-| AC-2..AC-6, AC-8, AC-9 | integration | `home.queries.int.test.ts` against Postgres |
+| AC-2..AC-6, AC-8, AC-9, AC-11 | integration | `home.queries.int.test.ts` against Postgres |
 | AC-1, AC-7, AC-10 | e2e | student opens `/stu/home`, sees sections, axe; lecturer gets forbidden |
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E pass
-- [ ] Security checklist satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E pass
+- [x] Security checklist satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

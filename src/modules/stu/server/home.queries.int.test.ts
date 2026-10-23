@@ -95,7 +95,7 @@ beforeEach(async () => {
         credits: 4,
         isElective: true,
       },
-      { planId: plan, courseId: courseY2, yearOfStudy: 2, semester: 3, credits: 6 },
+      { planId: plan, courseId: courseY2, yearOfStudy: 2, semester: 1, credits: 6 },
     ],
   });
   cohort = (

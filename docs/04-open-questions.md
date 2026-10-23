@@ -44,6 +44,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-25 | Evaluation questionnaires content | no | answered | NJSBC / HR |
 | Q-26 | Hosting & data location | no | answered | Client |
 | Q-27 | Uploaded files: size/type limits & retention | no | open | Secretariat / DPO |
+| Q-28 | Course categories & credit values | no | open | Secretariat / Heads of department |
 
 ---
 
@@ -261,6 +262,18 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
   average of 1–5 scale questions.
 - **Answer (2026-10-03):** Working assumption adopted — the forms engine (ADR-0009) is ours; the
   question content is configuration that NJSBC/HR enter before go-live, so it blocks nothing.
+
+### Q-28 — Course categories & credit values
+- **Questions:** Which course categories does LOGOS use in its curriculum plans (SRC-013 names a
+  "course category")? For example compulsory / elective / general / professional / practice /
+  thesis — and which of them carry special rules (e.g. electives chosen by the student)? Are credits
+  always whole numbers, or are half credits used? What is the largest number of weekly hours per
+  type?
+- **Working assumption:** categories are a list the administrators maintain (code, Albanian and
+  English name, active) — nothing is hard-coded; no special rules are attached to a category in
+  CUR-01 (the elective flag is a property of the plan entry in CUR-02). Credits are whole numbers
+  0–60 and hours whole numbers 0–500 per type.
+- **Impact:** only the initial category list and the numeric limits (constants in one file).
 
 ### Q-27 — Uploaded files: size/type limits & retention
 - **Questions:** What is the largest file a candidate, student or staff member may upload, and

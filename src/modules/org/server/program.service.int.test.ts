@@ -338,10 +338,14 @@ describe("PROGRAM scope (AC-8, AC-9)", () => {
     for (const [type, scopeId] of [
       ["FACULTY", facultyId],
       ["DEPARTMENT", departmentId],
+      ["PROGRAM", id],
     ] as const) {
       expect(
         canOf(actorRef, [assignment(type, scopeId)], "org.program.read", new Date(), scope),
-      ).toBe(false); // secretary has no org.program.write...
+      ).toBe(true);
+      expect(
+        canOf(actorRef, [assignment(type, "other-unit")], "org.program.read", new Date(), scope),
+      ).toBe(false);
     }
   });
 });

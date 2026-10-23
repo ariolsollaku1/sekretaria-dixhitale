@@ -80,7 +80,8 @@
       "studentStatistics": "Statistika",
       "timetable": "Orari i mësimit",
       "myTimetable": "Orari im",
-      "documents": "Dokumentet zyrtare"
+      "documents": "Dokumentet zyrtare",
+      "studentHome": "Faqja ime"
     },
     "languages": {
       "sq": "Shqip",
@@ -1770,6 +1771,43 @@
           "TRANSFER": "Transferim"
         }
       }
+    },
+    "home": {
+      "title": "Portali i studentit",
+      "studentNumber": "Nr. i studentit",
+      "year": "Viti akademik {code}",
+      "studies": "Studimet e mia",
+      "fullRecord": "Dosja e plotë",
+      "noOpen": "Nuk keni asnjë regjistrim aktiv ose të pezulluar.",
+      "closed": "{n, plural, one {# regjistrim i mëparshëm} other {# regjistrime të mëparshme}} në dosjen tuaj.",
+      "correction": "Të dhënat tuaja shfaqen këtu vetëm për lexim. Për t'i korrigjuar, kontaktoni Sekretarinë.",
+      "noYear": "Nuk jeni regjistruar për këtë vit",
+      "yearN": "Viti {n}",
+      "shortcuts": "Shkurtore",
+      "notifications": "Njoftimet",
+      "timetable": "Orari",
+      "calendar": "Kalendari",
+      "all": "Të gjitha",
+      "today": "Mësimet e sotme",
+      "noClasses": "Sot nuk keni mësim.",
+      "events": "Datat e ardhshme",
+      "noEvents": "Nuk ka data të ardhshme.",
+      "announcements": "Lajmërimet",
+      "noAnnouncements": "Nuk ka lajmërime.",
+      "unread": "{n, plural, =0 {Nuk keni njoftime të palexuara} one {# njoftim i palexuar} other {# njoftime të palexuara}}",
+      "noNotifications": "Nuk ka njoftime.",
+      "courses": "Lëndët e vitit tim",
+      "semester": "Semestri {number}",
+      "elective": "me zgjedhje",
+      "credits": "{n} kredite",
+      "creditsTotal": "Gjithsej: {n} kredite",
+      "coursesEmpty": "Plani nuk ka lëndë për këtë vit studimi.",
+      "courses_noRegistration": "Nuk jeni regjistruar ende për vitin aktual, prandaj nuk shfaqen lëndë.",
+      "courses_planDraft": "Plani mësimor i kohortës suaj nuk është miratuar ende.",
+      "courses_notActive": "Lëndët shfaqen vetëm për regjistrimet aktive.",
+      "noRecord": "Nuk keni dosje studenti",
+      "noRecordHint": "Llogaria juaj nuk është e lidhur me një student. Kontaktoni Sekretarinë.",
+      "open": "Hap portalin tim"
     }
   },
   "forms": {

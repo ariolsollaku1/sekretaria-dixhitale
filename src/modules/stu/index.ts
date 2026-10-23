@@ -1,6 +1,8 @@
 // Public surface of the STU module: other code imports only from here.
 import "./permissions";
 import "./server/student-dependents";
+import "./server/audience";
+import "./server/home-widget";
 export { studentsTable } from "./server/student.table";
 export { StudentForm } from "./ui/student-form";
 export { AddEnrollment, RegisterYear, ChangeGroup } from "./ui/enrollment-manager";
@@ -24,3 +26,5 @@ export { studentListsTable } from "./server/lists.table";
 export { statRecords, type StatFilters } from "./server/stat.queries";
 export { TRANSLATED as STAT_TRANSLATED } from "./server/stat.format";
 export { pivot, isDimension, DIMENSIONS, type Dimension } from "./domain/stat-rules";
+export { getPortalHome, type PortalHome, type HomeEnrollment } from "./server/home.queries";
+export { PortalHomeView } from "./ui/portal-home";

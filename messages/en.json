@@ -80,7 +80,8 @@
       "studentStatistics": "Statistics",
       "timetable": "Class timetable",
       "myTimetable": "My timetable",
-      "documents": "Official documents"
+      "documents": "Official documents",
+      "studentHome": "Student home"
     },
     "languages": {
       "sq": "Shqip",
@@ -1770,6 +1771,43 @@
           "TRANSFER": "Transfer"
         }
       }
+    },
+    "home": {
+      "title": "Student portal",
+      "studentNumber": "Student no.",
+      "year": "Academic year {code}",
+      "studies": "My studies",
+      "fullRecord": "Full record",
+      "noOpen": "You have no active or suspended enrollment.",
+      "closed": "{n, plural, one {# past enrollment} other {# past enrollments}} in your record.",
+      "correction": "Your data is read-only here. To correct it, contact the Secretariat.",
+      "noYear": "Not registered for this year",
+      "yearN": "Year {n}",
+      "shortcuts": "Shortcuts",
+      "notifications": "Notifications",
+      "timetable": "Timetable",
+      "calendar": "Calendar",
+      "all": "All",
+      "today": "Today's classes",
+      "noClasses": "No classes today.",
+      "events": "Upcoming dates",
+      "noEvents": "No upcoming dates.",
+      "announcements": "Announcements",
+      "noAnnouncements": "No announcements.",
+      "unread": "{n, plural, =0 {No unread notifications} one {# unread notification} other {# unread notifications}}",
+      "noNotifications": "No notifications.",
+      "courses": "Courses of my year",
+      "semester": "Semester {number}",
+      "elective": "elective",
+      "credits": "{n} credits",
+      "creditsTotal": "Total: {n} credits",
+      "coursesEmpty": "The plan has no courses for this year of study.",
+      "courses_noRegistration": "You are not registered for the current year yet, so no courses are shown.",
+      "courses_planDraft": "The curriculum plan of your cohort is not approved yet.",
+      "courses_notActive": "Courses are shown for active enrollments only.",
+      "noRecord": "You have no student record",
+      "noRecordHint": "Your account is not linked to a student. Contact the Secretariat.",
+      "open": "Open my portal"
     }
   },
   "forms": {

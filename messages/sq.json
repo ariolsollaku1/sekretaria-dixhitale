@@ -1183,6 +1183,67 @@
     "rollover": {
       "label": "Përgatitni kalendarin akademik",
       "description": "Kopjoni kalendarin e vitit të kaluar dhe rregulloni datat."
+    },
+    "timetable": {
+      "title": "Orari i mësimit",
+      "mine": "Orari im",
+      "roomView": "Orari i sallës",
+      "edit": "Ndrysho orarin",
+      "noYear": "Nuk ka vit akademik të zgjedhur.",
+      "noGroups": "Nuk ka grupe aktive për këtë vit.",
+      "chooseGroup": "Zgjidhni një grup.",
+      "chooseRoom": "Shkruani emrin e sallës.",
+      "group": "Grupi",
+      "onDate": "Në datën (opsionale)",
+      "show": "Shfaq",
+      "empty": "Nuk ka orë në orar.",
+      "noRecord": "Nuk gjetëm orar për ju (llogaria nuk është lidhur me një pedagog ose një student me regjistrim aktiv).",
+      "noAssignments": "Ky grup nuk ka ende pedagogë të caktuar. Caktoni pedagogët te Ngarkesa mësimore.",
+      "add": "Shto orë",
+      "added": "Ora u shtua.",
+      "save": "Ruaj",
+      "saved": "U ruajt.",
+      "remove": "Hiq",
+      "clash": "Përplasje me orë ekzistuese: {clashes}.",
+      "clashKind": {
+        "GROUP": "i njëjti grup",
+        "LECTURER": "i njëjti pedagog",
+        "ROOM": "e njëjta sallë"
+      },
+      "kind": {
+        "LECTURE": "Leksion",
+        "SEMINAR": "Seminar",
+        "LAB": "Laborator"
+      },
+      "weekday": {
+        "1": "E hënë",
+        "2": "E martë",
+        "3": "E mërkurë",
+        "4": "E enjte",
+        "5": "E premte",
+        "6": "E shtunë",
+        "7": "E diel"
+      },
+      "form": {
+        "assignment": "Lënda dhe lloji",
+        "weekday": "Dita",
+        "start": "Fillon",
+        "end": "Mbaron",
+        "room": "Salla",
+        "validFrom": "Vlen nga",
+        "validTo": "Vlen deri"
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "weekdayRange": "Dita nuk është e vlefshme.",
+        "timeRange": "Ora nuk është e vlefshme.",
+        "endBeforeStart": "Mbarimi duhet të jetë pas fillimit.",
+        "invalidDate": "Data nuk është e vlefshme.",
+        "outsideYear": "Datat duhet të jenë brenda vitit akademik.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "generic": "Veprimi nuk u krye."
+      }
     }
   },
   "ntf": {

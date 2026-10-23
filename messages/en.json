@@ -1183,6 +1183,67 @@
     "rollover": {
       "label": "Prepare the academic calendar",
       "description": "Copy last year's calendar and adjust the dates."
+    },
+    "timetable": {
+      "title": "Class timetable",
+      "mine": "My timetable",
+      "roomView": "Room timetable",
+      "edit": "Edit the timetable",
+      "noYear": "No academic year selected.",
+      "noGroups": "There are no active groups for this year.",
+      "chooseGroup": "Choose a group.",
+      "chooseRoom": "Enter a room name.",
+      "group": "Group",
+      "onDate": "On date (optional)",
+      "show": "Show",
+      "empty": "There are no classes in the timetable.",
+      "noRecord": "We found no timetable for you (your account is not linked to a lecturer or to a student with an active registration).",
+      "noAssignments": "This group has no lecturers assigned yet. Assign them under Teaching assignments.",
+      "add": "Add class",
+      "added": "The class was added.",
+      "save": "Save",
+      "saved": "Saved.",
+      "remove": "Remove",
+      "clash": "Clashes with existing classes: {clashes}.",
+      "clashKind": {
+        "GROUP": "same group",
+        "LECTURER": "same lecturer",
+        "ROOM": "same room"
+      },
+      "kind": {
+        "LECTURE": "Lecture",
+        "SEMINAR": "Seminar",
+        "LAB": "Laboratory"
+      },
+      "weekday": {
+        "1": "Monday",
+        "2": "Tuesday",
+        "3": "Wednesday",
+        "4": "Thursday",
+        "5": "Friday",
+        "6": "Saturday",
+        "7": "Sunday"
+      },
+      "form": {
+        "assignment": "Course and kind",
+        "weekday": "Day",
+        "start": "Starts",
+        "end": "Ends",
+        "room": "Room",
+        "validFrom": "Valid from",
+        "validTo": "Valid to"
+      },
+      "errors": {
+        "required": "This field is required.",
+        "weekdayRange": "The day is not valid.",
+        "timeRange": "The time is not valid.",
+        "endBeforeStart": "The end must be after the start.",
+        "invalidDate": "The date is not valid.",
+        "outsideYear": "The dates must be inside the academic year.",
+        "tooLong": "The text is too long.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "generic": "The action failed."
+      }
     }
   },
   "ntf": {

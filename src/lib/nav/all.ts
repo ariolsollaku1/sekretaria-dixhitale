@@ -208,3 +208,32 @@ registerNav(
     order: 11,
   },
 );
+registerNav(
+  {
+    id: "forms",
+    labelKey: "forms",
+    href: "/forms",
+    icon: "clipboard",
+    permission: "plt.form.submit",
+    group: "students",
+    order: 90,
+  },
+  {
+    id: "forms-inbox",
+    labelKey: "formsInbox",
+    href: "/forms/inbox",
+    icon: "clipboard",
+    permission: "plt.form.inbox",
+    group: "administration",
+    order: 40,
+  },
+  {
+    id: "admin-forms",
+    labelKey: "adminForms",
+    href: "/admin/forms",
+    icon: "settings",
+    permission: "plt.form.manage",
+    group: "system",
+    order: 40,
+  },
+);

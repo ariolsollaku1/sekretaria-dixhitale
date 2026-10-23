@@ -146,7 +146,7 @@ model RateLimitHit { id, bucket String, at DateTime  @@index([bucket, at]) }
 
 ## 4. Tasks
 
-- [ ] **T1** — `forms.prisma` + migration (partial unique index); permissions; nav; public route open in the proxy. (AC-1, AC-12)
+- [x] **T1** — `forms.prisma` + migration (partial unique index); permissions; nav; public route open in the proxy. (AC-1, AC-12)
 - [ ] **T2** — Rate limiter; pure definition schema and answer validation with unit tests. (AC-2, AC-5, AC-6)
 - [ ] **T3** — Definition service (draft, publish, archive) and queries; integration tests. (AC-1..AC-3, AC-11)
 - [ ] **T4** — Submission service: submit (public/authenticated), state change, assign, comment, notifications, handlers; integration tests. (AC-4..AC-10)

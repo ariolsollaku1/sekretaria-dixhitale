@@ -69,7 +69,10 @@
       "students": "Studentët",
       "myStudentRecord": "Të dhënat e mia",
       "teaching": "Ngarkesa mësimore",
-      "myTeaching": "Lëndët e mia"
+      "myTeaching": "Lëndët e mia",
+      "forms": "Formularët",
+      "formsInbox": "Kutia e formularëve",
+      "adminForms": "Përcaktimi i formularëve"
     },
     "languages": {
       "sq": "Shqip",

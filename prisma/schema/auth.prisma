@@ -1,6 +1,8 @@
 // Better Auth tables (names and required fields per the library), adapted to our conventions.
 // `User` is the app's source of truth for who may sign in (auth.md); roles come in PLT-05.
 model User {
+  formsSubmitted          FormSubmission[]         @relation("FormSubmitter")
+  formsAssigned           FormSubmission[]         @relation("FormAssignee")
   id                      String                   @id @default(cuid(2))
   email                   String                   @unique
   emailVerified           Boolean                  @default(false) @map("email_verified")

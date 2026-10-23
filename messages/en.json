@@ -69,7 +69,10 @@
       "students": "Students",
       "myStudentRecord": "My student record",
       "teaching": "Teaching assignments",
-      "myTeaching": "My teaching"
+      "myTeaching": "My teaching",
+      "forms": "Forms",
+      "formsInbox": "Form inbox",
+      "adminForms": "Form definitions"
     },
     "languages": {
       "sq": "Shqip",

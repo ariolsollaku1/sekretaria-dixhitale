@@ -2,7 +2,7 @@ import "server-only";
 import { Prisma } from "@/generated/prisma/client";
 import { DomainError, type ActionContext } from "@/lib/actions";
 import { createAuditor, type Audit } from "@/lib/audit";
-import { db, withTransaction, type Tx } from "@/lib/db";
+import { withTransaction, type Tx } from "@/lib/db";
 import { attachFile } from "@/lib/files/files.service";
 import { resolveLocale } from "@/lib/i18n/config";
 import { notify } from "@/lib/notify/notify";

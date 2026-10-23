@@ -14,6 +14,7 @@ import { orgProgramsSeeder } from "./org-programs";
 import { orgUnitsSeeder } from "./org-units";
 import { devUsersSeeder } from "./dev-users";
 import { stuStudentsSeeder } from "./stu-students";
+import { pltFormsSeeder } from "./plt-forms";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -32,6 +33,7 @@ const SEEDERS: Seeder[] = [
   orgCohortsSeeder,
   stuStudentsSeeder,
   curTeachingSeeder,
+  pltFormsSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

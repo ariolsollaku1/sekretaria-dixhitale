@@ -151,3 +151,7 @@ export function validateDefinition(
     });
   return errors.length > 0 ? { ok: false, errors } : { ok: true, definition: parsed.data };
 }
+
+/** The label in the reader's locale, falling back to Albanian (the required language). */
+export const localize = (text: Localized | undefined, locale: string): string =>
+  !text ? "" : locale === "en" && text.en ? text.en : text.sq;

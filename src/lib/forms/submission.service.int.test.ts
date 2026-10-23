@@ -329,3 +329,66 @@ describe("handling (AC-7..AC-10)", () => {
     expect(kinds).toEqual(["SUBMITTED", "ASSIGNED", "ASSIGNED", "COMMENT"]);
   });
 });
+
+describe("file fields in authenticated forms", () => {
+  it("attaches the submitter's own upload and refuses someone else's or a wrong purpose", async () => {
+    const { mkdtemp, rm } = await import("node:fs/promises");
+    const { tmpdir } = await import("node:os");
+    const { join } = await import("node:path");
+    const { LocalStorage } = await import("@/lib/storage/local");
+    const { storeUpload, openFile } = await import("@/lib/files/files.service");
+    const { resetFilePurposes } = await import("@/lib/files/purposes");
+    const { registerFormPurposes } = await import("./purposes");
+    const dir = await mkdtemp(join(tmpdir(), "form-files-"));
+    const storage = new LocalStorage(dir);
+    resetFilePurposes();
+    registerFormPurposes();
+    const upload = (userId: string, purpose = "form-attachment") =>
+      storeUpload(
+        {
+          user: { id: userId },
+          purpose,
+          fileName: "dok.pdf",
+          declaredType: "application/pdf",
+          bytes: new TextEncoder().encode("%PDF-1.7 form"),
+        },
+        { storage, can: async () => true },
+      );
+    try {
+      await publishForm("intern", "AUTHENTICATED", {
+        fields: [
+          { key: "name", type: "text", label: { sq: "Emri" }, required: true },
+          { key: "doc", type: "file", label: { sq: "Dokumenti" }, required: true },
+        ],
+      });
+      actorId = "stu";
+      const mine = await upload("stu");
+      const theirs = await upload("fin");
+      expect(
+        await run((ctx) =>
+          subs.submitAuthenticated(ctx, "intern", { name: "Ana", doc: theirs.id }),
+        ),
+      ).toMatchObject({ ok: false, error: { code: "VALIDATION" } });
+      expect(
+        await run((ctx) =>
+          subs.submitAuthenticated(ctx, "intern", { name: "Ana", doc: "x".repeat(10) }),
+        ),
+      ).toMatchObject({ ok: false });
+      const r = ok(
+        await run((ctx) => subs.submitAuthenticated(ctx, "intern", { name: "Ana", doc: mine.id })),
+      );
+      const file = await db.storedFile.findUniqueOrThrow({ where: { id: mine.id } });
+      expect(file).toMatchObject({
+        status: "ATTACHED",
+        entityType: "FormSubmission",
+        entityId: r.submissionId,
+      });
+      // the submitter and the handlers can read it; another staff role cannot
+      expect(await openFile({ id: "stu" }, mine.id, { storage })).not.toBeNull();
+      expect(await openFile({ id: "sec" }, mine.id, { storage })).not.toBeNull();
+      expect(await openFile({ id: "fin" }, mine.id, { storage })).toBeNull();
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
+  });
+});

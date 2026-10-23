@@ -144,14 +144,25 @@ model RateLimitHit { id, bucket String, at DateTime  @@index([bucket, at]) }
 - A hidden field (condition false) is not required and its answer is dropped.
 - A handler registered under a key no module provides: publishing is allowed, approving fails visibly (the transition is refused) until a module registers it.
 
+**Implementation notes:**
+- Everything lives in `src/lib/forms` (platform feature, not a module), UI in
+  `src/components/forms`; the public route is `src/app/(public)/f/[key]` (the proxy lets `/f/` through).
+- A published definition is frozen by a database trigger; one PUBLISHED version per key by a partial unique index.
+- The rate limiter (`src/lib/ratelimit`) stores a hash of the address per bucket; the hourly job
+  `plt.ratelimit.prune` removes old hits.
+- File fields (authenticated forms) use the PLT-08 purpose `form-attachment`, readable by the
+  submitter and the form's handlers; file purposes of lib features register through `src/lib/files/all.ts`.
+- Notification type `plt.form-status`; handlers are registered with `registerFormHandler(key, …)`.
+- Dev seed: the public form `kontakt-demo` (handled by the Secretariat).
+
 ## 4. Tasks
 
 - [x] **T1** — `forms.prisma` + migration (partial unique index); permissions; nav; public route open in the proxy. (AC-1, AC-12)
 - [x] **T2** — Rate limiter; pure definition schema and answer validation with unit tests. (AC-2, AC-5, AC-6)
 - [x] **T3** — Definition service (draft, publish, archive) and queries; integration tests. (AC-1..AC-3, AC-11)
 - [x] **T4** — Submission service: submit (public/authenticated), state change, assign, comment, notifications, handlers; integration tests. (AC-4..AC-10)
-- [ ] **T5** — Renderer, public and authenticated pages, inbox table and detail, admin editor with preview, i18n. (AC-4, AC-7, AC-11)
-- [ ] **T6** — E2E, example form (seed), docs. (all)
+- [x] **T5** — Renderer, public and authenticated pages, inbox table and detail, admin editor with preview, i18n. (AC-4, AC-7, AC-11)
+- [x] **T6** — E2E, example form (seed), docs. (all)
 
 ## 5. Test plan
 
@@ -167,9 +178,9 @@ model RateLimitHit { id, bucket String, at DateTime  @@index([bucket, at]) }
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, ADR-0009 consequences, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, ADR-0009 consequences, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

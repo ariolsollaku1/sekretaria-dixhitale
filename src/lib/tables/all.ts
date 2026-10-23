@@ -9,3 +9,4 @@ import "@/modules/ntf";
 import "@/modules/hr";
 import "@/modules/stu";
 import "@/lib/audit/table";
+import "@/lib/forms/table";

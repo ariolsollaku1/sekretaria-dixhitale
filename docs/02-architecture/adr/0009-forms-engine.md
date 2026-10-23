@@ -37,3 +37,13 @@ Build one **forms engine** (PLT-15):
 - One hand-coded page per form — ~20 forms × (UI + validation + inbox + workflow) of duplicated work.
 - External form tools (Google/Microsoft Forms) — data leaves our control (SRC-150) and doesn't
   integrate with records.
+
+## Implementation (PLT-15)
+
+- One published version per key (partial unique index); published and archived versions are frozen
+  by a trigger — a change is a new draft version.
+- Public submissions: hidden honeypot (a filled one is answered like a success and stored nowhere) and a
+  database-backed rate limit of 5 per address and form per 10 minutes; no CAPTCHA yet (Q-37). The
+  address is never stored with the answers.
+- Handlers are registered in code by key (`registerFormHandler`) and run inside the transaction of
+  the approving state change; a missing or failing handler rolls it back.

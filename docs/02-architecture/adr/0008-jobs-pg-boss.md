@@ -24,3 +24,14 @@ We need scheduled and asynchronous work: payment reminders two weeks before inst
 
 - BullMQ + Redis — extra service for no gain at this scale.
 - OS cron calling API routes — no retries/visibility.
+
+## Implementation notes (PLT-12)
+
+- The worker runs **embedded** in the Next.js server process (started from `instrumentation.ts`) rather
+  than as a separate `node worker.js`: bundling the TypeScript sources, Prisma client and path aliases
+  into a second entry point would add build machinery for no benefit at this scale. `JOBS_WORKER=off`
+  makes a process publisher-only, so a dedicated worker container can be introduced later without
+  code changes (it would run the same app with the worker enabled and no traffic routed to it).
+- Queues use the `exclusive` policy and every enqueue needs an idempotency key
+  (`reminder:<installmentId>:<dueDate>` style), as this ADR asked.
+- pg-boss 12 manages its own `pgboss` schema inside the application database.

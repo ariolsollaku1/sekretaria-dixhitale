@@ -56,7 +56,8 @@
       "departments": "Departments",
       "programs": "Programs",
       "courses": "Courses",
-      "courseCategories": "Course categories"
+      "courseCategories": "Course categories",
+      "jobs": "Jobs"
     },
     "languages": {
       "sq": "Shqip",
@@ -575,6 +576,40 @@
       "unknownCategory": "No active category has this code.",
       "unknownDepartment": "No active department has this code.",
       "departmentNotPermitted": "You may not write in this department."
+    }
+  },
+  "jobs": {
+    "title": "Background jobs",
+    "queues": "Queues",
+    "recent": "Recent jobs",
+    "all": "All",
+    "filter": "Filter",
+    "empty": "No jobs match.",
+    "retry": "Retry",
+    "retried": "The job was queued again.",
+    "notFailed": "Only failed jobs can be retried.",
+    "retryFailed": "The action failed.",
+    "unavailable": "The job system is unavailable",
+    "unavailableHint": "Check the database connection and the server logs.",
+    "columns": {
+      "queue": "Queue",
+      "schedule": "Schedule (cron)",
+      "waiting": "Waiting",
+      "active": "Running",
+      "failed": "Failed",
+      "state": "State",
+      "attempts": "Attempts",
+      "created": "Created",
+      "started": "Started",
+      "finished": "Finished"
+    },
+    "states": {
+      "created": "Waiting",
+      "retry": "To retry",
+      "active": "Running",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "failed": "Failed"
     }
   }
 }

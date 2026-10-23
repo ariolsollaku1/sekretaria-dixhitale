@@ -56,7 +56,8 @@
       "departments": "Departamentet",
       "programs": "Programet",
       "courses": "Lëndët",
-      "courseCategories": "Kategoritë e lëndëve"
+      "courseCategories": "Kategoritë e lëndëve",
+      "jobs": "Punët në sfond"
     },
     "languages": {
       "sq": "Shqip",
@@ -575,6 +576,40 @@
       "unknownCategory": "Kategoria me këtë kod nuk ekziston ose është joaktive.",
       "unknownDepartment": "Departamenti me këtë kod nuk ekziston ose është joaktiv.",
       "departmentNotPermitted": "Nuk keni leje për këtë departament."
+    }
+  },
+  "jobs": {
+    "title": "Punët në sfond",
+    "queues": "Radhët",
+    "recent": "Punët e fundit",
+    "all": "Të gjitha",
+    "filter": "Filtro",
+    "empty": "Asnjë punë nuk përputhet.",
+    "retry": "Provo përsëri",
+    "retried": "Puna u ridërgua në radhë.",
+    "notFailed": "Vetëm punët e dështuara mund të provohen përsëri.",
+    "retryFailed": "Veprimi nuk u krye.",
+    "unavailable": "Sistemi i punëve nuk është i disponueshëm",
+    "unavailableHint": "Kontrolloni lidhjen me bazën e të dhënave dhe regjistrat e serverit.",
+    "columns": {
+      "queue": "Radha",
+      "schedule": "Orari (cron)",
+      "waiting": "Në pritje",
+      "active": "Në ekzekutim",
+      "failed": "Të dështuara",
+      "state": "Gjendja",
+      "attempts": "Tentativa",
+      "created": "Krijuar",
+      "started": "Nisur",
+      "finished": "Përfunduar"
+    },
+    "states": {
+      "created": "Në pritje",
+      "retry": "Për t’u provuar",
+      "active": "Në ekzekutim",
+      "completed": "Përfunduar",
+      "cancelled": "Anuluar",
+      "failed": "Dështuar"
     }
   }
 }

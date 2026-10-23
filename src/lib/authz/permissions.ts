@@ -10,6 +10,8 @@ export const PLATFORM_PERMISSIONS = [
   "plt.file.upload",
   "plt.file.read",
   "plt.view.save",
+  "plt.jobs.read",
+  "plt.jobs.manage",
 ] as const;
 
 registerPermissions("iam", {
@@ -23,9 +25,18 @@ registerPermissions("plt", {
     "plt.file.upload",
     "plt.file.read",
     "plt.view.save",
+    "plt.jobs.read",
+    "plt.jobs.manage",
   ],
   grants: {
-    sysadmin: ["plt.audit.read", "plt.settings.write", "plt.file.upload", "plt.file.read"],
+    sysadmin: [
+      "plt.audit.read",
+      "plt.settings.write",
+      "plt.file.upload",
+      "plt.file.read",
+      "plt.jobs.read",
+      "plt.jobs.manage",
+    ],
   },
 });
 // PLT-10: saving a personal table filter is not sensitive, so every role may.

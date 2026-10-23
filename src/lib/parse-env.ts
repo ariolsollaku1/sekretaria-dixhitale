@@ -6,6 +6,8 @@ const schema = z.object({
   DATABASE_URL: z.string().startsWith("postgres"),
   /** Root of the file volume (`/data/files` in Docker). */
   FILES_DIR: z.string().min(1).default("./.data/files"),
+  /** "embedded": this process also runs the job worker; "off": it only enqueues (PLT-12). */
+  JOBS_WORKER: z.enum(["embedded", "off"]).default("embedded"),
   DEFAULT_LOCALE: z.enum(["sq", "en"]).default("sq"),
   // Auth (PLT-04)
   KEYCLOAK_ISSUER: z.url(),

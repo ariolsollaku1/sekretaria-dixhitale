@@ -34,7 +34,7 @@ are both `Person`s (domain model); this feature introduces `Person` and `Staff`.
 |---|---|
 | AC-1 | THE SYSTEM SHALL store a `Person` (first name, last name, optional father's name, gender `FEMALE`/`MALE`, birth date, optional unique national ID number, phone, e-mail, address) and at most one `Staff` per person with `kind` (`ACADEMIC`/`ADMINISTRATIVE`), `category` (`PAE`/`PAK`/`VOLUNTEER`), optional degree and title (text ≤ 100), optional active department, `retired`, optional primary employer, `contractStart`, optional `contractEnd`, and `active`. |
 | AC-2 | IF a required value is missing or invalid (names, gender, birth date in the future or before 1900, malformed e-mail, `contractEnd` before `contractStart`, text too long), THEN THE SYSTEM SHALL refuse with field errors. |
-| AC-3 | IF the national ID number or e-mail is already used by another person, THEN THE SYSTEM SHALL refuse with a field error and write nothing. |
+| AC-3 | IF the national ID number or e-mail belongs to a person who already has a staff record, or the two belong to different persons, THEN THE SYSTEM SHALL refuse with a field error and write nothing; IF it belongs to a person without a staff record (e.g. a student), THE SYSTEM SHALL attach the staff record to that person and leave their personal data unchanged. |
 | AC-4 | THE SYSTEM SHALL keep `primaryEmployer` only for category `PAK` (cleared otherwise) and require the department, when given, to be active. |
 | AC-5 | WHEN HR creates a staff member and a user account with the same e-mail exists without a person, THE SYSTEM SHALL link it (`User.personId`), so the member can see their own record. |
 | AC-6 | WHEN HR changes a record, THE SYSTEM SHALL audit before/after with national ID masked, and personal fields (birth date, phone, address) masked too. |
@@ -119,7 +119,7 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 
 ### Edge cases & errors
 
-- A person already exists (e.g. from STU-01, a lecturer who studies): creation by national ID or e-mail of an existing `Person` without staff attaches the staff record to it instead of refusing (a person with staff already → conflict).
+- A person already exists (e.g. from STU-01, a lecturer who studies): creation with the national ID or e-mail of an existing `Person` without staff attaches the staff record to it (their personal data stays as it is); a person with staff already → conflict.
 - A department-scoped reader opening a staff member outside their units gets 404.
 - Deactivated staff stay in lists (status filter) and keep their history.
 - Import numbers dates as `YYYY-MM-DD` or Excel dates.
@@ -128,7 +128,7 @@ e-mail stored lower-case (app) with a unique index on `lower(email)`.
 
 - [x] **T1** — `hr.prisma` + migration (Person, Staff, FK from users); permissions; nav. (AC-1, AC-13)
 - [x] **T2** — Extract shared import helpers; schemas and import validation with unit tests. (AC-2, AC-4, AC-12)
-- [ ] **T3** — Service and queries (scope, masking, account link); integration tests. (AC-3..AC-10)
+- [x] **T3** — Service and queries (scope, masking, account link); integration tests. (AC-3..AC-10)
 - [ ] **T4** — Import preview/commit; tests. (AC-12)
 - [ ] **T5** — Table, pages, forms, import UI, my record, i18n. (AC-8..AC-12)
 - [ ] **T6** — E2E, seed, docs. (all)

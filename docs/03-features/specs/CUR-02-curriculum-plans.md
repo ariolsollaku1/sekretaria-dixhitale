@@ -92,7 +92,7 @@ Migration: range checks; trigger `plan_courses_frozen` (insert/update/delete onl
 | Permission | Granted to |
 |---|---|
 | `cur.plan.read` | sysadmin, secretary, student_affairs, hr, quality, head_of_department, program_coordinator |
-| `cur.plan.view` | lecturer, student |
+| `cur.plan.view` | everyone who may look at plans: the `read` roles plus lecturer and student (lecturer and student see approved plans only; `read` adds drafts and the archive) |
 | `cur.plan.write` | sysadmin, head_of_department, program_coordinator |
 
 Scope comes from the assignment; the target resolver `plan` maps a plan to its program.
@@ -126,7 +126,7 @@ Scope comes from the assignment; the target resolver `plan` maps a plan to its p
 
 ## 4. Tasks
 
-- [ ] **T1** — `curriculum.prisma` + migration (checks, freeze triggers); permissions; target resolver; nav. (AC-1, AC-4, AC-11)
+- [x] **T1** — `curriculum.prisma` + migration (checks, freeze triggers); permissions; target resolver; nav. (AC-1, AC-4, AC-11)
 - [ ] **T2** — Pure plan rules and schemas with unit tests. (AC-2, AC-3, AC-5)
 - [ ] **T3** — Service and queries (create/copy, courses, approve, archive, delete) with integration tests incl. DB freeze. (AC-3, AC-4, AC-6..AC-8, AC-12)
 - [ ] **T4** — Dependents registrations and plan registry for ORG-04; tests. (AC-8, AC-9)

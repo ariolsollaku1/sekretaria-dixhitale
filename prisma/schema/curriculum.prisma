@@ -1,0 +1,56 @@
+enum PlanStatus {
+  DRAFT
+  APPROVED
+  ARCHIVED
+
+  @@map("plan_status")
+}
+
+/// A version of a program's curriculum plan (CUR-02). Approved plans are frozen (trigger).
+model CurriculumPlan {
+  id                      String       @id @default(cuid(2))
+  programId               String       @map("program_id")
+  /// Increments per program.
+  version                 Int
+  validFromAcademicYearId String       @map("valid_from_academic_year_id")
+  status                  PlanStatus   @default(DRAFT)
+  notes                   String?
+  approvedAt              DateTime?    @map("approved_at") @db.Timestamptz(3)
+  approvedById            String?      @map("approved_by_id")
+  archivedAt              DateTime?    @map("archived_at") @db.Timestamptz(3)
+  createdAt               DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById             String?      @map("created_by_id")
+  updatedById             String?      @map("updated_by_id")
+  program                 StudyProgram @relation(fields: [programId], references: [id])
+  validFrom               AcademicYear @relation(fields: [validFromAcademicYearId], references: [id])
+  courses                 PlanCourse[]
+
+  @@unique([programId, version])
+  @@index([programId, status])
+  @@map("curriculum_plans")
+}
+
+/// A course placed in a plan, with the figures that apply to this plan (copied from the catalog when added).
+model PlanCourse {
+  id           String          @id @default(cuid(2))
+  planId       String          @map("plan_id")
+  courseId     String          @map("course_id")
+  yearOfStudy  Int             @map("year_of_study")
+  semester     Int
+  credits      Int
+  categoryId   String?         @map("category_id")
+  hoursLecture Int             @default(0) @map("hours_lecture")
+  hoursSeminar Int             @default(0) @map("hours_seminar")
+  hoursLab     Int             @default(0) @map("hours_lab")
+  isElective   Boolean         @default(false) @map("is_elective")
+  createdAt    DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  plan         CurriculumPlan  @relation(fields: [planId], references: [id], onDelete: Cascade)
+  course       Course          @relation(fields: [courseId], references: [id])
+  category     CourseCategory? @relation(fields: [categoryId], references: [id])
+
+  @@unique([planId, courseId])
+  @@index([planId, yearOfStudy, semester])
+  @@map("plan_courses")
+}

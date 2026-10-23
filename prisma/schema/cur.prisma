@@ -2,15 +2,16 @@
 
 /// Administrator-maintained list (Q-28): nothing about categories is hard-coded.
 model CourseCategory {
-  id          String   @id @default(cuid(2))
-  code        String   @unique
-  nameSq      String   @map("name_sq")
-  nameEn      String   @map("name_en")
-  active      Boolean  @default(true)
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById String?  @map("created_by_id")
-  updatedById String?  @map("updated_by_id")
+  planCourses PlanCourse[]
+  id          String       @id @default(cuid(2))
+  code        String       @unique
+  nameSq      String       @map("name_sq")
+  nameEn      String       @map("name_en")
+  active      Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById String?      @map("created_by_id")
+  updatedById String?      @map("updated_by_id")
   courses     Course[]
 
   @@map("course_categories")
@@ -18,6 +19,7 @@ model CourseCategory {
 
 /// A course in the catalog (CUR-01). Never deleted, only deactivated; plans copy the defaults.
 model Course {
+  planCourses    PlanCourse[]
   id             String          @id @default(cuid(2))
   code           String          @unique
   name           String

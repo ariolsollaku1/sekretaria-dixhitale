@@ -84,6 +84,15 @@ registerNav(
     order: 10,
   },
   {
+    id: "plans",
+    labelKey: "plans",
+    href: "/cur/plans",
+    icon: "clipboard",
+    permission: "cur.plan.view",
+    group: "teaching",
+    order: 12,
+  },
+  {
     id: "course-categories",
     labelKey: "courseCategories",
     href: "/cur/categories",

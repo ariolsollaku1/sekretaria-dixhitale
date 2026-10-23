@@ -96,7 +96,7 @@ erDiagram
 | `Semester` | `academicYearId`, `number` (1/2), dates |
 | `Faculty` | `code` (unique, upper case), `name`, `nameEn?`, `active` |
 | `Department` | `facultyId` (fixed), `code` (unique, upper case), `name`, `nameEn?`, `active`; `headStaffId?` arrives with HR-01 (until then the head is derived from `UserRole`) |
-| `StudyProgram` | `departmentId`, `code`, `name`, `cycle` (FIRST/SECOND), `durationYears` (1/2/3), `totalCredits`, `coordinatorStaffId?`, `active` |
+| `StudyProgram` | `departmentId` (fixed), `code` (unique), `name`, `nameEn?`, `cycle` (FIRST/SECOND), `subtype?` (Master only, from settings), `durationYears` (1/2/3, allowed values per cycle from settings), `totalCredits` (1–600), `active`; `coordinatorStaffId?` arrives with HR-01 (until then derived from `UserRole`) |
 | `Cohort` | `programId`, `startAcademicYearId`, `curriculumPlanId`, `name` |
 | `StudentGroup` | `cohortId`, `academicYearId`, `yearOfStudy`, `name`, `capacity?` |
 

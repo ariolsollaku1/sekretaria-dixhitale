@@ -20,6 +20,7 @@ import {
   reactivateDepartmentAction,
   reactivateFacultyAction,
 } from "../server/unit.actions";
+import { deactivateProgramAction, reactivateProgramAction } from "../server/program.actions";
 
 /** AC-5: deactivate / reactivate a faculty or department with a mandatory reason. */
 export function UnitStatusActions({
@@ -27,7 +28,7 @@ export function UnitStatusActions({
   id,
   active,
 }: {
-  kind: "faculty" | "department";
+  kind: "faculty" | "department" | "program";
   id: string;
   active: boolean;
 }) {
@@ -39,14 +40,12 @@ export function UnitStatusActions({
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
-  const act =
-    kind === "faculty"
-      ? active
-        ? deactivateFacultyAction
-        : reactivateFacultyAction
-      : active
-        ? deactivateDepartmentAction
-        : reactivateDepartmentAction;
+  const actions = {
+    faculty: { off: deactivateFacultyAction, on: reactivateFacultyAction },
+    department: { off: deactivateDepartmentAction, on: reactivateDepartmentAction },
+    program: { off: deactivateProgramAction, on: reactivateProgramAction },
+  }[kind];
+  const act = active ? actions.off : actions.on;
   const key = active ? "deactivate" : "reactivate";
 
   async function submit() {
@@ -63,6 +62,14 @@ export function UnitStatusActions({
         setError(t("errors.reasonRequired"));
       } else {
         const [code, count] = result.error.message.split(":");
+        if (code === "HAS_DEPENDENTS") {
+          const names = (count ?? "")
+            .split(",")
+            .map((p) => p.split("="))
+            .map(([key, n]) => `${t.has(key as never) ? t(key as never) : key} (${n})`);
+          toast.error(t("errors.HAS_DEPENDENTS", { names: names.join(", ") }));
+          return;
+        }
         const known = code && t.has(`errors.${code}` as never);
         toast.error(
           known

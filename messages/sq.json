@@ -53,7 +53,8 @@
       "files": "Skedarët",
       "years": "Vitet akademike",
       "faculties": "Fakultetet",
-      "departments": "Departamentet"
+      "departments": "Departamentet",
+      "programs": "Programet"
     },
     "languages": {
       "sq": "Shqip",
@@ -393,7 +394,16 @@
       "ALREADY_INACTIVE": "Njësia është tashmë joaktive.",
       "ALREADY_ACTIVE": "Njësia është tashmë aktive.",
       "HAS_ACTIVE_DEPARTMENTS": "Fakulteti ka ende {count} departamente aktive. Çaktivizojini së pari.",
-      "FACULTY_INACTIVE": "Fakulteti i departamentit është joaktiv. Riaktivizojeni së pari fakultetin."
+      "FACULTY_INACTIVE": "Fakulteti i departamentit është joaktiv. Riaktivizojeni së pari fakultetin.",
+      "invalidProgramCode": "Kodi duhet të ketë 2–20 karaktere (A–Z, 0–9, - ose _).",
+      "durationNotAllowed": "Kjo kohëzgjatje nuk lejohet për këtë cikël.",
+      "subtypeOnlyMaster": "Lloji vlen vetëm për ciklin e dytë (Master).",
+      "subtypeUnknown": "Ky lloj nuk është i përcaktuar.",
+      "creditsRange": "Kreditet duhet të jenë një numër nga 1 në 600.",
+      "departmentNotFound": "Departamenti nuk u gjet.",
+      "departmentInactive": "Departamenti (ose fakulteti i tij) është joaktiv.",
+      "DEPARTMENT_INACTIVE": "Departamenti i programit është joaktiv. Riaktivizojeni së pari.",
+      "HAS_DEPENDENTS": "Programi ka ende të dhëna aktive që varen prej tij: {names}."
     },
     "rollover": {
       "title": "Fillimi i vitit të ri akademik",
@@ -430,7 +440,27 @@
       "departmentsOf": "Departamentet e fakultetit",
       "noDepartments": "Ky fakultet nuk ka ende departamente.",
       "newDepartment": "Shto departament",
-      "inactiveNote": "Kjo njësi është joaktive."
+      "inactiveNote": "Kjo njësi është joaktive.",
+      "department": "Departamenti",
+      "departmentCode": "Kodi i departamentit"
+    },
+    "program": {
+      "cycle": "Cikli",
+      "cycles": {
+        "FIRST": "Cikli i parë (Bachelor)",
+        "SECOND": "Cikli i dytë (Master)"
+      },
+      "subtype": "Lloji i Master-it",
+      "noSubtype": "Pa lloj të caktuar",
+      "duration": "Kohëzgjatja",
+      "years": "{count, plural, one {# vit} other {# vite}}",
+      "credits": "Kreditet totale",
+      "codeHint": "2–20 karaktere: shkronja A–Z, shifra, vizë ose nënvizë.",
+      "create": "Program i ri",
+      "title": "Programet e studimit",
+      "coordinators": "Koordinatorët e programit",
+      "noCoordinators": "Asnjë koordinator nuk është caktuar. Caktojeni duke i dhënë një përdoruesi rolin “Koordinator programi” me fushëveprim këtë program.",
+      "department": "Departamenti"
     }
   }
 }

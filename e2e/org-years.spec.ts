@@ -57,6 +57,8 @@ test("AC-1/2/3: a sysadmin creates a year with semesters; invalid dates show mes
 }) => {
   await signInAs(page, "sysadmin@dev.logos.test");
   await page.goto("/org/years/new");
+  // Controlled inputs: filling before React hydrates would be overwritten, so wait for the page to settle.
+  await page.waitForLoadState("networkidle");
 
   const fill = async (label: string, index: number, value: string) =>
     page.getByLabel(label).nth(index).fill(value);

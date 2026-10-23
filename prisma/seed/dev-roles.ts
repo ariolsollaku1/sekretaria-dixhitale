@@ -75,6 +75,28 @@ export const devRolesSeeder: Seeder = {
           });
         continue;
       }
+      if (role === "program_coordinator") {
+        const program = await db.studyProgram.findUnique({ where: { code: "DEMO-BSC" } });
+        if (!program) continue;
+        const has = await db.userRole.findFirst({
+          where: {
+            userId: user.id,
+            role: "program_coordinator",
+            scopeType: "PROGRAM",
+            scopeId: program.id,
+          },
+        });
+        if (!has)
+          await db.userRole.create({
+            data: {
+              userId: user.id,
+              role: "program_coordinator",
+              scopeType: "PROGRAM",
+              scopeId: program.id,
+            },
+          });
+        continue;
+      }
       if (!scopeType) continue;
       const exists = await db.userRole.findFirst({
         where: { userId: user.id, role: role as never, scopeType },

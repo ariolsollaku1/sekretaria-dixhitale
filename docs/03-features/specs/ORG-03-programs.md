@@ -119,15 +119,33 @@ Check constraints: `duration_years BETWEEN 1 AND 3`, `total_credits BETWEEN 1 AN
   re-validated only when edited.
 - A subtype removed from the setting stays on old programs; it cannot be chosen for new ones.
 
+**Implementation notes:**
+- Durations and Master subtypes are `SystemSetting` rows (`org.programDurations`,
+  `org.programSubtypes`), seeded with the brief's defaults; a missing or malformed setting falls
+  back to the defaults. There is no settings screen yet (a generic one is later); until then they are
+  changed in the database or through `setSetting`.
+- `registerProgramDependent({ id, labelKey, countActive })` is the hook cohorts (ORG-04) and plans
+  (CUR-02) will use; a blocking dependent travels in the error message as
+  `HAS_DEPENDENTS:<labelKey>=<count>,…` so the UI can name it.
+- The program form limits the duration list to the cycle's allowed values and shows the subtype
+  only for the second cycle; the server re-validates everything.
+- `UnitStatusActions` now also serves programs; the programs table filters by department *code*.
+- `PROGRAM` scope resolver completes the hierarchy: `expandTargetScope({ programId })` now yields
+  the department and faculty, which the integration test proves for faculty- and department-scoped
+  roles.
+- Demo seed: `DEMO-BSC` (first cycle, 3 years, 180 credits) and `DEMO-MSC` (second cycle, 2 years,
+  professional, 120 credits); numbers only illustrate the rules. The dev coordinator is scoped to
+  `DEMO-BSC`.
+
 ## 4. Tasks
 
 - [x] **T1** — Model + migration with checks; permissions; default settings seeded. (AC-1, AC-2, AC-11)
 - [x] **T2** — Pure program rules and schemas (config-driven) with unit tests. (AC-2..AC-4)
 - [x] **T3** — Dependents registry; services; queries; integration tests. (AC-5..AC-7, AC-9)
 - [x] **T4** — `PROGRAM` scope resolver and role-editor integration test. (AC-8)
-- [ ] **T5** — Table, list/new/detail pages, status dialog. (AC-10)
-- [ ] **T6** — Nav, i18n (`org.program.*`), demo seed and dev coordinator role. (AC-12)
-- [ ] **T7** — E2E and docs. (all)
+- [x] **T5** — Table, list/new/detail pages, status dialog. (AC-10)
+- [x] **T6** — Nav, i18n (`org.program.*`), demo seed and dev coordinator role. (AC-12)
+- [x] **T7** — E2E and docs. (all)
 
 ## 5. Test plan
 
@@ -145,9 +163,9 @@ Check constraints: `duration_years BETWEEN 1 AND 3`, `total_credits BETWEEN 1 AN
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief, auth.md scope resolvers)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief, auth.md scope resolvers)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

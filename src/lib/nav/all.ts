@@ -60,3 +60,12 @@ registerNav(
     order: 21,
   },
 );
+registerNav({
+  id: "programs",
+  labelKey: "programs",
+  href: "/org/programs",
+  icon: "graduation",
+  permission: "org.program.read",
+  group: "administration",
+  order: 22,
+});

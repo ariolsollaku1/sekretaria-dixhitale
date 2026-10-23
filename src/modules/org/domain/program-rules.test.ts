@@ -147,7 +147,13 @@ describe("schemas", () => {
     expect(programSchema.safeParse({ ...ok, totalCredits: "12.5" }).success).toBe(false);
   });
   it("update has no department", () => {
-    const { departmentId: _d, ...rest } = ok;
+    const rest = {
+      cycle: ok.cycle,
+      code: ok.code,
+      name: ok.name,
+      durationYears: ok.durationYears,
+      totalCredits: ok.totalCredits,
+    };
     expect(
       Object.keys(updateProgramSchema.parse({ ...rest, programId: "p1", departmentId: "x" })),
     ).not.toContain("departmentId");

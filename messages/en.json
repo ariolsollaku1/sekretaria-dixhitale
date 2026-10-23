@@ -53,7 +53,8 @@
       "files": "Files",
       "years": "Academic years",
       "faculties": "Faculties",
-      "departments": "Departments"
+      "departments": "Departments",
+      "programs": "Programs"
     },
     "languages": {
       "sq": "Shqip",
@@ -393,7 +394,16 @@
       "ALREADY_INACTIVE": "The unit is already inactive.",
       "ALREADY_ACTIVE": "The unit is already active.",
       "HAS_ACTIVE_DEPARTMENTS": "The faculty still has {count} active departments. Deactivate them first.",
-      "FACULTY_INACTIVE": "The department's faculty is inactive. Reactivate the faculty first."
+      "FACULTY_INACTIVE": "The department's faculty is inactive. Reactivate the faculty first.",
+      "invalidProgramCode": "The code needs 2–20 characters (A–Z, 0–9, - or _).",
+      "durationNotAllowed": "This duration is not allowed for this cycle.",
+      "subtypeOnlyMaster": "The type applies only to the second cycle (Master).",
+      "subtypeUnknown": "This type is not defined.",
+      "creditsRange": "Credits must be a number from 1 to 600.",
+      "departmentNotFound": "The department was not found.",
+      "departmentInactive": "The department (or its faculty) is inactive.",
+      "DEPARTMENT_INACTIVE": "The program's department is inactive. Reactivate it first.",
+      "HAS_DEPENDENTS": "The program still has active records that depend on it: {names}."
     },
     "rollover": {
       "title": "Start a new academic year",
@@ -430,7 +440,27 @@
       "departmentsOf": "Departments of this faculty",
       "noDepartments": "This faculty has no departments yet.",
       "newDepartment": "Add department",
-      "inactiveNote": "This unit is inactive."
+      "inactiveNote": "This unit is inactive.",
+      "department": "Department",
+      "departmentCode": "Department code"
+    },
+    "program": {
+      "cycle": "Cycle",
+      "cycles": {
+        "FIRST": "First cycle (Bachelor)",
+        "SECOND": "Second cycle (Master)"
+      },
+      "subtype": "Master type",
+      "noSubtype": "No type set",
+      "duration": "Duration",
+      "years": "{count, plural, one {# year} other {# years}}",
+      "credits": "Total credits",
+      "codeHint": "2–20 characters: letters A–Z, digits, hyphen or underscore.",
+      "create": "New program",
+      "title": "Study programs",
+      "coordinators": "Program coordinators",
+      "noCoordinators": "No coordinator is assigned. Assign one by giving a user the “Program coordinator” role scoped to this program.",
+      "department": "Department"
     }
   }
 }

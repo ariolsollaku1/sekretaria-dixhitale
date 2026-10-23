@@ -63,3 +63,30 @@ it("seeds neutral demo faculties and departments and scopes the dev head of depa
     { role: "head_of_department", scopeType: "DEPARTMENT", scopeId: a1.id },
   ]);
 });
+
+it("seeds demo programs and scopes the dev program coordinator to one (ORG-03 AC-12)", async () => {
+  await runSeeds(db, "dev");
+  await runSeeds(db, "dev");
+  expect(
+    await db.studyProgram.findMany({
+      orderBy: { code: "asc" },
+      select: { code: true, cycle: true },
+    }),
+  ).toEqual([
+    { code: "DEMO-BSC", cycle: "FIRST" },
+    { code: "DEMO-MSC", cycle: "SECOND" },
+  ]);
+  const pc = await db.user.findUniqueOrThrow({
+    where: { email: "program-coordinator@dev.logos.test" },
+    include: { roles: true },
+  });
+  const bsc = await db.studyProgram.findUniqueOrThrow({ where: { code: "DEMO-BSC" } });
+  expect(pc.roles).toMatchObject([
+    { role: "program_coordinator", scopeType: "PROGRAM", scopeId: bsc.id },
+  ]);
+  const settings = await db.systemSetting.findMany({
+    where: { key: { startsWith: "org." } },
+    orderBy: { key: "asc" },
+  });
+  expect(settings.map((s) => s.key)).toEqual(["org.programDurations", "org.programSubtypes"]);
+});

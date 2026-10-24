@@ -13,6 +13,8 @@ import {
   displayMoney,
   getPlan,
   getPlanFinance,
+  listPlanScholarships,
+  VoidScholarshipButton,
 } from "@/modules/fin";
 
 const STATUS_TONE = {
@@ -29,14 +31,18 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
   if (!(await can(user, "fin.plan.read"))) return <ForbiddenView />;
   const plan = await getPlan(user, id);
   if (!plan) notFound();
-  const [t, tk, tp, mayWrite, mayReadPay, mayWritePay] = await Promise.all([
-    getTranslations("fin.plan"),
-    getTranslations("fin.kind"),
-    getTranslations("fin.payment"),
-    can(user, "fin.plan.write"),
-    can(user, "fin.payment.read"),
-    can(user, "fin.payment.write"),
-  ]);
+  const [t, tk, tp, ts, mayWrite, mayReadPay, mayWritePay, mayVoid, scholarships] =
+    await Promise.all([
+      getTranslations("fin.plan"),
+      getTranslations("fin.kind"),
+      getTranslations("fin.payment"),
+      getTranslations("fin.scholarship"),
+      can(user, "fin.plan.write"),
+      can(user, "fin.payment.read"),
+      can(user, "fin.payment.write"),
+      can(user, "fin.scholarship.write"),
+      can(user, "fin.scholarship.read").then((ok) => (ok ? listPlanScholarships(user, id) : [])),
+    ]);
   const fin = mayReadPay ? await getPlanFinance(user, id) : null;
   const editable = mayWrite && plan.yearStatus !== "CLOSED";
   return (
@@ -189,7 +195,11 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
                   {i.status === "CANCELLED" ? (
                     <>
                       <StatusBadge tone="neutral" label={t("cancelled")} />
-                      {i.cancelReason && <span className="ml-2 text-[13px]">{i.cancelReason}</span>}
+                      {i.cancelReason && (
+                        <span className="ml-2 text-[13px]">
+                          {i.cancelReason === "SCHOLARSHIP" ? t("scholarship") : i.cancelReason}
+                        </span>
+                      )}
                     </>
                   ) : fin?.installments[i.id] ? (
                     <StatusBadge
@@ -222,6 +232,34 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
         </table>
       </div>
       {editable && <AddInstallment planId={plan.id} />}
+      {scholarships.length > 0 && (
+        <section aria-labelledby="plan-sch" className="mt-8">
+          <h2 id="plan-sch" className="mb-3 text-2xl font-semibold">
+            {ts("title")}
+          </h2>
+          <ul className="flex max-w-3xl flex-col gap-3 text-sm">
+            {scholarships.map((s) => (
+              <li
+                key={s.id}
+                className="border-border flex flex-wrap items-center gap-3 border-b pb-3"
+              >
+                <span>
+                  {ts(`type.${s.type}`)} · {ts(`category.${s.category}`)} ·{" "}
+                  <span className="font-tabular">
+                    {s.type === "FULL" ? "100 %" : s.percent ? `${s.percent} %` : s.amount}
+                  </span>
+                </span>
+                <span className="text-muted-foreground">
+                  {s.voidedAt ? `${ts("status.VOID")} · ${s.voidReason ?? ""}` : s.reason}
+                </span>
+                {mayVoid && editable && !s.voidedAt && (
+                  <VoidScholarshipButton id={s.id} label={s.yearCode} />
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {fin && (
         <section aria-labelledby="payments-h" className="mt-8">

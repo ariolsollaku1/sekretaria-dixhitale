@@ -116,7 +116,8 @@
       "deliveredHours": "Delivered hours",
       "evaluations": "Performance evaluations",
       "myEvaluations": "Evaluations to fill in",
-      "leads": "Leads"
+      "leads": "Leads",
+      "scholarships": "Scholarships"
     },
     "languages": {
       "sq": "Shqip",
@@ -3052,7 +3053,8 @@
       "earlyUntil": "{amount} until {date}",
       "cancelled": "Cancelled",
       "adjusted": "Adjusted",
-      "active": "Active"
+      "active": "Active",
+      "scholarship": "Scholarship"
     },
     "adjust": {
       "adjust": "Adjust",
@@ -3094,7 +3096,20 @@
       "noPlan": "No payment plan of this academic year for this student.",
       "ambiguousPlan": "Several payment plans match this student.",
       "duplicateInFile": "The same payment appears twice in the file.",
-      "method": "Unknown payment method."
+      "method": "Unknown payment method.",
+      "alreadyHas": "This enrollment already has a scholarship for the year.",
+      "oneValue": "Enter either a percentage or an amount.",
+      "fullHasValue": "A full scholarship has no percentage or amount.",
+      "noTuition": "The payment plan has no tuition installment to reduce.",
+      "exceedsTuition": "The amount is more than the tuition of the year.",
+      "ambiguous": "The student has several open enrollments: enter the program code.",
+      "REQUEST_CLOSED": "The application is already decided.",
+      "ALREADY_VOID": "The scholarship is already void.",
+      "NOT_ALLOWED_TO_DECIDE": "You are not allowed to decide on scholarships.",
+      "NO_SCHOLARSHIP_RECORDED": "Record the scholarship before approving the application.",
+      "STUDENT_NOT_IDENTIFIED": "The student could not be identified.",
+      "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
+      "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments: give the program code in the application."
     },
     "clearance": {
       "CLEARED": "Cleared",
@@ -3199,6 +3214,87 @@
         "status": "Status"
       },
       "earlyUntil": "{amount} if paid by {date}"
+    },
+    "scholarship": {
+      "title": "Scholarships",
+      "noYear": "No academic year is selected.",
+      "reportLink": "Report: number of scholarships per year and program",
+      "type": {
+        "FULL": "Full",
+        "PARTIAL": "Partial"
+      },
+      "category": {
+        "EXCELLENCE": "Excellence",
+        "NEED": "Need",
+        "DISABILITY": "Disability",
+        "OTHER": "Other"
+      },
+      "status": {
+        "ACTIVE": "Active",
+        "VOID": "Void"
+      },
+      "columns": {
+        "type": "Type",
+        "category": "Kind",
+        "terms": "Reduction",
+        "before": "Tuition before",
+        "reduction": "Reduced by",
+        "after": "Tuition after",
+        "planTotal": "Plan total",
+        "status": "Status",
+        "program": "Program",
+        "year": "Academic year",
+        "actions": "Actions"
+      },
+      "granted": "Scholarship recorded and the payment plan recalculated.",
+      "grantedPending": "Scholarship recorded. It applies when the payment plan is generated.",
+      "form": {
+        "directTitle": "Grant a scholarship",
+        "decisionTitle": "Record the decision",
+        "studentNumber": "Student number",
+        "programCode": "Program code (if several)",
+        "year": "Academic year",
+        "category": "Kind of scholarship",
+        "how": "Reduction",
+        "howFull": "Full (100 % of tuition)",
+        "howPercent": "Percentage of tuition",
+        "howAmount": "Fixed amount of tuition",
+        "percent": "Percentage",
+        "amount": "Amount",
+        "reason": "Reason",
+        "grant": "Grant scholarship",
+        "hint": "The scholarship reduces the tuition installments of the payment plan of that year. Voiding it gives the reduction back."
+      },
+      "void": {
+        "open": "Void",
+        "reason": "Reason",
+        "confirm": "Void scholarship",
+        "close": "Close",
+        "done": "Scholarship voided."
+      },
+      "report": {
+        "title": "Scholarships per year and program",
+        "hint": "Counts the scholarships that are not void, by academic year and study program.",
+        "total": "Total"
+      },
+      "decision": {
+        "title": "Scholarship decision",
+        "inbox": "Form inbox",
+        "applicant": "Applicant",
+        "student": "Student",
+        "year": "Year requested",
+        "average": "Average grade",
+        "motivation": "Reasons",
+        "recorded": "Recorded scholarship",
+        "empty": "No scholarship has been recorded for this application.",
+        "closed": "The application is decided; the decision can no longer change.",
+        "errors": {
+          "generic": "The applicant could not be matched to one enrollment.",
+          "STUDENT_NOT_IDENTIFIED": "The student could not be identified.",
+          "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
+          "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments: the application names no unique program."
+        }
+      }
     }
   },
   "adm": {

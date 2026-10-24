@@ -4,3 +4,4 @@ import "server-only";
 import "@/modules/stu";
 import "@/modules/off";
 import "@/modules/adm";
+import "@/modules/fin";

@@ -148,6 +148,9 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-124 | Online application: status link and e-mails | no | open | Student Affairs / DPO |
 | Q-125 | Online application: who sees and configures | no | open | Secretariat |
 | Q-134 | Performance evaluations: campaigns, evaluators, visibility | no | open | HR / Rectorate |
+| Q-140 | Scholarships: kinds and who decides | no | open | Finance |
+| Q-141 | Scholarships: effect on the payment plan | no | open | Finance |
+| Q-142 | Scholarships: application form, list and report | no | open | Finance |
 
 ---
 
@@ -352,6 +355,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
   **students in need** and **students with disabilities**. Excellence scholarship by average grade:
   **50 %** of the fee for 9.1–9.5, **80 %** for 9.6–9.8, **100 %** for 9.8–10. Finance administers
   them in their finance program. Consistent with the working assumption; bands should be configurable.
+- **Refined by:** Q-140 (kinds, who decides), Q-141 (effect on the plan), Q-142 (form, list, report).
 - **Answer:** —
 
 ### Q-24 — Fee structure & installment rules
@@ -1249,3 +1253,40 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** How long may a lead be kept? Must a person be erasable on request?
 - **Working assumption:** leads are kept (never hard-deleted, as all business data); no automatic expiry or erasure in this feature; a lost lead keeps its data.
 - **Impact:** a retention job, an anonymize action.
+
+### Q-140 — Scholarships: kinds and who decides
+- **Context:** SRC-037a (scholarship form), SRC-083; Q-23 research (excellence, need, disability).
+- **Questions:** Which kinds of scholarship exist and who decides (Finance alone, or a commission)? May
+  Finance also grant one without an application? Are the excellence bands (by average grade) applied
+  automatically?
+- **Working assumption:** four kinds recorded as a category for reports (`EXCELLENCE`, `NEED`,
+  `DISABILITY`, `OTHER`); Finance alone decides, either as the decision on an application or directly
+  for a student number; Finance enters "full", a percentage or an amount — the bands of Q-23 are not
+  computed or preset; one live scholarship per enrollment and academic year; granting and voiding
+  need a reason and are audited.
+- **Impact:** categories, who may decide, automatic bands, multi-step approval.
+
+### Q-141 — Scholarships: effect on the payment plan
+- **Context:** SRC-083 (students "with the respective fees"); FIN-01 payment plans.
+- **Questions:** Does a scholarship reduce only the tuition or all fees? Is a fixed amount shared over
+  the installments or taken from the first? What happens to early-payment discounts? What if the
+  plan changes afterwards?
+- **Working assumption:** only the tuition installments of the year's plan; a percentage reduces each
+  installment (rounded half up), an amount is shared in proportion and may not exceed the tuition;
+  a full scholarship cancels the tuition installments (kept visible with the reason "scholarship");
+  the early-payment amount of a reduced installment is cleared; voiding gives back exactly what was
+  taken; a scholarship granted before the plan exists is applied when the plan is generated;
+  installments adjusted by hand later are not recalculated.
+- **Impact:** plan recalculation, balances in FIN-02, other fee kinds.
+
+### Q-142 — Scholarships: application form, list and report
+- **Context:** SRC-037a, SRC-083, SRC-084.
+- **Questions:** Which fields does the application need? What must the list show? How is the
+  report counted?
+- **Working assumption:** two forms (public with student number and date of birth; in-portal with an
+  optional document) asking program code, academic year, kind, average grade, reasons and a
+  declaration, handled by Finance in the forms inbox (texts editable in PLT-15); the list of the
+  selected academic year shows type, kind, reduction and the tuition before, reduced by and after,
+  plus the plan total; the report counts the scholarships that are not void per academic year and
+  program, split full/partial and by kind; both are exportable.
+- **Impact:** form fields, list columns, report dimensions.

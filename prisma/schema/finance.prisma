@@ -112,27 +112,28 @@ model PaymentPlan {
 
 /// An installment of a plan; adjusted or cancelled with a reason, never deleted (Q-89).
 model PlanInstallment {
-  id             String            @id @default(cuid(2))
-  planId         String            @map("plan_id")
-  sequence       Int
-  kind           FeeKind
-  label          String            @default("")
-  dueDate        DateTime          @map("due_date") @db.Date
-  amount         Decimal           @db.Decimal(12, 2)
+  id              String            @id @default(cuid(2))
+  planId          String            @map("plan_id")
+  sequence        Int
+  kind            FeeKind
+  label           String            @default("")
+  dueDate         DateTime          @map("due_date") @db.Date
+  amount          Decimal           @db.Decimal(12, 2)
   /// The amount if paid by `earlyUntil` under the best discount (Q-87).
-  earlyAmount    Decimal?          @map("early_amount") @db.Decimal(12, 2)
-  earlyUntil     DateTime?         @map("early_until") @db.Date
-  status         InstallmentStatus @default(ACTIVE)
+  earlyAmount     Decimal?          @map("early_amount") @db.Decimal(12, 2)
+  earlyUntil      DateTime?         @map("early_until") @db.Date
+  status          InstallmentStatus @default(ACTIVE)
   /// The fee it came from; null for an installment added by hand.
-  scheduleItemId String?           @map("schedule_item_id")
-  adjustedAt     DateTime?         @map("adjusted_at") @db.Timestamptz(3)
-  cancelReason   String?           @map("cancel_reason")
-  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt      DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById    String?           @map("created_by_id")
-  updatedById    String?           @map("updated_by_id")
-  plan           PaymentPlan       @relation(fields: [planId], references: [id])
-  payments       Payment[]
+  scheduleItemId  String?           @map("schedule_item_id")
+  adjustedAt      DateTime?         @map("adjusted_at") @db.Timestamptz(3)
+  cancelReason    String?           @map("cancel_reason")
+  createdAt       DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime          @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById     String?           @map("created_by_id")
+  updatedById     String?           @map("updated_by_id")
+  plan            PaymentPlan       @relation(fields: [planId], references: [id])
+  payments        Payment[]
+  scholarshipCuts ScholarshipCut[]
 
   @@unique([planId, sequence])
   @@index([dueDate])

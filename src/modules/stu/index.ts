@@ -39,3 +39,4 @@ export {
 } from "./server/recognition.queries";
 export { REQUEST_FORMS } from "./domain/request-forms";
 export { RecognitionPanelView } from "./ui/recognition-panel";
+export { resolveRequester, enrollmentOf, type Requester } from "./server/request-resolve";

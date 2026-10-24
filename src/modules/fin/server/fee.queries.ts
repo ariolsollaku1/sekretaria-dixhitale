@@ -12,7 +12,13 @@ export const money = (d: { toFixed(n: number): string }) => d.toFixed(2);
 export async function finProgramScope(
   user: { id: string },
   permission:
-    "fin.fee.read" | "fin.fee.write" | "fin.plan.read" | "fin.plan.write" | "fin.payment.read",
+    | "fin.fee.read"
+    | "fin.fee.write"
+    | "fin.plan.read"
+    | "fin.plan.write"
+    | "fin.payment.read"
+    | "fin.scholarship.read"
+    | "fin.scholarship.write",
 ): Promise<Prisma.StudyProgramWhereInput> {
   const g = await grantScopes(user, permission);
   if (g.institution) return {};

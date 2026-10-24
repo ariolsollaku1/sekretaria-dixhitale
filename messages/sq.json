@@ -58,6 +58,7 @@
       "courses": "Lëndët",
       "courseCategories": "Kategoritë e lëndëve",
       "jobs": "Punët në sfond",
+      "backups": "Kopjet rezervë",
       "notifications": "Njoftimet",
       "calendar": "Kalendari akademik",
       "announcements": "Njoftimet e shkollës",
@@ -2117,6 +2118,47 @@
       "issuedOn": "Lëshuar më",
       "tooMany": "Shumë kërkesa. Provoni përsëri pas pak."
     }
+  },
+  "backups": {
+    "title": "Kopjet rezervë dhe eksporti i të dhënave",
+    "latest": "Ekzekutimet e fundit",
+    "recent": "Ekzekutimet e kohëve të fundit",
+    "empty": "Ende nuk ka ekzekutime.",
+    "never": "Nuk është ekzekutuar kurrë",
+    "retention": "Ruhen {count} eksportet më të reja për shkarkim; ato më të vjetrat fshihen automatikisht.",
+    "kinds": {
+      "export": "Eksport i plotë",
+      "integrity": "Kontroll i integritetit"
+    },
+    "status": {
+      "SUCCEEDED": "I suksesshëm",
+      "FAILED": "I dështuar",
+      "RUNNING": "Në ekzekutim"
+    },
+    "columns": {
+      "kind": "Ekzekutimi",
+      "status": "Gjendja",
+      "started": "Filloi",
+      "finished": "Mbaroi",
+      "tables": "Tabela",
+      "rows": "Rreshta",
+      "files": "Skedarë",
+      "problems": "Probleme",
+      "size": "Madhësia"
+    },
+    "download": "Shkarko",
+    "manual": "manual",
+    "runExport": "Nis eksportin tani",
+    "runIntegrity": "Nis kontrollin e integritetit tani",
+    "queued": "Ekzekutimi u vu në radhë dhe do të nisë së shpejti.",
+    "alreadyQueued": "Një ekzekutim i këtij lloji është tashmë në pritje ose në ekzekutim.",
+    "jobsDown": "Sistemi i punëve në sfond nuk është i disponueshëm.",
+    "startFailed": "Ekzekutimi nuk u nis.",
+    "staleExport": "Nuk ka eksport të suksesshëm në 36 orët e fundit.",
+    "staleIntegrity": "Nuk ka kontroll të suksesshëm integriteti në 8 ditët e fundit.",
+    "pending": "{count, plural, one {# ekzekutim është në pritje ose në ekzekutim.} other {# ekzekutime janë në pritje ose në ekzekutim.}}",
+    "unavailable": "Gjendja e kopjeve rezervë nuk është e disponueshme",
+    "unavailableHint": "Kontrolloni lidhjen me bazën e të dhënave dhe regjistrat e serverit."
   },
   "msg": {
     "title": "Mesazhet",

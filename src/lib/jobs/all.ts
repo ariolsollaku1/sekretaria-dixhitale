@@ -5,3 +5,4 @@ import "@/lib/notify/jobs";
 import "@/modules/ntf";
 import "@/lib/ratelimit/jobs";
 import "@/modules/hr";
+import "@/lib/backup/jobs";

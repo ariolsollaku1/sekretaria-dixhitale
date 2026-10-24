@@ -170,6 +170,15 @@ registerNav({
   order: 30,
 });
 registerNav({
+  id: "backups",
+  labelKey: "backups",
+  href: "/admin/backups",
+  icon: "settings",
+  permission: "plt.backup.read",
+  group: "system",
+  order: 31,
+});
+registerNav({
   id: "calendar",
   labelKey: "calendar",
   href: "/calendar",

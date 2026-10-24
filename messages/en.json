@@ -58,6 +58,7 @@
       "courses": "Courses",
       "courseCategories": "Course categories",
       "jobs": "Jobs",
+      "backups": "Backups",
       "notifications": "Notifications",
       "calendar": "Academic calendar",
       "announcements": "Announcements",
@@ -2117,6 +2118,47 @@
       "issuedOn": "Issued on",
       "tooMany": "Too many requests. Try again shortly."
     }
+  },
+  "backups": {
+    "title": "Backups and data export",
+    "latest": "Latest runs",
+    "recent": "Recent runs",
+    "empty": "No runs yet.",
+    "never": "Never run",
+    "retention": "The newest {count} exports are kept for download; older ones are deleted automatically.",
+    "kinds": {
+      "export": "Full export",
+      "integrity": "Integrity check"
+    },
+    "status": {
+      "SUCCEEDED": "Succeeded",
+      "FAILED": "Failed",
+      "RUNNING": "Running"
+    },
+    "columns": {
+      "kind": "Run",
+      "status": "Status",
+      "started": "Started",
+      "finished": "Finished",
+      "tables": "Tables",
+      "rows": "Rows",
+      "files": "Files",
+      "problems": "Problems",
+      "size": "Size"
+    },
+    "download": "Download",
+    "manual": "manual",
+    "runExport": "Run export now",
+    "runIntegrity": "Run integrity check now",
+    "queued": "The run was queued and will start shortly.",
+    "alreadyQueued": "A run of this kind is already waiting or running.",
+    "jobsDown": "The job system is unavailable.",
+    "startFailed": "The run could not be started.",
+    "staleExport": "No successful export in the last 36 hours.",
+    "staleIntegrity": "No successful integrity check in the last 8 days.",
+    "pending": "{count, plural, one {# run is waiting or running.} other {# runs are waiting or running.}}",
+    "unavailable": "Backup status is unavailable",
+    "unavailableHint": "Check the database connection and the server logs."
   },
   "msg": {
     "title": "Messages",

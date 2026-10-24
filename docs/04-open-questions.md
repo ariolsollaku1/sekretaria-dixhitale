@@ -58,6 +58,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
 | Q-41 | Syllabi: format, who uploads and approves, carrying forward | no | open | Heads of department / Quality |
+| Q-65 | Full data export: contents, format and what is left out | no | open | IT / DPO |
+| Q-66 | Backups: frequency, retention, recovery targets | no | open | IT / Management |
+| Q-67 | Backups: off-site copy, encryption and who runs `pg_dump` | no | open | IT / Client host |
+| Q-68 | Backup and integrity failures: who is alerted | no | open | IT |
+| Q-69 | Export download: who may export and can it contain personal data | no | open | DPO / Management |
 | Q-55 | Student portal: requesting a correction of own data | no | open | Secretariat |
 | Q-56 | Student portal: which curriculum courses a student sees | no | open | Academic Affairs |
 | Q-57 | Student portal: access after the studies end (suspended, deregistered, graduated) | no | open | Secretariat / Management |
@@ -509,6 +514,54 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Is a syllabus a document the lecturer or department writes (PDF/Word) or a structured form (objectives, contents, literature, assessment…)? Who uploads (the lecturer, the head of department, the program coordinator) and who approves? Is a syllabus re-approved every academic year or only when it changes? Must students see it before enrolling?
 - **Working assumption:** version 1 stores a PDF per course of an approved plan and academic year (the structured form is a later increment); the program coordinator, the head of department (inside their scope) and the sysadmin upload and approve; each upload is a new version, approving a version archives the previous one; the previous approved syllabus of the course can be carried forward into a new year as a draft that still needs approval; approved syllabi are readable by everyone who may see the plan, students included; drafts and archived versions only by staff.
 - **Impact:** the format (a structured form would need its fields), the roles that upload and approve, the carry-forward rule.
+
+### Q-65 — Full data export: contents, format and what is left out
+- **Context:** SRC-151 — data must be convertible to standard programmes for migration (PLT-13).
+- **Questions:** Is "CSV per table + JSON Lines + the original files in one ZIP" enough as the open
+  format? Should an Excel version also be produced? Which data must be left out?
+- **Working assumption:** one ZIP: `csv/<table>.csv` (UTF-8, header row, empty field = no value),
+  `jsonl/<table>.jsonl` (one JSON object per line, exact values), `files/` with every stored file,
+  `manifest.json` with row counts and SHA-256 per entry, and a `README.txt`. All business tables are
+  included. Left out: sessions, accounts, verification tokens, calendar feed tokens, rate-limit
+  hits, job-system tables and the run log itself (secrets or operational noise).
+- **Impact:** the table list and formats of the export job.
+
+### Q-66 — Backups: frequency, retention, recovery targets
+- **Context:** SRC-150 — "how can the institution maintain backups in soft copy".
+- **Questions:** How often must a backup run, how long is each kept, and what are the maximum
+  data loss (RPO) and restore time (RTO) the institution accepts?
+- **Working assumption:** full export nightly at 02:30 (Europe/Tirane); the newest 7 exports are
+  kept, older ones are deleted from disk (the run log keeps the record); integrity check every
+  Sunday 04:00. Database dumps follow the retention in deployment.md (7 daily / 4 weekly /
+  12 monthly). RPO 24 hours, RTO one working day.
+- **Impact:** the cron expressions and the retention count (constants in one file).
+
+### Q-67 — Backups: off-site copy, encryption and who runs `pg_dump`
+- **Context:** SRC-150 — the host is the client's concern (Q-26); the app cannot copy to another
+  site or encrypt the volume on its own.
+- **Questions:** Where do backups go (second server, NAS, EU cloud storage)? Are they encrypted? Who
+  runs and monitors the nightly `pg_dump` and file copy?
+- **Working assumption:** the app produces the export and verifies it; the client's operator runs
+  `scripts/backup.sh` (database dump + files archive) from cron on the host, copies the results
+  off-site inside the EU and encrypts the disk or the archive. The app does not encrypt exports.
+- **Impact:** a possible encryption step or storage adapter later; no code change now.
+
+### Q-68 — Backup and integrity failures: who is alerted
+- **Context:** a backup nobody notices failing is worthless.
+- **Questions:** Who must be told when a scheduled export or the integrity check fails or finds a
+  problem, and how (e-mail, dashboard)?
+- **Working assumption:** the failure is shown on `/admin/backups` (latest status banner), written
+  to the log (ids and counts only) and the job system keeps the failed job visible on
+  `/admin/jobs`. No e-mail yet.
+- **Impact:** a notification to the sysadmin role via PLT-11 once confirmed.
+
+### Q-69 — Export download: who may export and can it contain personal data
+- **Context:** the full export holds every personal record (SRC-152, Q-16).
+- **Questions:** Is the sysadmin the only person who may start and download an export? Must a
+  second person approve? Should downloads expire?
+- **Working assumption:** only `sysadmin` (`plt.backup.manage`); every start and every download is
+  audited; no second approval; exports stay downloadable until the retention removes them.
+- **Impact:** the permission grants and a possible approval step.
 ### Q-55 — Student portal: requesting a correction of own data
 - **Context:** SRC-036, SRC-020 — the portal shows a student their data read-only; the brief mentions "request correction".
 - **Questions:** How does a student ask for a correction (a request form, e-mail to the Secretariat, in person)? Which fields may they ask to change? Who approves?

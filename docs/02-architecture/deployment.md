@@ -73,8 +73,10 @@ Secrets are never committed.
 - All personal data live in the `db` and `files` volumes on the client's host — no third-party SaaS
   stores personal data. Email delivery is the only outbound flow with personal data (address,
   message), via the client's SMTP.
-- `backup` service: nightly `pg_dump` (custom format) of both databases + tarball of `files`,
-  retention 7 daily / 4 weekly / 12 monthly, plus a documented restore procedure tested in CI
-  (PLT-13).
-- Full **data export** in open formats (CSV per table + JSON + original files) is available to
-  `sysadmin` (PLT-13, SRC-151).
+- Backups: `scripts/backup.sh` (run from cron on the host) takes a `pg_dump` (custom format) of both
+  databases + a tarball of `files`, retention 7 daily / 4 weekly / 12 monthly; `scripts/restore.sh`
+  restores into a new database and verifies it (PLT-13, [backup-restore.md](backup-restore.md)). A
+  dedicated `backup` container and a CI restore test are left to the client's pipeline (Q-67).
+- Full **data export** in open formats (CSV per table + JSON Lines + original files, one ZIP) is
+  produced nightly by the app and available to `sysadmin` on `/admin/backups` (PLT-13, SRC-151).
+  Procedures, scripts and the restore drill: [backup-restore.md](backup-restore.md).

@@ -264,12 +264,14 @@ type Row = {
 type BulkItem = { applicationId: string; reference: string; ok: boolean; code?: string };
 
 /** AC-7, AC-8: enroll a selection of candidates into one cohort and group. */
-export function BulkEnroll({ rows, options }: { rows: Row[]; options: Placement }) {
+export function BulkEnroll({ rows: all, options }: { rows: Row[]; options: Placement }) {
   const t = useTranslations("adm.enroll");
   const ts = useTranslations("adm.status");
   const te = useTranslations("adm.errors");
-  const router = useRouter();
   const explain = useExplain();
+  // Enrolled rows leave the list at once; the result stays on the page (no server refresh).
+  const [done, setDone] = useState<Set<string>>(new Set());
+  const rows = all.filter((r) => !done.has(r.id));
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [place, setPlace] = useState({
     cohortId: options.cohorts[0]?.id ?? "",
@@ -302,8 +304,10 @@ export function BulkEnroll({ rows, options }: { rows: Row[]; options: Placement 
       if (r.ok) {
         setResult(r.data.items as BulkItem[]);
         setSelected(new Set());
+        setDone(
+          new Set([...done, ...r.data.items.filter((i) => i.ok).map((i) => i.applicationId)]),
+        );
         toast.success(t("bulkDone", { count: r.data.enrolled }));
-        router.refresh();
       } else if (r.error.fieldErrors) {
         const next: Record<string, string> = {};
         for (const [field, codes] of Object.entries(r.error.fieldErrors))

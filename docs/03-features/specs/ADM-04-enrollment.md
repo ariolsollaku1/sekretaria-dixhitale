@@ -114,7 +114,7 @@ STU-01 exports `registerStudent`, `addEnrollment`, `registerYear` services from 
 - Module `src/modules/adm`: `domain/enroll-rules.ts`, `enroll-schemas.ts`; `server/enroll.service.ts`, `enroll.actions.ts`, `enroll.queries.ts`; `ui/enroll-form.tsx` (`EnrollForm`, `BulkEnroll`); pages `src/app/(app)/adm/enrollment` and the extended application detail.
 - STU-01 exports `registerStudent`, `addEnrollment`, `registerYear`, `personalSchema` from its `index.ts`; ADM-04 calls them with the action's `ctx`, so everything is one transaction and one audit trail (`stu.*` entries plus `adm.application.enroll`).
 - Bulk: each candidate runs between `SAVEPOINT` and `RELEASE`/`ROLLBACK TO` on the transaction client, so a failure undoes only that candidate (including its audit rows).
-- Migration `20261024140000_adm_enrollment` adds the four columns to `applications`.
+- Migration `20261024150000_adm_enrollment` adds the four columns to `applications`.
 - The enrollment-opened hook of IAM-02 runs inside each enrollment; no payment plan or contract is created (Q-147).
 
 ## 4. Tasks

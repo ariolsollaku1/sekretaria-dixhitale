@@ -68,9 +68,7 @@ test("AC-1..AC-4: a visitor finds public forms on the index without login", asyn
   expect((await page.goto("/f/e2e-int06-skice"))?.status()).toBe(404);
 });
 
-test("AC-5: the sysadmin sees the addresses", async ({
-  page,
-}) => {
+test("AC-5: the sysadmin sees the addresses", async ({ page }) => {
   await signInAs(page, "sysadmin@dev.logos.test");
   await page.goto("/admin/forms/links");
   await expect(

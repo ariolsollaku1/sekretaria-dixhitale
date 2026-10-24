@@ -109,6 +109,10 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-111 | Payments: financial clearance rule | no | open | Finance / Secretariat |
 | Q-112 | Payments: CSV/XLSX import | no | open | Finance |
 | Q-113 | Payments: student view and closed years | no | open | Finance |
+| Q-114 | Study package: who issues it and self-service | no | open | Secretariat |
+| Q-115 | Study package: which syllabus per course | no | open | Secretariat |
+| Q-116 | Study package: courses without an approved syllabus | no | open | Secretariat |
+| Q-117 | Study package: number, layout and readers | no | open | Secretariat |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1060,3 +1064,26 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** What may a student see? May payments be recorded on a closed academic year?
 - **Working assumption:** a student sees their own plans of all years with installments, payments, balance and clearance. Payments (and voiding) are allowed on plans of closed years because late debts are paid later; plan changes stay refused there (FIN-01).
 - **Impact:** portal page, year-closing rules.
+### Q-114 — Study package: who issues it and self-service
+- **Context:** CUR-06, SRC-055 — students and graduates ask for the plan with credits and the syllabi; the brief says "by the Secretariat; optionally self-service for students".
+- **Questions:** Who issues the package? May students generate their own? Any limit?
+- **Working assumption:** secretary and student affairs issue for students within their scope (`cur.package.issue`); a student may generate and download the package of their own enrollments (`cur.package.self`), at most 3 new packages per hour. The content is only what the student can already read (plan and approved syllabi).
+- **Impact:** permission grants, the hourly limit; switching self-service off removes one grant.
+
+### Q-115 — Study package: which syllabus per course
+- **Context:** CUR-06, CUR-03 — syllabi exist per course and academic year, with versions.
+- **Questions:** Which syllabus goes into the package: the one of the year the student studied the course, or the latest?
+- **Working assumption:** per plan course the approved syllabus of the academic year in which the student was registered for that course's year of study; if there is none, the approved syllabus of the most recent year. Drafts and archived versions are never included.
+- **Impact:** the selection rule `pickSyllabus`.
+
+### Q-116 — Study package: courses without an approved syllabus
+- **Context:** CUR-06 — some courses may have no approved syllabus yet.
+- **Questions:** Block the package, or issue it incomplete?
+- **Working assumption:** the package is issued; the plan table marks the course "no syllabus" and the issuer sees how many are missing.
+- **Impact:** a stricter rule would refuse issuing while any is missing.
+
+### Q-117 — Study package: number, layout and readers
+- **Context:** CUR-06, PLT-09 — the document type needs a number prefix and a cover layout; the real layouts of other documents wait for Q-07…Q-10.
+- **Questions:** Number series? Cover content and signature? Who may read an issued package?
+- **Working assumption:** series `PLN-YYYY-NNNNN`; cover with program, student name and number, cohort, plan version, courses per semester with credits and totals, then the syllabi; no signature or stamp; readable by the student of the enrollment, by staff with `cur.package.issue` in scope, and the sysadmin. The sysadmin edits the HTML template per language in PLT-09.
+- **Impact:** the template, the prefix, the read rule.

@@ -104,7 +104,9 @@
       "evalResults": "Evaluation results",
       "myEvalResults": "My student evaluations",
       "paymentsImport": "Import payments",
-      "myPayments": "My payments"
+      "myPayments": "My payments",
+      "studyPackages": "Study packages",
+      "myPackage": "My study package"
     },
     "languages": {
       "sq": "Shqip",
@@ -1018,6 +1020,53 @@
         "created": "Created",
         "approved": "Approved"
       }
+    },
+    "packages": {
+      "title": "Study packages",
+      "intro": "A package is one PDF: the curriculum plan with credits of the student's cohort, followed by the approved syllabi of its courses. Find a student, check the preview and issue it.",
+      "search": "Student number or name",
+      "find": "Find",
+      "noStudents": "No student in your scope matches.",
+      "recent": "Recently issued",
+      "mineTitle": "My study package",
+      "mineIntro": "Generate the curriculum plan with credits and the syllabi of your program as one PDF, for example for further studies or employment.",
+      "mine": "My packages",
+      "noEnrollments": "No enrollment found.",
+      "noEnrollmentsHint": "Your student record has no enrollment yet. Contact the secretariat.",
+      "noneIssued": "Nothing issued yet.",
+      "cohort": "Cohort {name}",
+      "status": {
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspended",
+        "DEREGISTERED": "Deregistered",
+        "GRADUATED": "Graduated"
+      },
+      "preview": "{courses, plural, one {# course} other {# courses}}, {credits} credits, {included} syllabi included.",
+      "missing": "{count, plural, one {# course without syllabus} other {# courses without syllabus}}",
+      "language": "Language",
+      "languages": {
+        "sq": "Albanian",
+        "en": "English"
+      },
+      "issue": "Issue package",
+      "issuing": "Issuing…",
+      "issued": "Package {number} issued.",
+      "cancelled": "Cancelled",
+      "download": "Download",
+      "columns": {
+        "number": "Number",
+        "student": "Student",
+        "program": "Program",
+        "language": "Language",
+        "issuedAt": "Issued"
+      },
+      "forbidden": "You are not allowed to do this.",
+      "unavailable": "The PDF service is not available. Try again in a moment.",
+      "noTemplate": "No published template exists for this language. Ask the system administrator to publish one.",
+      "limitReached": "You can generate at most 3 packages per hour. Try again later.",
+      "planNotApproved": "The curriculum plan of this enrollment is not approved yet.",
+      "planEmpty": "The curriculum plan has no courses.",
+      "failed": "The package could not be issued."
     }
   },
   "jobs": {
@@ -2270,7 +2319,8 @@
   },
   "documents": {
     "types": {
-      "plt_sample": "Test document"
+      "plt_sample": "Test document",
+      "cur_study-package": "Curriculum and syllabi package"
     },
     "admin": {
       "title": "Official documents",

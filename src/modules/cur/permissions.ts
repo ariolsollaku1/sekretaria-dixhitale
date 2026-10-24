@@ -70,3 +70,15 @@ registerPermissions("cur", {
     student: ["cur.syllabus.view"],
   },
 });
+
+// AC-7 (CUR-06): the plan-and-syllabi package. `issue` is scoped to the enrollment's program; `self`
+// lets a student issue only for their own enrollments (the service checks the owner; Q-114).
+registerPermissions("cur", {
+  permissions: ["cur.package.issue", "cur.package.self"],
+  grants: {
+    sysadmin: ["cur.package.issue"],
+    secretary: ["cur.package.issue"],
+    student_affairs: ["cur.package.issue"],
+    student: ["cur.package.self"],
+  },
+});

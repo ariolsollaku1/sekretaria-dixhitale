@@ -1,6 +1,9 @@
 // Public surface of the CUR module: other code imports only from here.
 import "./permissions";
 import "./server/course-resolvers";
+import { registerPackageType } from "./server/package.document";
+
+registerPackageType();
 
 export { coursesTable } from "./server/course.table";
 export { getCourse, listCategories, writableDepartments } from "./server/course.queries";
@@ -53,3 +56,5 @@ export {
   history as syllabusHistory,
   listSyllabusPlans,
 } from "./server/syllabus.queries";
+export { searchStudents, recentIssued, ownPackages } from "./server/package.queries";
+export { IssuedPackages, PackageStudents } from "./ui/package-panels";

@@ -40,6 +40,7 @@ Code: `src/modules/cur`. Entities: [domain model](../../02-architecture/domain-m
 - **Goal:** students/graduates often request "the plan with credits and the syllabi" (SRC-055).
 - **Scope:** generate a PDF bundle (plan with credits + all syllabi of the student's cohort/plan)
   on request by the Secretariat; optionally self-service for students; issued as a document (PLT-09).
+- **Implemented (CUR-06, [spec](../specs/CUR-06-student-package.md)):** document type `cur.study-package` (`PLN-YYYY-NNNNN`); pages `/cur/packages` (secretariat: search, preview, issue, list) and `/cur/my-package` (student, own enrollments, 3 per hour); per course the approved syllabus of the year the student studied it, else the latest; courses without one are marked and counted, not blocking (Q-114..Q-117). The sysadmin publishes the cover template per language in PLT-09 (a default is seeded for development); `pdf-lib` merges the PDFs.
 
 ### CUR-07 — Approved documents archive
 - **Goal:** approved plans, syllabi, diploma form and supplement per academic year, current and

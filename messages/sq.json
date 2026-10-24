@@ -104,7 +104,9 @@
       "evalResults": "Rezultatet e vlerësimit",
       "myEvalResults": "Vlerësimet e mia nga studentët",
       "paymentsImport": "Importo pagesat",
-      "myPayments": "Pagesat e mia"
+      "myPayments": "Pagesat e mia",
+      "studyPackages": "Paketat e studimit",
+      "myPackage": "Paketa ime e studimit"
     },
     "languages": {
       "sq": "Shqip",
@@ -1018,6 +1020,53 @@
         "created": "Krijuar",
         "approved": "Miratuar"
       }
+    },
+    "packages": {
+      "title": "Paketat e studimit",
+      "intro": "Një paketë është një PDF: plani mësimor me kredite i kohortit të studentit, ndjekur nga syllabuset e miratuara të lëndëve. Gjeni studentin, shikoni përmbledhjen dhe lëshojeni.",
+      "search": "Numri ose emri i studentit",
+      "find": "Kërko",
+      "noStudents": "Asnjë student brenda fushës suaj nuk përputhet.",
+      "recent": "Të lëshuara së fundi",
+      "mineTitle": "Paketa ime e studimit",
+      "mineIntro": "Gjeneroni planin mësimor me kredite dhe syllabuset e programit tuaj në një PDF, p.sh. për studime të mëtejshme ose punësim.",
+      "mine": "Paketat e mia",
+      "noEnrollments": "Nuk u gjet asnjë regjistrim.",
+      "noEnrollmentsHint": "Dosja juaj e studentit nuk ka ende regjistrim. Kontaktoni sekretarinë.",
+      "noneIssued": "Ende nuk është lëshuar asgjë.",
+      "cohort": "Kohorti {name}",
+      "status": {
+        "ACTIVE": "Aktiv",
+        "SUSPENDED": "Pezulluar",
+        "DEREGISTERED": "Çregjistruar",
+        "GRADUATED": "I diplomuar"
+      },
+      "preview": "{courses, plural, one {# lëndë} other {# lëndë}}, {credits} kredite, {included} syllabuse të përfshirë.",
+      "missing": "{count, plural, one {# lëndë pa syllabus} other {# lëndë pa syllabus}}",
+      "language": "Gjuha",
+      "languages": {
+        "sq": "Shqip",
+        "en": "Anglisht"
+      },
+      "issue": "Lësho paketën",
+      "issuing": "Po lëshohet…",
+      "issued": "Paketa {number} u lëshua.",
+      "cancelled": "Anuluar",
+      "download": "Shkarko",
+      "columns": {
+        "number": "Numri",
+        "student": "Studenti",
+        "program": "Programi",
+        "language": "Gjuha",
+        "issuedAt": "Lëshuar"
+      },
+      "forbidden": "Nuk keni të drejtë ta bëni këtë.",
+      "unavailable": "Shërbimi i PDF nuk është i disponueshëm. Provoni përsëri pas pak.",
+      "noTemplate": "Nuk ka shabllon të publikuar për këtë gjuhë. Kërkojini administratorit të sistemit ta publikojë.",
+      "limitReached": "Mund të gjeneroni deri në 3 paketa në orë. Provoni më vonë.",
+      "planNotApproved": "Plani mësimor i këtij regjistrimi nuk është miratuar ende.",
+      "planEmpty": "Plani mësimor nuk ka lëndë.",
+      "failed": "Paketa nuk mund të lëshohej."
     }
   },
   "jobs": {
@@ -2270,7 +2319,8 @@
   },
   "documents": {
     "types": {
-      "plt_sample": "Dokument provë"
+      "plt_sample": "Dokument provë",
+      "cur_study-package": "Paketa e planit dhe syllabuseve"
     },
     "admin": {
       "title": "Dokumentet zyrtare",

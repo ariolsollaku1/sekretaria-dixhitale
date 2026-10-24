@@ -7,6 +7,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
+import { AccountPanel, getAccountPanel } from "@/modules/iam";
 import { getStudent } from "@/modules/stu";
 import { listYearOptions } from "@/modules/org";
 import {
@@ -28,16 +29,19 @@ export default async function StudentPage({
   const { id } = await params;
   const user = await requireUser(`/stu/students/${id}`);
   if (!(await can(user, "stu.student.read"))) return <ForbiddenView />;
-  const [t, query, mayWrite, data, years] = await Promise.all([
+  const [t, query, mayWrite, data, years, mayAccount] = await Promise.all([
     getTranslations("stu"),
     searchParams,
     can(user, "stu.student.write"),
     getStudent(user, id),
     listYearOptions(),
+    can(user, "iam.account.student"),
   ]);
   if (!data) notFound(); // outside the user's programs = does not exist
   const tab = TABS.find((x) => x === query.tab) ?? "personal";
   const { student, enrollments } = data;
+  // IAM-02 AC-9: the account state is shown to those who may manage student accounts
+  const account = mayAccount ? await getAccountPanel(student.personId) : null;
   const name = `${student.firstName} ${student.lastName}`;
   return (
     <>
@@ -71,6 +75,15 @@ export default async function StudentPage({
         ))}
       </nav>
       {tab === "personal" && <PersonalSection student={student} />}
+      {tab === "personal" && account && (
+        <AccountPanel
+          kind="STUDENT"
+          studentId={student.id}
+          state={account.state}
+          email={account.email}
+          canManage
+        />
+      )}
       {tab === "enrollments" && (
         <EnrollmentsSection studentId={student.id} enrollments={enrollments} canWrite={mayWrite} />
       )}

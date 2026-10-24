@@ -123,9 +123,11 @@ The app creates/updates/disables Keycloak users through the Keycloak Admin REST 
 | Event | App action | Keycloak action |
 |---|---|---|
 | Admin creates staff user | create `User` + `UserRole`s | create user, send "set password / verify email" email |
-| Student enrolled (IAM-02) | create `User` (role `student`, scope `SELF`) | create user, send activation email |
+| Student account created from the student page or for a cohort (IAM-02) | create `User` (role `student`, scope `SELF`, `personId`) | create user, send activation email |
+| Staff account created by HR (IAM-02) | create `User` with the chosen role | create user, send activation email |
 | User deactivated | `User.active=false`, delete sessions | disable user, logout sessions |
-| Student graduates/deregisters (IAM-02) | deactivate | disable (alumni have no access, SRC-037) |
+| Last open enrollment ends / employment ends (IAM-02) | deactivate (audit `iam.account.auto_deactivate`) | disable (alumni have no access, SRC-037) |
+| New open enrollment / employment resumes (IAM-02) | reactivate only if the system had switched it off | enable |
 
 Failures to reach Keycloak must not leave half-created users: create in Keycloak first, then the
 app row in a transaction; on app failure, delete the Keycloak user (compensating action).
@@ -143,6 +145,15 @@ faculty); ORG-03 adds `PROGRAM` (ancestors: department and faculty). Until a res
 with compensation (`ctx.onFailure`) and sends the activation email after commit. The provisioning
 table above is accurate; sysadmins are put in group `require-otp`, deactivation disables the Keycloak
 user and ends its sessions.
+
+### Implementation (IAM-02)
+
+`account.service.ts` reuses the IAM-01 service. Hooks registered in `account-hooks.ts` run inside the
+transaction of the change: STU-02 status handlers, a new "enrollment opened" handler in STU and a
+"staff active" handler in HR. `syncAccountAccess` deactivates when a person has neither an open
+enrollment nor an active staff record, and reactivates only accounts that the system itself
+deactivated (the latest deactivation audit entry says so). An identity-provider outage stops the
+change that would have switched access off, so nobody keeps access by accident.
 
 ## Development note — issuer URL inside Docker
 

@@ -6,6 +6,7 @@ import "@/modules/org";
 import "@/modules/hr";
 import { staffSchema, type StaffFormInput } from "../domain/schemas";
 import { getOwnStaff, getStaff, scopeWhere } from "./staff.queries";
+import { registerStaffActiveHandler } from "./staff-hooks";
 import * as svc from "./staff.service";
 
 const actor = { id: "hr-1", email: "hr@t.test", name: "HR", locale: null, personId: null };
@@ -222,6 +223,20 @@ describe("setStaffActive (AC-7)", () => {
     });
     expect(audits.map((a) => a.reason)).toEqual(["Contract ended", "Rehired"]);
     expect(await db.staff.count()).toBe(1);
+  });
+
+  it("tells the registered handlers inside the transaction, and a failing handler undoes the change (IAM-02)", async () => {
+    const id = await create();
+    const seen: boolean[] = [];
+    registerStaffActiveHandler("test.active", async (_ctx, e) => void seen.push(e.active));
+    expect((await run((ctx) => svc.setStaffActive(ctx, id, false), "Left")).ok).toBe(true);
+    expect(seen).toEqual([false]);
+    registerStaffActiveHandler("test.active", async () => {
+      throw new Error("boom");
+    });
+    expect((await run((ctx) => svc.setStaffActive(ctx, id, true), "Back")).ok).toBe(false);
+    expect((await db.staff.findUniqueOrThrow({ where: { id } })).active).toBe(false);
+    registerStaffActiveHandler("test.active", async () => undefined);
   });
 
   it("requires a reason", async () => {

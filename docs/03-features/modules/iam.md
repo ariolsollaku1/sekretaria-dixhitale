@@ -15,3 +15,7 @@ Auth design: [../../02-architecture/auth.md](../../02-architecture/auth.md).
   re-enabled on re-enrollment; bulk "send activation emails" for a cohort; report of accounts never
   activated.
 - **Assumption (Q-19):** username = personal email unless the institution issues student emails.
+- **Spec:** [../specs/IAM-02-account-provisioning.md](../specs/IAM-02-account-provisioning.md)
+- **As built:** accounts are created on request (student page, staff page, whole cohort), not behind
+  the secretariat's back (Q-127); access follows open enrollments and active employment (Q-128);
+  HR picks the staff role (Q-129); `/admin/accounts` lists accounts never activated (Q-130).

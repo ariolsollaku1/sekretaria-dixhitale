@@ -35,3 +35,33 @@ export async function runStatusChangeHandlers(
 ): Promise<void> {
   for (const handler of handlers.values()) await handler(ctx, event);
 }
+
+// IAM-02 (AC-7): a new open enrollment (first registration, second program, transfer target) brings
+// access back. Same contract: runs inside the transaction of the change.
+export type EnrollmentOpenedEvent = {
+  enrollmentId: string;
+  studentId: string;
+  personId: string;
+  programId: string;
+};
+
+export type EnrollmentOpenedHandler = (
+  ctx: ActionContext,
+  event: EnrollmentOpenedEvent,
+) => Promise<void>;
+
+const openedHandlers = new Map<string, EnrollmentOpenedHandler>();
+
+export function registerEnrollmentOpenedHandler(
+  id: string,
+  handler: EnrollmentOpenedHandler,
+): void {
+  openedHandlers.set(id, handler);
+}
+
+export async function runEnrollmentOpenedHandlers(
+  ctx: ActionContext,
+  event: EnrollmentOpenedEvent,
+): Promise<void> {
+  for (const handler of openedHandlers.values()) await handler(ctx, event);
+}

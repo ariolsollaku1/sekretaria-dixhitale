@@ -17,11 +17,14 @@ export {
 import "./server/status-notification";
 export {
   registerStatusChangeHandler,
+  registerEnrollmentOpenedHandler,
   resetStatusChangeHandlers,
   type StatusChangeEvent,
+  type EnrollmentOpenedEvent,
 } from "./server/status-hooks";
 export { StatusChange } from "./ui/status-change";
 export { allowedTransitions } from "./domain/status-rules";
+export { scopeWhere as studentScopeWhere } from "./server/student.queries";
 export { studentListsTable } from "./server/lists.table";
 export { statRecords, type StatFilters } from "./server/stat.queries";
 export { TRANSLATED as STAT_TRANSLATED } from "./server/stat.format";

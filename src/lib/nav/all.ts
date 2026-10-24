@@ -10,6 +10,7 @@ import "@/modules/ers";
 import "@/modules/adm";
 import "@/modules/off";
 import "@/modules/qa";
+import "@/modules/iam";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -32,6 +33,15 @@ registerNav({
   permission: "iam.user.read",
   group: "system",
   order: 5,
+});
+registerNav({
+  id: "accounts",
+  labelKey: "accounts",
+  href: "/admin/accounts",
+  icon: "users",
+  permission: "iam.account.read",
+  group: "system",
+  order: 6,
 });
 registerNav({
   id: "files",

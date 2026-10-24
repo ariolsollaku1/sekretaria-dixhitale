@@ -78,6 +78,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
 | Q-63 | Attendance: creating class sessions | no | open | Secretariat |
 | Q-64 | Attendance: who sees what | no | open | Secretariat |
+| Q-70 | Deregistration request: effective date, which enrollment, fees | no | open | Secretariat / Finance |
+| Q-71 | Student requests: identifying a requester who is not logged in | no | open | Secretariat / DPO |
+| Q-72 | Recognition of documents: who decides and on what basis | no | open | Secretariat / Academic board |
+| Q-73 | Recognized courses: how they are recorded and used | no | open | Secretariat / Academic board |
+| Q-74 | Student requests: attachments and the forms' texts | no | open | Secretariat |
 
 ---
 
@@ -669,3 +674,62 @@ Decisions taken in conversation that aren't architecture ADRs.
   Secretariat reads and corrects all; heads of department and program coordinators read the sessions
   of their scope; a student sees only their own absent and excused marks (with the status, without notes).
 - **Impact:** visibility of notes and of colleagues' classes.
+
+### Q-70 — Deregistration request: effective date, which enrollment, fees
+- **Context:** SRC-037b — a student asks to be deregistered; approval triggers the STU-02 change.
+- **Questions:** Which date applies — the date of the request, the date the student wants, or the
+  date of the decision? Is there a notice period or a deadline in the year? What about a student
+  with fees outstanding or with two open programs? May the request be withdrawn?
+- **Working assumption:** the effective date is the date the student asks for, moved to today when
+  it lies in the future and to the previous change of the enrollment when it lies before it; no
+  notice period and no fee check (FIN does not exist yet); a student with several open enrollments
+  names the program (its code) and the Secretariat refuses the approval when it does not match
+  exactly one; the Secretariat may reject the request with a comment, the student cannot withdraw it.
+- **Impact:** the date rule, fee preconditions, withdrawal.
+
+### Q-71 — Student requests: identifying a requester who is not logged in
+- **Context:** SRC-037 — the forms can be opened from the website without logging in (alumni, people
+  without an account), so the system cannot tell who is asking.
+- **Questions:** What identifies the requester — student number, national ID, date of birth,
+  e-mail? Must the Secretariat verify identity (a copy of an ID) before approving?
+- **Working assumption:** a public request carries the student number and the date of birth; approval
+  is refused unless both match one student, and the Secretariat checks the rest by hand (the
+  answers are shown beside the record). A logged-in student is identified by the account and gives nothing.
+- **Impact:** the identifying fields, identity checks, whether public requests exist at all.
+
+### Q-72 — Recognition of documents: who decides and on what basis
+- **Context:** SRC-037c — a student asks for earlier studies or documents (courses passed elsewhere,
+  certificates) to be recognized.
+- **Questions:** Who decides — Secretariat, program coordinator, the academic board? Is the decision
+  per course or for the whole request? Which documents must be attached (transcript, syllabi,
+  translation) and what happens to a partly accepted request? Is there a fee or a deadline?
+- **Working assumption:** the Secretariat and Student Affairs record the decision (the coordinator's
+  opinion is a comment); it is per course with the credits recognized (default: the course's
+  credits, editable); a request with at least one recognized course can be approved, otherwise it is
+  rejected with a comment; the student attaches scans in the logged-in form (up to the platform file
+  limits), the public form takes none; no fee, no deadline.
+- **Impact:** who may decide, partial recognition, attachments, fees.
+
+### Q-73 — Recognized courses: how they are recorded and used
+- **Context:** SRC-037c, SRC-043 — the recognized courses count toward the student's credits and
+  averages (EXM-07).
+- **Questions:** Does a recognized course carry a grade (transferred) or only "recognized" with
+  credits? Can a course be recognized more than once, and can a decision be revised? Does a
+  recognized course replace a plan course of the student's program?
+- **Working assumption:** a recognized course is stored against the student's enrollment with the
+  catalog course and the credits (no grade; EXM-07 decides how it enters averages); one live
+  recognition per course and enrollment; a decision is revised by voiding the line (kept, never
+  deleted) and recording another; recognized courses are not matched to plan courses by the system.
+- **Impact:** grades of recognized courses, replacement of plan courses, revisions.
+
+### Q-74 — Student requests: attachments and the forms' texts
+- **Context:** SRC-037b, SRC-037c — the exact questions on the deregistration and recognition forms
+  are not in the source.
+- **Questions:** Which fields do the official forms have, which texts and declarations (reason list,
+  consent, statement of accuracy) must appear, and what must the student attach?
+- **Working assumption:** deregistration asks for the reason (free text), the requested date, the
+  program (optional) and a confirmation that the student understands the request ends their studies;
+  recognition asks for the earlier institution, the programme and the courses with their credits in
+  free text, plus an optional scan (logged-in form only). The sysadmin can change any of it in the
+  form definition without code (PLT-15).
+- **Impact:** the wording and fields of the two forms.

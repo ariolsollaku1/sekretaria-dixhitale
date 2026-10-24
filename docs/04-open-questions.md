@@ -118,6 +118,9 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-128 | Accounts: when access ends and returns | no | open | Secretariat / HR |
 | Q-129 | Accounts: staff accounts and their roles | no | open | HR / IT |
 | Q-130 | Accounts: activation reminders and the never-activated report | no | open | Secretariat / IT |
+| Q-131 | Delivered hours: monthly approval rules | no | open | HR / Heads of department |
+| Q-132 | Delivered hours: adjustments | no | open | HR / Finance |
+| Q-133 | Delivered hours: who sees what | no | open | HR / Finance |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1180,3 +1183,21 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** After how many days is an account "late"? Should reminders be sent automatically?
 - **Working assumption:** the report lists active accounts linked to a person that never signed in, with the days since creation, filterable by kind (student, staff); no threshold. Reminders are sent only when a person asks (per account or "send to the whole cohort", which also creates missing accounts for students with an e-mail); no automatic reminders.
 - **Impact:** `/admin/accounts` page, cohort action.
+
+### Q-131 — Delivered hours: monthly approval rules
+- **Context:** SRC-061, SRC-066; HR-04 (builds on Q-22).
+- **Questions:** Is approval per lecturer and calendar month? Who approves? May a month be approved before it ends? What happens when sessions change after approval?
+- **Working assumption:** the head of department of the lecturer's department approves one lecturer's whole month, only after the month has ended and only if it has hours or adjustments; the approval stores the figures at that moment; if the Secretariat later corrects a session the month shows "changed" and needs a new approval; reopening needs a written reason.
+- **Impact:** approval flow, Finance's use of the figures (FIN-06).
+
+### Q-132 — Delivered hours: adjustments
+- **Context:** HR-04 — "adjustments with reason".
+- **Questions:** What may be adjusted (hours only?), by whom, and within which limits?
+- **Working assumption:** whole hours between -100 and +100 added to one of the lecturer's assignments for a month of its academic year, with a 3–300 character reason, by the head of department or HR; append-only (corrected by an opposite adjustment); not possible on an approved month (reopen first) or in a closed year.
+- **Impact:** hour totals, the audit trail.
+
+### Q-133 — Delivered hours: who sees what
+- **Context:** SRC-066, SRC-063 (Finance reads HR data); HR-04.
+- **Questions:** Which roles read lecturers' delivered hours? May lecturers see colleagues'?
+- **Working assumption:** HR, Finance, Secretariat and sysadmin read all lecturers; a head of department those of their department; a lecturer only their own. PAE / PAK / volunteer comes from the staff category.
+- **Impact:** grants of `hr.hours.read`, the own-hours page.

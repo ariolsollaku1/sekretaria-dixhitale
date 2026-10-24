@@ -29,3 +29,15 @@ export {
 } from "./server/teaching.queries";
 import "./server/teaching-widget";
 export { registerStaffActiveHandler, type StaffActiveEvent } from "./server/staff-hooks";
+import "./server/staff-resolver";
+export { hoursTable, hoursReportTable } from "./server/hours.tables";
+export {
+  getMonthDetail,
+  getOwnHours,
+  courseRows,
+  totalsByCategory,
+  type MonthDetail,
+  type OwnHours,
+} from "./server/hours.queries";
+export { HoursMonthView, MonthList } from "./ui/hours-view";
+export { HoursActions } from "./ui/hours-actions";

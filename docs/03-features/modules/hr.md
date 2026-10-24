@@ -29,7 +29,8 @@ Code: `src/modules/hr`. HR data needed by Finance must be readable by `finance` 
 - **Scope:** delivered hours derived from sessions marked "held" in ATT-01; lecturer monthly
   summary; head of department approval per month; adjustments with reason; reports per
   lecturer/course/month/semester, PAE vs PAK.
-- **Assumption (Q-22).**
+- **Assumption (Q-22, Q-131, Q-132, Q-133).** Approval per lecturer and ended month by the head of
+  department; adjustments append-only with a reason.
 
 ### HR-05 — HR lists & reports
 - **Goal:** the lists Finance and management need (SRC-063, SRC-064, SRC-067, SRC-068, SRC-069).

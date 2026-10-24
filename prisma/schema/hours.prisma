@@ -1,0 +1,45 @@
+enum HoursApprovalStatus {
+  APPROVED
+  OPEN
+
+  @@map("hours_approval_status")
+}
+
+/// Monthly approval of a lecturer's delivered hours (HR-04); the row is kept when the month is reopened.
+model HoursApproval {
+  id              String              @id @default(cuid(2))
+  staffId         String              @map("staff_id")
+  /// Calendar month, `YYYY-MM` (Europe/Tirane).
+  month           String
+  status          HoursApprovalStatus
+  /// The figures at the moment of approval (Q-131): a later difference marks the month "changed".
+  heldHours       Int                 @map("held_hours")
+  adjustmentHours Int                 @map("adjustment_hours")
+  decidedAt       DateTime            @map("decided_at") @db.Timestamptz(3)
+  decidedById     String?             @map("decided_by_id")
+  createdAt       DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+  staff           Staff               @relation(fields: [staffId], references: [id])
+
+  @@unique([staffId, month])
+  @@map("hours_approvals")
+}
+
+/// A signed correction of delivered hours with a reason (HR-04); append-only.
+model HoursAdjustment {
+  id           String             @id @default(cuid(2))
+  staffId      String             @map("staff_id")
+  assignmentId String             @map("assignment_id")
+  month        String
+  /// Whole hours, never 0.
+  hours        Int
+  reason       String
+  createdAt    DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  createdById  String?            @map("created_by_id")
+  staff        Staff              @relation(fields: [staffId], references: [id])
+  assignment   TeachingAssignment @relation(fields: [assignmentId], references: [id])
+
+  @@index([staffId, month])
+  @@index([assignmentId])
+  @@map("hours_adjustments")
+}

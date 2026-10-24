@@ -13,17 +13,36 @@ registerPermissions("hr", {
     "hr.staff.sensitive",
     "hr.staff.self",
     "hr.workspace.self",
+    "hr.hours.read",
+    "hr.hours.self",
+    "hr.hours.approve",
+    "hr.hours.adjust",
   ],
   grants: {
     ...Object.fromEntries(ROLES.filter((r) => r !== "student").map((r) => [r, ["hr.staff.self"]])),
-    // HR-07 (Q-80): the lecturer workspace is for the lecturer role.
-    lecturer: ["hr.staff.self", "hr.workspace.self"],
-    sysadmin: [...READ, "hr.staff.sensitive", "hr.staff.self"],
-    secretary: [...READ, "hr.staff.self"],
-    finance: [...READ, "hr.staff.self"],
+    // HR-07 (Q-80): the lecturer workspace is for the lecturer role. HR-04 (Q-133): own hours.
+    lecturer: ["hr.staff.self", "hr.workspace.self", "hr.hours.self"],
+    // HR-04 (Q-131..Q-133): delivered hours are read by HR, Finance, the Secretariat and the sysadmin;
+    // a head of department reads, adjusts and approves those of their department.
+    sysadmin: [...READ, "hr.staff.sensitive", "hr.staff.self", "hr.hours.read"],
+    secretary: [...READ, "hr.staff.self", "hr.hours.read"],
+    finance: [...READ, "hr.staff.self", "hr.hours.read"],
     quality: [...READ, "hr.staff.self"],
-    head_of_department: [...READ, "hr.staff.self"],
-    hr: [...READ, "hr.staff.write", "hr.staff.sensitive", "hr.staff.self"],
+    head_of_department: [
+      ...READ,
+      "hr.staff.self",
+      "hr.hours.read",
+      "hr.hours.approve",
+      "hr.hours.adjust",
+    ],
+    hr: [
+      ...READ,
+      "hr.staff.write",
+      "hr.staff.sensitive",
+      "hr.staff.self",
+      "hr.hours.read",
+      "hr.hours.adjust",
+    ],
   },
 });
 

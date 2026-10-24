@@ -12,6 +12,7 @@ export {
   type SessionDetail,
   type AbsenceView,
 } from "./server/session.queries";
+export { sessionsForHours, type HoursSession } from "./server/hours.queries";
 export { attReportTable, attSummaryTable } from "./server/report.tables";
 export { ownSummary, getThreshold, type OwnCourseSummary } from "./server/report.queries";
 export { OwnSummary } from "./ui/own-summary";

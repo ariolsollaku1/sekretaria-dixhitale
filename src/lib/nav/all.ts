@@ -481,6 +481,24 @@ registerNav(
     group: "teaching",
     order: 13,
   },
+  {
+    id: "my-hours",
+    labelKey: "myHours",
+    href: "/hr/hours/mine",
+    icon: "clipboard",
+    permission: "hr.hours.self",
+    group: "teaching",
+    order: 8,
+  },
+  {
+    id: "delivered-hours",
+    labelKey: "deliveredHours",
+    href: "/hr/hours",
+    icon: "chart",
+    permission: "hr.hours.read",
+    group: "administration",
+    order: 34,
+  },
 );
 registerNav({
   id: "registration-notices",

@@ -57,6 +57,9 @@ erDiagram
 
   TeachingAssignment ||--o{ ClassSession : "held as"
   ClassSession ||--o{ AttendanceMark : records
+  Staff ||--o{ HoursApproval : "month approved"
+  Staff ||--o{ HoursAdjustment : "hours adjusted"
+  TeachingAssignment ||--o{ HoursAdjustment : "for"
 
   ExamSession ||--o{ Exam : schedules
   Exam }o--|| PlanCourse : for
@@ -143,6 +146,8 @@ erDiagram
 | `TimetableEntry` | `teachingAssignmentId`, `weekday`, `startTime`, `endTime`, `room`, `validFrom/To` |
 | `ClassSession` | `assignmentId`, `date`, `startMinute`, `endMinute`, `hours` (whole academic hours), `topic`, `status` (PLANNED/HELD/CANCELLED), `timetableEntryId?`, `heldAt` — basis for attendance and delivered hours (HR-04); never deleted, only cancelled (ATT-01) |
 | `AttendanceMark` | `sessionId`, `studentId`, `status` (PRESENT/ABSENT/EXCUSED), `note`, `markedById` — one per roster student per session (ATT-01) |
+| `HoursApproval` | `staffId`, `month` (`YYYY-MM`), `status` (APPROVED/OPEN), `heldHours`, `adjustmentHours` (figures at approval; a difference later = "changed"), `decidedAt`, `decidedById`; unique per staff and month, kept when reopened (HR-04) |
+| `HoursAdjustment` | `staffId`, `assignmentId`, `month`, `hours` (whole, non-zero), `reason`, `createdById` — append-only correction of delivered hours (HR-04). Delivered hours = `hours` of `HELD` `ClassSession`s per month + adjustments |
 
 ### EXM — exams & grades
 | Entity | Key fields |

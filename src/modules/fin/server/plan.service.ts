@@ -9,6 +9,7 @@ import {
 import { MAX_CENTS, centsOf, formatCents } from "../domain/money";
 import type { GeneratePlansInput } from "../domain/schemas";
 import { assertYearOpen } from "./fee.service";
+import { applyLiveScholarship } from "./scholarship.service";
 
 type Ctx = ActionContext;
 const date = (d: string) => new Date(`${d}T00:00:00Z`);
@@ -121,6 +122,8 @@ export async function generatePlans(ctx: Ctx, input: GeneratePlansInput) {
         total: formatCents(lines.reduce((a, l) => a + l.amountCents, 0)),
       },
     });
+    // FIN-03 AC-5: a scholarship granted before the plan existed applies to the new plan
+    await applyLiveScholarship(ctx, e.id, year.id, plan.id);
   }
   return { created, skipped };
 }

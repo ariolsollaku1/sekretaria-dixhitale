@@ -55,6 +55,7 @@ model Enrollment {
   cohort           Cohort                  @relation(fields: [cohortId], references: [id])
   years            YearRegistration[]
   paymentPlans     PaymentPlan[]
+  scholarships     Scholarship[]
   history          EnrollmentStatusEvent[]
   recognized       RecognizedCourse[]
 

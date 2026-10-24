@@ -584,6 +584,15 @@ registerNav(
     group: "finance",
     order: 40,
   },
+  {
+    id: "scholarships",
+    labelKey: "scholarships",
+    href: "/fin/scholarships",
+    icon: "wallet",
+    permission: "fin.scholarship.read",
+    group: "finance",
+    order: 50,
+  },
 );
 registerNav(
   {

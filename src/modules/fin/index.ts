@@ -27,3 +27,14 @@ export {
   type OwnFinance,
   type OwnPlan,
 } from "./server/payment.queries";
+import "./server/scholarship-handlers";
+export { scholarshipsTable, scholarshipReportTable } from "./server/scholarship.table";
+export {
+  getApplicationPanel,
+  listOpenYearOptions,
+  listPlanScholarships,
+  type ApplicationPanel,
+  type ScholarshipRow,
+} from "./server/scholarship.queries";
+export { GrantScholarshipForm, VoidScholarshipButton } from "./ui/scholarship-forms";
+export { SCHOLARSHIP_FORMS } from "./domain/scholarship-forms";

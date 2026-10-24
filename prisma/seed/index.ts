@@ -27,6 +27,7 @@ import { curPackageSeeder } from "./cur-package";
 import { ntfEventsSeeder } from "./ntf-events";
 import { hrEvaluationsSeeder } from "./hr-evaluations";
 import { admLeadsSeeder } from "./adm-leads";
+import { finScholarshipFormsSeeder } from "./fin-scholarship-forms";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -51,6 +52,7 @@ const SEEDERS: Seeder[] = [
   offRequestsSeeder,
   hrEvaluationsSeeder,
   admLeadsSeeder,
+  finScholarshipFormsSeeder,
   calTimetableSeeder,
   admNoticesSeeder,
   qaCampaignsSeeder,

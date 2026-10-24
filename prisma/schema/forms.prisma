@@ -60,6 +60,7 @@ model FormSubmission {
   assignee     User?                 @relation("FormAssignee", fields: [assigneeId], references: [id])
   events       FormSubmissionEvent[]
   recognized   RecognizedCourse[]
+  scholarships Scholarship[]
 
   @@index([definitionId, state])
   @@index([submitterId])

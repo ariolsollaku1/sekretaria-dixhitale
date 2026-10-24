@@ -116,7 +116,8 @@
       "deliveredHours": "Orët e realizuara",
       "evaluations": "Vlerësimet e performancës",
       "myEvaluations": "Vlerësimet që duhet të plotësoj",
-      "leads": "Interesimet"
+      "leads": "Interesimet",
+      "scholarships": "Bursat"
     },
     "languages": {
       "sq": "Shqip",
@@ -3052,7 +3053,8 @@
       "earlyUntil": "{amount} deri më {date}",
       "cancelled": "Anuluar",
       "adjusted": "Ndryshuar",
-      "active": "Aktiv"
+      "active": "Aktiv",
+      "scholarship": "Bursë"
     },
     "adjust": {
       "adjust": "Ndrysho",
@@ -3094,7 +3096,20 @@
       "noPlan": "Studenti nuk ka plan pagesash për këtë vit akademik.",
       "ambiguousPlan": "Disa plane pagesash përputhen me këtë student.",
       "duplicateInFile": "E njëjta pagesë shfaqet dy herë në skedar.",
-      "method": "Mënyrë pagese e panjohur."
+      "method": "Mënyrë pagese e panjohur.",
+      "alreadyHas": "Ky regjistrim ka tashmë një bursë për këtë vit.",
+      "oneValue": "Jepni ose përqindje ose shumë.",
+      "fullHasValue": "Bursa e plotë nuk ka përqindje apo shumë.",
+      "noTuition": "Plani i pagesave nuk ka këst të tarifës së studimit për t'u zbritur.",
+      "exceedsTuition": "Shuma është më e madhe se tarifa e studimit e vitit.",
+      "ambiguous": "Studenti ka disa regjistrime të hapura: jepni kodin e programit.",
+      "REQUEST_CLOSED": "Kërkesa është vendosur tashmë.",
+      "ALREADY_VOID": "Bursa është anuluar tashmë.",
+      "NOT_ALLOWED_TO_DECIDE": "Nuk keni leje të vendosni për burse.",
+      "NO_SCHOLARSHIP_RECORDED": "Regjistroni bursën përpara miratimit të kërkesës.",
+      "STUDENT_NOT_IDENTIFIED": "Studenti nuk u identifikua.",
+      "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
+      "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura: jepni kodin e programit në kërkesë."
     },
     "clearance": {
       "CLEARED": "Rregullt",
@@ -3199,6 +3214,87 @@
         "status": "Gjendja"
       },
       "earlyUntil": "{amount} nëse paguhet deri më {date}"
+    },
+    "scholarship": {
+      "title": "Bursat",
+      "noYear": "Nuk është zgjedhur asnjë vit akademik.",
+      "reportLink": "Raport: numri i bursave sipas vitit dhe programit",
+      "type": {
+        "FULL": "E plotë",
+        "PARTIAL": "Pjesore"
+      },
+      "category": {
+        "EXCELLENCE": "Shkëlqimi",
+        "NEED": "Nevoja",
+        "DISABILITY": "Aftësia e kufizuar",
+        "OTHER": "Tjetër"
+      },
+      "status": {
+        "ACTIVE": "Aktive",
+        "VOID": "Anuluar"
+      },
+      "columns": {
+        "type": "Lloji",
+        "category": "Kategoria",
+        "terms": "Zbritja",
+        "before": "Tarifa para bursës",
+        "reduction": "Zbritur me",
+        "after": "Tarifa pas bursës",
+        "planTotal": "Totali i planit",
+        "status": "Statusi",
+        "program": "Programi",
+        "year": "Viti akademik",
+        "actions": "Veprime"
+      },
+      "granted": "Bursa u regjistrua dhe plani i pagesave u rillogarit.",
+      "grantedPending": "Bursa u regjistrua. Do të zbatohet kur të gjenerohet plani i pagesave.",
+      "form": {
+        "directTitle": "Jep një bursë",
+        "decisionTitle": "Regjistro vendimin",
+        "studentNumber": "Numri i studentit",
+        "programCode": "Kodi i programit (nëse ka disa)",
+        "year": "Viti akademik",
+        "category": "Lloji i bursës",
+        "how": "Zbritja",
+        "howFull": "E plotë (100 % e tarifës së studimit)",
+        "howPercent": "Përqindje e tarifës së studimit",
+        "howAmount": "Shumë e caktuar e tarifës së studimit",
+        "percent": "Përqindja",
+        "amount": "Shuma",
+        "reason": "Arsyeja",
+        "grant": "Jep bursën",
+        "hint": "Bursa zvogëlon kestet e tarifës së studimit në planin e pagesave të atij viti. Anulimi e kthen zbritjen."
+      },
+      "void": {
+        "open": "Anulo",
+        "reason": "Arsyeja",
+        "confirm": "Anulo bursën",
+        "close": "Mbyll",
+        "done": "Bursa u anulua."
+      },
+      "report": {
+        "title": "Bursat sipas vitit dhe programit",
+        "hint": "Numëron bursat që nuk janë anuluar, sipas vitit akademik dhe programit të studimit.",
+        "total": "Gjithsej"
+      },
+      "decision": {
+        "title": "Vendimi për bursën",
+        "inbox": "Kutia e formularëve",
+        "applicant": "Kërkuesi",
+        "student": "Studenti",
+        "year": "Viti i kërkuar",
+        "average": "Mesatarja e notave",
+        "motivation": "Arsyet",
+        "recorded": "Bursa e regjistruar",
+        "empty": "Për këtë kërkesë nuk është regjistruar asnjë bursë.",
+        "closed": "Kërkesa është vendosur; vendimi nuk mund të ndryshojë më.",
+        "errors": {
+          "generic": "Kërkuesi nuk u lidh me një regjistrim të vetëm.",
+          "STUDENT_NOT_IDENTIFIED": "Studenti nuk u identifikua.",
+          "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
+          "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura: kërkesa nuk tregon një program të vetëm."
+        }
+      }
     }
   },
   "adm": {

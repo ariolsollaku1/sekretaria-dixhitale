@@ -30,7 +30,9 @@ Code: `src/modules/fin`. Finance reports by **calendar year**, payment plans ref
 - **Scope:** scholarship application form (PLT-15, public + portal); Finance decision creates a
   `Scholarship` (type, % or amount, academic year, reason) → payment plan recalculated; lists of
   students with scholarships and resulting fees; counts per academic year and program.
-- **Assumption (Q-23).**
+- **Assumption (Q-23):** scholarship = full or partial (percentage or amount) reduction of the tuition
+  of one academic year. Details and working assumptions in Q-140 (kinds, who decides), Q-141 (effect on
+  the plan), Q-142 (form, list, report). Spec: [FIN-03](../specs/FIN-03-scholarships.md).
 
 ### FIN-04 — Payment reminders
 - **Goal:** automatic reminder two weeks before each installment (SRC-086).

@@ -7,6 +7,7 @@ import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import type { SearchParams } from "@/lib/tables/types";
 import { lecturersTable } from "@/modules/hr";
+import { MessageThesePeople } from "@/modules/ntf";
 
 const PRESETS = [
   { key: "byDepartment", query: "status=active" },
@@ -28,7 +29,10 @@ export default async function HrListsPage({
   const [t, search] = await Promise.all([getTranslations("hr.lists"), searchParams]);
   return (
     <>
-      <PageHeader title={t("title")} />
+      <PageHeader
+        title={t("title")}
+        actions={<MessageThesePeople def={lecturersTable} search={search} user={user} />}
+      />
       <nav aria-label={t("presets")} className="mb-6">
         <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {PRESETS.map((p) => (

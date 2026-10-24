@@ -11,6 +11,8 @@ import { scopeWhere, toDay } from "./student.queries";
 type Row = {
   id: string;
   studentId: string;
+  /** NTF-03: the person to message (never shown). */
+  personId: string;
   studentNumber: string;
   name: string;
   faculty: string;
@@ -33,6 +35,7 @@ export const studentListsTable = registerTable(
     permission: "stu.student.read",
     exportName: "student-lists",
     rowKey: (r) => r.id,
+    recipient: (r) => r.personId,
     columns: [
       {
         key: "studentNumber",
@@ -136,6 +139,7 @@ export const studentListsTable = registerTable(
       const student = {
         select: {
           id: true,
+          personId: true,
           studentNumber: true,
           person: { select: { firstName: true, lastName: true } },
         },
@@ -167,6 +171,7 @@ export const studentListsTable = registerTable(
           rows: rows.map((r) => ({
             id: r.id,
             studentId: r.enrollment.student.id,
+            personId: r.enrollment.student.personId,
             studentNumber: r.enrollment.student.studentNumber,
             name: `${r.enrollment.student.person.lastName} ${r.enrollment.student.person.firstName}`,
             faculty: r.enrollment.program.department.faculty.code,
@@ -203,6 +208,7 @@ export const studentListsTable = registerTable(
         rows: rows.map((e) => ({
           id: e.id,
           studentId: e.enrollment.student.id,
+          personId: e.enrollment.student.personId,
           studentNumber: e.enrollment.student.studentNumber,
           name: `${e.enrollment.student.person.lastName} ${e.enrollment.student.person.firstName}`,
           faculty: e.enrollment.program.department.faculty.code,

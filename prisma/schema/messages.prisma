@@ -1,0 +1,69 @@
+// NTF-03: targeted messages to the people of a list, their delivery log and reusable templates.
+
+enum MessageStatus {
+  PENDING
+  SENT
+
+  @@map("message_status")
+}
+
+enum DeliveryState {
+  QUEUED
+  DELIVERED
+  NO_ACCOUNT
+
+  @@map("delivery_state")
+}
+
+/// One send to the people of a list. Never edited or deleted after it is stored.
+model Message {
+  id             String             @id @default(cuid(2))
+  subject        String
+  body           String
+  /// PLT-10 table id the recipients came from, e.g. "stu.lists".
+  sourceTable    String             @map("source_table")
+  /// The validated filters of that list at send time.
+  filters        Json
+  status         MessageStatus      @default(PENDING)
+  recipientCount Int                @map("recipient_count")
+  noAccountCount Int                @default(0) @map("no_account_count")
+  createdById    String             @map("created_by_id")
+  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  completedAt    DateTime?          @map("completed_at") @db.Timestamptz(3)
+  recipients     MessageRecipient[]
+
+  @@index([createdById, createdAt])
+  @@index([status, createdAt])
+  @@map("messages")
+}
+
+/// The delivery log: one row per person. Holds ids only, never an address.
+model MessageRecipient {
+  id             String        @id @default(cuid(2))
+  messageId      String        @map("message_id")
+  personId       String        @map("person_id")
+  userId         String?       @map("user_id")
+  state          DeliveryState @default(QUEUED)
+  notificationId String?       @map("notification_id")
+  emailOutboxId  String?       @map("email_outbox_id")
+  message        Message       @relation(fields: [messageId], references: [id])
+  person         Person        @relation(fields: [personId], references: [id])
+
+  @@unique([messageId, personId])
+  @@index([messageId, state])
+  @@map("message_recipients")
+}
+
+/// A saved wording (Q-52); archived, never deleted.
+model MessageTemplate {
+  id          String    @id @default(cuid(2))
+  name        String
+  subject     String
+  body        String
+  archivedAt  DateTime? @map("archived_at") @db.Timestamptz(3)
+  createdById String    @map("created_by_id")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([archivedAt, name])
+  @@map("message_templates")
+}

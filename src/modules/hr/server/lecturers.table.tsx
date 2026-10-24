@@ -12,6 +12,8 @@ import { scopeWhere } from "./staff.queries";
 
 type Row = {
   id: string;
+  /** NTF-03: the person to message (never shown). */
+  personId: string;
   name: string;
   category: string;
   faculty: string;
@@ -38,6 +40,7 @@ export const lecturersTable = registerTable(
     permission: "hr.staff.read",
     exportName: "lecturers",
     rowKey: (r) => r.id,
+    recipient: (r) => r.personId,
     columns: [
       {
         key: "name",
@@ -195,6 +198,7 @@ export const lecturersTable = registerTable(
         total,
         rows: rows.map((s) => ({
           id: s.id,
+          personId: s.personId,
           name: `${s.person.lastName} ${s.person.firstName}`,
           category: s.category,
           faculty: s.department?.faculty.code ?? "",

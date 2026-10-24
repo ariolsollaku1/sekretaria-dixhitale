@@ -20,6 +20,8 @@ export type NotifyInput = {
   link?: string | null;
   /** One notification per user + key (e.g. reminders); repeating it does nothing. */
   dedupeKey?: string;
+  /** Sender-written texts (NTF-03) instead of the catalog texts of the type. */
+  raw?: { title: string; body: string; subject: string };
 };
 
 export type NotifyContext = {
@@ -28,7 +30,11 @@ export type NotifyContext = {
   afterCommit?: (fn: () => Promise<void>) => void;
 };
 
-export type NotifyResult = { notificationId: string | null; emailQueued: boolean };
+export type NotifyResult = {
+  notificationId: string | null;
+  emailQueued: boolean;
+  outboxId?: string;
+};
 
 /**
  * AC-2: writes the in-app notification and, if allowed, the e-mail outbox row in the CALLER's
@@ -56,6 +62,7 @@ export async function notify(ctx: NotifyContext, input: NotifyInput): Promise<No
     messages: CATALOGS[locale],
     link,
     appUrl: env.APP_URL,
+    raw: input.raw,
   });
 
   const created = await ctx.db.notification.createManyAndReturn({
@@ -100,5 +107,5 @@ export async function notify(ctx: NotifyContext, input: NotifyInput): Promise<No
   ctx.afterCommit?.(async () => {
     await enqueue("plt.mail.send", { outboxId: outbox.id }, { key: `mail:${outbox.id}` });
   });
-  return { notificationId: notification.id, emailQueued: true };
+  return { notificationId: notification.id, emailQueued: true, outboxId: outbox.id };
 }

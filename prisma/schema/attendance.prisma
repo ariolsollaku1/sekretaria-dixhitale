@@ -1,0 +1,61 @@
+enum SessionStatus {
+  PLANNED
+  HELD
+  CANCELLED
+
+  @@map("session_status")
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  EXCUSED
+
+  @@map("attendance_status")
+}
+
+/// One meeting of a teaching assignment on a date (ATT-01). Never deleted, only cancelled.
+model ClassSession {
+  id               String             @id @default(cuid(2))
+  assignmentId     String             @map("assignment_id")
+  date             DateTime           @db.Date
+  /// Minutes from midnight, local time.
+  startMinute      Int                @map("start_minute")
+  endMinute        Int                @map("end_minute")
+  /// Whole academic hours the session counts for (Q-60); feeds HR-04.
+  hours            Int
+  topic            String?
+  status           SessionStatus      @default(PLANNED)
+  timetableEntryId String?            @map("timetable_entry_id")
+  heldAt           DateTime?          @map("held_at") @db.Timestamptz(3)
+  createdAt        DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById      String?            @map("created_by_id")
+  updatedById      String?            @map("updated_by_id")
+  assignment       TeachingAssignment @relation(fields: [assignmentId], references: [id])
+  timetableEntry   TimetableEntry?    @relation(fields: [timetableEntryId], references: [id], onDelete: SetNull)
+  marks            AttendanceMark[]
+
+  @@unique([assignmentId, date, startMinute])
+  @@index([date])
+  @@index([timetableEntryId])
+  @@map("class_sessions")
+}
+
+/// A student's attendance at one session (ATT-01).
+model AttendanceMark {
+  id         String           @id @default(cuid(2))
+  sessionId  String           @map("session_id")
+  studentId  String           @map("student_id")
+  status     AttendanceStatus
+  note       String?
+  markedById String?          @map("marked_by_id")
+  createdAt  DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt  DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+  session    ClassSession     @relation(fields: [sessionId], references: [id])
+  student    Student          @relation(fields: [studentId], references: [id])
+
+  @@unique([sessionId, studentId])
+  @@index([studentId])
+  @@map("attendance_marks")
+}

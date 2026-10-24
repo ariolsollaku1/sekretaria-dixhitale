@@ -142,6 +142,15 @@ registerNav(
     order: 15,
   },
   {
+    id: "teaching-hub",
+    labelKey: "teachingHub",
+    href: "/hr/teaching",
+    icon: "book",
+    permission: "hr.workspace.self",
+    group: "teaching",
+    order: 1,
+  },
+  {
     id: "my-teaching",
     labelKey: "myTeaching",
     href: "/cur/teaching/mine",

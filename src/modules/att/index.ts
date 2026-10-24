@@ -6,6 +6,8 @@ export {
   getSessionDetail,
   ownAbsences,
   getWindowDays,
+  rosterOf,
+  type RosterStudent,
   type SessionView,
   type SessionDetail,
   type AbsenceView,
@@ -16,4 +18,11 @@ export { OwnSummary } from "./ui/own-summary";
 export { SessionForms } from "./ui/session-forms";
 export { SessionList } from "./ui/session-list";
 export { AttendanceForm } from "./ui/attendance-form";
-export { addDays, clampDay, defaultHours, formatTime, todayInTirane } from "./domain/session-rules";
+export {
+  addDays,
+  clampDay,
+  defaultHours,
+  formatTime,
+  isoWeekday,
+  todayInTirane,
+} from "./domain/session-rules";

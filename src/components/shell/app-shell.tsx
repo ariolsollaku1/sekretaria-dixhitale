@@ -7,12 +7,30 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { signOutAction } from "@/lib/auth/actions";
 import { AcademicYearProvider } from "@/lib/academic-year/client";
 import { AcademicYearSelect, type AcademicYearView } from "./academic-year-select";
+import { GlobalSearch } from "./global-search";
 import { LocaleSwitcher } from "./locale-switcher";
 import { NavList, type NavSectionView } from "./nav-list";
 import { NotificationBell, type BellItem } from "@/components/notifications/notification-bell";
 import { UserMenu } from "./user-menu";
 
 const SIGN_OUT_FORM = "shell-signout";
+
+function BrandMark({ appName, institution }: { appName: string; institution: string }) {
+  return (
+    <div className="flex items-center gap-3 p-5">
+      <span
+        aria-hidden
+        className="grid size-10 place-items-center rounded-xl bg-white/15 text-lg font-bold text-white"
+      >
+        L
+      </span>
+      <div>
+        <p className="font-semibold text-white">{appName}</p>
+        <p className="text-sidebar-foreground text-[13px]">{institution}</p>
+      </div>
+    </div>
+  );
+}
 
 export type ShellProps = {
   sections: NavSectionView[];
@@ -36,18 +54,17 @@ export function AppShell({ sections, user, academicYear, notifications, children
       </a>
       <form id={SIGN_OUT_FORM} action={signOutAction} />
       <div className="flex min-h-screen">
-        <aside className="border-border bg-card hidden w-64 shrink-0 border-r md:block print:hidden">
-          <div className="p-4">
-            <p className="text-brand text-lg font-semibold">{t("appName")}</p>
-            <p className="text-muted-foreground text-[13px]">{t("institution")}</p>
+        <aside className="bg-sidebar-gradient text-sidebar-foreground hidden w-64 shrink-0 md:block print:hidden">
+          <div className="sticky top-0 flex max-h-screen flex-col overflow-y-auto">
+            <BrandMark appName={t("appName")} institution={t("institution")} />
+            <nav aria-label={t("navigation")} className="p-3">
+              <NavList sections={sections} />
+            </nav>
           </div>
-          <nav aria-label={t("navigation")} className="p-2">
-            <NavList sections={sections} />
-          </nav>
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="border-border bg-card flex flex-wrap items-center gap-2 border-b px-3 py-2 md:px-6 print:hidden">
+          <header className="flex flex-wrap items-center gap-2 px-3 py-3 md:px-8 print:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -57,8 +74,11 @@ export function AppShell({ sections, user, academicYear, notifications, children
             >
               <Menu aria-hidden />
             </Button>
-            <p className="font-semibold md:hidden">{t("appName")}</p>
-            <div className="ml-auto flex flex-wrap items-center gap-2">
+            <p className="text-brand font-semibold md:hidden">{t("appName")}</p>
+            <div className="min-w-0 flex-1 md:max-w-sm">
+              <GlobalSearch sections={sections} />
+            </div>
+            <div className="ml-auto flex flex-wrap items-center gap-3">
               {academicYear && <AcademicYearSelect {...academicYear} />}
               <LocaleSwitcher />
               <NotificationBell unread={notifications.unread} items={notifications.items} />
@@ -68,7 +88,7 @@ export function AppShell({ sections, user, academicYear, notifications, children
           <main
             id="main-content"
             tabIndex={-1}
-            className="mx-auto w-full max-w-6xl flex-1 p-4 md:p-8"
+            className="mx-auto w-full max-w-7xl flex-1 p-4 md:px-8 md:pt-2 md:pb-10"
           >
             {children}
           </main>
@@ -77,8 +97,10 @@ export function AppShell({ sections, user, academicYear, notifications, children
 
       <Dialog open={drawerOpen} onOpenChange={setDrawerOpen}>
         <DialogContent placement="drawer" closeLabel={t("closeMenu")} className="p-4">
-          <DialogTitle className="text-brand text-lg font-semibold">{t("appName")}</DialogTitle>
-          <DialogDescription className="text-muted-foreground mb-4 text-[13px]">
+          <DialogTitle className="mb-1 text-lg font-semibold text-white">
+            {t("appName")}
+          </DialogTitle>
+          <DialogDescription className="text-sidebar-foreground mb-4 text-[13px]">
             {t("institution")}
           </DialogDescription>
           <nav aria-label={t("navigation")}>

@@ -2,7 +2,9 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
@@ -88,10 +90,10 @@ export function AccountPanel(props: Props) {
     );
 
   return (
-    <section aria-labelledby="account-panel-title" className="mb-8 max-w-2xl">
-      <h2 id="account-panel-title" className="mb-3 text-2xl font-semibold">
+    <Card aria-labelledby="account-panel-title">
+      <CardTitle id="account-panel-title" icon={KeyRound}>
         {t("title")}
-      </h2>
+      </CardTitle>
       <p className="mb-3 flex flex-wrap items-center gap-3 text-sm">
         <StatusBadge tone={TONE[props.state]} label={t(`state.${props.state}`)} />
         {props.email && <span>{props.email}</span>}
@@ -128,6 +130,6 @@ export function AccountPanel(props: Props) {
           {t("resend")}
         </Button>
       )}
-    </section>
+    </Card>
   );
 }

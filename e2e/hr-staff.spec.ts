@@ -73,7 +73,7 @@ test("AC-1/2/3/7/8/9/11: HR registers, edits and ends employment; finance reads 
   await signInAs(page, "finance@dev.logos.test");
   await page.goto(detailUrl);
   await expect(page.getByRole("heading", { level: 1, name: "Arben E2EHoxha" })).toBeVisible();
-  await expect(page.getByText("Prof. Dr.")).toBeVisible();
+  await expect(page.getByRole("definition").filter({ hasText: "Prof. Dr." })).toBeVisible();
   await expect(page.getByText("E2E-J12345678K")).toHaveCount(0);
   await expect(page.getByText("Numri personal (NID)")).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Ndrysho" })).toHaveCount(0);
@@ -95,9 +95,11 @@ test("AC-1/2/3/7/8/9/11: HR registers, edits and ends employment; finance reads 
 test("AC-10/13: a lecturer sees only their own record; a student is refused", async ({ page }) => {
   await signInAs(page, "lecturer@dev.logos.test");
   await page.goto("/hr/me");
-  await expect(
-    page.getByRole("heading", { level: 1, name: "Të dhënat e mia si staf" }),
-  ).toBeVisible();
+  // The record page has one h1 (the person's name); "my record" is its breadcrumb.
+  await expect(page.getByRole("heading", { level: 1, name: "Demo Lektor" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: /breadcrumb|rruga/i })).toContainText(
+    "Të dhënat e mia si staf",
+  );
   await expect(page.getByText("Dr.").first()).toBeVisible();
   await page.goto("/hr/staff");
   await expect(page.getByRole("heading", { level: 1, name: "Nuk keni leje" })).toBeVisible();

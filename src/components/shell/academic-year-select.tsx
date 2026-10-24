@@ -1,4 +1,5 @@
 "use client";
+import { CalendarDays } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { setAcademicYearAction } from "@/lib/academic-year/actions";
@@ -13,8 +14,9 @@ export function AcademicYearSelect({ options, selected }: AcademicYearView) {
   const t = useTranslations("shell");
   const [pending, startTransition] = useTransition();
   return (
-    <div className="flex items-center gap-2">
-      <label htmlFor="academic-year-select" className="text-[13px] font-semibold">
+    <div className="rounded-control bg-card ring-border flex items-center gap-2 pl-3 shadow-sm ring-1">
+      <CalendarDays className="text-brand size-4" aria-hidden />
+      <label htmlFor="academic-year-select" className="sr-only">
         {t("academicYear")}
       </label>
       <select
@@ -22,7 +24,7 @@ export function AcademicYearSelect({ options, selected }: AcademicYearView) {
         value={selected ?? ""}
         disabled={pending}
         onChange={(e) => startTransition(() => setAcademicYearAction(e.target.value))}
-        className="font-tabular rounded-control border-input bg-card min-h-11 border px-2 text-sm"
+        className="font-tabular rounded-control min-h-11 bg-transparent pr-2 text-sm font-semibold"
       >
         {options.map((o) => (
           <option key={o.id} value={o.id}>

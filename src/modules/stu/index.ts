@@ -35,3 +35,4 @@ export {
   type RecognitionPanel,
 } from "./server/recognition.queries";
 export { REQUEST_FORMS } from "./domain/request-forms";
+export { RecognitionPanelView } from "./ui/recognition-panel";

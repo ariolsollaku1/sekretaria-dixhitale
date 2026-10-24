@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { SubmissionActions } from "@/components/forms/submission-actions";
@@ -11,6 +12,8 @@ import type { Locale } from "@/lib/i18n/config";
 import { formatDateTime } from "@/lib/i18n/format";
 import { nextStates, stateDef } from "@/lib/forms/answers";
 import { localize } from "@/lib/forms/definition";
+import "@/lib/forms/all";
+import { getFormHandler } from "@/lib/forms/handlers";
 import { getSubmission, listAssignees } from "@/lib/forms/queries";
 
 export default async function SubmissionPage({ params }: { params: Promise<{ id: string }> }) {
@@ -25,6 +28,8 @@ export default async function SubmissionPage({ params }: { params: Promise<{ id:
   const def = form.definition;
   const answers = submission.answers as Record<string, unknown>;
   const assignees = await listAssignees(form.ownerRoles);
+  // a module may offer more actions for its forms (e.g. STU-07: the recognition decision)
+  const moreHref = def.handler ? getFormHandler(def.handler)?.detailHref?.(submission.id) : null;
   const title = `${localize(def.title, l)} · ${submission.reference}`;
   const stateLabel = (k: string | null) => (k ? localize(stateDef(def, k)?.label, l) || k : "—");
   const display = (f: (typeof def.fields)[number]) => {
@@ -85,6 +90,13 @@ export default async function SubmissionPage({ params }: { params: Promise<{ id:
           ))}
         </dl>
       </section>
+      {moreHref && (
+        <p className="mb-6 text-sm">
+          <Link href={moreHref} className="font-semibold underline">
+            {t("inbox.moreActions")}
+          </Link>
+        </p>
+      )}
       <section aria-labelledby="actions-title" className="mb-8">
         <h2 id="actions-title" className="mb-3 text-2xl font-semibold">
           {t("inbox.actions")}

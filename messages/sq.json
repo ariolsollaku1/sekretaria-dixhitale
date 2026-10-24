@@ -1883,6 +1883,53 @@
       "noRecord": "Nuk keni dosje studenti",
       "noRecordHint": "Llogaria juaj nuk është e lidhur me një student. Kontaktoni Sekretarinë.",
       "open": "Hap portalin tim"
+    },
+    "requests": {
+      "title": "Vendimi i njohjes",
+      "inbox": "Kutia e formularëve",
+      "requester": "Kërkuesi",
+      "student": "Studenti",
+      "studentNumber": "Numri i studentit",
+      "program": "Programi",
+      "courses": "Lëndët e njohura",
+      "empty": "Nuk është regjistruar asnjë lëndë e njohur.",
+      "closed": "Kërkesa është mbyllur; vendimi nuk ndryshohet më.",
+      "columns": {
+        "code": "Kodi",
+        "name": "Lënda",
+        "credits": "Kredite",
+        "note": "Shënim",
+        "status": "Gjendja",
+        "actions": "Veprime"
+      },
+      "statusLive": "E njohur",
+      "statusVoid": "Anuluar",
+      "void": "Anulo",
+      "voidTitle": "Anulo njohjen",
+      "voidBody": "Lënda {course} nuk do të numërohet më. Rreshti ruhet.",
+      "voidReason": "Arsyeja",
+      "recorded": "Lënda u regjistrua.",
+      "voided": "Njohja u anulua.",
+      "form": {
+        "courseCode": "Kodi i lëndës",
+        "credits": "Kredite (opsionale)",
+        "note": "Shënim (opsionale)",
+        "add": "Shto lëndën e njohur"
+      },
+      "errors": {
+        "unknownCourse": "Lënda nuk u gjet.",
+        "alreadyRecognized": "Kjo lëndë është e njohur tashmë për këtë regjistrim.",
+        "REQUEST_CLOSED": "Kërkesa është mbyllur.",
+        "creditsRange": "Kreditet duhet të jenë një numër nga 1 në 60.",
+        "required": "Plotësoni fushën.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "reasonRequired": "Arsyeja është e detyrueshme.",
+        "ALREADY_VOID": "Njohja është anuluar tashmë.",
+        "STUDENT_NOT_IDENTIFIED": "Studenti nuk u identifikua (numri i studentit dhe data e lindjes duhet të përputhen).",
+        "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
+        "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura; kodi i programit nuk përzgjedh saktësisht një.",
+        "generic": "Veprimi dështoi."
+      }
     }
   },
   "forms": {
@@ -1959,8 +2006,14 @@
         "HANDLER_MISSING": "Nuk ka program që e kryen miratimin për këtë formular.",
         "assigneeCannotHandle": "Ky përdorues nuk i trajton këto formularë.",
         "required": "Shkruani tekstin.",
-        "generic": "Veprimi nuk u krye."
-      }
+        "generic": "Veprimi nuk u krye.",
+        "STUDENT_NOT_IDENTIFIED": "Studenti nuk u identifikua (numri i studentit dhe data e lindjes duhet të përputhen).",
+        "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
+        "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura; kodi i programit nuk përzgjedh saktësisht një.",
+        "NOT_ALLOWED_TO_DEREGISTER": "Nuk keni të drejtë të çregjistroni studentë.",
+        "NO_RECOGNIZED_COURSES": "Regjistroni të paktën një lëndë të njohur përpara miratimit."
+      },
+      "moreActions": "Hap vendimin e njohjes"
     },
     "admin": {
       "title": "Përcaktimi i formularëve",

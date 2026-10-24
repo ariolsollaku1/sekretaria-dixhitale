@@ -1883,6 +1883,53 @@
       "noRecord": "You have no student record",
       "noRecordHint": "Your account is not linked to a student. Contact the Secretariat.",
       "open": "Open my portal"
+    },
+    "requests": {
+      "title": "Recognition decision",
+      "inbox": "Form inbox",
+      "requester": "Requester",
+      "student": "Student",
+      "studentNumber": "Student number",
+      "program": "Program",
+      "courses": "Recognized courses",
+      "empty": "No recognized course has been recorded.",
+      "closed": "The request is closed; the decision can no longer change.",
+      "columns": {
+        "code": "Code",
+        "name": "Course",
+        "credits": "Credits",
+        "note": "Note",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "statusLive": "Recognized",
+      "statusVoid": "Voided",
+      "void": "Void",
+      "voidTitle": "Void the recognition",
+      "voidBody": "Course {course} will no longer count. The row is kept.",
+      "voidReason": "Reason",
+      "recorded": "The course was recorded.",
+      "voided": "The recognition was voided.",
+      "form": {
+        "courseCode": "Course code",
+        "credits": "Credits (optional)",
+        "note": "Note (optional)",
+        "add": "Add recognized course"
+      },
+      "errors": {
+        "unknownCourse": "The course was not found.",
+        "alreadyRecognized": "This course is already recognized for this enrollment.",
+        "REQUEST_CLOSED": "The request is closed.",
+        "creditsRange": "Credits must be a number from 1 to 60.",
+        "required": "Fill in the field.",
+        "tooLong": "The text is too long.",
+        "reasonRequired": "A reason is required.",
+        "ALREADY_VOID": "The recognition is already voided.",
+        "STUDENT_NOT_IDENTIFIED": "The student could not be identified (student number and date of birth must match).",
+        "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
+        "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments and the program code does not select exactly one.",
+        "generic": "The action failed."
+      }
     }
   },
   "forms": {
@@ -1959,8 +2006,14 @@
         "HANDLER_MISSING": "No module handles the approval of this form.",
         "assigneeCannotHandle": "This user does not handle these forms.",
         "required": "Enter the text.",
-        "generic": "The action failed."
-      }
+        "generic": "The action failed.",
+        "STUDENT_NOT_IDENTIFIED": "The student could not be identified (student number and date of birth must match).",
+        "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
+        "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments and the program code does not select exactly one.",
+        "NOT_ALLOWED_TO_DEREGISTER": "You are not allowed to deregister students.",
+        "NO_RECOGNIZED_COURSES": "Record at least one recognized course before approving."
+      },
+      "moreActions": "Open the recognition decision"
     },
     "admin": {
       "title": "Form definitions",

@@ -177,7 +177,7 @@ erDiagram
 | `Staff` | (HR-01, implemented) `personId` (unique), `kind` (ACADEMIC/ADMINISTRATIVE), `category` (PAE/PAK/VOLUNTEER), `degree?`, `title?`, `departmentId?`, `retired`, `primaryEmployer?` (PAK only), `contractStart`, `contractEnd?`, `active` (employment ended = false; never deleted). |
 | `EmploymentContract` | `staffId`, `type`, `startDate`, `endDate`, `fileId` |
 | `PerformanceEvaluation` | `staffId`, `evaluatorId`, `period`, form submission ref, `score` |
-| Staff requests | via `FormSubmission` (leave, supplies, certificates, authorizations) |
+| Staff requests | (OFF-01, implemented) no table of their own: `FormSubmission` rows of the forms `staff-leave`, `staff-supplies`, `staff-certificate`, `staff-authorization` (handler `off.request`). The chain is in the definition: transitions name the `roles` that may take them, and `submitRoles` limits who may fill the form in (PLT-15 additions). History per staff member = the submissions of the account. |
 
 ### QA / ERS / LIB / NTF
 | Entity | Key fields |

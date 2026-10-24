@@ -61,7 +61,7 @@ const featuresText = readFileSync(FEATURES, "utf8");
 const questionsText = readFileSync(QUESTIONS, "utf8");
 
 const questions = new Map();
-for (const { row } of parseTables(questionsText, /^Q-\d{2}$/)) {
+for (const { row } of parseTables(questionsText, /^Q-\d{2,3}$/)) {
   if (questions.has(row.ID)) errors.push(`Duplicate question ${row.ID}`);
   const blocking = row.Blocking?.toLowerCase();
   const status = row.Status?.toLowerCase();

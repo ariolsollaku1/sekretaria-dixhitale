@@ -96,7 +96,9 @@
       "attendanceReport": "Raporti i pranisë",
       "attendanceSummary": "Përmbledhja e pranisë",
       "teachingHub": "Hapësira ime e mësimdhënies",
-      "registrationNotices": "Njoftimet e regjistrimit"
+      "registrationNotices": "Njoftimet e regjistrimit",
+      "staffRequests": "Kërkesat e stafit",
+      "staffRequestHistory": "Historiku i kërkesave"
     },
     "languages": {
       "sq": "Shqip",
@@ -2168,7 +2170,9 @@
         "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
         "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura; kodi i programit nuk përzgjedh saktësisht një.",
         "NOT_ALLOWED_TO_DEREGISTER": "Nuk keni të drejtë të çregjistroni studentë.",
-        "NO_RECOGNIZED_COURSES": "Regjistroni të paktën një lëndë të njohur përpara miratimit."
+        "NO_RECOGNIZED_COURSES": "Regjistroni të paktën një lëndë të njohur përpara miratimit.",
+        "OWN_REQUEST": "Nuk mund ta vendosni vetë për kërkesën tuaj.",
+        "INVALID_LEAVE_DATES": "Data e mbarimit të lejes nuk mund të jetë para fillimit."
       },
       "moreActions": "Hap vendimin e njohjes"
     },
@@ -2828,6 +2832,26 @@
       "programNotFound": "Programi nuk ekziston.",
       "audienceNotAllowed": "Nuk lejohesh të publikosh për të gjithë.",
       "generic": "Diçka shkoi keq. Provo përsëri."
+    }
+  },
+  "off": {
+    "title": "Kërkesat e stafit",
+    "newRequest": "Dërgo një kërkesë",
+    "noForms": "Nuk ka formularë të disponueshëm për ju.",
+    "mine": "Kërkesat e mia",
+    "empty": "Nuk ka kërkesa.",
+    "columns": {
+      "reference": "Referenca",
+      "type": "Lloji",
+      "state": "Gjendja",
+      "period": "Periudha",
+      "submittedAt": "Dërguar më"
+    },
+    "history": {
+      "title": "Historiku i kërkesave të stafit",
+      "pick": "Zgjidhni një punonjës",
+      "nobody": "Asnjë punonjës nuk ka dërguar kërkesë.",
+      "of": "Kërkesat e {name}"
     }
   }
 }

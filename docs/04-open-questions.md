@@ -108,6 +108,10 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-97 | Erasmus applications: known applicants and visibility | no | open | Erasmus Office |
 | Q-98 | Registration notices: shape, audience, public surfaces | no | open | Student affairs |
 | Q-99 | Registration notices: required documents and contract excerpt | no | open | Student affairs |
+| Q-100 | Staff requests: the types and their fields | no | open | Administration |
+| Q-101 | Staff requests: the approval chain | no | open | Administration / HR |
+| Q-102 | Staff requests: who submits, handles and reads history | no | open | Administration / HR |
+| Q-103 | Staff requests: what approval does | no | open | Administration / HR |
 
 ---
 
@@ -353,6 +357,30 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 - **Answer (2026-10-03):** Deployment is not a concern for the documentation phase; the client will
   comply with the data-location requirements (SRC-150). The stack stays host-agnostic (Docker
   Compose, no third-party storage of personal data).
+
+### Q-100 — Staff requests: the types and their fields
+- **Context:** SRC-140 — "forms for leave, office supplies, certificates, authorizations, etc."; OFF-01.
+- **Questions:** Which request types exist and what does each form ask? Which leave types?
+- **Working assumption:** four forms. Leave: type (annual, sick, unpaid, other), start and end date, reason. Supplies: items with quantities (free text, one per line), needed-by date (optional), notes. Employment certificate: purpose, recipient (optional), copies (1 to 10), notes. Authorization: subject, description, valid from, valid to (optional). The sysadmin can edit any of them in the forms admin.
+- **Impact:** field lists, leave types.
+
+### Q-101 — Staff requests: the approval chain
+- **Context:** SRC-140; OFF-01 brief — "supervisor → administration, configurable per type"; there is no organizational chart of who supervises whom.
+- **Questions:** Who is the "direct supervisor" of a staff member? Which request types need the supervisor's approval?
+- **Working assumption:** the supervisor is any user with the `head_of_department` role (not matched to the staff member's department). Leave and authorization need the supervisor first and then administration; supplies and certificates go to administration only. Administration may also approve directly (for heads of department or when the supervisor is absent). Nobody can take a supervisor or administration step on their own request. The chain is configured in each form's workflow (transition roles), so it changes without code.
+- **Impact:** workflows, who sees which requests in the inbox.
+
+### Q-102 — Staff requests: who submits, handles and reads history
+- **Context:** roles.md — "staff self-service" and the OFF row (administration W, HR R).
+- **Questions:** Who may submit? Who may see all requests of a staff member?
+- **Working assumption:** every role except student submits; the inbox of a form is handled by its owner roles (administration, plus head of department for leave and authorization); the per-staff history page is for administration, HR and the sysadmin.
+- **Impact:** submit roles, history access.
+
+### Q-103 — Staff requests: what approval does
+- **Context:** SRC-140; leave balances and the employment certificate layout are not defined.
+- **Questions:** Should an approved leave reduce a balance or appear in a calendar? What does the employment certificate look like and who signs it?
+- **Working assumption:** approval only closes the request and notifies the staff member (the end date must not be before the start date); no balances or calendar entries; the certificate is not generated automatically, administration issues it outside the system until a layout is given (then PLT-09 can produce it).
+- **Impact:** leave records, certificate generation.
 
 ---
 

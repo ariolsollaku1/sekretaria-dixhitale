@@ -9,11 +9,11 @@ import { localize } from "@/lib/forms/definition";
 import { listAuthenticatedForms } from "@/lib/forms/queries";
 
 export default async function FormsPage() {
-  await requireUser("/forms");
+  const user = await requireUser("/forms");
   const [t, locale, forms] = await Promise.all([
     getTranslations("forms"),
     getLocale(),
-    listAuthenticatedForms(),
+    listAuthenticatedForms(user.id),
   ]);
   return (
     <>

@@ -1,6 +1,7 @@
 // Pure form-definition schema (PLT-15 AC-2). No I/O. The definition is JSON written by the
 // sysadmin; it is validated here before it can be saved or published.
 import { z } from "zod";
+import { ROLES } from "@/lib/authz/roles";
 
 export const FIELD_TYPES = [
   "text",
@@ -41,6 +42,8 @@ const fieldSchema = z.object({
 });
 export type FormField = z.infer<typeof fieldSchema>;
 
+const roleSchema = z.enum(ROLES, "unknownRole");
+
 const stateSchema = z.object({
   key,
   label: localized,
@@ -57,8 +60,15 @@ export const definitionSchema = z
     workflow: z.object({
       initial: key,
       states: z.array(stateSchema).min(1).max(30),
-      transitions: z.array(z.object({ from: key, to: key })).max(200),
+      // `roles` (optional): only users holding one of them may take the transition (sysadmin always may)
+      transitions: z
+        .array(
+          z.object({ from: key, to: key, roles: z.array(roleSchema).min(1).max(13).optional() }),
+        )
+        .max(200),
     }),
+    /** Roles allowed to fill in an authenticated form; absent = every signed-in user. */
+    submitRoles: z.array(roleSchema).min(1).max(13).optional(),
     handler: z
       .string()
       .regex(/^[a-z]+\.[a-z0-9_.-]+$/, "badHandler")
@@ -127,6 +137,7 @@ const ERROR_CODES = new Set([
   "noFinalState",
   "finalHasExit",
   "fileNotPublic",
+  "unknownRole",
 ]);
 
 /** AC-2: the definition, or every problem with its path (`fields.2.options`). `audience` adds the cross-check on files. */

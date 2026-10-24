@@ -112,9 +112,30 @@ export function makeReference(bytes: Uint8Array = randomBytes(8)): string {
   return `${chars.slice(0, 4)}-${chars.slice(4, 8)}`;
 }
 
-/** AC-8: the states reachable from `state`. */
-export const nextStates = (def: FormDefinitionJson, state: string): string[] =>
-  def.workflow.transitions.filter((t) => t.from === state).map((t) => t.to);
+/**
+ * AC-8: the states reachable from `state`. With `roles` given, transitions that name roles are
+ * limited to holders of one of them (OFF-01: supervisor, then administration); the sysadmin may take
+ * any. Without `roles` nothing is filtered (structural questions).
+ */
+export const nextStates = (
+  def: FormDefinitionJson,
+  state: string,
+  roles?: readonly string[],
+): string[] =>
+  def.workflow.transitions
+    .filter(
+      (t) =>
+        t.from === state &&
+        (!roles ||
+          !t.roles ||
+          roles.includes("sysadmin") ||
+          t.roles.some((r) => roles.includes(r))),
+    )
+    .map((t) => t.to);
+
+/** OFF-01: may this user fill in the authenticated form? (`submitRoles` absent = anybody signed in) */
+export const maySubmit = (def: FormDefinitionJson, roles: readonly string[]): boolean =>
+  !def.submitRoles || roles.includes("sysadmin") || def.submitRoles.some((r) => roles.includes(r));
 
 export const stateDef = (def: FormDefinitionJson, state: string) =>
   def.workflow.states.find((s) => s.key === state);

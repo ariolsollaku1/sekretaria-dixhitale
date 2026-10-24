@@ -96,7 +96,9 @@
       "attendanceReport": "Attendance report",
       "attendanceSummary": "Attendance summary",
       "teachingHub": "My teaching workspace",
-      "registrationNotices": "Registration notices"
+      "registrationNotices": "Registration notices",
+      "staffRequests": "Staff requests",
+      "staffRequestHistory": "Request history"
     },
     "languages": {
       "sq": "Shqip",
@@ -2168,7 +2170,9 @@
         "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
         "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments and the program code does not select exactly one.",
         "NOT_ALLOWED_TO_DEREGISTER": "You are not allowed to deregister students.",
-        "NO_RECOGNIZED_COURSES": "Record at least one recognized course before approving."
+        "NO_RECOGNIZED_COURSES": "Record at least one recognized course before approving.",
+        "OWN_REQUEST": "You cannot decide on your own request.",
+        "INVALID_LEAVE_DATES": "The end of the leave cannot be before its start."
       },
       "moreActions": "Open the recognition decision"
     },
@@ -2828,6 +2832,26 @@
       "programNotFound": "The program does not exist.",
       "audienceNotAllowed": "You may not publish to everyone.",
       "generic": "Something went wrong. Try again."
+    }
+  },
+  "off": {
+    "title": "Staff requests",
+    "newRequest": "Submit a request",
+    "noForms": "There are no forms available to you.",
+    "mine": "My requests",
+    "empty": "There are no requests.",
+    "columns": {
+      "reference": "Reference",
+      "type": "Type",
+      "state": "State",
+      "period": "Period",
+      "submittedAt": "Submitted on"
+    },
+    "history": {
+      "title": "Staff request history",
+      "pick": "Choose a staff member",
+      "nobody": "No staff member has submitted a request.",
+      "of": "Requests of {name}"
     }
   }
 }

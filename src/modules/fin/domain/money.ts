@@ -18,6 +18,13 @@ export function formatCents(cents: number): string {
   return `${sign}${Math.floor(abs / 100)}.${String(abs % 100).padStart(2, "0")}`;
 }
 
+/** "1234567.5" -> "1 234 567.50": for display only, still a string (no floating point). */
+export function displayMoney(value: string): string {
+  const [whole = "0", cents = ""] = value.split(".");
+  const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return `${grouped}.${cents.padEnd(2, "0")}`;
+}
+
 /** The decimal string of a Prisma `Decimal` (or anything that prints as one) as cents. */
 export function centsOf(value: { toString(): string }): number {
   const cents = parseCents(value.toString());

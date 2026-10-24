@@ -10,7 +10,7 @@ import {
   type ScheduleItemInput,
 } from "./fee-rules";
 import { feeItemSchema } from "./schemas";
-import { centsOf, formatCents, parseCents, percentOf, shares } from "./money";
+import { centsOf, displayMoney, formatCents, parseCents, percentOf, shares } from "./money";
 
 describe("money (AC-12)", () => {
   it("parses decimal strings to whole cents and back", () => {
@@ -20,6 +20,11 @@ describe("money (AC-12)", () => {
     expect(formatCents(123450)).toBe("1234.50");
     expect(formatCents(5)).toBe("0.05");
     expect(centsOf({ toString: () => "99.10" })).toBe(9910);
+  });
+  it("groups thousands for display without leaving the string", () => {
+    expect(displayMoney("1234567.50")).toBe("1 234 567.50");
+    expect(displayMoney("12.5")).toBe("12.50");
+    expect(displayMoney("999.00")).toBe("999.00");
   });
   it("rejects anything that is not a plain amount", () => {
     for (const bad of ["", "-1", "1,5", "1.234", "abc", "1e3", "12345678901"])

@@ -118,7 +118,8 @@
       "myEvaluations": "Evaluations to fill in",
       "leads": "Leads",
       "scholarships": "Scholarships",
-      "paymentLists": "Payment lists"
+      "paymentLists": "Payment lists",
+      "paymentReminders": "Payment reminders"
     },
     "languages": {
       "sq": "Shqip",
@@ -1327,6 +1328,18 @@
         "title": "New private link",
         "body": "A new link was issued for {reference}."
       }
+    },
+    "fin": {
+      "payment-due": {
+        "label": "Payment deadline reminders",
+        "title": "Installment {sequence} is due soon",
+        "body": "Installment {sequence} is due on {date}. Outstanding amount: {amount}."
+      },
+      "payment-overdue": {
+        "label": "Overdue payment notices",
+        "title": "Installment {sequence} is overdue",
+        "body": "Installment {sequence} was due on {date} and is still unpaid. Outstanding amount: {amount}."
+      }
     }
   },
   "mail": {
@@ -1390,6 +1403,16 @@
       "link-reissued": {
         "subject": "New link for application {reference}",
         "body": "Hello {name},\n\nAs you asked, we issued a new private link for application {reference}. The previous link no longer works. Do not share this link with others."
+      }
+    },
+    "fin": {
+      "payment-due": {
+        "subject": "Reminder: installment {sequence} is due on {date}",
+        "body": "Hello,\n\ninstallment {sequence} of your tuition and fees is due on {date}. Outstanding amount: {amount}.\n\nYour payments and balance are in the Digital Secretariat."
+      },
+      "payment-overdue": {
+        "subject": "Installment {sequence} is overdue",
+        "body": "Hello,\n\ninstallment {sequence} was due on {date} and is still unpaid. Outstanding amount: {amount}.\n\nYour payments and balance are in the Digital Secretariat."
       }
     }
   },
@@ -3332,6 +3355,27 @@
         "SUMMER": "Summer session",
         "AUTUMN": "Autumn session",
         "MINI": "Mini session"
+      }
+    },
+    "reminders": {
+      "title": "Payment reminders",
+      "intro": "Students are reminded automatically {days, plural, one {# day} other {# days}} before each installment falls due, once per installment, by e-mail and in the system. This is the log of those reminders.",
+      "overdueOff": "Notices for unpaid installments after the due date are switched off.",
+      "overdueOn": "A notice is also sent once when an installment is still unpaid {days, plural, one {# day} other {# days}} after its due date.",
+      "columns": {
+        "sentOn": "Date",
+        "installment": "Installment",
+        "dueDate": "Due date",
+        "kind": "Reminder",
+        "outcome": "Result"
+      },
+      "kind": {
+        "UPCOMING": "Before the due date",
+        "OVERDUE": "After the due date"
+      },
+      "outcome": {
+        "SENT": "Sent",
+        "NO_ACCOUNT": "Student has no account"
       }
     }
   },

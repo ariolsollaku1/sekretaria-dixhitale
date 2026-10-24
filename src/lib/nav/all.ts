@@ -585,6 +585,15 @@ registerNav(
     order: 40,
   },
   {
+    id: "payment-reminders",
+    labelKey: "paymentReminders",
+    href: "/fin/reminders",
+    icon: "wallet",
+    permission: "fin.payment.read",
+    group: "finance",
+    order: 45,
+  },
+  {
     id: "scholarships",
     labelKey: "scholarships",
     href: "/fin/scholarships",

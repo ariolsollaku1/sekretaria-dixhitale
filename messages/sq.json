@@ -118,7 +118,8 @@
       "myEvaluations": "Vlerësimet që duhet të plotësoj",
       "leads": "Interesimet",
       "scholarships": "Bursat",
-      "paymentLists": "Listat e pagesave"
+      "paymentLists": "Listat e pagesave",
+      "paymentReminders": "Kujtesat e pagesave"
     },
     "languages": {
       "sq": "Shqip",
@@ -1327,6 +1328,18 @@
         "title": "Lidhje e re private",
         "body": "U lëshua një lidhje e re për {reference}."
       }
+    },
+    "fin": {
+      "payment-due": {
+        "label": "Kujtesa për afatin e pagesës",
+        "title": "Kësti {sequence} afrohet",
+        "body": "Kësti {sequence} duhet paguar më {date}. Shuma e papaguar: {amount}."
+      },
+      "payment-overdue": {
+        "label": "Njoftime për pagesa të vonuara",
+        "title": "Kësti {sequence} ka vonuar",
+        "body": "Kësti {sequence} duhej paguar më {date} dhe është ende i papaguar. Shuma e papaguar: {amount}."
+      }
     }
   },
   "mail": {
@@ -1390,6 +1403,16 @@
       "link-reissued": {
         "subject": "Lidhja e re për aplikimin {reference}",
         "body": "Përshëndetje {name},\n\nMe kërkesën tuaj lëshuam një lidhje të re private për aplikimin {reference}. Lidhja e mëparshme nuk punon më. Mos e ndani këtë lidhje me të tjerët."
+      }
+    },
+    "fin": {
+      "payment-due": {
+        "subject": "Kujtesë: kësti {sequence} duhet paguar më {date}",
+        "body": "Përshëndetje,\n\nkësti {sequence} i tarifave të studimit duhet paguar më {date}. Shuma e papaguar: {amount}.\n\nPagesat dhe gjendjen tuaj i shihni në Sekretarinë Dixhitale."
+      },
+      "payment-overdue": {
+        "subject": "Kësti {sequence} ka vonuar",
+        "body": "Përshëndetje,\n\nkësti {sequence} duhej paguar më {date} dhe është ende i papaguar. Shuma e papaguar: {amount}.\n\nPagesat dhe gjendjen tuaj i shihni në Sekretarinë Dixhitale."
       }
     }
   },
@@ -3332,6 +3355,27 @@
         "SUMMER": "Sezoni veror",
         "AUTUMN": "Sezoni i vjeshtës",
         "MINI": "Sezoni i vogël"
+      }
+    },
+    "reminders": {
+      "title": "Kujtesat e pagesave",
+      "intro": "Studentët kujtohen automatikisht {days, plural, one {# ditë} other {# ditë}} para afatit të çdo kësti, një herë për çdo kest, me email dhe në sistem. Ky është regjistri i atyre kujtesave.",
+      "overdueOff": "Njoftimet për kestet e papaguara pas afatit janë të çaktivizuara.",
+      "overdueOn": "Dërgohet edhe një njoftim, një herë, kur kësti është ende i papaguar {days, plural, one {# ditë} other {# ditë}} pas afatit.",
+      "columns": {
+        "sentOn": "Data",
+        "installment": "Kësti",
+        "dueDate": "Afati",
+        "kind": "Kujtesa",
+        "outcome": "Rezultati"
+      },
+      "kind": {
+        "UPCOMING": "Para afatit",
+        "OVERDUE": "Pas afatit"
+      },
+      "outcome": {
+        "SENT": "Dërguar",
+        "NO_ACCOUNT": "Studenti nuk ka llogari"
       }
     }
   },

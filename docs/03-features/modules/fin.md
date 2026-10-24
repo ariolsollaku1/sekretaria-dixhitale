@@ -39,6 +39,9 @@ Code: `src/modules/fin`. Finance reports by **calendar year**, payment plans ref
 - **Scope:** daily job finds installments due in 14 days (configurable) and unpaid → email +
   in-app notification (once per installment, idempotent); overdue reminder (optional); log of
   reminders sent.
+- **Assumptions (Q-144):** window `fin.reminderDaysBefore` (default 14), overdue notice off unless
+  `fin.reminderOverdueAfterDays` is set, active enrollments only, students without an account are
+  logged and retried. Spec: [FIN-04](../specs/FIN-04-payment-reminders.md).
 
 ### FIN-05 — Shared Finance & Secretariat lists
 - **Goal:** the payment lists both offices use (SRC-049, SRC-085, SRC-087).

@@ -152,6 +152,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-141 | Scholarships: effect on the payment plan | no | open | Finance |
 | Q-142 | Scholarships: application form, list and report | no | open | Finance |
 | Q-143 | Shared payment lists: deadline list, exam-session clearance, debtors | no | open | Finance, Secretariat |
+| Q-144 | Payment reminders: timing, recipients, overdue notices | no | open | Finance |
 
 ---
 
@@ -1297,3 +1298,10 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** What does "before the exam session" mean as a date? What exactly does "grouped by payment deadlines" show? What is a "debtor", and which contact data may the Secretariat see?
 - **Working assumption:** one installment per row of the selected academic year, ordered by due date (the grouping is the due-date order plus a from/to filter on the due date, with paid, outstanding and status per installment); "before the session" = every installment due up to the **day before the first day** of the chosen session (type winter/summer/autumn/mini) of the selected year, using the clearance rule of Q-111 across all years of the student; without a session the date is a free "as of" date (default today); the debtors list is the clearance list filtered to "not cleared" and shows what is owed; both lists show e-mail and phone of the person and can be messaged (NTF-03); both are read by Finance, Secretariat and student affairs within their program scope (same permission, same data) and exported.
 - **Impact:** the clearance date rule, columns, who sees contact data.
+
+### Q-144 — Payment reminders: timing, recipients, overdue notices
+- **Context:** SRC-086 (automatic message to students two weeks before each installment); Q-20 (email + in-app, no SMS in v1); FIN-04.
+- **Questions:** Is "two weeks" always 14 days? Who receives the reminder (the student only)? Is a reminder also wanted for installments not paid after the due date, and when? Which text should it carry (amount, early-payment discount)? Which students are reminded (all enrollments or only active studies)? What if the student has no account?
+- **Working assumption:** a daily job (07:00 Europe/Tirane) reminds the student's own account, by email and in-app, **once per installment** (the email cannot be switched off): the first run on which the installment is active, still has an outstanding amount, and falls due within 14 days (setting `fin.reminderDaysBefore`, whole number 1-90, default 14; an installment created or reached late within the window is still reminded once, a later payment does not recall it). The text names the installment number, its due date and the **outstanding amount** (after payments and early settlement, as FIN-02 computes it); it does not mention discounts. Only enrollments with status `ACTIVE` are reminded. An **overdue notice is off by default**; setting `fin.reminderOverdueAfterDays` (whole number 1-365) turns it on and sends one notice per installment on the first run on which it is overdue by at least that many days and still outstanding (no cap on how old, so switching it on reminds every older debt once). A student without an account is logged as `NO_ACCOUNT` and tried again on the next runs until a reminder can be sent. Every attempt that sends or finds no account is kept in a log visible to Finance, the Secretariat and student affairs within their program scope. No SMS, no second reminder, no reminder to staff.
+- **Impact:** timing and wording of the messages, recipients, overdue policy, the reminder log.
+

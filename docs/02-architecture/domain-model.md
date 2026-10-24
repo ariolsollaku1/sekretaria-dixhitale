@@ -177,6 +177,7 @@ erDiagram
 | (FIN-05 lists) | No new entity: the deadline, clearance and debtors lists are computed views over `PaymentPlan`, `PlanInstallment`, `Payment` and `ExamSession` (Q-143) |
 | `Scholarship` | (FIN-03) `enrollmentId`, `academicYearId`, `type` (FULL/PARTIAL), `category` (EXCELLENCE/NEED/DISABILITY/OTHER), `percent`/`amount` (PARTIAL: exactly one), `reason`, `submissionId?` (the application), `voidedAt?`/`voidReason?`; one live per enrollment × year; never deleted (Q-140) |
 | `ScholarshipCut` | (FIN-03) what a scholarship took off one `PlanInstallment` (`amount`, `cancelled`), so that voiding gives it back exactly (Q-141) |
+| `PaymentReminder` | (FIN-04) log of the payment reminders: `installmentId`, `studentId`, `kind` (UPCOMING/OVERDUE), `outcome` (SENT/NO_ACCOUNT), `userId?`, snapshots `dueDate` and `outstanding`; at most one SENT per installment × kind (partial unique index); never edited or deleted (Q-144) |
 | `FinancialClearance` | computed view: per enrollment & exam session — cleared yes/no (SRC-049) |
 
 ### DOC / GRD — documents & graduation

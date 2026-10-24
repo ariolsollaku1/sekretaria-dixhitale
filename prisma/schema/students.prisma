@@ -32,6 +32,7 @@ model Student {
   evalParticipations EvalParticipation[]
   attendance         AttendanceMark[]
   recognized         RecognizedCourse[]
+  paymentReminders   PaymentReminder[]
 
   @@map("students")
 }

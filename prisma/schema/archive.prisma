@@ -1,0 +1,47 @@
+enum ApprovedDocumentKind {
+  DIPLOMA_FORM
+  DIPLOMA_SUPPLEMENT
+  DECISION
+  OTHER
+
+  @@map("approved_document_kind")
+}
+
+enum ApprovedDocumentStatus {
+  ACTIVE
+  WITHDRAWN
+
+  @@map("approved_document_status")
+}
+
+/// A document filed in the approved-documents archive of an academic year (CUR-07): diploma form,
+/// supplement, scanned decision. Never deleted; kind, year, program and file are frozen (trigger).
+model ApprovedDocument {
+  id             String                 @id @default(cuid(2))
+  kind           ApprovedDocumentKind
+  academicYearId String                 @map("academic_year_id")
+  /// Null = the whole institution.
+  programId      String?                @map("program_id")
+  title          String
+  decisionRef    String?                @map("decision_ref")
+  decisionDate   DateTime?              @map("decision_date") @db.Date
+  /// A PLT-08 file, purpose `approved-document`.
+  fileId         String                 @unique @map("file_id")
+  /// The PLT-09 template version this form belongs to (used by GRD-02).
+  templateId     String?                @map("template_id")
+  notes          String?
+  status         ApprovedDocumentStatus @default(ACTIVE)
+  withdrawnAt    DateTime?              @map("withdrawn_at") @db.Timestamptz(3)
+  withdrawnById  String?                @map("withdrawn_by_id")
+  withdrawReason String?                @map("withdraw_reason")
+  createdAt      DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?                @map("created_by_id")
+  updatedById    String?                @map("updated_by_id")
+  academicYear   AcademicYear           @relation(fields: [academicYearId], references: [id])
+  program        StudyProgram?          @relation(fields: [programId], references: [id])
+  template       DocumentTemplate?      @relation(fields: [templateId], references: [id])
+
+  @@index([academicYearId, programId])
+  @@map("approved_documents")
+}

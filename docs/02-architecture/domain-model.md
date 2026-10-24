@@ -118,7 +118,7 @@ erDiagram
 | `PlanCourse` | (CUR-02, implemented) `planId`, `courseId` (unique per plan), `yearOfStudy`, `semester` (1/2), `credits`, `categoryId?`, hours (lecture/seminar/lab), `isElective`; defaults copied from the catalog when added. |
 | `Syllabus` | `planCourseId`, `academicYearId`, `fileId` or structured content, `status` |
 | `TeachingAssignment` | (CUR-04, implemented) `groupId`, `planCourseId`, `staffId`, `kind` (LECTURE/SEMINAR/LAB), `semester` (of the plan course), `plannedHours`; unique per group, plan course, kind and lecturer. |
-| `ApprovedDocument` | Archive of approved plan/syllabus/diploma & supplement forms per academic year (SRC-111/112) |
+| `ApprovedDocument` | (CUR-07, implemented) archive of diploma forms, supplements, scanned decisions per academic year: `kind`, `academicYearId`, `programId?` (null = institution), `title`, `decisionRef?/Date?`, `fileId`, `templateId?` (PLT-09 template version), `status` ACTIVE/WITHDRAWN with reason. Never deleted; kind, year, program and file frozen (trigger). Plans and syllabi are linked from CUR-02/03, not copied. |
 
 ### STU / ADM — students & admissions
 | Entity | Key fields |

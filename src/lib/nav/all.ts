@@ -147,6 +147,15 @@ registerNav(
     order: 12,
   },
   {
+    id: "approvedArchive",
+    labelKey: "approvedArchive",
+    href: "/cur/archive",
+    icon: "file",
+    permission: "cur.archive.view",
+    group: "teaching",
+    order: 12.6,
+  },
+  {
     id: "teaching",
     labelKey: "teaching",
     href: "/cur/teaching",

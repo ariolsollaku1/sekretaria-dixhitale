@@ -17,6 +17,7 @@ model AcademicYear {
   cohortsStarted      Cohort[]
   plans               CurriculumPlan[]
   syllabi             Syllabus[]
+  approvedDocuments   ApprovedDocument[]
   feeItems            FeeScheduleItem[]
   registrationNotices RegistrationNotice[]
   paymentPlans        PaymentPlan[]
@@ -103,6 +104,7 @@ model StudyProgram {
   enrollments         Enrollment[]
   cohorts             Cohort[]
   plans               CurriculumPlan[]
+  approvedDocs        ApprovedDocument[]
   feeItems            FeeScheduleItem[]
   id                  String               @id @default(cuid(2))
   /// Fixed after creation.

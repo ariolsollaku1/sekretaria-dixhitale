@@ -58,3 +58,12 @@ export {
 } from "./server/syllabus.queries";
 export { searchStudents, recentIssued, ownPackages } from "./server/package.queries";
 export { IssuedPackages, PackageStudents } from "./ui/package-panels";
+
+// CUR-07: approved documents archive
+export { registerArchivePurposes, ARCHIVE_PURPOSE } from "./server/archive.purposes";
+export { archiveOfYear, templateOptions as archiveTemplateOptions } from "./server/archive.queries";
+export {
+  ArchiveDocumentDialog,
+  ArchiveDocumentTable,
+  type ArchiveDocView,
+} from "./ui/archive-documents";

@@ -82,3 +82,17 @@ registerPermissions("cur", {
     student: ["cur.package.self"],
   },
 });
+
+// AC-8/AC-9 (CUR-07): approved-documents archive. `view` is scoped to programs (institution-wide
+// documents are open to every viewer); `write` files documents, scoped to the document's program.
+registerPermissions("cur", {
+  permissions: ["cur.archive.view", "cur.archive.write"],
+  grants: {
+    sysadmin: ["cur.archive.view", "cur.archive.write"],
+    secretary: ["cur.archive.view", "cur.archive.write"],
+    head_of_department: ["cur.archive.view", "cur.archive.write"],
+    program_coordinator: ["cur.archive.view"],
+    student_affairs: ["cur.archive.view"],
+    quality: ["cur.archive.view"],
+  },
+});

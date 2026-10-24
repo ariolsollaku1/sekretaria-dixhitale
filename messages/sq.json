@@ -20,7 +20,9 @@
       "approved": "Miratuar",
       "rejected": "Refuzuar",
       "draft": "Draft"
-    }
+    },
+    "details": "Detajet",
+    "nameEn": "Emri në anglisht"
   },
   "shell": {
     "appName": "Sekretari Dixhitale",
@@ -316,7 +318,8 @@
       "since": "Që nga {date}",
       "until": "deri më {date}",
       "account": "Llogaria",
-      "history": "Historiku"
+      "history": "Historiku",
+      "signIn": "Hyrja"
     },
     "actions": {
       "deactivate": "Çaktivizo",
@@ -788,7 +791,8 @@
       "departmentCode": "Kodi i departamentit",
       "search": "Kërko sipas kodit ose emrit",
       "readOnlyNote": "Mund ta shihni këtë lëndë, por nuk keni leje ta ndryshoni.",
-      "history": "Historiku"
+      "history": "Historiku",
+      "load": "Ngarkesa dhe kreditet"
     },
     "actions": {
       "created": "Lënda u krijua.",
@@ -1529,7 +1533,9 @@
     "detail": {
       "weeks": "Java {weeks}",
       "edit": "Ndrysho",
-      "closedNote": "Viti akademik është i mbyllur; kalendari është vetëm për lexim."
+      "closedNote": "Viti akademik është i mbyllur; kalendari është vetëm për lexim.",
+      "weeksLabel": "Java akademike",
+      "when": "Data"
     },
     "feed": {
       "title": "Abonohu në kalendar",
@@ -1747,7 +1753,8 @@
       "STAFF": "Stafi",
       "STUDENTS": "Studentët",
       "CYCLE": "Cikli i studimit",
-      "PROGRAM": "Programi"
+      "PROGRAM": "Programi",
+      "label": "Audienca"
     },
     "cycle": {
       "FIRST": "Cikli i parë (Bachelor)",
@@ -2491,7 +2498,8 @@
         "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
         "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura; kodi i programit nuk përzgjedh saktësisht një.",
         "generic": "Veprimi dështoi."
-      }
+      },
+      "closedBadge": "Mbyllur"
     }
   },
   "ers": {
@@ -3172,7 +3180,8 @@
       "cancelled": "Anuluar",
       "adjusted": "Ndryshuar",
       "active": "Aktiv",
-      "scholarship": "Bursë"
+      "scholarship": "Bursë",
+      "totals": "Përmbledhje"
     },
     "adjust": {
       "adjust": "Ndrysho",
@@ -3411,7 +3420,8 @@
           "STUDENT_NOT_IDENTIFIED": "Studenti nuk u identifikua.",
           "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
           "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura: kërkesa nuk tregon një program të vetëm."
-        }
+        },
+        "closedBadge": "Mbyllur"
       }
     },
     "lists": {
@@ -3754,7 +3764,9 @@
       "female": "Femër",
       "male": "Mashkull",
       "download": "Shkarko",
-      "readOnly": "Statusi ndryshohet në shqyrtimin e aplikimeve (ADM-03)."
+      "readOnly": "Statusi ndryshohet në shqyrtimin e aplikimeve (ADM-03).",
+      "application": "Aplikimi",
+      "contact": "Kontakti"
     },
     "leads": {
       "title": "Interesimet (leads)",
@@ -3814,7 +3826,9 @@
         "UNASSIGNED": "U hoq përgjegjësi",
         "EDITED": "U ndryshuan të dhënat",
         "NOTE": "Shënim"
-      }
+      },
+      "details": "Detajet",
+      "actions": "Veprimet"
     },
     "invite": {
       "subject": "Ftesë për të aplikuar në Kolegjin LOGOS",
@@ -4164,7 +4178,8 @@
       "unregisterTitle": "Të anulohet regjistrimi juaj?",
       "unregisterBody": "Vendi juaj do t'u lihet të tjerëve.",
       "unregistered": "Regjistrimi juaj u anulua."
-    }
+    },
+    "registration": "Regjistrimi"
   },
   "hrEvaluation": {
     "title": "Vlerësimi i performancës",

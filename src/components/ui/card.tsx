@@ -16,14 +16,16 @@ export function Card({ className, ...props }: ComponentProps<"section">) {
 export function CardTitle({
   id,
   icon: Icon,
+  className,
   children,
 }: {
   id?: string;
+  className?: string;
   icon?: LucideIcon;
   children: ReactNode;
 }) {
   return (
-    <h2 id={id} className="mb-4 flex items-center gap-3 text-lg font-semibold">
+    <h2 id={id} className={cn("mb-4 flex items-center gap-3 text-lg font-semibold", className)}>
       {Icon && (
         <span className="bg-accent text-brand grid size-9 place-items-center rounded-xl">
           <Icon className="size-5" aria-hidden />
@@ -46,12 +48,13 @@ export function InfoList({
   return (
     <dl className={cn("grid gap-x-6 gap-y-4 sm:grid-cols-2", className)}>
       {shown.map(({ label, value, icon: Icon }) => (
-        <div key={label} className="flex min-w-0 items-start gap-3">
-          {Icon && <Icon className="text-muted-foreground mt-0.5 size-4 shrink-0" aria-hidden />}
-          <div className="min-w-0">
-            <dt className="text-muted-foreground text-[13px]">{label}</dt>
-            <dd className="font-semibold break-words">{value}</dd>
-          </div>
+        // <dl> may only contain <div>s that directly hold <dt>/<dd> (axe: definition-list).
+        <div key={label} className="min-w-0">
+          <dt className="text-muted-foreground flex items-center gap-1.5 text-[13px]">
+            {Icon && <Icon className="size-3.5 shrink-0" aria-hidden />}
+            {label}
+          </dt>
+          <dd className="font-semibold break-words">{value}</dd>
         </div>
       ))}
     </dl>

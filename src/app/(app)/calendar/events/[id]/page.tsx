@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EntityHistory } from "@/components/audit/entity-history";
 import { ForbiddenView } from "@/components/forbidden-view";
-import { PageHeader } from "@/components/ui/page-header";
+import { CalendarDays, FileText, Pencil } from "lucide-react";
+import { RecordHero } from "@/components/record/record-hero";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
@@ -23,8 +25,9 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
   const { id } = await params;
   const user = await requireUser(`/calendar/events/${id}`);
   if (!(await can(user, "cal.event.read"))) return <ForbiddenView />;
-  const [t, locale, mayWrite, event] = await Promise.all([
+  const [t, tc, locale, mayWrite, event] = await Promise.all([
     getTranslations("cal"),
+    getTranslations("common"),
     getLocale(),
     can(user, "cal.event.write"),
     getEvent(id),
@@ -45,78 +48,104 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
     : [];
   const programs = mayWrite && !closed ? await listProgramOptions() : [];
 
+  const range =
+    event.startDate === event.endDate
+      ? day(event.startDate)
+      : `${day(event.startDate)} – ${day(event.endDate)}`;
   return (
     <>
-      <PageHeader
-        title={event.title}
+      <RecordHero
+        icon={CalendarDays}
+        name={event.title}
+        subtitle={range}
         breadcrumbs={[{ label: t("title"), href: "/calendar" }, { label: event.title }]}
         actions={
           mayWrite && !closed && <EventStatusActions eventId={event.id} active={event.active} />
         }
-      />
-      <p className="mb-4 flex flex-wrap items-center gap-3 text-sm">
-        <StatusBadge tone="info" label={t(`type.${event.type}`)} />
-        <span className="font-tabular">
-          {event.startDate === event.endDate
-            ? day(event.startDate)
-            : `${day(event.startDate)} – ${day(event.endDate)}`}
-        </span>
-        {weeks.length > 0 && (
-          <span className="text-muted-foreground">
-            {t("detail.weeks", {
-              weeks: weeks.length > 1 ? `${weeks[0]}–${weeks.at(-1)}` : String(weeks[0]),
-            })}
-          </span>
-        )}
-        {!event.active && <StatusBadge tone="neutral" label={t("status.cancelled")} />}
-      </p>
-      <dl className="mb-8 grid max-w-2xl gap-2 text-sm sm:grid-cols-[10rem_1fr]">
-        <dt className="font-semibold">{t("form.audience")}</dt>
-        <dd>
-          {t(`audience.${event.audience}`)}
-          {event.cycle && ` — ${t(`cycle.${event.cycle}`)}`}
-          {event.programName && ` — ${event.programName}`}
-        </dd>
-        {event.description && (
+        badges={
           <>
-            <dt className="font-semibold">{t("form.description")}</dt>
-            <dd className="whitespace-pre-wrap">{event.description}</dd>
+            <StatusBadge tone="info" label={t(`type.${event.type}`)} />
+            {!event.active && <StatusBadge tone="neutral" label={t("status.cancelled")} />}
           </>
-        )}
-      </dl>
+        }
+      />
       {closed && (
         <p className="rounded-control border-border bg-muted mb-6 border p-3 text-sm">
           {t("detail.closedNote")}
         </p>
       )}
-      {mayWrite && !closed && (
-        <section aria-labelledby="edit-title" className="mb-8">
-          <h2 id="edit-title" className="mb-3 text-2xl font-semibold">
-            {t("detail.edit")}
-          </h2>
-          <EventForm
-            mode="edit"
-            eventId={event.id}
-            programs={programs}
-            defaults={{
-              title: event.title,
-              type: event.type,
-              startDate: event.startDate,
-              endDate: event.endDate,
-              description: event.description ?? "",
-              audience: event.audience,
-              cycle: event.cycle,
-              programId: event.programId,
-            }}
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-6">
+          {event.description && (
+            <Card aria-labelledby="cal-description">
+              <CardTitle id="cal-description" icon={FileText}>
+                {t("form.description")}
+              </CardTitle>
+              <p className="text-sm whitespace-pre-wrap">{event.description}</p>
+            </Card>
+          )}
+          {mayWrite && !closed && (
+            <Card aria-labelledby="edit-title">
+              <CardTitle id="edit-title" icon={Pencil}>
+                {t("detail.edit")}
+              </CardTitle>
+              <EventForm
+                mode="edit"
+                eventId={event.id}
+                programs={programs}
+                defaults={{
+                  title: event.title,
+                  type: event.type,
+                  startDate: event.startDate,
+                  endDate: event.endDate,
+                  description: event.description ?? "",
+                  audience: event.audience,
+                  cycle: event.cycle,
+                  programId: event.programId,
+                }}
+              />
+            </Card>
+          )}
+        </div>
+        <Card aria-labelledby="cal-details">
+          <CardTitle id="cal-details" icon={CalendarDays}>
+            {tc("details")}
+          </CardTitle>
+          <InfoList
+            className="sm:grid-cols-1"
+            items={[
+              { label: t("detail.when"), value: <span className="font-tabular">{range}</span> },
+              {
+                label: t("form.audience"),
+                value: [
+                  t(`audience.${event.audience}`),
+                  event.cycle && t(`cycle.${event.cycle}`),
+                  event.programName,
+                ]
+                  .filter(Boolean)
+                  .join(" — "),
+              },
+              {
+                label: t("detail.weeksLabel"),
+                value:
+                  weeks.length > 0
+                    ? t("detail.weeks", {
+                        weeks: weeks.length > 1 ? `${weeks[0]}–${weeks.at(-1)}` : String(weeks[0]),
+                      })
+                    : null,
+              },
+            ]}
           />
-        </section>
-      )}
+        </Card>
+      </div>
       {mayWrite && (
-        <EntityHistory
-          entityType="CalendarEvent"
-          entityId={event.id}
-          permission="cal.event.write"
-        />
+        <div className="mt-6">
+          <EntityHistory
+            entityType="CalendarEvent"
+            entityId={event.id}
+            permission="cal.event.write"
+          />
+        </div>
       )}
     </>
   );

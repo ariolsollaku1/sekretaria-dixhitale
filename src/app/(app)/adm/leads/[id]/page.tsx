@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { ForbiddenView } from "@/components/forbidden-view";
-import { PageHeader } from "@/components/ui/page-header";
+import { History, Pencil, UserRound } from "lucide-react";
+import type { ReactNode } from "react";
+import { RecordHero } from "@/components/record/record-hero";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
 import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
@@ -83,85 +86,94 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
         return t("event.CREATED");
     }
   };
+  const details: { label: string; value: ReactNode }[] = [
+    ...rows.map(([label, value]) => ({ label, value })),
+    ...(lead.status === "LOST" ? [{ label: t("lostReason"), value: lead.lostReason }] : []),
+  ];
   return (
     <>
-      <PageHeader
-        title={name}
+      <RecordHero
+        name={name}
+        subtitle={lead.programLabel ?? lead.programNote ?? undefined}
         breadcrumbs={[{ label: t("leads"), href: "/adm/leads" }, { label: name }]}
-        actions={<StatusBadge tone={TONE[lead.status] ?? "neutral"} label={ts(lead.status)} />}
+        badges={<StatusBadge tone={TONE[lead.status] ?? "neutral"} label={ts(lead.status)} />}
       />
-      <dl className="mb-6 grid max-w-3xl gap-x-8 gap-y-2 text-sm sm:grid-cols-[12rem_1fr]">
-        {rows.map(([label, value]) => (
-          <div key={label} className="contents">
-            <dt className="text-muted-foreground">{label}</dt>
-            <dd>{value ?? "—"}</dd>
-          </div>
-        ))}
-        {lead.status === "LOST" && (
-          <div className="contents">
-            <dt className="text-muted-foreground">{t("lostReason")}</dt>
-            <dd>{lead.lostReason ?? "—"}</dd>
-          </div>
-        )}
-        {lead.message && (
-          <div className="contents">
-            <dt className="text-muted-foreground">{t("message")}</dt>
-            <dd className="break-words whitespace-pre-wrap">{lead.message}</dd>
-          </div>
-        )}
-      </dl>
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-6">
+          <Card aria-labelledby="lead-details">
+            <CardTitle id="lead-details" icon={UserRound}>
+              {t("details")}
+            </CardTitle>
+            <InfoList items={details} />
+            {lead.message && (
+              <div className="mt-4">
+                <p className="text-muted-foreground text-[13px]">{t("message")}</p>
+                <p className="font-semibold break-words whitespace-pre-wrap">{lead.message}</p>
+              </div>
+            )}
+          </Card>
 
-      {mayWrite && (
-        <div className="mb-8 flex flex-col gap-8">
-          <LeadActions
-            leadId={lead.id}
-            status={lead.status}
-            assigneeId={lead.assigneeId}
-            assignees={assignees}
-            canInvite={inviteBlocker(lead) === null}
-          />
-          <section aria-labelledby="lead-edit-h">
-            <h2 id="lead-edit-h" className="mb-3 text-lg font-semibold">
-              {t("edit")}
-            </h2>
-            <LeadForm
-              leadId={lead.id}
-              programs={programs}
-              initial={{
-                firstName: lead.firstName,
-                lastName: lead.lastName,
-                email: lead.email ?? "",
-                phone: lead.phone ?? "",
-                programId: lead.programId ?? "",
-                programNote: lead.programNote ?? "",
-                message: lead.message ?? "",
-                source: lead.source,
-                sourceNote: lead.sourceNote ?? "",
-              }}
-            />
-          </section>
+          {mayWrite && (
+            <Card aria-labelledby="lead-edit-h">
+              <CardTitle id="lead-edit-h" icon={Pencil}>
+                {t("edit")}
+              </CardTitle>
+              <LeadForm
+                leadId={lead.id}
+                programs={programs}
+                initial={{
+                  firstName: lead.firstName,
+                  lastName: lead.lastName,
+                  email: lead.email ?? "",
+                  phone: lead.phone ?? "",
+                  programId: lead.programId ?? "",
+                  programNote: lead.programNote ?? "",
+                  message: lead.message ?? "",
+                  source: lead.source,
+                  sourceNote: lead.sourceNote ?? "",
+                }}
+              />
+            </Card>
+          )}
         </div>
-      )}
 
-      <section aria-labelledby="lead-history-h">
-        <h2 id="lead-history-h" className="mb-3 text-lg font-semibold">
-          {t("history")}
-        </h2>
-        <ol className="flex max-w-3xl flex-col gap-3 text-sm">
-          {lead.events.map((e) => (
-            <li key={e.id} className="border-border border-l-2 pl-3">
-              <p className="font-semibold">{kindLabel(e)}</p>
-              {e.kind === "NOTE" || (e.kind === "STATUS" && e.body) ? (
-                <p className="break-words whitespace-pre-wrap">{e.body}</p>
-              ) : null}
-              <p className="text-muted-foreground text-[13px]">
-                {dateTime(e.createdAt)}
-                {e.actorName ? ` · ${e.actorName}` : ""}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section>
+        <div className="flex flex-col gap-6">
+          {mayWrite && (
+            <Card aria-label={t("actions")}>
+              <LeadActions
+                leadId={lead.id}
+                status={lead.status}
+                assigneeId={lead.assigneeId}
+                assignees={assignees}
+                canInvite={inviteBlocker(lead) === null}
+              />
+            </Card>
+          )}
+          <Card aria-labelledby="lead-history-h">
+            <CardTitle id="lead-history-h" icon={History}>
+              {t("history")}
+            </CardTitle>
+            <ol className="border-border flex flex-col gap-5 border-l-2 pl-5 text-sm">
+              {lead.events.map((e) => (
+                <li key={e.id} className="relative">
+                  <span
+                    aria-hidden
+                    className="bg-brand-gradient ring-card absolute top-1.5 -left-[1.6rem] size-3 rounded-full ring-4"
+                  />
+                  <p className="font-semibold">{kindLabel(e)}</p>
+                  {e.kind === "NOTE" || (e.kind === "STATUS" && e.body) ? (
+                    <p className="break-words whitespace-pre-wrap">{e.body}</p>
+                  ) : null}
+                  <p className="text-muted-foreground text-[13px]">
+                    {dateTime(e.createdAt)}
+                    {e.actorName ? ` · ${e.actorName}` : ""}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </Card>
+        </div>
+      </div>
     </>
   );
 }

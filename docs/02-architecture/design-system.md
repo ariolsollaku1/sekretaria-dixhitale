@@ -155,19 +155,49 @@ Built from shared parts, so a new page is composition, not styling:
 6. e2e: the page renders for an allowed role, and a forbidden role gets `ForbiddenView`/404; query
    fields by role (`definition`), not loose text (a value may appear in the hero and a card).
 
-### Where it is used / next
+### Variants
 
-| Page | Status |
+- **Person record** (staff, student, user, applicant, lead): initials avatar; subtitle is an
+  identifier plus one fact (number · program, e-mail).
+- **Entity record** (course, program, department, faculty, cohort, academic year, event, plan): pass
+  `icon` to `RecordHero` instead of initials; name = the entity's name, subtitle = its code ·
+  one parent (e.g. "CS101 · Computer science").
+- **Workflow record** (application, scholarship decision, recognition request, evaluation
+  campaign): the main column holds the work (documents, decision table, evaluations), the side
+  column holds who/what it is about; a closed state is a neutral pill in the hero.
+- **Admin forms inside a record** (edit course, edit program…) are a card titled with a pencil
+  icon in the main column, below the read-only facts, only for users with the write permission;
+  read-only users get the facts and a muted note, never a disabled form.
+
+### More rules learned from applying it
+
+- **The primary call-to-action of the page's audience** (e.g. "Register" on an event) is *not* in
+  the banner: a gradient button on the gradient banner has no contrast. Put it in a side card
+  with the state text (`role="status"`) above it. Banner actions are for managers.
+- **Details card**: a side card titled "Details" holds code, English name and the parent link;
+  facts the viewer scans (credits, dates, totals) get their own titled card.
+- **`InfoList` is a real definition list**: `dl > div > dt + dd`, nothing in between (axe rule
+  `definition-list`). A field icon goes inside the `dt`, never beside it.
+- **Tables inside a card** scroll in their own `overflow-x-auto` box; the card supplies the
+  surface, so the table has no border of its own.
+- **Timelines** (history, lead events) use the left rule + gradient dot of `EntityHistory`.
+- **Progress** (contract elapsed, evaluations submitted) is `role="progressbar"` with a label and
+  `aria-valuenow`, and shows a fact, not a verdict.
+
+### Where it is used
+
+| Page | Variant |
 |---|---|
-| Staff record `/hr/staff/[id]`, `/hr/me` | ✅ |
-| Student record `/stu/students/[id]` (tabs) | ✅ |
-| User `/admin/users/[id]`, application `/adm/applications/[id]`, lead `/adm/leads/[id]` | to do (person) |
-| Course `/cur/courses/[id]`, program `/org/programs/[id]`, department / faculty / cohort / year | to do (icon avatar) |
-| Event `/events/[id]`, `/calendar/events/[id]`, curriculum plan `/cur/plans/[id]`, fee plan `/fin/plans/[id]` | to do (icon avatar) |
-| Student request `/stu/requests/[id]`, scholarship application, evaluation `/hr/evaluations/[id]` | to do (workflow records: add a status timeline card) |
+| `/hr/staff/[id]`, `/hr/me`, `/stu/students/[id]` (tabs), `/admin/users/[id]` | person |
+| `/adm/applications/[id]`, `/adm/leads/[id]` | person + workflow |
+| `/cur/courses/[id]`, `/org/programs/[id]`, `/org/departments/[id]`, `/org/faculties/[id]`, `/org/cohorts/[id]`, `/org/years/[id]` | entity |
+| `/events/[id]`, `/calendar/events/[id]`, `/cur/plans/[id]`, `/fin/plans/[id]` | entity |
+| `/stu/requests/[id]`, `/fin/scholarships/applications/[id]`, `/hr/evaluations/[id]` | workflow |
 
 Not record pages and not in scope: lists (`TablePage`), forms, audit entries, announcements and
-messages (reading pages), QA result reports.
+messages (reading pages), QA result reports, the remaining one-off pages (document templates,
+form definitions, hours, teaching assignment, exam sessions, attendance sessions, syllabi, QA
+campaigns): restyle them with the same parts when they are next touched.
 
 ## Adding to the system
 

@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { ForbiddenView } from "@/components/forbidden-view";
-import { PageHeader } from "@/components/ui/page-header";
+import { BarChart3, ClipboardCheck, Users } from "lucide-react";
+import { RecordHero } from "@/components/record/record-hero";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
+import { ScrollBox } from "@/components/ui/scroll-box";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
@@ -26,137 +29,179 @@ export default async function CampaignPage({ params }: { params: Promise<{ id: s
   if (!view) notFound();
   const { campaign, evaluations, report } = view;
   const editable = canManage && campaign.status === "OPEN";
-  const [t, options] = await Promise.all([
+  const [t, tc, options] = await Promise.all([
     getTranslations("hrEvaluation"),
+    getTranslations("common"),
     editable ? listEvaluatorOptions() : Promise.resolve([]),
   ]);
 
+  const percent = campaign.total > 0 ? Math.round((campaign.submitted / campaign.total) * 100) : 0;
   return (
     <>
-      <PageHeader
-        title={campaign.name}
+      <RecordHero
+        icon={ClipboardCheck}
+        name={campaign.name}
+        subtitle={`${campaign.periodStart} – ${campaign.periodEnd}`}
         breadcrumbs={[{ label: t("title"), href: "/hr/evaluations" }, { label: campaign.name }]}
         actions={editable ? <CloseCampaignButton campaignId={campaign.id} /> : undefined}
-      />
-      <dl className="mb-6 grid max-w-xl grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
-        <dt className="text-muted-foreground">{t("fields.kind")}</dt>
-        <dd>{t(`kinds.${campaign.kind}`)}</dd>
-        <dt className="text-muted-foreground">{t("fields.period")}</dt>
-        <dd>
-          {campaign.periodStart} – {campaign.periodEnd}
-        </dd>
-        <dt className="text-muted-foreground">{t("columns.state")}</dt>
-        <dd>
+        badges={
           <StatusBadge
             tone={campaign.status === "OPEN" ? "success" : "neutral"}
             label={t(`campaignStates.${campaign.status}`)}
           />
-        </dd>
-        <dt className="text-muted-foreground">{t("fields.resultsVisible")}</dt>
-        <dd>{campaign.resultsVisible ? t("yes") : t("no")}</dd>
-        <dt className="text-muted-foreground">{t("progress")}</dt>
-        <dd className="font-tabular">
-          {campaign.submitted} / {campaign.total}
-        </dd>
-      </dl>
-
-      <h2 className="mb-2 text-lg font-semibold">{t("report.title")}</h2>
-      <p className="text-muted-foreground mb-3 max-w-2xl text-sm">{t("report.intro")}</p>
-      {REPORT_LEVELS.map((level) => (
-        <section key={level} aria-labelledby={`rep-${level}`} className="mb-6">
-          <h3 id={`rep-${level}`} className="mb-1 font-medium">
-            {t(`report.levels.${level}`)}
-          </h3>
-          {report[level].length === 0 ? (
-            <p className="text-muted-foreground text-sm">{t("report.empty")}</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full max-w-3xl text-sm">
-                <caption className="sr-only">{t(`report.levels.${level}`)}</caption>
+        }
+      />
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-6">
+          <Card aria-labelledby="eval-report">
+            <CardTitle id="eval-report" icon={BarChart3}>
+              {t("report.title")}
+            </CardTitle>
+            <p className="text-muted-foreground mb-4 text-sm">{t("report.intro")}</p>
+            {REPORT_LEVELS.map((level) => (
+              <section key={level} aria-labelledby={`rep-${level}`} className="mb-6 last:mb-0">
+                <h3 id={`rep-${level}`} className="mb-1 font-medium">
+                  {t(`report.levels.${level}`)}
+                </h3>
+                {report[level].length === 0 ? (
+                  <p className="text-muted-foreground text-sm">{t("report.empty")}</p>
+                ) : (
+                  <ScrollBox label={t(`report.levels.${level}`)}>
+                    <table className="w-full text-sm">
+                      <caption className="sr-only">{t(`report.levels.${level}`)}</caption>
+                      <thead>
+                        <tr className="border-border border-b text-left">
+                          <th scope="col" className="py-2 pr-4">
+                            {level === "institution"
+                              ? t("report.scope")
+                              : t(`report.group.${level}`)}
+                          </th>
+                          <th scope="col" className="py-2 pr-4">
+                            {t("report.total")}
+                          </th>
+                          <th scope="col" className="py-2 pr-4">
+                            {t("report.submitted")}
+                          </th>
+                          <th scope="col" className="py-2 pr-4">
+                            {t("report.average")}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {report[level].map((g) => (
+                          <tr key={g.key} className="border-border border-b">
+                            <td className="py-2 pr-4">
+                              {level === "institution" ? t("report.institution") : g.key || "—"}
+                            </td>
+                            <td className="font-tabular py-2 pr-4">{g.total}</td>
+                            <td className="font-tabular py-2 pr-4">{g.submitted}</td>
+                            <td className="font-tabular py-2 pr-4">
+                              {g.average === null ? "—" : g.average.toFixed(2)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </ScrollBox>
+                )}
+              </section>
+            ))}
+          </Card>
+          <Card aria-labelledby="eval-list">
+            <CardTitle id="eval-list" icon={Users}>
+              {t("evaluations")}
+            </CardTitle>
+            <ScrollBox label={t("evaluations")}>
+              <table className="w-full text-sm">
+                <caption className="sr-only">{t("evaluations")}</caption>
                 <thead>
                   <tr className="border-border border-b text-left">
                     <th scope="col" className="py-2 pr-4">
-                      {level === "institution" ? t("report.scope") : t(`report.group.${level}`)}
+                      {t("columns.person")}
                     </th>
                     <th scope="col" className="py-2 pr-4">
-                      {t("report.total")}
+                      {t("columns.department")}
                     </th>
                     <th scope="col" className="py-2 pr-4">
-                      {t("report.submitted")}
+                      {t("columns.evaluator")}
                     </th>
                     <th scope="col" className="py-2 pr-4">
-                      {t("report.average")}
+                      {t("columns.state")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {t("columns.score")}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {report[level].map((g) => (
-                    <tr key={g.key} className="border-border border-b">
+                  {evaluations.map((e) => (
+                    <tr key={e.id} className="border-border border-b align-top">
+                      <td className="py-2 pr-4">{e.name}</td>
+                      <td className="py-2 pr-4">{e.departmentCode ?? "—"}</td>
                       <td className="py-2 pr-4">
-                        {level === "institution" ? t("report.institution") : g.key || "—"}
+                        {editable ? (
+                          <AssignEvaluator
+                            evaluationId={e.id}
+                            current={e.evaluatorId}
+                            options={options}
+                            person={e.name}
+                          />
+                        ) : (
+                          (e.evaluatorName ?? t("unassigned"))
+                        )}
                       </td>
-                      <td className="font-tabular py-2 pr-4">{g.total}</td>
-                      <td className="font-tabular py-2 pr-4">{g.submitted}</td>
+                      <td className="py-2 pr-4">{t(`states.${e.state}`)}</td>
                       <td className="font-tabular py-2 pr-4">
-                        {g.average === null ? "—" : g.average.toFixed(2)}
+                        {e.score === null ? "—" : e.score.toFixed(2)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-          )}
-        </section>
-      ))}
-
-      <h2 className="mb-2 text-lg font-semibold">{t("evaluations")}</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full max-w-4xl text-sm">
-          <caption className="sr-only">{t("evaluations")}</caption>
-          <thead>
-            <tr className="border-border border-b text-left">
-              <th scope="col" className="py-2 pr-4">
-                {t("columns.person")}
-              </th>
-              <th scope="col" className="py-2 pr-4">
-                {t("columns.department")}
-              </th>
-              <th scope="col" className="py-2 pr-4">
-                {t("columns.evaluator")}
-              </th>
-              <th scope="col" className="py-2 pr-4">
-                {t("columns.state")}
-              </th>
-              <th scope="col" className="py-2 pr-4">
-                {t("columns.score")}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {evaluations.map((e) => (
-              <tr key={e.id} className="border-border border-b align-top">
-                <td className="py-2 pr-4">{e.name}</td>
-                <td className="py-2 pr-4">{e.departmentCode ?? "—"}</td>
-                <td className="py-2 pr-4">
-                  {editable ? (
-                    <AssignEvaluator
-                      evaluationId={e.id}
-                      current={e.evaluatorId}
-                      options={options}
-                      person={e.name}
-                    />
-                  ) : (
-                    (e.evaluatorName ?? t("unassigned"))
-                  )}
-                </td>
-                <td className="py-2 pr-4">{t(`states.${e.state}`)}</td>
-                <td className="font-tabular py-2 pr-4">
-                  {e.score === null ? "—" : e.score.toFixed(2)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            </ScrollBox>
+          </Card>
+        </div>
+        <Card aria-labelledby="eval-details">
+          <CardTitle id="eval-details" icon={ClipboardCheck}>
+            {tc("details")}
+          </CardTitle>
+          <InfoList
+            className="sm:grid-cols-1"
+            items={[
+              { label: t("fields.kind"), value: t(`kinds.${campaign.kind}`) },
+              {
+                label: t("fields.period"),
+                value: (
+                  <span className="font-tabular">
+                    {campaign.periodStart} – {campaign.periodEnd}
+                  </span>
+                ),
+              },
+              {
+                label: t("fields.resultsVisible"),
+                value: campaign.resultsVisible ? t("yes") : t("no"),
+              },
+              {
+                label: t("progress"),
+                value: (
+                  <span className="font-tabular">
+                    {campaign.submitted} / {campaign.total}
+                  </span>
+                ),
+              },
+            ]}
+          />
+          <div
+            role="progressbar"
+            aria-label={t("progress")}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={percent}
+            className="bg-muted mt-4 h-2 rounded-full"
+          >
+            <div className="bg-brand-gradient h-2 rounded-full" style={{ width: `${percent}%` }} />
+          </div>
+        </Card>
       </div>
     </>
   );

@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { EntityHistory } from "@/components/audit/entity-history";
 import { ForbiddenView } from "@/components/forbidden-view";
-import { PageHeader } from "@/components/ui/page-header";
+import { LogIn, ShieldCheck, UserRound } from "lucide-react";
+import { RecordHero } from "@/components/record/record-hero";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
@@ -48,8 +50,9 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <>
-      <PageHeader
-        title={detail.name}
+      <RecordHero
+        name={detail.name}
+        subtitle={detail.email}
         breadcrumbs={[{ label: t("title"), href: "/admin/users" }, { label: detail.name }]}
         actions={
           mayWrite && (
@@ -61,53 +64,66 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
             />
           )
         }
-      />
-      <p className="mb-6 flex flex-wrap items-center gap-3 text-sm">
-        <StatusBadge
-          tone={detail.active ? "success" : "neutral"}
-          label={t(detail.active ? "status.active" : "status.inactive")}
-        />
-        <span>{detail.email}</span>
-        <span className="text-muted-foreground">
-          {t("columns.lastLogin")}:{" "}
-          {detail.lastLoginAt
-            ? formatDateTime(detail.lastLoginAt, locale as Locale)
-            : t("neverLoggedIn")}
-        </span>
-      </p>
-
-      {mayWrite && (
-        <section aria-labelledby="account-title" className="mb-8">
-          <h2 id="account-title" className="mb-3 text-2xl font-semibold">
-            {t("detail.account")}
-          </h2>
-          <UserEditForm
-            defaults={{
-              userId: detail.id,
-              email: detail.email,
-              firstName: names.firstName,
-              lastName: names.lastName,
-            }}
+        badges={
+          <StatusBadge
+            tone={detail.active ? "success" : "neutral"}
+            label={t(detail.active ? "status.active" : "status.inactive")}
           />
-        </section>
-      )}
-
-      <section aria-labelledby="roles-title">
-        <h2 id="roles-title" className="mb-3 text-2xl font-semibold">
-          {t("detail.roles")}
-        </h2>
-        {mayWrite ? (
-          <UserRolesPanel userId={detail.id} assignments={assignments} options={options} />
-        ) : (
-          <ul className="text-sm">
-            {assignments.map((a) => (
-              <li key={a.id}>{a.role}</li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <EntityHistory entityType="User" entityId={detail.id} permission="iam.user.read" />
+        }
+      />
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-6">
+          {mayWrite && (
+            <Card aria-labelledby="account-title">
+              <CardTitle id="account-title" icon={UserRound}>
+                {t("detail.account")}
+              </CardTitle>
+              <UserEditForm
+                defaults={{
+                  userId: detail.id,
+                  email: detail.email,
+                  firstName: names.firstName,
+                  lastName: names.lastName,
+                }}
+              />
+            </Card>
+          )}
+          <Card aria-labelledby="roles-title">
+            <CardTitle id="roles-title" icon={ShieldCheck}>
+              {t("detail.roles")}
+            </CardTitle>
+            {mayWrite ? (
+              <UserRolesPanel userId={detail.id} assignments={assignments} options={options} />
+            ) : (
+              <ul className="text-sm">
+                {assignments.map((a) => (
+                  <li key={a.id}>{a.role}</li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </div>
+        <Card aria-labelledby="signin-title">
+          <CardTitle id="signin-title" icon={LogIn}>
+            {t("detail.signIn")}
+          </CardTitle>
+          <InfoList
+            className="sm:grid-cols-1"
+            items={[
+              { label: t("columns.email"), value: detail.email },
+              {
+                label: t("columns.lastLogin"),
+                value: detail.lastLoginAt
+                  ? formatDateTime(detail.lastLoginAt, locale as Locale)
+                  : t("neverLoggedIn"),
+              },
+            ]}
+          />
+        </Card>
+      </div>
+      <div className="mt-6">
+        <EntityHistory entityType="User" entityId={detail.id} permission="iam.user.read" />
+      </div>
     </>
   );
 }

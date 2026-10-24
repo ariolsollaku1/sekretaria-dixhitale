@@ -75,10 +75,10 @@ New `hr.workspace.self`, granted to `lecturer` (Q-80). Cross-module data is read
 
 ## 4. Tasks
 
-- [ ] **T1** — Permission, pure rules with unit tests. (AC-1, AC-2, AC-3, AC-4)
-- [ ] **T2** — Queries + integration tests (own data only, roster ownership). (AC-2..AC-6, AC-8)
-- [ ] **T3** — Pages, widget, nav, i18n sq/en. (AC-1, AC-7)
-- [ ] **T4** — E2E (main flow + forbidden), seed check, docs. (all)
+- [x] **T1** — Permission, pure rules with unit tests. (AC-1, AC-2, AC-3, AC-4)
+- [x] **T2** — Queries + integration tests (own data only, roster ownership). (AC-2..AC-6, AC-8)
+- [x] **T3** — Pages, widget, nav, i18n sq/en. (AC-1, AC-7)
+- [x] **T4** — E2E (main flow + forbidden), seed check, docs. (all)
 
 ## 5. Test plan
 
@@ -90,9 +90,9 @@ New `hr.workspace.self`, granted to `lecturer` (Q-80). Cross-module data is read
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E pass
-- [ ] Security checklist satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E pass
+- [x] Security checklist satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

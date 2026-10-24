@@ -179,6 +179,7 @@ export async function ownAssignments(user: { id: string }, yearId: string) {
   });
   return rows.map((a) => ({
     id: a.id,
+    groupId: a.groupId,
     semester: a.semester,
     kind: a.kind,
     plannedHours: a.plannedHours,

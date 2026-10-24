@@ -93,7 +93,8 @@ test("AC-2..AC-5, 7, 10, 11: the lecturer records absences; the student sees the
   // --- the student sees their own absence, and has no lecturer pages
   await signInFresh(page, "student@dev.logos.test");
   await page.goto("/att/absences");
-  const row = page.locator("li").filter({ hasText: "DEMO101" });
+  // (ATT-02 adds a summary card per course above the list, so pick the absence row)
+  const row = page.locator("li").filter({ hasText: "DEMO101" }).filter({ hasText: "Mungon" });
   await expect(row).toContainText("Mungon");
   await expect(row).not.toContainText("Sick");
   await page.goto("/att/mine");

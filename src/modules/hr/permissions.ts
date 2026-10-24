@@ -7,9 +7,17 @@ import { registerSensitiveFields } from "@/lib/audit/diff";
 const READ = ["hr.staff.read"];
 
 registerPermissions("hr", {
-  permissions: ["hr.staff.read", "hr.staff.write", "hr.staff.sensitive", "hr.staff.self"],
+  permissions: [
+    "hr.staff.read",
+    "hr.staff.write",
+    "hr.staff.sensitive",
+    "hr.staff.self",
+    "hr.workspace.self",
+  ],
   grants: {
     ...Object.fromEntries(ROLES.filter((r) => r !== "student").map((r) => [r, ["hr.staff.self"]])),
+    // HR-07 (Q-80): the lecturer workspace is for the lecturer role.
+    lecturer: ["hr.staff.self", "hr.workspace.self"],
     sysadmin: [...READ, "hr.staff.sensitive", "hr.staff.self"],
     secretary: [...READ, "hr.staff.self"],
     finance: [...READ, "hr.staff.self"],

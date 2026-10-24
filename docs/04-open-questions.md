@@ -83,6 +83,16 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-72 | Recognition of documents: who decides and on what basis | no | open | Secretariat / Academic board |
 | Q-73 | Recognized courses: how they are recorded and used | no | open | Secretariat / Academic board |
 | Q-74 | Student requests: attachments and the forms' texts | no | open | Secretariat |
+| Q-90 | Attendance: how the percentage is computed | no | open | Secretariat |
+| Q-91 | Attendance: threshold and what it applies to | no | open | Secretariat |
+| Q-92 | Attendance: which classes and marks count | no | open | Secretariat |
+| Q-93 | Attendance: what the student sees of the percentage | no | open | Secretariat |
+| Q-94 | Attendance: who may run the reports and the period | no | open | Secretariat |
+| Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
+| Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
+| Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
+| Q-83 | Lecturer workspace: grades and absences views | no | open | Secretariat |
+| Q-84 | Lecturer workspace: location and dashboard card | no | open | Secretariat |
 
 ---
 
@@ -733,3 +743,76 @@ Decisions taken in conversation that aren't architecture ADRs.
   free text, plus an optional scan (logged-in form only). The sysadmin can change any of it in the
   form definition without code (PLT-15).
 - **Impact:** the wording and fields of the two forms.
+### Q-90 — Attendance: how the percentage is computed
+- **Context:** SRC-042, SRC-036b — the attendance report; Q-12 (the 75 % rule needs a definition).
+- **Questions:** Is attendance measured in hours or in classes? Does an excused absence count as
+  attended or as absent?
+- **Working assumption:** in **hours** (the hours of each held class): attendance % = hours present /
+  hours of the held classes the student has a mark for, rounded to one decimal. **Excused counts as
+  absent** for the percentage (it is reported separately, so the Secretariat can see it). One
+  institution-wide switch can change this later without a deployment (not built now).
+- **Impact:** the percentage; EXM-03 eligibility and DOC-03 reuse the same function.
+
+### Q-91 — Attendance: threshold and what it applies to
+- **Context:** Q-12 research finding — 75 % attendance is required for exams; lecture vs. seminar
+  not confirmed.
+- **Questions:** Which percentage, and is it per course as a whole or separately for lecture, seminar
+  and lab?
+- **Working assumption:** 75 % (setting `att.thresholdPercent`, a whole number 0–100), applied
+  **separately per student and teaching assignment** (course and kind), because the report rows are
+  assignments. "Below the threshold" means strictly less than the threshold.
+- **Impact:** which students are flagged; the setting.
+
+### Q-92 — Attendance: which classes and marks count
+- **Context:** SRC-043 — classes can be planned, held or cancelled; students may join a group late.
+- **Questions:** Do planned or cancelled classes count? What about classes before a student joined?
+- **Working assumption:** only classes marked **held** count; planned and cancelled ones never do. A
+  student is counted only for the held classes they have a mark for (classes saved before they were on
+  the roster do not count against them). The report can be limited to a date range.
+- **Impact:** denominators of the percentage.
+
+### Q-93 — Attendance: what the student sees of the percentage
+- **Context:** SRC-036b — students see their absences.
+- **Questions:** May students see their own attendance % per course and whether they are under the
+  threshold?
+- **Working assumption:** yes: per course and kind, the held hours, absent and excused hours and the
+  percentage, with a note when it is under the threshold; no other students' data, no notes.
+- **Impact:** the student page.
+
+### Q-94 — Attendance: who may run the reports and the period
+- **Context:** SRC-042 — the attendance report; roles.md.
+- **Questions:** Who may see reports, and for which period (year, semester, month)?
+- **Working assumption:** whoever has `att.attendance.read` (Secretariat, heads of department,
+  program coordinators; by scope of the program), for the selected academic year, optionally limited
+  by a from and to date; exportable like any list. Lecturers get no report yet (they see their own
+  classes); semesters are not a filter until the calendar defines them for attendance.
+- **Impact:** access, period, exports.
+### Q-80 — Lecturer workspace: who gets it
+- **Context:** SRC-070 — online access for lecturers; HR-07 "My teaching".
+- **Questions:** Is the workspace only for the `lecturer` role, or also for heads of department and program coordinators who teach?
+- **Working assumption:** only the `lecturer` role holds `hr.workspace.self`; anybody else with teaching assignments still has the "My teaching assignments" list (CUR-04). Granting it to more roles is one line in the permission grants.
+- **Impact:** the grant list, the dashboard card.
+
+### Q-81 — Lecturer workspace: what a lecturer sees of a roster
+- **Context:** SRC-070 — lecturers view rosters of their courses.
+- **Questions:** Which student fields may a lecturer see (photo, e-mail, program, status)? May they see rosters of colleagues' groups?
+- **Working assumption:** only for groups of their own teaching assignments; student number and name, nothing else; the roster is the one of ATT-01 (Q-62: active enrollments registered in the group for the year).
+- **Impact:** fields on the roster, visibility across assignments.
+
+### Q-82 — Lecturer workspace: "this semester"
+- **Context:** HR-07 — "assignments this semester"; the model has semesters of a plan course but no dated semester.
+- **Questions:** Where does a semester start and end? Should the hub show only the running semester?
+- **Working assumption:** the hub shows all assignments of the selected academic year grouped by plan semester; there is no "running semester" filter until the calendar defines semester dates.
+- **Impact:** a semester filter, hiding past semesters.
+
+### Q-83 — Lecturer workspace: grades and absences views
+- **Context:** SRC-070 — "viewing grades, absences, etc."; exams and grades (EXM) do not exist yet and Q-11 (grading rules) is open.
+- **Questions:** What exactly should a lecturer see of grades (own courses only? final grades?) and absences (totals per student?).
+- **Working assumption:** now the hub shows, per assignment, attendance progress (sessions held, still to record, absences marked) with a link to the attendance pages; grade shortcuts are added by EXM-02/05 through the hub's link registry once those pages exist.
+- **Impact:** grade and absence summaries on the hub.
+
+### Q-84 — Lecturer workspace: location and dashboard card
+- **Context:** HR-07 — hub placement.
+- **Questions:** Should the hub be the lecturer's landing page after sign-in?
+- **Working assumption:** page `/hr/teaching` (navigation group "teaching", first entry) and a "My teaching" card on the dashboard of lecturers; the post-login landing page is unchanged (as Q-59).
+- **Impact:** landing page, navigation.

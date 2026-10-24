@@ -1,0 +1,70 @@
+enum EvalCampaignStatus {
+  DRAFT
+  OPEN
+  CLOSED
+
+  @@map("eval_campaign_status")
+}
+
+enum EvalSection {
+  LECTURER
+  ADMINISTRATION
+
+  @@map("eval_section")
+}
+
+/// A student-evaluation campaign of one academic year (QA-01). Questions are frozen once it opens.
+model EvalCampaign {
+  id             String              @id @default(cuid(2))
+  academicYearId String              @map("academic_year_id")
+  name           String
+  status         EvalCampaignStatus  @default(DRAFT)
+  /// Validated list of questions (see src/modules/qa/domain/question-rules.ts).
+  questions      Json                @default("[]")
+  openedAt       DateTime?           @map("opened_at") @db.Timestamptz(3)
+  closedAt       DateTime?           @map("closed_at") @db.Timestamptz(3)
+  createdAt      DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?             @map("created_by_id")
+  updatedById    String?             @map("updated_by_id")
+  academicYear   AcademicYear        @relation(fields: [academicYearId], references: [id])
+  participations EvalParticipation[]
+  responses      EvalResponse[]
+
+  @@unique([academicYearId, name])
+  @@map("eval_campaigns")
+}
+
+/// WHO answered WHAT target, never how (QA-01 AC-5). Deliberately has no link to EvalResponse.
+model EvalParticipation {
+  id           String              @id @default(cuid(2))
+  campaignId   String              @map("campaign_id")
+  studentId    String              @map("student_id")
+  /// The assignment id, or "ADMIN" for the administration survey.
+  targetKey    String              @map("target_key")
+  assignmentId String?             @map("assignment_id")
+  /// Date only, so it cannot be matched with anything finer.
+  completedOn  DateTime            @map("completed_on") @db.Date
+  campaign     EvalCampaign        @relation(fields: [campaignId], references: [id])
+  student      Student             @relation(fields: [studentId], references: [id])
+  assignment   TeachingAssignment? @relation(fields: [assignmentId], references: [id])
+
+  @@unique([campaignId, studentId, targetKey])
+  @@index([campaignId, targetKey])
+  @@map("eval_participations")
+}
+
+/// HOW a target was answered, never by whom: no student, no timestamp (QA-01 AC-5).
+model EvalResponse {
+  id           String              @id @default(cuid(2))
+  campaignId   String              @map("campaign_id")
+  assignmentId String?             @map("assignment_id")
+  section      EvalSection
+  /// question key -> 1..5 or text
+  answers      Json
+  campaign     EvalCampaign        @relation(fields: [campaignId], references: [id])
+  assignment   TeachingAssignment? @relation(fields: [assignmentId], references: [id])
+
+  @@index([campaignId, assignmentId])
+  @@map("eval_responses")
+}

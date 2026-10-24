@@ -98,7 +98,11 @@
       "teachingHub": "My teaching workspace",
       "registrationNotices": "Registration notices",
       "staffRequests": "Staff requests",
-      "staffRequestHistory": "Request history"
+      "staffRequestHistory": "Request history",
+      "evalCampaigns": "Evaluation campaigns",
+      "evalSurveys": "My evaluations",
+      "evalResults": "Evaluation results",
+      "myEvalResults": "My student evaluations"
     },
     "languages": {
       "sq": "Shqip",
@@ -2852,6 +2856,126 @@
       "pick": "Choose a staff member",
       "nobody": "No staff member has submitted a request.",
       "of": "Requests of {name}"
+    }
+  },
+  "qa": {
+    "open": "Open",
+    "created": "Campaign created",
+    "opened": "Campaign opened",
+    "closed": "Campaign closed",
+    "noYear": "There is no academic year.",
+    "kind": {
+      "LECTURE": "Lecture",
+      "SEMINAR": "Seminar",
+      "LAB": "Laboratory"
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "OPEN": "Open",
+      "CLOSED": "Closed"
+    },
+    "section": {
+      "LECTURER": "Lecturer",
+      "ADMINISTRATION": "Administration"
+    },
+    "type": {
+      "SCALE": "Scale 1–5",
+      "TEXT": "Free comment"
+    },
+    "campaigns": {
+      "title": "Evaluation campaigns",
+      "empty": "There are no evaluation campaigns yet.",
+      "questionCount": "{count, plural, one {# question} other {# questions}}",
+      "seeResults": "See the results"
+    },
+    "campaign": {
+      "new": "New campaign",
+      "year": "Academic year",
+      "name": "Name",
+      "copyFrom": "Copy the questions from",
+      "noCopy": "Do not copy (empty)",
+      "create": "Create campaign"
+    },
+    "actions": {
+      "open": "Open the campaign",
+      "openTitle": "Open the campaign?",
+      "openDescription": "The questions can no longer be changed and students can fill in the evaluations.",
+      "close": "Close the campaign",
+      "closeTitle": "Close the campaign?",
+      "closeDescription": "Students can no longer answer and the results become visible. A campaign cannot be reopened."
+    },
+    "questions": {
+      "title": "Questions",
+      "none": "There are no questions yet.",
+      "section": "Section",
+      "type": "Type",
+      "labelSq": "Text in Albanian",
+      "labelEn": "Text in English (optional)",
+      "up": "Up",
+      "down": "Down",
+      "remove": "Remove",
+      "add": "Add question",
+      "save": "Save questions",
+      "saved": "Questions saved"
+    },
+    "participation": {
+      "title": "Participation",
+      "hint": "How many students answered out of all who can. Nobody is named and the answers are not linked to anyone.",
+      "administration": "Administration"
+    },
+    "surveys": {
+      "title": "My evaluations",
+      "empty": "There are no open evaluations for you right now.",
+      "noStudent": "Your account is not linked to a student.",
+      "noStudentHint": "Please contact the Secretariat.",
+      "anonymous": "Answers are anonymous: they are stored without your name and nobody can link them to you. The system only keeps the note that you completed it.",
+      "administration": "Administration",
+      "done": "Completed",
+      "fill": "Fill in"
+    },
+    "survey": {
+      "submit": "Send evaluation",
+      "sent": "Thank you, the evaluation was sent",
+      "scaleHint": "1 = lowest rating, 5 = highest rating"
+    },
+    "results": {
+      "title": "Evaluation results",
+      "empty": "There are no closed campaigns yet.",
+      "rule": "Results are shown only when there are at least {min} responses.",
+      "byAssignment": "By course and lecturer",
+      "byDepartment": "By department",
+      "administration": "Administration",
+      "noRows": "There are no results for you in this campaign.",
+      "notEnough": "Too few responses",
+      "withheld": "There are not yet at least {min} responses, so the results are not shown.",
+      "details": "Details",
+      "responses": "{count, plural, one {# response} other {# responses}}",
+      "overall": "Mean",
+      "distribution": "Distribution of the ratings 1–5"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "FORBIDDEN": "You are not allowed to do this.",
+      "DUPLICATE": "A campaign with this name already exists in that academic year.",
+      "NOT_DRAFT": "The campaign is no longer a draft.",
+      "NOT_OPEN": "The campaign is not open.",
+      "NO_SCALE_QUESTION": "Add at least one question with a 1–5 scale.",
+      "YEAR_CLOSED": "The academic year is closed.",
+      "ALREADY_ANSWERED": "You have already completed this evaluation.",
+      "NOT_YOUR_TARGET": "This evaluation is not for you.",
+      "NO_STUDENT": "Your account is not linked to a student.",
+      "ANSWERS": "Answer all the scale questions.",
+      "QUESTIONS": "Check the questions.",
+      "required": "Required.",
+      "scaleRange": "Choose a value from 1 to 5.",
+      "tooLong": "The text is too long.",
+      "invalid": "Invalid value.",
+      "unknownQuestion": "Unknown question.",
+      "noQuestions": "Add at least one question.",
+      "tooManyQuestions": "Too many questions (at most 40).",
+      "duplicateKey": "Duplicate question.",
+      "badKey": "Invalid key.",
+      "labelRequired": "Write the question text in Albanian."
     }
   }
 }

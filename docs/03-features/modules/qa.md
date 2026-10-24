@@ -10,7 +10,7 @@ Code: `src/modules/qa`.
   **anonymous**: responses stored without student identity, participation tracked separately to
   prevent double submission; minimum response count before results are shown (e.g. 5); results per
   lecturer/course/department; lecturer sees own aggregated results.
-- **Assumption (Q-25).**
+- **Assumption (Q-25, Q-104…Q-108).** Implemented: see [the spec](../specs/QA-01-student-evaluations.md). Own question list per campaign (not a forms-engine definition), one campaign per academic year, results only after closing.
 
 ### QA-02 — Alumni tracking
 - **Goal:** track alumni progress (SRC-122) and let alumni update their data without an account (SRC-037e).

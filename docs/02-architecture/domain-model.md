@@ -182,7 +182,9 @@ erDiagram
 ### QA / ERS / LIB / NTF
 | Entity | Key fields |
 |---|---|
-| `Survey` / `SurveyResponse` | anonymous student evaluations (responses not linked to the student) |
+| `EvalCampaign` | (QA-01, implemented) `academicYearId`, `name` (unique per year), `status` (DRAFT/OPEN/CLOSED), `questions` (JSON list: key, section LECTURER/ADMINISTRATION, type SCALE/TEXT, labels sq/en, required), `openedAt?`, `closedAt?`; questions frozen once open. |
+| `EvalParticipation` | (QA-01) who answered what, never how: `campaignId`, `studentId`, `targetKey` (assignment id or `ADMIN`), `assignmentId?`, `completedOn` (date only); unique per campaign, student and target. |
+| `EvalResponse` | (QA-01) how a target was answered, never by whom: `campaignId`, `assignmentId?`, `section`, `answers` (JSON); deliberately no student, no timestamp, no link to the participation. Shown only for closed campaigns and only with at least `qa.minResponses` (5) responses. |
 | `AlumniRecord` | `personId`, employment/further-studies updates over time |
 | `ErasmusApplication` | (ERS-01, implemented) no table: a `FormSubmission` of one of the six `erasmus-*` form definitions (`erasmus-student`, `-academic`, `-admin`, each public and `-portal`); states `submitted` → `shortlisted` → `selected` → `mobility_done` or `rejected`; the applicant kind, destination and period come from the form key and answers; the known student / staff is looked up, not stored (Q-97). |
 | `LibraryCardRequest`, `LibraryClearance` | depends on PLEJADES (Q-03) |

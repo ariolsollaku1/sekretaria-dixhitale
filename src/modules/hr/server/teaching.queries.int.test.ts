@@ -11,7 +11,7 @@ import { getAssignmentRoster, getTeachingHub } from "./teaching.queries";
 const today = todayInTirane();
 const d = (s: string) => new Date(`${s}T00:00:00Z`);
 
-let yearId: string, a1: string, a2: string, aOther: string;
+let yearId: string, a1: string, aOther: string;
 let userL1: string, userL2: string, userNoStaff: string;
 
 async function person(n: string) {
@@ -109,7 +109,7 @@ beforeEach(async () => {
       })
     ).id;
   a1 = await asg(g1, pc1, l1.staffId, 1);
-  a2 = await asg(g1, pc2, l1.staffId, 2);
+  await asg(g1, pc2, l1.staffId, 2);
   aOther = await asg(g2, pc1, l2.staffId, 1);
 
   const student = async (n: string, groupId: string, status: "ACTIVE" | "SUSPENDED") => {

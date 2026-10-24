@@ -138,14 +138,24 @@ whole cents (integers) and converts from and to decimal strings, so there is no 
 - A program without a registered student for the year generates zero plans (not an error).
 - Cancelling all installments leaves an empty plan (total 0).
 
+**Implementation notes:**
+- Routes `/fin/fees` (schedule of the selected year per program), `/fin/plans` (PLT-10 table `fin.plans`
+  and the generate form), `/fin/plans/[id]` (detail, adjust, add, cancel).
+- The domain computes money in whole cents and converts from/to decimal strings; Zod parses amounts
+  with at most two decimals; the database also checks `amount > 0` and the discount/early ranges.
+- Reasons for adjustments use the action wrapper's `requireReason` and are stored in the audit entry.
+- Fees and plans are institution-wide (Finance, Secretariat, student affairs); lists still filter by
+  `grantScopes` over programs for any future scoped grant.
+- No fee data is seeded (nothing may be invented); the e2e test creates and removes its own rows.
+
 ## 4. Tasks
 
-- [ ] **T1** — `finance.prisma` + migration with checks; permissions; nav; i18n skeleton. (AC-1, AC-11, AC-12)
-- [ ] **T2** — Pure money/fee rules and schemas with unit tests. (AC-2, AC-3, AC-6, AC-7, AC-8)
-- [ ] **T3** — Fee schedule service and queries; integration tests. (AC-1..AC-5, AC-11)
-- [ ] **T4** — Plan service and queries; integration tests. (AC-5..AC-9, AC-11)
-- [ ] **T5** — Pages: fee schedule, plans table, plan detail, forms, i18n. (AC-9, AC-10)
-- [ ] **T6** — E2E, seed, docs. (all)
+- [x] **T1** — `finance.prisma` + migration with checks; permissions; nav; i18n skeleton. (AC-1, AC-11, AC-12)
+- [x] **T2** — Pure money/fee rules and schemas with unit tests. (AC-2, AC-3, AC-6, AC-7, AC-8)
+- [x] **T3** — Fee schedule service and queries; integration tests. (AC-1..AC-5, AC-11)
+- [x] **T4** — Plan service and queries; integration tests. (AC-5..AC-9, AC-11)
+- [x] **T5** — Pages: fee schedule, plans table, plan detail, forms, i18n. (AC-9, AC-10)
+- [x] **T6** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -161,9 +171,9 @@ whole cents (integers) and converts from and to decimal strings, so there is no 
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

@@ -194,4 +194,5 @@ erDiagram
 | `Message` | (NTF-03, implemented) one send to the people of a list: `subject`, plain-text `body` (placeholders `{firstName}`, `{lastName}`, `{fullName}`), `sourceTable` (PLT-10 table id), `filters` (JSON), `status` (PENDING/SENT), `recipientCount`, `noAccountCount`, `createdById`, `completedAt`. Never edited or deleted. |
 | `MessageRecipient` | (NTF-03) delivery log, one row per `Person` per message (unique): `userId?`, `state` (QUEUED/DELIVERED/NO_ACCOUNT), `notificationId?`, `emailOutboxId?`. No addresses. |
 | `MessageTemplate` | (NTF-03) saved wording: `name`, `subject`, `body`, `archivedAt?` (archived, never deleted). |
-| `Event` / `EventRegistration` | extracurricular activities (SRC-037d) |
+| `Event` | (NTF-02, implemented) `title`, plain-text `description`, `location`, `startsAt`, `endsAt?`, `capacity?` (null = unlimited), `registrationDeadline?` (default: the start), `status` (DRAFT/PUBLISHED/CANCELLED), `audience` (as `Announcement`) with `cycle`/`programId`, `announcementId?`, `remindedAt?`. Cancelled, never deleted. |
+| `EventRegistration` | (NTF-02) one row per `User` and `Event` (unique): `status` (REGISTERED/CANCELLED), `registeredAt`, `cancelledAt?`. Cancelling keeps the row; registering again reuses it. |

@@ -1,5 +1,26 @@
 import { describe, expect, it } from "vitest";
-import { zonedDay, zonedDayStart, zonedNextDayStart } from "./zone";
+import {
+  instantToZonedDateTime,
+  zonedDateTimeToInstant,
+  zonedDay,
+  zonedDayStart,
+  zonedNextDayStart,
+} from "./zone";
+
+describe("zoned date-times (Europe/Tirane)", () => {
+  it("converts wall-clock times in winter and summer", () => {
+    expect(zonedDateTimeToInstant("2026-12-10T18:30").toISOString()).toBe(
+      "2026-12-10T17:30:00.000Z",
+    );
+    expect(zonedDateTimeToInstant("2026-07-10T18:30").toISOString()).toBe(
+      "2026-07-10T16:30:00.000Z",
+    );
+  });
+  it("round-trips", () => {
+    for (const local of ["2026-12-10T00:00", "2026-07-10T23:59", "2026-03-30T09:15"])
+      expect(instantToZonedDateTime(zonedDateTimeToInstant(local))).toBe(local);
+  });
+});
 
 describe("zoned days (Europe/Tirane)", () => {
   it("starts a winter day at 23:00 UTC the evening before (UTC+1)", () => {

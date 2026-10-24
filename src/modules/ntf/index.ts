@@ -39,3 +39,24 @@ export { MessageForm } from "./ui/message-form";
 export { TemplateForm } from "./ui/template-form";
 export { TemplateArchive } from "./ui/template-archive";
 export { MessageThesePeople } from "./ui/message-link";
+// NTF-02 events
+import "./server/event-reminder";
+export { eventsTable, eventAttendeesTable } from "./server/event.table";
+export {
+  listEvents,
+  visibleEvent,
+  mayManageEvent,
+  getEvent,
+  myRegistration,
+  listAnnouncementOptions,
+  type EventView,
+  type ListedEvent,
+} from "./server/event.queries";
+export { EventForm } from "./ui/event-form";
+export { EventStatusActions, RegisterButton } from "./ui/event-actions";
+export {
+  registrationState,
+  placesLeft,
+  mayUnregister,
+  type RegistrationState,
+} from "./domain/event-rules";

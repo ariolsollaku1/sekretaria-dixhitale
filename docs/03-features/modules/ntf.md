@@ -17,6 +17,12 @@ Code: `src/modules/ntf`. Delivery (in-app + email) is PLT-11.
 - **Goal:** students register for conferences, workshops and other activities and are notified (SRC-035, SRC-037d).
 - **Scope:** event (date, place, capacity, audience) linked to an announcement; registration form
   (PLT-15, public for externals if needed); attendee list; reminders; certificate of attendance later.
+- **Built (v1, see the spec):** event with date, place, capacity, deadline, audience (as announcements)
+  and an optional link to an announcement; one-click registration of signed-in users with exact
+  capacity under concurrency; cancel until the start; confirmation, one reminder within 24 hours
+  (hourly job) and cancellation notices; management list and exportable attendee list for
+  organisers. No public registration for externals, no waiting list, no certificate. Assumptions
+  Q-118…Q-121.
 
 ### NTF-03 — Targeted messaging to lists
 - **Goal:** message the students in any filtered list, e.g. backlog students about sessions and

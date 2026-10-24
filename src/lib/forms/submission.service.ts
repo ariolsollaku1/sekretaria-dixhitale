@@ -71,6 +71,11 @@ async function insertSubmission(
         before: null,
         after: { form: form.key, version: form.version, reference },
       });
+      const handler = form.definition.handler ? getFormHandler(form.definition.handler) : undefined;
+      await handler?.onSubmitted?.(
+        { db: tx, audit },
+        { submissionId: created.id, formKey: form.key, answers, submitterId },
+      );
       return { id: created.id, reference };
     } catch (error) {
       // a reference collision: draw another one
@@ -204,7 +209,7 @@ export async function changeState(
   if (target.kind === "approved" && definition.handler) {
     const handler = getFormHandler(definition.handler);
     if (!handler) throw new DomainError("CONFLICT", "HANDLER_MISSING");
-    await handler.onApproved(ctx, {
+    await handler.onApproved?.(ctx, {
       submissionId,
       formKey: form.key,
       answers: submission.answers as Answers,

@@ -153,6 +153,7 @@ model RateLimitHit { id, bucket String, at DateTime  @@index([bucket, at]) }
   `plt.ratelimit.prune` removes old hits.
 - File fields (authenticated forms) use the PLT-08 purpose `form-attachment`, readable by the
   submitter and the form's handlers; file purposes of lib features register through `src/lib/files/all.ts`.
+- Handlers may also define `onSubmitted` (added by ADM-01): it runs in the submission transaction right after the answers are stored, for forms whose answers become a record at once; `onApproved` is optional.
 - Notification type `plt.form-status`; handlers are registered with `registerFormHandler(key, …)`.
 - Dev seed: the public form `kontakt-demo` (handled by the Secretariat).
 

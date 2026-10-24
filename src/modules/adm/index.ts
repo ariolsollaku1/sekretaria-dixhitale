@@ -32,3 +32,21 @@ export { ApplyForm } from "./ui/apply-form";
 export { DocumentUpload } from "./ui/document-upload";
 export { LinkRequestForm } from "./ui/link-request-form";
 export { PublicShell } from "./ui/public-shell";
+import "./server/interest-handler";
+export { leadsTable } from "./server/lead.table";
+export {
+  getLead,
+  listAssigneeOptions,
+  listLeadProgramOptions,
+  type LeadView,
+} from "./server/lead.queries";
+export { INTEREST_FORM } from "./domain/interest-form";
+export {
+  allowedTransitions,
+  inviteBlocker,
+  type LeadStatus,
+  type LeadSource,
+} from "./domain/lead-rules";
+export { LeadForm } from "./ui/lead-form";
+export { ImportLeads } from "./ui/import-leads";
+export { LeadActions } from "./ui/lead-actions";

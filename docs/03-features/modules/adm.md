@@ -8,6 +8,7 @@ Code: `src/modules/adm`. Flow: interest → application → review/ranking → e
 - **Scope:** public interest form (PLT-15) with program of interest, contact data, source, consent;
   manual/bulk entry for event leads (CSV import); leads list with status (new/contacted/applied/
   lost), notes, assignment; convert lead → application invitation email.
+- **Status:** done. Spec: [ADM-01](../specs/ADM-01-interest-leads.md). Assumptions: Q-135..Q-139.
 
 ### ADM-02 — Online application
 - **Goal:** candidates enter their own data once; staff only confirm it later (SRC-020, SRC-030, SRC-032).

@@ -121,6 +121,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-131 | Delivered hours: monthly approval rules | no | open | HR / Heads of department |
 | Q-132 | Delivered hours: adjustments | no | open | HR / Finance |
 | Q-133 | Delivered hours: who sees what | no | open | HR / Finance |
+| Q-135 | Leads: fields and consent of the interest form | no | open | Student Affairs |
+| Q-136 | Leads: statuses and who works them | no | open | Student Affairs |
+| Q-137 | Leads: CSV import format and duplicates | no | open | Student Affairs |
+| Q-138 | Leads: the invitation e-mail | no | open | Student Affairs |
+| Q-139 | Leads: retention and erasure | no | open | Secretariat |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1215,3 +1220,32 @@ Decisions taken in conversation that aren't architecture ADRs.
   average of 1-5 scale answers (Q-25); reports show count, submitted and average by department,
   faculty or institution within the reader's scope.
 - **Impact:** campaign options, default evaluator rule, visibility flag; no schema change.
+### Q-135 — Leads: fields and consent of the interest form
+- **Context:** SRC-030/031 — an interest form on the website; the fields and the consent wording are not given.
+- **Questions:** Which fields does the interest form ask (beyond name, contact and program)? What consent text must be shown, and is consent mandatory to submit?
+- **Working assumption:** first name, last name, e-mail, phone (optional), program of interest (free text, matched to a program by code or name), an optional message, and a required consent checkbox "I agree that LOGOS contacts me about studies". The sysadmin may edit the form without code (new version).
+- **Impact:** form definition, consent field of the lead.
+
+### Q-136 — Leads: statuses and who works them
+- **Context:** ADM brief — leads have a status (new/contacted/applied/lost), notes and assignment.
+- **Questions:** Are these the right statuses? Who assigns and works the leads?
+- **Working assumption:** NEW → CONTACTED → APPLIED, LOST from NEW/CONTACTED with a reason, LOST → NEW to reopen; the Secretariat and Student Affairs both write and may assign a lead to anyone holding the write permission; Finance and the sysadmin read. APPLIED is set by hand until ADM-02 links applications.
+- **Impact:** transition rules, permission grants.
+
+### Q-137 — Leads: CSV import format and duplicates
+- **Context:** SRC-030 — data collected at campaigns and events is entered in bulk.
+- **Questions:** What columns do event lists have? Is the e-mail the key for duplicates?
+- **Working assumption:** header row with `firstName`, `lastName`, `email`, `phone`, `program`, `consent` (first and last name required; e-mail or phone required; consent yes/po/1/true, default no), `,` or `;` separated, UTF-8; the source and event name are chosen once per import; a row whose e-mail already exists is skipped; 1000 rows / 1 MB per file; one invalid row refuses the file.
+- **Impact:** importer, duplicate rule.
+
+### Q-138 — Leads: the invitation e-mail
+- **Context:** ADM brief — "convert lead → application invitation email".
+- **Questions:** Wording, language, sender, and may a lead without consent be e-mailed?
+- **Working assumption:** a short Albanian text inviting the lead to apply (program named when known), sent from the system address, only to leads who consented and have an e-mail; it contains no link until ADM-02 provides the application page; the page shows when it was sent.
+- **Impact:** e-mail text, consent rule.
+
+### Q-139 — Leads: retention and erasure
+- **Context:** leads are personal data of people who never enrolled.
+- **Questions:** How long may a lead be kept? Must a person be erasable on request?
+- **Working assumption:** leads are kept (never hard-deleted, as all business data); no automatic expiry or erasure in this feature; a lost lead keeps its data.
+- **Impact:** a retention job, an anonymize action.

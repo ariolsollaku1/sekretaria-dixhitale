@@ -28,3 +28,11 @@ export { TRANSLATED as STAT_TRANSLATED } from "./server/stat.format";
 export { pivot, isDimension, DIMENSIONS, type Dimension } from "./domain/stat-rules";
 export { getPortalHome, type PortalHome, type HomeEnrollment } from "./server/home.queries";
 export { PortalHomeView } from "./ui/portal-home";
+import "./server/request-handlers";
+export {
+  getRecognitionPanel,
+  listRecognizedCourses,
+  type RecognitionPanel,
+} from "./server/recognition.queries";
+export { REQUEST_FORMS } from "./domain/request-forms";
+export { RecognitionPanelView } from "./ui/recognition-panel";

@@ -12,6 +12,8 @@ export type ApprovedSubmission = {
 
 export type FormHandler = {
   onApproved(ctx: ActionContext, submission: ApprovedSubmission): Promise<void>;
+  /** Optional page of the owning module with more actions for a submission (shown as a link). */
+  detailHref?(submissionId: string): string;
 };
 
 const handlers = new Map<string, FormHandler>();

@@ -14,6 +14,7 @@ time ([ADR-0001](02-architecture/adr/0001-spec-driven-docs.md)).
 | [03-features/](03-features/) | the [feature registry](03-features/FEATURES.md) (status, dependencies, blockers), [module briefs](03-features/modules/), [full specs](03-features/specs/) |
 | [04-open-questions.md](04-open-questions.md) | what we don't know yet and which features it blocks |
 | [05-roadmap.md](05-roadmap.md) | build order (phases P0–P8) and which questions to ask before each phase |
+| [06-implementation-status.md](06-implementation-status.md) | what is built, what is ready, what is blocked, and caveats (handoff page) |
 
 ## How a feature moves
 

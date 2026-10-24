@@ -6,8 +6,10 @@ import { buttonVariants } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
 import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
+import { can } from "@/lib/authz/guard";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDate } from "@/lib/i18n/format";
+import { RegistrationSection, getNoticeByAnnouncement, noticeDetail } from "@/modules/adm";
 import {
   AnnouncementStatusActions,
   listAttachments,
@@ -31,13 +33,19 @@ export default async function AnnouncementPage({ params }: { params: Promise<{ i
   const user = await requireUser(`/announcements/${id}`);
   const a = await visibleAnnouncement(user.id, id);
   if (!a) notFound();
-  const [t, locale, manage, files] = await Promise.all([
+  const [t, locale, manage, files, notice, mayWriteNotice] = await Promise.all([
     getTranslations("ntf"),
     getLocale(),
     mayManage(user, a),
     listAttachments(id),
+    getNoticeByAnnouncement(id),
+    can(user, "adm.notice.write"),
   ]);
   const l = locale as Locale;
+  // ADM-06: a registration notice carries campaign data, edited on its own form
+  const editHref = notice ? `/adm/notices/${notice.id}/edit` : `/announcements/${a.id}/edit`;
+  const mayEdit = manage && (!notice || mayWriteNotice);
+  const detail = notice ? await noticeDetail(notice) : null;
 
   return (
     <>
@@ -47,12 +55,11 @@ export default async function AnnouncementPage({ params }: { params: Promise<{ i
         actions={
           manage && (
             <>
-              <Link
-                href={`/announcements/${a.id}/edit`}
-                className={buttonVariants({ variant: "secondary" })}
-              >
-                {t("edit")}
-              </Link>
+              {mayEdit && (
+                <Link href={editHref} className={buttonVariants({ variant: "secondary" })}>
+                  {t("edit")}
+                </Link>
+              )}
               <AnnouncementStatusActions announcementId={a.id} status={a.status} />
             </>
           )
@@ -77,6 +84,7 @@ export default async function AnnouncementPage({ params }: { params: Promise<{ i
       <div className="rounded-card border-border bg-card mb-6 max-w-3xl border p-4 text-sm whitespace-pre-line">
         {a.body}
       </div>
+      {detail && <RegistrationSection notice={detail} />}
       {files.length > 0 && (
         <section aria-labelledby="files-title" className="mb-8">
           <h2 id="files-title" className="mb-2 text-lg font-semibold">

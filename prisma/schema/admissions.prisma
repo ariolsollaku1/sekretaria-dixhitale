@@ -1,0 +1,24 @@
+/// Structured campaign data of an announcement that is a registration notice (ADM-06, SRC-033).
+/// Fees and preferential-fee days are not stored: they are read live from the FIN-01 schedule.
+model RegistrationNotice {
+  id                   String        @id @default(cuid(2))
+  announcementId       String        @unique @map("announcement_id")
+  academicYearId       String        @map("academic_year_id")
+  /// Narrows the fees shown; null = every active program with fees.
+  programId            String?       @map("program_id")
+  registrationDeadline DateTime      @map("registration_deadline") @db.Date
+  /// Checklist of required documents, at most 20 lines (database check).
+  documents            String[]
+  contractExcerpt      String        @default("") @map("contract_excerpt")
+  showFees             Boolean       @default(true) @map("show_fees")
+  createdAt            DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById          String?       @map("created_by_id")
+  updatedById          String?       @map("updated_by_id")
+  announcement         Announcement  @relation(fields: [announcementId], references: [id])
+  academicYear         AcademicYear  @relation(fields: [academicYearId], references: [id])
+  program              StudyProgram? @relation(fields: [programId], references: [id])
+
+  @@index([academicYearId])
+  @@map("registration_notices")
+}

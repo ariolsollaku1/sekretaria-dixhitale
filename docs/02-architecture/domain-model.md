@@ -124,6 +124,7 @@ erDiagram
 | `Person` | (HR-01, STU-01; implemented) `firstName`, `lastName`, `fatherName?`, `gender` (FEMALE/MALE), `birthDate`, `nationalId?` (unique), `phone?`, `email?` (unique), `address?`, `birthPlace?`, `residence?`. `User.personId` points at it. |
 | `Lead` | interest-form contact: name, email, phone, program of interest, source (website/campaign/event), consent |
 | `Application` | `personData` (snapshot), `programId`, `academicYearId`, `highSchoolAverage`, documents, `status` (SUBMITTED/IN_REVIEW/ACCEPTED/REJECTED/ENROLLED) |
+| `RegistrationNotice` | (ADM-06, implemented) `announcementId` (unique; the notice is an NTF-01 announcement for audience ALL), `academicYearId`, `programId?`, `registrationDeadline` (date), `documents` (text[], ≤ 20 by check), `contractExcerpt`, `showFees`. Fees and preferential days are read live from `FeeScheduleItem`/`FeeDiscount`, never copied. |
 | `Student` | (STU-01, implemented) `personId` (unique), `studentNumber` (6-digit sequence, generated), `nim?` (unique, typed from SMIAL until INT-01). |
 | `Enrollment` | (STU-01, implemented) `studentId`, `programId`, `cohortId`, `registrationType` (FIRST_TIME/SECOND_PROGRAM/TRANSFER), `status` (ACTIVE/SUSPENDED/DEREGISTERED/GRADUATED), `startedAt`, `endedAt?`; one ACTIVE or SUSPENDED per student and program (partial unique index). |
 | `YearRegistration` | (STU-01, implemented) `enrollmentId`, `academicYearId`, `yearOfStudy`, `groupId`; unique per enrollment and year. |

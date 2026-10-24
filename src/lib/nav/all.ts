@@ -7,6 +7,7 @@ import "@/modules/stu";
 import "@/modules/att";
 import "@/modules/fin";
 import "@/modules/ers";
+import "@/modules/adm";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -433,6 +434,15 @@ registerNav(
     order: 13,
   },
 );
+registerNav({
+  id: "registration-notices",
+  labelKey: "registrationNotices",
+  href: "/adm/notices",
+  icon: "bell",
+  permission: "adm.notice.write",
+  group: "administration",
+  order: 50,
+});
 registerNav(
   {
     id: "fees",

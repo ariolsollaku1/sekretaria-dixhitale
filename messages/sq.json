@@ -95,7 +95,8 @@
       "paymentPlans": "Planet e pagesave",
       "attendanceReport": "Raporti i pranisë",
       "attendanceSummary": "Përmbledhja e pranisë",
-      "teachingHub": "Hapësira ime e mësimdhënies"
+      "teachingHub": "Hapësira ime e mësimdhënies",
+      "registrationNotices": "Njoftimet e regjistrimit"
     },
     "languages": {
       "sq": "Shqip",
@@ -2751,6 +2752,82 @@
       "tooLong": "Teksti është shumë i gjatë.",
       "tooMany": "Shumë rreshta.",
       "generic": "Diçka shkoi keq. Kontrolloni të dhënat dhe provoni përsëri."
+    }
+  },
+  "adm": {
+    "list": {
+      "title": "Njoftimet e regjistrimit",
+      "new": "Njoftim i ri regjistrimi",
+      "empty": "Ende nuk ka njoftime regjistrimi.",
+      "allPrograms": "Të gjitha programet",
+      "edit": "Ndrysho",
+      "columns": {
+        "title": "Titulli",
+        "year": "Viti akademik",
+        "program": "Programi",
+        "deadline": "Afati",
+        "status": "Statusi",
+        "actions": "Veprime"
+      }
+    },
+    "form": {
+      "newTitle": "Njoftim i ri regjistrimi",
+      "editTitle": "Ndrysho njoftimin e regjistrimit",
+      "title": "Titulli",
+      "body": "Hyrje",
+      "bodyHint": "Tekst i thjeshtë që shfaqet i pari. Tarifat dhe ditët preferenciale merren nga tarifat e studimit.",
+      "year": "Viti akademik",
+      "program": "Programi",
+      "programHint": "Kufizon tarifat e shfaqura. Lëre bosh për të gjitha programet.",
+      "allPrograms": "Të gjitha programet",
+      "deadline": "Afati i regjistrimit",
+      "documents": "Dokumentet e nevojshme",
+      "documentsHint": "Një dokument në rresht, deri në {max}.",
+      "showFees": "Shfaq tarifat dhe ditët e tarifës preferenciale nga tarifat e studimit",
+      "contract": "Pjesë nga kontrata e studentit",
+      "contractHint": "Tekst i thjeshtë, citohet siç shkruhet.",
+      "publishDate": "I dukshëm nga",
+      "publishHint": "Bosh: menjëherë kur publikohet.",
+      "expiresDate": "I dukshëm deri",
+      "expiresHint": "Bosh: derisa të arkivohet. Kjo ditë përfshihet.",
+      "pinned": "Fiksoje në krye të listës",
+      "emailPush": "Dërgoje edhe me e-mail dhe njoftim në portal për të gjithë",
+      "emailPushHint": "Dërgohet një herë, kur njoftimi bëhet i dukshëm.",
+      "create": "Ruaj si skicë",
+      "save": "Ruaj"
+    },
+    "actions": {
+      "created": "Njoftimi i regjistrimit u ruajt si skicë. Publikoje nga kjo faqe.",
+      "saved": "Njoftimi i regjistrimit u ruajt."
+    },
+    "section": {
+      "title": "Regjistrimi {year}",
+      "deadline": "Afati i regjistrimit",
+      "deadlinePassed": "Afati ka kaluar",
+      "daysLeft": "{count, plural, =0 {Dita e fundit} one {1 ditë e mbetur} other {# ditë të mbetura}}",
+      "documents": "Dokumentet e nevojshme",
+      "fees": "Tarifat e studimit dhe ditët preferenciale",
+      "noFees": "Ende nuk janë publikuar tarifa.",
+      "fee": "Tarifa",
+      "amount": "Shuma",
+      "preferential": "Tarifa preferenciale",
+      "window": "nga {from} deri më {to}",
+      "runningNow": "Në fuqi tani",
+      "ended": "Ka përfunduar",
+      "contract": "Nga kontrata e studentit"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Shumë i gjatë.",
+      "invalidDate": "Shkruaj një datë të vlefshme.",
+      "documentEmpty": "Rreshti i dokumentit nuk mund të jetë bosh.",
+      "documentTooLong": "Rreshti i dokumentit është shumë i gjatë (maksimumi 200 shkronja).",
+      "tooManyDocuments": "Maksimumi 20 dokumente.",
+      "expiresBeforePublish": "Dita e fundit nuk mund të jetë para ditës së parë.",
+      "yearNotFound": "Zgjidh një vit akademik.",
+      "programNotFound": "Programi nuk ekziston.",
+      "audienceNotAllowed": "Nuk lejohesh të publikosh për të gjithë.",
+      "generic": "Diçka shkoi keq. Provo përsëri."
     }
   }
 }

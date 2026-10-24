@@ -403,4 +403,22 @@ registerNav(
     group: "teaching",
     order: 11,
   },
+  {
+    id: "attendance-report",
+    labelKey: "attendanceReport",
+    href: "/att/report",
+    icon: "clipboard",
+    permission: "att.attendance.read",
+    group: "teaching",
+    order: 12,
+  },
+  {
+    id: "attendance-summary",
+    labelKey: "attendanceSummary",
+    href: "/att/summary",
+    icon: "clipboard",
+    permission: "att.attendance.read",
+    group: "teaching",
+    order: 13,
+  },
 );

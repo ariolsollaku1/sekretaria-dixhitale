@@ -90,6 +90,8 @@
       "myAbsences": "My absences",
       "exams": "Exam schedule",
       "myExams": "My exams",
+      "attendanceReport": "Attendance report",
+      "attendanceSummary": "Attendance summary",
       "teachingHub": "My teaching workspace"
     },
     "languages": {
@@ -2446,6 +2448,52 @@
       "YEAR_CLOSED": "The academic year is closed.",
       "HELD_LOCKED": "A held class can only be cancelled by the Secretariat, with a reason.",
       "DUPLICATE": "A class with this date and start time already exists."
+    },
+    "own": {
+      "title": "My attendance",
+      "hint": "Attendance is counted in hours of held classes; excused absences do not count as attended. Minimum: {threshold}%.",
+      "figures": "Held hours {held} · absent {absent} · excused {excused}",
+      "below": "Below {threshold}%"
+    },
+    "report": {
+      "belowFlag": "Below threshold",
+      "filters": {
+        "program": "Program code",
+        "group": "Group",
+        "course": "Course",
+        "kind": "Kind",
+        "from": "From",
+        "to": "To",
+        "below": "Below threshold",
+        "belowYes": "Only below the threshold"
+      },
+      "columns": {
+        "studentNumber": "Student no.",
+        "name": "Student",
+        "program": "Program",
+        "group": "Group",
+        "course": "Course",
+        "kind": "Kind",
+        "lecturer": "Lecturer",
+        "classes": "Classes",
+        "heldHours": "Held hours",
+        "presentHours": "Present hours",
+        "absentHours": "Absent hours",
+        "excusedHours": "Excused hours",
+        "percent": "Attendance %",
+        "below": "Below threshold",
+        "students": "Students",
+        "averagePercent": "Average %",
+        "belowCount": "Students below"
+      },
+      "report": {
+        "title": "Attendance report",
+        "intro": "Attendance of each student per course and kind for the selected academic year, from held classes only. Threshold: {threshold}%."
+      },
+      "summary": {
+        "title": "Attendance summary",
+        "intro": "Held classes, average attendance and students below the threshold per group and course. Threshold: {threshold}%."
+      }
     }
   }
 }

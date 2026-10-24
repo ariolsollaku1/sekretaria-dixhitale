@@ -6,6 +6,8 @@ const DEFAULTS: Record<string, unknown> = {
   "app.timezone": "Europe/Tirane",
   // ATT-01 (Q-61 working assumption): days after a class during which the lecturer may enter attendance.
   "att.editWindowDays": 7,
+  // ATT-02 (Q-91 working assumption): attendance threshold in percent (75 % is the Q-12 research finding).
+  "att.thresholdPercent": 75,
   // ORG-03: allowed program durations per cycle and Master subtypes (defaults from the ORG brief;
   // the institution can change them without a deployment).
   "org.programDurations": { FIRST: [3], SECOND: [1, 2] },

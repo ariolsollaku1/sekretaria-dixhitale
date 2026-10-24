@@ -90,6 +90,8 @@
       "myAbsences": "Mungesat e mia",
       "exams": "Provimet",
       "myExams": "Provimet e mia",
+      "attendanceReport": "Raporti i pranisë",
+      "attendanceSummary": "Përmbledhja e pranisë",
       "teachingHub": "Hapësira ime e mësimdhënies"
     },
     "languages": {
@@ -2446,6 +2448,52 @@
       "YEAR_CLOSED": "Viti akademik është i mbyllur.",
       "HELD_LOCKED": "Një orë e zhvilluar mund të anulohet vetëm nga Sekretaria, me arsye.",
       "DUPLICATE": "Ekziston tashmë një orë me këtë datë dhe orë fillimi."
+    },
+    "own": {
+      "title": "Prania ime",
+      "hint": "Prania llogaritet në orë të zhvilluara; mungesat e justifikuara nuk numërohen si prani. Minimumi: {threshold}%.",
+      "figures": "Orë të zhvilluara {held} · mungesa {absent} · të justifikuara {excused}",
+      "below": "Nën {threshold}%"
+    },
+    "report": {
+      "belowFlag": "Nën pragun",
+      "filters": {
+        "program": "Kodi i programit",
+        "group": "Grupi",
+        "course": "Lënda",
+        "kind": "Lloji",
+        "from": "Nga",
+        "to": "Deri",
+        "below": "Nën pragun",
+        "belowYes": "Vetëm nën pragun"
+      },
+      "columns": {
+        "studentNumber": "Nr. i studentit",
+        "name": "Studenti",
+        "program": "Programi",
+        "group": "Grupi",
+        "course": "Lënda",
+        "kind": "Lloji",
+        "lecturer": "Pedagogu",
+        "classes": "Orë mësimi",
+        "heldHours": "Orë të zhvilluara",
+        "presentHours": "Orë prania",
+        "absentHours": "Orë mungesa",
+        "excusedHours": "Orë të justifikuara",
+        "percent": "Prania %",
+        "below": "Nën pragun",
+        "students": "Studentë",
+        "averagePercent": "Mesatarja %",
+        "belowCount": "Studentë nën pragun"
+      },
+      "report": {
+        "title": "Raporti i pranisë",
+        "intro": "Prania e çdo studenti sipas lëndës dhe llojit për vitin akademik të zgjedhur, vetëm nga orët e zhvilluara. Pragu: {threshold}%."
+      },
+      "summary": {
+        "title": "Përmbledhja e pranisë",
+        "intro": "Orët e zhvilluara, prania mesatare dhe studentët nën prag sipas grupit dhe lëndës. Pragu: {threshold}%."
+      }
     }
   }
 }

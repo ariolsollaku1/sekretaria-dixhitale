@@ -31,7 +31,7 @@ type PaymentRow = {
   createdAt: Date;
 };
 
-const toInstallment = (i: InstallmentRow): InstallmentInput => ({
+export const toInstallment = (i: InstallmentRow): InstallmentInput => ({
   id: i.id,
   sequence: i.sequence,
   dueDate: toDay(i.dueDate),
@@ -39,7 +39,7 @@ const toInstallment = (i: InstallmentRow): InstallmentInput => ({
   earlyCents: i.earlyAmount ? centsOf(i.earlyAmount) : null,
   earlyUntil: i.earlyUntil ? toDay(i.earlyUntil) : null,
 });
-const toPayments = (rows: PaymentRow[]): PaymentInput[] =>
+export const toPayments = (rows: PaymentRow[]): PaymentInput[] =>
   [...rows]
     .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
     .map((p, order) => ({

@@ -117,7 +117,8 @@
       "evaluations": "Vlerësimet e performancës",
       "myEvaluations": "Vlerësimet që duhet të plotësoj",
       "leads": "Interesimet",
-      "scholarships": "Bursat"
+      "scholarships": "Bursat",
+      "paymentLists": "Listat e pagesave"
     },
     "languages": {
       "sq": "Shqip",
@@ -3294,6 +3295,43 @@
           "NO_OPEN_ENROLLMENT": "Studenti nuk ka regjistrim të hapur.",
           "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura: kërkesa nuk tregon një program të vetëm."
         }
+      }
+    },
+    "lists": {
+      "title": "Listat e pagesave",
+      "deadlinesTitle": "Këstet sipas afatit",
+      "clearanceTitle": "Rregullimi financiar",
+      "debtorsTitle": "Debitorët",
+      "tabs": {
+        "deadlines": "Sipas afatit",
+        "clearance": "Para sezonit të provimeve",
+        "debtors": "Debitorët"
+      },
+      "deadlinesHint": "Çdo këst i vitit akademik të zgjedhur, i renditur sipas afatit, me atë që është paguar dhe çfarë mbetet. Filtro sipas intervalit të afatit ose gjendjes.",
+      "clearanceHint": "Studentët me plan pagesash në vitin akademik të zgjedhur. Zgjidhni një sezon provimesh për të parë kush i ka mbyllur detyrimet para tij (deri një ditë para ditës së parë), ose caktoni një datë. Pa asnjërën përdoret sot. Nëse viti nuk ka një sezon të tillë, lista është bosh.",
+      "debtorsHint": "Studentët që nuk i kanë mbyllur detyrimet në datën e zgjedhur, me të dhënat e kontaktit. Zgjidhni një sezon ose një datë për të ndryshuar kontrollin.",
+      "noYear": "Zgjidhni më parë një vit akademik.",
+      "columns": {
+        "dueDate": "Afati",
+        "installment": "Kësti",
+        "amount": "Shuma",
+        "status": "Gjendja",
+        "email": "E-mail",
+        "phone": "Telefoni",
+        "date": "Kontrolluar më",
+        "owed": "Detyrimi"
+      },
+      "filters": {
+        "dueFrom": "Afati nga",
+        "dueTo": "Afati deri",
+        "session": "Sezoni i provimeve",
+        "asOf": "Data e kontrollit"
+      },
+      "session": {
+        "WINTER": "Sezoni dimëror",
+        "SUMMER": "Sezoni veror",
+        "AUTUMN": "Sezoni i vjeshtës",
+        "MINI": "Sezoni i vogël"
       }
     }
   },

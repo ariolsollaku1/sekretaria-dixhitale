@@ -151,6 +151,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-140 | Scholarships: kinds and who decides | no | open | Finance |
 | Q-141 | Scholarships: effect on the payment plan | no | open | Finance |
 | Q-142 | Scholarships: application form, list and report | no | open | Finance |
+| Q-143 | Shared payment lists: deadline list, exam-session clearance, debtors | no | open | Finance, Secretariat |
 
 ---
 
@@ -1290,3 +1291,9 @@ Decisions taken in conversation that aren't architecture ADRs.
   plus the plan total; the report counts the scholarships that are not void per academic year and
   program, split full/partial and by kind; both are exportable.
 - **Impact:** form fields, list columns, report dimensions.
+
+### Q-143 — Shared payment lists: deadline list, exam-session clearance, debtors
+- **Context:** SRC-049a/b (students who have / have not closed their financial obligations before the winter/summer/autumn exam session), SRC-085 (students grouped by payment deadlines per the annex of the contract), SRC-087 (same lists open to Finance and the Secretariat at the same time); Q-111 (financial clearance).
+- **Questions:** What does "before the exam session" mean as a date? What exactly does "grouped by payment deadlines" show? What is a "debtor", and which contact data may the Secretariat see?
+- **Working assumption:** one installment per row of the selected academic year, ordered by due date (the grouping is the due-date order plus a from/to filter on the due date, with paid, outstanding and status per installment); "before the session" = every installment due up to the **day before the first day** of the chosen session (type winter/summer/autumn/mini) of the selected year, using the clearance rule of Q-111 across all years of the student; without a session the date is a free "as of" date (default today); the debtors list is the clearance list filtered to "not cleared" and shows what is owed; both lists show e-mail and phone of the person and can be messaged (NTF-03); both are read by Finance, Secretariat and student affairs within their program scope (same permission, same data) and exported.
+- **Impact:** the clearance date rule, columns, who sees contact data.

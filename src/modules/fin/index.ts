@@ -38,3 +38,5 @@ export {
 } from "./server/scholarship.queries";
 export { GrantScholarshipForm, VoidScholarshipButton } from "./ui/scholarship-forms";
 export { SCHOLARSHIP_FORMS } from "./domain/scholarship-forms";
+// FIN-05 shared lists
+export { deadlinesTable, clearanceTable } from "./server/list.table";

@@ -48,6 +48,8 @@ erDiagram
   Enrollment ||--o{ YearRegistration : "registers each year"
   YearRegistration }o--|| StudentGroup : in
   Enrollment ||--o{ EnrollmentStatusEvent : history
+  Enrollment ||--o{ RecognizedCourse : "recognized (STU-07)"
+  RecognizedCourse }o--|| Course : of
 
   PlanCourse ||--o{ TeachingAssignment : "taught via"
   Staff ||--o{ TeachingAssignment : teaches
@@ -124,6 +126,7 @@ erDiagram
 | `Enrollment` | (STU-01, implemented) `studentId`, `programId`, `cohortId`, `registrationType` (FIRST_TIME/SECOND_PROGRAM/TRANSFER), `status` (ACTIVE/SUSPENDED/DEREGISTERED/GRADUATED), `startedAt`, `endedAt?`; one ACTIVE or SUSPENDED per student and program (partial unique index). |
 | `YearRegistration` | (STU-01, implemented) `enrollmentId`, `academicYearId`, `yearOfStudy`, `groupId`; unique per enrollment and year. |
 | `EnrollmentStatusEvent` | (STU-01 creates the first row; STU-02 the transitions) `enrollmentId`, `fromStatus?`, `toStatus`, `reason?`, `effectiveDate`, `documentRef?`. |
+| `RecognizedCourse` | (STU-07) `studentId`, `enrollmentId`, `submissionId` (the recognition request), `courseId`, `credits`, `note?`, `voidedAt?`/`voidedById?`/`voidReason?`; never deleted, one live row per enrollment and course (partial unique index); read by EXM-07. |
 
 ### CAL / ATT — calendar, timetable, attendance
 | Entity | Key fields |

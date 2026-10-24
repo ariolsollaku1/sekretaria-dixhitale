@@ -140,13 +140,18 @@ additionally requires `stu.student.write`.
   Secretariat rejects with a comment.
 - Requested date after today or before the previous change: moved into range, not an error.
 
+**Implementation notes:**
+- Handlers live in `src/modules/stu/server/request-handlers.ts`; `src/lib/forms/all.ts` loads them where the inbox actions run (the registry is in-process). `FormHandler.detailHref` lets a module add a link on the submission detail.
+- The recognized courses of a request are recorded *before* approval (the handler only checks that one exists); the dev/demo seeder publishes the four forms, production loads them in the forms admin.
+- Courses are identified by catalog code in the decision form (no picker).
+
 ## 4. Tasks
 
-- [ ] **T1** — Pure rules and the four definitions with unit tests. (AC-1, AC-2, AC-3)
-- [ ] **T2** — `RecognizedCourse` model + migration (partial unique index), permissions; recognition service and actions; integration tests. (AC-5, AC-6, AC-9, AC-10)
-- [ ] **T3** — Resolver and handlers (deregistration → STU-02, recognition guard) registered on the forms engine; integration tests. (AC-2..AC-4, AC-7)
-- [ ] **T4** — Decision page, detail link, i18n, nav-free routes, seeder. (AC-1, AC-8)
-- [ ] **T5** — E2E, docs (domain model, brief). (all)
+- [x] **T1** — Pure rules and the four definitions with unit tests. (AC-1, AC-2, AC-3)
+- [x] **T2** — `RecognizedCourse` model + migration (partial unique index), permissions; recognition service and actions; integration tests. (AC-5, AC-6, AC-9, AC-10)
+- [x] **T3** — Resolver and handlers (deregistration → STU-02, recognition guard) registered on the forms engine; integration tests. (AC-2..AC-4, AC-7)
+- [x] **T4** — Decision page, detail link, i18n, nav-free routes, seeder. (AC-1, AC-8)
+- [x] **T5** — E2E, docs (domain model, brief). (all)
 
 ## 5. Test plan
 
@@ -162,9 +167,9 @@ additionally requires `stu.student.write`.
 
 ## 6. Definition of done
 
-- [ ] All tasks ticked, all ACs covered by tests
-- [ ] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
-- [ ] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
-- [ ] i18n keys added (`en` and `sq`)
-- [ ] Docs updated (domain model, brief)
-- [ ] FEATURES.md Status → `done`; `node scripts/features.mjs --write`
+- [x] All tasks ticked, all ACs covered by tests
+- [x] `pnpm lint && pnpm typecheck && pnpm test` pass; E2E for user-facing flows pass
+- [x] Security checklist in [conventions.md](../../02-architecture/conventions.md#security-checklist-every-feature) satisfied
+- [x] i18n keys added (`en` and `sq`)
+- [x] Docs updated (domain model, brief)
+- [x] FEATURES.md Status → `done`; `node scripts/features.mjs --write`

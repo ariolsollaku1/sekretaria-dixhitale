@@ -46,3 +46,6 @@ Code: `src/modules/stu`. Entities: [domain model](../../02-architecture/domain-m
 - **Scope:** form definitions in PLT-15 (public + in-portal); Secretariat inbox; approval of a
   deregistration triggers STU-02 transition; recognition decision records recognized courses/credits
   (stored for EXM-07).
+- **Built:** four form definitions (`deregistration`, `recognition` public; `*-student` in the portal) with
+  handlers `stu.deregistration` / `stu.recognition`; the decision page `/stu/requests/[submissionId]`
+  records and voids recognized courses (`RecognizedCourse`). Spec: [STU-07](../specs/STU-07-student-requests.md).

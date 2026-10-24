@@ -78,6 +78,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
 | Q-63 | Attendance: creating class sessions | no | open | Secretariat |
 | Q-64 | Attendance: who sees what | no | open | Secretariat |
+| Q-90 | Attendance: how the percentage is computed | no | open | Secretariat |
+| Q-91 | Attendance: threshold and what it applies to | no | open | Secretariat |
+| Q-92 | Attendance: which classes and marks count | no | open | Secretariat |
+| Q-93 | Attendance: what the student sees of the percentage | no | open | Secretariat |
+| Q-94 | Attendance: who may run the reports and the period | no | open | Secretariat |
 
 ---
 
@@ -669,3 +674,48 @@ Decisions taken in conversation that aren't architecture ADRs.
   Secretariat reads and corrects all; heads of department and program coordinators read the sessions
   of their scope; a student sees only their own absent and excused marks (with the status, without notes).
 - **Impact:** visibility of notes and of colleagues' classes.
+
+### Q-90 — Attendance: how the percentage is computed
+- **Context:** SRC-042, SRC-036b — the attendance report; Q-12 (the 75 % rule needs a definition).
+- **Questions:** Is attendance measured in hours or in classes? Does an excused absence count as
+  attended or as absent?
+- **Working assumption:** in **hours** (the hours of each held class): attendance % = hours present /
+  hours of the held classes the student has a mark for, rounded to one decimal. **Excused counts as
+  absent** for the percentage (it is reported separately, so the Secretariat can see it). One
+  institution-wide switch can change this later without a deployment (not built now).
+- **Impact:** the percentage; EXM-03 eligibility and DOC-03 reuse the same function.
+
+### Q-91 — Attendance: threshold and what it applies to
+- **Context:** Q-12 research finding — 75 % attendance is required for exams; lecture vs. seminar
+  not confirmed.
+- **Questions:** Which percentage, and is it per course as a whole or separately for lecture, seminar
+  and lab?
+- **Working assumption:** 75 % (setting `att.thresholdPercent`, a whole number 0–100), applied
+  **separately per student and teaching assignment** (course and kind), because the report rows are
+  assignments. "Below the threshold" means strictly less than the threshold.
+- **Impact:** which students are flagged; the setting.
+
+### Q-92 — Attendance: which classes and marks count
+- **Context:** SRC-043 — classes can be planned, held or cancelled; students may join a group late.
+- **Questions:** Do planned or cancelled classes count? What about classes before a student joined?
+- **Working assumption:** only classes marked **held** count; planned and cancelled ones never do. A
+  student is counted only for the held classes they have a mark for (classes saved before they were on
+  the roster do not count against them). The report can be limited to a date range.
+- **Impact:** denominators of the percentage.
+
+### Q-93 — Attendance: what the student sees of the percentage
+- **Context:** SRC-036b — students see their absences.
+- **Questions:** May students see their own attendance % per course and whether they are under the
+  threshold?
+- **Working assumption:** yes: per course and kind, the held hours, absent and excused hours and the
+  percentage, with a note when it is under the threshold; no other students' data, no notes.
+- **Impact:** the student page.
+
+### Q-94 — Attendance: who may run the reports and the period
+- **Context:** SRC-042 — the attendance report; roles.md.
+- **Questions:** Who may see reports, and for which period (year, semester, month)?
+- **Working assumption:** whoever has `att.attendance.read` (Secretariat, heads of department,
+  program coordinators; by scope of the program), for the selected academic year, optionally limited
+  by a from and to date; exportable like any list. Lecturers get no report yet (they see their own
+  classes); semesters are not a filter until the calendar defines them for attendance.
+- **Impact:** access, period, exports.

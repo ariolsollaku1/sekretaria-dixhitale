@@ -22,6 +22,7 @@ import { ersFormsSeeder } from "./ers-forms";
 import { offRequestsSeeder } from "./off-requests";
 import { qaCampaignsSeeder } from "./qa-campaigns";
 import { curPackageSeeder } from "./cur-package";
+import { ntfEventsSeeder } from "./ntf-events";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -48,6 +49,7 @@ const SEEDERS: Seeder[] = [
   admNoticesSeeder,
   qaCampaignsSeeder,
   curPackageSeeder,
+  ntfEventsSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

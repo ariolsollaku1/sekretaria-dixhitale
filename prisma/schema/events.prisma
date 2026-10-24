@@ -1,0 +1,63 @@
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  CANCELLED
+
+  @@map("event_status")
+}
+
+enum RegistrationStatus {
+  REGISTERED
+  CANCELLED
+
+  @@map("registration_status")
+}
+
+/// An event or extracurricular activity people register for (NTF-02). Cancelled, never deleted.
+model Event {
+  id                   String               @id @default(cuid(2))
+  title                String
+  description          String
+  location             String
+  startsAt             DateTime             @map("starts_at") @db.Timestamptz(3)
+  endsAt               DateTime?            @map("ends_at") @db.Timestamptz(3)
+  /// null = unlimited places.
+  capacity             Int?
+  /// null = registration closes at `startsAt`.
+  registrationDeadline DateTime?            @map("registration_deadline") @db.Timestamptz(3)
+  status               EventStatus          @default(DRAFT)
+  audience             AnnouncementAudience @default(ALL)
+  /// Set when audience = CYCLE.
+  cycle                StudyCycle?
+  /// Set when audience = PROGRAM.
+  programId            String?              @map("program_id")
+  announcementId       String?              @map("announcement_id")
+  /// Set when the reminder fan-out has finished.
+  remindedAt           DateTime?            @map("reminded_at") @db.Timestamptz(3)
+  createdAt            DateTime             @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime             @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById          String?              @map("created_by_id")
+  updatedById          String?              @map("updated_by_id")
+  program              StudyProgram?        @relation(fields: [programId], references: [id])
+  announcement         Announcement?        @relation(fields: [announcementId], references: [id])
+  registrations        EventRegistration[]
+
+  @@index([status, startsAt])
+  @@map("events")
+}
+
+/// One row per person and event; cancelling keeps the row (status CANCELLED).
+model EventRegistration {
+  id           String             @id @default(cuid(2))
+  eventId      String             @map("event_id")
+  userId       String             @map("user_id")
+  status       RegistrationStatus @default(REGISTERED)
+  registeredAt DateTime           @default(now()) @map("registered_at") @db.Timestamptz(3)
+  cancelledAt  DateTime?          @map("cancelled_at") @db.Timestamptz(3)
+  event        Event              @relation(fields: [eventId], references: [id])
+  user         User               @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+  @@index([userId])
+  @@map("event_registrations")
+}

@@ -1,10 +1,13 @@
 import "server-only";
 import { db } from "@/lib/db";
-import { writableProgramIds } from "./announcement.queries";
+import { writableProgramIds, type WritePermission } from "./announcement.queries";
 
-/** Active programs the author may address. */
-export async function listProgramOptions(user: { id: string }) {
-  const ids = await writableProgramIds(user);
+/** Active programs the author may address (announcements by default; NTF-02 passes the event permission). */
+export async function listProgramOptions(
+  user: { id: string },
+  permission: WritePermission = "ntf.announcement.write",
+) {
+  const ids = await writableProgramIds(user, permission);
   const programs = await db.studyProgram.findMany({
     where: { active: true, id: { in: ids } },
     orderBy: { code: "asc" },

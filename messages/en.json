@@ -106,7 +106,8 @@
       "paymentsImport": "Import payments",
       "myPayments": "My payments",
       "studyPackages": "Study packages",
-      "myPackage": "My study package"
+      "myPackage": "My study package",
+      "events": "Events"
     },
     "languages": {
       "sq": "Shqip",
@@ -1157,6 +1158,21 @@
         "label": "Messages from the college",
         "title": "Message from the college",
         "body": "You have a new message."
+      },
+      "event-registered": {
+        "label": "Event registration confirmations",
+        "title": "You are registered: {title}",
+        "body": "Your registration for “{title}” ({when}) is confirmed."
+      },
+      "event-reminder": {
+        "label": "Reminders before events",
+        "title": "Event soon: {title}",
+        "body": "“{title}” starts at {when}."
+      },
+      "event-cancelled": {
+        "label": "Cancelled events",
+        "title": "Event cancelled: {title}",
+        "body": "The event “{title}” planned for {when} was cancelled."
       }
     },
     "stu": {
@@ -1197,6 +1213,18 @@
       "message": {
         "subject": "Message from the college",
         "body": "You have a new message in the Digital Secretariat."
+      },
+      "event-registered": {
+        "subject": "Registration confirmed: {title}",
+        "body": "Your registration for the event “{title}” ({when}) is confirmed."
+      },
+      "event-reminder": {
+        "subject": "Reminder: {title}",
+        "body": "The event “{title}” you registered for starts at {when}."
+      },
+      "event-cancelled": {
+        "subject": "Event cancelled: {title}",
+        "body": "The event “{title}” planned for {when} was cancelled."
       }
     },
     "stu": {
@@ -3143,6 +3171,114 @@
       "duplicateKey": "Duplicate question.",
       "badKey": "Invalid key.",
       "labelRequired": "Write the question text in Albanian."
+    }
+  },
+  "evt": {
+    "title": "Events",
+    "manage": "Manage events",
+    "new": "New event",
+    "edit": "Edit",
+    "attendees": "Attendees",
+    "empty": "There are no events for you right now.",
+    "emptyHint": "Events appear here as soon as they are published.",
+    "upcoming": "Upcoming",
+    "noUpcoming": "No upcoming events.",
+    "past": "Past events",
+    "registered": "Registered",
+    "when": "When",
+    "where": "Where",
+    "places": "Places",
+    "deadline": "Register by",
+    "announcement": "Announcement",
+    "unlimited": "Unlimited",
+    "placesLeft": "{count, plural, =0 {No places left} one {# place left} other {# places left}}",
+    "registeredCount": "{count, plural, =0 {nobody registered} one {# registered} other {# registered}}",
+    "youAreRegistered": "You are registered for this event.",
+    "state": {
+      "open": "Registration is open.",
+      "full": "All places are taken.",
+      "closed": "Registration is closed.",
+      "started": "This event has already started.",
+      "cancelled": "This event was cancelled.",
+      "draft": "This event is not published yet."
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Published",
+      "CANCELLED": "Cancelled"
+    },
+    "columns": {
+      "title": "Title",
+      "startsAt": "Starts",
+      "location": "Place",
+      "status": "Status",
+      "audience": "Audience",
+      "registered": "Registered",
+      "capacity": "Capacity",
+      "name": "Name",
+      "email": "E-mail",
+      "event": "Event",
+      "eventId": "Event (id)",
+      "registeredAt": "Registered at"
+    },
+    "form": {
+      "title": "Title",
+      "description": "Description",
+      "descriptionHint": "Plain text; line breaks are kept.",
+      "location": "Place",
+      "startsAt": "Starts",
+      "endsAt": "Ends",
+      "deadline": "Registration closes",
+      "deadlineHint": "Blank = at the start of the event.",
+      "capacity": "Places",
+      "capacityHint": "Blank = unlimited.",
+      "audience": "Open to",
+      "cycle": "Cycle",
+      "program": "Program",
+      "announcement": "Linked announcement",
+      "announcementHint": "Optional; readers get a link to it.",
+      "create": "Save as draft",
+      "save": "Save changes"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date or time is not valid.",
+      "cycleRequired": "Choose the cycle.",
+      "programRequired": "Choose an existing program.",
+      "endBeforeStart": "The end must be after the start.",
+      "deadlineAfterStart": "The registration deadline cannot be after the start.",
+      "capacityInvalid": "Enter a whole number of at least 1.",
+      "announcementMissing": "Choose an existing announcement.",
+      "audienceNotAllowed": "You may not address this audience.",
+      "ALREADY_REGISTERED": "You are already registered.",
+      "FULL": "All places are taken.",
+      "CLOSED": "Registration is closed.",
+      "STARTED": "The event has already started.",
+      "CANCELLED": "The event was cancelled.",
+      "DRAFT": "The event is not published.",
+      "NOT_REGISTERED": "You are not registered for this event.",
+      "CANNOT_CANCEL": "The registration can no longer be cancelled.",
+      "NOT_DRAFT": "Only a draft can be published.",
+      "NOT_PUBLISHED": "Only a published event can be cancelled.",
+      "EVENT_CANCELLED": "A cancelled event cannot be changed.",
+      "generic": "The action failed."
+    },
+    "actions": {
+      "created": "The event was saved as a draft.",
+      "saved": "Changes saved.",
+      "published": "The event was published.",
+      "cancelled": "The event was cancelled and the registered people were notified.",
+      "publish": "Publish",
+      "cancel": "Cancel event",
+      "cancelTitle": "Cancel this event?",
+      "cancelBody": "Everyone registered is notified. A cancelled event cannot be published again.",
+      "register": "Register",
+      "registered": "You are registered.",
+      "unregister": "Cancel my registration",
+      "unregisterTitle": "Cancel your registration?",
+      "unregisterBody": "Your place becomes available to others.",
+      "unregistered": "Your registration was cancelled."
     }
   }
 }

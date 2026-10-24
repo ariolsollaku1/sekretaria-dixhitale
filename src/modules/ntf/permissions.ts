@@ -29,15 +29,28 @@ const SENDERS = [
 ] as const;
 
 registerPermissions("ntf", {
-  permissions: ["ntf.announcement.read", "ntf.announcement.write", "ntf.message.send"],
+  permissions: [
+    "ntf.announcement.read",
+    "ntf.announcement.write",
+    "ntf.message.send",
+    "ntf.event.read",
+    "ntf.event.register",
+    "ntf.event.write",
+  ],
   grants: {
-    ...Object.fromEntries(ROLES.map((r) => [r, ["ntf.announcement.read"]])),
+    // NTF-02 AC-12 (Q-121): everyone reads events and registers; the announcement writers organise.
+    ...Object.fromEntries(
+      ROLES.map((r) => [r, ["ntf.announcement.read", "ntf.event.read", "ntf.event.register"]]),
+    ),
     ...Object.fromEntries(
       WRITERS.map((r) => [
         r,
         [
           "ntf.announcement.read",
           "ntf.announcement.write",
+          "ntf.event.read",
+          "ntf.event.register",
+          "ntf.event.write",
           ...(SENDERS.includes(r as never) ? ["ntf.message.send"] : []),
         ],
       ]),

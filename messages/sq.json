@@ -106,7 +106,8 @@
       "paymentsImport": "Importo pagesat",
       "myPayments": "Pagesat e mia",
       "studyPackages": "Paketat e studimit",
-      "myPackage": "Paketa ime e studimit"
+      "myPackage": "Paketa ime e studimit",
+      "events": "Ngjarje"
     },
     "languages": {
       "sq": "Shqip",
@@ -1157,6 +1158,21 @@
         "label": "Mesazhet nga kolegji",
         "title": "Mesazh nga kolegji",
         "body": "Keni një mesazh të ri."
+      },
+      "event-registered": {
+        "label": "Konfirmimet e regjistrimit në ngjarje",
+        "title": "Jeni regjistruar: {title}",
+        "body": "Regjistrimi juaj për “{title}” ({when}) u konfirmua."
+      },
+      "event-reminder": {
+        "label": "Kujtesat para ngjarjeve",
+        "title": "Ngjarje së shpejti: {title}",
+        "body": "“{title}” fillon më {when}."
+      },
+      "event-cancelled": {
+        "label": "Ngjarjet e anuluara",
+        "title": "Ngjarja u anulua: {title}",
+        "body": "Ngjarja “{title}” e planifikuar më {when} u anulua."
       }
     },
     "stu": {
@@ -1197,6 +1213,18 @@
       "message": {
         "subject": "Mesazh nga kolegji",
         "body": "Keni një mesazh të ri në Sekretarinë Dixhitale."
+      },
+      "event-registered": {
+        "subject": "Regjistrimi u konfirmua: {title}",
+        "body": "Regjistrimi juaj për ngjarjen “{title}” ({when}) u konfirmua."
+      },
+      "event-reminder": {
+        "subject": "Kujtesë: {title}",
+        "body": "Ngjarja “{title}” për të cilën jeni regjistruar fillon më {when}."
+      },
+      "event-cancelled": {
+        "subject": "Ngjarja u anulua: {title}",
+        "body": "Ngjarja “{title}” e planifikuar më {when} u anulua."
       }
     },
     "stu": {
@@ -3143,6 +3171,114 @@
       "duplicateKey": "Pyetje e dyfishtë.",
       "badKey": "Çelës i pavlefshëm.",
       "labelRequired": "Shkruani tekstin e pyetjes në shqip."
+    }
+  },
+  "evt": {
+    "title": "Ngjarje",
+    "manage": "Menaxho ngjarjet",
+    "new": "Ngjarje e re",
+    "edit": "Ndrysho",
+    "attendees": "Të regjistruarit",
+    "empty": "Për momentin nuk ka ngjarje për ju.",
+    "emptyHint": "Ngjarjet shfaqen këtu sapo publikohen.",
+    "upcoming": "Të ardhshme",
+    "noUpcoming": "Nuk ka ngjarje të ardhshme.",
+    "past": "Ngjarje të kaluara",
+    "registered": "I regjistruar",
+    "when": "Kur",
+    "where": "Ku",
+    "places": "Vende",
+    "deadline": "Regjistrimi deri më",
+    "announcement": "Njoftimi",
+    "unlimited": "Pa kufi",
+    "placesLeft": "{count, plural, =0 {Nuk ka vende të lira} one {# vend i lirë} other {# vende të lira}}",
+    "registeredCount": "{count, plural, =0 {askush i regjistruar} one {# i regjistruar} other {# të regjistruar}}",
+    "youAreRegistered": "Jeni i regjistruar për këtë ngjarje.",
+    "state": {
+      "open": "Regjistrimi është i hapur.",
+      "full": "Të gjitha vendet janë zënë.",
+      "closed": "Regjistrimi është mbyllur.",
+      "started": "Kjo ngjarje ka filluar tashmë.",
+      "cancelled": "Kjo ngjarje u anulua.",
+      "draft": "Kjo ngjarje nuk është publikuar ende."
+    },
+    "status": {
+      "DRAFT": "Skicë",
+      "PUBLISHED": "Publikuar",
+      "CANCELLED": "Anuluar"
+    },
+    "columns": {
+      "title": "Titulli",
+      "startsAt": "Fillon",
+      "location": "Vendi",
+      "status": "Statusi",
+      "audience": "Kujt i drejtohet",
+      "registered": "Të regjistruar",
+      "capacity": "Kapaciteti",
+      "name": "Emri",
+      "email": "Email",
+      "event": "Ngjarja",
+      "eventId": "Ngjarja (id)",
+      "registeredAt": "Regjistruar më"
+    },
+    "form": {
+      "title": "Titulli",
+      "description": "Përshkrimi",
+      "descriptionHint": "Tekst i thjeshtë; rreshtat e rinj ruhen.",
+      "location": "Vendi",
+      "startsAt": "Fillon",
+      "endsAt": "Mbaron",
+      "deadline": "Regjistrimi mbyllet",
+      "deadlineHint": "Bosh = në fillim të ngjarjes.",
+      "capacity": "Vende",
+      "capacityHint": "Bosh = pa kufi.",
+      "audience": "E hapur për",
+      "cycle": "Cikli",
+      "program": "Programi",
+      "announcement": "Njoftimi i lidhur",
+      "announcementHint": "Opsionale; lexuesit marrin një lidhje drejt tij.",
+      "create": "Ruaj si skicë",
+      "save": "Ruaj ndryshimet"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data ose ora nuk është e vlefshme.",
+      "cycleRequired": "Zgjidhni ciklin.",
+      "programRequired": "Zgjidhni një program ekzistues.",
+      "endBeforeStart": "Mbarimi duhet të jetë pas fillimit.",
+      "deadlineAfterStart": "Afati i regjistrimit nuk mund të jetë pas fillimit.",
+      "capacityInvalid": "Shkruani një numër të plotë së paku 1.",
+      "announcementMissing": "Zgjidhni një njoftim ekzistues.",
+      "audienceNotAllowed": "Nuk keni të drejtë t'i drejtoheni kësaj audience.",
+      "ALREADY_REGISTERED": "Jeni regjistruar tashmë.",
+      "FULL": "Të gjitha vendet janë zënë.",
+      "CLOSED": "Regjistrimi është mbyllur.",
+      "STARTED": "Ngjarja ka filluar tashmë.",
+      "CANCELLED": "Ngjarja u anulua.",
+      "DRAFT": "Ngjarja nuk është publikuar.",
+      "NOT_REGISTERED": "Nuk jeni regjistruar për këtë ngjarje.",
+      "CANNOT_CANCEL": "Regjistrimi nuk mund të anulohet më.",
+      "NOT_DRAFT": "Vetëm një skicë mund të publikohet.",
+      "NOT_PUBLISHED": "Vetëm një ngjarje e publikuar mund të anulohet.",
+      "EVENT_CANCELLED": "Një ngjarje e anuluar nuk mund të ndryshohet.",
+      "generic": "Veprimi dështoi."
+    },
+    "actions": {
+      "created": "Ngjarja u ruajt si skicë.",
+      "saved": "Ndryshimet u ruajtën.",
+      "published": "Ngjarja u publikua.",
+      "cancelled": "Ngjarja u anulua dhe të regjistruarit u njoftuan.",
+      "publish": "Publiko",
+      "cancel": "Anulo ngjarjen",
+      "cancelTitle": "Të anulohet kjo ngjarje?",
+      "cancelBody": "Të gjithë të regjistruarit njoftohen. Një ngjarje e anuluar nuk mund të publikohet përsëri.",
+      "register": "Regjistrohu",
+      "registered": "U regjistruat.",
+      "unregister": "Anulo regjistrimin",
+      "unregisterTitle": "Të anulohet regjistrimi juaj?",
+      "unregisterBody": "Vendi juaj do t'u lihet të tjerëve.",
+      "unregistered": "Regjistrimi juaj u anulua."
     }
   }
 }

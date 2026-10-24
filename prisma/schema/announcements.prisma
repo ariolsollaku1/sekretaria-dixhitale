@@ -39,6 +39,7 @@ model Announcement {
   updatedById        String?              @map("updated_by_id")
   program            StudyProgram?        @relation(fields: [programId], references: [id])
   registrationNotice RegistrationNotice?
+  events             Event[]
 
   @@index([status, publishAt])
   @@map("announcements")

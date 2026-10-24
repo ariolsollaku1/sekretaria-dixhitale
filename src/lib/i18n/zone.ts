@@ -45,3 +45,30 @@ export function zonedNextDayStart(day: string, timeZone: string = TIME_ZONE): Da
   const next = new Date(Date.UTC(+day.slice(0, 4), +day.slice(5, 7) - 1, +day.slice(8, 10) + 1));
   return zonedDayStart(next.toISOString().slice(0, 10), timeZone);
 }
+
+/** The UTC instant of a wall-clock time `YYYY-MM-DDTHH:mm` in `timeZone` (NTF-02 event times). */
+export function zonedDateTimeToInstant(local: string, timeZone: string = TIME_ZONE): Date {
+  const [y, mo, d] = local.slice(0, 10).split("-").map(Number);
+  const [h, mi] = local.slice(11, 16).split(":").map(Number);
+  const guess = Date.UTC(y!, mo! - 1, d!, h!, mi!);
+  const first = guess - offsetMs(guess, timeZone);
+  return new Date(guess - offsetMs(first, timeZone));
+}
+
+/** An instant as the wall-clock time `YYYY-MM-DDTHH:mm` in `timeZone` (the inverse of the above). */
+export function instantToZonedDateTime(instant: Date, timeZone: string = TIME_ZONE): string {
+  const p = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      hourCycle: "h23",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+      .formatToParts(instant)
+      .map((x) => [x.type, x.value]),
+  );
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+}

@@ -122,6 +122,7 @@ model StudyProgram {
   department          Department           @relation(fields: [departmentId], references: [id])
   calendarEvents      CalendarEvent[]
   announcements       Announcement[]
+  events              Event[]
   registrationNotices RegistrationNotice[]
 
   @@index([departmentId])

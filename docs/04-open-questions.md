@@ -126,6 +126,10 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-101 | Staff requests: the approval chain | no | open | Administration / HR |
 | Q-102 | Staff requests: who submits, handles and reads history | no | open | Administration / HR |
 | Q-103 | Staff requests: what approval does | no | open | Administration / HR |
+| Q-118 | Events: who can register and how | no | open | Secretariat |
+| Q-119 | Events: capacity, deadline and cancellation | no | open | Secretariat |
+| Q-120 | Events: which notices are sent | no | open | Secretariat |
+| Q-121 | Events: who organises and who sees attendees | no | open | Secretariat |
 
 ---
 
@@ -1087,3 +1091,27 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Number series? Cover content and signature? Who may read an issued package?
 - **Working assumption:** series `PLN-YYYY-NNNNN`; cover with program, student name and number, cohort, plan version, courses per semester with credits and totals, then the syllabi; no signature or stamp; readable by the student of the enrollment, by staff with `cur.package.issue` in scope, and the sysadmin. The sysadmin edits the HTML template per language in PLT-09.
 - **Impact:** the template, the prefix, the read rule.
+
+### Q-118 — Events: who can register and how
+- **Context:** SRC-037d — a form for extracurricular activities (conferences, workshops…); the brief mentions a public form for externals "if needed".
+- **Questions:** Do people without an account (external visitors) register? Does the registration need questions of its own?
+- **Working assumption:** only signed-in students and staff whose audience matches the event register, with one click (no questions); no public registration for externals. If needed later, the forms engine (PLT-15) can be put in front.
+- **Impact:** public registration page, per-event questions.
+
+### Q-119 — Events: capacity, deadline and cancellation
+- **Context:** SRC-037d — events have limited places.
+- **Questions:** Is the capacity a hard limit or is there a waiting list? Until when can people register and cancel?
+- **Working assumption:** hard limit, no waiting list; registration closes at the deadline of the event (default: its start); a person may cancel until the event starts and register again if places remain.
+- **Impact:** waiting list, deadline default.
+
+### Q-120 — Events: which notices are sent
+- **Context:** SRC-037d — "a notification every time something arrives in the student's account".
+- **Questions:** Which notices does a registrant get, and when?
+- **Working assumption:** a confirmation on registering, one reminder when the event is within the next 24 hours, and a notice if the event is cancelled; all in-app with optional e-mail per the person's preferences (not mandatory).
+- **Impact:** reminder lead time, mandatory e-mail.
+
+### Q-121 — Events: who organises and who sees attendees
+- **Context:** SRC-035 — offices announce events; roles.md.
+- **Questions:** Which roles create events and see who registered?
+- **Working assumption:** the roles that write announcements (NTF-01), with the same scope rule (program events inside their scope, other audiences institution-wide); the same people see the attendee list (name, e-mail, time) and can export it; readers never see other registrants. An attendance certificate and check-in are not part of v1.
+- **Impact:** grants, attendee fields.

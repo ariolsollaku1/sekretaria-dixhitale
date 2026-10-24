@@ -229,6 +229,15 @@ registerNav({
   order: 6,
 });
 registerNav({
+  id: "events",
+  labelKey: "events",
+  href: "/events",
+  icon: "calendar",
+  permission: "ntf.event.read",
+  group: "teaching",
+  order: 7,
+});
+registerNav({
   id: "messages",
   labelKey: "messages",
   href: "/messages",

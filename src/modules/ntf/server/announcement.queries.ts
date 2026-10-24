@@ -6,6 +6,8 @@ import { db, type Tx } from "@/lib/db";
 import { matchesViewer, type Viewer } from "../domain/visibility";
 
 type Client = Pick<Tx, "userRole">;
+/** The write permissions that share the audience rules (NTF-01 announcements, NTF-02 events). */
+export type WritePermission = "ntf.announcement.write" | "ntf.event.write";
 
 export const PAGE_SIZE = 10;
 
@@ -114,8 +116,11 @@ export async function visibleAnnouncement(
 }
 
 /** Programs a writer may publish to: their program grants plus the programs of their departments/faculties. */
-export async function writableProgramIds(user: { id: string }): Promise<string[]> {
-  const g = await grantScopes(user, "ntf.announcement.write");
+export async function writableProgramIds(
+  user: { id: string },
+  permission: WritePermission = "ntf.announcement.write",
+): Promise<string[]> {
+  const g = await grantScopes(user, permission);
   if (g.institution)
     return (await db.studyProgram.findMany({ select: { id: true } })).map((p) => p.id);
   const rows = await db.studyProgram.findMany({
@@ -135,13 +140,11 @@ export async function writableProgramIds(user: { id: string }): Promise<string[]
 export async function mayTarget(
   user: { id: string },
   t: { audience: AnnouncementView["audience"]; programId: string | null },
+  permission: WritePermission = "ntf.announcement.write",
 ): Promise<boolean> {
   if (t.audience === "PROGRAM")
-    return (
-      !!t.programId &&
-      (await can(user, "ntf.announcement.write", { kind: "program", id: t.programId }))
-    );
-  return (await grantScopes(user, "ntf.announcement.write")).institution;
+    return !!t.programId && (await can(user, permission, { kind: "program", id: t.programId }));
+  return (await grantScopes(user, permission)).institution;
 }
 
 /** AC-10/AC-11: a writer manages announcements for audiences they could publish to. */

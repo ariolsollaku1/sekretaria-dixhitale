@@ -31,8 +31,8 @@ export function shares(total: number, weights: number[]): number[] {
   if (weights.length === 0) return [];
   if (sum <= 0) return weights.map((_, i) => (i === weights.length - 1 ? total : 0));
   const parts = weights.map((w) => Number((BigInt(total) * BigInt(w)) / BigInt(sum)));
-  parts[parts.length - 1] += total - parts.reduce((a, b) => a + b, 0);
-  return parts;
+  const rest = total - parts.reduce((a, b) => a + b, 0);
+  return parts.map((v, i) => (i === parts.length - 1 ? v + rest : v));
 }
 
 /** `cents * hundredths / 10000`, rounded half up, without leaving the integers. */

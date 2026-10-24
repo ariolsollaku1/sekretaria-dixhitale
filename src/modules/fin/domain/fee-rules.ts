@@ -91,7 +91,7 @@ export function earlyAmounts(
       d.kind === "PERCENT"
         ? installments.map((a) => percentOf(a, d.value))
         : shares(d.value, installments);
-    const parts = installments.map((a, i) => Math.min(a, cuts[i]));
+    const parts = installments.map((a, i) => Math.min(a, cuts[i] ?? 0));
     const reduction = parts.reduce((a, b) => a + b, 0);
     if (
       reduction > 0 &&
@@ -103,11 +103,12 @@ export function earlyAmounts(
   }
   if (!best) return none;
   const chosen = best;
-  return installments.map((a, i) =>
-    chosen.parts[i] > 0
-      ? { earlyCents: a - chosen.parts[i], earlyUntil: chosen.until }
-      : { earlyCents: null, earlyUntil: null },
-  );
+  return installments.map((a, i) => {
+    const cut = chosen.parts[i] ?? 0;
+    return cut > 0
+      ? { earlyCents: a - cut, earlyUntil: chosen.until }
+      : { earlyCents: null, earlyUntil: null };
+  });
 }
 
 const KIND_ORDER = new Map(FEE_KINDS.map((k, i) => [k, i]));
@@ -133,8 +134,8 @@ export function planLines(items: ScheduleItemInput[], yearStart: string): PlanLi
         label: item.label,
         dueDate: p.dueDate,
         amountCents: p.amountCents,
-        earlyCents: early[i].earlyCents,
-        earlyUntil: early[i].earlyUntil,
+        earlyCents: early[i]?.earlyCents ?? null,
+        earlyUntil: early[i]?.earlyUntil ?? null,
         scheduleItemId: item.id,
       }),
     );

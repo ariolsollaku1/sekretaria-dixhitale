@@ -38,23 +38,22 @@ describe("money (AC-12)", () => {
 });
 
 describe("validateInstallments (AC-2)", () => {
-  const rows = [
-    { dueDate: "2026-10-01", amountCents: 60000 },
-    { dueDate: "2027-02-01", amountCents: 40000 },
-  ];
+  const r0 = { dueDate: "2026-10-01", amountCents: 60000 };
+  const r1 = { dueDate: "2027-02-01", amountCents: 40000 };
+  const rows = [r0, r1];
   it("accepts installments adding up to the fee, and none at all", () => {
     expect(validateInstallments(100000, rows)).toEqual({});
     expect(validateInstallments(100000, [])).toEqual({});
   });
   it("refuses a wrong sum, a repeated or invalid date and a non-positive amount", () => {
     expect(validateInstallments(100001, rows).installments).toBe("sumMismatch");
-    expect(validateInstallments(100000, [rows[0], { ...rows[1], dueDate: "2026-10-01" }])).toEqual({
+    expect(validateInstallments(100000, [r0, { ...r1, dueDate: "2026-10-01" }])).toEqual({
       installments: "duplicateDate",
     });
-    expect(validateInstallments(100000, [{ ...rows[0], dueDate: "2026-02-30" }, rows[1]])).toEqual({
+    expect(validateInstallments(100000, [{ ...r0, dueDate: "2026-02-30" }, r1])).toEqual({
       installments: "invalidDate",
     });
-    expect(validateInstallments(100000, [{ ...rows[0], amountCents: 0 }, rows[1]])).toEqual({
+    expect(validateInstallments(100000, [{ ...r0, amountCents: 0 }, r1])).toEqual({
       installments: "amountRange",
     });
   });
@@ -96,10 +95,9 @@ describe("earlyAmounts (AC-7)", () => {
     ]);
   });
   it("shares an amount discount so the parts add up exactly", () => {
-    const out = earlyAmounts(
-      [33333, 33333, 33334],
-      [{ ...pct, kind: "AMOUNT", value: 1000 }],
-    ).map((e) => e.earlyCents!);
+    const out = earlyAmounts([33333, 33333, 33334], [{ ...pct, kind: "AMOUNT", value: 1000 }]).map(
+      (e) => e.earlyCents!,
+    );
     expect([33333, 33333, 33334].reduce((a, b) => a + b, 0) - out.reduce((a, b) => a + b, 0)).toBe(
       1000,
     );
@@ -111,7 +109,7 @@ describe("earlyAmounts (AC-7)", () => {
       earlyUntil: "2026-08-31",
     });
     const tie = { ...pct, kind: "AMOUNT" as const, value: 1000, validTo: "2026-08-01" };
-    expect(earlyAmounts([10000], [pct, tie])[0].earlyUntil).toBe("2026-08-01");
+    expect(earlyAmounts([10000], [pct, tie])[0]!.earlyUntil).toBe("2026-08-01");
   });
   it("gives nothing without discounts", () => {
     expect(earlyAmounts([100, 200], [])).toEqual([
@@ -120,7 +118,7 @@ describe("earlyAmounts (AC-7)", () => {
     ]);
   });
   it("never goes below zero", () => {
-    expect(earlyAmounts([100], [{ ...pct, kind: "AMOUNT", value: 500 }])[0].earlyCents).toBe(0);
+    expect(earlyAmounts([100], [{ ...pct, kind: "AMOUNT", value: 500 }])[0]!.earlyCents).toBe(0);
   });
 });
 
@@ -153,7 +151,7 @@ describe("planLines (AC-6)", () => {
       [2, "TUITION", "2026-10-01", 60000],
       [3, "TUITION", "2027-02-01", 40000],
     ]);
-    expect(lines[1].scheduleItemId).toBe("a");
+    expect(lines[1]!.scheduleItemId).toBe("a");
   });
 });
 
@@ -186,16 +184,14 @@ describe("feeItemSchema", () => {
     kind: "TUITION",
     amount: "1000.00",
     installments: [{ dueDate: "2026-10-01", amount: "1000" }],
-    discounts: [
-      { kind: "PERCENT", value: "10.5", validFrom: "2026-09-01", validTo: "2026-09-30" },
-    ],
+    discounts: [{ kind: "PERCENT", value: "10.5", validFrom: "2026-09-01", validTo: "2026-09-30" }],
   };
   it("turns amounts into cents and defaults the label", () => {
     const out = feeItemSchema.parse(base);
     expect(out.amount).toBe(100000);
     expect(out.label).toBe("");
-    expect(out.installments[0].amount).toBe(100000);
-    expect(out.discounts[0].value).toBe(1050);
+    expect(out.installments[0]!.amount).toBe(100000);
+    expect(out.discounts[0]!.value).toBe(1050);
   });
   it("refuses amounts with more than two decimals", () => {
     expect(feeItemSchema.safeParse({ ...base, amount: "10.001" }).success).toBe(false);

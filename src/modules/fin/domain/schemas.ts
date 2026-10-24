@@ -17,7 +17,6 @@ const money = z
     return cents;
   });
 const label = z.string().trim().max(60, "tooLong").default("");
-const reason = z.string().trim().min(1, "required").max(500, "tooLong");
 
 export const feeItemSchema = z.object({
   itemId: z.string().min(1).nullish(),
@@ -64,7 +63,6 @@ export const adjustInstallmentSchema = z.object({
   installmentId: id,
   amount: money,
   dueDate: day,
-  reason,
 });
 export const addInstallmentSchema = z.object({
   planId: id,
@@ -72,6 +70,5 @@ export const addInstallmentSchema = z.object({
   label,
   amount: money,
   dueDate: day,
-  reason,
 });
-export const cancelInstallmentSchema = z.object({ installmentId: id, reason });
+export const cancelInstallmentSchema = z.object({ installmentId: id });

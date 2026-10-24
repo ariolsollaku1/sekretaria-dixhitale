@@ -95,7 +95,8 @@
       "paymentPlans": "Payment plans",
       "attendanceReport": "Attendance report",
       "attendanceSummary": "Attendance summary",
-      "teachingHub": "My teaching workspace"
+      "teachingHub": "My teaching workspace",
+      "registrationNotices": "Registration notices"
     },
     "languages": {
       "sq": "Shqip",
@@ -2751,6 +2752,82 @@
       "tooLong": "The text is too long.",
       "tooMany": "Too many rows.",
       "generic": "Something went wrong. Check the entries and try again."
+    }
+  },
+  "adm": {
+    "list": {
+      "title": "Registration notices",
+      "new": "New registration notice",
+      "empty": "No registration notices yet.",
+      "allPrograms": "All programs",
+      "edit": "Edit",
+      "columns": {
+        "title": "Title",
+        "year": "Academic year",
+        "program": "Program",
+        "deadline": "Deadline",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "newTitle": "New registration notice",
+      "editTitle": "Edit registration notice",
+      "title": "Title",
+      "body": "Introduction",
+      "bodyHint": "Plain text shown first. Fees and preferential days come from the fee schedule.",
+      "year": "Academic year",
+      "program": "Program",
+      "programHint": "Narrows the fees shown. Leave empty for all programs.",
+      "allPrograms": "All programs",
+      "deadline": "Registration deadline",
+      "documents": "Required documents",
+      "documentsHint": "One document per line, up to {max}.",
+      "showFees": "Show the fees and preferential-fee days from the fee schedule",
+      "contract": "Excerpt of the student contract",
+      "contractHint": "Plain text, quoted as typed.",
+      "publishDate": "Visible from",
+      "publishHint": "Blank: at once when published.",
+      "expiresDate": "Visible until",
+      "expiresHint": "Blank: until archived. This day is included.",
+      "pinned": "Pin to the top of the feed",
+      "emailPush": "Also send by e-mail and in-app notification to everyone",
+      "emailPushHint": "Sent once, when the notice becomes visible.",
+      "create": "Save as draft",
+      "save": "Save"
+    },
+    "actions": {
+      "created": "Registration notice saved as a draft. Publish it from this page.",
+      "saved": "Registration notice saved."
+    },
+    "section": {
+      "title": "Registration {year}",
+      "deadline": "Registration deadline",
+      "deadlinePassed": "Deadline passed",
+      "daysLeft": "{count, plural, =0 {Last day} one {1 day left} other {# days left}}",
+      "documents": "Required documents",
+      "fees": "Tuition fees and preferential days",
+      "noFees": "No fees published yet.",
+      "fee": "Fee",
+      "amount": "Amount",
+      "preferential": "Preferential fee",
+      "window": "from {from} to {to}",
+      "runningNow": "Running now",
+      "ended": "Ended",
+      "contract": "From the student contract"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "Too long.",
+      "invalidDate": "Enter a valid date.",
+      "documentEmpty": "A document line cannot be empty.",
+      "documentTooLong": "A document line is too long (200 characters at most).",
+      "tooManyDocuments": "At most 20 documents.",
+      "expiresBeforePublish": "The last visible day cannot be before the first.",
+      "yearNotFound": "Choose an academic year.",
+      "programNotFound": "The program does not exist.",
+      "audienceNotAllowed": "You may not publish to everyone.",
+      "generic": "Something went wrong. Try again."
     }
   }
 }

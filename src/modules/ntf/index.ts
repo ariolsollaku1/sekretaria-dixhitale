@@ -14,6 +14,13 @@ export {
   type AnnouncementView,
 } from "./server/announcement.queries";
 export { listAttachments } from "./server/attachments";
+// ADM-06 builds registration notices on top of announcements
+export {
+  createAnnouncement,
+  updateAnnouncement,
+  publishAnnouncement,
+} from "./server/announcement.service";
+export { announcementSchema } from "./domain/schemas";
 export { listProgramOptions } from "./server/program-options";
 export { uploadConfig } from "./server/attachments";
 // NTF-03 messaging

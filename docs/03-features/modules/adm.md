@@ -42,3 +42,6 @@ Code: `src/modules/adm`. Flow: interest → application → review/ranking → e
 - **Scope:** announcement type "registration notice" (NTF-01) with structured fields (deadline
   dates, preferential fee windows from FIN config, document checklist); shown on public application
   page and sent to leads.
+- **Status:** built as [ADM-06](../specs/ADM-06-registration-notices.md): an announcement plus
+  campaign data; fees read live from FIN-01. The public page and the lead mailing call
+  `liveRegistrationNotices()` once ADM-01/ADM-02 exist (Q-98, Q-99).

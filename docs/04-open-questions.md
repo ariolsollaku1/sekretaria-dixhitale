@@ -106,6 +106,8 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-84 | Lecturer workspace: location and dashboard card | no | open | Secretariat |
 | Q-96 | Erasmus forms: fields and mobility states | no | open | Erasmus Office |
 | Q-97 | Erasmus applications: known applicants and visibility | no | open | Erasmus Office |
+| Q-98 | Registration notices: shape, audience, public surfaces | no | open | Student affairs |
+| Q-99 | Registration notices: required documents and contract excerpt | no | open | Student affairs |
 
 ---
 
@@ -950,3 +952,15 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** How is a public applicant recognized as a LOGOS student or staff member? Who besides the Erasmus officer may see applications (coordinators, heads of department)?
 - **Working assumption:** signed-in applications by the submitter's person; public student applications by student number and date of birth (both must match); public staff applications by the e-mail of the staff member's person. Only the Erasmus officer and the sysadmin see the applications; a link to the record is offered only to those who may read it.
 - **Impact:** applicant link, visibility for coordinators.
+
+### Q-98 — Registration notices: shape, audience, public surfaces
+- **Context:** SRC-033 (ADM-06) — notices about registration deadlines and preferential-fee days.
+- **Questions:** Who is the audience of a registration notice (current students, applicants, everybody)? Where must it appear besides the portal feed (public application page, mail to leads)?
+- **Working assumption:** an ordinary announcement for everyone (audience `ALL`) extended with the academic year, an optional program, the registration deadline, a document checklist and a contract excerpt; fees and preferential-fee days are read live from the FIN-01 fee schedule, never retyped. The public application page (ADM-02) and the mailing to leads (ADM-01) call `liveRegistrationNotices()` once those features exist.
+- **Impact:** audience choice, public page and lead mailing.
+
+### Q-99 — Registration notices: required documents and contract excerpt
+- **Context:** SRC-033 (ADM-06); the contract template is Q-10.
+- **Questions:** Is there a fixed list of required documents per program or registration type, and which parts of the student contract are quoted in the notice?
+- **Working assumption:** the author types the document checklist (up to 20 lines) and the contract excerpt (plain text) per campaign; no central list or template exists yet.
+- **Impact:** a central document list or contract-linked excerpt would replace the typed fields.

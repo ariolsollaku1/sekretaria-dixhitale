@@ -3,6 +3,7 @@ import "./permissions";
 export { plansTable } from "./server/plan.table";
 export {
   feeBoard,
+  feeSummary,
   listProgramOptions,
   type FeeItemView,
   type FeeProgramView,

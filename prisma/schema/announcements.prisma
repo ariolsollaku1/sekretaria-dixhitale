@@ -18,26 +18,27 @@ enum AnnouncementAudience {
 
 /// A notice for the portal (NTF-01). Plain text; archived, never deleted. Attachments are StoredFile rows.
 model Announcement {
-  id          String               @id @default(cuid(2))
-  title       String
-  body        String
-  status      AnnouncementStatus   @default(DRAFT)
-  audience    AnnouncementAudience @default(ALL)
+  id                 String               @id @default(cuid(2))
+  title              String
+  body               String
+  status             AnnouncementStatus   @default(DRAFT)
+  audience           AnnouncementAudience @default(ALL)
   /// Set when audience = CYCLE.
-  cycle       StudyCycle?
+  cycle              StudyCycle?
   /// Set when audience = PROGRAM.
-  programId   String?              @map("program_id")
-  publishAt   DateTime?            @map("publish_at") @db.Timestamptz(3)
-  expiresAt   DateTime?            @map("expires_at") @db.Timestamptz(3)
-  pinned      Boolean              @default(false)
-  emailPush   Boolean              @default(false) @map("email_push")
+  programId          String?              @map("program_id")
+  publishAt          DateTime?            @map("publish_at") @db.Timestamptz(3)
+  expiresAt          DateTime?            @map("expires_at") @db.Timestamptz(3)
+  pinned             Boolean              @default(false)
+  emailPush          Boolean              @default(false) @map("email_push")
   /// Set when the notification fan-out has finished.
-  pushedAt    DateTime?            @map("pushed_at") @db.Timestamptz(3)
-  createdAt   DateTime             @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt   DateTime             @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById String?              @map("created_by_id")
-  updatedById String?              @map("updated_by_id")
-  program     StudyProgram?        @relation(fields: [programId], references: [id])
+  pushedAt           DateTime?            @map("pushed_at") @db.Timestamptz(3)
+  createdAt          DateTime             @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime             @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById        String?              @map("created_by_id")
+  updatedById        String?              @map("updated_by_id")
+  program            StudyProgram?        @relation(fields: [programId], references: [id])
+  registrationNotice RegistrationNotice?
 
   @@index([status, publishAt])
   @@map("announcements")

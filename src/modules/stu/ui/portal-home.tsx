@@ -111,6 +111,7 @@ export async function PortalHomeView({ home }: { home: PortalHome }) {
   const links = [
     { href: "/stu/me", label: tn("myStudentRecord") },
     { href: "/cal/timetable/mine", label: tn("myTimetable") },
+    { href: "/att/absences", label: tn("myAbsences") },
     { href: "/calendar", label: tn("calendar") },
     { href: "/announcements", label: tn("announcements") },
     { href: "/notifications", label: t("notifications") },

@@ -90,6 +90,8 @@
       "myAbsences": "Mungesat e mia",
       "exams": "Provimet",
       "myExams": "Provimet e mia",
+      "fees": "Tarifat",
+      "paymentPlans": "Planet e pagesave",
       "attendanceReport": "Raporti i pranisë",
       "attendanceSummary": "Përmbledhja e pranisë",
       "teachingHub": "Hapësira ime e mësimdhënies"
@@ -2494,6 +2496,145 @@
         "title": "Përmbledhja e pranisë",
         "intro": "Orët e zhvilluara, prania mesatare dhe studentët nën prag sipas grupit dhe lëndës. Pragu: {threshold}%."
       }
+    }
+  },
+  "fin": {
+    "kind": {
+      "TUITION": "Tarifa e shkollimit",
+      "ADMINISTRATIVE": "Tarifa administrative",
+      "DIPLOMA": "Tarifa e diplomës",
+      "BACKLOG_EXAM": "Provim i prapambetur",
+      "OTHER": "Tjetër"
+    },
+    "columns": {
+      "studentNumber": "Numri i studentit",
+      "name": "Emri",
+      "program": "Programi",
+      "programCode": "Kodi i programit",
+      "year": "Viti akademik",
+      "installments": "Këstet",
+      "total": "Totali",
+      "nextDue": "Afati i radhës"
+    },
+    "fees": {
+      "title": "Tarifat",
+      "forYear": "Tarifat për vitin akademik {year}",
+      "noYear": "Nuk është zgjedhur viti akademik.",
+      "closed": "Ky vit akademik është mbyllur: tarifat nuk mund të ndryshojnë më.",
+      "program": "Programi",
+      "all": "Të gjitha programet",
+      "filter": "Shfaq",
+      "empty": "Nuk ka tarifa për këtë program në këtë vit.",
+      "singleInstallment": "Një këst në ditën e parë të vitit",
+      "active": "Aktive",
+      "inactive": "Joaktive",
+      "columns": {
+        "kind": "Tarifa",
+        "amount": "Shuma",
+        "installments": "Këstet",
+        "discounts": "Zbritjet",
+        "status": "Statusi",
+        "actions": "Veprime"
+      }
+    },
+    "form": {
+      "add": "Shto një tarifë",
+      "edit": "Ndrysho",
+      "saved": "Tarifa u ruajt.",
+      "kind": "Lloji",
+      "label": "Emërtimi (opsional)",
+      "amount": "Shuma",
+      "installments": "Këstet",
+      "installmentsHint": "Lëreni bosh për një këst të vetëm në ditën e parë të vitit akademik. Këstet duhet të përbëjnë saktësisht tarifën.",
+      "dueDate": "Afati",
+      "installmentAmount": "Shuma e kestit",
+      "remove": "Hiq",
+      "addInstallment": "Shto një këst",
+      "discounts": "Zbritjet",
+      "discountsHint": "Zbritja për pagesë të hershme zbatohet për pagesat brenda datave të saj. Zbritjet nuk kombinohen: përdoret më e madhja.",
+      "discountLabel": "Emri",
+      "discountKind": "Lloji i zbritjes",
+      "discountKinds": {
+        "PERCENT": "Përqindje",
+        "AMOUNT": "Shumë"
+      },
+      "discountValue": "Vlera",
+      "validFrom": "Nga",
+      "validTo": "Deri",
+      "addDiscount": "Shto një zbritje",
+      "save": "Ruaj",
+      "cancel": "Anulo",
+      "deactivate": "Çaktivizo",
+      "activate": "Riaktivizo"
+    },
+    "plans": {
+      "title": "Planet e pagesave",
+      "noYear": "Nuk është zgjedhur viti akademik."
+    },
+    "generate": {
+      "title": "Gjenero planet e pagesave për {year}",
+      "program": "Programi",
+      "studentNumber": "Numri i studentit (opsional)",
+      "submit": "Gjenero",
+      "hint": "Krijon një plan për çdo regjistrim të hapur të programit, të regjistruar në këtë vit dhe pa plan, nga tarifat aktive. Planet ekzistuese nuk ndryshojnë.",
+      "done": "Plane të krijuara: {created}; ekzistonin tashmë: {skipped}."
+    },
+    "plan": {
+      "plans": "Planet e pagesave",
+      "summary": "{program} · viti akademik {year}",
+      "closed": "Ky vit akademik është mbyllur: plani nuk mund të ndryshojë më.",
+      "total": "Totali i planit",
+      "earlyTotal": "Totali me pagesë të hershme",
+      "count": "Këstet",
+      "installments": "Këstet e planit",
+      "columns": {
+        "sequence": "Nr.",
+        "kind": "Tarifa",
+        "dueDate": "Afati",
+        "amount": "Shuma",
+        "early": "Pagesë e hershme",
+        "status": "Statusi",
+        "actions": "Veprime"
+      },
+      "earlyUntil": "{amount} deri më {date}",
+      "cancelled": "Anuluar",
+      "adjusted": "Ndryshuar",
+      "active": "Aktiv"
+    },
+    "adjust": {
+      "adjust": "Ndrysho",
+      "cancelInstallment": "Anulo",
+      "confirmCancel": "Anulo kestin",
+      "amount": "Shuma",
+      "dueDate": "Afati",
+      "reason": "Arsyeja",
+      "save": "Ruaj",
+      "close": "Mbyll",
+      "saved": "U ruajt.",
+      "add": "Shto një këst",
+      "addTitle": "Shto një këst në këtë plan",
+      "kind": "Lloji",
+      "label": "Emërtimi (opsional)"
+    },
+    "errors": {
+      "FORBIDDEN": "Nuk keni të drejtë ta bëni këtë.",
+      "YEAR_CLOSED": "Viti akademik është mbyllur.",
+      "CANCELLED": "Ky këst është anuluar tashmë.",
+      "sumMismatch": "Këstet duhet të përbëjnë saktësisht tarifën.",
+      "duplicateDate": "Dy këste kanë të njëjtin afat.",
+      "invalidDate": "Shkruani një datë të vlefshme.",
+      "amountRange": "Shumat e kësteve duhet të jenë më të mëdha se zero.",
+      "amount": "Shkruani një shumë me jo më shumë se dy shifra pas presjes.",
+      "range": "Vlera është jashtë kufijve.",
+      "reversed": "Fundi i afatit të zbritjes është para fillimit.",
+      "duplicate": "Ekziston tashmë një tarifë e këtij lloji dhe emërtimi për programin dhe vitin.",
+      "noFees": "Programi nuk ka tarifa aktive për këtë vit.",
+      "notFound": "Nuk ka student të tillë në këtë program dhe vit.",
+      "inactive": "Programi nuk është aktiv.",
+      "required": "Plotësoni të gjitha fushat e detyrueshme, përfshirë arsyen.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "tooMany": "Shumë rreshta.",
+      "generic": "Diçka shkoi keq. Kontrolloni të dhënat dhe provoni përsëri."
     }
   }
 }

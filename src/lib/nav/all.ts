@@ -5,6 +5,7 @@ import "@/modules/ntf";
 import "@/modules/hr";
 import "@/modules/stu";
 import "@/modules/att";
+import "@/modules/fin";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -420,5 +421,25 @@ registerNav(
     permission: "att.attendance.read",
     group: "teaching",
     order: 13,
+  },
+);
+registerNav(
+  {
+    id: "fees",
+    labelKey: "fees",
+    href: "/fin/fees",
+    icon: "wallet",
+    permission: "fin.fee.read",
+    group: "finance",
+    order: 10,
+  },
+  {
+    id: "payment-plans",
+    labelKey: "paymentPlans",
+    href: "/fin/plans",
+    icon: "wallet",
+    permission: "fin.plan.read",
+    group: "finance",
+    order: 20,
   },
 );

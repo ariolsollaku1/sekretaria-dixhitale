@@ -24,5 +24,18 @@ export {
   studentEntries,
   type EntryView,
 } from "./server/timetable.queries";
+export {
+  listSessions,
+  getSession,
+  sessionSittings,
+  myExams,
+  feedExams,
+  type SessionView,
+  type SittingView,
+} from "./server/exam.queries";
+export { ExamSchedule } from "./ui/exam-schedule";
+export { ExamSessionCreate, ExamSessionPanel } from "./ui/exam-session-forms";
+export { ExamSittingEditor } from "./ui/exam-sitting-editor";
+export { SESSION_TYPES } from "./domain/exam-rules";
 export { TimetableImport } from "./ui/timetable-import";
 export { TEMPLATE_CSV as TIMETABLE_TEMPLATE_CSV } from "./domain/timetable-import";

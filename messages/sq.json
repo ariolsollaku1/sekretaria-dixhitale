@@ -87,7 +87,9 @@
       "messages": "Mesazhet",
       "myAttendance": "Orët e mia",
       "attendanceSessions": "Prania",
-      "myAbsences": "Mungesat e mia"
+      "myAbsences": "Mungesat e mia",
+      "exams": "Provimet",
+      "myExams": "Provimet e mia"
     },
     "languages": {
       "sq": "Shqip",
@@ -1354,6 +1356,78 @@
           "FORBIDDEN": "Nuk keni leje.",
           "UNAUTHENTICATED": "Hyni përsëri."
         }
+      }
+    },
+    "exams": {
+      "title": "Sesionet e provimeve",
+      "mine": "Provimet e mia",
+      "schedule": "Orari i provimeve",
+      "scheduleCaption": "Provimet sipas datës dhe orës",
+      "noYear": "Nuk ka vit akademik të zgjedhur.",
+      "noSessions": "Ky vit nuk ka ende sesione provimesh.",
+      "emptySchedule": "Nuk ka provime në orar.",
+      "noCourses": "Nuk ka lëndë të tjera për t'u planifikuar në këtë sesion (lëndët e planeve të grupeve aktive të vitit).",
+      "miniNote": "Mini-sesioni është vetëm për vitin e fundit të studimit (viti i tretë i Bachelor-it ose Master).",
+      "closedNote": "Viti akademik është i mbyllur: orari nuk mund të ndryshohet.",
+      "yearOfStudy": "viti {year}",
+      "examCount": "{count, plural, =0 {Asnjë provim} one {# provim} other {# provime}}",
+      "addSession": "Shto sesionin",
+      "sessionAdded": "Sesioni u shtua.",
+      "add": "Shto provimin",
+      "added": "Provimi u shtua.",
+      "save": "Ruaj",
+      "saveDates": "Ruaj datat",
+      "saved": "U ruajt.",
+      "remove": "Hiq",
+      "publish": "Publiko orarin",
+      "unpublish": "Hiq publikimin",
+      "publishedDone": "Orari u publikua.",
+      "unpublished": "Publikimi u hoq.",
+      "status": {
+        "draft": "Skicë",
+        "published": "Publikuar"
+      },
+      "type": {
+        "WINTER": "Sesioni i dimrit",
+        "SUMMER": "Sesioni i verës",
+        "AUTUMN": "Sesioni i vjeshtës",
+        "MINI": "Mini-sesioni"
+      },
+      "form": {
+        "type": "Sesioni",
+        "startDate": "Fillon më",
+        "endDate": "Mbaron më",
+        "course": "Lënda",
+        "date": "Data",
+        "time": "Ora",
+        "start": "Fillon",
+        "end": "Mbaron",
+        "room": "Salla",
+        "examiners": "Provimdhënësit"
+      },
+      "clash": "Përplasje me provim ekzistues: {clashes}.",
+      "clashKind": {
+        "GROUP": "i njëjti grup studentësh",
+        "EXAMINER": "i njëjti provimdhënës",
+        "ROOM": "e njëjta sallë"
+      },
+      "errors": {
+        "required": "Kjo fushë është e detyrueshme.",
+        "invalidDate": "Data nuk është e vlefshme.",
+        "endBeforeStart": "Mbarimi duhet të jetë pas fillimit.",
+        "outsideYear": "Datat duhet të jenë brenda vitit akademik.",
+        "outsideSession": "Data duhet të jetë brenda datave të sesionit.",
+        "sittingsOutside": "Ka provime jashtë datave të reja të sesionit.",
+        "timeRange": "Ora nuk është e vlefshme.",
+        "tooLong": "Teksti është shumë i gjatë.",
+        "tooManyExaminers": "Maksimumi 6 provimdhënës.",
+        "duplicateExaminer": "Një provimdhënës është zgjedhur dy herë.",
+        "unknownExaminer": "Provimdhënësi nuk është i vlefshëm.",
+        "miniFinalYearOnly": "Mini-sesioni pranon vetëm lëndë të vitit të fundit të programit.",
+        "SESSION_EXISTS": "Ky sesion ekziston tashmë për këtë vit.",
+        "SITTING_EXISTS": "Kjo lëndë ka tashmë provim në këtë sesion.",
+        "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+        "generic": "Veprimi nuk u krye."
       }
     }
   },

@@ -338,6 +338,24 @@ registerNav(
     group: "teaching",
     order: 8,
   },
+  {
+    id: "exams",
+    labelKey: "exams",
+    href: "/cal/exams",
+    icon: "calendar",
+    permission: "cal.exam.read",
+    group: "teaching",
+    order: 9,
+  },
+  {
+    id: "my-exams",
+    labelKey: "myExams",
+    href: "/cal/exams/mine",
+    icon: "calendar",
+    permission: "cal.exam.self",
+    group: "teaching",
+    order: 10,
+  },
 );
 registerNav({
   id: "documents",

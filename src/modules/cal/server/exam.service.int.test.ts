@@ -192,7 +192,7 @@ describe("sessions (AC-1, AC-6, AC-7)", () => {
       ["2027-02-05", "2027-01-11"],
       ["2026-08-01", "2026-09-10"],
       ["2027-08-01", "2027-09-10"],
-    ])
+    ] as [string, string][])
       expect(
         await run((ctx) =>
           svc.createSession(ctx, { academicYearId: year, type: "AUTUMN", startDate, endDate }),
@@ -410,5 +410,25 @@ describe("visibility (AC-7..AC-9)", () => {
     await db.enrollment.update({ where: { id: enrollment }, data: { status: "SUSPENDED" } });
     ok(await run((ctx) => svc.setPublished(ctx, winter, true)));
     expect(await myExams("stu", year)).toEqual([]);
+  });
+
+  it("the iCal feed carries the published exams with their times (AC-9)", async () => {
+    await student();
+    ok(await addSitting(pcA1, { examinerIds: [staff1] }));
+    ok(await run((ctx) => svc.setPublished(ctx, winter, true)));
+    const { createFeedToken } = await import("./feed.service");
+    const { GET } = await import("@/app/api/calendar/[token]/route");
+    const get = async (userId: string) => {
+      const created = await runAs({ ...actor, id: userId }, (ctx) => createFeedToken(ctx));
+      const { token } = ok(created);
+      const res = await GET(new Request("http://x"), { params: Promise.resolve({ token }) });
+      return res.text();
+    };
+    const feed = await get("stu");
+    expect(feed).toContain("SUMMARY:Provim: CA CA");
+    expect(feed).toContain("DTSTART:20270112T090000");
+    expect(feed).toContain("LOCATION:A1");
+    expect(await get("lec2")).not.toContain("Provim:");
+    expect(await get("lec1")).toContain("Provim: CA");
   });
 });

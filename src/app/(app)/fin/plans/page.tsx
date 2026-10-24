@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { ForbiddenView } from "@/components/forbidden-view";
 import { TablePage } from "@/components/table/table-page";
@@ -13,17 +14,27 @@ import { getYear } from "@/modules/org";
 export default async function PlansPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const user = await requireUser("/fin/plans");
   if (!(await can(user, "fin.plan.read"))) return <ForbiddenView />;
-  const [t, search, yearId, mayWrite] = await Promise.all([
+  const [t, search, yearId, mayWrite, mayWritePay] = await Promise.all([
     getTranslations("fin.plans"),
     searchParams,
     getSelectedAcademicYear(),
     can(user, "fin.plan.write"),
+    can(user, "fin.payment.write"),
   ]);
   const year = yearId ? await getYear(yearId) : null;
   const programs = mayWrite && year ? await listProgramOptions(user, "fin.plan.read") : [];
   return (
     <>
-      <PageHeader title={t("title")} />
+      <PageHeader
+        title={t("title")}
+        actions={
+          mayWritePay ? (
+            <Link href="/fin/payments/import" className="text-sm underline">
+              {t("importPayments")}
+            </Link>
+          ) : undefined
+        }
+      />
       {!year && (
         <p className="rounded-control border-border bg-muted border p-3 text-sm">{t("noYear")}</p>
       )}

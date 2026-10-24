@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { DISCOUNT_KINDS, FEE_KINDS } from "./fee-rules";
 import { parseCents } from "./money";
+import { PAYMENT_METHODS } from "./payment-rules";
 
 const id = z.string().min(1, "required");
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "invalidDate");
@@ -72,3 +73,20 @@ export const addInstallmentSchema = z.object({
   dueDate: day,
 });
 export const cancelInstallmentSchema = z.object({ installmentId: id });
+
+// ---- FIN-02 -----------------------------------------------------------------------------------
+
+export const recordPaymentSchema = z.object({
+  planId: id,
+  amount: money,
+  paidOn: day,
+  reference: z.string().trim().max(120, "tooLong").default(""),
+  method: z.enum(PAYMENT_METHODS, { error: "required" }),
+  installmentId: z
+    .string()
+    .nullish()
+    .transform((v) => (v ? v : null)),
+});
+export type RecordPaymentInput = z.output<typeof recordPaymentSchema>;
+
+export const voidPaymentSchema = z.object({ paymentId: id });

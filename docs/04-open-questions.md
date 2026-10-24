@@ -104,6 +104,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-106 | Student evaluations: anonymity, minimum responses, when results appear | no | open | NJSBC |
 | Q-107 | Student evaluations: who sees which results | no | open | NJSBC / Rectorate |
 | Q-108 | Student evaluations: how the score is computed | no | open | NJSBC |
+| Q-109 | Payments: what is recorded and how it is allocated | no | open | Finance |
+| Q-110 | Payments: early-payment discount | no | open | Finance |
+| Q-111 | Payments: financial clearance rule | no | open | Finance / Secretariat |
+| Q-112 | Payments: CSV/XLSX import | no | open | Finance |
+| Q-113 | Payments: student view and closed years | no | open | Finance |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1026,3 +1031,32 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Are questions weighted? Is there a pass/alert threshold? Are results compared with the department average?
 - **Working assumption:** per question the arithmetic mean and the distribution 1–5; the overall figure of a target is the mean of all scale answers; no weights, no thresholds, no comparison. QA-03 (staff quality indicators) may combine it later.
 - **Impact:** the result calculations only (one pure module).
+### Q-109 — Payments: what is recorded and how it is allocated
+- **Context:** SRC-080a — payments of tuition, administrative and diploma fees, backlog exams (FIN-02).
+- **Questions:** Which data does a payment carry (receipt number, bank, payer)? Which payment methods exist? Does a payment name the installment it pays, or is the oldest one paid first? What happens to an amount above what is owed?
+- **Working assumption:** a payment belongs to a student's plan and has amount, date, reference (free text), method (cash, bank transfer, card, other) and optionally the installment it is meant for. It pays that installment first and then the oldest unpaid ones (in the order of payment dates); an excess is a credit on the plan, not moved to other plans. Payments are never deleted, only voided with a reason. Payment dates in the future are refused.
+- **Impact:** payment fields, allocation order, credits and refunds.
+
+### Q-110 — Payments: early-payment discount
+- **Context:** Q-87 — an installment has an early amount payable until a date.
+- **Questions:** Is the early amount honoured when the payment is made by that date even if recorded later? Is a partial early payment honoured?
+- **Working assumption:** the installment is settled by its early amount when payments **dated** on or before the early-until date cover the early amount; otherwise the full amount is due. The payment date counts, not the date it was recorded.
+- **Impact:** balances and clearance.
+
+### Q-111 — Payments: financial clearance rule
+- **Context:** SRC-049, SRC-050 — exams and graduation depend on financial status (EXM-03, GRD-01; Q-12 for exams).
+- **Questions:** When is a student financially cleared on a date? Is a tolerance allowed? Do debts of earlier years count?
+- **Working assumption:** cleared on date D when every active installment of any of the student's plans, of any year, due on or before D is fully paid (no tolerance; the credit of one plan does not offset another plan). The caller chooses D (for example the exam date).
+- **Impact:** the clearance function used by EXM-03 and GRD-01.
+
+### Q-112 — Payments: CSV/XLSX import
+- **Context:** SRC-080 — payment data from Financa 5 or the bank (Q-02 open).
+- **Questions:** What columns do the exports have? How is a payment matched to a student and plan?
+- **Working assumption:** template columns `student_number` (or `nim`), `amount`, `paid_on` (YYYY-MM-DD or DD.MM.YYYY), `reference`, `method` (optional, default bank transfer). The row is matched to the student's single plan of the academic year chosen for the import; none or several plans make the row invalid. A row equal to an existing recorded payment (plan, date, amount, reference) is a duplicate and skipped. Any invalid row blocks the whole import. At most 2 000 rows.
+- **Impact:** import template and matching.
+
+### Q-113 — Payments: student view and closed years
+- **Context:** FIN-02 brief — student portal "my installments"; SRC-001 year closing.
+- **Questions:** What may a student see? May payments be recorded on a closed academic year?
+- **Working assumption:** a student sees their own plans of all years with installments, payments, balance and clearance. Payments (and voiding) are allowed on plans of closed years because late debts are paid later; plan changes stay refused there (FIN-01).
+- **Impact:** portal page, year-closing rules.

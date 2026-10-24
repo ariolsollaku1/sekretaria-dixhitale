@@ -102,7 +102,9 @@
       "evalCampaigns": "Evaluation campaigns",
       "evalSurveys": "My evaluations",
       "evalResults": "Evaluation results",
-      "myEvalResults": "My student evaluations"
+      "myEvalResults": "My student evaluations",
+      "paymentsImport": "Import payments",
+      "myPayments": "My payments"
     },
     "languages": {
       "sq": "Shqip",
@@ -2639,7 +2641,10 @@
       "year": "Academic year",
       "installments": "Installments",
       "total": "Total",
-      "nextDue": "Next due date"
+      "nextDue": "Next due date",
+      "paid": "Paid",
+      "outstanding": "Outstanding",
+      "clearance": "Financial status"
     },
     "fees": {
       "title": "Fee schedule",
@@ -2694,7 +2699,8 @@
     },
     "plans": {
       "title": "Payment plans",
-      "noYear": "No academic year is selected."
+      "noYear": "No academic year is selected.",
+      "importPayments": "Import payments"
     },
     "generate": {
       "title": "Generate payment plans for {year}",
@@ -2759,7 +2765,118 @@
       "required": "Fill in all required fields, including the reason.",
       "tooLong": "The text is too long.",
       "tooMany": "Too many rows.",
-      "generic": "Something went wrong. Check the entries and try again."
+      "generic": "Something went wrong. Check the entries and try again.",
+      "future": "The date cannot be in the future.",
+      "notInPlan": "This installment is not part of the plan.",
+      "VOIDED": "This payment is already voided.",
+      "noPlan": "No payment plan of this academic year for this student.",
+      "ambiguousPlan": "Several payment plans match this student.",
+      "duplicateInFile": "The same payment appears twice in the file.",
+      "method": "Unknown payment method."
+    },
+    "clearance": {
+      "CLEARED": "Cleared",
+      "NOT_CLEARED": "Not cleared"
+    },
+    "payment": {
+      "record": "Record a payment",
+      "recordTitle": "Record a payment",
+      "saved": "Payment recorded.",
+      "amount": "Amount",
+      "paidOn": "Payment date",
+      "method": "Method",
+      "methods": {
+        "CASH": "Cash",
+        "BANK_TRANSFER": "Bank transfer",
+        "CARD": "Card",
+        "OTHER": "Other"
+      },
+      "reference": "Reference",
+      "installment": "For installment",
+      "oldestFirst": "Oldest unpaid first",
+      "save": "Save",
+      "close": "Close",
+      "hint": "A payment pays the chosen installment first and then the oldest unpaid ones. It can be voided later, never deleted.",
+      "void": "Void payment",
+      "voidReason": "Reason",
+      "confirmVoid": "Confirm void",
+      "voided": "Payment voided.",
+      "due": "To pay",
+      "paid": "Paid",
+      "outstanding": "Outstanding",
+      "overdue": "Overdue",
+      "credit": "Credit",
+      "clearance": "Financial status today",
+      "cleared": "Cleared",
+      "notCleared": "Not cleared",
+      "payments": "Payments",
+      "empty": "No payments recorded yet.",
+      "forInstallment": "Installment",
+      "voidedBadge": "Voided",
+      "imported": "Imported",
+      "recorded": "Recorded",
+      "status": {
+        "PAID": "Paid",
+        "PARTIAL": "Partly paid",
+        "UNPAID": "Not paid",
+        "OVERDUE": "Overdue"
+      }
+    },
+    "import": {
+      "title": "Import payments",
+      "noYear": "No academic year is selected.",
+      "file": "Payments file for the academic year {year} (.csv or .xlsx)",
+      "hint": "The first row has the headers: student_number (or nim), amount, paid_on, reference, method. Dates: YYYY-MM-DD or DD.MM.YYYY. Method: cash, bank, card, other (default bank transfer). Each row is matched to the student's payment plan of this academic year. At most 2000 rows, 2 MB.",
+      "choose": "Choose file",
+      "template": "Download CSV template",
+      "working": "Checking…",
+      "summary": "{valid} of {total} rows are valid ({created} new, {duplicates} already recorded and skipped) and {invalid} have errors.",
+      "errors": "Errors",
+      "row": "Row {row}",
+      "columns": {
+        "student": "Student",
+        "amount": "Amount",
+        "paidOn": "Date",
+        "reference": "Reference",
+        "method": "Method",
+        "status": "Status"
+      },
+      "new": "New",
+      "duplicate": "Already recorded",
+      "truncated": "Showing {shown} of {total} rows.",
+      "confirm": "Import {count} payments",
+      "fixFirst": "Fix the errors in the file and choose it again: the import is all or nothing.",
+      "done": "{created} payments recorded, {skipped} skipped.",
+      "fileErrors": {
+        "invalidEncoding": "The file is not UTF-8. Save it as “CSV UTF-8” or use .xlsx.",
+        "empty": "The file is empty or has only the headers.",
+        "tooManyRows": "The file has more than 2000 rows.",
+        "tooLarge": "The file is larger than 2 MB.",
+        "missingColumns": "Required columns are missing",
+        "unsupportedFile": "The file cannot be read. Use .csv or .xlsx.",
+        "importHasErrors": "The file has errors; nothing was saved.",
+        "FORBIDDEN": "You may not import.",
+        "UNAUTHENTICATED": "Sign in again to continue."
+      }
+    },
+    "mine": {
+      "title": "My payments",
+      "noStudent": "No student record",
+      "noStudentHint": "Your account is not linked to a student record.",
+      "empty": "You have no payment plan yet.",
+      "clearedHint": "You have nothing overdue on {date}.",
+      "owedHint": "On {date} you owe {amount} that is already due.",
+      "planTitle": "{program} · academic year {year}",
+      "installments": "Your installments",
+      "columns": {
+        "kind": "Fee",
+        "dueDate": "Due date",
+        "amount": "Amount",
+        "paid": "Paid",
+        "outstanding": "Outstanding",
+        "status": "Status"
+      },
+      "earlyUntil": "{amount} if paid by {date}"
     }
   },
   "adm": {

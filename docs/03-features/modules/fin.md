@@ -21,6 +21,9 @@ Code: `src/modules/fin`. Finance reports by **calendar year**, payment plans ref
   per-student balance; financial clearance status per date/exam session (used by EXM-03, GRD-01);
   student portal "my installments".
 - **Note:** works without F5 integration; INT-02 can later feed payments automatically.
+- **Built:** payments on a plan (record, void), CSV/XLSX import with preview, balances and
+  `getFinancialClearance(studentId, date)` for EXM-03/GRD-01, `/fin/mine` for students. Working
+  assumptions Q-109…Q-113. Spec: [FIN-02](../specs/FIN-02-payments.md).
 
 ### FIN-03 — Scholarships
 - **Goal:** full/partial scholarships and their lists/reports (SRC-037a, SRC-083, SRC-084).

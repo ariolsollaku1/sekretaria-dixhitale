@@ -11,7 +11,8 @@ export const money = (d: { toFixed(n: number): string }) => d.toFixed(2);
 /** AC-10/AC-11: the programs a reader may see (institution = all). */
 export async function finProgramScope(
   user: { id: string },
-  permission: "fin.fee.read" | "fin.fee.write" | "fin.plan.read" | "fin.plan.write",
+  permission:
+    "fin.fee.read" | "fin.fee.write" | "fin.plan.read" | "fin.plan.write" | "fin.payment.read",
 ): Promise<Prisma.StudyProgramWhereInput> {
   const g = await grantScopes(user, permission);
   if (g.institution) return {};

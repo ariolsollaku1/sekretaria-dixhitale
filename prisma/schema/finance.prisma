@@ -15,6 +15,22 @@ enum DiscountKind {
   @@map("discount_kind")
 }
 
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CARD
+  OTHER
+
+  @@map("payment_method")
+}
+
+enum PaymentStatus {
+  RECORDED
+  VOIDED
+
+  @@map("payment_status")
+}
+
 enum InstallmentStatus {
   ACTIVE
   CANCELLED
@@ -87,6 +103,7 @@ model PaymentPlan {
   enrollment     Enrollment        @relation(fields: [enrollmentId], references: [id])
   academicYear   AcademicYear      @relation(fields: [academicYearId], references: [id])
   installments   PlanInstallment[]
+  payments       Payment[]
 
   @@unique([enrollmentId, academicYearId])
   @@index([academicYearId])
@@ -115,8 +132,38 @@ model PlanInstallment {
   createdById    String?           @map("created_by_id")
   updatedById    String?           @map("updated_by_id")
   plan           PaymentPlan       @relation(fields: [planId], references: [id])
+  payments       Payment[]
 
   @@unique([planId, sequence])
   @@index([dueDate])
   @@map("plan_installments")
+}
+
+/// A payment received on a payment plan (FIN-02, Q-109). Never deleted, only voided with a reason.
+/// How it is spread over the installments is computed (domain/payment-rules), not stored.
+model Payment {
+  id            String           @id @default(cuid(2))
+  planId        String           @map("plan_id")
+  amount        Decimal          @db.Decimal(12, 2)
+  paidOn        DateTime         @map("paid_on") @db.Date
+  reference     String           @default("")
+  method        PaymentMethod
+  /// The installment the payer meant to pay; it is paid first.
+  installmentId String?          @map("installment_id")
+  status        PaymentStatus    @default(RECORDED)
+  voidReason    String?          @map("void_reason")
+  voidedAt      DateTime?        @map("voided_at") @db.Timestamptz(3)
+  voidedById    String?          @map("voided_by_id")
+  /// Groups the rows of one file import (Q-112).
+  importBatch   String?          @map("import_batch")
+  createdAt     DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById   String?          @map("created_by_id")
+  updatedById   String?          @map("updated_by_id")
+  plan          PaymentPlan      @relation(fields: [planId], references: [id])
+  installment   PlanInstallment? @relation(fields: [installmentId], references: [id])
+
+  @@index([planId])
+  @@index([paidOn])
+  @@map("payments")
 }

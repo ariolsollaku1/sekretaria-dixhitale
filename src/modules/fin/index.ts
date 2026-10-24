@@ -40,3 +40,7 @@ export { GrantScholarshipForm, VoidScholarshipButton } from "./ui/scholarship-fo
 export { SCHOLARSHIP_FORMS } from "./domain/scholarship-forms";
 // FIN-05 shared lists
 export { deadlinesTable, clearanceTable } from "./server/list.table";
+import "./server/reminder.job";
+export { remindersTable } from "./server/reminder.table";
+export { sendPaymentReminders, getReminderSettings } from "./server/reminder.job";
+export { reminderFor } from "./domain/reminder-rules";

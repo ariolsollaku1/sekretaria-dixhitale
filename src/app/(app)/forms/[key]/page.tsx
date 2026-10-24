@@ -5,6 +5,8 @@ import { PageHeader } from "@/components/ui/page-header";
 import { requireUser } from "@/lib/auth";
 import { registerAllPurposes } from "@/lib/files/all";
 import { getFilePurpose } from "@/lib/files/purposes";
+import { currentRoles } from "@/lib/forms/access";
+import { maySubmit } from "@/lib/forms/answers";
 import { localize } from "@/lib/forms/definition";
 import { getPublishedForm } from "@/lib/forms/queries";
 import { FILE_PURPOSE } from "@/lib/forms/submission.service";
@@ -16,9 +18,11 @@ export default async function AuthenticatedFormPage({
   params: Promise<{ key: string }>;
 }) {
   const { key } = await params;
-  await requireUser(`/forms/${key}`);
+  const user = await requireUser(`/forms/${key}`);
   const form = await getPublishedForm(key);
   if (!form || form.audience !== "AUTHENTICATED") notFound();
+  // OFF-01: a form limited to some roles does not exist for the others
+  if (!maySubmit(form.definition, await currentRoles(user.id))) notFound();
   registerAllPurposes();
   const purpose = getFilePurpose(FILE_PURPOSE)!;
   const [t, locale] = await Promise.all([getTranslations("forms"), getLocale()]);

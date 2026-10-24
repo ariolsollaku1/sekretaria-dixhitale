@@ -3,6 +3,7 @@ import {
   HONEYPOT_FIELD,
   isHoneypotFilled,
   makeReference,
+  maySubmit,
   nextStates,
   validateAnswers,
   visibleFields,
@@ -231,5 +232,36 @@ describe("helpers (AC-6, AC-8)", () => {
   it("lists the next states", () => {
     expect(nextStates(base() as never, "new")).toEqual(["review"]);
     expect(nextStates(base() as never, "approved")).toEqual([]);
+  });
+});
+
+describe("roles on transitions and submit roles (OFF-01 AC-2, AC-3)", () => {
+  const withRoles = () => {
+    const d = base();
+    d.workflow.transitions = [
+      { from: "new", to: "review", roles: ["head_of_department"] },
+      { from: "review", to: "approved" },
+    ] as never;
+    return { ...d, submitRoles: ["lecturer"] };
+  };
+  it("accepts known roles and refuses unknown ones", () => {
+    expect(errorsOf(withRoles())).toEqual([]);
+    const bad = withRoles();
+    bad.submitRoles = ["wizard"];
+    expect(errorsOf(bad)).toContain("submitRoles.0:unknownRole");
+  });
+  it("filters transitions by the roles of the user; the sysadmin takes any", () => {
+    const d = withRoles() as never;
+    expect(nextStates(d, "new", ["lecturer"])).toEqual([]);
+    expect(nextStates(d, "new", ["head_of_department"])).toEqual(["review"]);
+    expect(nextStates(d, "new", ["sysadmin"])).toEqual(["review"]);
+    expect(nextStates(d, "review", ["lecturer"])).toEqual(["approved"]); // no roles named = open
+  });
+  it("limits who may submit", () => {
+    const d = withRoles() as never;
+    expect(maySubmit(d, ["lecturer"])).toBe(true);
+    expect(maySubmit(d, ["student"])).toBe(false);
+    expect(maySubmit(d, ["sysadmin"])).toBe(true);
+    expect(maySubmit(base() as never, ["student"])).toBe(true);
   });
 });

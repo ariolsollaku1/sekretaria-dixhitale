@@ -11,6 +11,7 @@ import { can } from "@/lib/authz/guard";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDateTime } from "@/lib/i18n/format";
 import { nextStates, stateDef } from "@/lib/forms/answers";
+import { currentRoles } from "@/lib/forms/access";
 import { localize } from "@/lib/forms/definition";
 import "@/lib/forms/all";
 import { getFormHandler } from "@/lib/forms/handlers";
@@ -103,7 +104,10 @@ export default async function SubmissionPage({ params }: { params: Promise<{ id:
         </h2>
         <SubmissionActions
           submissionId={submission.id}
-          next={nextStates(def, submission.state).map((k) => ({ key: k, label: stateLabel(k) }))}
+          next={nextStates(def, submission.state, await currentRoles(user.id)).map((k) => ({
+            key: k,
+            label: stateLabel(k),
+          }))}
           assignees={assignees}
           assigneeId={submission.assigneeId}
         />

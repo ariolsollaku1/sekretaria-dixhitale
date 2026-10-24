@@ -13,6 +13,7 @@ import {
   HONEYPOT_FIELD,
   isHoneypotFilled,
   makeReference,
+  maySubmit,
   nextStates,
   stateDef,
   validateAnswers,
@@ -113,6 +114,9 @@ export async function submitAuthenticated(
   const form = await getPublishedForm(key, ctx.db);
   if (!form || form.audience !== "AUTHENTICATED")
     throw new DomainError("NOT_FOUND", "Form not found");
+  // OFF-01: a form limited to some roles does not exist for the others
+  if (!maySubmit(form.definition, await currentRoles(ctx.user.id, ctx.db)))
+    throw new DomainError("NOT_FOUND", "Form not found");
   const checked = validateAnswers(form.definition, raw, { allowFiles: true });
   if (!checked.ok)
     throw new DomainError(
@@ -165,8 +169,15 @@ export async function changeState(
   comment: string | null,
 ) {
   const { submission, definition, form } = await loadForHandling(ctx, submissionId);
-  if (!nextStates(definition, submission.state).includes(to))
+  const roles = await currentRoles(ctx.user.id, ctx.db);
+  if (!nextStates(definition, submission.state, roles).includes(to))
     throw new DomainError("CONFLICT", "TRANSITION_NOT_ALLOWED");
+  // OFF-01: nobody decides on their own request through a role-restricted step (sysadmin excepted)
+  const restricted = definition.workflow.transitions.some(
+    (t) => t.from === submission.state && t.to === to && t.roles,
+  );
+  if (restricted && submission.submitterId === ctx.user.id && !roles.includes("sysadmin"))
+    throw new DomainError("CONFLICT", "OWN_REQUEST");
   const target = stateDef(definition, to)!;
 
   await ctx.db.formSubmission.update({ where: { id: submissionId }, data: { state: to } });

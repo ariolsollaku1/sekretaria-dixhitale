@@ -19,6 +19,7 @@ import { stuStudentsSeeder } from "./stu-students";
 import { pltFormsSeeder } from "./plt-forms";
 import { stuRequestsSeeder } from "./stu-requests";
 import { ersFormsSeeder } from "./ers-forms";
+import { offRequestsSeeder } from "./off-requests";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -40,6 +41,7 @@ const SEEDERS: Seeder[] = [
   pltFormsSeeder,
   stuRequestsSeeder,
   ersFormsSeeder,
+  offRequestsSeeder,
   calTimetableSeeder,
   admNoticesSeeder,
 ];

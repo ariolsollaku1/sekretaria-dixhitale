@@ -81,15 +81,16 @@ export async function getDefinitionRow(id: string) {
   return db.formDefinition.findUnique({ where: { id } });
 }
 
-/** Published authenticated forms a user may fill in (allowed roles are not modelled: see `ownerRoles`). */
-export async function listAuthenticatedForms() {
+/** Published authenticated forms a user may fill in (`submitRoles` of the definition, OFF-01). */
+export async function listAuthenticatedForms(userId?: string) {
+  const roles = userId ? await currentRoles(userId) : null;
   const rows = await db.formDefinition.findMany({
     where: { status: "PUBLISHED", audience: "AUTHENTICATED" },
     orderBy: { key: "asc" },
   });
   return rows.flatMap((r) => {
     const s = served(r);
-    return s ? [s] : [];
+    return s && (!roles || maySubmit(s.definition, roles)) ? [s] : [];
   });
 }
 
@@ -107,6 +108,7 @@ export async function listPublicForms() {
 
 // ---- inbox (AC-7) --------------------------------------------------------------------------------
 import type { Prisma } from "@/generated/prisma/client";
+import { maySubmit } from "./answers";
 import { currentRoles, mayHandle } from "./access";
 
 /** The submissions a user may handle: the sysadmin all, others those of forms they own a role of. */

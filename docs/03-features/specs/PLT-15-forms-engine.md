@@ -147,6 +147,7 @@ model RateLimitHit { id, bucket String, at DateTime  @@index([bucket, at]) }
 **Implementation notes:**
 - Everything lives in `src/lib/forms` (platform feature, not a module), UI in
   `src/components/forms`; the public route is `src/app/(public)/f/[key]` (the proxy lets `/f/` through).
+- OFF-01 additions (optional, backward compatible): a definition may list `submitRoles` (who may fill in an authenticated form; others get 404 and do not see it listed) and a transition may list `roles` (who may take it; sysadmin always; nobody may take a role-restricted transition on their own submission).
 - A published definition is frozen by a database trigger; one PUBLISHED version per key by a partial unique index.
 - The rate limiter (`src/lib/ratelimit`) stores a hash of the address per bucket; the hourly job
   `plt.ratelimit.prune` removes old hits.

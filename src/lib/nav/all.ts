@@ -8,6 +8,7 @@ import "@/modules/att";
 import "@/modules/fin";
 import "@/modules/ers";
 import "@/modules/adm";
+import "@/modules/off";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -461,5 +462,25 @@ registerNav(
     permission: "fin.plan.read",
     group: "finance",
     order: 20,
+  },
+);
+registerNav(
+  {
+    id: "staff-requests",
+    labelKey: "staffRequests",
+    href: "/off/requests",
+    icon: "clipboard",
+    permission: "off.request.submit",
+    group: "hr",
+    order: 10,
+  },
+  {
+    id: "staff-request-history",
+    labelKey: "staffRequestHistory",
+    href: "/off/history",
+    icon: "clipboard",
+    permission: "off.request.history",
+    group: "hr",
+    order: 11,
   },
 );

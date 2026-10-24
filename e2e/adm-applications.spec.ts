@@ -134,8 +134,9 @@ test("AC-1..AC-9, 11: staff opens a cycle, a candidate applies and uploads a doc
   await page.waitForLoadState("networkidle");
   await expect(page.getByRole("link", { name: reference })).toBeVisible();
   await page.getByRole("link", { name: reference }).click();
-  await expect(page.getByRole("heading", { name: `Aplikimi ${reference}` })).toBeVisible();
-  await expect(page.getByText("Hoxha")).toBeVisible();
+  // The record page's h1 is the applicant; the reference is in the breadcrumb and the subtitle.
+  await expect(page.getByRole("heading", { level: 1, name: /Hoxha/ })).toBeVisible();
+  await expect(page.getByText(reference).first()).toBeVisible();
   const download = page.getByTestId("doc-diploma").getByRole("link", { name: /diploma\.pdf/ });
   await expect(download).toBeVisible();
   const res = await page.request.get((await download.getAttribute("href"))!);

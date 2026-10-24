@@ -5,7 +5,9 @@ import { EntityHistory } from "@/components/audit/entity-history";
 import { ForbiddenView } from "@/components/forbidden-view";
 import { buttonVariants } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import { PageHeader } from "@/components/ui/page-header";
+import { Building2, Landmark, Pencil } from "lucide-react";
+import { RecordHero } from "@/components/record/record-hero";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
@@ -17,76 +19,95 @@ export default async function FacultyDetailPage({ params }: { params: Promise<{ 
   if (!(await can(user, "org.faculty.read"))) return <ForbiddenView />;
   const faculty = await getFaculty(id);
   if (!faculty) notFound();
-  const [t, mayWrite] = await Promise.all([
+  const [t, tc, mayWrite] = await Promise.all([
     getTranslations("org.unit"),
+    getTranslations("common"),
     can(user, "org.faculty.write"),
   ]);
 
   return (
     <>
-      <PageHeader
-        title={`${faculty.code} — ${faculty.name}`}
+      <RecordHero
+        icon={Landmark}
+        name={`${faculty.code} — ${faculty.name}`}
         breadcrumbs={[{ label: t("faculties"), href: "/org/faculties" }, { label: faculty.code }]}
         actions={
           mayWrite && <UnitStatusActions kind="faculty" id={faculty.id} active={faculty.active} />
         }
-      />
-      <p className="mb-6 flex flex-wrap items-center gap-3 text-sm">
-        <StatusBadge
-          tone={faculty.active ? "success" : "neutral"}
-          label={t(faculty.active ? "active" : "inactive")}
-        />
-        {faculty.nameEn && <span className="text-muted-foreground">{faculty.nameEn}</span>}
-      </p>
-
-      {mayWrite && (
-        <section aria-labelledby="edit-title" className="mb-8">
-          <h2 id="edit-title" className="mb-3 text-2xl font-semibold">
-            {t("faculties")}
-          </h2>
-          <UnitForm
-            kind="faculty"
-            mode="edit"
-            id={faculty.id}
-            defaults={{ code: faculty.code, name: faculty.name, nameEn: faculty.nameEn ?? "" }}
+        badges={
+          <StatusBadge
+            tone={faculty.active ? "success" : "neutral"}
+            label={t(faculty.active ? "active" : "inactive")}
           />
-        </section>
-      )}
-
-      <section aria-labelledby="deps-title" className="mb-8">
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <h2 id="deps-title" className="text-2xl font-semibold">
-            {t("departmentsOf")}
-          </h2>
-          {mayWrite && faculty.active && (
-            <Link href="/org/departments/new" className={buttonVariants({ variant: "secondary" })}>
-              {t("newDepartment")}
-            </Link>
+        }
+      />
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex flex-col gap-6">
+          {mayWrite && (
+            <Card aria-labelledby="edit-title">
+              <CardTitle id="edit-title" icon={Pencil}>
+                {t("faculties")}
+              </CardTitle>
+              <UnitForm
+                kind="faculty"
+                mode="edit"
+                id={faculty.id}
+                defaults={{ code: faculty.code, name: faculty.name, nameEn: faculty.nameEn ?? "" }}
+              />
+            </Card>
           )}
-        </div>
-        {faculty.departments.length === 0 ? (
-          <EmptyState title={t("noDepartments")} />
-        ) : (
-          <ul className="flex flex-col gap-2">
-            {faculty.departments.map((d) => (
-              <li
-                key={d.id}
-                className="rounded-control border-border bg-card flex items-center justify-between gap-3 border px-3 py-2"
-              >
-                <Link href={`/org/departments/${d.id}`} className="underline">
-                  <span className="font-tabular">{d.code}</span> — {d.name}
+          <Card aria-labelledby="deps-title">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <CardTitle id="deps-title" icon={Building2} className="mb-0">
+                {t("departmentsOf")}
+              </CardTitle>
+              {mayWrite && faculty.active && (
+                <Link
+                  href="/org/departments/new"
+                  className={buttonVariants({ variant: "secondary" })}
+                >
+                  {t("newDepartment")}
                 </Link>
-                <StatusBadge
-                  tone={d.active ? "success" : "neutral"}
-                  label={t(d.active ? "active" : "inactive")}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <EntityHistory entityType="Faculty" entityId={faculty.id} permission="org.faculty.read" />
+              )}
+            </div>
+            {faculty.departments.length === 0 ? (
+              <EmptyState title={t("noDepartments")} />
+            ) : (
+              <ul className="divide-border flex flex-col divide-y">
+                {faculty.departments.map((d) => (
+                  <li
+                    key={d.id}
+                    className="flex items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
+                  >
+                    <Link href={`/org/departments/${d.id}`} className="underline">
+                      <span className="font-tabular">{d.code}</span> — {d.name}
+                    </Link>
+                    <StatusBadge
+                      tone={d.active ? "success" : "neutral"}
+                      label={t(d.active ? "active" : "inactive")}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </div>
+        <Card aria-labelledby="fac-details">
+          <CardTitle id="fac-details" icon={Landmark}>
+            {tc("details")}
+          </CardTitle>
+          <InfoList
+            className="sm:grid-cols-1"
+            items={[
+              { label: t("code"), value: <span className="font-tabular">{faculty.code}</span> },
+              { label: tc("nameEn"), value: faculty.nameEn },
+            ]}
+          />
+        </Card>
+      </div>
+      <div className="mt-6">
+        <EntityHistory entityType="Faculty" entityId={faculty.id} permission="org.faculty.read" />
+      </div>
     </>
   );
 }

@@ -20,7 +20,9 @@
       "approved": "Approved",
       "rejected": "Rejected",
       "draft": "Draft"
-    }
+    },
+    "details": "Details",
+    "nameEn": "Name in English"
   },
   "shell": {
     "appName": "Digital Secretariat",
@@ -316,7 +318,8 @@
       "since": "Since {date}",
       "until": "until {date}",
       "account": "Account",
-      "history": "History"
+      "history": "History",
+      "signIn": "Sign-in"
     },
     "actions": {
       "deactivate": "Deactivate",
@@ -788,7 +791,8 @@
       "departmentCode": "Department code",
       "search": "Search by code or name",
       "readOnlyNote": "You can view this course but you may not change it.",
-      "history": "History"
+      "history": "History",
+      "load": "Load and credits"
     },
     "actions": {
       "created": "Course created.",
@@ -1529,7 +1533,9 @@
     "detail": {
       "weeks": "Week {weeks}",
       "edit": "Edit",
-      "closedNote": "The academic year is closed; the calendar is read-only."
+      "closedNote": "The academic year is closed; the calendar is read-only.",
+      "weeksLabel": "Academic weeks",
+      "when": "Date"
     },
     "feed": {
       "title": "Subscribe to the calendar",
@@ -1747,7 +1753,8 @@
       "STAFF": "Staff",
       "STUDENTS": "Students",
       "CYCLE": "Study cycle",
-      "PROGRAM": "Program"
+      "PROGRAM": "Program",
+      "label": "Audience"
     },
     "cycle": {
       "FIRST": "First cycle (Bachelor)",
@@ -2491,7 +2498,8 @@
         "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
         "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments and the program code does not select exactly one.",
         "generic": "The action failed."
-      }
+      },
+      "closedBadge": "Closed"
     }
   },
   "ers": {
@@ -3172,7 +3180,8 @@
       "cancelled": "Cancelled",
       "adjusted": "Adjusted",
       "active": "Active",
-      "scholarship": "Scholarship"
+      "scholarship": "Scholarship",
+      "totals": "Summary"
     },
     "adjust": {
       "adjust": "Adjust",
@@ -3411,7 +3420,8 @@
           "STUDENT_NOT_IDENTIFIED": "The student could not be identified.",
           "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
           "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments: the application names no unique program."
-        }
+        },
+        "closedBadge": "Closed"
       }
     },
     "lists": {
@@ -3754,7 +3764,9 @@
       "female": "Female",
       "male": "Male",
       "download": "Download",
-      "readOnly": "The status changes in the application review (ADM-03)."
+      "readOnly": "The status changes in the application review (ADM-03).",
+      "application": "Application",
+      "contact": "Contact"
     },
     "leads": {
       "title": "Leads",
@@ -3814,7 +3826,9 @@
         "UNASSIGNED": "Owner removed",
         "EDITED": "Details changed",
         "NOTE": "Note"
-      }
+      },
+      "details": "Details",
+      "actions": "Actions"
     },
     "invite": {
       "subject": "Invitation to apply to LOGOS University College",
@@ -4164,7 +4178,8 @@
       "unregisterTitle": "Cancel your registration?",
       "unregisterBody": "Your place becomes available to others.",
       "unregistered": "Your registration was cancelled."
-    }
+    },
+    "registration": "Registration"
   },
   "hrEvaluation": {
     "title": "Performance evaluations",

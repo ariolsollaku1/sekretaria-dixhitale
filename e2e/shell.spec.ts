@@ -48,7 +48,9 @@ test("AC-1/10: the shell shows the dashboard with welcome message and empty widg
 test("AC-4: switching to English changes labels and survives a reload", async ({ page }) => {
   await signInAs(page, USER);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Përshëndetje");
-  await page.getByLabel("Gjuha").selectOption("en");
+  // The language control is a flag button with a menu (PLT-16 / ADR-0013).
+  await page.getByRole("button", { name: /Gjuha/ }).click();
+  await page.getByRole("menuitem", { name: "English" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Hello, Dev Student Affairs");
   await page.reload();
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Hello");

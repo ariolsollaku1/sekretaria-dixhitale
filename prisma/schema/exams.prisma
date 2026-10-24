@@ -1,0 +1,64 @@
+enum ExamSessionType {
+  WINTER
+  SUMMER
+  AUTUMN
+  MINI
+
+  @@map("exam_session_type")
+}
+
+/// An exam session of an academic year (CAL-03): winter, summer, autumn or the final-year mini-session.
+/// Never deleted; the schedule is visible to students once `publishedAt` is set.
+model ExamSession {
+  id             String          @id @default(cuid(2))
+  academicYearId String          @map("academic_year_id")
+  type           ExamSessionType
+  startDate      DateTime        @map("start_date") @db.Date
+  endDate        DateTime        @map("end_date") @db.Date
+  publishedAt    DateTime?       @map("published_at") @db.Timestamptz(3)
+  createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?         @map("created_by_id")
+  updatedById    String?         @map("updated_by_id")
+  academicYear   AcademicYear    @relation(fields: [academicYearId], references: [id])
+  sittings       ExamSitting[]
+
+  @@unique([academicYearId, type])
+  @@map("exam_sessions")
+}
+
+/// The exam of a plan course in a session (CAL-03). Planning data: changed and removed with an audit entry.
+model ExamSitting {
+  id           String                @id @default(cuid(2))
+  sessionId    String                @map("session_id")
+  planCourseId String                @map("plan_course_id")
+  date         DateTime              @db.Date
+  /// Minutes from midnight, local time.
+  startMinute  Int                   @map("start_minute")
+  endMinute    Int                   @map("end_minute")
+  room         String?
+  note         String?
+  createdAt    DateTime              @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById  String?               @map("created_by_id")
+  updatedById  String?               @map("updated_by_id")
+  session      ExamSession           @relation(fields: [sessionId], references: [id])
+  planCourse   PlanCourse            @relation(fields: [planCourseId], references: [id])
+  examiners    ExamSittingExaminer[]
+
+  @@unique([sessionId, planCourseId])
+  @@index([date])
+  @@index([planCourseId])
+  @@map("exam_sittings")
+}
+
+model ExamSittingExaminer {
+  sittingId String      @map("sitting_id")
+  staffId   String      @map("staff_id")
+  sitting   ExamSitting @relation(fields: [sittingId], references: [id], onDelete: Cascade)
+  staff     Staff       @relation(fields: [staffId], references: [id])
+
+  @@id([sittingId, staffId])
+  @@index([staffId])
+  @@map("exam_sitting_examiners")
+}

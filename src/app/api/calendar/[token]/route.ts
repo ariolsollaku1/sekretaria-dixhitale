@@ -1,4 +1,4 @@
-import { feedEvents, renderCalendar, userForToken } from "@/modules/cal";
+import { feedEvents, feedExams, renderCalendar, userForToken } from "@/modules/cal";
 
 export const dynamic = "force-dynamic";
 
@@ -10,8 +10,27 @@ export async function GET(_request: Request, { params }: { params: Promise<{ tok
   const user = await userForToken(token);
   if (!user) return new Response("Not found", { status: 404 });
 
-  const events = await feedEvents(user.id);
-  const body = renderCalendar(events, "LOGOS — Kalendari akademik", new Date());
+  const [events, exams] = await Promise.all([feedEvents(user.id), feedExams(user.id)]);
+  // CAL-03 AC-9: published exams the user may see, as timed events
+  const body = renderCalendar(
+    [
+      ...events,
+      ...exams.map((s) => ({
+        id: `exam-${s.id}`,
+        title: `Provim: ${s.courseCode} ${s.courseName}`,
+        description: s.examiners.length
+          ? `Provimdhënës: ${s.examiners.map((x) => x.name).join(", ")}`
+          : null,
+        startDate: s.date,
+        endDate: s.date,
+        startMinute: s.startMinute,
+        endMinute: s.endMinute,
+        location: s.room,
+      })),
+    ],
+    "LOGOS — Kalendari akademik",
+    new Date(),
+  );
   return new Response(body, {
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",

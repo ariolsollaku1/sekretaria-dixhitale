@@ -88,6 +88,8 @@
       "myAttendance": "My classes",
       "attendanceSessions": "Attendance",
       "myAbsences": "My absences",
+      "exams": "Exam schedule",
+      "myExams": "My exams",
       "fees": "Fee schedule",
       "paymentPlans": "Payment plans",
       "attendanceReport": "Attendance report",
@@ -1359,6 +1361,78 @@
           "FORBIDDEN": "You may not.",
           "UNAUTHENTICATED": "Sign in again."
         }
+      }
+    },
+    "exams": {
+      "title": "Exam sessions",
+      "mine": "My exams",
+      "schedule": "Exam schedule",
+      "scheduleCaption": "Exams by date and time",
+      "noYear": "No academic year selected.",
+      "noSessions": "This year has no exam sessions yet.",
+      "emptySchedule": "No exams in the schedule.",
+      "noCourses": "No more courses to schedule in this session (courses of the plans of the year's active groups).",
+      "miniNote": "The mini-session is for the final year of study only (3rd-year bachelor or master).",
+      "closedNote": "The academic year is closed: the schedule cannot be changed.",
+      "yearOfStudy": "year {year}",
+      "examCount": "{count, plural, =0 {No exams} one {# exam} other {# exams}}",
+      "addSession": "Add session",
+      "sessionAdded": "Session added.",
+      "add": "Add exam",
+      "added": "Exam added.",
+      "save": "Save",
+      "saveDates": "Save dates",
+      "saved": "Saved.",
+      "remove": "Remove",
+      "publish": "Publish schedule",
+      "unpublish": "Withdraw publication",
+      "publishedDone": "Schedule published.",
+      "unpublished": "Publication withdrawn.",
+      "status": {
+        "draft": "Draft",
+        "published": "Published"
+      },
+      "type": {
+        "WINTER": "Winter session",
+        "SUMMER": "Summer session",
+        "AUTUMN": "Autumn session",
+        "MINI": "Mini-session"
+      },
+      "form": {
+        "type": "Session",
+        "startDate": "Starts on",
+        "endDate": "Ends on",
+        "course": "Course",
+        "date": "Date",
+        "time": "Time",
+        "start": "Starts",
+        "end": "Ends",
+        "room": "Room",
+        "examiners": "Examiners"
+      },
+      "clash": "Clashes with an existing exam: {clashes}.",
+      "clashKind": {
+        "GROUP": "same student group",
+        "EXAMINER": "same examiner",
+        "ROOM": "same room"
+      },
+      "errors": {
+        "required": "This field is required.",
+        "invalidDate": "The date is not valid.",
+        "endBeforeStart": "The end must be after the start.",
+        "outsideYear": "Dates must be within the academic year.",
+        "outsideSession": "The date must be within the session's dates.",
+        "sittingsOutside": "Some exams would fall outside the new session dates.",
+        "timeRange": "The time is not valid.",
+        "tooLong": "The text is too long.",
+        "tooManyExaminers": "At most 6 examiners.",
+        "duplicateExaminer": "An examiner was chosen twice.",
+        "unknownExaminer": "The examiner is not valid.",
+        "miniFinalYearOnly": "The mini-session only takes courses of the program's final year.",
+        "SESSION_EXISTS": "This session already exists for the year.",
+        "SITTING_EXISTS": "This course already has an exam in this session.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "generic": "The action failed."
       }
     }
   },

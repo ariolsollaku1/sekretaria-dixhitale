@@ -38,3 +38,16 @@ registerPermissions("cal", {
     student: ["cal.timetable.self"],
   },
 });
+
+// AC-10 (CAL-03): same split as the timetable — the Secretariat schedules exams, staff read the
+// whole schedule, lecturers (as examiners) and students see their own published exams.
+registerPermissions("cal", {
+  permissions: ["cal.exam.read", "cal.exam.write", "cal.exam.self"],
+  grants: {
+    ...Object.fromEntries(STAFF_READERS.map((r) => [r, ["cal.exam.read"]])),
+    sysadmin: ["cal.exam.read", "cal.exam.write"],
+    secretary: ["cal.exam.read", "cal.exam.write"],
+    lecturer: ["cal.exam.self"],
+    student: ["cal.exam.self"],
+  },
+});

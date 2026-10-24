@@ -41,6 +41,11 @@ export {
   findAssignments,
   type AssignmentContext,
 } from "./server/assignment-context";
+export {
+  getPlanCourseContext,
+  listExamCourses,
+  type PlanCourseContext,
+} from "./server/plan-course-context";
 export { registerCurPurposes, SYLLABUS_PURPOSE } from "./server/syllabus.purposes";
 export { SyllabusBoard, CarryForwardButton, type SyllabusRowView } from "./ui/syllabus-board";
 export {

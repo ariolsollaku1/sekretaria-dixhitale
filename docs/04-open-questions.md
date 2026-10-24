@@ -78,6 +78,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
 | Q-63 | Attendance: creating class sessions | no | open | Secretariat |
 | Q-64 | Attendance: who sees what | no | open | Secretariat |
+| Q-75 | Exam sessions: kinds, dates and who sets them | no | open | Secretariat / Academic Affairs |
+| Q-76 | Mini-session: which students and which courses | no | open | Secretariat / Academic Affairs |
+| Q-77 | Exam schedule: one exam per course, clashes and electives | no | open | Secretariat |
+| Q-78 | Exam schedule: publication, changes after publication and notices | no | open | Secretariat |
+| Q-79 | Exam schedule: examiners and rooms | no | open | Secretariat |
 | Q-70 | Deregistration request: effective date, which enrollment, fees | no | open | Secretariat / Finance |
 | Q-71 | Student requests: identifying a requester who is not logged in | no | open | Secretariat / DPO |
 | Q-72 | Recognition of documents: who decides and on what basis | no | open | Secretariat / Academic board |
@@ -689,6 +694,54 @@ Decisions taken in conversation that aren't architecture ADRs.
   Secretariat reads and corrects all; heads of department and program coordinators read the sessions
   of their scope; a student sees only their own absent and excused marks (with the status, without notes).
 - **Impact:** visibility of notes and of colleagues' classes.
+
+### Q-75 — Exam sessions: kinds, dates and who sets them
+- **Context:** SRC-014, SRC-034, SRC-052 — winter, summer and autumn sessions and a mini-session.
+- **Questions:** Is there exactly one session of each kind per academic year? Are there other kinds
+  (extraordinary, thesis defence)? Which semester's courses belong to which session? Who sets the dates?
+- **Working assumption:** at most one session of each of the four kinds (winter, summer, autumn, mini) per
+  academic year, with a start and end date inside the year, set by the Secretariat; sessions of a year may
+  overlap; any plan course may be scheduled in any session (the winter/summer/autumn split by semester,
+  and retakes, are not enforced).
+- **Impact:** the session kinds, uniqueness, whether courses are limited per session.
+
+### Q-76 — Mini-session: which students and which courses
+- **Context:** SRC-052 — list for third-year bachelor or master students — mini-session.
+- **Questions:** Is "final year" the last year of the program (3 for bachelor of 3 years, 2 for master of
+  2 years) or literally year 3 / master? Which courses may be examined in it?
+- **Working assumption:** final year = the program's `durationYears`; in the mini-session only courses of
+  that final year of study can be scheduled (CAL-03); which students may register is checked by EXM-04.
+- **Impact:** the course filter of the mini-session, EXM-04 registration.
+
+### Q-77 — Exam schedule: one exam per course, clashes and electives
+- **Context:** SRC-034, SRC-036d — the exam schedule; clash detection per group.
+- **Questions:** Is there one exam sitting per course per session (all groups together), or several
+  (written + oral, one per group)? Do two electives of the same year of study clash?
+- **Working assumption:** one sitting per plan course per session, for every group that follows that plan
+  in that year of study; two sittings clash (and the second is refused) when they overlap in time on the
+  same date for the same plan and year of study (electives included), the same examiner or the same room
+  (case-insensitive). A sitting must lie inside its session's dates.
+- **Impact:** the uniqueness and clash rules.
+
+### Q-78 — Exam schedule: publication, changes after publication and notices
+- **Context:** SRC-034, SRC-036d — the schedule is shown to students.
+- **Questions:** Is the schedule published per session or per exam? May a published exam still change?
+  Must students be notified?
+- **Working assumption:** published per session by the Secretariat (and unpublished again); students and
+  lecturers see only published sessions, staff see drafts; published sittings may still be changed (audited);
+  no automatic notice yet — students see the schedule in the portal and the personal calendar feed.
+- **Impact:** publication granularity, locking, notices (NTF).
+
+### Q-79 — Exam schedule: examiners and rooms
+- **Context:** SRC-014, SRC-034 — date/time/room/examiners of each exam.
+- **Questions:** How many examiners per exam, must they be the course's lecturers, and are rooms master data?
+- **Working assumption:** zero to six examiners chosen from the active academic staff (not tied to the
+  course's lecturers); room is free text up to 50 characters as in the timetable (Q-39); the exam is
+  not checked against the class timetable.
+- **Impact:** examiner rules, room master data.
+
+
+
 
 ### Q-70 — Deregistration request: effective date, which enrollment, fees
 - **Context:** SRC-037b — a student asks to be deregistered; approval triggers the STU-02 change.

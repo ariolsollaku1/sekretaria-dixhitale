@@ -35,6 +35,7 @@ model CurriculumPlan {
 /// A course placed in a plan, with the figures that apply to this plan (copied from the catalog when added).
 model PlanCourse {
   teachingAssignments TeachingAssignment[]
+  examSittings        ExamSitting[]
   syllabi             Syllabus[]
   id                  String               @id @default(cuid(2))
   planId              String               @map("plan_id")

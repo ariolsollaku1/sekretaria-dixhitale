@@ -13,6 +13,7 @@ enum AcademicYearStatus {
 model AcademicYear {
   yearRegistrations YearRegistration[]
   studentGroups     StudentGroup[]
+  examSessions      ExamSession[]
   cohortsStarted    Cohort[]
   plans             CurriculumPlan[]
   syllabi           Syllabus[]

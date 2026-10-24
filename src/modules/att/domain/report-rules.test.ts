@@ -71,7 +71,13 @@ describe("aggregate (AC-1, AC-4)", () => {
     expect(students.find((s) => s.studentId === "s1")?.percent).toBe(100);
     expect(students.find((s) => s.studentId === "s2")?.percent).toBe(50);
     const a = assignments.find((x) => x.assignmentId === "A")!;
-    expect(a).toMatchObject({ classes: 2, heldHours: 4, students: 2, averagePercent: 75, below: 1 });
+    expect(a).toMatchObject({
+      classes: 2,
+      heldHours: 4,
+      students: 2,
+      averagePercent: 75,
+      below: 1,
+    });
     expect(assignments.find((x) => x.assignmentId === "B")).toMatchObject({
       students: 1,
       below: 0,

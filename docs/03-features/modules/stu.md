@@ -34,6 +34,9 @@ Code: `src/modules/stu`. Entities: [domain model](../../02-architecture/domain-m
 - **Goal:** report of the high-school results first-year students bring (SRC-022).
 - **Scope:** per program/cohort: list + distribution of high-school averages (from the
   application), averages by program; export.
+- **Built:** `/stu/entry-qualifications`: summary, distribution in five bands, per-program mean/min/max and the name list with
+  the average of the application the enrollment came from (ADM-04 link); Excel/CSV of the list and of the program summary.
+  No new table. Working assumptions in Q-148.
 
 ### STU-06 — Secretariat student lists
 - **Goal:** standard yearly lists (SRC-051, SRC-053, SRC-054).

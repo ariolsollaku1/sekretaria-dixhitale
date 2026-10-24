@@ -350,6 +350,15 @@ registerNav(
     order: 13,
   },
   {
+    id: "entry-qualifications",
+    labelKey: "entryQualifications",
+    href: "/stu/entry-qualifications",
+    icon: "chart",
+    permission: "stu.student.read",
+    group: "students",
+    order: 14,
+  },
+  {
     id: "student-home",
     labelKey: "studentHome",
     href: "/stu/home",

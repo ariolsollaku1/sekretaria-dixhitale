@@ -3,6 +3,7 @@
 model User {
   formsSubmitted          FormSubmission[]         @relation("FormSubmitter")
   formsAssigned           FormSubmission[]         @relation("FormAssignee")
+  evaluationsToDo         Evaluation[]             @relation("EvaluationEvaluator")
   id                      String                   @id @default(cuid(2))
   email                   String                   @unique
   emailVerified           Boolean                  @default(false) @map("email_verified")

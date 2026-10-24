@@ -34,8 +34,25 @@ function served(row: {
     : null; // a stored definition that no longer validates is not served
 }
 
-/** AC-4: the served (published) version of a key. */
+/**
+ * Questionnaires owned by a module (HR-06 evaluations) are PLT-15 definitions that are edited in
+ * the forms admin but filled in through the module's own pages: they are not served as forms.
+ */
+export const INTERNAL_FORM_PREFIXES = ["hr-evaluation-"] as const;
+export const isInternalFormKey = (key: string): boolean =>
+  INTERNAL_FORM_PREFIXES.some((p) => key.startsWith(p));
+
+/** AC-4: the served (published) version of a key. Internal questionnaires are not served. */
 export async function getPublishedForm(
+  key: string,
+  client: Client = db,
+): Promise<ServedForm | null> {
+  if (isInternalFormKey(key)) return null;
+  return getInternalForm(key, client);
+}
+
+/** The published version of any key, internal questionnaires included (for the owning module). */
+export async function getInternalForm(
   key: string,
   client: Client = db,
 ): Promise<ServedForm | null> {
@@ -89,7 +106,7 @@ export async function listAuthenticatedForms(userId?: string) {
     orderBy: { key: "asc" },
   });
   return rows.flatMap((r) => {
-    const s = served(r);
+    const s = isInternalFormKey(r.key) ? null : served(r);
     return s && (!roles || maySubmit(s.definition, roles)) ? [s] : [];
   });
 }

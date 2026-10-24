@@ -142,6 +142,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-123 | Online application: cycles, program offer and documents | no | open | Student Affairs / Secretariat |
 | Q-124 | Online application: status link and e-mails | no | open | Student Affairs / DPO |
 | Q-125 | Online application: who sees and configures | no | open | Secretariat |
+| Q-134 | Performance evaluations: campaigns, evaluators, visibility | no | open | HR / Rectorate |
 
 ---
 
@@ -1201,3 +1202,16 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Which roles read lecturers' delivered hours? May lecturers see colleagues'?
 - **Working assumption:** HR, Finance, Secretariat and sysadmin read all lecturers; a head of department those of their department; a lecturer only their own. PAE / PAK / volunteer comes from the staff category.
 - **Impact:** grants of `hr.hours.read`, the own-hours page.
+### Q-134 — Performance evaluations: campaigns, evaluators, visibility
+- **Context:** SRC-065, SRC-071, SRC-141 — HR-06.
+- **Questions:** How often is staff evaluated, who evaluates whom, may the evaluated person see the
+  result, and what does "performance level" mean?
+- **Working assumption:** HR opens a campaign per period and kind (lecturers / administrative
+  staff); every active member of that kind is evaluated once; the evaluator of a lecturer is the
+  head of department of their department, HR assigns anyone else (the register holds no
+  supervisor, so HR assigns every evaluator of administrative staff); nobody evaluates themselves;
+  the evaluator may correct an evaluation until HR closes the campaign; the evaluated person sees
+  their own result only if the campaign has the "show results" flag and it is closed; score =
+  average of 1-5 scale answers (Q-25); reports show count, submitted and average by department,
+  faculty or institution within the reader's scope.
+- **Impact:** campaign options, default evaluator rule, visibility flag; no schema change.

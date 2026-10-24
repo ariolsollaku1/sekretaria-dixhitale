@@ -54,6 +54,7 @@ model Staff {
   examinerOf          ExamSittingExaminer[]
   hoursApprovals      HoursApproval[]
   hoursAdjustments    HoursAdjustment[]
+  evaluations         Evaluation[]
   id                  String                @id @default(cuid(2))
   personId            String                @unique @map("person_id")
   kind                StaffKind

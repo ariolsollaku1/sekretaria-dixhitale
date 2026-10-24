@@ -87,7 +87,9 @@
       "messages": "Mesazhet",
       "myAttendance": "Orët e mia",
       "attendanceSessions": "Prania",
-      "myAbsences": "Mungesat e mia"
+      "myAbsences": "Mungesat e mia",
+      "fees": "Tarifat",
+      "paymentPlans": "Planet e pagesave"
     },
     "languages": {
       "sq": "Shqip",

@@ -87,7 +87,9 @@
       "messages": "Messages",
       "myAttendance": "My classes",
       "attendanceSessions": "Attendance",
-      "myAbsences": "My absences"
+      "myAbsences": "My absences",
+      "fees": "Fee schedule",
+      "paymentPlans": "Payment plans"
     },
     "languages": {
       "sq": "Shqip",

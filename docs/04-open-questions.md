@@ -58,6 +58,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-39 | Timetable: rooms, time slots and clashes | no | open | Secretariat |
 | Q-40 | Issued documents: numbering, verification and cancellation | no | open | Secretariat / Legal |
 | Q-41 | Syllabi: format, who uploads and approves, carrying forward | no | open | Heads of department / Quality |
+| Q-55 | Student portal: requesting a correction of own data | no | open | Secretariat |
+| Q-56 | Student portal: which curriculum courses a student sees | no | open | Academic Affairs |
+| Q-57 | Student portal: access after the studies end (suspended, deregistered, graduated) | no | open | Secretariat / Management |
+| Q-58 | Student portal: how much the home page shows (horizons and counts) | no | open | Secretariat |
+| Q-59 | Student portal: where the home page lives | no | open | Secretariat |
 | Q-50 | Targeted messages: who may send, consent and opt-out | no | open | Secretariat / Legal |
 | Q-51 | Targeted messages: recipient limits and sending rhythm | no | open | Secretariat / IT |
 | Q-52 | Targeted messages: templates and placeholders | no | open | Secretariat |
@@ -504,6 +509,35 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Is a syllabus a document the lecturer or department writes (PDF/Word) or a structured form (objectives, contents, literature, assessment…)? Who uploads (the lecturer, the head of department, the program coordinator) and who approves? Is a syllabus re-approved every academic year or only when it changes? Must students see it before enrolling?
 - **Working assumption:** version 1 stores a PDF per course of an approved plan and academic year (the structured form is a later increment); the program coordinator, the head of department (inside their scope) and the sysadmin upload and approve; each upload is a new version, approving a version archives the previous one; the previous approved syllabus of the course can be carried forward into a new year as a draft that still needs approval; approved syllabi are readable by everyone who may see the plan, students included; drafts and archived versions only by staff.
 - **Impact:** the format (a structured form would need its fields), the roles that upload and approve, the carry-forward rule.
+### Q-55 — Student portal: requesting a correction of own data
+- **Context:** SRC-036, SRC-020 — the portal shows a student their data read-only; the brief mentions "request correction".
+- **Questions:** How does a student ask for a correction (a request form, e-mail to the Secretariat, in person)? Which fields may they ask to change? Who approves?
+- **Working assumption:** STU-03 only displays the data read-only with a note to contact the Secretariat; no correction flow is built until STU-07 (student requests) defines one.
+- **Impact:** a "request correction" action and its approval chain.
+
+### Q-56 — Student portal: which curriculum courses a student sees
+- **Context:** SRC-036 — the portal builds on the curriculum plan of the student's cohort (CUR-02).
+- **Questions:** Should a student see the whole plan, only the current year of study, or only courses they may register for? Are elective courses shown? Is a plan visible while still a draft?
+- **Working assumption:** the courses of the student's current year of study from the cohort's plan, grouped by semester, with credits and an elective mark; a plan in draft is never shown.
+- **Impact:** the course list and its filter.
+
+### Q-57 — Student portal: access after the studies end
+- **Context:** SRC-036, SRC-054 — students may be suspended, deregistered or graduated.
+- **Questions:** May such a student still sign in and see their home page and record? For how long? Are timetable and announcements still shown?
+- **Working assumption:** the account keeps working (account lifecycle is IAM-02); the home page shows the status prominently, lists past enrollments, and shows the timetable, calendar and plan only for active enrollments.
+- **Impact:** what a former student sees, and the cut-off.
+
+### Q-58 — Student portal: how much the home page shows
+- **Context:** SRC-036c, SRC-036d — calendar, timetable and announcements shown on the home page.
+- **Questions:** How many items and how far ahead are useful (next events, announcements, notifications)?
+- **Working assumption:** today's classes, the next 5 calendar events that end today or later, the latest 3 announcements and the latest 5 notifications (with the unread count); each links to its full page.
+- **Impact:** the counts and horizon only.
+
+### Q-59 — Student portal: where the home page lives
+- **Context:** SRC-036 — the platform has a dashboard at `/` with module widgets (PLT-06).
+- **Questions:** Should students land on a dedicated page or on the shared dashboard?
+- **Working assumption:** a dedicated page `/stu/home` (first item of the student menu) plus a "My studies" widget on the dashboard that links to it.
+- **Impact:** navigation and the post-login landing page.
 
 ### Q-50 — Targeted messages: who may send, consent and opt-out
 - **Context:** SRC-057 — contact the students of a list (e.g. backlog students) about sessions and academic and financial obligations; NTF-03.

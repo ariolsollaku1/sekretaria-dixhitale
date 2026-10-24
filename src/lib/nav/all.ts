@@ -263,6 +263,15 @@ registerNav(
     order: 13,
   },
   {
+    id: "student-home",
+    labelKey: "studentHome",
+    href: "/stu/home",
+    icon: "home",
+    permission: "stu.student.self",
+    group: "students",
+    order: 10,
+  },
+  {
     id: "my-student-record",
     labelKey: "myStudentRecord",
     href: "/stu/me",

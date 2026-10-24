@@ -8,6 +8,7 @@ import "@/modules/cal";
 import "@/modules/ntf";
 import "@/modules/hr";
 import "@/modules/stu";
+import "@/modules/fin";
 import "@/modules/att";
 import "@/lib/audit/table";
 import "@/lib/forms/table";

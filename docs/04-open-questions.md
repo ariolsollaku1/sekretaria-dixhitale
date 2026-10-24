@@ -78,6 +78,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
 | Q-63 | Attendance: creating class sessions | no | open | Secretariat |
 | Q-64 | Attendance: who sees what | no | open | Secretariat |
+| Q-85 | Fees: currency, amounts and what a fee depends on | no | open | Finance |
+| Q-86 | Fees: installments of a fee | no | open | Finance |
+| Q-87 | Fees: early-payment and preferential discounts | no | open | Finance |
+| Q-88 | Payment plans: who gets one and when | no | open | Finance |
+| Q-89 | Payment plans: adjusting a student's installments | no | open | Finance |
 | Q-90 | Attendance: how the percentage is computed | no | open | Secretariat |
 | Q-91 | Attendance: threshold and what it applies to | no | open | Secretariat |
 | Q-92 | Attendance: which classes and marks count | no | open | Secretariat |
@@ -680,6 +685,56 @@ Decisions taken in conversation that aren't architecture ADRs.
   of their scope; a student sees only their own absent and excused marks (with the status, without notes).
 - **Impact:** visibility of notes and of colleagues' classes.
 
+### Q-85 — Fees: currency, amounts and what a fee depends on
+- **Context:** SRC-080a, SRC-085 (FIN-01, refines Q-24) — fees per program and academic year.
+- **Questions:** In which currency are fees set (lek only, or euro for some students)? Does a fee also
+  depend on the year of study, cohort, registration type, or on whether the student is Albanian or
+  foreign? Which fee types exist beyond tuition, administrative, diploma and backlog exam?
+- **Working assumption:** one currency (lek, shown with two decimals); a fee is set per program ×
+  academic year × type (tuition, administrative, diploma, backlog exam, other) with an optional
+  label to tell apart several fees of one type; amounts are entered by Finance, nothing is preset.
+- **Impact:** fee keys (more dimensions), a currency column, the list of types.
+
+### Q-86 — Fees: installments of a fee
+- **Context:** SRC-085 — students pay in installments with deadlines from the annex of the contract.
+- **Questions:** How many installments does each fee have and on which dates? Are they equal? Do
+  all programs of a year share the same dates? What if a fee has no installments defined?
+- **Working assumption:** Finance defines the installments of each fee (amount and due date); they
+  must add up to the fee; a fee without installments is paid in one installment due on the first
+  day of the academic year.
+- **Impact:** the validation (sum equals fee), the fallback due date, shared date templates.
+
+### Q-87 — Fees: early-payment and preferential discounts
+- **Context:** SRC-085 / Q-24 — preferential fees for early payment with a date window.
+- **Questions:** Is a discount a percentage or an amount? Does it apply to the whole fee or to each
+  installment paid by a date? May several discounts apply together? Is the window relative to the
+  installment due date or fixed dates?
+- **Working assumption:** a discount of a fee is a percentage or an amount with a date window
+  (from, to); a plan installment records the amount to pay if paid by the end of the best window
+  (an amount discount is shared across installments in proportion to their amounts, never below
+  zero); discounts do not combine (the lowest resulting amount is used); recording and honoring
+  early payments belongs to FIN-02.
+- **Impact:** how the early amount is computed, combining, relative windows.
+
+### Q-88 — Payment plans: who gets one and when
+- **Context:** SRC-080a, SRC-085 — one plan per enrollment and academic year (Q-24).
+- **Questions:** Which students get a plan (active only? suspended ones?) and when is it created
+  (at yearly registration, or on Finance's request)? What happens to a plan if the student
+  deregisters mid-year? Are backlog-exam fees part of the yearly plan?
+- **Working assumption:** Finance generates a plan for an enrollment with a yearly registration in
+  the year (open enrollment, active or suspended), one by one or for a whole program; existing
+  plans are never overwritten; the plan copies every active fee of the program and year (backlog-exam
+  and other fees included); a deregistered student's plan is left as is for Finance to adjust.
+- **Impact:** eligibility, automatic creation, treatment of deregistration.
+
+### Q-89 — Payment plans: adjusting a student's installments
+- **Context:** SRC-085 — plans are adjustable per student (Q-24).
+- **Questions:** What may Finance change (amount, date, add or cancel an installment) and must a
+  reason be recorded? Is there an approval step or an upper limit? May a plan of a closed year change?
+- **Working assumption:** Finance may change the amount and due date of an installment, add one, or
+  cancel one, always with a reason; every change is audited with before and after; no approval step;
+  nothing changes once the academic year is closed; cancelled installments are kept, not deleted.
+- **Impact:** approval, limits, reasons, closed years.
 ### Q-90 — Attendance: how the percentage is computed
 - **Context:** SRC-042, SRC-036b — the attendance report; Q-12 (the 75 % rule needs a definition).
 - **Questions:** Is attendance measured in hours or in classes? Does an excused absence count as

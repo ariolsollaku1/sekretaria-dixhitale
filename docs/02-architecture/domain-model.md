@@ -64,8 +64,10 @@ erDiagram
   Enrollment ||--o{ CourseResult : "accumulates"
 
   Enrollment ||--o{ PaymentPlan : "pays via"
-  PaymentPlan ||--o{ Installment : has
-  Installment ||--o{ Payment : "settled by"
+  FeeScheduleItem ||--o{ FeeInstallmentTemplate : "paid in"
+  FeeScheduleItem ||--o{ FeeDiscount : "may carry"
+  PaymentPlan ||--o{ PlanInstallment : has
+  PlanInstallment ||--o{ Payment : "settled by"
   Enrollment ||--o{ Scholarship : receives
 
   Enrollment ||--o| Graduation : "ends with"
@@ -149,9 +151,10 @@ erDiagram
 ### FIN — finance
 | Entity | Key fields |
 |---|---|
-| `FeeSchedule` | `programId`, `academicYearId`, `feeType`, `amount`, preferential rules (Q-24) |
+| `FeeScheduleItem` | (FIN-01) `programId`, `academicYearId`, `kind` (TUITION/ADMINISTRATIVE/DIPLOMA/BACKLOG_EXAM/OTHER), `label`, `amount` Decimal(12,2), `active` — unique per program × year × kind × label; never deleted (Q-85) |
+| `FeeInstallmentTemplate` / `FeeDiscount` | (FIN-01) installments (`sequence`, `dueDate`, `amount`; they add up to the fee, Q-86) and early-payment discounts (PERCENT/AMOUNT `value`, `validFrom`..`validTo`, Q-87) of a fee |
 | `StudentContract` | `enrollmentId`, `academicYearId`, number, `fileId` |
-| `PaymentPlan` / `Installment` | per enrollment & academic year; `dueDate`, `amount`, `status` |
+| `PaymentPlan` / `PlanInstallment` | (FIN-01) one plan per enrollment × academic year, copied from the fee schedule; installments carry `kind`, `label`, `dueDate`, `amount`, `earlyAmount`/`earlyUntil`, `status` (ACTIVE/CANCELLED), `scheduleItemId?`; adjusted or cancelled with a reason and audited, never deleted (Q-88, Q-89) |
 | `Payment` | `installmentId?`, `amount`, `paidAt`, `reference`, `source` (MANUAL/CSV/F5) |
 | `Scholarship` | `enrollmentId`, `academicYearId`, `type` (FULL/PARTIAL), `percent`/`amount`, `reason` |
 | `FinancialClearance` | computed view: per enrollment & exam session — cleared yes/no (SRC-049) |

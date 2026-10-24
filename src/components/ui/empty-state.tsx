@@ -17,7 +17,11 @@ export function EmptyState({
 }) {
   return (
     <div className="rounded-card border-border bg-card flex flex-col items-center gap-2 border border-dashed p-8 text-center">
-      {Icon && <Icon className="text-muted-foreground size-8" aria-hidden />}
+      {Icon && (
+        <span className="bg-accent text-brand grid size-12 place-items-center rounded-2xl">
+          <Icon className="size-6" aria-hidden />
+        </span>
+      )}
       <Heading className="text-lg font-semibold">{title}</Heading>
       {description && <p className="text-muted-foreground max-w-prose text-sm">{description}</p>}
       {action && <div className="mt-2">{action}</div>}

@@ -15,11 +15,13 @@ export default async function MyStaffRecordPage() {
   const [t, staff] = await Promise.all([getTranslations("hr"), getOwnStaff(user)]);
   return (
     <>
-      <PageHeader title={t("me.title")} />
       {staff ? (
-        <StaffRecord staff={staff} />
+        <StaffRecord staff={staff} breadcrumbs={[{ label: t("me.title") }]} />
       ) : (
-        <EmptyState icon={UserX} title={t("me.none")} description={t("me.noneHint")} />
+        <>
+          <PageHeader title={t("me.title")} />
+          <EmptyState icon={UserX} title={t("me.none")} description={t("me.noneHint")} />
+        </>
       )}
     </>
   );

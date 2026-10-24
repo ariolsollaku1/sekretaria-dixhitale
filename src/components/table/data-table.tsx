@@ -96,7 +96,7 @@ export async function DataTable<Row>({
       <form
         method="get"
         action={basePath}
-        className="rounded-card border-border bg-card grid gap-3 border p-4 sm:grid-cols-2 lg:grid-cols-4 print:hidden"
+        className="rounded-card bg-card ring-border grid gap-3 p-4 shadow-sm ring-1 sm:grid-cols-2 lg:grid-cols-4 print:hidden"
       >
         {def.filters.map((f) => (
           <div key={f.key} className="flex flex-col gap-1.5">
@@ -146,7 +146,7 @@ export async function DataTable<Row>({
       {canSave && (
         <section
           aria-labelledby={`${def.id}-saved`}
-          className="rounded-card border-border bg-card border p-4 print:hidden"
+          className="rounded-card bg-card ring-border p-4 shadow-sm ring-1 print:hidden"
         >
           <h2 id={`${def.id}-saved`} className="mb-2 font-semibold">
             {t("table.saved.title")}
@@ -242,10 +242,10 @@ export async function DataTable<Row>({
           description={hasFilters ? t("table.emptyFiltered") : undefined}
         />
       ) : (
-        <div className="rounded-card border-border bg-card overflow-x-auto border">
+        <div className="rounded-card bg-card ring-border overflow-x-auto shadow-sm ring-1">
           <table className="w-full min-w-[40rem] text-sm">
             <thead>
-              <tr className="border-border border-b text-left">
+              <tr className="border-border text-muted-foreground border-b text-left text-[13px] tracking-wide uppercase">
                 {columns.map((c) => {
                   const active = params.sort.key === c.key;
                   const ariaSort = !c.sortable
@@ -287,7 +287,10 @@ export async function DataTable<Row>({
             </thead>
             <tbody>
               {result.rows.map((row) => (
-                <tr key={def.rowKey(row)} className="border-border border-b last:border-0">
+                <tr
+                  key={def.rowKey(row)}
+                  className="border-border hover:bg-accent/60 border-b transition-colors last:border-0"
+                >
                   {columns.map((c, i) => {
                     const custom = def.cells?.[c.key];
                     const content = custom
@@ -352,7 +355,7 @@ export async function DataTable<Row>({
               <Link
                 href={href({ size: s === 25 ? undefined : String(s), page: undefined })}
                 aria-current={s === params.pageSize ? "true" : undefined}
-                className={`rounded-control inline-flex min-h-11 min-w-11 items-center justify-center px-2 ${s === params.pageSize ? "bg-accent font-semibold" : "hover:bg-accent"}`}
+                className={`rounded-control inline-flex min-h-11 min-w-11 items-center justify-center px-2 ${s === params.pageSize ? "bg-brand-gradient text-primary-foreground font-semibold" : "hover:bg-accent"}`}
               >
                 {s}
               </Link>

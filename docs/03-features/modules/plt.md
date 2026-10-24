@@ -58,6 +58,14 @@ Status, dependencies and blockers: [../FEATURES.md](../FEATURES.md).
   user, export current result to **Excel (xlsx)**, CSV and printable PDF; exports respect
   permissions and are audited.
 
+### PLT-16 — Global search (menus & content)
+- **Goal:** find any page or record from one box in the top bar (not in the source requirements; a
+  usability feature on top of PLT-06/PLT-10).
+- **Scope:** command palette (click or ⌘K). Menu pages are matched in the browser from the
+  permission-filtered navigation; content is matched by per-module search sources that reuse each
+  module's list permission and scope filter. v1 sources: students, applications, staff, programs,
+  courses, issued documents, users.
+
 ### PLT-11 — Notifications (in-app + email)
 - **Goal:** tell users when something needs them (SRC-037d "notification whenever something
   arrives", SRC-086 reminders).

@@ -126,6 +126,30 @@
     "languages": {
       "sq": "Shqip",
       "en": "English"
+    },
+    "search": {
+      "placeholder": "Search pages and records…",
+      "open": "Open search",
+      "close": "Close search",
+      "title": "Search",
+      "hint": "Type a page name, or a name, reference, code or number.",
+      "minChars": "Type at least {count} characters to search records.",
+      "loading": "Searching…",
+      "noResults": "No results for “{query}”.",
+      "error": "Search failed. Try again.",
+      "rateLimited": "Too many searches. Wait a moment.",
+      "count": "{count, plural, one {# result} other {# results}}",
+      "results": "Results",
+      "pages": "Pages",
+      "groups": {
+        "students": "Students",
+        "applications": "Applications",
+        "staff": "Staff",
+        "programs": "Study programs",
+        "courses": "Courses",
+        "documents": "Issued documents",
+        "users": "Users"
+      }
     }
   },
   "dashboard": {
@@ -2065,6 +2089,14 @@
         "invalidMonth": "Invalid month.",
         "required": "Required."
       }
+    },
+    "profile": {
+      "contract": "Contract",
+      "daysLeft": "days until the end",
+      "ended": "Contract has ended",
+      "openEnded": "No end date",
+      "contact": "Contact",
+      "noContact": "No contact details."
     }
   },
   "stu": {
@@ -2145,7 +2177,9 @@
       "academicYear": "Academic year",
       "yearOfStudy": "Year of study",
       "group": "Group",
-      "noGroup": "There is no group for this year and year of study."
+      "noGroup": "There is no group for this year and year of study.",
+      "contact": "Contact",
+      "noContact": "No contact details."
     },
     "enrollments": {
       "empty": "The student has no enrollments.",

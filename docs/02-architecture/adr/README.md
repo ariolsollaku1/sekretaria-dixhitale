@@ -18,5 +18,6 @@ editing history).
 | [0010](0010-file-storage.md) | File storage behind an interface | Accepted |
 | [0011](0011-i18n.md) | Internationalization from day one | Accepted |
 | [0012](0012-design-system.md) | Design system on Tailwind + shadcn/ui | Proposed |
+| [0013](0013-aurora-visual-style.md) | Aurora visual style | Proposed |
 
 Template: copy any ADR, bump the number, set Status to `Proposed`.

@@ -21,7 +21,7 @@ export function NavList({
       {sections.map((section) => (
         <div key={section.id}>
           {section.heading && (
-            <p className="text-muted-foreground px-3 pb-1 text-[13px] font-semibold tracking-wide uppercase">
+            <p className="text-sidebar-foreground/80 px-3 pb-1 text-[13px] font-semibold tracking-wide uppercase">
               {section.heading}
             </p>
           )}
@@ -36,11 +36,13 @@ export function NavList({
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "rounded-control flex min-h-11 items-center gap-3 px-3 text-sm",
-                      active ? "bg-accent text-accent-foreground font-semibold" : "hover:bg-accent",
+                      "rounded-control flex min-h-11 items-center gap-3 px-3 text-[15px]",
+                      active
+                        ? "bg-card text-accent-foreground font-semibold shadow-lg"
+                        : "text-sidebar-foreground hover:bg-white/10",
                     )}
                   >
-                    <Icon className="size-4 shrink-0" aria-hidden />
+                    <Icon className="size-5 shrink-0" aria-hidden />
                     <span>{item.label}</span>
                   </Link>
                 </li>

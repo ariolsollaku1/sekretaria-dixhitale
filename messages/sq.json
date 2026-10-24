@@ -126,6 +126,30 @@
     "languages": {
       "sq": "Shqip",
       "en": "English"
+    },
+    "search": {
+      "placeholder": "Kërko faqe dhe të dhëna…",
+      "open": "Hap kërkimin",
+      "close": "Mbyll kërkimin",
+      "title": "Kërkim",
+      "hint": "Shkruani emrin e një faqeje, një emër, referencë, kod ose numër.",
+      "minChars": "Shkruani të paktën {count} shkronja për të kërkuar të dhëna.",
+      "loading": "Po kërkohet…",
+      "noResults": "Asnjë rezultat për “{query}”.",
+      "error": "Kërkimi dështoi. Provoni përsëri.",
+      "rateLimited": "Shumë kërkime. Prisni pak.",
+      "count": "{count, plural, one {# rezultat} other {# rezultate}}",
+      "results": "Rezultatet",
+      "pages": "Faqe",
+      "groups": {
+        "students": "Studentë",
+        "applications": "Aplikime",
+        "staff": "Staf",
+        "programs": "Programe studimi",
+        "courses": "Lëndë",
+        "documents": "Dokumente të lëshuara",
+        "users": "Përdorues"
+      }
     }
   },
   "dashboard": {
@@ -2065,6 +2089,14 @@
         "invalidMonth": "Muaj i pavlefshëm.",
         "required": "E detyrueshme."
       }
+    },
+    "profile": {
+      "contract": "Kontrata",
+      "daysLeft": "ditë deri në mbarim",
+      "ended": "Kontrata ka mbaruar",
+      "openEnded": "Pa datë mbarimi",
+      "contact": "Kontakti",
+      "noContact": "Nuk ka të dhëna kontakti."
     }
   },
   "stu": {
@@ -2145,7 +2177,9 @@
       "academicYear": "Viti akademik",
       "yearOfStudy": "Viti i studimit",
       "group": "Grupi",
-      "noGroup": "Nuk ka grup për këtë vit dhe vit studimi."
+      "noGroup": "Nuk ka grup për këtë vit dhe vit studimi.",
+      "contact": "Kontakti",
+      "noContact": "Nuk ka të dhëna kontakti."
     },
     "enrollments": {
       "empty": "Studenti nuk ka regjistrime.",

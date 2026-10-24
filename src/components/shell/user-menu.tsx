@@ -1,5 +1,5 @@
 "use client";
-import { ChevronDown, LogOut, User } from "lucide-react";
+import { ChevronDown, LogOut } from "lucide-react";
 import { useTranslations } from "next-intl";
 import {
   DropdownMenu,
@@ -9,6 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
 /** Profile summary + sign-out. The sign-out form lives outside the portal (`signOutFormId`). */
 export function UserMenu({
@@ -27,9 +36,14 @@ export function UserMenu({
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label={t("userMenu")}
-        className="rounded-control hover:bg-accent flex min-h-11 items-center gap-2 px-3 text-sm"
+        className="rounded-control hover:bg-accent flex min-h-11 items-center gap-2 px-1.5 text-sm sm:pr-3"
       >
-        <User className="size-4" aria-hidden />
+        <span
+          aria-hidden
+          className="bg-brand-gradient grid size-9 place-items-center rounded-full text-[13px] font-semibold text-white"
+        >
+          {initials(name)}
+        </span>
         <span className="hidden max-w-40 truncate sm:inline">{name}</span>
         <ChevronDown className="size-4" aria-hidden />
       </DropdownMenuTrigger>

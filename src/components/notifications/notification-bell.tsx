@@ -37,7 +37,7 @@ export function NotificationBell({ unread, items }: { unread: number; items: Bel
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label={`${t("bell")}: ${t("bellCount", { count: unread })}`}
-        className="rounded-control hover:bg-accent relative flex min-h-11 min-w-11 items-center justify-center"
+        className="rounded-control bg-card ring-border hover:bg-accent relative flex min-h-11 min-w-11 items-center justify-center shadow-sm ring-1"
       >
         <Bell className="size-5" aria-hidden />
         {unread > 0 && (

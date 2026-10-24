@@ -8,10 +8,12 @@ export function PageHeader({
   title,
   breadcrumbs,
   actions,
+  description,
 }: {
   title: string;
   breadcrumbs?: Breadcrumb[];
   actions?: ReactNode;
+  description?: string;
 }) {
   const t = useTranslations("common");
   return (
@@ -35,7 +37,8 @@ export function PageHeader({
             </ol>
           </nav>
         )}
-        <h1 className="text-[32px] leading-tight font-semibold">{title}</h1>
+        <h1 className="text-[32px] leading-tight font-semibold tracking-tight">{title}</h1>
+        {description && <p className="text-muted-foreground mt-1">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
     </header>

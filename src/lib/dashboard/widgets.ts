@@ -12,7 +12,10 @@ export type Widget = {
 const widgets = new Map<string, Widget>();
 
 export function registerWidget(widget: Widget): void {
-  if (widgets.has(widget.id)) throw new Error(`Duplicate widget "${widget.id}"`);
+  // Hot reload re-evaluates module indexes while this Map survives: replacing there is harmless,
+  // while a real duplicate must still fail in tests and production.
+  if (widgets.has(widget.id) && process.env.NODE_ENV !== "development")
+    throw new Error(`Duplicate widget "${widget.id}"`);
   widgets.set(widget.id, widget);
 }
 

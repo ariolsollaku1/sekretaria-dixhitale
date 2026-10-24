@@ -59,3 +59,4 @@ export {
 export { REPORT_LEVELS, type ReportLevel } from "./domain/evaluation-rules";
 export { OpenCampaignForm, CloseCampaignButton, AssignEvaluator } from "./ui/campaign-forms";
 export { EvaluationForm } from "./ui/evaluation-form";
+export { contractProgress, type ContractProgress } from "./domain/contract-progress";

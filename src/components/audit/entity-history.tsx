@@ -1,5 +1,6 @@
 import { History } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import { Card, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { auditForEntity } from "@/lib/audit/queries";
 import { getCurrentUser } from "@/lib/auth";
@@ -30,16 +31,20 @@ export async function EntityHistory({
     auditForEntity(entityType, entityId),
   ]);
   return (
-    <section aria-labelledby="entity-history-title" className="mt-8">
-      <h2 id="entity-history-title" className="mb-3 text-2xl font-semibold">
+    <Card aria-labelledby="entity-history-title">
+      <CardTitle id="entity-history-title" icon={History}>
         {t("title")}
-      </h2>
+      </CardTitle>
       {entries.length === 0 ? (
         <EmptyState icon={History} title={t("empty")} />
       ) : (
-        <ol className="flex flex-col gap-3">
+        <ol className="border-border flex flex-col gap-5 border-l-2 pl-5">
           {entries.map((e) => (
-            <li key={e.id} className="rounded-card border-border bg-card border p-4">
+            <li key={e.id} className="relative">
+              <span
+                aria-hidden
+                className="bg-brand-gradient ring-card absolute top-1.5 -left-[1.6rem] size-3 rounded-full ring-4"
+              />
               <p className="text-sm">
                 <time dateTime={e.at.toISOString()} className="font-tabular">
                   {formatDateTime(e.at, locale as Locale)}
@@ -59,6 +64,6 @@ export async function EntityHistory({
           ))}
         </ol>
       )}
-    </section>
+    </Card>
   );
 }

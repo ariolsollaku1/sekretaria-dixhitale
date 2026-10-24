@@ -4,7 +4,9 @@ import { getTranslations } from "next-intl/server";
 import { EntityHistory } from "@/components/audit/entity-history";
 import { ForbiddenView } from "@/components/forbidden-view";
 import { buttonVariants } from "@/components/ui/button";
-import { PageHeader } from "@/components/ui/page-header";
+import { RecordHero } from "@/components/record/record-hero";
+import { RecordTabs } from "@/components/record/record-tabs";
+import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import { AccountPanel, getAccountPanel } from "@/modules/iam";
@@ -17,6 +19,12 @@ import {
   YearsSection,
 } from "../../student-sections";
 
+const ENROLLMENT_TONE: Record<string, StatusTone> = {
+  ACTIVE: "success",
+  SUSPENDED: "warning",
+  DEREGISTERED: "neutral",
+  GRADUATED: "info",
+};
 const TABS = ["personal", "enrollments", "years", "history"] as const;
 
 export default async function StudentPage({
@@ -43,10 +51,12 @@ export default async function StudentPage({
   // IAM-02 AC-9: the account state is shown to those who may manage student accounts
   const account = mayAccount ? await getAccountPanel(student.personId) : null;
   const name = `${student.firstName} ${student.lastName}`;
+  const current = enrollments[0];
   return (
     <>
-      <PageHeader
-        title={name}
+      <RecordHero
+        name={name}
+        subtitle={[student.studentNumber, current?.program.code].filter(Boolean).join(" · ")}
         breadcrumbs={[{ label: t("title"), href: "/stu/students" }, { label: name }]}
         actions={
           mayWrite && (
@@ -58,30 +68,35 @@ export default async function StudentPage({
             </Link>
           )
         }
+        badges={
+          current && (
+            <StatusBadge
+              tone={ENROLLMENT_TONE[current.status] ?? "neutral"}
+              label={t(`status.${current.status}`)}
+            />
+          )
+        }
       />
-      <p className="text-muted-foreground font-tabular mb-4 text-sm">
-        {t("form.studentNumber")}: {student.studentNumber}
-      </p>
-      <nav aria-label={t("tabs.label")} className="mb-6 flex flex-wrap gap-2 print:hidden">
-        {TABS.map((x) => (
-          <Link
-            key={x}
-            href={`/stu/students/${student.id}?tab=${x}`}
-            aria-current={x === tab ? "page" : undefined}
-            className={buttonVariants({ variant: x === tab ? "primary" : "secondary" })}
-          >
-            {t(`tabs.${x}`)}
-          </Link>
-        ))}
-      </nav>
-      {tab === "personal" && <PersonalSection student={student} />}
-      {tab === "personal" && account && (
-        <AccountPanel
-          kind="STUDENT"
-          studentId={student.id}
-          state={account.state}
-          email={account.email}
-          canManage
+      <RecordTabs
+        label={t("tabs.label")}
+        basePath={`/stu/students/${student.id}`}
+        tabs={TABS.map((x) => ({ key: x, label: t(`tabs.${x}`) }))}
+        active={tab}
+      />
+      {tab === "personal" && (
+        <PersonalSection
+          student={student}
+          aside={
+            account && (
+              <AccountPanel
+                kind="STUDENT"
+                studentId={student.id}
+                state={account.state}
+                email={account.email}
+                canManage
+              />
+            )
+          }
         />
       )}
       {tab === "enrollments" && (
@@ -92,7 +107,13 @@ export default async function StudentPage({
       )}
       {tab === "history" && <HistorySection enrollments={enrollments} />}
       {mayWrite && (
-        <EntityHistory entityType="Student" entityId={student.id} permission="stu.student.write" />
+        <div className="mt-6">
+          <EntityHistory
+            entityType="Student"
+            entityId={student.id}
+            permission="stu.student.write"
+          />
+        </div>
       )}
     </>
   );

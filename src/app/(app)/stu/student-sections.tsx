@@ -1,4 +1,7 @@
+import { Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import type { ReactNode } from "react";
+import { Card, CardTitle, InfoList } from "@/components/ui/card";
 import { StatusBadge, type StatusTone } from "@/components/ui/status-badge";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDateTime, formatPlainDate } from "@/lib/i18n/format";
@@ -21,33 +24,59 @@ const TONE: Record<string, StatusTone> = {
 };
 const toDay = (d: Date) => d.toISOString().slice(0, 10);
 
-/** The personal data; the fields the viewer may not see (AC-10) are simply absent. */
-export async function PersonalSection({ student }: { student: StudentView }) {
+/**
+ * The personal data as cards (design-system.md, "Record page"); the fields the viewer may not see
+ * (AC-10) are simply absent. `aside` is the account panel, shown under the contact card.
+ */
+export async function PersonalSection({
+  student,
+  aside,
+}: {
+  student: StudentView;
+  aside?: ReactNode;
+}) {
   const [t, locale] = await Promise.all([getTranslations("stu"), getLocale()]);
   const day = (d: string) => formatPlainDate(d, locale as Locale);
-  const rows: [string, string | null][] = [
-    [t("form.fatherName"), student.fatherName],
-    [t("form.gender"), t(`gender.${student.gender}`)],
-    [t("form.birthDate"), student.birthDate ? day(student.birthDate) : null],
-    [t("form.birthPlace"), student.birthPlace],
-    [t("form.nationalId"), student.nationalId],
-    [t("form.nim"), student.nim],
-    [t("form.phone"), student.phone],
-    [t("form.email"), student.email],
-    [t("form.residence"), student.residence],
-    [t("form.address"), student.address],
+  const mono = (v: string | null) => v && <span className="font-tabular">{v}</span>;
+  const contact = [
+    { label: t("form.email"), value: student.email, icon: Mail },
+    { label: t("form.phone"), value: student.phone, icon: Phone },
+    { label: t("form.residence"), value: student.residence, icon: MapPin },
+    { label: t("form.address"), value: student.address, icon: MapPin },
   ];
   return (
-    <dl className="mb-8 grid max-w-2xl gap-x-6 gap-y-2 text-sm sm:grid-cols-[12rem_1fr]">
-      {rows
-        .filter(([, v]) => v)
-        .map(([label, value]) => (
-          <div key={label} className="contents">
-            <dt className="font-semibold">{label}</dt>
-            <dd>{value}</dd>
-          </div>
-        ))}
-    </dl>
+    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <Card aria-labelledby="stu-person">
+        <CardTitle id="stu-person" icon={UserRound}>
+          {t("tabs.personal")}
+        </CardTitle>
+        <InfoList
+          items={[
+            { label: t("form.fatherName"), value: student.fatherName },
+            { label: t("form.gender"), value: t(`gender.${student.gender}`) },
+            {
+              label: t("form.birthDate"),
+              value: student.birthDate ? day(student.birthDate) : null,
+            },
+            { label: t("form.birthPlace"), value: student.birthPlace },
+            { label: t("form.nationalId"), value: mono(student.nationalId) },
+            { label: t("form.nim"), value: mono(student.nim) },
+          ]}
+        />
+      </Card>
+      <div className="flex flex-col gap-6">
+        <Card aria-labelledby="stu-contact">
+          <CardTitle id="stu-contact" icon={Mail}>
+            {t("form.contact")}
+          </CardTitle>
+          <InfoList className="sm:grid-cols-1" items={contact} />
+          {contact.every((c) => !c.value) && (
+            <p className="text-muted-foreground text-sm">{t("form.noContact")}</p>
+          )}
+        </Card>
+        {aside}
+      </div>
+    </div>
   );
 }
 

@@ -5,36 +5,43 @@
 @import "@fontsource/ibm-plex-sans/latin-ext-600.css";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
 
-/* Design tokens (docs/02-architecture/design-system.md). Palette is provisional until LOGOS brand
+/* Design tokens (docs/02-architecture/design-system.md). Aurora style (ADR-0013). Palette is provisional until LOGOS brand
    colors are supplied: a rebrand changes only this block (--brand maps to --primary). */
 :root {
-  --background: #f6f7f9;
-  --foreground: #17202e;
+  --background: #f4f5fb;
+  --foreground: #1a1d2e;
   --card: #ffffff;
-  --card-foreground: #17202e;
+  --card-foreground: #1a1d2e;
   --popover: #ffffff;
-  --popover-foreground: #17202e;
-  --muted: #eceff3;
-  --muted-foreground: #4a5668;
-  --brand: #1f3a5f;
+  --popover-foreground: #1a1d2e;
+  --muted: #eceef7;
+  --muted-foreground: #4b5272;
+  --brand: #4f46e5;
+  --brand-end: #7c3aed;
   --primary: var(--brand);
   --primary-foreground: #ffffff;
-  --secondary: #e4ecf7;
-  --secondary-foreground: #17202e;
-  --accent: #e4ecf7;
-  --accent-foreground: #17202e;
-  --border: #d5dbe4;
-  --input: #9aa6b8;
-  --ring: #2e5a94;
-  --success: #1b6b4a;
-  --success-bg: #e3f3ec;
-  --warning: #7a4300;
-  --warning-bg: #fdf0dc;
-  --danger: #a32020;
-  --danger-bg: #fbe8e8;
-  --info: #1d4f91;
-  --info-bg: #e4ecf7;
-  --radius: 0.5rem;
+  --secondary: #eef0ff;
+  --secondary-foreground: #1a1d2e;
+  --accent: #eef0ff;
+  --accent-foreground: #312e81;
+  --border: #e0e3f0;
+  --input: #8c95b3;
+  --ring: #4f46e5;
+  --success: #166a4a;
+  --success-bg: #dff5ea;
+  --warning: #8a4a00;
+  --warning-bg: #fdf0d2;
+  --danger: #b0203a;
+  --danger-bg: #fde4e9;
+  --info: #1b5fa8;
+  --info-bg: #e0effd;
+  --violet: #6d28d9;
+  --violet-bg: #ede4fd;
+  --sidebar-from: #1e1b4b;
+  --sidebar-via: #312e81;
+  --sidebar-to: #4c1d95;
+  --sidebar-foreground: #c7d2fe;
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -47,6 +54,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-brand: var(--brand);
+  --color-brand-end: var(--brand-end);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -64,9 +72,12 @@
   --color-danger-bg: var(--danger-bg);
   --color-info: var(--info);
   --color-info-bg: var(--info-bg);
-  --radius-chip: 0.25rem;
-  --radius-control: 0.5rem;
-  --radius-card: 0.75rem;
+  --color-violet: var(--violet);
+  --color-violet-bg: var(--violet-bg);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --radius-chip: 0.5rem;
+  --radius-control: 0.75rem;
+  --radius-card: 1rem;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
@@ -88,4 +99,20 @@ body {
 .font-tabular {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
+}
+
+/* Aurora gradients (ADR-0013): the only places a gradient is allowed. */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(135deg, var(--brand), var(--brand-end));
+}
+@utility bg-sidebar-gradient {
+  background-image: linear-gradient(
+    to bottom,
+    var(--sidebar-from),
+    var(--sidebar-via),
+    var(--sidebar-to)
+  );
+}
+@utility shadow-brand {
+  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--brand) 45%, transparent);
 }

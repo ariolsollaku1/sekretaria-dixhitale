@@ -17,6 +17,7 @@ import { devUsersSeeder } from "./dev-users";
 import { stuStudentsSeeder } from "./stu-students";
 import { pltFormsSeeder } from "./plt-forms";
 import { stuRequestsSeeder } from "./stu-requests";
+import { ersFormsSeeder } from "./ers-forms";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -37,6 +38,7 @@ const SEEDERS: Seeder[] = [
   curTeachingSeeder,
   pltFormsSeeder,
   stuRequestsSeeder,
+  ersFormsSeeder,
   calTimetableSeeder,
 ];
 

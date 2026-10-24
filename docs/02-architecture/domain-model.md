@@ -183,7 +183,7 @@ erDiagram
 |---|---|
 | `Survey` / `SurveyResponse` | anonymous student evaluations (responses not linked to the student) |
 | `AlumniRecord` | `personId`, employment/further-studies updates over time |
-| `ErasmusApplication` | via `FormSubmission` + status |
+| `ErasmusApplication` | (ERS-01, implemented) no table: a `FormSubmission` of one of the six `erasmus-*` form definitions (`erasmus-student`, `-academic`, `-admin`, each public and `-portal`); states `submitted` → `shortlisted` → `selected` → `mobility_done` or `rejected`; the applicant kind, destination and period come from the form key and answers; the known student / staff is looked up, not stored (Q-97). |
 | `LibraryCardRequest`, `LibraryClearance` | depends on PLEJADES (Q-03) |
 | `Announcement` | (NTF-01, implemented) `title`, plain-text `body`, `status` (DRAFT/PUBLISHED/ARCHIVED), `audience` (ALL/STAFF/STUDENTS/CYCLE/PROGRAM) with `cycle`/`programId`, `publishAt`, `expiresAt`, `pinned`, `emailPush`, `pushedAt`; attachments are `StoredFile` rows (`entityType = Announcement`). |
 | `Message` | (NTF-03, implemented) one send to the people of a list: `subject`, plain-text `body` (placeholders `{firstName}`, `{lastName}`, `{fullName}`), `sourceTable` (PLT-10 table id), `filters` (JSON), `status` (PENDING/SENT), `recipientCount`, `noAccountCount`, `createdById`, `completedAt`. Never edited or deleted. |

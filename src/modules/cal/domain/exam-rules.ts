@@ -89,11 +89,8 @@ export function findExamClashes(sitting: Sitting, others: readonly Sitting[]): E
 }
 
 /** AC-6: sittings that would fall outside new session dates. */
-export const sittingsOutside = (
-  days: readonly string[],
-  start: string,
-  end: string,
-): string[] => days.filter((d) => d < start || d > end);
+export const sittingsOutside = (days: readonly string[], start: string, end: string): string[] =>
+  days.filter((d) => d < start || d > end);
 
 /** Sittings in date and time order. */
 export const bySchedule = <T extends Pick<Sitting, "date" | "startMinute">>(a: T, b: T): number =>

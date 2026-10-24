@@ -95,9 +95,9 @@ describe("findExamClashes (AC-5)", () => {
     expect(findExamClashes(base, [other({ planId: "p1", yearOfStudy: 2 })])).toEqual([]);
   });
   it("examiner and room clash (room case-insensitive, only when given)", () => {
-    expect(findExamClashes(base, [other({ examinerIds: ["s9", "s1"] })]).map((c) => c.kind)).toEqual(
-      ["EXAMINER"],
-    );
+    expect(
+      findExamClashes(base, [other({ examinerIds: ["s9", "s1"] })]).map((c) => c.kind),
+    ).toEqual(["EXAMINER"]);
     expect(findExamClashes(base, [other({ room: " a1 " })]).map((c) => c.kind)).toEqual(["ROOM"]);
     expect(findExamClashes({ ...base, room: null }, [other({ room: null })])).toEqual([]);
   });
@@ -108,9 +108,9 @@ describe("findExamClashes (AC-5)", () => {
     expect(kinds).toEqual(["GROUP", "EXAMINER", "ROOM"]);
   });
   it("touching times and other dates do not clash", () => {
-    expect(findExamClashes(base, [other({ planId: "p1", startMinute: 660, endMinute: 720 })])).toEqual(
-      [],
-    );
+    expect(
+      findExamClashes(base, [other({ planId: "p1", startMinute: 660, endMinute: 720 })]),
+    ).toEqual([]);
     expect(findExamClashes(base, [other({ planId: "p1", date: "2027-01-13" })])).toEqual([]);
   });
   it("never clashes with itself", () => {

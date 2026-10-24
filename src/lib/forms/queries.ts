@@ -93,6 +93,18 @@ export async function listAuthenticatedForms() {
   });
 }
 
+/** INT-06 AC-1/AC-2: the served public forms, for the public index and the website links page. */
+export async function listPublicForms() {
+  const rows = await db.formDefinition.findMany({
+    where: { status: "PUBLISHED", audience: "PUBLIC" },
+    orderBy: { key: "asc" },
+  });
+  return rows.flatMap((r) => {
+    const s = served(r);
+    return s ? [s] : [];
+  });
+}
+
 // ---- inbox (AC-7) --------------------------------------------------------------------------------
 import type { Prisma } from "@/generated/prisma/client";
 import { currentRoles, mayHandle } from "./access";

@@ -2191,7 +2191,26 @@
         "VERSION_TAKEN": "Versioni ekziston tashmë.",
         "reasonRequired": "Shkruani arsyen.",
         "generic": "Veprimi nuk u krye."
-      }
+      },
+      "websiteLinks": "Lidhjet për faqen e internetit"
+    },
+    "publicIndex": {
+      "title": "Formularët e hapur për të gjithë",
+      "intro": "Plotësoni një formular pa pasur nevojë për llogari. Pas dërgimit merrni një kod reference.",
+      "empty": "Nuk ka formularë të disponueshëm për momentin.",
+      "emptyHint": "Provoni përsëri më vonë ose kontaktoni Sekretarinë."
+    },
+    "links": {
+      "title": "Lidhjet për faqen e internetit",
+      "intro": "Adresat që duhet të shtohen në faqen e internetit të LOGOS (vetëm lidhje, pa ngulitje). Lista përditësohet vetë kur publikohet ose hiqet një formular.",
+      "index": "Lista e formularëve publikë",
+      "columns": {
+        "form": "Formulari",
+        "version": "Versioni",
+        "address": "Adresa"
+      },
+      "none": "Asnjë formular publik nuk është publikuar ende.",
+      "back": "Kthehu te përcaktimi i formularëve"
     }
   },
   "documents": {

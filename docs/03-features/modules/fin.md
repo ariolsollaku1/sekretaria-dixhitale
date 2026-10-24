@@ -45,6 +45,11 @@ Code: `src/modules/fin`. Finance reports by **calendar year**, payment plans ref
 - **Scope:** students grouped by payment deadlines; students who have / have not closed financial
   obligations before a given exam session (winter/summer/autumn); debtors list with contact data
   (→ NTF-03); exports.
+- **Built:** read-only lists over FIN-02 data, no schema: `/fin/lists/deadlines` (installments by due
+  date with paid / outstanding / status) and `/fin/lists/clearance` (cleared / not cleared before a
+  session or on a date; `result=NOT_CLEARED` = debtors with e-mail and phone), both exportable and
+  messageable (NTF-03), `fin.payment.read`, program-scoped. Working assumption Q-143. Spec:
+  [FIN-05](../specs/FIN-05-shared-payment-lists.md).
 
 ### FIN-06 — Staff payment data for F5
 - **Goal:** hand over payroll inputs: hours delivered by hourly-paid lecturers and supplements (SRC-080b, SRC-080c).

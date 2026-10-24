@@ -593,6 +593,15 @@ registerNav(
     group: "finance",
     order: 50,
   },
+  {
+    id: "payment-lists",
+    labelKey: "paymentLists",
+    href: "/fin/lists/deadlines",
+    icon: "wallet",
+    permission: "fin.payment.read",
+    group: "finance",
+    order: 60,
+  },
 );
 registerNav(
   {

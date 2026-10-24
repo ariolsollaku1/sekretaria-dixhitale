@@ -117,7 +117,8 @@
       "evaluations": "Performance evaluations",
       "myEvaluations": "Evaluations to fill in",
       "leads": "Leads",
-      "scholarships": "Scholarships"
+      "scholarships": "Scholarships",
+      "paymentLists": "Payment lists"
     },
     "languages": {
       "sq": "Shqip",
@@ -3294,6 +3295,43 @@
           "NO_OPEN_ENROLLMENT": "The student has no open enrollment.",
           "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments: the application names no unique program."
         }
+      }
+    },
+    "lists": {
+      "title": "Payment lists",
+      "deadlinesTitle": "Installments by due date",
+      "clearanceTitle": "Financial clearance",
+      "debtorsTitle": "Debtors",
+      "tabs": {
+        "deadlines": "By due date",
+        "clearance": "Before an exam session",
+        "debtors": "Debtors"
+      },
+      "deadlinesHint": "Every installment of the selected academic year, ordered by due date, with what is paid and outstanding. Filter by due-date range or status.",
+      "clearanceHint": "Students with a payment plan in the selected academic year. Choose an exam session to check who has closed their obligations before it (up to the day before its first day), or set a date. Without either, today is used. If the year has no such session the list is empty.",
+      "debtorsHint": "Students who have not closed their obligations on the chosen date, with contact data. Choose a session or a date to change the check.",
+      "noYear": "Select an academic year first.",
+      "columns": {
+        "dueDate": "Due date",
+        "installment": "Installment",
+        "amount": "Amount",
+        "status": "Status",
+        "email": "E-mail",
+        "phone": "Phone",
+        "date": "Checked on",
+        "owed": "Owed"
+      },
+      "filters": {
+        "dueFrom": "Due from",
+        "dueTo": "Due to",
+        "session": "Exam session",
+        "asOf": "As of date"
+      },
+      "session": {
+        "WINTER": "Winter session",
+        "SUMMER": "Summer session",
+        "AUTUMN": "Autumn session",
+        "MINI": "Mini session"
       }
     }
   },

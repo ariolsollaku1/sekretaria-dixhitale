@@ -174,6 +174,7 @@ erDiagram
 | `StudentContract` | `enrollmentId`, `academicYearId`, number, `fileId` |
 | `PaymentPlan` / `PlanInstallment` | (FIN-01) one plan per enrollment × academic year, copied from the fee schedule; installments carry `kind`, `label`, `dueDate`, `amount`, `earlyAmount`/`earlyUntil`, `status` (ACTIVE/CANCELLED), `scheduleItemId?`; adjusted or cancelled with a reason and audited, never deleted (Q-88, Q-89) |
 | `Payment` | (FIN-02) on a `PaymentPlan`: `amount`, `paidOn`, `reference`, `method` (CASH/BANK_TRANSFER/CARD/OTHER), `installmentId?` (the installment it is meant for), `status` (RECORDED/VOIDED, `voidReason`), `importBatch?`; never deleted. Allocation to installments, balances and financial clearance are **computed** (`domain/payment-rules.ts`), not stored (Q-109…Q-113) |
+| (FIN-05 lists) | No new entity: the deadline, clearance and debtors lists are computed views over `PaymentPlan`, `PlanInstallment`, `Payment` and `ExamSession` (Q-143) |
 | `Scholarship` | (FIN-03) `enrollmentId`, `academicYearId`, `type` (FULL/PARTIAL), `category` (EXCELLENCE/NEED/DISABILITY/OTHER), `percent`/`amount` (PARTIAL: exactly one), `reason`, `submissionId?` (the application), `voidedAt?`/`voidReason?`; one live per enrollment × year; never deleted (Q-140) |
 | `ScholarshipCut` | (FIN-03) what a scholarship took off one `PlanInstallment` (`amount`, `cancelled`), so that voiding gives it back exactly (Q-141) |
 | `FinancialClearance` | computed view: per enrollment & exam session — cleared yes/no (SRC-049) |

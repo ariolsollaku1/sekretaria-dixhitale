@@ -110,7 +110,8 @@
       "events": "Events",
       "applicationCycles": "Application cycles",
       "applications": "Applications",
-      "approvedArchive": "Approved archive"
+      "approvedArchive": "Approved archive",
+      "accounts": "Accounts"
     },
     "languages": {
       "sq": "Shqip",
@@ -319,6 +320,64 @@
       "SCOPE_NOT_FOUND": "The chosen target does not exist.",
       "INVALID_PERIOD": "The period is not valid.",
       "SCOPE_ID_FORBIDDEN": "This scope takes no target."
+    },
+    "accounts": {
+      "pageTitle": "Accounts",
+      "title": "Account",
+      "neverActivated": "Accounts never activated",
+      "neverActivatedHint": "Active accounts of students and staff that have never signed in. Open the person to send the activation email again.",
+      "state": {
+        "none": "No account",
+        "pending": "Pending activation",
+        "active": "Active",
+        "disabled": "Disabled"
+      },
+      "create": "Create account",
+      "resend": "Resend activation email",
+      "role": "Role",
+      "selectRole": "Select a role",
+      "created": "Account created. The activation email is on its way.",
+      "resent": "Activation email sent.",
+      "kind": {
+        "student": "Student",
+        "staff": "Staff"
+      },
+      "columns": {
+        "kind": "Kind",
+        "createdAt": "Created",
+        "days": "Days waiting"
+      },
+      "cohort": {
+        "title": "Accounts for a cohort",
+        "hint": "Creates the missing accounts of the students with an open enrollment in the cohort and sends the activation email again to those who never signed in.",
+        "pick": "Cohort",
+        "choose": "Select a cohort",
+        "send": "Create accounts and send emails",
+        "done": "Done.",
+        "result": "Created {created}, reminded {reminded}, skipped {skipped}."
+      },
+      "skip": {
+        "noEmail": "No email on the student record",
+        "noOpenEnrollment": "No open enrollment",
+        "hasAccount": "Account already active",
+        "emailTaken": "Email belongs to another account"
+      },
+      "errors": {
+        "noEmail": "The record has no email address, so no account can be created.",
+        "noOpenEnrollment": "The student has no open enrollment.",
+        "notEmployed": "The staff member is not employed.",
+        "emailTaken": "This email belongs to another account.",
+        "roleNotAllowed": "This role cannot be given here. Use user administration.",
+        "ACCOUNT_EXISTS": "The person already has an account.",
+        "ACCOUNT_DISABLED": "An account with this email exists but is disabled.",
+        "identityLinked": "This identity belongs to another user.",
+        "UNAVAILABLE": "The identity service is unavailable. Try again later.",
+        "FORBIDDEN": "You are not allowed to do this.",
+        "NOT_FOUND": "Not found.",
+        "CONFLICT": "The action could not be completed.",
+        "VALIDATION": "Check the data.",
+        "generic": "The action failed. Please try again."
+      }
     }
   },
   "files": {

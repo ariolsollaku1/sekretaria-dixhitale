@@ -5,6 +5,7 @@ import { linkAccountByEmail, personsUsing } from "@/lib/people";
 import { getYear } from "@/modules/org";
 import type { EnrollmentInput, PersonalInput, YearRegistrationInput } from "../domain/schemas";
 import { isOpenStatus, validateYearRegistration } from "../domain/student-rules";
+import { runEnrollmentOpenedHandlers } from "./status-hooks";
 import { fullView, getStudentRow, type StudentView } from "./student.queries";
 
 type Ctx = ActionContext;
@@ -88,6 +89,16 @@ export async function addEnrollment(ctx: Ctx, studentId: string, input: Enrollme
       entityId: enrollment.id,
       before: null,
       after: { studentId, ...input, status: "ACTIVE" },
+    });
+    const owner = await ctx.db.student.findUniqueOrThrow({
+      where: { id: studentId },
+      select: { personId: true },
+    });
+    await runEnrollmentOpenedHandlers(ctx, {
+      enrollmentId: enrollment.id,
+      studentId,
+      personId: owner.personId,
+      programId: input.programId,
     });
     return { enrollmentId: enrollment.id };
   } catch (error) {

@@ -28,3 +28,4 @@ export {
   type AssignmentRoster,
 } from "./server/teaching.queries";
 import "./server/teaching-widget";
+export { registerStaffActiveHandler, type StaffActiveEvent } from "./server/staff-hooks";

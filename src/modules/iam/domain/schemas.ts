@@ -44,6 +44,14 @@ export const assignRoleSchema = z.object({
   userId: z.string().min(1),
   assignment: roleAssignmentSchema,
 });
+// IAM-02 — account provisioning
+export const provisionStudentSchema = z.object({ studentId: z.string().min(1) });
+export const provisionStaffSchema = z.object({
+  staffId: z.string().min(1),
+  role: z.enum(ROLES),
+});
+export const cohortAccountsSchema = z.object({ cohortId: z.string().min(1) });
+
 export const revokeRoleSchema = z.object({
   userId: z.string().min(1),
   assignmentId: z.string().min(1),

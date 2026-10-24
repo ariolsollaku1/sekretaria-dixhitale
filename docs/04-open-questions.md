@@ -114,6 +114,10 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-116 | Study package: courses without an approved syllabus | no | open | Secretariat |
 | Q-117 | Study package: number, layout and readers | no | open | Secretariat |
 | Q-126 | Approved documents archive: contents, access and "in force" | no | open | Secretariat |
+| Q-127 | Accounts: how a student account is created | no | open | Secretariat / IT |
+| Q-128 | Accounts: when access ends and returns | no | open | Secretariat / HR |
+| Q-129 | Accounts: staff accounts and their roles | no | open | HR / IT |
+| Q-130 | Accounts: activation reminders and the never-activated report | no | open | Secretariat / IT |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1149,3 +1153,30 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Which documents belong in the archive besides plans and syllabi? Who may read and who may file them? Which plan counts as "approved for" a year?
 - **Working assumption:** besides the plans and syllabi (linked from CUR-02/03), the archive stores diploma forms, supplements, scanned decisions and other documents, filed already approved (withdrawn with a reason, never deleted). Readers: sysadmin, head of department, program coordinator, secretary, student affairs, quality; writers: sysadmin, secretary, head of department (scoped). The plan in force in a year is the approved or archived plan with the latest valid-from year not after it.
 - **Impact:** grant lists, the "in force" rule, a link to the diploma templates in GRD-02.
+
+
+
+
+### Q-127 — Accounts: how a student account is created
+- **Context:** SRC-037, Q-19 — a student account exists from enrollment; candidates have none.
+- **Questions:** Is the account created automatically at registration, or by a person at the secretariat? Which e-mail is the login (personal, or one issued by the college)?
+- **Working assumption:** a person with the right (secretary, student affairs) presses "Create account" on the student's page, one by one or for a whole cohort; nothing is created behind their back, so no e-mail leaves the system unexpectedly. The login is the student's e-mail on the person record (Q-19: personal e-mail unless the college issues one); without an e-mail or an open enrollment the account cannot be created. Role `student`, scope own records. A login that already exists with that e-mail and belongs to nobody is adopted.
+- **Impact:** the "Create account" button, the cohort bulk action; switching to automatic creation is one call in the student registration service.
+
+### Q-128 — Accounts: when access ends and returns
+- **Context:** SRC-037 — alumni have no access after graduating; Q-19.
+- **Questions:** Which statuses keep access? What about a student who is also staff? Who may switch an account back on?
+- **Working assumption:** a person keeps access while they have an open enrollment (active or suspended) or an active staff record; when the last of these ends (graduated, deregistered, employment ended by HR) the account is deactivated at once and its sessions end. It returns automatically with a new enrollment or when HR resumes employment, but only if the system itself switched it off — an account a system administrator deactivated by hand stays off. Every automatic change is audited. Contract end dates alone (HR-03) change nothing; HR ends the employment. An account that must not be switched off (the acting user, the last system administrator) is skipped and the skip is audited.
+- **Impact:** hooks on status changes, enrollments and staff active flag.
+
+### Q-129 — Accounts: staff accounts and their roles
+- **Context:** HR-01, roles.md — staff become users with roles.
+- **Questions:** Does every staff member get an account? Which role does a new account get?
+- **Working assumption:** HR creates the account on request from the staff page and picks the role (lecturers by default for academic staff); only roles with institution or own-records scope are offered there, roles scoped to a department or program (head of department, coordinator) and system administrator are assigned in user administration (IAM-01). The login is the e-mail on the person record.
+- **Impact:** the staff-page panel, the role list.
+
+### Q-130 — Accounts: activation reminders and the never-activated report
+- **Context:** IAM-02 brief — bulk "send activation emails" for a cohort; report of accounts never activated.
+- **Questions:** After how many days is an account "late"? Should reminders be sent automatically?
+- **Working assumption:** the report lists active accounts linked to a person that never signed in, with the days since creation, filterable by kind (student, staff); no threshold. Reminders are sent only when a person asks (per account or "send to the whole cohort", which also creates missing accounts for students with an e-mail); no automatic reminders.
+- **Impact:** `/admin/accounts` page, cohort action.

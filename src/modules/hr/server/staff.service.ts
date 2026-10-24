@@ -2,6 +2,7 @@ import "server-only";
 import { DomainError, type ActionContext } from "@/lib/actions";
 import { linkAccountByEmail, personsUsing } from "@/lib/people";
 import type { StaffInput } from "../domain/schemas";
+import { runStaffActiveHandlers } from "./staff-hooks";
 import { fullView, getStaffRow, type StaffView } from "./staff.queries";
 
 type Ctx = ActionContext;
@@ -191,5 +192,6 @@ export async function setStaffActive(ctx: Ctx, staffId: string, active: boolean)
     after: { active },
     reason: ctx.reason,
   });
+  await runStaffActiveHandlers(ctx, { staffId, personId: row.personId, active });
   return { staffId };
 }

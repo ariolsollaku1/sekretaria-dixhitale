@@ -7,6 +7,7 @@ import "@/modules/cur";
 import "@/modules/stu";
 import { personalSchema, type PersonalFormInput } from "../domain/schemas";
 import { getOwnStudent, getStudent, scopeWhere } from "./student.queries";
+import { registerEnrollmentOpenedHandler } from "./status-hooks";
 import * as svc from "./student.service";
 
 const actor = { id: "sec-1", email: "s@t.test", name: "Sec", locale: null, personId: null };
@@ -245,6 +246,25 @@ describe("enrollments (AC-2, AC-3)", () => {
     });
     ok(await run((ctx) => svc.addEnrollment(ctx, studentId, enrollment({ cohortId: cohort2 }))));
     expect(await db.enrollment.count({ where: { studentId } })).toBe(3);
+  });
+
+  it("tells the registered handlers about every new open enrollment, inside the transaction (IAM-02)", async () => {
+    const seen: string[] = [];
+    registerEnrollmentOpenedHandler("test.opened", async (_ctx, e) => void seen.push(e.programId));
+    const { studentId, enrollmentId } = ok(await register());
+    expect(seen).toEqual([prog1]);
+    ok(
+      await run((ctx) =>
+        svc.addEnrollment(
+          ctx,
+          studentId,
+          enrollment({ programId: prog2, cohortId: cohortP2, registrationType: "SECOND_PROGRAM" }),
+        ),
+      ),
+    );
+    expect(seen).toEqual([prog1, prog2]);
+    expect(enrollmentId).toBeTruthy();
+    registerEnrollmentOpenedHandler("test.opened", async () => undefined);
   });
 
   it("enforces the rule in the database too, for SUSPENDED as well", async () => {

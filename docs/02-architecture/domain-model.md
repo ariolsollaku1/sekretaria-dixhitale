@@ -82,7 +82,7 @@ erDiagram
 ### PLT / IAM — platform
 | Entity | Purpose |
 |---|---|
-| `User` | Login identity in the app; `keycloakId`, `email`, `active`, optional `personId`. |
+| `User` | Login identity in the app; `keycloakId`, `email`, `active`, optional `personId`. IAM-02: the account of a person (student or staff) is the `User` whose `personId` points at them; it is active while the person has an open enrollment or an active staff record. No new tables. |
 | `UserRole` | Role assignment: `role`, `scopeType`, `scopeId`, `validFrom/To`. |
 | `Session`, `Account`, `Verification` | Better Auth tables (names per library). |
 | `AuditLog` | `actorId`, `action`, `entityType`, `entityId`, `before`, `after` (JSON), `ip`, `at`. |

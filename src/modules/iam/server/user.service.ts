@@ -27,7 +27,7 @@ const KEYCLOAK = "keycloak";
 type Ctx = ActionContext;
 
 /** Identity-provider outages become a clean, typed failure; nothing is left half-created. */
-async function idpCall<T>(fn: () => Promise<T>): Promise<T> {
+export async function idpCall<T>(fn: () => Promise<T>): Promise<T> {
   try {
     return await fn();
   } catch (error) {
@@ -50,7 +50,7 @@ const activeSysadminWhere = (now: Date) => ({
   OR: [{ validTo: null }, { validTo: { gt: now } }],
 });
 
-async function sysadminFacts(db: Tx, userId: string) {
+export async function sysadminFacts(db: Tx, userId: string) {
   const now = new Date();
   const [activeSysadminCount, target] = await Promise.all([
     db.user.count({ where: { active: true, roles: { some: activeSysadminWhere(now) } } }),
@@ -196,7 +196,12 @@ export async function updateUser(ctx: Ctx, idp: IdentityProviderAdmin, input: Up
 }
 
 /** AC-6, AC-7 */
-export async function deactivateUser(ctx: Ctx, idp: IdentityProviderAdmin, userId: string) {
+export async function deactivateUser(
+  ctx: Ctx,
+  idp: IdentityProviderAdmin,
+  userId: string,
+  auditAction = "iam.user.deactivate",
+) {
   const user = await loadUser(ctx.db, userId);
   if (!user.active) throw new DomainError("CONFLICT", "User is already inactive");
   const rule = canDeactivate({
@@ -213,7 +218,7 @@ export async function deactivateUser(ctx: Ctx, idp: IdentityProviderAdmin, userI
   ctx.onFailure(() => idp.setEnabled(idpId, true));
   await idpCall(() => idp.logoutUser(idpId));
   await ctx.audit({
-    action: "iam.user.deactivate",
+    action: auditAction,
     entityType: "User",
     entityId: userId,
     before: { active: true },
@@ -222,7 +227,12 @@ export async function deactivateUser(ctx: Ctx, idp: IdentityProviderAdmin, userI
   });
 }
 
-export async function reactivateUser(ctx: Ctx, idp: IdentityProviderAdmin, userId: string) {
+export async function reactivateUser(
+  ctx: Ctx,
+  idp: IdentityProviderAdmin,
+  userId: string,
+  auditAction = "iam.user.reactivate",
+) {
   const user = await loadUser(ctx.db, userId);
   if (user.active) throw new DomainError("CONFLICT", "User is already active");
   await ctx.db.user.update({ where: { id: userId }, data: { active: true } });
@@ -230,7 +240,7 @@ export async function reactivateUser(ctx: Ctx, idp: IdentityProviderAdmin, userI
   await idpCall(() => idp.setEnabled(idpId, true));
   ctx.onFailure(() => idp.setEnabled(idpId, false));
   await ctx.audit({
-    action: "iam.user.reactivate",
+    action: auditAction,
     entityType: "User",
     entityId: userId,
     before: { active: false },

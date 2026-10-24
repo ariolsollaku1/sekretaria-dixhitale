@@ -110,7 +110,8 @@
       "events": "Ngjarje",
       "applicationCycles": "Ciklet e aplikimit",
       "applications": "Aplikimet",
-      "approvedArchive": "Arkiva e miratuar"
+      "approvedArchive": "Arkiva e miratuar",
+      "accounts": "Llogaritë"
     },
     "languages": {
       "sq": "Shqip",
@@ -319,6 +320,64 @@
       "SCOPE_NOT_FOUND": "Objekti i zgjedhur nuk ekziston.",
       "INVALID_PERIOD": "Periudha nuk është e vlefshme.",
       "SCOPE_ID_FORBIDDEN": "Ky fushëveprim nuk ka objekt."
+    },
+    "accounts": {
+      "pageTitle": "Llogaritë",
+      "title": "Llogaria",
+      "neverActivated": "Llogari të paaktivizuara",
+      "neverActivatedHint": "Llogari aktive të studentëve dhe stafit që nuk kanë hyrë asnjëherë. Hapni personin për të dërguar sërish emailin e aktivizimit.",
+      "state": {
+        "none": "Pa llogari",
+        "pending": "Në pritje të aktivizimit",
+        "active": "Aktive",
+        "disabled": "E çaktivizuar"
+      },
+      "create": "Krijo llogarinë",
+      "resend": "Ridërgo emailin e aktivizimit",
+      "role": "Roli",
+      "selectRole": "Zgjidhni një rol",
+      "created": "Llogaria u krijua. Emaili i aktivizimit po dërgohet.",
+      "resent": "Emaili i aktivizimit u dërgua.",
+      "kind": {
+        "student": "Student",
+        "staff": "Staf"
+      },
+      "columns": {
+        "kind": "Lloji",
+        "createdAt": "Krijuar",
+        "days": "Ditë në pritje"
+      },
+      "cohort": {
+        "title": "Llogari për një kohortë",
+        "hint": "Krijon llogaritë që mungojnë për studentët me regjistrim të hapur në kohortë dhe dërgon sërish emailin e aktivizimit për ata që nuk kanë hyrë asnjëherë.",
+        "pick": "Kohorta",
+        "choose": "Zgjidhni një kohortë",
+        "send": "Krijo llogaritë dhe dërgo emailet",
+        "done": "U krye.",
+        "result": "Krijuar {created}, kujtuar {reminded}, anashkaluar {skipped}."
+      },
+      "skip": {
+        "noEmail": "Regjistri i studentit nuk ka email",
+        "noOpenEnrollment": "Pa regjistrim të hapur",
+        "hasAccount": "Llogaria është tashmë aktive",
+        "emailTaken": "Emaili i përket një llogarie tjetër"
+      },
+      "errors": {
+        "noEmail": "Regjistri nuk ka adresë emaili, ndaj nuk mund të krijohet llogari.",
+        "noOpenEnrollment": "Studenti nuk ka regjistrim të hapur.",
+        "notEmployed": "Anëtari i stafit nuk është në punë.",
+        "emailTaken": "Ky email i përket një llogarie tjetër.",
+        "roleNotAllowed": "Ky rol nuk mund të jepet këtu. Përdorni administrimin e përdoruesve.",
+        "ACCOUNT_EXISTS": "Personi ka tashmë një llogari.",
+        "ACCOUNT_DISABLED": "Ekziston një llogari me këtë email, por është e çaktivizuar.",
+        "identityLinked": "Kjo identitet i përket një përdoruesi tjetër.",
+        "UNAVAILABLE": "Shërbimi i identitetit nuk është i disponueshëm. Provoni më vonë.",
+        "FORBIDDEN": "Nuk keni leje për këtë veprim.",
+        "NOT_FOUND": "Nuk u gjet.",
+        "CONFLICT": "Veprimi nuk mund të përfundojë.",
+        "VALIDATION": "Kontrolloni të dhënat.",
+        "generic": "Veprimi dështoi. Provoni sërish."
+      }
     }
   },
   "files": {

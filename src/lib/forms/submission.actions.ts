@@ -4,6 +4,7 @@ import { z } from "zod";
 import { action } from "@/lib/actions";
 import { getRequestContext } from "@/lib/audit/request-context";
 import "@/lib/authz/permissions";
+import "./all";
 import * as submissions from "./submission.service";
 
 /** AC-4..AC-6: public forms need no session. Returns the reference or what went wrong. */

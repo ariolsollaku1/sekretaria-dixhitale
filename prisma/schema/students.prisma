@@ -17,19 +17,20 @@ enum EnrollmentStatus {
 
 /// The student record of a person (STU-01). The number comes from a database sequence.
 model Student {
-  id            String           @id @default(cuid(2))
-  personId      String           @unique @map("person_id")
+  id            String             @id @default(cuid(2))
+  personId      String             @unique @map("person_id")
   /// Zero-padded sequence (Q-34 working assumption); never reused.
-  studentNumber String           @unique @default(dbgenerated("lpad((nextval('student_number_seq'::regclass))::text, 6, '0'::text)")) @map("student_number")
+  studentNumber String             @unique @default(dbgenerated("lpad((nextval('student_number_seq'::regclass))::text, 6, '0'::text)")) @map("student_number")
   /// From the Ministry's SMIAL, typed in until INT-01 (Q-01).
-  nim           String?          @unique
-  createdAt     DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt     DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById   String?          @map("created_by_id")
-  updatedById   String?          @map("updated_by_id")
-  person        Person           @relation(fields: [personId], references: [id])
+  nim           String?            @unique
+  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById   String?            @map("created_by_id")
+  updatedById   String?            @map("updated_by_id")
+  person        Person             @relation(fields: [personId], references: [id])
   enrollments   Enrollment[]
   attendance    AttendanceMark[]
+  recognized    RecognizedCourse[]
 
   @@map("students")
 }
@@ -53,6 +54,7 @@ model Enrollment {
   cohort           Cohort                  @relation(fields: [cohortId], references: [id])
   years            YearRegistration[]
   history          EnrollmentStatusEvent[]
+  recognized       RecognizedCourse[]
 
   @@index([studentId])
   @@index([programId, status])
@@ -95,4 +97,33 @@ model EnrollmentStatusEvent {
 
   @@index([enrollmentId, createdAt])
   @@map("enrollment_status_events")
+}
+
+/// A course recognized from earlier studies by a recognition request (STU-07, Q-73). Kept for EXM-07;
+/// a wrong decision is voided, never deleted. One live recognition per enrollment and course
+/// (partial unique index in the migration).
+model RecognizedCourse {
+  id           String         @id @default(cuid(2))
+  studentId    String         @map("student_id")
+  enrollmentId String         @map("enrollment_id")
+  submissionId String         @map("submission_id")
+  courseId     String         @map("course_id")
+  credits      Int
+  /// Earlier institution / basis of the decision.
+  note         String?
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  createdById  String?        @map("created_by_id")
+  voidedAt     DateTime?      @map("voided_at") @db.Timestamptz(3)
+  voidedById   String?        @map("voided_by_id")
+  voidReason   String?        @map("void_reason")
+  student      Student        @relation(fields: [studentId], references: [id])
+  enrollment   Enrollment     @relation(fields: [enrollmentId], references: [id])
+  submission   FormSubmission @relation(fields: [submissionId], references: [id])
+  course       Course         @relation(fields: [courseId], references: [id])
+
+  @@index([studentId])
+  @@index([enrollmentId])
+  @@index([submissionId])
+  @@index([courseId])
+  @@map("recognized_courses")
 }

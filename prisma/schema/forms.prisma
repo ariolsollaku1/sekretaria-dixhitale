@@ -59,6 +59,7 @@ model FormSubmission {
   submitter    User?                 @relation("FormSubmitter", fields: [submitterId], references: [id])
   assignee     User?                 @relation("FormAssignee", fields: [assigneeId], references: [id])
   events       FormSubmissionEvent[]
+  recognized   RecognizedCourse[]
 
   @@index([definitionId, state])
   @@index([submitterId])

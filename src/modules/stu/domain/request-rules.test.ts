@@ -104,9 +104,15 @@ describe("pickEnrollment (AC-4)", () => {
 describe("identityMatches (AC-2)", () => {
   const record = { studentNumber: "000012", birthDate: "2005-06-20" };
   it("needs both to match", () => {
-    expect(identityMatches({ studentNumber: "000012", birthDate: "2005-06-20" }, record)).toBe(true);
-    expect(identityMatches({ studentNumber: "000012", birthDate: "2005-06-21" }, record)).toBe(false);
-    expect(identityMatches({ studentNumber: "000013", birthDate: "2005-06-20" }, record)).toBe(false);
+    expect(identityMatches({ studentNumber: "000012", birthDate: "2005-06-20" }, record)).toBe(
+      true,
+    );
+    expect(identityMatches({ studentNumber: "000012", birthDate: "2005-06-21" }, record)).toBe(
+      false,
+    );
+    expect(identityMatches({ studentNumber: "000013", birthDate: "2005-06-20" }, record)).toBe(
+      false,
+    );
     expect(identityMatches({ studentNumber: 12, birthDate: "2005-06-20" }, record)).toBe(false);
   });
 });

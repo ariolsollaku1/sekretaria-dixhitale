@@ -20,23 +20,24 @@ model CourseCategory {
 /// A course in the catalog (CUR-01). Never deleted, only deactivated; plans copy the defaults.
 model Course {
   planCourses    PlanCourse[]
-  id             String          @id @default(cuid(2))
-  code           String          @unique
+  id             String             @id @default(cuid(2))
+  code           String             @unique
   name           String
-  nameEn         String?         @map("name_en")
-  defaultCredits Int             @map("default_credits")
-  categoryId     String?         @map("category_id")
-  hoursLecture   Int             @default(0) @map("hours_lecture")
-  hoursSeminar   Int             @default(0) @map("hours_seminar")
-  hoursLab       Int             @default(0) @map("hours_lab")
-  departmentId   String          @map("department_id")
-  active         Boolean         @default(true)
-  createdAt      DateTime        @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt      DateTime        @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById    String?         @map("created_by_id")
-  updatedById    String?         @map("updated_by_id")
-  category       CourseCategory? @relation(fields: [categoryId], references: [id])
-  department     Department      @relation(fields: [departmentId], references: [id])
+  nameEn         String?            @map("name_en")
+  defaultCredits Int                @map("default_credits")
+  categoryId     String?            @map("category_id")
+  hoursLecture   Int                @default(0) @map("hours_lecture")
+  hoursSeminar   Int                @default(0) @map("hours_seminar")
+  hoursLab       Int                @default(0) @map("hours_lab")
+  departmentId   String             @map("department_id")
+  active         Boolean            @default(true)
+  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?            @map("created_by_id")
+  updatedById    String?            @map("updated_by_id")
+  category       CourseCategory?    @relation(fields: [categoryId], references: [id])
+  department     Department         @relation(fields: [departmentId], references: [id])
+  recognized     RecognizedCourse[]
 
   @@index([departmentId])
   @@index([categoryId])

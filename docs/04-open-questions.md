@@ -130,6 +130,10 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-119 | Events: capacity, deadline and cancellation | no | open | Secretariat |
 | Q-120 | Events: which notices are sent | no | open | Secretariat |
 | Q-121 | Events: who organises and who sees attendees | no | open | Secretariat |
+| Q-122 | Online application: fields, previous education and duplicates | no | open | Student Affairs / Secretariat |
+| Q-123 | Online application: cycles, program offer and documents | no | open | Student Affairs / Secretariat |
+| Q-124 | Online application: status link and e-mails | no | open | Student Affairs / DPO |
+| Q-125 | Online application: who sees and configures | no | open | Secretariat |
 
 ---
 
@@ -1115,3 +1119,26 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Which roles create events and see who registered?
 - **Working assumption:** the roles that write announcements (NTF-01), with the same scope rule (program events inside their scope, other audiences institution-wide); the same people see the attendee list (name, e-mail, time) and can export it; readers never see other registrants. An attendance certificate and check-in are not part of v1.
 - **Impact:** grants, attendee fields.
+### Q-122 — Online application: fields, previous education and duplicates
+- **Context:** SRC-020, SRC-022, SRC-030 (ADM-02) — the candidate enters personal data and the school average once.
+- **Questions:** Which fields does the application need (national ID number, nationality, photo, parents, disability/category data)? On which scale is the average (5-10?) and does a Master candidate give the Bachelor average instead? May one person apply to several programs of a cycle? What counts as the same application?
+- **Working assumption:** personal data as in the student register (first name, last name, father's name, gender, birth date and place, national ID optional, phone, e-mail, address, residence); previous education: school/institution, city, graduation year and average between 5.00 and 10.00 (for Master, the previous studies); consent to data processing is mandatory. One application per e-mail, program and cycle; a person may apply to several programs.
+- **Impact:** form fields, validation range, duplicate rule, ADM-04 mapping to the student register.
+
+### Q-123 — Online application: cycles, program offer and documents
+- **Context:** SRC-030, SRC-032 (ADM-02).
+- **Questions:** Which dates open and close an application round, may there be several rounds a year, does each program have its own rounds or a capacity, which documents are required per cycle or program, may documents be uploaded later?
+- **Working assumption:** a cycle belongs to an academic year with open/close dates; every active program is offered in every open cycle; the Secretariat/Student Affairs define the document list per cycle (nothing is preset; the dev seed shows an example); documents are uploaded on the private status page after the form is sent, missing ones do not stop the application; files are PDF/JPEG/PNG up to 10 MB (as Q-27).
+- **Impact:** cycle configuration, program offer per cycle, the document list, upload limits.
+
+### Q-124 — Online application: status link and e-mails
+- **Context:** Q-19 (candidates have no account), SRC-030 (ADM-02).
+- **Questions:** How long may a candidate use the private link? Should the candidate get e-mails when the status changes (ADM-03)? Which language is used? Is an SMS wanted?
+- **Working assumption:** the link is valid 180 days and is replaced when the candidate asks for a new one (reference + e-mail); the confirmation and new-link e-mails use the language of the page the candidate used; no SMS.
+- **Impact:** token lifetime, mail texts, the later status notifications.
+
+### Q-125 — Online application: who sees and configures
+- **Context:** roles.md access matrix, ADM row (ADM-02).
+- **Questions:** Besides the Secretariat and Student Affairs, who reads applications (Finance, Program Coordinators scoped to their program)? May staff correct a candidate's data?
+- **Working assumption:** Secretariat and Student Affairs configure cycles and read applications; Finance and sysadmin read only; coordinators do not see applications yet (ADM-03 decides); staff do not edit the candidate's data in this feature.
+- **Impact:** permissions and scope filters of ADM.

@@ -16,6 +16,7 @@ Code: `src/modules/adm`. Flow: interest → application → review/ranking → e
   confirmation with reference number and a magic link to view status/complete missing documents;
   staff view of applications with status.
 - **Assumption (Q-19):** candidates have no Keycloak account; status access via signed link.
+- **Built** ([spec](../specs/ADM-02-online-application.md)): cycles with a configurable document list (`/adm/cycles`), public form at `/apply` (4 steps), private status link with document upload, staff list and detail (`/adm/applications`). Documents are uploaded after the form is sent (Q-123); working assumptions Q-122..Q-125.
 
 ### ADM-03 — Application review & candidate ranking
 - **Goal:** review completeness and rank candidates by cycle and category (SRC-114).

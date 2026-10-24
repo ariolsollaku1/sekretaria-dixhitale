@@ -11,5 +11,6 @@ import "@/modules/stu";
 import "@/modules/fin";
 import "@/modules/att";
 import "@/modules/ers";
+import "@/modules/adm";
 import "@/lib/audit/table";
 import "@/lib/forms/table";

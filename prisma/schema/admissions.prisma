@@ -22,3 +22,107 @@ model RegistrationNotice {
   @@index([academicYearId])
   @@map("registration_notices")
 }
+
+/// Status of an application (ADM-02 creates SUBMITTED; ADM-03/ADM-04 move it on).
+enum ApplicationStatus {
+  SUBMITTED
+  IN_REVIEW
+  ACCEPTED
+  REJECTED
+  ENROLLED
+
+  @@map("application_status")
+}
+
+/// An application round of an academic year (ADM-02, Q-96).
+model ApplicationCycle {
+  id             String                     @id @default(cuid(2))
+  academicYearId String                     @map("academic_year_id")
+  name           String
+  opensOn        DateTime                   @map("opens_on") @db.Date
+  closesOn       DateTime                   @map("closes_on") @db.Date
+  active         Boolean                    @default(true)
+  createdAt      DateTime                   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime                   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById    String?                    @map("created_by_id")
+  updatedById    String?                    @map("updated_by_id")
+  academicYear   AcademicYear               @relation(fields: [academicYearId], references: [id])
+  documents      ApplicationCycleDocument[]
+  applications   Application[]
+
+  @@unique([academicYearId, name])
+  @@map("application_cycles")
+}
+
+/// A document type a cycle asks for (configurable list; nothing is preset).
+model ApplicationCycleDocument {
+  id       String           @id @default(cuid(2))
+  cycleId  String           @map("cycle_id")
+  /// Stable machine key within the cycle, e.g. "diploma".
+  key      String
+  labelSq  String           @map("label_sq")
+  labelEn  String?          @map("label_en")
+  required Boolean          @default(true)
+  sequence Int
+  cycle    ApplicationCycle @relation(fields: [cycleId], references: [id])
+
+  @@unique([cycleId, key])
+  @@map("application_cycle_documents")
+}
+
+/// A candidate's application (ADM-02). Candidates have no account (Q-19): they hold a private link
+/// whose token is stored only as a hash. Personal data of the candidate: never logged.
+model Application {
+  id             String                @id @default(cuid(2))
+  reference      String                @unique
+  cycleId        String                @map("cycle_id")
+  programId      String                @map("program_id")
+  status         ApplicationStatus     @default(SUBMITTED)
+  /// Language of the page the candidate used; the e-mails follow it.
+  locale         String                @default("sq")
+  firstName      String                @map("first_name")
+  lastName       String                @map("last_name")
+  fatherName     String?               @map("father_name")
+  gender         Gender
+  birthDate      DateTime              @map("birth_date") @db.Date
+  birthPlace     String?               @map("birth_place")
+  nationalId     String?               @map("national_id")
+  email          String
+  /// Lower-cased e-mail: the duplicate rule is per cycle, program and e-mail.
+  emailKey       String                @map("email_key")
+  phone          String
+  address        String
+  residence      String?
+  schoolName     String                @map("school_name")
+  schoolCity     String?               @map("school_city")
+  graduationYear Int                   @map("graduation_year")
+  /// SRC-022: high-school (or previous studies) average.
+  averageGrade   Decimal               @map("average_grade") @db.Decimal(4, 2)
+  consentAt      DateTime              @map("consent_at") @db.Timestamptz(3)
+  tokenHash      String                @unique @map("token_hash")
+  tokenExpiresAt DateTime              @map("token_expires_at") @db.Timestamptz(3)
+  submittedAt    DateTime              @default(now()) @map("submitted_at") @db.Timestamptz(3)
+  updatedAt      DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  cycle          ApplicationCycle      @relation(fields: [cycleId], references: [id])
+  program        StudyProgram          @relation(fields: [programId], references: [id])
+  documents      ApplicationDocument[]
+
+  @@unique([cycleId, programId, emailKey])
+  @@index([programId])
+  @@index([status, submittedAt])
+  @@map("applications")
+}
+
+/// A file a candidate uploaded for a document type; a newer upload voids the older one (never deleted).
+model ApplicationDocument {
+  id            String      @id @default(cuid(2))
+  applicationId String      @map("application_id")
+  documentKey   String      @map("document_key")
+  fileId        String      @unique @map("file_id")
+  uploadedAt    DateTime    @default(now()) @map("uploaded_at") @db.Timestamptz(3)
+  voidedAt      DateTime?   @map("voided_at") @db.Timestamptz(3)
+  application   Application @relation(fields: [applicationId], references: [id])
+
+  @@index([applicationId, documentKey])
+  @@map("application_documents")
+}

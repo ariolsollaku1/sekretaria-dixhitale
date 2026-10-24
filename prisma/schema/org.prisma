@@ -20,6 +20,7 @@ model AcademicYear {
   feeItems            FeeScheduleItem[]
   registrationNotices RegistrationNotice[]
   paymentPlans        PaymentPlan[]
+  applicationCycles   ApplicationCycle[]
   id                  String               @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
   code                String               @unique
@@ -124,6 +125,7 @@ model StudyProgram {
   announcements       Announcement[]
   events              Event[]
   registrationNotices RegistrationNotice[]
+  applications        Application[]
 
   @@index([departmentId])
   @@map("study_programs")

@@ -474,6 +474,26 @@ registerNav({
 });
 registerNav(
   {
+    id: "application-cycles",
+    labelKey: "applicationCycles",
+    href: "/adm/cycles",
+    icon: "clipboard",
+    permission: "adm.cycle.read",
+    group: "students",
+    order: 5,
+  },
+  {
+    id: "applications",
+    labelKey: "applications",
+    href: "/adm/applications",
+    icon: "file",
+    permission: "adm.application.read",
+    group: "students",
+    order: 6,
+  },
+);
+registerNav(
+  {
     id: "fees",
     labelKey: "fees",
     href: "/fin/fees",

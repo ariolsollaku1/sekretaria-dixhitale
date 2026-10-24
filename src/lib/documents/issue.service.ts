@@ -20,6 +20,12 @@ export type IssueInput = {
   language: string;
   data: Record<string, unknown>;
   subject?: { type: string; id: string } | null;
+  /**
+   * Runs on the converted PDF before it is hashed and stored (e.g. CUR-06 appends the syllabi), so
+   * the stored SHA-256 is that of the final file. A failure rolls the number back like a failed
+   * conversion.
+   */
+  finalize?: (pdf: Uint8Array) => Promise<Uint8Array>;
 };
 
 /** 24 random bytes as base64url: unguessable, URL-safe. */
@@ -93,6 +99,7 @@ export async function issueDocument(
       throw new DomainError("UNAVAILABLE", "PDF conversion unavailable");
     throw error;
   }
+  if (input.finalize) pdf = await input.finalize(pdf);
 
   const fileId = randomBytes(12).toString("hex");
   const storageKey = newStorageKey(fileId, now);

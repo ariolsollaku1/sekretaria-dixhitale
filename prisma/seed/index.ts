@@ -21,6 +21,7 @@ import { stuRequestsSeeder } from "./stu-requests";
 import { ersFormsSeeder } from "./ers-forms";
 import { offRequestsSeeder } from "./off-requests";
 import { qaCampaignsSeeder } from "./qa-campaigns";
+import { curPackageSeeder } from "./cur-package";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -46,6 +47,7 @@ const SEEDERS: Seeder[] = [
   calTimetableSeeder,
   admNoticesSeeder,
   qaCampaignsSeeder,
+  curPackageSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

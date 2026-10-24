@@ -83,11 +83,11 @@ Audit: `cal.exam_session.create|update|publish|unpublish`, `cal.exam_sitting.cre
 
 ## 4. Tasks
 
-- [ ] **T1** — Models, migration, permissions, nav. (AC-1, AC-2, AC-10)
-- [ ] **T2** — Pure rules with unit tests. (AC-1..AC-5)
-- [ ] **T3** — CUR lookups, services, queries; integration tests. (AC-2..AC-10)
-- [ ] **T4** — Sessions list, session page with editor, my exams, i18n; iCal feed. (AC-6..AC-9)
-- [ ] **T5** — E2E, seed, docs. (all)
+- [x] **T1** — Models, migration, permissions, nav. (AC-1, AC-2, AC-10)
+- [x] **T2** — Pure rules with unit tests. (AC-1..AC-5)
+- [x] **T3** — CUR lookups, services, queries; integration tests. (AC-2..AC-10)
+- [x] **T4** — Sessions list, session page with editor, my exams, i18n; iCal feed. (AC-6..AC-9)
+- [x] **T5** — E2E, seed, docs. (all)
 
 ## 5. Test plan
 
@@ -101,4 +101,4 @@ Audit: `cal.exam_session.create|update|publish|unpublish`, `cal.exam_sitting.cre
 
 ## 6. Definition of done
 
-- [ ] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; FEATURES.md `done`
+- [x] Tasks ticked, ACs tested; lint, typecheck, tests, e2e pass; i18n; FEATURES.md `done`

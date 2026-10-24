@@ -139,8 +139,8 @@ erDiagram
 |---|---|
 | `GradingScheme` | scale, pass mark, rounding, component weights (Q-11) |
 | `AssessmentComponent` / `AssessmentResult` | partial assessments per teaching assignment and their results |
-| `ExamSession` | `academicYearId`, `type` (WINTER/SUMMER/AUTUMN/MINI), dates |
-| `Exam` | `examSessionId`, `planCourseId`, `date`, `room`, examiners |
+| `ExamSession` | (CAL-03, implemented) `academicYearId`, `type` (WINTER/SUMMER/AUTUMN/MINI), `startDate`/`endDate`, `publishedAt?`; unique per year and type; never deleted |
+| `Exam` | (CAL-03, implemented as `ExamSitting`) `sessionId`, `planCourseId`, `date`, `startMinute`/`endMinute`, `room`, `note`; unique per session and plan course; examiners in `ExamSittingExaminer` (`sittingId`, `staffId`) |
 | `ExamRegistration` | `examId`, `enrollmentId`, `attemptType` (FIRST/RETAKE/BACKLOG/IMPROVEMENT), `eligible`, `ineligibleReason` |
 | `ExamGrade` | `examRegistrationId`, `value`, `status` (DRAFT/SUBMITTED/FINAL), `finalizedAt`; corrections as `ExamGradeCorrection` |
 | `ExamRecord` | generated procesverbal: `examId`, `fileId`, `signedFileId?`, status |

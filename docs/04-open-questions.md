@@ -99,6 +99,11 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-93 | Attendance: what the student sees of the percentage | no | open | Secretariat |
 | Q-94 | Attendance: who may run the reports and the period | no | open | Secretariat |
 | Q-95 | Website links: index page address and public notices | no | open | Marketing / IT |
+| Q-104 | Student evaluations: questionnaire model and campaign | no | open | NJSBC |
+| Q-105 | Student evaluations: who evaluates what | no | open | NJSBC |
+| Q-106 | Student evaluations: anonymity, minimum responses, when results appear | no | open | NJSBC |
+| Q-107 | Student evaluations: who sees which results | no | open | NJSBC / Rectorate |
+| Q-108 | Student evaluations: how the score is computed | no | open | NJSBC |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -992,3 +997,32 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Is there a fixed list of required documents per program or registration type, and which parts of the student contract are quoted in the notice?
 - **Working assumption:** the author types the document checklist (up to 20 lines) and the contract excerpt (plain text) per campaign; no central list or template exists yet.
 - **Impact:** a central document list or contract-linked excerpt would replace the typed fields.
+### Q-104 — Student evaluations: questionnaire model and campaign
+- **Context:** SRC-120, SRC-121 — lecturer and administration evaluation forms (may be one form); Q-25 says the content is configuration.
+- **Questions:** Is one combined questionnaire (lecturer part + administration part) right? Which question types are needed besides a 1–5 scale and a free comment? Is a campaign per semester or per year?
+- **Working assumption:** an evaluation campaign belongs to one academic year (the calendar has no dated semesters, as Q-82) and carries its own question list, edited by the quality officer while the campaign is a draft and frozen when it opens. Two sections: lecturer questions (asked once per teaching assignment) and administration questions (asked once per student). Types: 1–5 scale (required) and free text (optional). The questions are copied from an earlier campaign on request. This does not use the forms-engine definitions because answers must not be linked to the submitter.
+- **Impact:** the question editor, the campaign period.
+
+### Q-105 — Student evaluations: who evaluates what
+- **Context:** SRC-120 — students evaluate the lecturer.
+- **Questions:** Does a student evaluate every lecturer and every kind (lecture, seminar, lab) of the courses of their group? Only courses already finished? May a student skip?
+- **Working assumption:** every student with an active registration in the campaign's year gets one survey per teaching assignment of their group (each kind and lecturer separately) plus one for the administration, while the campaign is open; answering is voluntary, nothing is enforced.
+- **Impact:** the list of surveys of a student, participation counts.
+
+### Q-106 — Student evaluations: anonymity, minimum responses, when results appear
+- **Context:** the QA brief asks for anonymous responses with a minimum number before results are shown (example: 5).
+- **Questions:** What is the minimum number of responses per lecturer/course? Should results appear while the campaign runs? How long are individual responses kept?
+- **Working assumption:** the minimum is 5, the setting `qa.minResponses`; results (and any figure or comment) appear only after the campaign is closed and only for targets with at least the minimum; participation is stored apart (student, target, date only) and the response has no student, no timestamp and no link to it. Responses are kept (no retention rule; PLT-14 / Q-16 may define one).
+- **Impact:** the setting, the results page, retention.
+
+### Q-107 — Student evaluations: who sees which results
+- **Context:** SRC-120, SRC-121; roles.md — NJSBC runs the evaluations.
+- **Questions:** May lecturers see their own results? Heads of department and program coordinators those of their staff? Who sees the free-text comments and the administration results?
+- **Working assumption:** the quality officer sees everything (all targets, department roll-ups, administration results, free-text comments, participation); heads of department and program coordinators see scale figures of the lecturer sections of assignments in their scope; a lecturer sees the scale figures of their own assignments; nobody else. Free-text comments are shown only to the quality officer, without any identification.
+- **Impact:** the grants of `qa.result.read` / `qa.result.self`, the comment visibility.
+
+### Q-108 — Student evaluations: how the score is computed
+- **Context:** Q-25 answered: scoring = average of 1–5 scale questions.
+- **Questions:** Are questions weighted? Is there a pass/alert threshold? Are results compared with the department average?
+- **Working assumption:** per question the arithmetic mean and the distribution 1–5; the overall figure of a target is the mean of all scale answers; no weights, no thresholds, no comparison. QA-03 (staff quality indicators) may combine it later.
+- **Impact:** the result calculations only (one pure module).

@@ -32,6 +32,7 @@ model AcademicYear {
   updatedById         String?              @map("updated_by_id")
   semesters           Semester[]
   calendarEvents      CalendarEvent[]
+  evalCampaigns       EvalCampaign[]
 
   @@index([status])
   @@map("academic_years")

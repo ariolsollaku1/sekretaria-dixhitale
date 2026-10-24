@@ -17,20 +17,21 @@ enum EnrollmentStatus {
 
 /// The student record of a person (STU-01). The number comes from a database sequence.
 model Student {
-  id            String             @id @default(cuid(2))
-  personId      String             @unique @map("person_id")
+  id                 String              @id @default(cuid(2))
+  personId           String              @unique @map("person_id")
   /// Zero-padded sequence (Q-34 working assumption); never reused.
-  studentNumber String             @unique @default(dbgenerated("lpad((nextval('student_number_seq'::regclass))::text, 6, '0'::text)")) @map("student_number")
+  studentNumber      String              @unique @default(dbgenerated("lpad((nextval('student_number_seq'::regclass))::text, 6, '0'::text)")) @map("student_number")
   /// From the Ministry's SMIAL, typed in until INT-01 (Q-01).
-  nim           String?            @unique
-  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt     DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
-  createdById   String?            @map("created_by_id")
-  updatedById   String?            @map("updated_by_id")
-  person        Person             @relation(fields: [personId], references: [id])
-  enrollments   Enrollment[]
-  attendance    AttendanceMark[]
-  recognized    RecognizedCourse[]
+  nim                String?             @unique
+  createdAt          DateTime            @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime            @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById        String?             @map("created_by_id")
+  updatedById        String?             @map("updated_by_id")
+  person             Person              @relation(fields: [personId], references: [id])
+  enrollments        Enrollment[]
+  evalParticipations EvalParticipation[]
+  attendance         AttendanceMark[]
+  recognized         RecognizedCourse[]
 
   @@map("students")
 }

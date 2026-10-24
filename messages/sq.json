@@ -98,7 +98,11 @@
       "teachingHub": "Hapësira ime e mësimdhënies",
       "registrationNotices": "Njoftimet e regjistrimit",
       "staffRequests": "Kërkesat e stafit",
-      "staffRequestHistory": "Historiku i kërkesave"
+      "staffRequestHistory": "Historiku i kërkesave",
+      "evalCampaigns": "Fushatat e vlerësimit",
+      "evalSurveys": "Vlerësimet e mia",
+      "evalResults": "Rezultatet e vlerësimit",
+      "myEvalResults": "Vlerësimet e mia nga studentët"
     },
     "languages": {
       "sq": "Shqip",
@@ -2852,6 +2856,126 @@
       "pick": "Zgjidhni një punonjës",
       "nobody": "Asnjë punonjës nuk ka dërguar kërkesë.",
       "of": "Kërkesat e {name}"
+    }
+  },
+  "qa": {
+    "open": "Hap",
+    "created": "Fushata u krijua",
+    "opened": "Fushata u hap",
+    "closed": "Fushata u mbyll",
+    "noYear": "Nuk ka vit akademik.",
+    "kind": {
+      "LECTURE": "Ligjëratë",
+      "SEMINAR": "Seminar",
+      "LAB": "Laborator"
+    },
+    "status": {
+      "DRAFT": "Draft",
+      "OPEN": "E hapur",
+      "CLOSED": "E mbyllur"
+    },
+    "section": {
+      "LECTURER": "Pedagogu",
+      "ADMINISTRATION": "Administrata"
+    },
+    "type": {
+      "SCALE": "Shkallë 1–5",
+      "TEXT": "Koment i lirë"
+    },
+    "campaigns": {
+      "title": "Fushatat e vlerësimit",
+      "empty": "Nuk ka ende fushata vlerësimi.",
+      "questionCount": "{count, plural, one {# pyetje} other {# pyetje}}",
+      "seeResults": "Shiko rezultatet"
+    },
+    "campaign": {
+      "new": "Fushatë e re",
+      "year": "Viti akademik",
+      "name": "Emri",
+      "copyFrom": "Kopjo pyetjet nga",
+      "noCopy": "Pa kopjuar (bosh)",
+      "create": "Krijo fushatën"
+    },
+    "actions": {
+      "open": "Hap fushatën",
+      "openTitle": "Të hapet fushata?",
+      "openDescription": "Pyetjet nuk do të ndryshohen më dhe studentët mund të plotësojnë vlerësimet.",
+      "close": "Mbyll fushatën",
+      "closeTitle": "Të mbyllet fushata?",
+      "closeDescription": "Studentët nuk mund të përgjigjen më dhe rezultatet bëhen të dukshme. Fushata nuk rihapet."
+    },
+    "questions": {
+      "title": "Pyetjet",
+      "none": "Nuk ka ende pyetje.",
+      "section": "Pjesa",
+      "type": "Lloji",
+      "labelSq": "Teksti në shqip",
+      "labelEn": "Teksti në anglisht (opsional)",
+      "up": "Lart",
+      "down": "Poshtë",
+      "remove": "Hiq",
+      "add": "Shto pyetje",
+      "save": "Ruaj pyetjet",
+      "saved": "Pyetjet u ruajtën"
+    },
+    "participation": {
+      "title": "Pjesëmarrja",
+      "hint": "Numri i studentëve që janë përgjigjur nga të gjithë ata që mund të përgjigjen. Askush nuk shihet dhe përgjigjet nuk lidhen me ta.",
+      "administration": "Administrata"
+    },
+    "surveys": {
+      "title": "Vlerësimet e mia",
+      "empty": "Nuk ka vlerësime të hapura për ju tani.",
+      "noStudent": "Llogaria juaj nuk është lidhur me një student.",
+      "noStudentHint": "Drejtojuni sekretarisë.",
+      "anonymous": "Përgjigjet janë anonime: ruhen pa emrin tuaj dhe askush nuk mund t'i lidhë me ju. Sistemi mban vetëm shënimin që e keni plotësuar.",
+      "administration": "Administrata",
+      "done": "E plotësuar",
+      "fill": "Plotëso"
+    },
+    "survey": {
+      "submit": "Dërgo vlerësimin",
+      "sent": "Faleminderit, vlerësimi u dërgua",
+      "scaleHint": "1 = vlerësimi më i ulët, 5 = vlerësimi më i lartë"
+    },
+    "results": {
+      "title": "Rezultatet e vlerësimit",
+      "empty": "Nuk ka ende fushata të mbyllura.",
+      "rule": "Rezultatet shfaqen vetëm kur ka të paktën {min} përgjigje.",
+      "byAssignment": "Sipas lëndës dhe pedagogut",
+      "byDepartment": "Sipas departamentit",
+      "administration": "Administrata",
+      "noRows": "Nuk ka rezultate për ju në këtë fushatë.",
+      "notEnough": "Pak përgjigje",
+      "withheld": "Nuk ka ende të paktën {min} përgjigje, ndaj rezultatet nuk shfaqen.",
+      "details": "Detaje",
+      "responses": "{count, plural, one {# përgjigje} other {# përgjigje}}",
+      "overall": "Mesatarja",
+      "distribution": "Shpërndarja e notave 1–5"
+    },
+    "errors": {
+      "generic": "Diçka shkoi keq. Provoni përsëri.",
+      "FORBIDDEN": "Nuk keni leje për këtë veprim.",
+      "DUPLICATE": "Ekziston një fushatë me këtë emër në atë vit akademik.",
+      "NOT_DRAFT": "Fushata nuk është më draft.",
+      "NOT_OPEN": "Fushata nuk është e hapur.",
+      "NO_SCALE_QUESTION": "Shtoni të paktën një pyetje me shkallë 1–5.",
+      "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+      "ALREADY_ANSWERED": "E keni plotësuar tashmë këtë vlerësim.",
+      "NOT_YOUR_TARGET": "Ky vlerësim nuk është për ju.",
+      "NO_STUDENT": "Llogaria juaj nuk është lidhur me një student.",
+      "ANSWERS": "Plotësoni të gjitha pyetjet me shkallë.",
+      "QUESTIONS": "Kontrolloni pyetjet.",
+      "required": "E detyrueshme.",
+      "scaleRange": "Zgjidhni një vlerë nga 1 në 5.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalid": "Vlerë e pavlefshme.",
+      "unknownQuestion": "Pyetje e panjohur.",
+      "noQuestions": "Shtoni të paktën një pyetje.",
+      "tooManyQuestions": "Shumë pyetje (maksimumi 40).",
+      "duplicateKey": "Pyetje e dyfishtë.",
+      "badKey": "Çelës i pavlefshëm.",
+      "labelRequired": "Shkruani tekstin e pyetjes në shqip."
     }
   }
 }

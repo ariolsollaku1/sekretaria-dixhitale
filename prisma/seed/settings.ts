@@ -8,6 +8,8 @@ const DEFAULTS: Record<string, unknown> = {
   "att.editWindowDays": 7,
   // ATT-02 (Q-91 working assumption): attendance threshold in percent (75 % is the Q-12 research finding).
   "att.thresholdPercent": 75,
+  // QA-01 (Q-106 working assumption): minimum number of responses before results of a target are shown.
+  "qa.minResponses": 5,
   // ORG-03: allowed program durations per cycle and Master subtypes (defaults from the ORG brief;
   // the institution can change them without a deployment).
   "org.programDurations": { FIRST: [3], SECOND: [1, 2] },

@@ -9,6 +9,7 @@ import "@/modules/fin";
 import "@/modules/ers";
 import "@/modules/adm";
 import "@/modules/off";
+import "@/modules/qa";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -482,5 +483,43 @@ registerNav(
     permission: "off.request.history",
     group: "hr",
     order: 11,
+  },
+);
+registerNav(
+  {
+    id: "eval-campaigns",
+    labelKey: "evalCampaigns",
+    href: "/qa/campaigns",
+    icon: "clipboard",
+    permission: "qa.campaign.manage",
+    group: "administration",
+    order: 50,
+  },
+  {
+    id: "eval-surveys",
+    labelKey: "evalSurveys",
+    href: "/qa/surveys",
+    icon: "clipboard",
+    permission: "qa.survey.submit",
+    group: "students",
+    order: 30,
+  },
+  {
+    id: "eval-results",
+    labelKey: "evalResults",
+    href: "/qa/results",
+    icon: "chart",
+    permission: "qa.result.read",
+    group: "administration",
+    order: 51,
+  },
+  {
+    id: "my-eval-results",
+    labelKey: "myEvalResults",
+    href: "/qa/results",
+    icon: "chart",
+    permission: "qa.result.self",
+    group: "teaching",
+    order: 20,
   },
 );

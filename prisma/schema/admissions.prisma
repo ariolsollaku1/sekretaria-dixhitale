@@ -103,13 +103,21 @@ model Application {
   tokenExpiresAt DateTime              @map("token_expires_at") @db.Timestamptz(3)
   submittedAt    DateTime              @default(now()) @map("submitted_at") @db.Timestamptz(3)
   updatedAt      DateTime              @updatedAt @map("updated_at") @db.Timestamptz(3)
+  /// ADM-04: the result of the enrollment; the submitted data above are never changed by it.
+  studentId      String?               @map("student_id")
+  enrollmentId   String?               @unique @map("enrollment_id")
+  enrolledAt     DateTime?             @map("enrolled_at") @db.Timestamptz(3)
+  enrolledById   String?               @map("enrolled_by_id")
   cycle          ApplicationCycle      @relation(fields: [cycleId], references: [id])
   program        StudyProgram          @relation(fields: [programId], references: [id])
+  student        Student?              @relation(fields: [studentId], references: [id])
+  enrollment     Enrollment?           @relation(fields: [enrollmentId], references: [id])
   documents      ApplicationDocument[]
 
   @@unique([cycleId, programId, emailKey])
   @@index([programId])
   @@index([status, submittedAt])
+  @@index([studentId])
   @@map("applications")
 }
 

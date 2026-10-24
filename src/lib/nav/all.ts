@@ -546,6 +546,15 @@ registerNav(
     group: "students",
     order: 6,
   },
+  {
+    id: "enrollment",
+    labelKey: "enrollment",
+    href: "/adm/enrollment",
+    icon: "graduation",
+    permission: "adm.application.enroll",
+    group: "students",
+    order: 7,
+  },
 );
 registerNav(
   {

@@ -50,3 +50,14 @@ export {
 export { LeadForm } from "./ui/lead-form";
 export { ImportLeads } from "./ui/import-leads";
 export { LeadActions } from "./ui/lead-actions";
+// ADM-04: enrollment of applications.
+export { EnrollForm, BulkEnroll } from "./ui/enroll-form";
+export {
+  getEnrollDraft,
+  placementOptions,
+  listEnrollPrograms,
+  listEnrollable,
+  type EnrollDraft,
+  type EnrollableRow,
+} from "./server/enroll.queries";
+export { isEnrollable, ENROLLABLE_STATUSES, BULK_MAX } from "./domain/enroll-rules";

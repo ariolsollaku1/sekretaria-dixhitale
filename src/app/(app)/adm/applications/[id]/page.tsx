@@ -7,9 +7,16 @@ import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import { formatDateTime, formatPlainDate } from "@/lib/i18n/format";
 import type { Locale } from "@/lib/i18n/config";
-import { getApplicationDetail } from "@/modules/adm";
+import Link from "next/link";
+import {
+  EnrollForm,
+  getApplicationDetail,
+  getEnrollDraft,
+  isEnrollable,
+  placementOptions,
+} from "@/modules/adm";
 
-// ADM-02 AC-11: the detail of one application. Read only; the status moves in ADM-03.
+// ADM-02 AC-11: the detail of one application; ADM-04 AC-9 adds the enrollment (final approval).
 export default async function ApplicationDetailPage({
   params,
 }: {
@@ -25,6 +32,12 @@ export default async function ApplicationDetailPage({
     getApplicationDetail(id),
   ]);
   if (!a) notFound();
+  const mayEnroll = await can(user, "adm.application.enroll");
+  const draft = mayEnroll ? await getEnrollDraft(id) : null;
+  const options =
+    draft && isEnrollable(draft.status) ? await placementOptions(draft.programId) : null;
+  const mayReadStudents = await can(user, "stu.student.read");
+  const te = await getTranslations("adm.enroll");
   const row = (label: string, value: string | number | null) => (
     <>
       <dt className="text-muted-foreground">{label}</dt>
@@ -105,6 +118,39 @@ export default async function ApplicationDetailPage({
             ))}
           </ul>
         </section>
+
+        {draft && options && (
+          <section className="rounded-card border-border bg-card border p-5">
+            <h2 className="mb-3 text-xl font-semibold">{te("title")}</h2>
+            <EnrollForm
+              applicationId={id}
+              person={draft.person}
+              options={options}
+              missing={draft.missing}
+            />
+          </section>
+        )}
+        {a.status === "ENROLLED" && draft?.result && (
+          <section
+            data-testid="enrolled-note"
+            className="rounded-card border-border bg-card border p-5"
+          >
+            <h2 className="mb-2 text-xl font-semibold">{te("enrolledTitle")}</h2>
+            <p className="text-sm">
+              {te("enrolledOn", {
+                date: formatDateTime(draft.result.enrolledAt, locale as Locale),
+              })}
+              {mayReadStudents && (
+                <>
+                  {" "}
+                  <Link href={`/stu/students/${draft.result.studentId}`} className="underline">
+                    {te("openStudent")}
+                  </Link>
+                </>
+              )}
+            </p>
+          </section>
+        )}
       </div>
     </>
   );

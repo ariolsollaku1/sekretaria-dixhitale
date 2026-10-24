@@ -27,6 +27,7 @@ export { allowedTransitions } from "./domain/status-rules";
 export { scopeWhere as studentScopeWhere } from "./server/student.queries";
 export { studentListsTable } from "./server/lists.table";
 export { statRecords, type StatFilters } from "./server/stat.queries";
+export { entryReport, type EntryFilters, type EntryRow } from "./server/entry.queries";
 export { TRANSLATED as STAT_TRANSLATED } from "./server/stat.format";
 export { pivot, isDimension, DIMENSIONS, type Dimension } from "./domain/stat-rules";
 export { getPortalHome, type PortalHome, type HomeEnrollment } from "./server/home.queries";

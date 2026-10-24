@@ -81,6 +81,7 @@
       "erasmusApplications": "Erasmus applications",
       "studentLists": "Secretariat lists",
       "studentStatistics": "Statistics",
+      "entryQualifications": "Entry qualifications",
       "timetable": "Class timetable",
       "myTimetable": "My timetable",
       "documents": "Official documents",
@@ -2313,6 +2314,64 @@
           "FIRST_TIME": "First registration",
           "SECOND_PROGRAM": "Second program",
           "TRANSFER": "Transfer"
+        }
+      }
+    },
+    "entry": {
+      "title": "Entry qualifications",
+      "intro": "The high-school averages first-year students bring, taken from the online application. Counts first registrations of cohorts that start in the academic year selected in the header.",
+      "programCode": "Program code",
+      "facultyCode": "Faculty code",
+      "cycle": "Cycle",
+      "all": "All",
+      "show": "Show",
+      "none": "No enrollments for these criteria.",
+      "distribution": "Distribution of averages",
+      "band": "Average",
+      "count": "Count",
+      "share": "Share",
+      "byProgram": "Averages by program",
+      "list": "Student list",
+      "noAverage": "no average",
+      "cycles": {
+        "FIRST": "First cycle (Bachelor)",
+        "SECOND": "Second cycle (Master)"
+      },
+      "summary": {
+        "total": "Enrollments",
+        "withAverage": "With average",
+        "withoutAverage": "Without average",
+        "mean": "Mean",
+        "range": "Lowest - highest"
+      },
+      "bands": {
+        "lt6": "Under 6",
+        "6": "6 - 6.99",
+        "7": "7 - 7.99",
+        "8": "8 - 8.99",
+        "9": "9 - 10"
+      },
+      "columns": {
+        "program": "Program",
+        "withAverage": "With average",
+        "mean": "Mean",
+        "min": "Lowest",
+        "max": "Highest",
+        "studentNumber": "Student no.",
+        "name": "Name",
+        "cohort": "Cohort",
+        "school": "School",
+        "year": "Graduation year",
+        "average": "Average"
+      },
+      "download": {
+        "list": {
+          "xlsx": "Download list (Excel)",
+          "csv": "Download list (CSV)"
+        },
+        "programs": {
+          "xlsx": "Download by program (Excel)",
+          "csv": "Download by program (CSV)"
         }
       }
     },

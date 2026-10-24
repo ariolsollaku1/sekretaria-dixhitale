@@ -81,6 +81,7 @@
       "erasmusApplications": "Aplikimet Erasmus",
       "studentLists": "Listat e Sekretarisë",
       "studentStatistics": "Statistika",
+      "entryQualifications": "Kualifikimet e hyrjes",
       "timetable": "Orari i mësimit",
       "myTimetable": "Orari im",
       "documents": "Dokumentet zyrtare",
@@ -2313,6 +2314,64 @@
           "FIRST_TIME": "Regjistrim i parë",
           "SECOND_PROGRAM": "Program i dytë",
           "TRANSFER": "Transferim"
+        }
+      }
+    },
+    "entry": {
+      "title": "Kualifikimet e hyrjes",
+      "intro": "Mesataret e shkollës së mesme që sjellin studentët e vitit të parë, sipas aplikimit online. Numërohen regjistrimet e para të kohortave që fillojnë në vitin akademik të zgjedhur në krye të faqes.",
+      "programCode": "Kodi i programit",
+      "facultyCode": "Kodi i fakultetit",
+      "cycle": "Cikli",
+      "all": "Të gjithë",
+      "show": "Shfaq",
+      "none": "Nuk ka regjistrime për këto kritere.",
+      "distribution": "Shpërndarja e mesatareve",
+      "band": "Mesatarja",
+      "count": "Numri",
+      "share": "Pjesa",
+      "byProgram": "Mesataret sipas programit",
+      "list": "Lista e studentëve",
+      "noAverage": "pa mesatare",
+      "cycles": {
+        "FIRST": "Cikli i parë (Bachelor)",
+        "SECOND": "Cikli i dytë (Master)"
+      },
+      "summary": {
+        "total": "Regjistrime",
+        "withAverage": "Me mesatare",
+        "withoutAverage": "Pa mesatare",
+        "mean": "Mesatarja",
+        "range": "Më e ulëta - më e larta"
+      },
+      "bands": {
+        "lt6": "Nën 6",
+        "6": "6 - 6,99",
+        "7": "7 - 7,99",
+        "8": "8 - 8,99",
+        "9": "9 - 10"
+      },
+      "columns": {
+        "program": "Programi",
+        "withAverage": "Me mesatare",
+        "mean": "Mesatarja",
+        "min": "Më e ulëta",
+        "max": "Më e lartë",
+        "studentNumber": "Nr. i studentit",
+        "name": "Emri",
+        "cohort": "Kohorta",
+        "school": "Shkolla",
+        "year": "Viti i mbarimit",
+        "average": "Mesatarja"
+      },
+      "download": {
+        "list": {
+          "xlsx": "Shkarko listën (Excel)",
+          "csv": "Shkarko listën (CSV)"
+        },
+        "programs": {
+          "xlsx": "Shkarko sipas programit (Excel)",
+          "csv": "Shkarko sipas programit (CSV)"
         }
       }
     },

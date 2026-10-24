@@ -33,3 +33,13 @@ registerPermissions("adm", {
     finance: ["adm.application.read", "adm.cycle.read"],
   },
 });
+
+// ADM-04 (AC-1), roles.md "ADM — admissions": only the Secretariat and Student Affairs give the
+// final approval that turns an application into a student.
+registerPermissions("adm", {
+  permissions: ["adm.application.enroll"],
+  grants: {
+    secretary: ["adm.application.enroll"],
+    student_affairs: ["adm.application.enroll"],
+  },
+});

@@ -153,6 +153,9 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-142 | Scholarships: application form, list and report | no | open | Finance |
 | Q-143 | Shared payment lists: deadline list, exam-session clearance, debtors | no | open | Finance, Secretariat |
 | Q-144 | Payment reminders: timing, recipients, overdue notices | no | open | Finance |
+| Q-145 | Enrollment: which applications may be enrolled | no | open | Secretariat |
+| Q-146 | Enrollment: what the Secretariat confirms and what is created | no | open | Secretariat |
+| Q-147 | Enrollment: bulk enrollment and the payment plan | no | open | Secretariat / Finance |
 
 ---
 
@@ -1305,3 +1308,41 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Working assumption:** a daily job (07:00 Europe/Tirane) reminds the student's own account, by email and in-app, **once per installment** (the email cannot be switched off): the first run on which the installment is active, still has an outstanding amount, and falls due within 14 days (setting `fin.reminderDaysBefore`, whole number 1-90, default 14; an installment created or reached late within the window is still reminded once, a later payment does not recall it). The text names the installment number, its due date and the **outstanding amount** (after payments and early settlement, as FIN-02 computes it); it does not mention discounts. Only enrollments with status `ACTIVE` are reminded. An **overdue notice is off by default**; setting `fin.reminderOverdueAfterDays` (whole number 1-365) turns it on and sends one notice per installment on the first run on which it is overdue by at least that many days and still outstanding (no cap on how old, so switching it on reminds every older debt once). A student without an account is logged as `NO_ACCOUNT` and tried again on the next runs until a reminder can be sent. Every attempt that sends or finds no account is kept in a log visible to Finance, the Secretariat and student affairs within their program scope. No SMS, no second reminder, no reminder to staff.
 - **Impact:** timing and wording of the messages, recipients, overdue policy, the reminder log.
 
+### Q-145 — Enrollment: which applications may be enrolled
+- **Context:** SRC-020, SRC-032, SRC-051; ADM-03 (review and ranking) is blocked by Q-13, so no
+  application can reach `ACCEPTED` yet.
+- **Questions:** May the Secretariat enroll an application that was not ranked and accepted? Must all
+  required documents be uploaded before the final approval?
+- **Working assumption:** an application in status `SUBMITTED`, `IN_REVIEW` or `ACCEPTED` can be
+  enrolled by the Secretariat or Student Affairs (the enrollment is the "final approval"); once ADM-03
+  exists the rule narrows to `ACCEPTED` (one constant). `REJECTED` and `ENROLLED` never. A missing
+  required document stops the enrollment unless the officer ticks "enroll without the missing
+  documents"; the choice is audited.
+- **Impact:** enrollable statuses, the document check.
+
+### Q-146 — Enrollment: what the Secretariat confirms and what is created
+- **Context:** SRC-020 (data entered once, Secretariat only confirms), SRC-032, SRC-051.
+- **Questions:** Which data does the Secretariat confirm or correct? What if the person is already a
+  student (second program)? Where do cohort, group and year of study come from?
+- **Working assumption:** the personal data of the application (not the previous education) are shown
+  in an editable form and the confirmed values become the Person; the NIM may be typed. The officer
+  picks the registration type (first time / second program / transfer), the cohort of the applied
+  program, the start date and the group; the academic year and the year of study of the first
+  `YearRegistration` are those of the group. A person who already is a student (same national ID or
+  e-mail) gets a new enrollment on their existing student record, with a registration type other than
+  "first time", and their personal data are not overwritten. The application keeps the data as
+  submitted and links to the student and enrollment; its status becomes `ENROLLED`.
+- **Impact:** form fields, student/enrollment creation, the link between application and student.
+
+### Q-147 — Enrollment: bulk enrollment and the payment plan
+- **Context:** SRC-032, SRC-051; FIN-01 generates plans in bulk; IAM-02 creates accounts when an
+  enrollment opens.
+- **Questions:** Is a list of accepted candidates enrolled at once? Does the enrollment create the
+  payment plan and the contract?
+- **Working assumption:** bulk enrollment takes the personal data as submitted (no per-person
+  correction), one registration type, cohort, start date and group for the whole list (at most 100),
+  and handles each candidate on its own: those that fail (for example a data conflict) are listed with
+  the reason, the rest are enrolled. The account follows the IAM-02 rule on its own (an enrollment
+  opened event); the payment plan is still generated by Finance in FIN-01 ("Generate plans") and the
+  contract belongs to ADM-05 (blocked by Q-10).
+- **Impact:** bulk behavior, plan and contract triggers.

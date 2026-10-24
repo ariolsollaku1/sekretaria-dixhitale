@@ -33,6 +33,7 @@ model Student {
   attendance         AttendanceMark[]
   recognized         RecognizedCourse[]
   paymentReminders   PaymentReminder[]
+  applications       Application[]
 
   @@map("students")
 }
@@ -59,6 +60,7 @@ model Enrollment {
   scholarships     Scholarship[]
   history          EnrollmentStatusEvent[]
   recognized       RecognizedCourse[]
+  application      Application?
 
   @@index([studentId])
   @@index([programId, status])

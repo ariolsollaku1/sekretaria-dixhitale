@@ -31,6 +31,7 @@ Code: `src/modules/adm`. Flow: interest → application → review/ranking → e
   time / second program / transfer), cohort and group → creates Person/Student/Enrollment/
   YearRegistration (STU-01); triggers account creation (IAM-02) and payment plan (FIN-01) when
   those exist; bulk enrollment for a list of accepted candidates.
+- **Built** ([spec](../specs/ADM-04-enrollment.md)): enrollment form on the application detail (editable personal data, registration type, cohort, group, start date) and bulk enrollment at `/adm/enrollment`; creates Person/Student (or a new enrollment for a known student), Enrollment and YearRegistration in one transaction, application becomes `ENROLLED`. The account follows from the IAM-02 hook; the payment plan stays with Finance (FIN-01) and the contract with ADM-05. Working assumptions Q-145..Q-147.
 
 ### ADM-05 — Student contract & invoicing
 - **Goal:** generate the student contract with its installment annex and the first invoice (SRC-032, SRC-085).

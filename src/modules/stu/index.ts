@@ -40,3 +40,6 @@ export {
 export { REQUEST_FORMS } from "./domain/request-forms";
 export { RecognitionPanelView } from "./ui/recognition-panel";
 export { resolveRequester, enrollmentOf, type Requester } from "./server/request-resolve";
+// ADM-04: the enrollment of an application reuses the STU-01 services inside its own transaction.
+export { registerStudent, addEnrollment, registerYear } from "./server/student.service";
+export { personalSchema, type PersonalInput } from "./domain/schemas";

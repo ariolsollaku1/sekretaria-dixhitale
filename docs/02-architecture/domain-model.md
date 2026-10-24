@@ -69,7 +69,8 @@ erDiagram
   FeeScheduleItem ||--o{ FeeInstallmentTemplate : "paid in"
   FeeScheduleItem ||--o{ FeeDiscount : "may carry"
   PaymentPlan ||--o{ PlanInstallment : has
-  PlanInstallment ||--o{ Payment : "settled by"
+  PaymentPlan ||--o{ Payment : "paid by"
+  PlanInstallment ||--o{ Payment : "meant for"
   Enrollment ||--o{ Scholarship : receives
 
   Enrollment ||--o| Graduation : "ends with"
@@ -159,7 +160,7 @@ erDiagram
 | `FeeInstallmentTemplate` / `FeeDiscount` | (FIN-01) installments (`sequence`, `dueDate`, `amount`; they add up to the fee, Q-86) and early-payment discounts (PERCENT/AMOUNT `value`, `validFrom`..`validTo`, Q-87) of a fee |
 | `StudentContract` | `enrollmentId`, `academicYearId`, number, `fileId` |
 | `PaymentPlan` / `PlanInstallment` | (FIN-01) one plan per enrollment × academic year, copied from the fee schedule; installments carry `kind`, `label`, `dueDate`, `amount`, `earlyAmount`/`earlyUntil`, `status` (ACTIVE/CANCELLED), `scheduleItemId?`; adjusted or cancelled with a reason and audited, never deleted (Q-88, Q-89) |
-| `Payment` | `installmentId?`, `amount`, `paidAt`, `reference`, `source` (MANUAL/CSV/F5) |
+| `Payment` | (FIN-02) on a `PaymentPlan`: `amount`, `paidOn`, `reference`, `method` (CASH/BANK_TRANSFER/CARD/OTHER), `installmentId?` (the installment it is meant for), `status` (RECORDED/VOIDED, `voidReason`), `importBatch?`; never deleted. Allocation to installments, balances and financial clearance are **computed** (`domain/payment-rules.ts`), not stored (Q-109…Q-113) |
 | `Scholarship` | `enrollmentId`, `academicYearId`, `type` (FULL/PARTIAL), `percent`/`amount`, `reason` |
 | `FinancialClearance` | computed view: per enrollment & exam session — cleared yes/no (SRC-049) |
 

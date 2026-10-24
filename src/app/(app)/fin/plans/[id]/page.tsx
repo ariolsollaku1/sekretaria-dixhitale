@@ -5,20 +5,39 @@ import { PageHeader } from "@/components/ui/page-header";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
-import { AddInstallment, InstallmentActions, displayMoney, getPlan } from "@/modules/fin";
+import {
+  AddInstallment,
+  InstallmentActions,
+  RecordPayment,
+  VoidPayment,
+  displayMoney,
+  getPlan,
+  getPlanFinance,
+} from "@/modules/fin";
 
-// FIN-01 AC-8, AC-9: one payment plan with its installments and totals; Finance adjusts it.
+const STATUS_TONE = {
+  PAID: "success",
+  PARTIAL: "info",
+  UNPAID: "neutral",
+  OVERDUE: "danger",
+} as const;
+
+// FIN-01 AC-8, AC-9; FIN-02 AC-10: one payment plan with its installments and totals; Finance adjusts it.
 export default async function PlanPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const user = await requireUser(`/fin/plans/${id}`);
   if (!(await can(user, "fin.plan.read"))) return <ForbiddenView />;
   const plan = await getPlan(user, id);
   if (!plan) notFound();
-  const [t, tk, mayWrite] = await Promise.all([
+  const [t, tk, tp, mayWrite, mayReadPay, mayWritePay] = await Promise.all([
     getTranslations("fin.plan"),
     getTranslations("fin.kind"),
+    getTranslations("fin.payment"),
     can(user, "fin.plan.write"),
+    can(user, "fin.payment.read"),
+    can(user, "fin.payment.write"),
   ]);
+  const fin = mayReadPay ? await getPlanFinance(user, id) : null;
   const editable = mayWrite && plan.yearStatus !== "CLOSED";
   return (
     <>
@@ -47,7 +66,52 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
           <dt className="text-muted-foreground">{t("count")}</dt>
           <dd className="font-tabular text-xl font-semibold">{plan.count}</dd>
         </div>
+        {fin && (
+          <>
+            <div>
+              <dt className="text-muted-foreground">{tp("paid")}</dt>
+              <dd className="font-tabular text-xl font-semibold">{displayMoney(fin.paid)}</dd>
+            </div>
+            <div>
+              <dt className="text-muted-foreground">{tp("outstanding")}</dt>
+              <dd className="font-tabular text-xl font-semibold">
+                {displayMoney(fin.outstanding)}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-muted-foreground">{tp("overdue")}</dt>
+              <dd className="font-tabular text-xl font-semibold">{displayMoney(fin.overdue)}</dd>
+            </div>
+            {fin.credit !== "0.00" && (
+              <div>
+                <dt className="text-muted-foreground">{tp("credit")}</dt>
+                <dd className="font-tabular text-xl font-semibold">{displayMoney(fin.credit)}</dd>
+              </div>
+            )}
+            <div>
+              <dt className="text-muted-foreground">{tp("clearance")}</dt>
+              <dd>
+                <StatusBadge
+                  tone={fin.clearedToday ? "success" : "danger"}
+                  label={tp(fin.clearedToday ? "cleared" : "notCleared")}
+                />
+              </dd>
+            </div>
+          </>
+        )}
       </dl>
+      {fin && mayWritePay && (
+        <RecordPayment
+          planId={plan.id}
+          today={fin.today}
+          installments={plan.installments
+            .filter((i) => i.status === "ACTIVE")
+            .map((i) => ({
+              id: i.id,
+              label: `${i.sequence} · ${tk(i.kind)} · ${i.dueDate}`,
+            }))}
+        />
+      )}
 
       <div className="mb-6 overflow-x-auto">
         <table className="w-full text-left text-sm">
@@ -69,6 +133,16 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
               <th scope="col" className="py-2 pr-4">
                 {t("columns.early")}
               </th>
+              {fin && (
+                <>
+                  <th scope="col" className="py-2 pr-4">
+                    {tp("paid")}
+                  </th>
+                  <th scope="col" className="py-2 pr-4">
+                    {tp("outstanding")}
+                  </th>
+                </>
+              )}
               <th scope="col" className="py-2 pr-4">
                 {t("columns.status")}
               </th>
@@ -99,16 +173,36 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
                     ? t("earlyUntil", { amount: displayMoney(i.earlyAmount), date: i.earlyUntil })
                     : "—"}
                 </td>
+                {fin && (
+                  <>
+                    <td className="font-tabular py-2 pr-4">
+                      {fin.installments[i.id] ? displayMoney(fin.installments[i.id]!.paid) : "—"}
+                    </td>
+                    <td className="font-tabular py-2 pr-4">
+                      {fin.installments[i.id]
+                        ? displayMoney(fin.installments[i.id]!.outstanding)
+                        : "—"}
+                    </td>
+                  </>
+                )}
                 <td className="py-2 pr-4">
                   {i.status === "CANCELLED" ? (
                     <>
                       <StatusBadge tone="neutral" label={t("cancelled")} />
                       {i.cancelReason && <span className="ml-2 text-[13px]">{i.cancelReason}</span>}
                     </>
+                  ) : fin?.installments[i.id] ? (
+                    <StatusBadge
+                      tone={STATUS_TONE[fin.installments[i.id]!.status]}
+                      label={tp(`status.${fin.installments[i.id]!.status}`)}
+                    />
                   ) : i.adjusted ? (
                     <StatusBadge tone="info" label={t("adjusted")} />
                   ) : (
                     <StatusBadge tone="success" label={t("active")} />
+                  )}
+                  {i.adjusted && i.status === "ACTIVE" && fin && (
+                    <span className="text-muted-foreground ml-2 text-[13px]">{t("adjusted")}</span>
                   )}
                 </td>
                 {editable && (
@@ -128,6 +222,87 @@ export default async function PlanPage({ params }: { params: Promise<{ id: strin
         </table>
       </div>
       {editable && <AddInstallment planId={plan.id} />}
+
+      {fin && (
+        <section aria-labelledby="payments-h" className="mt-8">
+          <h2 id="payments-h" className="mb-3 text-lg font-semibold">
+            {tp("payments")}
+          </h2>
+          {fin.payments.length === 0 ? (
+            <p className="rounded-control border-border bg-muted border p-3 text-sm">
+              {tp("empty")}
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <caption className="sr-only">{tp("payments")}</caption>
+                <thead>
+                  <tr className="border-border border-b">
+                    <th scope="col" className="py-2 pr-4">
+                      {tp("paidOn")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {tp("amount")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {tp("method")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {tp("reference")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {tp("forInstallment")}
+                    </th>
+                    <th scope="col" className="py-2 pr-4">
+                      {t("columns.status")}
+                    </th>
+                    {mayWritePay && (
+                      <th scope="col" className="py-2">
+                        <span className="sr-only">{t("columns.actions")}</span>
+                      </th>
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {fin.payments.map((p) => (
+                    <tr
+                      key={p.id}
+                      className={`border-border border-b align-top ${p.status === "VOIDED" ? "text-muted-foreground line-through" : ""}`}
+                    >
+                      <td className="font-tabular py-2 pr-4">
+                        <time dateTime={p.paidOn}>{p.paidOn}</time>
+                      </td>
+                      <td className="font-tabular py-2 pr-4">{displayMoney(p.amount)}</td>
+                      <td className="py-2 pr-4">{tp(`methods.${p.method}`)}</td>
+                      <td className="py-2 pr-4">{p.reference || "—"}</td>
+                      <td className="font-tabular py-2 pr-4">{p.installmentSequence ?? "—"}</td>
+                      <td className="py-2 pr-4 no-underline">
+                        {p.status === "VOIDED" ? (
+                          <>
+                            <StatusBadge tone="neutral" label={tp("voidedBadge")} />
+                            {p.voidReason && (
+                              <span className="ml-2 text-[13px]">{p.voidReason}</span>
+                            )}
+                          </>
+                        ) : p.imported ? (
+                          <StatusBadge tone="info" label={tp("imported")} />
+                        ) : (
+                          <StatusBadge tone="success" label={tp("recorded")} />
+                        )}
+                      </td>
+                      {mayWritePay && (
+                        <td className="py-2">
+                          {p.status === "RECORDED" && <VoidPayment paymentId={p.id} />}
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+      )}
     </>
   );
 }

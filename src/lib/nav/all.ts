@@ -464,6 +464,24 @@ registerNav(
     group: "finance",
     order: 20,
   },
+  {
+    id: "payments-import",
+    labelKey: "paymentsImport",
+    href: "/fin/payments/import",
+    icon: "wallet",
+    permission: "fin.payment.write",
+    group: "finance",
+    order: 30,
+  },
+  {
+    id: "my-payments",
+    labelKey: "myPayments",
+    href: "/fin/mine",
+    icon: "wallet",
+    permission: "fin.payment.self",
+    group: "finance",
+    order: 40,
+  },
 );
 registerNav(
   {

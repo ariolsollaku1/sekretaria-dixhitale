@@ -102,7 +102,9 @@
       "evalCampaigns": "Fushatat e vlerësimit",
       "evalSurveys": "Vlerësimet e mia",
       "evalResults": "Rezultatet e vlerësimit",
-      "myEvalResults": "Vlerësimet e mia nga studentët"
+      "myEvalResults": "Vlerësimet e mia nga studentët",
+      "paymentsImport": "Importo pagesat",
+      "myPayments": "Pagesat e mia"
     },
     "languages": {
       "sq": "Shqip",
@@ -2639,7 +2641,10 @@
       "year": "Viti akademik",
       "installments": "Këstet",
       "total": "Totali",
-      "nextDue": "Afati i radhës"
+      "nextDue": "Afati i radhës",
+      "paid": "Paguar",
+      "outstanding": "Mbetur",
+      "clearance": "Gjendja financiare"
     },
     "fees": {
       "title": "Tarifat",
@@ -2694,7 +2699,8 @@
     },
     "plans": {
       "title": "Planet e pagesave",
-      "noYear": "Nuk është zgjedhur viti akademik."
+      "noYear": "Nuk është zgjedhur viti akademik.",
+      "importPayments": "Importo pagesat"
     },
     "generate": {
       "title": "Gjenero planet e pagesave për {year}",
@@ -2759,7 +2765,118 @@
       "required": "Plotësoni të gjitha fushat e detyrueshme, përfshirë arsyen.",
       "tooLong": "Teksti është shumë i gjatë.",
       "tooMany": "Shumë rreshta.",
-      "generic": "Diçka shkoi keq. Kontrolloni të dhënat dhe provoni përsëri."
+      "generic": "Diçka shkoi keq. Kontrolloni të dhënat dhe provoni përsëri.",
+      "future": "Data nuk mund të jetë në të ardhmen.",
+      "notInPlan": "Ky kësti nuk është pjesë e planit.",
+      "VOIDED": "Kjo pagesë është anuluar tashmë.",
+      "noPlan": "Studenti nuk ka plan pagesash për këtë vit akademik.",
+      "ambiguousPlan": "Disa plane pagesash përputhen me këtë student.",
+      "duplicateInFile": "E njëjta pagesë shfaqet dy herë në skedar.",
+      "method": "Mënyrë pagese e panjohur."
+    },
+    "clearance": {
+      "CLEARED": "Rregullt",
+      "NOT_CLEARED": "Jo i rregullt"
+    },
+    "payment": {
+      "record": "Regjistro një pagesë",
+      "recordTitle": "Regjistro një pagesë",
+      "saved": "Pagesa u regjistrua.",
+      "amount": "Shuma",
+      "paidOn": "Data e pagesës",
+      "method": "Mënyra",
+      "methods": {
+        "CASH": "Para në dorë",
+        "BANK_TRANSFER": "Transfertë bankare",
+        "CARD": "Kartë",
+        "OTHER": "Tjetër"
+      },
+      "reference": "Referenca",
+      "installment": "Për kestin",
+      "oldestFirst": "Kësti më i vjetër i papaguar",
+      "save": "Ruaj",
+      "close": "Mbyll",
+      "hint": "Pagesa paguan së pari kestin e zgjedhur e pastaj kestet më të vjetra të papaguara. Mund të anulohet më vonë, por nuk fshihet kurrë.",
+      "void": "Anulo pagesën",
+      "voidReason": "Arsyeja",
+      "confirmVoid": "Konfirmo anulimin",
+      "voided": "Pagesa u anulua.",
+      "due": "Për t'u paguar",
+      "paid": "Paguar",
+      "outstanding": "Mbetur",
+      "overdue": "Me vonesë",
+      "credit": "Tepricë",
+      "clearance": "Gjendja financiare sot",
+      "cleared": "Rregullt",
+      "notCleared": "Jo i rregullt",
+      "payments": "Pagesat",
+      "empty": "Ende nuk ka pagesa të regjistruara.",
+      "forInstallment": "Kësti",
+      "voidedBadge": "Anuluar",
+      "imported": "Importuar",
+      "recorded": "Regjistruar",
+      "status": {
+        "PAID": "Paguar",
+        "PARTIAL": "Paguar pjesërisht",
+        "UNPAID": "Pa paguar",
+        "OVERDUE": "Me vonesë"
+      }
+    },
+    "import": {
+      "title": "Importo pagesat",
+      "noYear": "Nuk është zgjedhur asnjë vit akademik.",
+      "file": "Skedari i pagesave për vitin akademik {year} (.csv ose .xlsx)",
+      "hint": "Rreshti i parë ka kokat: student_number (ose nim), amount, paid_on, reference, method. Datat: YYYY-MM-DD ose DD.MM.YYYY. Mënyra: cash, bank, card, other (parazgjedhja është transfertë bankare). Çdo rresht lidhet me planin e pagesave të studentit për këtë vit akademik. Maksimumi 2000 rreshta, 2 MB.",
+      "choose": "Zgjidh skedarin",
+      "template": "Shkarko shabllonin CSV",
+      "working": "Po kontrollohet…",
+      "summary": "{valid} nga {total} rreshta janë të vlefshëm ({created} të rinj, {duplicates} të regjistruar më parë e anashkalohen) dhe {invalid} kanë gabime.",
+      "errors": "Gabimet",
+      "row": "Rreshti {row}",
+      "columns": {
+        "student": "Studenti",
+        "amount": "Shuma",
+        "paidOn": "Data",
+        "reference": "Referenca",
+        "method": "Mënyra",
+        "status": "Gjendja"
+      },
+      "new": "I ri",
+      "duplicate": "Regjistruar më parë",
+      "truncated": "Po shfaqen {shown} nga {total} rreshta.",
+      "confirm": "Importo {count} pagesa",
+      "fixFirst": "Korrigjo gabimet në skedar dhe zgjidhe përsëri: importi bëhet i plotë ose aspak.",
+      "done": "{created} pagesa u regjistruan, {skipped} u anashkaluan.",
+      "fileErrors": {
+        "invalidEncoding": "Skedari nuk është UTF-8. Ruaje si “CSV UTF-8” ose përdor .xlsx.",
+        "empty": "Skedari është bosh ose ka vetëm kokat.",
+        "tooManyRows": "Skedari ka më shumë se 2000 rreshta.",
+        "tooLarge": "Skedari është më i madh se 2 MB.",
+        "missingColumns": "Mungojnë kolonat e detyrueshme",
+        "unsupportedFile": "Skedari nuk mund të lexohet. Përdor .csv ose .xlsx.",
+        "importHasErrors": "Skedari ka gabime; nuk u ruajt asgjë.",
+        "FORBIDDEN": "Nuk keni të drejtë të importoni.",
+        "UNAUTHENTICATED": "Hyni përsëri për të vazhduar."
+      }
+    },
+    "mine": {
+      "title": "Pagesat e mia",
+      "noStudent": "Nuk ka dosje studenti",
+      "noStudentHint": "Llogaria juaj nuk është lidhur me një dosje studenti.",
+      "empty": "Ende nuk keni plan pagesash.",
+      "clearedHint": "Më {date} nuk keni asgjë të vonuar.",
+      "owedHint": "Më {date} keni për të paguar {amount} që ka kaluar afatin.",
+      "planTitle": "{program} · viti akademik {year}",
+      "installments": "Këstet tuaja",
+      "columns": {
+        "kind": "Tarifa",
+        "dueDate": "Afati",
+        "amount": "Shuma",
+        "paid": "Paguar",
+        "outstanding": "Mbetur",
+        "status": "Gjendja"
+      },
+      "earlyUntil": "{amount} nëse paguhet deri më {date}"
     }
   },
   "adm": {

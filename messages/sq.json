@@ -82,7 +82,12 @@
       "studentStatistics": "Statistika",
       "timetable": "Orari i mësimit",
       "myTimetable": "Orari im",
-      "documents": "Dokumentet zyrtare"
+      "documents": "Dokumentet zyrtare",
+      "studentHome": "Faqja ime",
+      "messages": "Mesazhet",
+      "myAttendance": "Orët e mia",
+      "attendanceSessions": "Prania",
+      "myAbsences": "Mungesat e mia"
     },
     "languages": {
       "sq": "Shqip",
@@ -1081,6 +1086,11 @@
         "label": "Njoftime të reja të shkollës",
         "title": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri: {title}."
+      },
+      "message": {
+        "label": "Mesazhet nga kolegji",
+        "title": "Mesazh nga kolegji",
+        "body": "Keni një mesazh të ri."
       }
     },
     "stu": {
@@ -1117,6 +1127,10 @@
       "announcement": {
         "subject": "Njoftim i ri: {title}",
         "body": "Është publikuar një njoftim i ri në Sekretarin Dixhital:\n\n{title}"
+      },
+      "message": {
+        "subject": "Mesazh nga kolegji",
+        "body": "Keni një mesazh të ri në Sekretarinë Dixhitale."
       }
     },
     "stu": {
@@ -1832,6 +1846,43 @@
           "TRANSFER": "Transferim"
         }
       }
+    },
+    "home": {
+      "title": "Portali i studentit",
+      "studentNumber": "Nr. i studentit",
+      "year": "Viti akademik {code}",
+      "studies": "Studimet e mia",
+      "fullRecord": "Dosja e plotë",
+      "noOpen": "Nuk keni asnjë regjistrim aktiv ose të pezulluar.",
+      "closed": "{n, plural, one {# regjistrim i mëparshëm} other {# regjistrime të mëparshme}} në dosjen tuaj.",
+      "correction": "Të dhënat tuaja shfaqen këtu vetëm për lexim. Për t'i korrigjuar, kontaktoni Sekretarinë.",
+      "noYear": "Nuk jeni regjistruar për këtë vit",
+      "yearN": "Viti {n}",
+      "shortcuts": "Shkurtore",
+      "notifications": "Njoftimet",
+      "timetable": "Orari",
+      "calendar": "Kalendari",
+      "all": "Të gjitha",
+      "today": "Mësimet e sotme",
+      "noClasses": "Sot nuk keni mësim.",
+      "events": "Datat e ardhshme",
+      "noEvents": "Nuk ka data të ardhshme.",
+      "announcements": "Lajmërimet",
+      "noAnnouncements": "Nuk ka lajmërime.",
+      "unread": "{n, plural, =0 {Nuk keni njoftime të palexuara} one {# njoftim i palexuar} other {# njoftime të palexuara}}",
+      "noNotifications": "Nuk ka njoftime.",
+      "courses": "Lëndët e vitit tim",
+      "semester": "Semestri {number}",
+      "elective": "me zgjedhje",
+      "credits": "{n} kredite",
+      "creditsTotal": "Gjithsej: {n} kredite",
+      "coursesEmpty": "Plani nuk ka lëndë për këtë vit studimi.",
+      "courses_noRegistration": "Nuk jeni regjistruar ende për vitin aktual, prandaj nuk shfaqen lëndë.",
+      "courses_planDraft": "Plani mësimor i kohortës suaj nuk është miratuar ende.",
+      "courses_notActive": "Lëndët shfaqen vetëm për regjistrimet aktive.",
+      "noRecord": "Nuk keni dosje studenti",
+      "noRecordHint": "Llogaria juaj nuk është e lidhur me një student. Kontaktoni Sekretarinë.",
+      "open": "Hap portalin tim"
     }
   },
   "forms": {
@@ -2108,5 +2159,185 @@
     "pending": "{count, plural, one {# ekzekutim është në pritje ose në ekzekutim.} other {# ekzekutime janë në pritje ose në ekzekutim.}}",
     "unavailable": "Gjendja e kopjeve rezervë nuk është e disponueshme",
     "unavailableHint": "Kontrolloni lidhjen me bazën e të dhënave dhe regjistrat e serverit."
+  },
+  "msg": {
+    "title": "Mesazhet",
+    "intro": "Mesazhet që keni dërguar personave të një liste. Për të shkruar një të ri, hapni një listë (p.sh. listat e studentëve) dhe zgjidhni \"Dërgo mesazh këtyre personave\".",
+    "action": "Dërgo mesazh këtyre personave",
+    "columns": {
+      "subject": "Subjekti",
+      "sentAt": "Dërguar",
+      "source": "Lista",
+      "recipients": "Persona",
+      "noAccount": "Pa llogari",
+      "status": "Statusi"
+    },
+    "status": {
+      "PENDING": "Në dërgim",
+      "SENT": "Dërguar"
+    },
+    "source": {
+      "stu_lists": "Listat e studentëve",
+      "hr_lecturers": "Listat e pedagogëve"
+    },
+    "compose": {
+      "title": "Mesazh i ri",
+      "backHint": "Kthehuni te lista dhe ndryshoni filtrat.",
+      "recipients": "Ky mesazh i dërgohet {count} personave nga: {list}.",
+      "template": "Fillo nga një shabllon",
+      "subject": "Subjekti",
+      "body": "Mesazhi",
+      "bodyHint": "Tekst i thjeshtë. Mund të përdorni '{firstName}', '{lastName}' dhe '{fullName}'; zëvendësohen për çdo person.",
+      "send": "Dërgo mesazhin",
+      "confirmTitle": "Ta dërgoni këtë mesazh?",
+      "confirmBody": "Mesazhi do t'u dërgohet {count} personave dhe nuk mund të tërhiqet.",
+      "confirm": "Dërgo",
+      "sent": "Mesazhi u vu në radhë për dërgim."
+    },
+    "templates": {
+      "title": "Shabllonet e mesazheve",
+      "empty": "Ende nuk ka shabllone.",
+      "new": "Shabllon i ri",
+      "name": "Emri i shabllonit",
+      "create": "Ruaj shabllonin",
+      "saved": "Shablloni u ruajt.",
+      "saveAs": "Ruaje këtë tekst si shabllon",
+      "save": "Ruaj si shabllon",
+      "archive": "Arkivo",
+      "archiveTitle": "Ta arkivoni këtë shabllon?",
+      "archiveBody": "Shablloni \"{name}\" nuk do të ofrohet më. Mesazhet e dërguara nuk preken.",
+      "archived": "Shablloni u arkivua.",
+      "failed": "Shablloni nuk u arkivua."
+    },
+    "detail": {
+      "from": "Dërguar nga {name}",
+      "log": "Regjistri i dërgimit",
+      "summary": "{total} persona: {delivered} të dërguar, {queued} në pritje, {noAccount} pa llogari në portal.",
+      "person": "Personi",
+      "state": "Njoftimi në portal",
+      "email": "Emaili",
+      "pages": "Faqet",
+      "previous": "Para",
+      "next": "Pas",
+      "page": "Faqja {page} nga {pageCount}"
+    },
+    "delivery": {
+      "QUEUED": "Në pritje",
+      "DELIVERED": "Dërguar",
+      "NO_ACCOUNT": "Pa llogari në portal"
+    },
+    "emailState": {
+      "NONE": "Nuk u dërgua",
+      "QUEUED": "Në radhë",
+      "SENT": "Dërguar",
+      "FAILED": "Dështoi"
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Ky tekst është shumë i gjatë.",
+      "unknownPlaceholder": "Në kllapa gjarpërore mund të përdoren vetëm '{firstName}', '{lastName}' dhe '{fullName}'.",
+      "tooMany": "Kjo listë ka më shumë se 2000 persona. Ngushtoni filtrat dhe provoni përsëri.",
+      "noRecipients": "Në këtë listë nuk ka askënd, ndaj nuk ka kujt t'i shkruhet.",
+      "forbidden": "Nuk keni të drejtë të dërgoni mesazhe te kjo listë.",
+      "generic": "Diçka shkoi keq. Provoni përsëri."
+    }
+  },
+  "att": {
+    "noAssignments": "Nuk keni ngarkesa mësimore në këtë vit akademik.",
+    "noYear": "Nuk është zgjedhur viti akademik.",
+    "noGroups": "Nuk ka grupe në këtë vit akademik.",
+    "chooseGroup": "Zgjidhni një grup për të parë orët e tij.",
+    "group": "Grupi",
+    "show": "Shfaq",
+    "all": "Të gjitha",
+    "sessions": "Orët e mësimit",
+    "sessionsTitle": "Prania",
+    "noSessions": "Ende nuk ka orë mësimi.",
+    "open": "Hap",
+    "hoursCount": "{count, plural, one {# orë} other {# orë}}",
+    "counts": "Mungesa: {absent} · Të arsyetuara: {excused}",
+    "kind": {
+      "LECTURE": "Leksion",
+      "SEMINAR": "Seminar",
+      "LAB": "Laborator"
+    },
+    "status": {
+      "PLANNED": "E planifikuar",
+      "HELD": "E zhvilluar",
+      "CANCELLED": "E anuluar"
+    },
+    "mark": {
+      "PRESENT": "Prezent",
+      "ABSENT": "Mungon",
+      "EXCUSED": "I arsyetuar"
+    },
+    "notMarked": "Pa shënuar",
+    "noRoster": "Nuk ka studentë të regjistruar në këtë grup.",
+    "allPresent": "Të gjithë prezentë",
+    "saveHeld": "Ruaj dhe shëno si të zhvilluar",
+    "cancelClass": "Anulo orën",
+    "saved": "Prania u ruajt",
+    "cancelled": "Ora u anulua",
+    "added": "Ora u shtua",
+    "generated": "{created, plural, one {U krijua # orë} other {U krijuan # orë}}, {skipped} ekzistonin tashmë",
+    "generate": {
+      "title": "Krijo orët nga orari",
+      "submit": "Krijo orët",
+      "hint": "Krijon një orë për çdo termin të orarit të ngarkesës në intervalin e datave (më së shumti 120 ditë). Orët ekzistuese ruhen."
+    },
+    "extra": {
+      "title": "Shto një orë shtesë",
+      "submit": "Shto orën"
+    },
+    "form": {
+      "assignment": "Lënda",
+      "from": "Nga",
+      "to": "Deri",
+      "date": "Data",
+      "start": "Fillimi",
+      "end": "Mbarimi",
+      "hours": "Orë",
+      "topic": "Tema",
+      "note": "Shënim",
+      "reason": "Arsyeja e ndryshimit",
+      "reasonHint": "E detyrueshme për Sekretarinë: regjistrohet në ditarin e auditimit."
+    },
+    "mine": {
+      "title": "Orët e mia",
+      "noStaff": "Llogaria juaj nuk është e lidhur me asnjë kartelë personeli.",
+      "noStaffHint": "Kërkojini Burimeve Njerëzore ta lidhin llogarinë me kartelën tuaj."
+    },
+    "absences": {
+      "title": "Mungesat e mia",
+      "empty": "Nuk ka mungesa të regjistruara këtë vit akademik.",
+      "noStudent": "Llogaria juaj nuk është e lidhur me asnjë kartelë studenti.",
+      "noStudentHint": "Kontaktoni Sekretarinë."
+    },
+    "blocked": {
+      "FUTURE": "Ora ende nuk ka ndodhur; prania mund të futet nga dita e orës.",
+      "WINDOW_CLOSED": "Afati për futjen e pranisë ({days} ditë pas orës) ka përfunduar. Kërkojini Sekretarisë ta korrigjojë.",
+      "CANCELLED": "Kjo orë është anuluar.",
+      "YEAR_CLOSED": "Viti akademik është i mbyllur."
+    },
+    "errors": {
+      "generic": "Diçka shkoi keq. Kontrolloni të dhënat dhe provoni përsëri.",
+      "FORBIDDEN": "Nuk keni leje për këtë veprim.",
+      "invalidDate": "Shkruani një datë të vlefshme.",
+      "endBeforeStart": "Mbarimi duhet të jetë pas fillimit.",
+      "rangeTooLong": "Intervali mund të jetë më së shumti 120 ditë.",
+      "outsideYear": "Data duhet të jetë brenda vitit akademik.",
+      "timeRange": "Shkruani një orar të vlefshëm.",
+      "hoursRange": "Orët duhet të jenë një numër i plotë nga 1 në 12.",
+      "heldFixed": "Një orë e zhvilluar e ruan datën dhe orarin.",
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "incomplete": "Çdo student duhet të shënohet.",
+      "FUTURE": "Ora ende nuk ka ndodhur.",
+      "WINDOW_CLOSED": "Afati për futjen e pranisë ka përfunduar; Sekretaria mund ta korrigjojë.",
+      "CANCELLED": "Ora është anuluar.",
+      "YEAR_CLOSED": "Viti akademik është i mbyllur.",
+      "HELD_LOCKED": "Një orë e zhvilluar mund të anulohet vetëm nga Sekretaria, me arsye.",
+      "DUPLICATE": "Ekziston tashmë një orë me këtë datë dhe orë fillimi."
+    }
   }
 }

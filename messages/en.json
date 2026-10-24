@@ -82,7 +82,12 @@
       "studentStatistics": "Statistics",
       "timetable": "Class timetable",
       "myTimetable": "My timetable",
-      "documents": "Official documents"
+      "documents": "Official documents",
+      "studentHome": "Student home",
+      "messages": "Messages",
+      "myAttendance": "My classes",
+      "attendanceSessions": "Attendance",
+      "myAbsences": "My absences"
     },
     "languages": {
       "sq": "Shqip",
@@ -1081,6 +1086,11 @@
         "label": "New announcements",
         "title": "New announcement: {title}",
         "body": "A new announcement was published: {title}."
+      },
+      "message": {
+        "label": "Messages from the college",
+        "title": "Message from the college",
+        "body": "You have a new message."
       }
     },
     "stu": {
@@ -1117,6 +1127,10 @@
       "announcement": {
         "subject": "New announcement: {title}",
         "body": "A new announcement was published in the Digital Secretariat:\n\n{title}"
+      },
+      "message": {
+        "subject": "Message from the college",
+        "body": "You have a new message in the Digital Secretariat."
       }
     },
     "stu": {
@@ -1832,6 +1846,43 @@
           "TRANSFER": "Transfer"
         }
       }
+    },
+    "home": {
+      "title": "Student portal",
+      "studentNumber": "Student no.",
+      "year": "Academic year {code}",
+      "studies": "My studies",
+      "fullRecord": "Full record",
+      "noOpen": "You have no active or suspended enrollment.",
+      "closed": "{n, plural, one {# past enrollment} other {# past enrollments}} in your record.",
+      "correction": "Your data is read-only here. To correct it, contact the Secretariat.",
+      "noYear": "Not registered for this year",
+      "yearN": "Year {n}",
+      "shortcuts": "Shortcuts",
+      "notifications": "Notifications",
+      "timetable": "Timetable",
+      "calendar": "Calendar",
+      "all": "All",
+      "today": "Today's classes",
+      "noClasses": "No classes today.",
+      "events": "Upcoming dates",
+      "noEvents": "No upcoming dates.",
+      "announcements": "Announcements",
+      "noAnnouncements": "No announcements.",
+      "unread": "{n, plural, =0 {No unread notifications} one {# unread notification} other {# unread notifications}}",
+      "noNotifications": "No notifications.",
+      "courses": "Courses of my year",
+      "semester": "Semester {number}",
+      "elective": "elective",
+      "credits": "{n} credits",
+      "creditsTotal": "Total: {n} credits",
+      "coursesEmpty": "The plan has no courses for this year of study.",
+      "courses_noRegistration": "You are not registered for the current year yet, so no courses are shown.",
+      "courses_planDraft": "The curriculum plan of your cohort is not approved yet.",
+      "courses_notActive": "Courses are shown for active enrollments only.",
+      "noRecord": "You have no student record",
+      "noRecordHint": "Your account is not linked to a student. Contact the Secretariat.",
+      "open": "Open my portal"
     }
   },
   "forms": {
@@ -2108,5 +2159,185 @@
     "pending": "{count, plural, one {# run is waiting or running.} other {# runs are waiting or running.}}",
     "unavailable": "Backup status is unavailable",
     "unavailableHint": "Check the database connection and the server logs."
+  },
+  "msg": {
+    "title": "Messages",
+    "intro": "Messages you sent to the people of a list. To write a new one, open a list (for example the student lists) and choose \"Message these people\".",
+    "action": "Message these people",
+    "columns": {
+      "subject": "Subject",
+      "sentAt": "Sent",
+      "source": "List",
+      "recipients": "People",
+      "noAccount": "Without account",
+      "status": "Status"
+    },
+    "status": {
+      "PENDING": "Sending",
+      "SENT": "Sent"
+    },
+    "source": {
+      "stu_lists": "Student lists",
+      "hr_lecturers": "Lecturer lists"
+    },
+    "compose": {
+      "title": "New message",
+      "backHint": "Go back to the list and change the filters.",
+      "recipients": "This message goes to {count} people from: {list}.",
+      "template": "Start from a template",
+      "subject": "Subject",
+      "body": "Message",
+      "bodyHint": "Plain text. You can use '{firstName}', '{lastName}' and '{fullName}'; they are replaced for each person.",
+      "send": "Send message",
+      "confirmTitle": "Send this message?",
+      "confirmBody": "The message will be sent to {count} people and cannot be recalled.",
+      "confirm": "Send",
+      "sent": "The message was queued for sending."
+    },
+    "templates": {
+      "title": "Message templates",
+      "empty": "There are no templates yet.",
+      "new": "New template",
+      "name": "Template name",
+      "create": "Save template",
+      "saved": "Template saved.",
+      "saveAs": "Save this wording as a template",
+      "save": "Save as template",
+      "archive": "Archive",
+      "archiveTitle": "Archive this template?",
+      "archiveBody": "The template \"{name}\" will no longer be offered. Messages already sent are not affected.",
+      "archived": "Template archived.",
+      "failed": "The template could not be archived."
+    },
+    "detail": {
+      "from": "Sent by {name}",
+      "log": "Delivery log",
+      "summary": "{total} people: {delivered} delivered, {queued} waiting, {noAccount} without a portal account.",
+      "person": "Person",
+      "state": "Notice in the portal",
+      "email": "E-mail",
+      "pages": "Pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {pageCount}"
+    },
+    "delivery": {
+      "QUEUED": "Waiting",
+      "DELIVERED": "Delivered",
+      "NO_ACCOUNT": "No portal account"
+    },
+    "emailState": {
+      "NONE": "Not sent",
+      "QUEUED": "Queued",
+      "SENT": "Sent",
+      "FAILED": "Failed"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "This text is too long.",
+      "unknownPlaceholder": "Only '{firstName}', '{lastName}' and '{fullName}' can be used in curly brackets.",
+      "tooMany": "This list has more than 2000 people. Narrow the filters and try again.",
+      "noRecipients": "There is nobody in this list, so there is nobody to write to.",
+      "forbidden": "You may not send messages to this list.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "att": {
+    "noAssignments": "You have no teaching assignments in this academic year.",
+    "noYear": "No academic year is selected.",
+    "noGroups": "There are no groups in this academic year.",
+    "chooseGroup": "Choose a group to see its classes.",
+    "group": "Group",
+    "show": "Show",
+    "all": "All",
+    "sessions": "Classes",
+    "sessionsTitle": "Attendance",
+    "noSessions": "No classes yet.",
+    "open": "Open",
+    "hoursCount": "{count, plural, one {# hour} other {# hours}}",
+    "counts": "Absent: {absent} · Excused: {excused}",
+    "kind": {
+      "LECTURE": "Lecture",
+      "SEMINAR": "Seminar",
+      "LAB": "Laboratory"
+    },
+    "status": {
+      "PLANNED": "Planned",
+      "HELD": "Held",
+      "CANCELLED": "Cancelled"
+    },
+    "mark": {
+      "PRESENT": "Present",
+      "ABSENT": "Absent",
+      "EXCUSED": "Excused"
+    },
+    "notMarked": "Not marked",
+    "noRoster": "No students are registered in this group.",
+    "allPresent": "Everyone present",
+    "saveHeld": "Save and mark as held",
+    "cancelClass": "Cancel class",
+    "saved": "Attendance saved",
+    "cancelled": "Class cancelled",
+    "added": "Class added",
+    "generated": "{created, plural, one {# class created} other {# classes created}}, {skipped} already existed",
+    "generate": {
+      "title": "Create classes from the timetable",
+      "submit": "Create classes",
+      "hint": "Creates a class for every timetable slot of the assignment in the date range (at most 120 days). Existing classes are kept."
+    },
+    "extra": {
+      "title": "Add an extra class",
+      "submit": "Add class"
+    },
+    "form": {
+      "assignment": "Course",
+      "from": "From",
+      "to": "To",
+      "date": "Date",
+      "start": "Start",
+      "end": "End",
+      "hours": "Hours",
+      "topic": "Topic",
+      "note": "Note",
+      "reason": "Reason for the change",
+      "reasonHint": "Required for the Secretariat: it is recorded in the audit log."
+    },
+    "mine": {
+      "title": "My classes",
+      "noStaff": "No staff record is linked to your account.",
+      "noStaffHint": "Ask HR to link your account to your staff record."
+    },
+    "absences": {
+      "title": "My absences",
+      "empty": "No absences recorded this academic year.",
+      "noStudent": "No student record is linked to your account.",
+      "noStudentHint": "Contact the Secretariat."
+    },
+    "blocked": {
+      "FUTURE": "This class has not taken place yet; attendance can be entered from the day of the class.",
+      "WINDOW_CLOSED": "The period for entering attendance ({days} days after the class) has ended. Ask the Secretariat to correct it.",
+      "CANCELLED": "This class was cancelled.",
+      "YEAR_CLOSED": "The academic year is closed."
+    },
+    "errors": {
+      "generic": "Something went wrong. Check the entries and try again.",
+      "FORBIDDEN": "You are not allowed to do this.",
+      "invalidDate": "Enter a valid date.",
+      "endBeforeStart": "The end must be after the start.",
+      "rangeTooLong": "The range may be at most 120 days.",
+      "outsideYear": "The date must be inside the academic year.",
+      "timeRange": "Enter a valid time.",
+      "hoursRange": "Hours must be a whole number from 1 to 12.",
+      "heldFixed": "A held class keeps its date and time.",
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "incomplete": "Every student must be marked.",
+      "FUTURE": "The class has not taken place yet.",
+      "WINDOW_CLOSED": "The period for entering attendance has ended; the Secretariat can correct it.",
+      "CANCELLED": "The class is cancelled.",
+      "YEAR_CLOSED": "The academic year is closed.",
+      "HELD_LOCKED": "A held class can only be cancelled by the Secretariat, with a reason.",
+      "DUPLICATE": "A class with this date and start time already exists."
+    }
   }
 }

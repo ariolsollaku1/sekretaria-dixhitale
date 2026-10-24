@@ -4,6 +4,7 @@ import "@/modules/cal";
 import "@/modules/ntf";
 import "@/modules/hr";
 import "@/modules/stu";
+import "@/modules/att";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -195,6 +196,15 @@ registerNav({
   group: "teaching",
   order: 6,
 });
+registerNav({
+  id: "messages",
+  labelKey: "messages",
+  href: "/messages",
+  icon: "bell",
+  permission: "ntf.message.send",
+  group: "administration",
+  order: 6,
+});
 registerNav(
   {
     id: "staff",
@@ -260,6 +270,15 @@ registerNav(
     permission: "stu.student.read",
     group: "students",
     order: 13,
+  },
+  {
+    id: "student-home",
+    labelKey: "studentHome",
+    href: "/stu/home",
+    icon: "home",
+    permission: "stu.student.self",
+    group: "students",
+    order: 10,
   },
   {
     id: "my-student-record",
@@ -329,3 +348,32 @@ registerNav({
   group: "system",
   order: 41,
 });
+registerNav(
+  {
+    id: "my-attendance",
+    labelKey: "myAttendance",
+    href: "/att/mine",
+    icon: "clipboard",
+    permission: "att.attendance.record",
+    group: "teaching",
+    order: 9,
+  },
+  {
+    id: "attendance-sessions",
+    labelKey: "attendanceSessions",
+    href: "/att/sessions",
+    icon: "clipboard",
+    permission: "att.attendance.read",
+    group: "teaching",
+    order: 10,
+  },
+  {
+    id: "my-absences",
+    labelKey: "myAbsences",
+    href: "/att/absences",
+    icon: "clipboard",
+    permission: "att.attendance.self",
+    group: "teaching",
+    order: 11,
+  },
+);

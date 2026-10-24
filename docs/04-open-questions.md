@@ -63,6 +63,21 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-67 | Backups: off-site copy, encryption and who runs `pg_dump` | no | open | IT / Client host |
 | Q-68 | Backup and integrity failures: who is alerted | no | open | IT |
 | Q-69 | Export download: who may export and can it contain personal data | no | open | DPO / Management |
+| Q-55 | Student portal: requesting a correction of own data | no | open | Secretariat |
+| Q-56 | Student portal: which curriculum courses a student sees | no | open | Academic Affairs |
+| Q-57 | Student portal: access after the studies end (suspended, deregistered, graduated) | no | open | Secretariat / Management |
+| Q-58 | Student portal: how much the home page shows (horizons and counts) | no | open | Secretariat |
+| Q-59 | Student portal: where the home page lives | no | open | Secretariat |
+| Q-50 | Targeted messages: who may send, consent and opt-out | no | open | Secretariat / Legal |
+| Q-51 | Targeted messages: recipient limits and sending rhythm | no | open | Secretariat / IT |
+| Q-52 | Targeted messages: templates and placeholders | no | open | Secretariat |
+| Q-53 | Targeted messages: people without a portal account | no | open | Secretariat / IT |
+| Q-54 | Targeted messages: retention of content and delivery log | no | open | Secretariat / Legal |
+| Q-60 | Attendance: hours of a class session | no | open | Secretariat |
+| Q-61 | Attendance: edit window and corrections | no | open | Secretariat |
+| Q-62 | Attendance: statuses, roster and excused absences | no | open | Secretariat |
+| Q-63 | Attendance: creating class sessions | no | open | Secretariat |
+| Q-64 | Attendance: who sees what | no | open | Secretariat |
 
 ---
 
@@ -547,3 +562,110 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Working assumption:** only `sysadmin` (`plt.backup.manage`); every start and every download is
   audited; no second approval; exports stay downloadable until the retention removes them.
 - **Impact:** the permission grants and a possible approval step.
+### Q-55 — Student portal: requesting a correction of own data
+- **Context:** SRC-036, SRC-020 — the portal shows a student their data read-only; the brief mentions "request correction".
+- **Questions:** How does a student ask for a correction (a request form, e-mail to the Secretariat, in person)? Which fields may they ask to change? Who approves?
+- **Working assumption:** STU-03 only displays the data read-only with a note to contact the Secretariat; no correction flow is built until STU-07 (student requests) defines one.
+- **Impact:** a "request correction" action and its approval chain.
+
+### Q-56 — Student portal: which curriculum courses a student sees
+- **Context:** SRC-036 — the portal builds on the curriculum plan of the student's cohort (CUR-02).
+- **Questions:** Should a student see the whole plan, only the current year of study, or only courses they may register for? Are elective courses shown? Is a plan visible while still a draft?
+- **Working assumption:** the courses of the student's current year of study from the cohort's plan, grouped by semester, with credits and an elective mark; a plan in draft is never shown.
+- **Impact:** the course list and its filter.
+
+### Q-57 — Student portal: access after the studies end
+- **Context:** SRC-036, SRC-054 — students may be suspended, deregistered or graduated.
+- **Questions:** May such a student still sign in and see their home page and record? For how long? Are timetable and announcements still shown?
+- **Working assumption:** the account keeps working (account lifecycle is IAM-02); the home page shows the status prominently, lists past enrollments, and shows the timetable, calendar and plan only for active enrollments.
+- **Impact:** what a former student sees, and the cut-off.
+
+### Q-58 — Student portal: how much the home page shows
+- **Context:** SRC-036c, SRC-036d — calendar, timetable and announcements shown on the home page.
+- **Questions:** How many items and how far ahead are useful (next events, announcements, notifications)?
+- **Working assumption:** today's classes, the next 5 calendar events that end today or later, the latest 3 announcements and the latest 5 notifications (with the unread count); each links to its full page.
+- **Impact:** the counts and horizon only.
+
+### Q-59 — Student portal: where the home page lives
+- **Context:** SRC-036 — the platform has a dashboard at `/` with module widgets (PLT-06).
+- **Questions:** Should students land on a dedicated page or on the shared dashboard?
+- **Working assumption:** a dedicated page `/stu/home` (first item of the student menu) plus a "My studies" widget on the dashboard that links to it.
+- **Impact:** navigation and the post-login landing page.
+
+### Q-50 — Targeted messages: who may send, consent and opt-out
+- **Context:** SRC-057 — contact the students of a list (e.g. backlog students) about sessions and academic and financial obligations; NTF-03.
+- **Questions:** Which offices may message which lists? Must students consent to e-mail from the college, and may they switch it off? Are obligation notices (fees, exam sessions) mandatory?
+- **Working assumption:** sending needs `ntf.message.send` (system administrator, secretary, student affairs, finance, HR, administration, head of department, program coordinator) **and** read access to the list the recipients come from, so the list's own scope limits who can be reached. A message is a normal (optional) notification type: everyone gets the in-app notice, the e-mail follows the recipient's preference (default on). Nothing is mandatory.
+- **Impact:** the sender roles, a mandatory type for obligations, an unsubscribe rule.
+
+### Q-51 — Targeted messages: recipient limits and sending rhythm
+- **Context:** NTF-03; the Microsoft 365 mailbox has sending limits (Q-20).
+- **Questions:** Largest audience of one message? Daily mail quota of the mailbox? May the same person be messaged repeatedly?
+- **Working assumption:** at most 2 000 recipients per message (narrow the filters otherwise), sent in batches of 200 by a background job; no per-day quota and no throttling of repeated messages in v1.
+- **Impact:** the cap, throttling, approval for large audiences.
+
+### Q-52 — Targeted messages: templates and placeholders
+- **Context:** NTF-03 — "compose with templates/placeholders".
+- **Questions:** Which standard texts does the Secretariat use (session reminder, obligation notice…)? Which personal data may a text contain? Are templates shared or personal?
+- **Working assumption:** no official wording is shipped. Senders save their own templates (name, subject, text) which every sender sees and which are archived, never deleted. Placeholders are only `{firstName}`, `{lastName}` and `{fullName}`; any other `{…}` is refused. Plain text, no attachments, no reply handling.
+- **Impact:** a list of official templates, more placeholders (student number, program, amount due), attachments.
+
+### Q-53 — Targeted messages: people without a portal account
+- **Context:** NTF-03; students and staff exist as persons before their account is provisioned (IAM-02).
+- **Questions:** Should the college write to the personal e-mail kept on the person record when there is no account?
+- **Working assumption:** only portal users are reached (in-app notice + e-mail to the account address). People without an account are kept in the delivery log as "no account" and nothing is sent to the address on the person record.
+- **Impact:** a second delivery path to the personal e-mail address.
+
+### Q-54 — Targeted messages: retention of content and delivery log
+- **Context:** NTF-03 — delivery log; the content may refer to a person's obligations.
+- **Questions:** How long are sent messages and their per-person delivery results kept? Who may read them?
+- **Working assumption:** kept indefinitely (no hard deletes); the sender sees the messages they sent and system administrators (holders of `plt.audit.read`) see all; the log stores person ids and delivery state only, never the e-mail address.
+- **Impact:** retention period, wider access (e.g. head of office).
+
+### Q-60 — Attendance: hours of a class session
+- **Context:** SRC-043, HR-04 delivered hours — a class session carries the hours it counts for.
+- **Questions:** How long is an academic hour (45 minutes?) and are fractions of an hour allowed? Must
+  the hours of a session equal the timetable slot, or may the lecturer change them?
+- **Working assumption:** whole hours (1–12) per session; an academic hour is 45 minutes, so a session
+  generated from the timetable defaults to `round(minutes / 45)` (at least 1); the lecturer may change it.
+- **Impact:** the default, fractional hours, the input of HR-04.
+
+### Q-61 — Attendance: edit window and corrections
+- **Context:** SRC-043 — absences are stored and may be modified in case of error.
+- **Questions:** For how many days after a class may the lecturer still enter or change attendance?
+  Who may correct later, and must a reason be given? May attendance be entered for a class that has not happened yet?
+- **Working assumption:** the lecturer may enter and change the attendance of their own session from
+  the day of the class until 7 days after it (setting `att.editWindowDays`, whole days, 0 or more);
+  not before the class day; after that only the Secretariat, always with a written reason, audited;
+  nobody once the academic year is closed.
+- **Impact:** the window length, who corrects, the reason rule.
+
+### Q-62 — Attendance: statuses, roster and excused absences
+- **Context:** SRC-036b, SRC-043 — the roster of a group is marked present, absent or excused.
+- **Questions:** Who decides that an absence is excused and is a document needed? Does an excused
+  absence count as absence in the attendance percentage (Q-12, ATT-02)? Which students are on the
+  roster (suspended ones, students who changed group)?
+- **Working assumption:** the lecturer (or the Secretariat) marks present / absent / excused with an
+  optional note, no document; ATT-01 only records the status, how it counts is decided in ATT-02 with
+  Q-12; the roster is the students with an active enrollment whose yearly registration in the session's
+  academic year is in the group, as of saving; every roster student gets a mark on save.
+- **Impact:** the roster rule, who sets excused, counting.
+
+### Q-63 — Attendance: creating class sessions
+- **Context:** SRC-043 — attendance is entered per class.
+- **Questions:** Should sessions appear automatically from the timetable, and what about holidays
+  and cancelled classes? May lecturers add extra classes (make-up, replacements)?
+- **Working assumption:** a lecturer (or the Secretariat) generates the sessions of an assignment for
+  a date range from its timetable slots (at most 120 days, existing ones skipped, holidays are not
+  excluded automatically — a class that did not take place is marked cancelled); extra classes are
+  added by hand (date, time, hours, topic); sessions are never deleted, only cancelled.
+- **Impact:** automatic generation, holiday handling, deletion.
+
+### Q-64 — Attendance: who sees what
+- **Context:** SRC-036b, SRC-070 — students see their absences, lecturers theirs, staff reports.
+- **Questions:** May a lecturer see the attendance of colleagues' classes in the same group? May a
+  student see the excused status and notes? Do program coordinators and heads see their programs?
+- **Working assumption:** a lecturer sees and records only sessions of their own assignments; the
+  Secretariat reads and corrects all; heads of department and program coordinators read the sessions
+  of their scope; a student sees only their own absent and excused marks (with the status, without notes).
+- **Impact:** visibility of notes and of colleagues' classes.

@@ -7,6 +7,7 @@ import { requireUser } from "@/lib/auth";
 import { can } from "@/lib/authz/guard";
 import type { SearchParams } from "@/lib/tables/types";
 import { studentListsTable } from "@/modules/stu";
+import { MessageThesePeople } from "@/modules/ntf";
 
 export default async function StudentListsPage({
   searchParams,
@@ -18,7 +19,10 @@ export default async function StudentListsPage({
   const [t, search] = await Promise.all([getTranslations("stu.lists"), searchParams]);
   return (
     <>
-      <PageHeader title={t("title")} />
+      <PageHeader
+        title={t("title")}
+        actions={<MessageThesePeople def={studentListsTable} search={search} user={user} />}
+      />
       <nav aria-label={t("title")} className="mb-4">
         <ul className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {(["registered", "deregistered", "suspended"] as const).map((k) => (

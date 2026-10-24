@@ -23,3 +23,8 @@ Code: `src/modules/ntf`. Delivery (in-app + email) is PLT-11.
   obligations (SRC-057).
 - **Scope:** "Message these people" action on PLT-10 lists (permission-checked); compose with
   templates/placeholders; send via email + in-app; delivery log; no reply handling in v1.
+- **Built (v1, see the spec):** a PLT-10 table becomes a message source by declaring `recipient(row)`
+  (done for `stu.lists` and `hr.lecturers`); "Message these people" carries the table id + filters to
+  `/messages/new`; plain-text subject/body with three placeholders; shared templates; sending by the
+  `ntf.message.send` job in batches of 200 through `notify()`; delivery log per person. Assumptions
+  Q-50…Q-54.

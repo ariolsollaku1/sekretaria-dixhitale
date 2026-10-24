@@ -16,6 +16,7 @@ model TimetableEntry {
   createdById  String?            @map("created_by_id")
   updatedById  String?            @map("updated_by_id")
   assignment   TeachingAssignment @relation(fields: [assignmentId], references: [id])
+  sessions     ClassSession[]
 
   @@index([assignmentId])
   @@index([weekday])

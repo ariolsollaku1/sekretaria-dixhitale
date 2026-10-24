@@ -1,12 +1,18 @@
 import { registerPermissions } from "@/lib/authz/registry";
 
-// AC-6 (ADM-06), roles.md "ADM — admissions": the offices that run registration write notices.
-// Readers need nothing here: a notice is an announcement, read with `ntf.announcement.read`.
-const WRITERS = ["sysadmin", "secretary", "student_affairs", "administration"] as const;
-
+// ADM-06 (AC-6), roles.md "ADM — admissions": the offices that run registration write notices.
+// Readers need nothing for them: a notice is an announcement, read with `ntf.announcement.read`.
+// ADM-01 (AC-9, SRC-031): the Secretariat and Student Affairs work leads; Finance and the sysadmin
+// read them. Leads have no program yet, so there is no scope narrowing.
 registerPermissions("adm", {
-  permissions: ["adm.notice.write"],
-  grants: Object.fromEntries(WRITERS.map((r) => [r, ["adm.notice.write"]])),
+  permissions: ["adm.notice.write", "adm.lead.read", "adm.lead.write"],
+  grants: {
+    sysadmin: ["adm.notice.write", "adm.lead.read"],
+    secretary: ["adm.notice.write", "adm.lead.read", "adm.lead.write"],
+    student_affairs: ["adm.notice.write", "adm.lead.read", "adm.lead.write"],
+    administration: ["adm.notice.write"],
+    finance: ["adm.lead.read"],
+  },
 });
 
 // AC-12 (ADM-02), roles.md "ADM — admissions": Secretariat and Student Affairs write, Finance and

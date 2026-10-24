@@ -643,3 +643,12 @@ registerNav(
     order: 20,
   },
 );
+registerNav({
+  id: "leads",
+  labelKey: "leads",
+  href: "/adm/leads",
+  icon: "users",
+  permission: "adm.lead.read",
+  group: "students",
+  order: 60,
+});

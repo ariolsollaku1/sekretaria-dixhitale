@@ -115,7 +115,8 @@
       "myHours": "Orët e mia të realizuara",
       "deliveredHours": "Orët e realizuara",
       "evaluations": "Vlerësimet e performancës",
-      "myEvaluations": "Vlerësimet që duhet të plotësoj"
+      "myEvaluations": "Vlerësimet që duhet të plotësoj",
+      "leads": "Interesimet"
     },
     "languages": {
       "sq": "Shqip",
@@ -3290,7 +3291,14 @@
       "expiresBeforePublish": "Dita e fundit nuk mund të jetë para ditës së parë.",
       "yearNotFound": "Zgjidh një vit akademik.",
       "programNotFound": "Programi nuk ekziston.",
-      "audienceNotAllowed": "Nuk lejohesh të publikosh për të gjithë."
+      "audienceNotAllowed": "Nuk lejohesh të publikosh për të gjithë.",
+      "contactRequired": "Shkruani një email ose një telefon.",
+      "inactive": "Programi nuk është aktiv.",
+      "TRANSITION_NOT_ALLOWED": "Ky ndryshim statusi nuk lejohet.",
+      "assigneeCannotWork": "Ky përdorues nuk mund të punojë me interesimet.",
+      "NO_EMAIL": "Interesimi nuk ka email.",
+      "NO_CONSENT": "Personi nuk ka pranuar të kontaktohet.",
+      "FINISHED": "Interesimi është i mbyllur (ka aplikuar ose është i humbur)."
     },
     "status": {
       "SUBMITTED": "Dërguar",
@@ -3457,6 +3465,124 @@
       "male": "Mashkull",
       "download": "Shkarko",
       "readOnly": "Statusi ndryshohet në shqyrtimin e aplikimeve (ADM-03)."
+    },
+    "leads": {
+      "title": "Interesimet (leads)",
+      "addTitle": "Shto një interesim",
+      "importTitle": "Importo nga skedari CSV"
+    },
+    "source": {
+      "WEBSITE": "Faqja e internetit",
+      "CAMPAIGN": "Fushatë",
+      "EVENT": "Ngjarje",
+      "OTHER": "Tjetër"
+    },
+    "import": {
+      "hint": "Skedar CSV me kokë: firstName, lastName, email, phone, program, consent (emri dhe mbiemri janë të detyrueshëm; email ose telefon; consent: po/jo). Burimi dhe emri i ngjarjes zgjidhen këtu për të gjithë skedarin. Rreshtat me email ekzistues anashkalohen; një rresht i pavlefshëm e refuzon skedarin.",
+      "source": "Burimi",
+      "sourceNote": "Emri i ngjarjes ose fushatës",
+      "file": "Skedari CSV",
+      "submit": "Importo",
+      "done": "U importuan {imported} interesime, u anashkaluan {skipped} (email ekzistues).",
+      "rowErrors": "Skedari nuk u importua. Korrigjoni rreshtat e mëposhtëm:",
+      "rowError": "Rreshti {line}: {reason}",
+      "reasons": {
+        "nameRequired": "emri dhe mbiemri janë të detyrueshëm",
+        "tooLong": "vlerë shumë e gjatë",
+        "contactRequired": "duhet email ose telefon",
+        "invalidEmail": "email i pavlefshëm"
+      },
+      "fileErrors": {
+        "tooBig": "Skedari është më i madh se 1 MB.",
+        "empty": "Skedari nuk ka rreshta.",
+        "missingColumns": "Mungojnë kolonat e detyrueshme (firstName, lastName dhe email ose phone).",
+        "tooManyRows": "Skedari ka më shumë se 1000 rreshta."
+      }
+    },
+    "lead": {
+      "leads": "Interesimet",
+      "email": "Email",
+      "phone": "Telefoni",
+      "program": "Programi i interesit",
+      "source": "Burimi",
+      "consent": "Pëlqimi për kontakt",
+      "consentYes": "Po, më {at}",
+      "consentNo": "Jo",
+      "assignee": "Përgjegjësi",
+      "invitedAt": "Ftesa u dërgua më",
+      "submission": "Referenca e formularit",
+      "createdAt": "Regjistruar më",
+      "lostReason": "Arsyeja e humbjes",
+      "message": "Mesazhi",
+      "edit": "Ndrysho të dhënat",
+      "history": "Historiku",
+      "event": {
+        "CREATED": "Interesimi u regjistrua",
+        "STATUS": "Statusi: {from} → {to}",
+        "INVITED": "U dërgua ftesa për aplikim",
+        "ASSIGNED": "U caktua te {name}",
+        "UNASSIGNED": "U hoq përgjegjësi",
+        "EDITED": "U ndryshuan të dhënat",
+        "NOTE": "Shënim"
+      }
+    },
+    "invite": {
+      "subject": "Ftesë për të aplikuar në Kolegjin LOGOS",
+      "body": "Përshëndetje {name},\n\nfaleminderit për interesimin tuaj për studimet në Kolegjin Universitar LOGOS. Ju ftojmë të aplikoni për vitin e ri akademik. Për çdo pyetje, Zyra e Çështjeve Studentore është në dispozicionin tuaj.",
+      "bodyProgram": "Përshëndetje {name},\n\nfaleminderit për interesimin tuaj për programin “{program}” në Kolegjin Universitar LOGOS. Ju ftojmë të aplikoni për vitin e ri akademik. Për çdo pyetje, Zyra e Çështjeve Studentore është në dispozicionin tuaj."
+    },
+    "leadForm": {
+      "firstName": "Emri",
+      "lastName": "Mbiemri",
+      "email": "Email",
+      "phone": "Telefoni",
+      "program": "Programi",
+      "noProgram": "— pa program —",
+      "programNote": "Programi i interesit (tekst)",
+      "source": "Burimi",
+      "sourceNote": "Emri i ngjarjes ose fushatës",
+      "message": "Mesazhi",
+      "consent": "Personi ka pranuar të kontaktohet",
+      "add": "Shto interesimin",
+      "saved": "U ruajt."
+    },
+    "leadActions": {
+      "status": "Statusi",
+      "final": "Ky status është i fundit; nuk ka më ndryshime të lejuara.",
+      "lostReason": "Arsyeja (e detyrueshme për “I humbur”)",
+      "moveTo": "Kalo te: {status}",
+      "statusChanged": "Statusi u ndryshua.",
+      "assign": "Përgjegjësi",
+      "assignee": "Caktuar te",
+      "unassigned": "— askush —",
+      "assigned": "U caktua.",
+      "invite": "Ftesë për aplikim",
+      "inviteHint": "Dërgon një email me ftesë për të aplikuar. Lejohet vetëm për persona që kanë pranuar të kontaktohen.",
+      "sendInvitation": "Dërgo ftesën",
+      "invited": "Ftesa u vendos në radhën e dërgimit.",
+      "notes": "Shënime",
+      "note": "Shënim i ri",
+      "addNote": "Shto shënimin",
+      "noteAdded": "Shënimi u shtua."
+    },
+    "leadColumns": {
+      "name": "Emri",
+      "email": "Email",
+      "phone": "Telefoni",
+      "program": "Programi",
+      "programCode": "Kodi i programit",
+      "source": "Burimi",
+      "sourceNote": "Ngjarja / fushata",
+      "status": "Statusi",
+      "consent": "Pëlqimi",
+      "assignee": "Përgjegjësi",
+      "createdAt": "Regjistruar më"
+    },
+    "leadStatus": {
+      "NEW": "I ri",
+      "CONTACTED": "I kontaktuar",
+      "APPLIED": "Ka aplikuar",
+      "LOST": "I humbur"
     }
   },
   "off": {

@@ -126,3 +126,85 @@ model ApplicationDocument {
   @@index([applicationId, documentKey])
   @@map("application_documents")
 }
+
+// ADM-01: prospects before any application. Leads are never deleted (conventions).
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  APPLIED
+  LOST
+
+  @@map("lead_status")
+}
+
+enum LeadSource {
+  WEBSITE
+  CAMPAIGN
+  EVENT
+  OTHER
+
+  @@map("lead_source")
+}
+
+enum LeadEventKind {
+  CREATED
+  STATUS
+  EDITED
+  ASSIGNED
+  INVITED
+  NOTE
+
+  @@map("lead_event_kind")
+}
+
+model Lead {
+  id           String        @id @default(cuid(2))
+  firstName    String        @map("first_name")
+  lastName     String        @map("last_name")
+  email        String?
+  phone        String?
+  programId    String?       @map("program_id")
+  /// What the prospect typed as program of interest (kept when no program matches).
+  programNote  String?       @map("program_note")
+  message      String?
+  source       LeadSource
+  /// Event or campaign name.
+  sourceNote   String?       @map("source_note")
+  consent      Boolean       @default(false)
+  consentAt    DateTime?     @map("consent_at") @db.Timestamptz(3)
+  status       LeadStatus    @default(NEW)
+  lostReason   String?       @map("lost_reason")
+  assigneeId   String?       @map("assignee_id")
+  /// The PLT-15 submission this lead came from (website leads).
+  submissionId String?       @unique @map("submission_id")
+  invitedAt    DateTime?     @map("invited_at") @db.Timestamptz(3)
+  invitedById  String?       @map("invited_by_id")
+  createdAt    DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdById  String?       @map("created_by_id")
+  updatedById  String?       @map("updated_by_id")
+  program      StudyProgram? @relation(fields: [programId], references: [id])
+  events       LeadEvent[]
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([programId])
+  @@map("leads")
+}
+
+model LeadEvent {
+  id         String        @id @default(cuid(2))
+  leadId     String        @map("lead_id")
+  kind       LeadEventKind
+  fromStatus LeadStatus?   @map("from_status")
+  toStatus   LeadStatus?   @map("to_status")
+  /// A note, the reason of LOST, or the assignee id.
+  body       String?
+  actorId    String?       @map("actor_id")
+  createdAt  DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  lead       Lead          @relation(fields: [leadId], references: [id])
+
+  @@index([leadId, createdAt])
+  @@map("lead_events")
+}

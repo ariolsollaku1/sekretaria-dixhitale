@@ -115,7 +115,8 @@
       "myHours": "My delivered hours",
       "deliveredHours": "Delivered hours",
       "evaluations": "Performance evaluations",
-      "myEvaluations": "Evaluations to fill in"
+      "myEvaluations": "Evaluations to fill in",
+      "leads": "Leads"
     },
     "languages": {
       "sq": "Shqip",
@@ -3290,7 +3291,14 @@
       "expiresBeforePublish": "The last visible day cannot be before the first.",
       "yearNotFound": "Choose an academic year.",
       "programNotFound": "The program does not exist.",
-      "audienceNotAllowed": "You may not publish to everyone."
+      "audienceNotAllowed": "You may not publish to everyone.",
+      "contactRequired": "Enter an email or a phone.",
+      "inactive": "The program is not active.",
+      "TRANSITION_NOT_ALLOWED": "This status change is not allowed.",
+      "assigneeCannotWork": "This user cannot work with leads.",
+      "NO_EMAIL": "The lead has no email.",
+      "NO_CONSENT": "The person did not agree to be contacted.",
+      "FINISHED": "The lead is closed (applied or lost)."
     },
     "status": {
       "SUBMITTED": "Submitted",
@@ -3457,6 +3465,124 @@
       "male": "Male",
       "download": "Download",
       "readOnly": "The status changes in the application review (ADM-03)."
+    },
+    "leads": {
+      "title": "Leads",
+      "addTitle": "Add a lead",
+      "importTitle": "Import from a CSV file"
+    },
+    "source": {
+      "WEBSITE": "Website",
+      "CAMPAIGN": "Campaign",
+      "EVENT": "Event",
+      "OTHER": "Other"
+    },
+    "import": {
+      "hint": "A CSV file with the header: firstName, lastName, email, phone, program, consent (first and last name are required; email or phone; consent: yes/no). The source and event name are chosen here for the whole file. Rows whose email already exists are skipped; one invalid row refuses the file.",
+      "source": "Source",
+      "sourceNote": "Event or campaign name",
+      "file": "CSV file",
+      "submit": "Import",
+      "done": "{imported} leads imported, {skipped} skipped (existing email).",
+      "rowErrors": "The file was not imported. Fix these rows:",
+      "rowError": "Row {line}: {reason}",
+      "reasons": {
+        "nameRequired": "first and last name are required",
+        "tooLong": "value too long",
+        "contactRequired": "an email or phone is required",
+        "invalidEmail": "invalid email"
+      },
+      "fileErrors": {
+        "tooBig": "The file is larger than 1 MB.",
+        "empty": "The file has no rows.",
+        "missingColumns": "Required columns are missing (firstName, lastName and email or phone).",
+        "tooManyRows": "The file has more than 1000 rows."
+      }
+    },
+    "lead": {
+      "leads": "Leads",
+      "email": "Email",
+      "phone": "Phone",
+      "program": "Program of interest",
+      "source": "Source",
+      "consent": "Consent to be contacted",
+      "consentYes": "Yes, on {at}",
+      "consentNo": "No",
+      "assignee": "Assigned to",
+      "invitedAt": "Invitation sent",
+      "submission": "Form reference",
+      "createdAt": "Registered",
+      "lostReason": "Reason lost",
+      "message": "Message",
+      "edit": "Edit details",
+      "history": "History",
+      "event": {
+        "CREATED": "Lead registered",
+        "STATUS": "Status: {from} → {to}",
+        "INVITED": "Invitation to apply sent",
+        "ASSIGNED": "Assigned to {name}",
+        "UNASSIGNED": "Owner removed",
+        "EDITED": "Details changed",
+        "NOTE": "Note"
+      }
+    },
+    "invite": {
+      "subject": "Invitation to apply to LOGOS University College",
+      "body": "Hello {name},\n\nthank you for your interest in studying at LOGOS University College. We invite you to apply for the new academic year. The Student Affairs Office is at your disposal for any question.",
+      "bodyProgram": "Hello {name},\n\nthank you for your interest in the program “{program}” at LOGOS University College. We invite you to apply for the new academic year. The Student Affairs Office is at your disposal for any question."
+    },
+    "leadForm": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "program": "Program",
+      "noProgram": "— no program —",
+      "programNote": "Program of interest (text)",
+      "source": "Source",
+      "sourceNote": "Event or campaign name",
+      "message": "Message",
+      "consent": "The person agreed to be contacted",
+      "add": "Add lead",
+      "saved": "Saved."
+    },
+    "leadActions": {
+      "status": "Status",
+      "final": "This status is final; no further changes are allowed.",
+      "lostReason": "Reason (required for “Lost”)",
+      "moveTo": "Move to: {status}",
+      "statusChanged": "Status changed.",
+      "assign": "Owner",
+      "assignee": "Assigned to",
+      "unassigned": "— nobody —",
+      "assigned": "Assigned.",
+      "invite": "Invitation to apply",
+      "inviteHint": "Sends an email inviting the person to apply. Only allowed for people who agreed to be contacted.",
+      "sendInvitation": "Send invitation",
+      "invited": "The invitation was queued for sending.",
+      "notes": "Notes",
+      "note": "New note",
+      "addNote": "Add note",
+      "noteAdded": "Note added."
+    },
+    "leadColumns": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "program": "Program",
+      "programCode": "Program code",
+      "source": "Source",
+      "sourceNote": "Event / campaign",
+      "status": "Status",
+      "consent": "Consent",
+      "assignee": "Assigned to",
+      "createdAt": "Registered"
+    },
+    "leadStatus": {
+      "NEW": "New",
+      "CONTACTED": "Contacted",
+      "APPLIED": "Applied",
+      "LOST": "Lost"
     }
   },
   "off": {

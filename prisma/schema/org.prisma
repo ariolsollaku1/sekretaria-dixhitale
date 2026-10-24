@@ -128,6 +128,7 @@ model StudyProgram {
   events              Event[]
   registrationNotices RegistrationNotice[]
   applications        Application[]
+  leads               Lead[]
 
   @@index([departmentId])
   @@map("study_programs")

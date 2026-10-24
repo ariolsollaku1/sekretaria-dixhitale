@@ -33,6 +33,10 @@ the system works without it (manual entry / CSV import fallbacks).
 - **Scope:** a public `/forms` index page listing all public forms (and the public announcements
   page), a stable URL per form, and a short hand-over note for whoever maintains the website listing
   the links to add. Re-check with Marketing/IT who adds the links.
+- **Built (Q-95):** the index is at `/f` (`/forms` is the signed-in area); public notices are not
+  built (announcements need login). Sysadmin page `/admin/forms/links` shows the absolute
+  addresses; hand-over note in [website-links.md](../../02-architecture/website-links.md).
+  Spec: [INT-06](../specs/INT-06-website-links.md).
 
 ### INT-07 — Legacy data migration
 - **Goal:** load existing students, grades, staff and payment data (SRC-151).

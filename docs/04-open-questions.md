@@ -98,6 +98,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-92 | Attendance: which classes and marks count | no | open | Secretariat |
 | Q-93 | Attendance: what the student sees of the percentage | no | open | Secretariat |
 | Q-94 | Attendance: who may run the reports and the period | no | open | Secretariat |
+| Q-95 | Website links: index page address and public notices | no | open | Marketing / IT |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -924,3 +925,14 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Should the hub be the lecturer's landing page after sign-in?
 - **Working assumption:** page `/hr/teaching` (navigation group "teaching", first entry) and a "My teaching" card on the dashboard of lecturers; the post-login landing page is unchanged (as Q-59).
 - **Impact:** landing page, navigation.
+
+### Q-95 — Website links: index page address and public notices
+- **Context:** INT-06 (follow-up of Q-06) — SRC-030, SRC-037, SRC-114, SRC-133; the website only adds links.
+- **Questions:** Who adds the links on the LOGOS website, and is one link to a list of forms enough or
+  should each form be linked from its own section? Must announcements (notices) also be readable
+  without login (SRC-114 mentions standardized notices on the website)?
+- **Working assumption:** the list of public forms is at `/f` (the route `/forms` is the signed-in
+  area) and each form at `/f/<key>`; the website can link either. Announcements stay internal
+  (every audience requires a login); a public notices page is not built until the client confirms
+  it and which announcement audiences it would show.
+- **Impact:** the address of the index, an extra "public" audience for announcements.

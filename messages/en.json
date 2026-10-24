@@ -2191,7 +2191,26 @@
         "VERSION_TAKEN": "The version already exists.",
         "reasonRequired": "Enter the reason.",
         "generic": "The action failed."
-      }
+      },
+      "websiteLinks": "Website links"
+    },
+    "publicIndex": {
+      "title": "Forms open to everyone",
+      "intro": "Fill in a form without an account. After sending you receive a reference code.",
+      "empty": "No forms are available at the moment.",
+      "emptyHint": "Try again later or contact the Secretariat."
+    },
+    "links": {
+      "title": "Website links",
+      "intro": "The addresses to add to the LOGOS website (links only, no embedding). The list updates itself when a form is published or taken out of service.",
+      "index": "List of public forms",
+      "columns": {
+        "form": "Form",
+        "version": "Version",
+        "address": "Address"
+      },
+      "none": "No public form has been published yet.",
+      "back": "Back to form definitions"
     }
   },
   "documents": {

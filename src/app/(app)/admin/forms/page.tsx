@@ -25,9 +25,14 @@ export default async function AdminFormsPage() {
       <PageHeader
         title={t("title")}
         actions={
-          <Link href="/admin/forms/new" className={buttonVariants()}>
-            {t("new")}
-          </Link>
+          <div className="flex gap-2">
+            <Link href="/admin/forms/links" className={buttonVariants({ variant: "secondary" })}>
+              {t("websiteLinks")}
+            </Link>
+            <Link href="/admin/forms/new" className={buttonVariants()}>
+              {t("new")}
+            </Link>
+          </div>
         }
       />
       {rows.length === 0 ? (

@@ -109,7 +109,8 @@
       "myPackage": "My study package",
       "events": "Events",
       "applicationCycles": "Application cycles",
-      "applications": "Applications"
+      "applications": "Applications",
+      "approvedArchive": "Approved archive"
     },
     "languages": {
       "sq": "Shqip",
@@ -1070,6 +1071,61 @@
       "planNotApproved": "The curriculum plan of this enrollment is not approved yet.",
       "planEmpty": "The curriculum plan has no courses.",
       "failed": "The package could not be issued."
+    },
+    "archive": {
+      "title": "Approved documents archive",
+      "noYear": "Select an academic year.",
+      "forYear": "Academic year {year}",
+      "allPrograms": "All programs",
+      "show": "Show",
+      "empty": "No programs for this year.",
+      "emptyHint": "The programs you may see appear here with their plan and approved documents.",
+      "planInForce": "Curriculum plan in force",
+      "planLabel": "Version {version} (from {from})",
+      "noPlan": "No plan approved up to this year.",
+      "syllabi": "Syllabi",
+      "syllabiCount": "{approved} of {total} courses with an approved syllabus",
+      "institution": "Whole institution",
+      "noDocuments": "No archived documents for this year.",
+      "add": "Add document",
+      "addTitle": "Add an approved document",
+      "addBody": "Upload the approved diploma form, supplement or scanned decision for this academic year.",
+      "edit": "Edit",
+      "editTitle": "Edit document details",
+      "editBody": "The file, kind, year and program do not change; for another file withdraw the document and add a new one.",
+      "withdraw": "Withdraw",
+      "withdrawTitle": "Withdraw \"{title}\"?",
+      "withdrawBody": "The document stays in the archive marked as withdrawn with the reason; it is not deleted.",
+      "statusWithdrawn": "Withdrawn",
+      "download": "Download",
+      "added": "Document added.",
+      "updated": "Document saved.",
+      "withdrawn": "Document withdrawn.",
+      "failed": "The action failed.",
+      "kind": {
+        "DIPLOMA_FORM": "Diploma form",
+        "DIPLOMA_SUPPLEMENT": "Diploma supplement",
+        "DECISION": "Approved decision",
+        "OTHER": "Other"
+      },
+      "fields": {
+        "kind": "Kind",
+        "program": "Program",
+        "file": "File (PDF or scan)",
+        "title": "Title",
+        "decisionRef": "Decision no. (optional)",
+        "decisionDate": "Decision date (optional)",
+        "template": "Template version (optional)",
+        "notes": "Notes (optional)",
+        "reason": "Reason"
+      },
+      "columns": {
+        "title": "Title",
+        "kind": "Kind",
+        "decision": "Decision",
+        "file": "File",
+        "actions": "Actions"
+      }
     }
   },
   "jobs": {

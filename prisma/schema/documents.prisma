@@ -8,21 +8,22 @@ enum DocumentTemplateStatus {
 
 /// A versioned HTML template of a document type (PLT-09, ADR-0007); frozen once published.
 model DocumentTemplate {
-  id          String                 @id @default(cuid(2))
-  type        String
-  version     Int
-  language    String
-  validFrom   DateTime               @map("valid_from") @db.Date
-  validTo     DateTime?              @map("valid_to") @db.Date
-  status      DocumentTemplateStatus @default(DRAFT)
-  html        String
-  notes       String?
-  createdAt   DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt   DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
-  publishedAt DateTime?              @map("published_at") @db.Timestamptz(3)
-  createdById String?                @map("created_by_id")
-  updatedById String?                @map("updated_by_id")
-  issued      IssuedDocument[]
+  id           String                 @id @default(cuid(2))
+  type         String
+  version      Int
+  language     String
+  validFrom    DateTime               @map("valid_from") @db.Date
+  validTo      DateTime?              @map("valid_to") @db.Date
+  status       DocumentTemplateStatus @default(DRAFT)
+  html         String
+  notes        String?
+  createdAt    DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  publishedAt  DateTime?              @map("published_at") @db.Timestamptz(3)
+  createdById  String?                @map("created_by_id")
+  updatedById  String?                @map("updated_by_id")
+  issued       IssuedDocument[]
+  approvedDocs ApprovedDocument[]
 
   @@unique([type, version, language])
   @@index([type, status])

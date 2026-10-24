@@ -109,7 +109,8 @@
       "myPackage": "Paketa ime e studimit",
       "events": "Ngjarje",
       "applicationCycles": "Ciklet e aplikimit",
-      "applications": "Aplikimet"
+      "applications": "Aplikimet",
+      "approvedArchive": "Arkiva e miratuar"
     },
     "languages": {
       "sq": "Shqip",
@@ -1070,6 +1071,61 @@
       "planNotApproved": "Plani mësimor i këtij regjistrimi nuk është miratuar ende.",
       "planEmpty": "Plani mësimor nuk ka lëndë.",
       "failed": "Paketa nuk mund të lëshohej."
+    },
+    "archive": {
+      "title": "Arkiva e dokumenteve të miratuara",
+      "noYear": "Zgjidhni një vit akademik.",
+      "forYear": "Viti akademik {year}",
+      "allPrograms": "Të gjitha programet",
+      "show": "Shfaq",
+      "empty": "Nuk ka programe për këtë vit.",
+      "emptyHint": "Programet e lejuara për ju shfaqen këtu me planin dhe dokumentet e miratuara.",
+      "planInForce": "Plani mësimor në fuqi",
+      "planLabel": "Versioni {version} (nga {from})",
+      "noPlan": "Asnjë plan i miratuar deri në këtë vit.",
+      "syllabi": "Programet e lëndëve (syllabuset)",
+      "syllabiCount": "{approved} nga {total} lëndë me program të miratuar",
+      "institution": "I gjithë kolegji",
+      "noDocuments": "Nuk ka dokumente të arkivuara për këtë vit.",
+      "add": "Shto dokument",
+      "addTitle": "Shto dokument të miratuar",
+      "addBody": "Ngarkoni formën e miratuar të diplomës, suplementin ose vendimin e skanuar për këtë vit akademik.",
+      "edit": "Ndrysho",
+      "editTitle": "Ndrysho të dhënat e dokumentit",
+      "editBody": "Skedari, lloji, viti dhe programi nuk ndryshohen; për një skedar tjetër tërhiqeni dokumentin dhe shtoni një të ri.",
+      "withdraw": "Tërhiq",
+      "withdrawTitle": "Të tërhiqet \"{title}\"?",
+      "withdrawBody": "Dokumenti mbetet në arkivë i shënuar si i tërhequr me arsyen; nuk fshihet.",
+      "statusWithdrawn": "Tërhequr",
+      "download": "Shkarko",
+      "added": "Dokumenti u shtua.",
+      "updated": "Dokumenti u ruajt.",
+      "withdrawn": "Dokumenti u tërhoq.",
+      "failed": "Veprimi nuk u krye.",
+      "kind": {
+        "DIPLOMA_FORM": "Forma e diplomës",
+        "DIPLOMA_SUPPLEMENT": "Suplementi i diplomës",
+        "DECISION": "Vendim i miratuar",
+        "OTHER": "Tjetër"
+      },
+      "fields": {
+        "kind": "Lloji",
+        "program": "Programi",
+        "file": "Skedari (PDF ose skanim)",
+        "title": "Titulli",
+        "decisionRef": "Nr. i vendimit (opsionale)",
+        "decisionDate": "Data e vendimit (opsionale)",
+        "template": "Versioni i shabllonit (opsionale)",
+        "notes": "Shënime (opsionale)",
+        "reason": "Arsyeja"
+      },
+      "columns": {
+        "title": "Titulli",
+        "kind": "Lloji",
+        "decision": "Vendimi",
+        "file": "Skedari",
+        "actions": "Veprime"
+      }
     }
   },
   "jobs": {

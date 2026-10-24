@@ -113,6 +113,7 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-115 | Study package: which syllabus per course | no | open | Secretariat |
 | Q-116 | Study package: courses without an approved syllabus | no | open | Secretariat |
 | Q-117 | Study package: number, layout and readers | no | open | Secretariat |
+| Q-126 | Approved documents archive: contents, access and "in force" | no | open | Secretariat |
 | Q-80 | Lecturer workspace: who gets it | no | open | Rectorate / HR |
 | Q-81 | Lecturer workspace: what a lecturer sees of a roster | no | open | Secretariat |
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
@@ -1142,3 +1143,9 @@ Decisions taken in conversation that aren't architecture ADRs.
 - **Questions:** Besides the Secretariat and Student Affairs, who reads applications (Finance, Program Coordinators scoped to their program)? May staff correct a candidate's data?
 - **Working assumption:** Secretariat and Student Affairs configure cycles and read applications; Finance and sysadmin read only; coordinators do not see applications yet (ADM-03 decides); staff do not edit the candidate's data in this feature.
 - **Impact:** permissions and scope filters of ADM.
+
+### Q-126 — Approved documents archive: contents, access and "in force"
+- **Context:** SRC-111/112 — approved plans, syllabi, diploma form and supplement per academic year, current and past; CUR-07.
+- **Questions:** Which documents belong in the archive besides plans and syllabi? Who may read and who may file them? Which plan counts as "approved for" a year?
+- **Working assumption:** besides the plans and syllabi (linked from CUR-02/03), the archive stores diploma forms, supplements, scanned decisions and other documents, filed already approved (withdrawn with a reason, never deleted). Readers: sysadmin, head of department, program coordinator, secretary, student affairs, quality; writers: sysadmin, secretary, head of department (scoped). The plan in force in a year is the approved or archived plan with the latest valid-from year not after it.
+- **Impact:** grant lists, the "in force" rule, a link to the diploma templates in GRD-02.

@@ -10,7 +10,9 @@ Code: `src/modules/fin`. Finance reports by **calendar year**, payment plans ref
   diploma, backlog exam, other); preferential/early-payment discounts with date windows; payment
   plan per enrollment × academic year generated from schedule (installments with due dates and
   amounts) and adjustable per student (audited); scholarships applied (FIN-03).
-- **Assumption (Q-24):** structure is configurable; values entered by Finance.
+- **Assumption (Q-24):** structure is configurable; values entered by Finance. Details and working
+  assumptions in Q-85 (currency, fee keys), Q-86 (installments), Q-87 (discounts), Q-88 (who gets a
+  plan), Q-89 (adjustments). Spec: [FIN-01](../specs/FIN-01-fee-structure.md).
 
 ### FIN-02 — Payments & financial status
 - **Goal:** record payments and know who owes what — shared by Finance and Secretariat (SRC-080a, SRC-087).

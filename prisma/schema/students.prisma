@@ -53,6 +53,7 @@ model Enrollment {
   program          StudyProgram            @relation(fields: [programId], references: [id])
   cohort           Cohort                  @relation(fields: [cohortId], references: [id])
   years            YearRegistration[]
+  paymentPlans     PaymentPlan[]
   history          EnrollmentStatusEvent[]
   recognized       RecognizedCourse[]
 

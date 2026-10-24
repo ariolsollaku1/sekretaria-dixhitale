@@ -16,6 +16,8 @@ model AcademicYear {
   cohortsStarted    Cohort[]
   plans             CurriculumPlan[]
   syllabi           Syllabus[]
+  feeItems          FeeScheduleItem[]
+  paymentPlans      PaymentPlan[]
   id                String             @id @default(cuid(2))
   /// Derived from the dates: "2026-2027".
   code              String             @unique
@@ -97,6 +99,7 @@ model StudyProgram {
   enrollments    Enrollment[]
   cohorts        Cohort[]
   plans          CurriculumPlan[]
+  feeItems       FeeScheduleItem[]
   id             String           @id @default(cuid(2))
   /// Fixed after creation.
   departmentId   String           @map("department_id")

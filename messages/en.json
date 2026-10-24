@@ -88,6 +88,8 @@
       "myAttendance": "My classes",
       "attendanceSessions": "Attendance",
       "myAbsences": "My absences",
+      "fees": "Fee schedule",
+      "paymentPlans": "Payment plans",
       "attendanceReport": "Attendance report",
       "attendanceSummary": "Attendance summary",
       "teachingHub": "My teaching workspace"
@@ -2473,6 +2475,145 @@
         "title": "Attendance summary",
         "intro": "Held classes, average attendance and students below the threshold per group and course. Threshold: {threshold}%."
       }
+    }
+  },
+  "fin": {
+    "kind": {
+      "TUITION": "Tuition",
+      "ADMINISTRATIVE": "Administrative fee",
+      "DIPLOMA": "Diploma fee",
+      "BACKLOG_EXAM": "Backlog exam",
+      "OTHER": "Other"
+    },
+    "columns": {
+      "studentNumber": "Student number",
+      "name": "Name",
+      "program": "Program",
+      "programCode": "Program code",
+      "year": "Academic year",
+      "installments": "Installments",
+      "total": "Total",
+      "nextDue": "Next due date"
+    },
+    "fees": {
+      "title": "Fee schedule",
+      "forYear": "Fees for the academic year {year}",
+      "noYear": "No academic year is selected.",
+      "closed": "This academic year is closed: the fee schedule can no longer change.",
+      "program": "Program",
+      "all": "All programs",
+      "filter": "Show",
+      "empty": "No fees set for this program in this year.",
+      "singleInstallment": "One installment on the first day of the year",
+      "active": "Active",
+      "inactive": "Inactive",
+      "columns": {
+        "kind": "Fee",
+        "amount": "Amount",
+        "installments": "Installments",
+        "discounts": "Discounts",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "form": {
+      "add": "Add a fee",
+      "edit": "Edit",
+      "saved": "Fee saved.",
+      "kind": "Type",
+      "label": "Label (optional)",
+      "amount": "Amount",
+      "installments": "Installments",
+      "installmentsHint": "Leave empty for one installment on the first day of the academic year. The installments must add up to the fee.",
+      "dueDate": "Due date",
+      "installmentAmount": "Installment amount",
+      "remove": "Remove",
+      "addInstallment": "Add an installment",
+      "discounts": "Discounts",
+      "discountsHint": "An early-payment discount applies to payments made within its dates. Discounts do not combine: the largest one is used.",
+      "discountLabel": "Name",
+      "discountKind": "Discount type",
+      "discountKinds": {
+        "PERCENT": "Percentage",
+        "AMOUNT": "Amount"
+      },
+      "discountValue": "Value",
+      "validFrom": "From",
+      "validTo": "Until",
+      "addDiscount": "Add a discount",
+      "save": "Save",
+      "cancel": "Cancel",
+      "deactivate": "Deactivate",
+      "activate": "Reactivate"
+    },
+    "plans": {
+      "title": "Payment plans",
+      "noYear": "No academic year is selected."
+    },
+    "generate": {
+      "title": "Generate payment plans for {year}",
+      "program": "Program",
+      "studentNumber": "Student number (optional)",
+      "submit": "Generate",
+      "hint": "Creates a plan for every open enrollment of the program registered in this year that has none yet, from the active fees. Existing plans are not changed.",
+      "done": "Plans created: {created}; already existing: {skipped}."
+    },
+    "plan": {
+      "plans": "Payment plans",
+      "summary": "{program} · academic year {year}",
+      "closed": "This academic year is closed: the plan can no longer change.",
+      "total": "Plan total",
+      "earlyTotal": "Total if paid early",
+      "count": "Installments",
+      "installments": "Installments of the plan",
+      "columns": {
+        "sequence": "No.",
+        "kind": "Fee",
+        "dueDate": "Due date",
+        "amount": "Amount",
+        "early": "Early payment",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "earlyUntil": "{amount} until {date}",
+      "cancelled": "Cancelled",
+      "adjusted": "Adjusted",
+      "active": "Active"
+    },
+    "adjust": {
+      "adjust": "Adjust",
+      "cancelInstallment": "Cancel",
+      "confirmCancel": "Cancel installment",
+      "amount": "Amount",
+      "dueDate": "Due date",
+      "reason": "Reason",
+      "save": "Save",
+      "close": "Close",
+      "saved": "Saved.",
+      "add": "Add an installment",
+      "addTitle": "Add an installment to this plan",
+      "kind": "Type",
+      "label": "Label (optional)"
+    },
+    "errors": {
+      "FORBIDDEN": "You are not allowed to do this.",
+      "YEAR_CLOSED": "The academic year is closed.",
+      "CANCELLED": "This installment is already cancelled.",
+      "sumMismatch": "The installments must add up exactly to the fee.",
+      "duplicateDate": "Two installments have the same due date.",
+      "invalidDate": "Enter a valid date.",
+      "amountRange": "Installment amounts must be greater than zero.",
+      "amount": "Enter an amount with at most two decimals.",
+      "range": "The value is out of range.",
+      "reversed": "The end of the discount window is before its start.",
+      "duplicate": "A fee of this type and label already exists for the program and year.",
+      "noFees": "The program has no active fees for this year.",
+      "notFound": "No such student in this program and year.",
+      "inactive": "The program is not active.",
+      "required": "Fill in all required fields, including the reason.",
+      "tooLong": "The text is too long.",
+      "tooMany": "Too many rows.",
+      "generic": "Something went wrong. Check the entries and try again."
     }
   }
 }

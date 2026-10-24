@@ -78,6 +78,7 @@
       "contracts": "Contract expiry",
       "teachingLoad": "Annual load",
       "hrLists": "Lecturer lists",
+      "erasmusApplications": "Erasmus applications",
       "studentLists": "Secretariat lists",
       "studentStatistics": "Statistics",
       "timetable": "Class timetable",
@@ -2042,6 +2043,49 @@
         "AMBIGUOUS_ENROLLMENT": "The student has several open enrollments and the program code does not select exactly one.",
         "generic": "The action failed."
       }
+    }
+  },
+  "ers": {
+    "title": "Erasmus applications",
+    "intro": "Applications of students, academic staff and administrative staff for Erasmus mobility. States are changed in the forms inbox.",
+    "columns": {
+      "reference": "Reference",
+      "kind": "Applicant",
+      "name": "Name",
+      "email": "E-mail",
+      "destination": "Host institution",
+      "mobilityType": "Mobility type",
+      "period": "Period",
+      "state": "State",
+      "known": "Known in the system",
+      "submittedAt": "Submitted"
+    },
+    "kinds": {
+      "student": "Student",
+      "academic": "Academic staff",
+      "admin": "Administrative staff"
+    },
+    "states": {
+      "submitted": "Submitted",
+      "shortlisted": "Shortlisted",
+      "selected": "Selected",
+      "mobility_done": "Mobility done",
+      "rejected": "Rejected"
+    },
+    "mobility": {
+      "study": "Study",
+      "traineeship": "Traineeship",
+      "teaching": "Teaching",
+      "training": "Training"
+    },
+    "terms": {
+      "autumn": "Autumn semester",
+      "spring": "Spring semester",
+      "year": "Full year"
+    },
+    "known": {
+      "student": "Student",
+      "staff": "Staff"
     }
   },
   "forms": {

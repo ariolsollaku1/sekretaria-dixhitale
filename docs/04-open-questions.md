@@ -104,6 +104,8 @@ Status: `open` | `answered`. Blocking: `yes` | `no`.
 | Q-82 | Lecturer workspace: "this semester" | no | open | Secretariat |
 | Q-83 | Lecturer workspace: grades and absences views | no | open | Secretariat |
 | Q-84 | Lecturer workspace: location and dashboard card | no | open | Secretariat |
+| Q-96 | Erasmus forms: fields and mobility states | no | open | Erasmus Office |
+| Q-97 | Erasmus applications: known applicants and visibility | no | open | Erasmus Office |
 
 ---
 
@@ -936,3 +938,15 @@ Decisions taken in conversation that aren't architecture ADRs.
   (every audience requires a login); a public notices page is not built until the client confirms
   it and which announcement audiences it would show.
 - **Impact:** the address of the index, an extra "public" audience for announcements.
+
+### Q-96 — Erasmus forms: fields and mobility states
+- **Context:** SRC-037f, SRC-130…133 — three Erasmus forms exist in the source without their fields; the brief names the states.
+- **Questions:** Which data does each form (student, academic staff, administrative staff) collect? Which mobility types and periods exist? Which states does an application go through?
+- **Working assumption:** student form — identity, program, year of study, destination, mobility type (study / traineeship), period (autumn / spring / full year), academic year, language level, motivation; staff forms — identity, department or unit, position, destination, mobility type (teaching / training), start and end date, motivation. States `submitted` → `shortlisted` → `selected` → `mobility_done`, with `rejected` from any non-final state; editable by the sysadmin in the forms admin.
+- **Impact:** form definitions, states, the list columns.
+
+### Q-97 — Erasmus applications: known applicants and visibility
+- **Context:** SRC-133 — the brief asks to link an application to the student or staff record "when the applicant is known"; Q-37 covers public forms in general.
+- **Questions:** How is a public applicant recognized as a LOGOS student or staff member? Who besides the Erasmus officer may see applications (coordinators, heads of department)?
+- **Working assumption:** signed-in applications by the submitter's person; public student applications by student number and date of birth (both must match); public staff applications by the e-mail of the staff member's person. Only the Erasmus officer and the sysadmin see the applications; a link to the record is offered only to those who may read it.
+- **Impact:** applicant link, visibility for coordinators.

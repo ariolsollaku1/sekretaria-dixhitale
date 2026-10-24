@@ -78,6 +78,7 @@
       "contracts": "Mbarimi i kontratave",
       "teachingLoad": "Ngarkesa vjetore",
       "hrLists": "Listat e pedagogëve",
+      "erasmusApplications": "Aplikimet Erasmus",
       "studentLists": "Listat e Sekretarisë",
       "studentStatistics": "Statistika",
       "timetable": "Orari i mësimit",
@@ -2042,6 +2043,49 @@
         "AMBIGUOUS_ENROLLMENT": "Studenti ka disa regjistrime të hapura; kodi i programit nuk përzgjedh saktësisht një.",
         "generic": "Veprimi dështoi."
       }
+    }
+  },
+  "ers": {
+    "title": "Aplikimet Erasmus",
+    "intro": "Aplikimet e studentëve, stafit akademik dhe stafit administrativ për mobilitet Erasmus. Ndryshimi i gjendjes bëhet te kutia e formularëve.",
+    "columns": {
+      "reference": "Referenca",
+      "kind": "Aplikanti",
+      "name": "Emri",
+      "email": "Email",
+      "destination": "Institucioni pritës",
+      "mobilityType": "Lloji i mobilitetit",
+      "period": "Periudha",
+      "state": "Gjendja",
+      "known": "Në sistem",
+      "submittedAt": "Dërguar më"
+    },
+    "kinds": {
+      "student": "Student",
+      "academic": "Staf akademik",
+      "admin": "Staf administrativ"
+    },
+    "states": {
+      "submitted": "Dërguar",
+      "shortlisted": "Në listën e ngushtë",
+      "selected": "Përzgjedhur",
+      "mobility_done": "Mobiliteti përfunduar",
+      "rejected": "Refuzuar"
+    },
+    "mobility": {
+      "study": "Studim",
+      "traineeship": "Praktikë",
+      "teaching": "Mësimdhënie",
+      "training": "Trajnim"
+    },
+    "terms": {
+      "autumn": "Semestri i vjeshtës",
+      "spring": "Semestri i pranverës",
+      "year": "Viti i plotë"
+    },
+    "known": {
+      "student": "Student",
+      "staff": "Staf"
     }
   },
   "forms": {

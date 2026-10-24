@@ -6,6 +6,7 @@ import "@/modules/hr";
 import "@/modules/stu";
 import "@/modules/att";
 import "@/modules/fin";
+import "@/modules/ers";
 import { registerNav } from "./registry";
 
 // Each module registers its entries here (one import per module index.ts) so the shell never
@@ -309,6 +310,15 @@ registerNav(
     permission: "plt.form.submit",
     group: "students",
     order: 90,
+  },
+  {
+    id: "erasmus-applications",
+    labelKey: "erasmusApplications",
+    href: "/ers/applications",
+    icon: "clipboard",
+    permission: "ers.application.read",
+    group: "administration",
+    order: 41,
   },
   {
     id: "forms-inbox",

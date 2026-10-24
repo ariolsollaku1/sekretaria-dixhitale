@@ -1,0 +1,65 @@
+enum EvaluationKind {
+  LECTURER
+  STAFF
+
+  @@map("evaluation_kind")
+}
+
+enum CampaignStatus {
+  OPEN
+  CLOSED
+
+  @@map("campaign_status")
+}
+
+enum EvaluationState {
+  PENDING
+  SUBMITTED
+
+  @@map("evaluation_state")
+}
+
+/// A performance-evaluation round for one kind of staff and one period (HR-06). Never deleted.
+model EvaluationCampaign {
+  id               String         @id @default(cuid(2))
+  name             String
+  kind             EvaluationKind
+  periodStart      DateTime       @map("period_start") @db.Date
+  periodEnd        DateTime       @map("period_end") @db.Date
+  /// The questionnaire version pinned when the campaign was opened (a PLT-15 FormDefinition).
+  formDefinitionId String         @map("form_definition_id")
+  /// The evaluated person may see their own result once the campaign is closed.
+  resultsVisible   Boolean        @default(false) @map("results_visible")
+  status           CampaignStatus @default(OPEN)
+  closedAt         DateTime?      @map("closed_at") @db.Timestamptz(3)
+  closedById       String?        @map("closed_by_id")
+  createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  createdById      String?        @map("created_by_id")
+  evaluations      Evaluation[]
+
+  @@index([status])
+  @@map("evaluation_campaigns")
+}
+
+/// One person evaluated in one campaign by one assigned evaluator (HR-06).
+model Evaluation {
+  id          String             @id @default(cuid(2))
+  campaignId  String             @map("campaign_id")
+  staffId     String             @map("staff_id")
+  evaluatorId String?            @map("evaluator_id")
+  state       EvaluationState    @default(PENDING)
+  answers     Json?
+  /// Average of the 1-5 scale answers (Q-25), null when none.
+  score       Decimal?           @db.Decimal(3, 2)
+  submittedAt DateTime?          @map("submitted_at") @db.Timestamptz(3)
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  campaign    EvaluationCampaign @relation(fields: [campaignId], references: [id])
+  staff       Staff              @relation(fields: [staffId], references: [id])
+  evaluator   User?              @relation("EvaluationEvaluator", fields: [evaluatorId], references: [id])
+
+  @@unique([campaignId, staffId])
+  @@index([evaluatorId])
+  @@index([staffId])
+  @@map("evaluations")
+}

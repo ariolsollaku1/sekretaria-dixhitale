@@ -113,7 +113,9 @@
       "approvedArchive": "Approved archive",
       "accounts": "Accounts",
       "myHours": "My delivered hours",
-      "deliveredHours": "Delivered hours"
+      "deliveredHours": "Delivered hours",
+      "evaluations": "Performance evaluations",
+      "myEvaluations": "Evaluations to fill in"
     },
     "languages": {
       "sq": "Shqip",
@@ -1306,6 +1308,11 @@
         "label": "Staff contract expiry",
         "title": "Contracts ending",
         "body": "{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}."
+      },
+      "evaluation": {
+        "label": "Performance evaluations for you to fill in",
+        "title": "You have evaluations to fill in",
+        "body": "{count, plural, one {# evaluation was} other {# evaluations were}} assigned to you in the campaign “{campaign}”."
       }
     },
     "adm": {
@@ -1366,6 +1373,10 @@
       "contracts": {
         "subject": "Contracts ending this week",
         "body": "Hello,\n\n{ended, plural, =0 {} one {# contract has ended} other {# contracts have ended}}{ended, plural, =0 {} other { and }}{soon, plural, =0 {} one {# ends soon} other {# end soon}}.\n\nThe list is in the Digital Secretariat."
+      },
+      "evaluation": {
+        "subject": "Performance evaluations to fill in: {campaign}",
+        "body": "Hello,\n\n{count, plural, one {# evaluation was} other {# evaluations were}} assigned to you in the campaign “{campaign}”.\n\nPlease fill them in in the Digital Secretary."
       }
     },
     "adm": {
@@ -3694,6 +3705,104 @@
       "unregisterTitle": "Cancel your registration?",
       "unregisterBody": "Your place becomes available to others.",
       "unregistered": "Your registration was cancelled."
+    }
+  },
+  "hrEvaluation": {
+    "title": "Performance evaluations",
+    "intro": "Evaluation campaigns for lecturers (by the head of department) and administrative staff (by the direct supervisor), with performance-level reports.",
+    "campaigns": "Campaigns",
+    "noCampaigns": "There are no evaluation campaigns yet.",
+    "evaluations": "Evaluations",
+    "progress": "Submitted",
+    "yes": "Yes",
+    "no": "No",
+    "open": "Open campaign",
+    "openTitle": "New evaluation campaign",
+    "opened": "The campaign was opened.",
+    "close": "Close campaign",
+    "closeTitle": "Close the campaign?",
+    "closeConfirm": "Once closed, no evaluation of this campaign can change and the campaign cannot be reopened.",
+    "closed": "The campaign was closed.",
+    "assigned": "The evaluator was assigned.",
+    "assignFor": "Evaluator for {person}",
+    "unassigned": "No evaluator",
+    "submit": "Submit evaluation",
+    "submitted": "The evaluation was saved.",
+    "fields": {
+      "name": "Campaign name",
+      "kind": "Kind",
+      "period": "Period",
+      "periodStart": "Period start",
+      "periodEnd": "Period end",
+      "resultsVisible": "The evaluated person sees their own result after the campaign is closed"
+    },
+    "kinds": {
+      "LECTURER": "Lecturers",
+      "STAFF": "Administrative staff"
+    },
+    "campaignStates": {
+      "OPEN": "Open",
+      "CLOSED": "Closed"
+    },
+    "states": {
+      "PENDING": "Pending",
+      "SUBMITTED": "Submitted"
+    },
+    "columns": {
+      "campaign": "Campaign",
+      "person": "Evaluated person",
+      "department": "Department",
+      "departmentCode": "Department code",
+      "evaluator": "Evaluator",
+      "state": "State",
+      "score": "Score"
+    },
+    "report": {
+      "title": "Performance report",
+      "intro": "Average score (scale 1–5) of the submitted evaluations, within your scope.",
+      "empty": "There are no evaluations in your scope.",
+      "scope": "Scope",
+      "institution": "Institution",
+      "total": "Evaluations",
+      "submitted": "Submitted",
+      "average": "Average",
+      "levels": {
+        "department": "By department",
+        "faculty": "By faculty",
+        "institution": "Institution"
+      },
+      "group": {
+        "department": "Department",
+        "faculty": "Faculty"
+      }
+    },
+    "mine": {
+      "title": "Evaluations to fill in",
+      "none": "You have no evaluations to fill in",
+      "noneHint": "When an evaluation in an open campaign is assigned to you, it appears here.",
+      "until": "Until"
+    },
+    "evaluate": {
+      "title": "Evaluation of {person}"
+    },
+    "me": {
+      "title": "My evaluation results",
+      "link": "My evaluation results",
+      "none": "No results to show",
+      "noneHint": "A result appears once the campaign is closed and the institution allows results to be shown."
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "The text is too long.",
+      "invalidDate": "The date is not valid.",
+      "periodOrder": "The period cannot end before it starts.",
+      "noQuestionnaire": "There is no published questionnaire for this kind. Publish it in Forms (key hr-evaluation-lecturer or hr-evaluation-staff).",
+      "noStaff": "There is no active staff of this kind to evaluate.",
+      "unknownEvaluator": "The evaluator is not valid.",
+      "selfEvaluation": "Nobody can evaluate themselves.",
+      "CAMPAIGN_CLOSED": "The campaign is closed.",
+      "QUESTIONNAIRE_UNAVAILABLE": "The questionnaire of this campaign is not available.",
+      "generic": "The action failed. Please try again."
     }
   }
 }

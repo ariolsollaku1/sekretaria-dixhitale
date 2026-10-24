@@ -29,7 +29,7 @@ Code: `src/modules/hr`. HR data needed by Finance must be readable by `finance` 
 - **Scope:** delivered hours derived from sessions marked "held" in ATT-01; lecturer monthly
   summary; head of department approval per month; adjustments with reason; reports per
   lecturer/course/month/semester, PAE vs PAK.
-- **Assumption (Q-22, Q-131, Q-132, Q-133).** Approval per lecturer and ended month by the head of
+- **Assumption (Q-22, Q-134, Q-132, Q-133).** Approval per lecturer and ended month by the head of
   department; adjustments append-only with a reason.
 
 ### HR-05 — HR lists & reports
@@ -45,6 +45,10 @@ Code: `src/modules/hr`. HR data needed by Finance must be readable by `finance` 
   evaluator fills, evaluated person sees result (configurable); reports by department/faculty/
   institution.
 - **Assumption (Q-25):** questionnaire content configured later.
+- **Built (see [spec](../specs/HR-06-performance-evaluations.md)):** questionnaires are PLT-15
+  definitions with the keys `hr-evaluation-lecturer` / `hr-evaluation-staff` (edited and published in
+  the forms admin, hidden from the forms catalog); campaigns, evaluations, scoring and reports live in
+  the HR module at `/hr/evaluations`. Rules in Q-134.
 
 ### HR-07 — Lecturer workspace
 - **Goal:** lecturers' online access to their courses, rosters, grades and absences (SRC-070).

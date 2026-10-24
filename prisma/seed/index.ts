@@ -25,6 +25,7 @@ import { offRequestsSeeder } from "./off-requests";
 import { qaCampaignsSeeder } from "./qa-campaigns";
 import { curPackageSeeder } from "./cur-package";
 import { ntfEventsSeeder } from "./ntf-events";
+import { hrEvaluationsSeeder } from "./hr-evaluations";
 import { settingsSeeder } from "./settings";
 import type { SeedEnv, Seeder } from "./types";
 
@@ -47,6 +48,7 @@ const SEEDERS: Seeder[] = [
   stuRequestsSeeder,
   ersFormsSeeder,
   offRequestsSeeder,
+  hrEvaluationsSeeder,
   calTimetableSeeder,
   admNoticesSeeder,
   qaCampaignsSeeder,

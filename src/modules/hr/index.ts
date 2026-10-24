@@ -41,3 +41,21 @@ export {
 } from "./server/hours.queries";
 export { HoursMonthView, MonthList } from "./ui/hours-view";
 export { HoursActions } from "./ui/hours-actions";
+// HR-06 performance evaluations
+import "./evaluation-permissions";
+export { evaluationsTable } from "./server/evaluation.table";
+export {
+  listCampaigns,
+  getCampaignView,
+  listEvaluatorOptions,
+  myEvaluations,
+  getEvaluationToFill,
+  ownResults,
+  type CampaignRow,
+  type CampaignView,
+  type MyEvaluation,
+  type OwnResult,
+} from "./server/evaluation.queries";
+export { REPORT_LEVELS, type ReportLevel } from "./domain/evaluation-rules";
+export { OpenCampaignForm, CloseCampaignButton, AssignEvaluator } from "./ui/campaign-forms";
+export { EvaluationForm } from "./ui/evaluation-form";

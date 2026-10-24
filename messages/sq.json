@@ -113,7 +113,9 @@
       "approvedArchive": "Arkiva e miratuar",
       "accounts": "Llogaritë",
       "myHours": "Orët e mia të realizuara",
-      "deliveredHours": "Orët e realizuara"
+      "deliveredHours": "Orët e realizuara",
+      "evaluations": "Vlerësimet e performancës",
+      "myEvaluations": "Vlerësimet që duhet të plotësoj"
     },
     "languages": {
       "sq": "Shqip",
@@ -1306,6 +1308,11 @@
         "label": "Mbarimi i kontratave të stafit",
         "title": "Kontrata që mbarojnë",
         "body": "{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}."
+      },
+      "evaluation": {
+        "label": "Vlerësime performance që duhet të plotësoni",
+        "title": "Keni vlerësime për të plotësuar",
+        "body": "{count, plural, one {Ju është caktuar # vlerësim} other {Ju janë caktuar # vlerësime}} në fushatën “{campaign}”."
       }
     },
     "adm": {
@@ -1366,6 +1373,10 @@
       "contracts": {
         "subject": "Kontrata që mbarojnë këtë javë",
         "body": "Përshëndetje,\n\n{ended, plural, =0 {} one {# kontratë ka mbaruar} other {# kontrata kanë mbaruar}}{ended, plural, =0 {} other { dhe }}{soon, plural, =0 {} one {# mbaron së shpejti} other {# mbarojnë së shpejti}}.\n\nListën e shihni në Sekretarin Dixhital."
+      },
+      "evaluation": {
+        "subject": "Vlerësime performance për të plotësuar: {campaign}",
+        "body": "Përshëndetje,\n\n{count, plural, one {ju është caktuar # vlerësim} other {ju janë caktuar # vlerësime}} në fushatën “{campaign}”.\n\nPlotësojini në Sekretarin Dixhital."
       }
     },
     "adm": {
@@ -3694,6 +3705,104 @@
       "unregisterTitle": "Të anulohet regjistrimi juaj?",
       "unregisterBody": "Vendi juaj do t'u lihet të tjerëve.",
       "unregistered": "Regjistrimi juaj u anulua."
+    }
+  },
+  "hrEvaluation": {
+    "title": "Vlerësimi i performancës",
+    "intro": "Fushatat e vlerësimit të pedagogëve (nga drejtuesi i departamentit) dhe të personelit administrativ (nga eprori i drejtpërdrejtë), me raportet e nivelit të performancës.",
+    "campaigns": "Fushatat",
+    "noCampaigns": "Nuk ka ende fushata vlerësimi.",
+    "evaluations": "Vlerësimet",
+    "progress": "Të plotësuara",
+    "yes": "Po",
+    "no": "Jo",
+    "open": "Hap fushatën",
+    "openTitle": "Fushatë e re vlerësimi",
+    "opened": "Fushata u hap.",
+    "close": "Mbyll fushatën",
+    "closeTitle": "Të mbyllet fushata?",
+    "closeConfirm": "Pas mbylljes asnjë vlerësim i kësaj fushate nuk mund të ndryshohet dhe fushata nuk rihapet.",
+    "closed": "Fushata u mbyll.",
+    "assigned": "Vlerësuesi u caktua.",
+    "assignFor": "Vlerësuesi për {person}",
+    "unassigned": "Pa vlerësues",
+    "submit": "Dërgo vlerësimin",
+    "submitted": "Vlerësimi u ruajt.",
+    "fields": {
+      "name": "Emri i fushatës",
+      "kind": "Lloji",
+      "period": "Periudha",
+      "periodStart": "Fillimi i periudhës",
+      "periodEnd": "Fundi i periudhës",
+      "resultsVisible": "Personi i vlerësuar e shikon rezultatin e vet pas mbylljes"
+    },
+    "kinds": {
+      "LECTURER": "Pedagogë",
+      "STAFF": "Personel administrativ"
+    },
+    "campaignStates": {
+      "OPEN": "E hapur",
+      "CLOSED": "E mbyllur"
+    },
+    "states": {
+      "PENDING": "Në pritje",
+      "SUBMITTED": "Plotësuar"
+    },
+    "columns": {
+      "campaign": "Fushata",
+      "person": "Personi i vlerësuar",
+      "department": "Departamenti",
+      "departmentCode": "Kodi i departamentit",
+      "evaluator": "Vlerësuesi",
+      "state": "Gjendja",
+      "score": "Pikët"
+    },
+    "report": {
+      "title": "Raporti i performancës",
+      "intro": "Mesatarja e pikëve (shkalla 1–5) të vlerësimeve të plotësuara, brenda fushëveprimit tuaj.",
+      "empty": "Nuk ka vlerësime në fushëveprimin tuaj.",
+      "scope": "Fushëveprimi",
+      "institution": "Institucioni",
+      "total": "Vlerësime",
+      "submitted": "Të plotësuara",
+      "average": "Mesatarja",
+      "levels": {
+        "department": "Sipas departamentit",
+        "faculty": "Sipas fakultetit",
+        "institution": "Institucioni"
+      },
+      "group": {
+        "department": "Departamenti",
+        "faculty": "Fakulteti"
+      }
+    },
+    "mine": {
+      "title": "Vlerësimet që duhet të plotësoj",
+      "none": "Nuk keni vlerësime për të plotësuar",
+      "noneHint": "Kur t’ju caktohet një vlerësim në një fushatë të hapur, do të shfaqet këtu.",
+      "until": "Deri më"
+    },
+    "evaluate": {
+      "title": "Vlerësimi i {person}"
+    },
+    "me": {
+      "title": "Rezultatet e mia të vlerësimit",
+      "link": "Rezultatet e mia të vlerësimit",
+      "none": "Nuk ka rezultate për t’u shfaqur",
+      "noneHint": "Rezultati shfaqet kur fushata është mbyllur dhe institucioni ka lejuar shfaqjen e rezultateve."
+    },
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "invalidDate": "Data nuk është e vlefshme.",
+      "periodOrder": "Fundi i periudhës nuk mund të jetë para fillimit.",
+      "noQuestionnaire": "Nuk ka pyetësor të publikuar për këtë lloj. Publikojeni te Formularët (çelësi hr-evaluation-lecturer ose hr-evaluation-staff).",
+      "noStaff": "Nuk ka staf aktiv të këtij lloji për t’u vlerësuar.",
+      "unknownEvaluator": "Vlerësuesi nuk është i vlefshëm.",
+      "selfEvaluation": "Askush nuk mund ta vlerësojë veten.",
+      "CAMPAIGN_CLOSED": "Fushata është e mbyllur.",
+      "QUESTIONNAIRE_UNAVAILABLE": "Pyetësori i kësaj fushate nuk është i disponueshëm.",
+      "generic": "Veprimi nuk u krye. Provoni përsëri."
     }
   }
 }

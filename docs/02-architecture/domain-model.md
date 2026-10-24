@@ -53,6 +53,8 @@ erDiagram
 
   PlanCourse ||--o{ TeachingAssignment : "taught via"
   Staff ||--o{ TeachingAssignment : teaches
+  EvaluationCampaign ||--o{ Evaluation : contains
+  Staff ||--o{ Evaluation : "is evaluated (HR-06)"
   StudentGroup ||--o{ TeachingAssignment : for
 
   TeachingAssignment ||--o{ ClassSession : "held as"
@@ -185,7 +187,8 @@ erDiagram
 |---|---|
 | `Staff` | (HR-01, implemented) `personId` (unique), `kind` (ACADEMIC/ADMINISTRATIVE), `category` (PAE/PAK/VOLUNTEER), `degree?`, `title?`, `departmentId?`, `retired`, `primaryEmployer?` (PAK only), `contractStart`, `contractEnd?`, `active` (employment ended = false; never deleted). |
 | `EmploymentContract` | `staffId`, `type`, `startDate`, `endDate`, `fileId` |
-| `PerformanceEvaluation` | `staffId`, `evaluatorId`, `period`, form submission ref, `score` |
+| `EvaluationCampaign` | (HR-06) `name`, `kind` (LECTURER/STAFF), `periodStart`, `periodEnd`, `formDefinitionId` (the pinned PLT-15 questionnaire version, keys `hr-evaluation-lecturer` / `hr-evaluation-staff`), `resultsVisible`, `status` (OPEN/CLOSED, no reopen), `closedAt?`; never deleted. |
+| `Evaluation` | (HR-06) `campaignId`, `staffId` (evaluated), `evaluatorId?` (User), `state` (PENDING/SUBMITTED), `answers` (JSON validated against the pinned questionnaire), `score?` (mean of the 1–5 scale answers, Q-25), `submittedAt?`; unique per campaign and staff member. Replaces the earlier `PerformanceEvaluation` sketch. |
 | Staff requests | (OFF-01, implemented) no table of their own: `FormSubmission` rows of the forms `staff-leave`, `staff-supplies`, `staff-certificate`, `staff-authorization` (handler `off.request`). The chain is in the definition: transitions name the `roles` that may take them, and `submitRoles` limits who may fill the form in (PLT-15 additions). History per staff member = the submissions of the account. |
 
 ### QA / ERS / LIB / NTF

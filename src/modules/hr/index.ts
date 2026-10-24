@@ -20,3 +20,11 @@ export {
 export { contractsTable } from "./server/contract.table";
 import "./server/contract.job";
 export { lecturersTable } from "./server/lecturers.table";
+export { TeachingHubView, TeachingSummary } from "./ui/teaching-hub";
+export {
+  getTeachingHub,
+  getAssignmentRoster,
+  type TeachingHub,
+  type AssignmentRoster,
+} from "./server/teaching.queries";
+import "./server/teaching-widget";

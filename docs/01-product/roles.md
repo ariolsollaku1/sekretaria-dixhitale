@@ -64,6 +64,7 @@ Exact permissions per feature are defined in each feature spec.
 | GRD — graduation, diplomas | | W | | | R | | | | | r | R | R |
 | FIN — finance | | R | R | | W | | | | | r | | |
 | HR — staff | R | R | | r | R | W | R | | | | R | |
+| HR — delivered hours | R | R | | r (own) | R | W (adjust) | | | | | W (approve, own department) | |
 | LIB — library | | R | | | | | | W | | r | | |
 | QA — evaluations, alumni | | | | r (own results) | | R | W | | | r (fill) | R | |
 | ERS — Erasmus | | R | | | | | | | | r (apply) | | |

@@ -12,6 +12,7 @@ model TeachingAssignment {
   sessions           ClassSession[]
   evalParticipations EvalParticipation[]
   evalResponses      EvalResponse[]
+  hoursAdjustments   HoursAdjustment[]
   id                 String              @id @default(cuid(2))
   groupId            String              @map("group_id")
   planCourseId       String              @map("plan_course_id")

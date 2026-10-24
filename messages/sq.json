@@ -111,7 +111,9 @@
       "applicationCycles": "Ciklet e aplikimit",
       "applications": "Aplikimet",
       "approvedArchive": "Arkiva e miratuar",
-      "accounts": "Llogaritë"
+      "accounts": "Llogaritë",
+      "myHours": "Orët e mia të realizuara",
+      "deliveredHours": "Orët e realizuara"
     },
     "languages": {
       "sq": "Shqip",
@@ -1931,6 +1933,99 @@
       "rosterEmpty": "Asnjë student nuk është regjistruar në këtë grup këtë vit.",
       "studentNumber": "Nr. i studentit",
       "studentName": "Emri"
+    },
+    "hours": {
+      "title": "Orët e realizuara",
+      "intro": "Orët e realizuara nga pedagogët çdo muaj: orët e mësimeve të shënuara si të zhvilluara, plus rregullimet. Përgjegjësi i departamentit miraton muajin e çdo pedagogu pasi ai përfundon.",
+      "reportLink": "Raport sipas lëndës",
+      "report": {
+        "title": "Orët e realizuara sipas lëndës",
+        "intro": "Orët e realizuara për pedagog, lëndë dhe muaj për vitin akademik të zgjedhur, me totale sipas kategorisë së stafit (të brendshëm PAE, të jashtëm PAK, vullnetarë)."
+      },
+      "mine": {
+        "title": "Orët e mia të realizuara",
+        "intro": "Mësimet që keni zhvilluar çdo muaj dhe orët e tyre. Muaji miratohet nga përgjegjësi i departamentit pasi përfundon.",
+        "noStaff": "Nuk ka regjistrim stafi",
+        "noStaffHint": "Llogaria juaj nuk është lidhur me një regjistrim stafi. Pyesni Burimet Njerëzore."
+      },
+      "columns": {
+        "lecturer": "Pedagogu",
+        "category": "Kategoria",
+        "department": "Departamenti",
+        "month": "Muaji",
+        "sessions": "Mësime të zhvilluara",
+        "heldHours": "Orë të zhvilluara",
+        "adjustments": "Rregullime",
+        "total": "Orë gjithsej",
+        "pending": "Pa regjistruar",
+        "state": "Miratimi",
+        "course": "Lënda",
+        "kind": "Lloji",
+        "group": "Grupi",
+        "semester": "Semestri"
+      },
+      "filters": {
+        "month": "Muaji (VVVV-MM)",
+        "category": "Kategoria",
+        "department": "Kodi i departamentit",
+        "lecturer": "Pedagogu",
+        "state": "Miratimi",
+        "course": "Lënda",
+        "semester": "Semestri"
+      },
+      "state": {
+        "PENDING": "Në pritje",
+        "APPROVED": "Miratuar",
+        "CHANGED": "Ndryshuar pas miratimit",
+        "OPEN": "Rihapur"
+      },
+      "byCourse": "Sipas lëndës",
+      "noHours": "Ende nuk ka orë të realizuara.",
+      "attendanceList": "Mësimet e muajit",
+      "noSessions": "Nuk ka mësime këtë muaj.",
+      "adjustments": "Rregullime",
+      "noAdjustments": "Nuk ka rregullime.",
+      "pendingHint": "{n, plural, one {# mësim i planifikuar nuk është regjistruar ende.} other {# mësime të planifikuara nuk janë regjistruar ende.}}",
+      "pendingShort": "{n} pa regjistruar",
+      "changedHint": "Mësimet ose rregullimet kanë ndryshuar pas miratimit. Muaji kërkon miratim të ri.",
+      "hoursN": "{n, plural, one {# orë} other {# orë}}",
+      "monthSummary": "{total} orë · {sessions} mësime",
+      "approved": "Muaji u miratua.",
+      "reopened": "Muaji u rihap.",
+      "adjusted": "Rregullimi u ruajt.",
+      "actions": {
+        "approve": "Mirato muajin",
+        "reapprove": "Mirato përsëri",
+        "reopen": "Rihap muajin"
+      },
+      "form": {
+        "reason": "Arsyeja",
+        "assignment": "Lënda",
+        "hours": "Orë (+/-)"
+      },
+      "adjustForm": {
+        "title": "Shto një rregullim",
+        "submit": "Shto rregullimin",
+        "hint": "Orë të plota nga -100 deri në 100 me një arsye. Rregullimet nuk ndryshohen; një gabim korrigjohet me një rregullim të kundërt. Një muaj i miratuar duhet rihapur së pari."
+      },
+      "errors": {
+        "generic": "Veprimi nuk u krye.",
+        "FORBIDDEN": "Nuk keni leje për këtë veprim.",
+        "NOT_ENDED": "Muaji nuk ka përfunduar ende.",
+        "EMPTY": "Muaji nuk ka orë për t'u miratuar.",
+        "ALREADY_APPROVED": "Muaji është miratuar tashmë.",
+        "NOT_APPROVED": "Muaji nuk është miratuar.",
+        "YEAR_CLOSED": "Viti akademik është mbyllur.",
+        "APPROVED": "Muaji është miratuar. Rihapeni së pari.",
+        "MONTH_OUTSIDE_YEAR": "Muaji është jashtë vitit akademik të lëndës.",
+        "monthOutsideYear": "Muaji është jashtë vitit akademik të lëndës.",
+        "NOT_FOUND": "Nuk u gjet.",
+        "hoursRange": "Shkruani orë të plota nga -100 deri në 100, jo 0.",
+        "reasonRequired": "Shkruani një arsye me të paktën 3 shkronja.",
+        "tooLong": "Shumë i gjatë.",
+        "invalidMonth": "Muaj i pavlefshëm.",
+        "required": "E detyrueshme."
+      }
     }
   },
   "stu": {

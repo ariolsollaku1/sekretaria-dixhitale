@@ -7,6 +7,7 @@ import { admNoticesSeeder } from "./adm-notices";
 import { calEventsSeeder } from "./cal-events";
 import { curCoursesSeeder } from "./cur-courses";
 import { hrStaffSeeder } from "./hr-staff";
+import { hrHoursSeeder } from "./hr-hours";
 import { calTimetableSeeder } from "./cal-timetable";
 import { admCyclesSeeder } from "./adm-cycles";
 import { curTeachingSeeder } from "./cur-teaching";
@@ -52,6 +53,7 @@ const SEEDERS: Seeder[] = [
   curPackageSeeder,
   ntfEventsSeeder,
   admCyclesSeeder,
+  hrHoursSeeder,
 ];
 
 function parseEnv(args: string[]): SeedEnv {

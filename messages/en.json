@@ -111,7 +111,9 @@
       "applicationCycles": "Application cycles",
       "applications": "Applications",
       "approvedArchive": "Approved archive",
-      "accounts": "Accounts"
+      "accounts": "Accounts",
+      "myHours": "My delivered hours",
+      "deliveredHours": "Delivered hours"
     },
     "languages": {
       "sq": "Shqip",
@@ -1931,6 +1933,99 @@
       "rosterEmpty": "No student is registered in this group for this year.",
       "studentNumber": "Student no.",
       "studentName": "Name"
+    },
+    "hours": {
+      "title": "Delivered hours",
+      "intro": "Hours delivered by lecturers per month: the hours of the classes marked as held, plus adjustments. The head of department approves each lecturer's month after it ends.",
+      "reportLink": "Report by course",
+      "report": {
+        "title": "Delivered hours by course",
+        "intro": "Hours delivered per lecturer, course and month for the selected academic year, with totals per staff category (internal PAE, external PAK, volunteer)."
+      },
+      "mine": {
+        "title": "My delivered hours",
+        "intro": "The classes you held each month and their hours. A month is approved by the head of department after it ends.",
+        "noStaff": "No staff record",
+        "noStaffHint": "Your account is not linked to a staff record. Ask HR."
+      },
+      "columns": {
+        "lecturer": "Lecturer",
+        "category": "Category",
+        "department": "Department",
+        "month": "Month",
+        "sessions": "Classes held",
+        "heldHours": "Held hours",
+        "adjustments": "Adjustments",
+        "total": "Total hours",
+        "pending": "Not recorded",
+        "state": "Approval",
+        "course": "Course",
+        "kind": "Kind",
+        "group": "Group",
+        "semester": "Semester"
+      },
+      "filters": {
+        "month": "Month (YYYY-MM)",
+        "category": "Category",
+        "department": "Department code",
+        "lecturer": "Lecturer",
+        "state": "Approval",
+        "course": "Course",
+        "semester": "Semester"
+      },
+      "state": {
+        "PENDING": "Pending",
+        "APPROVED": "Approved",
+        "CHANGED": "Changed after approval",
+        "OPEN": "Reopened"
+      },
+      "byCourse": "By course",
+      "noHours": "No delivered hours yet.",
+      "attendanceList": "Classes of the month",
+      "noSessions": "No classes this month.",
+      "adjustments": "Adjustments",
+      "noAdjustments": "No adjustments.",
+      "pendingHint": "{n, plural, one {# planned class is still not recorded.} other {# planned classes are still not recorded.}}",
+      "pendingShort": "{n} not recorded",
+      "changedHint": "Classes or adjustments changed after the approval. The month needs a new approval.",
+      "hoursN": "{n, plural, one {# hour} other {# hours}}",
+      "monthSummary": "{total} h · {sessions} classes",
+      "approved": "Month approved.",
+      "reopened": "Month reopened.",
+      "adjusted": "Adjustment saved.",
+      "actions": {
+        "approve": "Approve month",
+        "reapprove": "Approve again",
+        "reopen": "Reopen month"
+      },
+      "form": {
+        "reason": "Reason",
+        "assignment": "Course",
+        "hours": "Hours (+/-)"
+      },
+      "adjustForm": {
+        "title": "Add an adjustment",
+        "submit": "Add adjustment",
+        "hint": "Whole hours between -100 and 100 with a reason. Adjustments cannot be edited; correct a mistake with an opposite one. An approved month must be reopened first."
+      },
+      "errors": {
+        "generic": "The action could not be completed.",
+        "FORBIDDEN": "You are not allowed to do this.",
+        "NOT_ENDED": "The month has not ended yet.",
+        "EMPTY": "The month has no hours to approve.",
+        "ALREADY_APPROVED": "The month is already approved.",
+        "NOT_APPROVED": "The month is not approved.",
+        "YEAR_CLOSED": "The academic year is closed.",
+        "APPROVED": "The month is approved. Reopen it first.",
+        "MONTH_OUTSIDE_YEAR": "The month is outside the academic year of the course.",
+        "monthOutsideYear": "The month is outside the academic year of the course.",
+        "NOT_FOUND": "Not found.",
+        "hoursRange": "Enter whole hours between -100 and 100, not 0.",
+        "reasonRequired": "Enter a reason of at least 3 characters.",
+        "tooLong": "Too long.",
+        "invalidMonth": "Invalid month.",
+        "required": "Required."
+      }
     }
   },
   "stu": {

@@ -89,7 +89,8 @@
       "attendanceSessions": "Attendance",
       "myAbsences": "My absences",
       "exams": "Exam schedule",
-      "myExams": "My exams"
+      "myExams": "My exams",
+      "teachingHub": "My teaching workspace"
     },
     "languages": {
       "sq": "Shqip",
@@ -1669,6 +1670,39 @@
         "retiredExternal": "Retired external",
         "volunteers": "Volunteers"
       }
+    },
+    "workspace": {
+      "title": "My teaching",
+      "widgetTitle": "My teaching",
+      "widgetAssignments": "{n, plural, one {# teaching assignment} other {# teaching assignments}} this academic year",
+      "widgetClasses": "{n, plural, =0 {No classes today} one {# class today} other {# classes today}}",
+      "widgetPending": "{n, plural, =0 {No class waiting for attendance} one {# class waiting for attendance} other {# classes waiting for attendance}}",
+      "open": "Open my workspace",
+      "noStaff": "You have no staff record",
+      "noStaffHint": "Contact Human Resources to link your account to a staff record.",
+      "assignments": "My courses",
+      "semester": "Semester {number}",
+      "noAssignments": "You have no teaching assignments for this academic year.",
+      "students": "Students",
+      "roster": "Roster",
+      "attendance": "Attendance",
+      "progress": "{held} held · {pending} to record · {absences} absences",
+      "record": "Record attendance",
+      "gradesLater": "Results and grades will appear here once the exams module is available.",
+      "today": "Today's classes",
+      "timetable": "Timetable",
+      "noClasses": "You have no classes today.",
+      "shortcuts": "Shortcuts",
+      "announcements": "Announcements",
+      "noAnnouncements": "No announcements.",
+      "notifications": "Notifications",
+      "noNotifications": "No notifications.",
+      "unread": "{n, plural, =0 {None unread} one {# unread} other {# unread}}",
+      "all": "All",
+      "rosterTitle": "Student roster",
+      "rosterEmpty": "No student is registered in this group for this year.",
+      "studentNumber": "Student no.",
+      "studentName": "Name"
     }
   },
   "stu": {

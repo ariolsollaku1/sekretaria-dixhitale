@@ -89,7 +89,8 @@
       "attendanceSessions": "Prania",
       "myAbsences": "Mungesat e mia",
       "exams": "Provimet",
-      "myExams": "Provimet e mia"
+      "myExams": "Provimet e mia",
+      "teachingHub": "Hapësira ime e mësimdhënies"
     },
     "languages": {
       "sq": "Shqip",
@@ -1669,6 +1670,39 @@
         "retiredExternal": "Të jashtëm në pension",
         "volunteers": "Vullnetarë"
       }
+    },
+    "workspace": {
+      "title": "Mësimdhënia ime",
+      "widgetTitle": "Mësimdhënia ime",
+      "widgetAssignments": "{n, plural, one {# caktim mësimor} other {# caktime mësimore}} këtë vit akademik",
+      "widgetClasses": "{n, plural, =0 {Sot nuk keni orë mësimi} one {Sot keni # orë mësimi} other {Sot keni # orë mësimi}}",
+      "widgetPending": "{n, plural, =0 {Asnjë orë pa prani të regjistruar} one {# orë pret praninë} other {# orë presin praninë}}",
+      "open": "Hap hapësirën time",
+      "noStaff": "Nuk keni regjistrim stafi",
+      "noStaffHint": "Kontaktoni Burimet Njerëzore që të lidhin llogarinë tuaj me një regjistrim stafi.",
+      "assignments": "Lëndët e mia",
+      "semester": "Semestri {number}",
+      "noAssignments": "Nuk keni caktime mësimore për këtë vit akademik.",
+      "students": "Studentë",
+      "roster": "Lista",
+      "attendance": "Prania",
+      "progress": "{held} të mbajtura · {pending} për t'u regjistruar · {absences} mungesa",
+      "record": "Regjistro praninë",
+      "gradesLater": "Vlerësimet dhe notat do të shfaqen këtu kur moduli i provimeve të jetë i gatshëm.",
+      "today": "Orët e sotme",
+      "timetable": "Orari",
+      "noClasses": "Sot nuk keni orë mësimi.",
+      "shortcuts": "Shkurtore",
+      "announcements": "Njoftimet",
+      "noAnnouncements": "Nuk ka njoftime.",
+      "notifications": "Njoftimet e sistemit",
+      "noNotifications": "Nuk ka njoftime sistemi.",
+      "unread": "{n, plural, =0 {Asnjë e palexuar} one {# e palexuar} other {# të palexuara}}",
+      "all": "Të gjitha",
+      "rosterTitle": "Lista e studentëve",
+      "rosterEmpty": "Asnjë student nuk është regjistruar në këtë grup këtë vit.",
+      "studentNumber": "Nr. i studentit",
+      "studentName": "Emri"
     }
   },
   "stu": {

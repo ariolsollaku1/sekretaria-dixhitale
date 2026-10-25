@@ -90,6 +90,29 @@ body {
   line-height: 1.5;
 }
 
+/* Tailwind v4 preflight sets buttons to the default arrow; interactive things get the hand. */
+@layer base {
+  button:not(:disabled),
+  summary,
+  select:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [role="checkbox"],
+  [role="switch"],
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="file"]:not(:disabled),
+  label[for] {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
 /* Visible focus everywhere: 2px ring with 2px offset (design-system.md). */
 :focus-visible {
   outline: 2px solid var(--ring);

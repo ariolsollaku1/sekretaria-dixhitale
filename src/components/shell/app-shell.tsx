@@ -64,7 +64,7 @@ export function AppShell({ sections, user, academicYear, notifications, children
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex flex-wrap items-center gap-2 px-3 py-3 md:px-8 print:hidden">
+          <header className="bg-card border-border sticky top-0 z-30 flex flex-wrap items-center gap-2 border-b px-3 py-3 shadow-sm md:px-8 print:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -88,7 +88,7 @@ export function AppShell({ sections, user, academicYear, notifications, children
           <main
             id="main-content"
             tabIndex={-1}
-            className="mx-auto w-full max-w-7xl flex-1 p-4 md:px-8 md:pt-2 md:pb-10"
+            className="mx-auto w-full max-w-7xl flex-1 p-4 md:px-8 md:pt-6 md:pb-10"
           >
             {children}
           </main>
